@@ -1,4 +1,4 @@
-div.layered_image-asset * {
+div.layered_image-asset {
     line-height: 100%;
 }
 
@@ -38,7 +38,7 @@ div.layered_image-asset .ui-slider-handle {
 }
 
 .ca-ui-annotation.active {
-	background-color: #444;
+	background-color: #555;
 }
 
 .ca-ui-reset {
@@ -54,6 +54,19 @@ div.layered_image-asset .ui-slider-handle {
 	width: 50px;
 	height: 50px;
 }
+
+.ca-ui-layer-selector {
+	float: right;
+	height: 50px;
+	width: 50px;
+	background: url('../img/icon-layers.png') center no-repeat;
+	border-right: 1px solid #888;
+	display: none;
+}
+.ca-ui-layer-selector.active {
+	background-color: #555;
+}
+
 
 .ca-ui-layer {
 	padding: 5px 5px 5px 5px;
@@ -157,7 +170,6 @@ div.layered_image-asset .ui-slider-handle {
 
 .ca-ui-viewfinder.viewfinder-open {
 	width: 100px;
-	background: transparent;
 	height: 100px;
 	background: #000 url('../img/icon-viewfinder-small-rev.png') bottom right no-repeat;
     overflow: hidden;
@@ -175,10 +187,13 @@ div.layered_image-asset .ui-slider-handle {
 	position: absolute;
 	top: 0;
 	left: 0;
+	width: 100%;
+	height: 100%;
 }
 
 .ca-ui-viewfinderLayer img {
 	width: 100%;
+	height: 100%;
 }
 
 .ca-ui-viewfinder-viewport {
@@ -194,6 +209,7 @@ div.layered_image-asset .ui-slider-handle {
     opacity: 0.85;
     color: #fff;
     display: block;
+    font-size: 11px;
 }
 
 .ca-ui-legend ul {
@@ -270,26 +286,28 @@ div.layered_image-asset .ui-slider-handle {
 
 .ca-ui-annotation-selector {
 	position: absolute;
-	background: #000;
 	margin: 0;
-	background-color: #444;
-	opacity: 0.85;
-	padding: 3px 5px 0 5px;
+	background-color: #555;
+	padding: 5px 10px 5px 10px;
 	color: #fff;
 }
 
 .ca-ui-annotation-selector .title {
 	font-weight: bold;
+	font-size: 12px;
+	padding-bottom: 1px;
 }
 
 .ca-ui-annotation-selector-list {
 	list-style: none;
-	padding: 7px 0 10px 0;
 }
 
 .ca-ui-annotation-selector-list li {
-	height: 15px;
-	font-size: 12px;
+	font-size: 11px;
+	height: 17px;
+	border-top: 1px solid grey;
+	padding-top: 5px;
+	margin-bottom: 5px;
 }
 
 .ca-ui-annotation-selector-list li span {
@@ -307,7 +325,9 @@ div.layered_image-asset .ui-slider-handle {
 	float: left;
 	height: 11px;
 	width: 11px;
-	border: 1px solid #fff;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 	text-align: center;
 }
 
@@ -321,11 +341,10 @@ div.layered_image-asset .ui-slider-handle {
 
 .ca-ui-layer-selector-popup {
 	position: absolute;
-	background: #000;
-	opacity: 0.85;
 	margin: 0;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
+	background-color: #555;
+	padding: 3px 5px 0 5px;
+	color: #fff;
 }
 
 .ca-ui-layer-selector-popup hr {
@@ -351,19 +370,89 @@ div.layered_image-asset .ui-slider-handle {
 	text-align: center;
 }
 
+.ca-ui-layer-selector-rows {
+	font-size: 11px;
+}
+
+.ca-ui-layer-selector-row-button1 {
+	width: 30px;
+	height: 30px;
+	float: left;
+	border-top: 1px solid gray;
+}
+
+.ca-ui-layer-selector-row-title {
+	float: left;
+	border-top: 1px solid gray;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
+	height: 30px;
+	width: 130px;
+}
+.ca-ui-layer-selector-row-title span {
+	width: 100%;
+	text-align: center;
+	padding-top: 8px;
+}
+
+.ca-ui-layer-selector-row-button2 {
+	width: 30px;
+	height: 30px;
+	border-top: 1px solid gray;
+	float: left;
+}
+
+.ca-ui-layer-selector-row {
+	width: 200px;
+	height: 30px;
+}
+
+.ca-ui-layer-selector-button {
+	height: 20px;
+	width: 20px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	margin: 4px 0 0 4px;
+	text-align: center;
+	padding-top: 4px;
+	background-color: black;
+}
+
+.ca-ui-layer-selector-button.active {
+	color: black;
+	background-color: white;
+}
+
+.ca-ui-layer-selector-row-button1 .ca-ui-layer-selector-button.active:after {
+	font-size: 10px;
+	content: "1";
+}
+
+.ca-ui-layer-selector-row-button2 .ca-ui-layer-selector-button.active:after {
+	font-size: 10px;
+	content: "2";
+}
+
 .ca-ui-layer-slider-container {
-	padding: 11px 12px 12px;
 	float: right;
-	min-width: 50px;
-    max-width: 100px;
-	border-right: 1px solid #888;
+	width: 150px;
+	height: 50px;
+    color: #fff;
+    font-size: 11px;
+    padding: 12px 10px 0 10px;
+    text-align: center;
 }
 
 .ca-ui-layer-slider {
 	height: 5px;
-	min-width: 25px;
-    max-width: 50px;
+	width: 100%;
 	background: #444;
+}
+
+.ca-ui-layer-slider-layer-text {
+	padding-bottom: 3px;
+	width: 100%;
 }
 
 .ca-ui-layer-slider .ui-slider-handle {
