@@ -1,5 +1,6 @@
 <html>
 <head>
+
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -76,6 +77,7 @@
 	<script src="js/oscitk/Router.js"></script>
 	<script src="js/oscitk/helper.js"></script>
 	<script src="js/appBootstrap.js"></script>
+	<script src="js/oscitk/zotero.js"></script>
 
 	<script>jQuery(function() {
 			app.bootstrap({
@@ -112,6 +114,8 @@
 					'toggleCiteDialog': 'cite'
 				}
 			});
+
+            app.zotero.init();
 			app.run();
 		});
 	</script>

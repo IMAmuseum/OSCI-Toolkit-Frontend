@@ -31,11 +31,11 @@ app = {
 		
 		// init main view
 		this.views.app = new OsciTk.views.App();
-		// load package document
-		this.models.docPackage = new OsciTk.models.Package({url: this.config.get('packageUrl')});
 	},
 
 	run : function() {
+		// load package document
+		this.models.docPackage = new OsciTk.models.Package({url: this.config.get('packageUrl')});
 		Backbone.history.start();
 	}
 };
