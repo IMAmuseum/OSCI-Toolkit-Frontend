@@ -1044,7 +1044,6 @@ LayeredImage.prototype.toggleAnnotationSelector = function() {
 		this.ui.annotation.addClass('active');
 
 		// get the position of the button's top right corner - this is where to bind the popup
-		console.log(this.ui.annotation.offsetParent(), 'offsetParent');
 		var parentOffset = this.ui.annotation.offsetParent().position();
 		var elOffset = this.ui.annotation.position();
 		var elWidth = this.ui.annotation.outerWidth();
