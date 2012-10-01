@@ -300,6 +300,7 @@ div.layered_image-asset .ui-slider-handle {
 
 .ca-ui-annotation-selector-list {
 	list-style: none;
+	margin: 0;
 }
 
 .ca-ui-annotation-selector-list li {
@@ -343,7 +344,7 @@ div.layered_image-asset .ui-slider-handle {
 	position: absolute;
 	margin: 0;
 	background-color: #555;
-	padding: 3px 5px 0 5px;
+	padding: 0 5px 0 5px;
 	color: #fff;
 }
 
@@ -381,6 +382,10 @@ div.layered_image-asset .ui-slider-handle {
 	border-top: 1px solid gray;
 }
 
+.ca-ui-layer-selector-rows .ca-ui-layer-selector-row:first-child div {
+	border-top: none;
+}
+
 .ca-ui-layer-selector-row-title {
 	float: left;
 	border-top: 1px solid gray;
@@ -389,6 +394,7 @@ div.layered_image-asset .ui-slider-handle {
 	height: 30px;
 	width: 130px;
 }
+
 .ca-ui-layer-selector-row-title span {
 	width: 100%;
 	text-align: center;
@@ -403,7 +409,6 @@ div.layered_image-asset .ui-slider-handle {
 }
 
 .ca-ui-layer-selector-row {
-	width: 200px;
 	height: 30px;
 }
 
@@ -415,7 +420,7 @@ div.layered_image-asset .ui-slider-handle {
 	border-radius: 10px;
 	margin: 4px 0 0 4px;
 	text-align: center;
-	padding-top: 4px;
+	line-height: 20px;
 	background-color: black;
 }
 
