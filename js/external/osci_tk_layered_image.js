@@ -1,3 +1,5 @@
+var $ = jQuery;
+
 var LICollection = function() {
 	var collection = [];
 	
@@ -61,7 +63,7 @@ var LayeredImage = function(container) { // container should be a html element
 	else return false;
 
 	// turn the element into a jQuery object
-	this.container = window.$(container);
+	this.container = $(container);
 
 	// ensure we have something to work on
 	if (this.container.length < 1) {
@@ -109,7 +111,7 @@ var LayeredImage = function(container) { // container should be a html element
 	var layerContainer = this.container.find('.layered_image-layers');
 	var layerItems = layerContainer.find('li');
 	for (i=0, count = layerItems.length; i < count; i++) {
-		var layerMarkup = window.$(layerItems[i]);
+		var layerMarkup = $(layerItems[i]);
 		this.layers.push(layerMarkup.data());
 	}
 	layerContainer.remove();
@@ -172,7 +174,7 @@ var LayeredImage = function(container) { // container should be a html element
 			
 			if (secondLayer) {
 				this.createLayer(secondLayer);
-				window.$('#' + secondLayer.id).css('opacity', 0);
+				$('#' + secondLayer.id).css('opacity', 0);
 			}
 			
 			usedPresetLayers = true;
@@ -184,7 +186,7 @@ var LayeredImage = function(container) { // container should be a html element
 		this.createLayer(this.baseLayers[0]);
 		if (this.baseLayers[1]) {
 			this.createLayer(this.baseLayers[1]);
-			window.$('#' + this.baseLayers[1].id).css('opacity', 0);
+			$('#' + this.baseLayers[1].id).css('opacity', 0);
 		}
 	}
 	
@@ -661,19 +663,19 @@ LayeredImage.prototype.createUI = function() {
 			container.attr('data-controls', 'true');
 			CA.toggleControls();
 		}
-		CA.ui.controlsTimeout = setTimeout(function() {
-			var date = new Date();
-			// check if the mouse is over a control, if it is, don't hide
-			if (container.attr('data-controls') == 'true' &&
-				(date.getTime() - container.attr('data-controls-time')) >= 1750) {
+		// CA.ui.controlsTimeout = setTimeout(function() {
+		// 	var date = new Date();
+		// 	// check if the mouse is over a control, if it is, don't hide
+		// 	if (container.attr('data-controls') == 'true' &&
+		// 		(date.getTime() - container.attr('data-controls-time')) >= 1750) {
 				
-				if (container.attr('data-controls-lock') != 'true') {
-					container.attr('data-controls', 'false');
-					CA.clearPopups();
-					CA.toggleControls();
-				}
-			}
-		}, 2000);
+		// 		if (container.attr('data-controls-lock') != 'true') {
+		// 			container.attr('data-controls', 'false');
+		// 			CA.clearPopups();
+		// 			CA.toggleControls();
+		// 		}
+		// 	}
+		// }, 2000);
 	});
 	// mousing over a control locks them "on"
 	$.each(this.ui.controls, function() {
@@ -1005,8 +1007,8 @@ LayeredImage.prototype.toggleLayerSelector = function(event) {
 		var width = CA.ui.sliderContainer.outerWidth() + layerSelector.outerWidth();
 		var cssParams = {
 			bottom : bottom + 'px',
-			left: left + 'px',
-			width: width + 'px'
+			left: left + 'px'
+			// width: width + 'px'
 		};
 
 		// create the popup
@@ -1042,6 +1044,7 @@ LayeredImage.prototype.toggleAnnotationSelector = function() {
 		this.ui.annotation.addClass('active');
 
 		// get the position of the button's top right corner - this is where to bind the popup
+		console.log(this.ui.annotation.offsetParent(), 'offsetParent');
 		var parentOffset = this.ui.annotation.offsetParent().position();
 		var elOffset = this.ui.annotation.position();
 		var elWidth = this.ui.annotation.outerWidth();
@@ -1195,6 +1198,7 @@ LayeredImage.prototype.realignLayers = function() {
 
 LayeredImage.prototype.clearPopups = function() {
 	var CA = this;
+
 	if (this.ui.currentPopup) {
 		this.ui.currentPopup.fadeOut(400, function() {
 			$(this).remove();
