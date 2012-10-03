@@ -1,5 +1,5 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2012-09-11
+ * OSCI Toolkit - v0.1.0 - 2012-10-03
  * http://oscitoolkit.org/
  * Copyright (c) 2010-2012 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
@@ -218,7 +218,11 @@ a.footnote-reference {
 }
 .fancybox-close:hover { opacity: 1; }
 
-
+@media (max-width:600px) {
+	.title-view h1 {
+		display: none;
+	}
+}
 
 #navigation {
 	font-family: sans-serif;

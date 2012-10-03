@@ -1,5 +1,5 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2012-09-11
+ * OSCI Toolkit - v0.1.0 - 2012-10-03
  * http://oscitoolkit.org/
  * Copyright (c) 2010-2012 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
@@ -2673,6 +2673,16 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 		var windowWidth = $(window).width();
 		var windowHeight = $(window).height();
 
+		//min width to prevent lockup
+		if (windowWidth < 300) {
+			windowWidth = 300;
+		}
+
+		//min height to prevent lockup
+		if (windowHeight < 300) {
+			windowHeight = 300;
+		}
+
 		//if the window size did not change, no need to recalculate dimensions
 		if (dimensions.windowWidth && dimensions.windowWidth === windowWidth && dimensions.windowHeight && dimensions.windowHeight === windowHeight) {
 			return;
@@ -3490,11 +3500,11 @@ app = {
 		
 		// init main view
 		this.views.app = new OsciTk.views.App();
-		// load package document
-		this.models.docPackage = new OsciTk.models.Package({url: this.config.get('packageUrl')});
 	},
 
 	run : function() {
+		// load package document
+		this.models.docPackage = new OsciTk.models.Package({url: this.config.get('packageUrl')});
 		Backbone.history.start();
 	}
 };
