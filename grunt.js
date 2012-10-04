@@ -35,12 +35,23 @@ module.exports = function(grunt) {
 					'js/oscitk/views/SectionView.js',
 					'js/oscitk/views/MultiColumnFigureView.js',
 					'js/oscitk/views/**/*.js',
+					'js/oscitk/zotero.js',
+					'js/oscitk/osci_tk_layerd_image.js',
 					'js/appBootstrap.js'
 				],
 				dest: 'dist/OSCI-Toolkit-<%= meta.version %>.js'
 			},
 			dependencies: {
-				src: ['js/external/json2.js', 'js/external/jquery-1.7.1.js', 'js/external/underscore-1.3.3.js', 'js/external/backbone.js', 'js/external/jquery.qtip.min.js', 'js/external/fancybox/jquery.fancybox.js'],
+				src: [
+					'js/external/json2.js',
+					'js/external/jquery-1.7.1.js',
+					'js/external/underscore-1.3.3.js',
+					'js/external/backbone.js',
+					'js/external/jquery.qtip.js',
+					'js/external/fancybox/jquery.fancybox.js',
+					'js/external/polymaps.min.js',
+					'js/external/jquery-ui-1.8.23.custom.min.js'
+				],
 				dest: 'dist/OSCI-Toolkit-<%= meta.version %>-dependencies.js'
 			},
 			css: {
@@ -52,10 +63,23 @@ module.exports = function(grunt) {
 					'css/toolbar.css',
 					'css/section.css',
 					'css/multiColumnSection.css',
+					'css/citation.css',
+					'css/layered_image.css',
+					'css/notes.css',
+					'css/search.css',
 					'css/themeNight.css',
 					'css/themeSepia.css'
 				],
 				dest: 'dist/OSCI-Toolkit-<%= meta.version %>.css'
+			},
+			css_dependencies: {
+				src: [
+					'<banner:meta.banner>',
+					'js/external/fancybox/jquery.fancybox.css',
+					'js/external/jquery-ui.custom.css',
+					'js/external/jquery.qtip.css'
+				],
+				dest: 'dist/OSCI-Toolkit-<%= meta.version %>-dependencies.css'
 			}
 		},
 		min: {
@@ -72,6 +96,10 @@ module.exports = function(grunt) {
 			dist: {
 				src: ['<banner:meta.banner>', '<config:concat.css.dest>'],
 				dest: 'dist/OSCI-Toolkit-<%= meta.version %>.min.css'
+			},
+			css_dependencies: {
+				src: ['<banner:meta.banner>', '<config:concat.css_dependencies.dest>'],
+				dest: 'dist/OSCI-Toolkit-<%= meta.version %>-dependencies.min.css'
 			}
 		},
 		watch: {
