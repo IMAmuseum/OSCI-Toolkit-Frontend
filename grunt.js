@@ -35,7 +35,7 @@ module.exports = function(grunt) {
 					'js/oscitk/views/SectionView.js',
 					'js/oscitk/views/MultiColumnFigureView.js',
 					'js/oscitk/views/**/*.js',
-					'js/oscitk/osci_tk_layerd_image.js',
+					'js/oscitk/osci_tk_layered_image.js',
 					'js/appBootstrap.js',
 					'js/oscitk/zotero.js'
 				],
