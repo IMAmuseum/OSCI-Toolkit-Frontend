@@ -458,6 +458,9 @@ div.layered_image-asset .ui-slider-handle {
 .ca-ui-layer-slider-layer-text {
 	padding-bottom: 3px;
 	width: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .ca-ui-layer-slider .ui-slider-handle {
