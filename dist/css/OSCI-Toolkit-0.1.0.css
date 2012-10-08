@@ -1,5 +1,5 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2012-10-05
+ * OSCI Toolkit - v0.1.0 - 2012-10-08
  * http://oscitoolkit.org/
  * Copyright (c) 2010-2012 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
@@ -1791,6 +1791,9 @@ div.layered_image-asset .ui-slider-handle {
 .ca-ui-layer-slider-layer-text {
 	padding-bottom: 3px;
 	width: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .ca-ui-layer-slider .ui-slider-handle {
