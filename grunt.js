@@ -184,9 +184,9 @@ module.exports = function(grunt) {
 		return output;
 	});
 
-	grunt.loadNpmTasks('/usr/local/lib/node_modules/grunt/node_modules/grunt-css');
-	grunt.loadNpmTasks('/usr/local/lib/node_modules/grunt/node_modules/grunt-contrib-copy');
-	grunt.loadNpmTasks('/usr/local/lib/node_modules/grunt/node_modules/grunt-contrib-compress');
+	grunt.loadNpmTasks('grunt-css');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-compress');
 
 	// Default task.
 	grunt.registerTask('default', 'precompileTemplates concat min cssmin copy compress');
