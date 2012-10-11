@@ -1,5 +1,5 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2012-10-08
+ * OSCI Toolkit - v0.1.0 - 2012-10-11
  * http://oscitoolkit.org/
  * Copyright (c) 2010-2012 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
@@ -1778,8 +1778,8 @@ OsciTk.views.MultiColumnFigureLayeredImage = OsciTk.views.MultiColumnFigure.exte
 		var containerWidth = container.width();
 
 		// place figure options on figure tag
-		var jsonOptions = JSON.stringify(this.model.get('options'));
-		this.$el.attr('data-options', jsonOptions);
+		this.jsonOptions = JSON.stringify(this.model.get('options'));
+		this.$el.attr('data-options', this.jsonOptions);
 
 		// the content document may already be loaded
 		if (this.figContent !== null) {
@@ -1797,6 +1797,7 @@ OsciTk.views.MultiColumnFigureLayeredImage = OsciTk.views.MultiColumnFigure.exte
 					dataType: 'html',
 					success: function(data) {
 						$this.figContent = $(data).filter('.layered_image-asset').first();
+						$this.LIMarkup = $this.figContent.clone();
 						$this.renderFromContentDoc();
 					}
 				});
@@ -1810,6 +1811,10 @@ OsciTk.views.MultiColumnFigureLayeredImage = OsciTk.views.MultiColumnFigure.exte
 		contentDiv.html(this.figContent);
 		new window.LayeredImage(contentDiv.find('.layered_image-asset')[0]);
 		this.contentRendered = true;
+	},
+	fullscreen: function() {
+		var li = liCollection.find(this.LIMarkup.attr('id'));
+		li.fullscreen();
 	}
 });
 OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
