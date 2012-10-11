@@ -44,7 +44,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 						} else if (data.identifier.search(/^fig-[0-9]-[0-9]-[0-9]+/) > -1) {
 							var matches = data.identifier.match(/^(fig-[0-9]-[0-9])-([0-9])+?/);
 							var figureId = matches[1];
-							var occurence = matches[2] ? matches[2] : 1;
+							var occurrence = matches[2] ? parseInt(matches[2],10) : 1;
 
 							var refs = $(".figure_reference").filter("[href='#" + figureId + "']");
 							if (refs.length) {
@@ -52,12 +52,12 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 									page_for_id = this.getPageForElement(refs[0]);
 								} else {
 									//find visible occurence
-									var occurenceCount = 0;
+									var occurrenceCount = 0;
 									for (var i = 0, l = refs.length; i < l; i++) {
 										if (this.isElementVisible(refs[i])) {
-											occurenceCount++;
+											occurrenceCount++;
 
-											if (occurenceCount === occurence) {
+											if (occurrenceCount === occurrence) {
 												page_for_id = this.getPageForElement(refs[i]);
 												break;
 											}

@@ -218,7 +218,11 @@ a.footnote-reference {
 }
 .fancybox-close:hover { opacity: 1; }
 
-
+@media (max-width:600px) {
+	.title-view h1 {
+		display: none;
+	}
+}
 
 #navigation {
 	font-family: sans-serif;
