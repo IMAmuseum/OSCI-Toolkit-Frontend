@@ -36,19 +36,42 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 						gotoPage = 1;
 						break;
 					default:
-						var page_for_id;
+						var page_for_id = null;
+
 						if(data.identifier.search(/^p-[0-9]-[0-9]+/) > -1) {
 							var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
 							page_for_id = this.getPageForParagraphId(pid);
+						} else if (data.identifier.search(/^fig-[0-9]-[0-9]-[0-9]+/) > -1) {
+							var matches = data.identifier.match(/^(fig-[0-9]-[0-9])-([0-9])+?/);
+							var figureId = matches[1];
+							var occurence = matches[2] ? matches[2] : 1;
+
+							var refs = $(".figure_reference").filter("[href='#" + figureId + "']");
+							if (refs.length) {
+								if (refs.length === 1) {
+									page_for_id = this.getPageForElement(refs[0]);
+								} else {
+									//find visible occurence
+									for (var i = 0, l = refs.length; i < l; i++) {
+										if (this.isElementVisible(refs[i])) {
+											page_for_id = this.getPageForElement(refs[i]);
+											break;
+										}
+									}
+								}
+							}
+
 						} else {
 							page_for_id = this.getPageForElementId(data.identifier);
 						}
+
 						if (page_for_id !== null) {
 							gotoPage = page_for_id;
 						} else {
 							gotoPage = 1;
-							console.log('id', data.identifier, 'not found in any page');
+							console.log('Navigation error: ', data.identifier, 'not found in any page');
 						}
+
 						break;
 				}
 			}
@@ -95,6 +118,11 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 		this.dimensions = {};
 
 		OsciTk.views.MultiColumnSection.__super__.initialize.call(this);
+	},
+
+	isElementVisible: function(elem) {
+		//determine if it is visible
+		return true;
 	},
 
 	preRender: function() {
