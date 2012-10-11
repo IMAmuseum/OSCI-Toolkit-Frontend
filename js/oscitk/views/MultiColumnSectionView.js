@@ -52,10 +52,15 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 									page_for_id = this.getPageForElement(refs[0]);
 								} else {
 									//find visible occurence
+									var occurenceCount = 0;
 									for (var i = 0, l = refs.length; i < l; i++) {
 										if (this.isElementVisible(refs[i])) {
-											page_for_id = this.getPageForElement(refs[i]);
-											break;
+											occurenceCount++;
+
+											if (occurenceCount === occurence) {
+												page_for_id = this.getPageForElement(refs[i]);
+												break;
+											}
 										}
 									}
 								}
