@@ -2470,11 +2470,11 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 					default:
 						var page_for_id = null;
 
-						if(data.identifier.search(/^p-[0-9]-[0-9]+/) > -1) {
+						if(data.identifier.search(/^p-[0-9]+-[0-9]+/) > -1) {
 							var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
 							page_for_id = this.getPageForParagraphId(pid);
-						} else if (data.identifier.search(/^fig-[0-9]-[0-9]-[0-9]+/) > -1) {
-							var matches = data.identifier.match(/^(fig-[0-9]-[0-9])-([0-9])+?/);
+						} else if (data.identifier.search(/^fig-[0-9]+-[0-9]+-[0-9]+/) > -1) {
+							var matches = data.identifier.match(/^(fig-[0-9]+-[0-9]+)-([0-9])+?/);
 							var figureId = matches[1];
 							var occurrence = matches[2] ? parseInt(matches[2],10) : 1;
 
@@ -2485,12 +2485,12 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 								} else {
 									//find visible occurence
 									var occurrenceCount = 0;
-									for (var i = 0, l = refs.length; i < l; i++) {
-										if (this.isElementVisible(refs[i])) {
+									for (var j = 0, l = refs.length; j < l; j++) {
+										if (this.isElementVisible(refs[j])) {
 											occurrenceCount++;
 
 											if (occurrenceCount === occurrence) {
-												page_for_id = this.getPageForElement(refs[i]);
+												page_for_id = this.getPageForElement(refs[j]);
 												break;
 											}
 										}
@@ -2559,6 +2559,8 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
 	isElementVisible: function(elem) {
 		//determine if it is visible
+
+
 		return true;
 	},
 
