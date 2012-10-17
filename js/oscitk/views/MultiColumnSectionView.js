@@ -127,9 +127,25 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
 	isElementVisible: function(elem) {
 		//determine if it is visible
+		var $elem = $(elem);
+		var inColumn = $elem.parents(".column");
+		var checkContainer = null;
+		var visible = true;
 
+		if (inColumn.length) {
+			checkContainer = inColumn;
+		} else {
+			checkContainer = $elem.parents(".page");
+		}
 
-		return true;
+		if (checkContainer.length) {
+			var position = $elem.position();
+			if (position.top < 0 || position.top > checkContainer.height()) {
+				visible = false;
+			}
+		}
+
+		return visible;
 	},
 
 	preRender: function() {
