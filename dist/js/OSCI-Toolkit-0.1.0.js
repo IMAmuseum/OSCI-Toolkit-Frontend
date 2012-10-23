@@ -1,5 +1,5 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2012-10-17
+ * OSCI Toolkit - v0.1.0 - 2012-10-23
  * http://oscitoolkit.org/
  * Copyright (c) 2010-2012 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
@@ -896,7 +896,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 	getPageForParagraphId: function(pid) {
 		var views = this.getChildViews();
 		var p = _.find(views, function(view) {
-			return view.$el.find("[data-paragraph_number='" + pid + "']").length !== 0;
+			return view.$el.find("[data-paragraph_identifier='" + pid + "']").length !== 0;
 		});
 		if ((p !== undefined) && (p !== -1)) {
 			return _.indexOf(views, p) + 1;
@@ -2167,6 +2167,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 		}, this);
 
 		app.dispatcher.on("navigate", function(data) {
+			console.log(data, 'navigate data');
 			var gotoPage = 1;
 			if (data.page) {
 				gotoPage = data.page;
@@ -2182,7 +2183,8 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 					default:
 						var page_for_id = null;
 
-						if(data.identifier.search(/^p-[0-9]+-[0-9]+/) > -1) {
+						if(data.identifier.search(/^p-[0-9]+/) > -1) {
+							console.log('search matched');
 							var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
 							page_for_id = this.getPageForParagraphId(pid);
 						} else if (data.identifier.search(/^fig-[0-9]+-[0-9]+-[0-9]+/) > -1) {
