@@ -2167,7 +2167,6 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 		}, this);
 
 		app.dispatcher.on("navigate", function(data) {
-			console.log(data, 'navigate data');
 			var gotoPage = 1;
 			if (data.page) {
 				gotoPage = data.page;
@@ -2184,7 +2183,6 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 						var page_for_id = null;
 
 						if(data.identifier.search(/^p-[0-9]+/) > -1) {
-							console.log('search matched');
 							var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
 							page_for_id = this.getPageForParagraphId(pid);
 						} else if (data.identifier.search(/^fig-[0-9]+-[0-9]+-[0-9]+/) > -1) {
