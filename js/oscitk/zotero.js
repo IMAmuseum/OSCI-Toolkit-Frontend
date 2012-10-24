@@ -23,11 +23,11 @@ app.zotero = {
             span.addClass('Z3988');
             span.attr('title', coins.join('&'));
             span.appendTo($('body'));
-        
+
             // Trigger zotero to search for biblio data
             var ev = document.createEvent('HTMLEvents');
             ev.initEvent('ZoteroItemUpdated', true, true);
             document.dispatchEvent(ev);
-        });
+        }, this);
     }
 };

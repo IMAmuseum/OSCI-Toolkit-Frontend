@@ -10,14 +10,6 @@ OsciTk.models.Section = OsciTk.models.BaseModel.extend({
 		};
 	},
 
-	sync: function(method, model, options) {
-		// console.log('OsciTkSection.sync: ' + method);
-	},
-
-	parse: function(response) {
-		console.log('parse section');
-	},
-
 	loadContent: function() {
 		var content = null;
 		if (this.get('contentLoaded') === false) {

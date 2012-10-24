@@ -170,6 +170,14 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 		//create a placeholder for figures that do not fit on a page
 		this.unplacedFigures = [];
 
+		//if there is a plate image, make sure it gets moved to the front
+		var plateFigures = app.collections.figures.where({plate: true});
+		if (plateFigures.length) {
+			_.each(plateFigures, function(fig) {
+				this.unplacedFigures.push(fig.id);
+			}, this);
+		}
+
 		this.layoutData.items = this.layoutData.data.length;
 
 		var i = 0;

@@ -584,7 +584,8 @@ OsciTk.models.Figure = OsciTk.models.BaseModel.extend({
 			columns: null,
 			aspect: 1,
 			body: null,
-			options: {}
+			options: {},
+			plate: false
 		};
 	},
 
@@ -596,7 +597,13 @@ OsciTk.models.Figure = OsciTk.models.BaseModel.extend({
 		var position = this.get('position');
 		var parsedPosition;
 
-		if (position.length > 1) {
+		//set a flag for easily identifing the plate figure
+		if (position === "plate") {
+			this.set('plate', true);
+			position = "p";
+		}
+
+		if (position.length == 2) {
 			parsedPosition = {
 				vertical: position[0],
 				horizontal: position[1]
@@ -850,14 +857,6 @@ OsciTk.models.Section = OsciTk.models.BaseModel.extend({
 			contentLoaded: false,
 			pages: new OsciTk.collections.Pages()
 		};
-	},
-
-	sync: function(method, model, options) {
-		// console.log('OsciTkSection.sync: ' + method);
-	},
-
-	parse: function(response) {
-		console.log('parse section');
 	},
 
 	loadContent: function() {
@@ -2601,6 +2600,14 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
 		//create a placeholder for figures that do not fit on a page
 		this.unplacedFigures = [];
+
+		//if there is a plate image, make sure it gets moved to the front
+		var plateFigures = app.collections.figures.where({plate: true});
+		if (plateFigures.length) {
+			_.each(plateFigures, function(fig) {
+				this.unplacedFigures.push(fig.id);
+			}, this);
+		}
 
 		this.layoutData.items = this.layoutData.data.length;
 
