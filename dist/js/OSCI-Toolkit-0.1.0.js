@@ -1,5 +1,5 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2012-10-23
+ * OSCI Toolkit - v0.1.0 - 2012-10-24
  * http://oscitoolkit.org/
  * Copyright (c) 2010-2012 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
@@ -2958,7 +2958,12 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	},
 
 	setCurrentNavigationItem: function(section_id) {
-		this.currentNavigationItem = app.collections.navigationItems.get(section_id);
+		var section = app.collections.navigationItems.get(section_id);
+		if (section) {
+			this.currentNavigationItem = app.collections.navigationItems.get(section_id);
+		} else {
+			this.currentNavigationItem = app.collections.navigationItems.first();
+		}
 		app.dispatcher.trigger('currentNavigationItemChanged', this.currentNavigationItem);
 	},
 
@@ -5083,11 +5088,11 @@ app.zotero = {
             span.addClass('Z3988');
             span.attr('title', coins.join('&'));
             span.appendTo($('body'));
-        
+
             // Trigger zotero to search for biblio data
             var ev = document.createEvent('HTMLEvents');
             ev.initEvent('ZoteroItemUpdated', true, true);
             document.dispatchEvent(ev);
-        });
+        }, this);
     }
 };
