@@ -1,5 +1,10 @@
+html {
+	height:100%;
+}
+
 body {
 	margin: 0;
+	height:100%;
 }
 
 a {
@@ -211,4 +216,8 @@ a.footnote-reference {
 }
 .fancybox-close:hover { opacity: 1; }
 
-
+@media (max-width:600px) {
+	.title-view h1 {
+		display: none;
+	}
+}
