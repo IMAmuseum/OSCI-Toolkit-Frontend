@@ -2616,7 +2616,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 		var paragraphNumber = 1;
 		var paragraphsOnPage = 0;
 		var itemsOnPage = 0;
-		while(this.layoutData.items > 0) {
+		while(this.layoutData.items > 0 || this.unplacedFigures.length > 0) {
 			var pageView = this.getPageForProcessing(undefined, "#pages");
 			var layoutResults = null;
 			var figureIds = [];
