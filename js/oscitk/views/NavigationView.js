@@ -116,7 +116,12 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	},
 
 	setCurrentNavigationItem: function(section_id) {
-		this.currentNavigationItem = app.collections.navigationItems.get(section_id);
+		var section = app.collections.navigationItems.get(section_id);
+		if (section) {
+			this.currentNavigationItem = app.collections.navigationItems.get(section_id);
+		} else {
+			this.currentNavigationItem = app.collections.navigationItems.first();
+		}
 		app.dispatcher.trigger('currentNavigationItemChanged', this.currentNavigationItem);
 	},
 
