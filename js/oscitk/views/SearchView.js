@@ -8,7 +8,7 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 			page: 0,
 			keyword: null,
 			filters: [],
-			sort: null
+			sort: ''
 		};
 
 		// define results object
@@ -27,7 +27,8 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 		'click .search-result': 'gotoResult',
 		'click .facet': 'addFacet',
 		'click .filter': 'addFilter',
-		'click #reset-search': 'resetSearch'
+		'click #reset-search': 'resetSearch',
+		'click .sort-button': 'addSort'
 	},
 	render: function() {
 		this.$el.html(this.template(this));
@@ -58,8 +59,12 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 		var queryParams = {
 			key: this.query.keyword,
 			group: 'true',
-			page: this.query.page
+			page: this.query.page,
+			sort: this.query.sort
 		};
+
+		// filter by publication id
+		this.query.filters.push('pid:' + app.models.docPackage.get('id'));
 
 		if (this.query.filters.length) {
 			queryParams['filters'] = this.query.filters.join(' ');
@@ -71,8 +76,6 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 			data: queryParams,
 			success: function(data) {
 				data = JSON.parse(data);
-				if(data.numFound === 0) return;
-
 				// add the incoming docs to the results collection
 				that.response.docs.reset(data.docs);
 				that.response.facets = data.facets;
@@ -100,6 +103,23 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 
 		app.router.navigate("section/" + resultModel.get("ss_section_id") + "/" + resultModel.get("id"), {trigger: true});
 		app.views.toolbarView.contentClose();
+	},
+	addSort: function(e) {
+		e.preventDefault();
+		var sort = $(e.currentTarget).data('sort');
+		var exists = sort === this.query.sort;
+
+		this.$el.find('.sort-button').removeClass("active");
+
+		if (!exists) {
+			this.query.sort = sort;
+		}
+
+		if (this.hasSearched) {
+			this.search();
+		}
+
+		$(e.currentTarget).addClass('active');
 	},
 	addFilter: function(e) {
 		e.preventDefault();
