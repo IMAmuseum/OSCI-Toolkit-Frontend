@@ -663,19 +663,19 @@ LayeredImage.prototype.createUI = function() {
 			container.attr('data-controls', 'true');
 			CA.toggleControls();
 		}
-		// CA.ui.controlsTimeout = setTimeout(function() {
-		// 	var date = new Date();
-		// 	// check if the mouse is over a control, if it is, don't hide
-		// 	if (container.attr('data-controls') == 'true' &&
-		// 		(date.getTime() - container.attr('data-controls-time')) >= 1750) {
+		CA.ui.controlsTimeout = setTimeout(function() {
+			var date = new Date();
+			// check if the mouse is over a control, if it is, don't hide
+			if (container.attr('data-controls') == 'true' &&
+				(date.getTime() - container.attr('data-controls-time')) >= 1750) {
 				
-		// 		if (container.attr('data-controls-lock') != 'true') {
-		// 			container.attr('data-controls', 'false');
-		// 			CA.clearPopups();
-		// 			CA.toggleControls();
-		// 		}
-		// 	}
-		// }, 2000);
+				if (container.attr('data-controls-lock') != 'true') {
+					container.attr('data-controls', 'false');
+					CA.clearPopups();
+					CA.toggleControls();
+				}
+			}
+		}, 2000);
 	});
 	// mousing over a control locks them "on"
 	$.each(this.ui.controls, function() {

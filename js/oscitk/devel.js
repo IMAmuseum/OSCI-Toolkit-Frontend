@@ -2,13 +2,13 @@
 var originalBackboneTrigger = Backbone.Events.trigger;
 Backbone.Events.trigger = function() {
 	console.log(arguments, "Event Triggered");
-	
+
 	var calls = this._callbacks;
 	var eventSplitter = /\s+/;
 	var events = arguments[0].split(eventSplitter);
-	var node, tail;
-	while (event = events.shift()) {
-		if (node = calls[event]) {
+	var node, tail, ev;
+	while (ev = events.shift()) {
+		if (node = calls[ev]) {
 			tail = node.tail;
 			while ((node = node.next) !== tail) {
 				var cid = (node.context !== undefined) ? node.context.cid : undefined;
@@ -18,7 +18,7 @@ Backbone.Events.trigger = function() {
 				if (cid === undefined) {
 					cid = "undefined";
 				}
-				console.log([event, node.context], cid + " listened");
+				console.log([ev, node.context], cid + " listened");
 			}
 		}
 	}

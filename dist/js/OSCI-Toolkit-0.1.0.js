@@ -1,5 +1,5 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2012-10-11
+ * OSCI Toolkit - v0.1.0 - 2012-10-24
  * http://oscitoolkit.org/
  * Copyright (c) 2010-2012 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
@@ -584,7 +584,8 @@ OsciTk.models.Figure = OsciTk.models.BaseModel.extend({
 			columns: null,
 			aspect: 1,
 			body: null,
-			options: {}
+			options: {},
+			plate: false
 		};
 	},
 
@@ -596,7 +597,13 @@ OsciTk.models.Figure = OsciTk.models.BaseModel.extend({
 		var position = this.get('position');
 		var parsedPosition;
 
-		if (position.length > 1) {
+		//set a flag for easily identifing the plate figure
+		if (position === "plate") {
+			this.set('plate', true);
+			position = "p";
+		}
+
+		if (position.length == 2) {
 			parsedPosition = {
 				vertical: position[0],
 				horizontal: position[1]
@@ -850,14 +857,6 @@ OsciTk.models.Section = OsciTk.models.BaseModel.extend({
 			contentLoaded: false,
 			pages: new OsciTk.collections.Pages()
 		};
-	},
-
-	sync: function(method, model, options) {
-		// console.log('OsciTkSection.sync: ' + method);
-	},
-
-	parse: function(response) {
-		console.log('parse section');
 	},
 
 	loadContent: function() {
@@ -1184,7 +1183,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 	getPageForParagraphId: function(pid) {
 		var views = this.getChildViews();
 		var p = _.find(views, function(view) {
-			return view.$el.find("[data-paragraph_number='" + pid + "']").length !== 0;
+			return view.$el.find("[data-paragraph_identifier='" + pid + "']").length !== 0;
 		});
 		if ((p !== undefined) && (p !== -1)) {
 			return _.indexOf(views, p) + 1;
@@ -2470,7 +2469,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 					default:
 						var page_for_id = null;
 
-						if(data.identifier.search(/^p-[0-9]+-[0-9]+/) > -1) {
+						if(data.identifier.search(/^p-[0-9]+/) > -1) {
 							var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
 							page_for_id = this.getPageForParagraphId(pid);
 						} else if (data.identifier.search(/^fig-[0-9]+-[0-9]+-[0-9]+/) > -1) {
@@ -2559,9 +2558,25 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
 	isElementVisible: function(elem) {
 		//determine if it is visible
+		var $elem = $(elem);
+		var inColumn = $elem.parents(".column");
+		var checkContainer = null;
+		var visible = true;
 
+		if (inColumn.length) {
+			checkContainer = inColumn;
+		} else {
+			checkContainer = $elem.parents(".page");
+		}
 
-		return true;
+		if (checkContainer.length) {
+			var position = $elem.position();
+			if (position.top < 0 || position.top > checkContainer.height()) {
+				visible = false;
+			}
+		}
+
+		return visible;
 	},
 
 	preRender: function() {
@@ -2586,6 +2601,14 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 		//create a placeholder for figures that do not fit on a page
 		this.unplacedFigures = [];
 
+		//if there is a plate image, make sure it gets moved to the front
+		var plateFigures = app.collections.figures.where({plate: true});
+		if (plateFigures.length) {
+			_.each(plateFigures, function(fig) {
+				this.unplacedFigures.push(fig.id);
+			}, this);
+		}
+
 		this.layoutData.items = this.layoutData.data.length;
 
 		var i = 0;
@@ -2593,7 +2616,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 		var paragraphNumber = 1;
 		var paragraphsOnPage = 0;
 		var itemsOnPage = 0;
-		while(this.layoutData.items > 0) {
+		while(this.layoutData.items > 0 || this.unplacedFigures.length > 0) {
 			var pageView = this.getPageForProcessing(undefined, "#pages");
 			var layoutResults = null;
 			var figureIds = [];
@@ -2942,7 +2965,12 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	},
 
 	setCurrentNavigationItem: function(section_id) {
-		this.currentNavigationItem = app.collections.navigationItems.get(section_id);
+		var section = app.collections.navigationItems.get(section_id);
+		if (section) {
+			this.currentNavigationItem = app.collections.navigationItems.get(section_id);
+		} else {
+			this.currentNavigationItem = app.collections.navigationItems.first();
+		}
 		app.dispatcher.trigger('currentNavigationItemChanged', this.currentNavigationItem);
 	},
 
@@ -4184,19 +4212,19 @@ LayeredImage.prototype.createUI = function() {
 			container.attr('data-controls', 'true');
 			CA.toggleControls();
 		}
-		// CA.ui.controlsTimeout = setTimeout(function() {
-		// 	var date = new Date();
-		// 	// check if the mouse is over a control, if it is, don't hide
-		// 	if (container.attr('data-controls') == 'true' &&
-		// 		(date.getTime() - container.attr('data-controls-time')) >= 1750) {
+		CA.ui.controlsTimeout = setTimeout(function() {
+			var date = new Date();
+			// check if the mouse is over a control, if it is, don't hide
+			if (container.attr('data-controls') == 'true' &&
+				(date.getTime() - container.attr('data-controls-time')) >= 1750) {
 				
-		// 		if (container.attr('data-controls-lock') != 'true') {
-		// 			container.attr('data-controls', 'false');
-		// 			CA.clearPopups();
-		// 			CA.toggleControls();
-		// 		}
-		// 	}
-		// }, 2000);
+				if (container.attr('data-controls-lock') != 'true') {
+					container.attr('data-controls', 'false');
+					CA.clearPopups();
+					CA.toggleControls();
+				}
+			}
+		}, 2000);
 	});
 	// mousing over a control locks them "on"
 	$.each(this.ui.controls, function() {
@@ -5067,11 +5095,11 @@ app.zotero = {
             span.addClass('Z3988');
             span.attr('title', coins.join('&'));
             span.appendTo($('body'));
-        
+
             // Trigger zotero to search for biblio data
             var ev = document.createEvent('HTMLEvents');
             ev.initEvent('ZoteroItemUpdated', true, true);
             document.dispatchEvent(ev);
-        });
+        }, this);
     }
 };
