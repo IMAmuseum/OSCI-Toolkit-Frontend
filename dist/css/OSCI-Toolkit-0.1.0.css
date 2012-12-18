@@ -1,5 +1,5 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2012-10-24
+ * OSCI Toolkit - v0.1.0 - 2012-12-18
  * http://oscitoolkit.org/
  * Copyright (c) 2010-2012 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
@@ -927,6 +927,7 @@ h1, h2, h3, h4, h5 {
 	float: left;
 	display: inline-block;
 	padding-right: 20px;
+	margin-bottom: 20px;
 }
 #search-view #search-keyword {
 	width: 300px;
@@ -936,10 +937,10 @@ h1, h2, h3, h4, h5 {
 	padding: 10px 12px;
 	border-radius: 25px;
 }
-#search-view #search-filters {
+#search-view #search-filters-container {
 	height: 30px;
 }
-#search-view #search-filters div.label {
+#search-view #search-filters-container div.label {
 	float: left;
 	padding-top: 5px;
 }
@@ -955,14 +956,19 @@ h1, h2, h3, h4, h5 {
 #search-filter-figures .dot {
 	background-color: #999966;
 }
-#search-view #search-filters ul {
+
+#search-view #search-filters-container {
+	display: inline-block;
+}
+
+#search-view #search-filters-container ul {
 	display: block;
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
 	float: left;
 }
-#search-view #search-filters ul li {
+#search-view #search-filters-container ul li {
 	margin: 0 5px;
 	padding: 5px 0;
 	color: #FFF;
@@ -976,18 +982,18 @@ h1, h2, h3, h4, h5 {
 	font-size: .9em;
 	cursor: hand;
 }
-#search-view #search-filters ul li.active {
+#search-view #search-filters-container ul li.active {
 	background-color: #dedede;
 	color: #8c8c8c;
 }
-#search-view #search-filters ul li .dot {
+#search-view #search-filters-container ul li .dot {
 	margin: 4px 0 0 8px;
 	width: 13px;
 	height: 13px;
 	border-radius: 10px;
 	float: left;
 }
-#search-view #search-filters ul li .label {
+#search-view #search-filters-container ul li .label {
 	float: left;
 	padding-left: 5px;
 	padding-top: 4px;
@@ -1089,6 +1095,28 @@ h1, h2, h3, h4, h5 {
 	padding: 10px 0;
 	list-style-type: none;
 	border-top: 1px solid #8C8C8C;
+}
+
+@media only screen and (min-width: 481px), only screen and (min-device-width: 960px) {
+	#search-filters-container .label,
+	ul.search-filters,
+	ul.search-filters li {
+		display: block;
+	}
+	select.search-filters {
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 960px), only screen and (max-device-width: 480px) {
+	#search-filters-container .label,
+	ul.search-filters,
+	ul.search-filters li {
+		display: none;
+	}	
+	select.search-filters {
+		display: block;
+	}
 }
 #navigation {
 	font-family: sans-serif;
