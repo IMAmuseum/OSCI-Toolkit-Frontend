@@ -35,43 +35,91 @@ module.exports = function(grunt) {
 					'js/oscitk/views/SectionView.js',
 					'js/oscitk/views/MultiColumnFigureView.js',
 					'js/oscitk/views/**/*.js',
-					'js/appBootstrap.js'
+					'js/oscitk/osci_tk_layered_image.js',
+					'js/appBootstrap.js',
+					'js/oscitk/zotero.js'
 				],
-				dest: 'dist/OSCI-Toolkit-<%= meta.version %>.js'
+				dest: 'dist/js/OSCI-Toolkit-<%= meta.version %>.js'
 			},
 			dependencies: {
-				src: ['js/external/json2.js', 'js/external/jquery-1.7.1.js', 'js/external/underscore-1.3.3.js', 'js/external/backbone.js', 'js/external/jquery.qtip.min.js', 'js/external/fancybox/jquery.fancybox.js'],
-				dest: 'dist/OSCI-Toolkit-<%= meta.version %>-dependencies.js'
+				src: [
+					'js/external/json2.js',
+					'js/external/jquery-1.7.1.js',
+					'js/external/underscore-1.3.3.js',
+					'js/external/backbone.js',
+					'js/external/jquery.qtip.js',
+					'js/external/fancybox/jquery.fancybox.js',
+					'js/external/polymaps.min.js',
+					'js/external/jquery-ui-1.8.23.custom.min.js'
+				],
+				dest: 'dist/js/OSCI-Toolkit-<%= meta.version %>-dependencies.js'
 			},
 			css: {
 				src: [
 					'<banner:meta.banner>',
 					'css/common.css',
-					'css/navigation.css',
-					'css/search.css',
 					'css/toolbar.css',
 					'css/section.css',
 					'css/multiColumnSection.css',
+					'css/search.css',
+					'css/navigation.css',
+					'css/notes.css',
+					'css/layered_image.css',
+					'css/citation.css',
 					'css/themeNight.css',
 					'css/themeSepia.css'
 				],
-				dest: 'dist/OSCI-Toolkit-<%= meta.version %>.css'
+				dest: 'dist/css/OSCI-Toolkit-<%= meta.version %>.css'
+			},
+			css_dependencies: {
+				src: [
+					'<banner:meta.banner>',
+					'js/external/fancybox/jquery.fancybox.css',
+					'js/external/jquery-ui.custom.css',
+					'js/external/jquery.qtip.css'
+				],
+				dest: 'dist/css/OSCI-Toolkit-<%= meta.version %>-dependencies.css'
 			}
 		},
 		min: {
 			dist: {
 				src: ['<banner:meta.banner>', '<config:concat.dist.dest>'],
-				dest: 'dist/OSCI-Toolkit-<%= meta.version %>.min.js'
+				dest: 'dist/js/OSCI-Toolkit-<%= meta.version %>.min.js'
 			},
 			dependencies: {
 				src: ['<banner:meta.banner>', '<config:concat.dependencies.dest>'],
-				dest: 'dist/OSCI-Toolkit-<%= meta.version %>-dependencies.min.js'
+				dest: 'dist/js/OSCI-Toolkit-<%= meta.version %>-dependencies.min.js'
 			}
 		},
 		cssmin: {
 			dist: {
 				src: ['<banner:meta.banner>', '<config:concat.css.dest>'],
-				dest: 'dist/OSCI-Toolkit-<%= meta.version %>.min.css'
+				dest: 'dist/css/OSCI-Toolkit-<%= meta.version %>.min.css'
+			},
+			css_dependencies: {
+				src: ['<banner:meta.banner>', '<config:concat.css_dependencies.dest>'],
+				dest: 'dist/css/OSCI-Toolkit-<%= meta.version %>-dependencies.min.css'
+			}
+		},
+		copy: {
+			dist: {
+				files: {
+					'dist/img/': 'img/*'
+				}
+			}
+		},
+		compress: {
+			zip: {
+				files: {
+					'dist/osci_toolkit.zip': [
+						'dist/css/*',
+						'dist/js/*',
+						'dist/img/*'
+					]
+				},
+				options: {
+					rootDir: 'osci_toolkit'
+				}
 			}
 		},
 		watch: {
@@ -135,9 +183,11 @@ module.exports = function(grunt) {
 		return output;
 	});
 
-	grunt.loadNpmTasks('/usr/local/lib/node_modules/grunt/node_modules/grunt-css');
+	grunt.loadNpmTasks('grunt-css');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-compress');
 
 	// Default task.
-	grunt.registerTask('default', 'precompileTemplates concat min cssmin');
+	grunt.registerTask('default', 'precompileTemplates concat min cssmin copy compress');
 
 };

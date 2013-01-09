@@ -1,5 +1,5 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2012-09-11
+ * OSCI Toolkit - v0.1.0 - 2012-12-18
  * http://oscitoolkit.org/
  * Copyright (c) 2010-2012 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
@@ -237,308 +237,314 @@ OsciTk.views.BaseView = Backbone.View.extend({
 	}
 });
 OsciTk.templates['account-login'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+='<h3>Login</h3>\n<div class="form-error"></div>\n<form id="account-form">\n\t<label for="username">Username:</label>\n\t<input type="text" id="username" placeholder="Username" />\n\t<label for="password">Password:</label>\n\t<input type="password" id="password" placeholder="Password" />\n\t<button type="button" class="login">Log In</button>\n\t<div><a href="#" class="register">Register an account</a></div>\n</form>';
 }
 return __p;
 }
 OsciTk.templates['account-profile'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+='<h3>Profile</h3>\n<h4>'+
-( username )+
+((__t=( username ))==null?'':__t)+
 '</h4>\n<h5>'+
-( email )+
+((__t=( email ))==null?'':__t)+
 '</h5>\n<div><a href="#" class="logout">Log out</a></div>';
 }
 return __p;
 }
 OsciTk.templates['account-register'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+='<h2>Register</h2>\n<div class="form-error"></div>\n<form id="account-form">\n\t<label for="username">Username:</label>\n\t<input type="text" id="username" placeholder="Username" />\n\t<label for="password">Password:</label>\n\t<input type="password" id="password" placeholder="Password" />\n\t<label for="email">Email:</label>\n\t<input type="text" id="email" placeholder="Email" />\n\t<button type="button" class="register">Register</button>\n\t<div><a href="#" class="login">Already have an account?</a></div>\n</form>';
 }
 return __p;
 }
 OsciTk.templates['citation'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+='<div class="citations">\n\t<span>Format</span>\n\t<ul class="formats">\n\t\t<li class="active"><a href="#citation-format-chicago">Chicago</a></li>\n\t\t<li><a href="#citation-format-mla">MLA</a></li>\n\t</ul>\n\t<div id="citation-format-chicago" class="citation">\n\t\t'+
-( creator )+
+((__t=( creator ))==null?'':__t)+
 ', "<em>'+
-( title )+
+((__t=( title ))==null?'':__t)+
 '</em>," in <em>'+
-( publicationTitle )+
+((__t=( publicationTitle ))==null?'':__t)+
 '</em>, ed. '+
-( editor )+
+((__t=( editor ))==null?'':__t)+
 ' '+
-( publisher )+
+((__t=( publisher ))==null?'':__t)+
 ' '+
-( formattedDate )+
+((__t=( formattedDate ))==null?'':__t)+
 ', para '+
-( paragraphNumber )+
+((__t=( paragraphNumber ))==null?'':__t)+
 '.\n\t</div>\n\t<div id="citation-format-mla" style="display: none;" class="citation">\n\t\t'+
-( creator )+
+((__t=( creator ))==null?'':__t)+
 ', "<em>'+
-( title )+
+((__t=( title ))==null?'':__t)+
 '</em>," in <span style="text-decoration:underline;">'+
-( publicationTitle )+
+((__t=( publicationTitle ))==null?'':__t)+
 '</span>, ed. '+
-( editor )+
+((__t=( editor ))==null?'':__t)+
 ' ('+
-( publisher )+
+((__t=( publisher ))==null?'':__t)+
 '), '+
-( formattedDate )+
+((__t=( formattedDate ))==null?'':__t)+
 ', '+
-( paragraphNumber )+
+((__t=( paragraphNumber ))==null?'':__t)+
 '.\n\t</div>\n</div>\n<div class="citation_url">\n\t<span>Citation URL</span>\n\t<input disabled="disabled" value="'+
-( url )+
+((__t=( url ))==null?'':__t)+
 '" />\n</div>\n<div class="reference_text">\n\t<span>Reference Text</span>\n\t<textarea disabled="disabled">'+
-( referenceText )+
+((__t=( referenceText ))==null?'':__t)+
 '</textarea>\n</div>';
 }
 return __p;
 }
 OsciTk.templates['figure-reference'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+='<a href="#'+
-( id )+
+((__t=( id ))==null?'':__t)+
 '" class="figure_reference">'+
-( title )+
+((__t=( title ))==null?'':__t)+
 '</a>';
 }
 return __p;
 }
 OsciTk.templates['figures'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+='<div class=\'figure-browser\'>\n\t<h3>Figures</h3>\n\t<div class=\'figure-tray\'>\n\t\t<div class=\'figure-reel\'>\n\t\t\t';
  _.each(figures, function(figure) { 
-;__p+='\n\t\t\t\t<figure class=\'thumbnail\' data-figure-id="'+
-( figure.id )+
+__p+='\n\t\t\t\t<figure class=\'thumbnail\' data-figure-id="'+
+((__t=( figure.id ))==null?'':__t)+
 '">\n\t\t\t\t\t';
  if (figure.thumbnail_url != undefined) { 
-;__p+='\n\t\t\t\t\t\t<img class=\'figure-thumbnail\' src=\''+
-( figure.thumbnail_url )+
+__p+='\n\t\t\t\t\t\t<img class=\'figure-thumbnail\' src=\''+
+((__t=( figure.thumbnail_url ))==null?'':__t)+
 '\'/>\n\t\t\t\t\t';
  } else { 
-;__p+='\n\t\t\t\t\t\t<div class=\'figure-thumbnail\'>&nbsp;</div>\n\t\t\t\t\t';
+__p+='\n\t\t\t\t\t\t<div class=\'figure-thumbnail\'>&nbsp;</div>\n\t\t\t\t\t';
  } 
-;__p+='\n\t\t\t\t\t<figcaption>'+
-( figure.title )+
+__p+='\n\t\t\t\t\t<figcaption>'+
+((__t=( figure.title ))==null?'':__t)+
 '</figcaption>\n\t\t\t\t</figure>\n\t\t\t';
  }); 
-;__p+='\n\t\t</div>\n\t</div>\n</div>\n<div class=\'figure-previews\'>\n\t<div class=\'figure-nav prev\' title=\'Previous figure\'>&lt;</div>\n\t<div class=\'figure-nav next\' title=\'Next Figure\'>&gt;</div>\n\n\t<h3><span class=\'back-to-grid\'>&laquo; Figures</span> | <span class=\'title\'>TITLE</span></h3>\n\t<div class=\'figure-tray\'>\n\t\t<div class=\'figure-reel\'>\n\t\t\t';
+__p+='\n\t\t</div>\n\t</div>\n</div>\n<div class=\'figure-previews\'>\n\t<div class=\'figure-nav prev\' title=\'Previous figure\'>&lt;</div>\n\t<div class=\'figure-nav next\' title=\'Next Figure\'>&gt;</div>\n\n\t<h3><span class=\'back-to-grid\'>&laquo; Figures</span> | <span class=\'title\'>TITLE</span></h3>\n\t<div class=\'figure-tray\'>\n\t\t<div class=\'figure-reel\'>\n\t\t\t';
  _.each(figures, function(figure) { 
-;__p+='\n\t\t\t\t<figure class=\'preview\' data-figure-id="'+
-( figure.id )+
+__p+='\n\t\t\t\t<figure class=\'preview\' data-figure-id="'+
+((__t=( figure.id ))==null?'':__t)+
 '">\n\t\t\t\t\t';
  if (figure.thumbnail_url != undefined) { 
-;__p+='\n\t\t\t\t\t\t<img class=\'figure-preview\' src=\''+
-( figure.thumbnail_url )+
+__p+='\n\t\t\t\t\t\t<img class=\'figure-preview\' src=\''+
+((__t=( figure.thumbnail_url ))==null?'':__t)+
 '\'/>\n\t\t\t\t\t';
  } else { 
-;__p+='\n\t\t\t\t\t\t<div class=\'figure-preview\'>&nbsp;</div>\n\t\t\t\t\t';
+__p+='\n\t\t\t\t\t\t<div class=\'figure-preview\'>&nbsp;</div>\n\t\t\t\t\t';
  } 
-;__p+='\n\t\t\t\t\t<div class=\'figure-info\'>\n\t\t\t\t\t\t<!--<h3 class=\'title\'>Figure Title?</h3>-->\n\t\t\t\t\t\t<!--<p class=\'meta-info\'>meta info | more meta</p>-->\n\t\t\t\t\t\t<div class=\'caption\'>\n\t\t\t\t\t\t\t'+
-( figure.caption )+
+__p+='\n\t\t\t\t\t<div class=\'figure-info\'>\n\t\t\t\t\t\t<!--<h3 class=\'title\'>Figure Title?</h3>-->\n\t\t\t\t\t\t<!--<p class=\'meta-info\'>meta info | more meta</p>-->\n\t\t\t\t\t\t<div class=\'caption\'>\n\t\t\t\t\t\t\t'+
+((__t=( figure.caption ))==null?'':__t)+
 '\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<a class=\'view-fullscreen\'>View fullscreen</a>\n\t\t\t\t\t<a class=\'view-in-context\'>View in context</a>\n\t\t\t\t</figure>\n\t\t\t';
  }); 
-;__p+='\n\t\t</div>\n\t</div>\n</div>';
+__p+='\n\t\t</div>\n\t</div>\n</div>';
 }
 return __p;
 }
 OsciTk.templates['font'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+='<h3>Reading Settings</h3>\n<div class="font-control">\n\t<h3>Font Size</h3>\n\t<a href="#font-larger" class="larger font-button">A</a>\n\t<a href="#font-smaller" class="smaller font-button">A</a>\n</div>\n<div class="theme-control">\n\t<h3>Theme</h3>\n\t<a href="#normal" class="theme-button">Normal</a>\n\t<a href="#sepia" class="theme-button">Sepia</a>\n\t<a href="#night" class="theme-button">Night</a>\n</div>';
 }
 return __p;
 }
 OsciTk.templates['multi-column-column'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+='<div class="column"></div>';
 }
 return __p;
 }
 OsciTk.templates['multi-column-figure'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+='<div class="figure_content"></div>\n<figcaption>'+
-( caption )+
+((__t=( caption ))==null?'':__t)+
 '</figcaption>';
 }
 return __p;
 }
 OsciTk.templates['multi-column-section'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+='<div id="pages"></div>';
 }
 return __p;
 }
 OsciTk.templates['navigation'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+='<div class=\'header\'>'+
-( chapter )+
+((__t=( chapter ))==null?'':__t)+
 '</div>\n<div class=\'prev-page side\'><div class=\'indicator\'>&lt;</div></div>\n<div class=\'next-page side\'><div class=\'indicator\'>&gt;</div></div>\n<div class=\'prev-page corner\'>\n\t<div class=\'label\'>Previous</div>\n\t<div class=\'button\'>&nbsp;</div>\n</div>\n<div class=\'pager\'><div class=\'head\'>&nbsp;</div></div>\n<div class=\'next-page corner\'>\n\t<div class=\'label\'>Next</div>\n\t<div class=\'button\'>&nbsp;</div>\n</div>';
 }
 return __p;
 }
 OsciTk.templates['note-popup'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+='<form class="noteForm">\n\t<textarea>'+
-( note )+
+((__t=( note ))==null?'':__t)+
 '</textarea>\n\t<div class="status">Saved</div>\n</form>\n<div class="reference-text">\n\t<span class="reference-text-label">Reference Text</span>\n\t<div class="reference-text-content">'+
-( referenceContent )+
+((__t=( referenceContent ))==null?'':__t)+
 '</div>\n</div>';
 }
 return __p;
 }
 OsciTk.templates['notes'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+='<h3>Notes</h3>\n<div class="notesReel">\n\t<ul class="notesList">\n\t\t';
  _.each(notes, function(note) { 
-;__p+='\n\t\t\t<li class="notesListItem">\n\t\t\t\t<div class="the-note">\n\t\t\t\t\t<span class="note-content">'+
-( note.get('note') )+
+__p+='\n\t\t\t<li class="notesListItem">\n\t\t\t\t<div class="the-note">\n\t\t\t\t\t<span class="note-content">'+
+((__t=( note.get('note') ))==null?'':__t)+
 '</span>\n\t\t\t\t</div>\n\t\t\t\t';
  if (note.get('tags').length > 0) { 
-;__p+='\n\t\t\t\t\t<div class="note-tags">\n\t                \t<span class="tags-label">tags:</span> ';
+__p+='\n\t\t\t\t\t<div class="note-tags">\n\t                \t<span class="tags-label">tags:</span> ';
  _.each(note.get('tags'), function(tag) { 
-;__p+=''+
-( tag )+
+__p+=''+
+((__t=( tag ))==null?'':__t)+
 ' ';
  }); 
-;__p+='\n\t                </div>\n\t\t\t\t';
+__p+='\n\t                </div>\n\t\t\t\t';
  } 
-;__p+='\n\t\t\t\t<div class="note-buttons">\n\t\t\t\t\t<a href="#" class="noteLink" data-content_id="'+
-( note.get('content_id') )+
+__p+='\n\t\t\t\t<div class="note-buttons">\n\t\t\t\t\t<a href="#" class="noteLink" data-content_id="'+
+((__t=( note.get('content_id') ))==null?'':__t)+
 '">Link</a>\n\t\t\t\t\t<!-- <a href="#" class="noteEdit" data-content_id="'+
-( note.get('content_id') )+
+((__t=( note.get('content_id') ))==null?'':__t)+
 '">Edit</a> -->\n\t\t\t\t</div>\n\t\t\t</li>\n\t\t';
  }); 
-;__p+='\n\t</ul>\n</div>';
+__p+='\n\t</ul>\n</div>';
 }
 return __p;
 }
 OsciTk.templates['page'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+=''+
-( content )+
+((__t=( content ))==null?'':__t)+
 '';
 }
 return __p;
 }
 OsciTk.templates['search-results'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+='';
  if (query.keyword) { 
-;__p+='\n<div id="search-results-header">\n\t<div id="search-summary">\n\t\tResult(s) for <span id="search-query">"'+
-( query.keyword )+
+__p+='\n<div id="search-results-header">\n\t<div id="search-summary">\n\t\tResult(s) for <span id="search-query">"'+
+((__t=( query.keyword ))==null?'':__t)+
 '"</span> ('+
-( response.numFound )+
-')\n\t\t<a id="reset-search" href="#">RESET</a>\n\t</div>\n\t<div id="results-sort">\n\t\tSort By:\n\t\t<ul>\n\t\t\t<li id="results-sort-relevance" class="sort-button"><a href="#" class="sort-button">Relevance</a></li>\n\t\t\t<li id="results-sort-type"><a href="#" class="sort-button">Type</a></li>\n\t\t</ul>\n\t</div>\n</div>\n<div id="search-results-container">\n\t<div id="search-results">\n\t\t<div id="search-results-content">\n\t\t\t';
+((__t=( response.numFound ))==null?'':__t)+
+')\n\t\t<a id="reset-search" href="#">RESET</a>\n\t</div>\n\t<div id="results-sort">\n\t\tSort By:\n\t\t<ul>\n\t\t\t<li><a href="#" class="sort-button" data-sort="score">Relevance</a></li>\n\t\t\t<li><a href="#" class="sort-button" data-sort="content">Type</a></li>\n\t\t</ul>\n\t</div>\n</div>\n<div id="search-results-container">\n\t';
+ if (response.numFound !== 0) { 
+__p+='\n\t<div id="search-results">\n\t\t<div id="search-results-content">\n\t\t\t';
  _.each(results, function(group) { var first = true;
-;__p+='\n\t\t\t\t<div class="result-section">\n\t\t\t\t\t';
+__p+='\n\t\t\t\t<div class="result-section">\n\t\t\t\t\t';
  _.each(group, function(result) { 
-;__p+='\n\t\t\t\t\t';
+__p+='\n\t\t\t\t\t';
  if (first) { 
-;__p+='\n\t\t\t\t\t<div class="result-title">'+
-( result.get('label') )+
+__p+='\n\t\t\t\t\t<div class="result-title">'+
+((__t=( result.get('label') ))==null?'':__t)+
 '</div>\n\t\t\t\t\t';
  first = false; } 
-;__p+='\n\t\t\t\t\t<div class="search-result" data-id="'+
-( result.get('id') )+
+__p+='\n\t\t\t\t\t<div class="search-result" data-id="'+
+((__t=( result.get('id') ))==null?'':__t)+
 '">\n\t\t\t\t\t\t<div class="result-content">\n\t\t\t\t\t\t\t<div class="result-type '+
-( result.get('bundle') )+
+((__t=( result.get('bundle') ))==null?'':__t)+
 '">'+
-( result.get('bundle') )+
+((__t=( result.get('bundle') ))==null?'':__t)+
 '</div>\n\t\t\t\t\t\t\t<div class="result-body">'+
-( result.get('teaser') )+
+((__t=( result.get('teaser') ))==null?'':__t)+
 '</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t';
  }); 
-;__p+='\n\t\t\t\t</div>\n\t\t\t';
+__p+='\n\t\t\t\t</div>\n\t\t\t';
  }); 
-;__p+='\n\t\t</div>\n\t</div>\n\t<div id="filter-by-section">\n\t\t<div class="section-title">Filter by section</div>\n\t\t<ul>\n\t\t\t';
+__p+='\n\t\t</div>\n\t</div>\n\t';
+ } else { 
+__p+='\n\tNo results found.\n\t';
+ } 
+__p+='\n\t<div id="filter-by-section">\n\t\t<div class="section-title">Filter by section</div>\n\t\t<ul>\n\t\t\t';
  _.each(response.facets, function(facet) { 
-;__p+='\n\t\t\t\t<li><a href="#" data-filter="section:'+
-( facet.section_id )+
+__p+='\n\t\t\t\t<li><a href="#" data-filter="section:'+
+((__t=( facet.section_id ))==null?'':__t)+
 '" class="facet">'+
-( facet.section )+
+((__t=( facet.section ))==null?'':__t)+
 '</a> ('+
-( facet.count )+
+((__t=( facet.count ))==null?'':__t)+
 ')</li>\n\t\t\t';
  }); 
-;__p+='\n\t\t</ul>\n\t</div>\n</div>\n';
+__p+='\n\t\t</ul>\n\t</div>\n</div>\n';
  } 
-;__p+='';
+__p+='';
 }
 return __p;
 }
 OsciTk.templates['search'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+='<div id="search-header">\n\t<h3>Search</h3>\n\t<div id="search-box">\n\t\t<form id="search-form" name="search-form" method="POST">\n\t\t\t<input type="text" name="keyword" id="search-keyword" placeholder="search" value="'+
-( query.keyword )+
-'"/>\n\t\t\t<input type="hidden" name="page" id="search-page" />\n\t\t</form>\n\t</div>\n\t<div id="search-filters">\n\t\t<div class="label">Filter |</div>\n\t\t<ul>\n\t\t\t<li class="filter" data-filter="type:content" id="search-filter-content"><div class="dot">&nbsp;</div><div class="label">Content</div></li>\n\t\t\t<li class="filter" data-filter="type:notes" id="search-filter-notes"><div class="dot">&nbsp;</div><div class="label">My Notes</div></li>\n\t\t\t<li class="filter" data-filter="type:footnotes" id="search-filter-footnotes"><div class="dot">&nbsp;</div><div class="label">Footnotes</div></li>\n\t\t\t<li class="filter" data-filter="type:figures" id="search-filter-figures"><div class="dot">&nbsp;</div><div class="label">Figures</div></li>\n\t\t</ul>\n\t</div>\n</div>\n<div id="search-results-wrapper"></div>';
+((__t=( query.keyword ))==null?'':__t)+
+'"/>\n\t\t\t<input type="hidden" name="page" id="search-page" />\n\t\t</form>\n\t</div>\n\t<div id="search-filters-container">\n\t\t<div class="label">Filter |</div>\n\t\t<ul class="search-filters">\n\t\t\t<li class="filter" data-filter="type:content" id="search-filter-content"><div class="dot">&nbsp;</div><div class="label">Content</div></li>\n\t\t\t<li class="filter" data-filter="type:notes" id="search-filter-notes"><div class="dot">&nbsp;</div><div class="label">My Notes</div></li>\n\t\t\t<li class="filter" data-filter="type:footnotes" id="search-filter-footnotes"><div class="dot">&nbsp;</div><div class="label">Footnotes</div></li>\n\t\t\t<li class="filter" data-filter="type:figures" id="search-filter-figures"><div class="dot">&nbsp;</div><div class="label">Figures</div></li>\n\t\t</ul>\n\t\t<div class="search-filter-select">\n\t\t<select class="search-filters">\n\t\t\t<option>Select a filter</option>\n\t\t\t<option value="content">Content</option>\n\t\t\t<option value="notes">My Notes</option>\n\t\t\t<option value="footnotes">Footnotes</option>\n\t\t\t<option value="figures">Figures</option>\n\t\t</select>\n\t</div>\n\t</div>\n</div>\n<div id="search-results-wrapper"></div>';
 }
 return __p;
 }
 OsciTk.templates['title'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+='<h1 id="publication-title"></h1>';
 }
 return __p;
 }
 OsciTk.templates['toc'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+='<h3>Table of Contents</h3>\n<ul>\n\t';
  _.each(items, function(item) { 
-;__p+='\n\t\t<li class="toc-item';
+__p+='\n\t\t<li class="toc-item';
  if (item.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } 
-;__p+='">\n\t\t\t<a data-section-id="'+
-( item.id )+
+__p+='">\n\t\t\t<a data-section-id="'+
+((__t=( item.id ))==null?'':__t)+
 '" href="#">\n\t\t\t\t<div class="toc-item-thumbnail">\n\t\t\t\t\t';
  if (item.get('thumbnail')) { 
-;__p+='\n\t\t\t\t\t\t<img src="'+
-( item.get('thumbnail') )+
+__p+='\n\t\t\t\t\t\t<img src="'+
+((__t=( item.get('thumbnail') ))==null?'':__t)+
 '">\n\t\t\t\t\t';
  } 
-;__p+='\n\t\t\t\t</div>\n\t\t\t\t<div class="toc-item-text">\n\t\t\t\t\t<h4>'+
-( item.get('title') )+
+__p+='\n\t\t\t\t</div>\n\t\t\t\t<div class="toc-item-text">\n\t\t\t\t\t<h4>'+
+((__t=( item.get('title') ))==null?'':__t)+
 '</h4>\n\t\t\t\t\t';
  if (item.get('subtitle')) { 
-;__p+='\n\t\t\t\t\t\t<h5>'+
-( item.get('subtitle') )+
+__p+='\n\t\t\t\t\t\t<h5>'+
+((__t=( item.get('subtitle') ))==null?'':__t)+
 '</h5>\n\t\t\t\t\t';
  } 
-;__p+='\n\t\t\t\t</div>\n\t\t\t</a>\n\t\t\t<hr>\n\t\t</li>\n\t';
+__p+='\n\t\t\t\t</div>\n\t\t\t</a>\n\t\t\t<hr>\n\t\t</li>\n\t';
  }); 
-;__p+='\n</ul>';
+__p+='\n</ul>';
 }
 return __p;
 }
 OsciTk.templates['toolbar-item'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+=''+
-( text )+
+((__t=( text ))==null?'':__t)+
 '';
 }
 return __p;
 }
 OsciTk.templates['toolbar'] = function(obj){
-var __p='';var print=function(){__p+=Array.prototype.join.call(arguments, '')};
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+='<div id="toolbar-close">Close</div>\n<div id="toolbar-title-container">\n\t<h2 id="toolbar-title"></h2>\n</div>\n<div id="toolbar-content-container">\n\t<div id="toolbar-content"></div>\n</div>\n<div id="toolbar-handle"></div>';
 }
@@ -584,7 +590,8 @@ OsciTk.models.Figure = OsciTk.models.BaseModel.extend({
 			columns: null,
 			aspect: 1,
 			body: null,
-			options: {}
+			options: {},
+			plate: false
 		};
 	},
 
@@ -596,7 +603,13 @@ OsciTk.models.Figure = OsciTk.models.BaseModel.extend({
 		var position = this.get('position');
 		var parsedPosition;
 
-		if (position.length > 1) {
+		//set a flag for easily identifing the plate figure
+		if (position === "plate") {
+			this.set('plate', true);
+			position = "p";
+		}
+
+		if (position.length == 2) {
 			parsedPosition = {
 				vertical: position[0],
 				horizontal: position[1]
@@ -850,14 +863,6 @@ OsciTk.models.Section = OsciTk.models.BaseModel.extend({
 			contentLoaded: false,
 			pages: new OsciTk.collections.Pages()
 		};
-	},
-
-	sync: function(method, model, options) {
-		// console.log('OsciTkSection.sync: ' + method);
-	},
-
-	parse: function(response) {
-		console.log('parse section');
 	},
 
 	loadContent: function() {
@@ -1184,11 +1189,19 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 	getPageForParagraphId: function(pid) {
 		var views = this.getChildViews();
 		var p = _.find(views, function(view) {
-			return view.$el.find("[data-paragraph_number='" + pid + "']").length !== 0;
+			return view.$el.find("[data-paragraph_identifier='" + pid + "']").length !== 0;
 		});
 		if ((p !== undefined) && (p !== -1)) {
 			return _.indexOf(views, p) + 1;
 		}
+		return null;
+	},
+	getPageForElement: function(element) {
+		var page = $(element).parents(".page");
+		if (page) {
+			return page.data("page_num");
+		}
+
 		return null;
 	},
 	getPageForElementId : function(id) {
@@ -1198,6 +1211,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 			return _.indexOf(views, p) + 1;
 		}
 		return null;
+	},
+	isElementVisible: function(element) {
+		return true;
 	},
 	getPageForProcessing : function(id, newTarget) {
 		var page;
@@ -2066,8 +2082,8 @@ OsciTk.views.MultiColumnFigureLayeredImage = OsciTk.views.MultiColumnFigure.exte
 		var containerWidth = container.width();
 
 		// place figure options on figure tag
-		var jsonOptions = JSON.stringify(this.model.get('options'));
-		this.$el.attr('data-options', jsonOptions);
+		this.jsonOptions = JSON.stringify(this.model.get('options'));
+		this.$el.attr('data-options', this.jsonOptions);
 
 		// the content document may already be loaded
 		if (this.figContent !== null) {
@@ -2085,6 +2101,7 @@ OsciTk.views.MultiColumnFigureLayeredImage = OsciTk.views.MultiColumnFigure.exte
 					dataType: 'html',
 					success: function(data) {
 						$this.figContent = $(data).filter('.layered_image-asset').first();
+						$this.LIMarkup = $this.figContent.clone();
 						$this.renderFromContentDoc();
 					}
 				});
@@ -2098,8 +2115,13 @@ OsciTk.views.MultiColumnFigureLayeredImage = OsciTk.views.MultiColumnFigure.exte
 		contentDiv.html(this.figContent);
 		new window.LayeredImage(contentDiv.find('.layered_image-asset')[0]);
 		this.contentRendered = true;
+	},
+	fullscreen: function() {
+		var li = liCollection.find(this.LIMarkup.attr('id'));
+		li.fullscreen();
 	}
 });
+
 OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 	initialize: function() {
 		this.columnTemplate = OsciTk.templateManager.get('multi-column-column');
@@ -2451,19 +2473,47 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 						gotoPage = 1;
 						break;
 					default:
-						var page_for_id;
-						if(data.identifier.search(/^p-[0-9]-[0-9]+/) > -1) {
+						var page_for_id = null;
+
+						if(data.identifier.search(/^p-[0-9]+/) > -1) {
 							var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
 							page_for_id = this.getPageForParagraphId(pid);
+						} else if (data.identifier.search(/^fig-[0-9]+-[0-9]+-[0-9]+/) > -1) {
+							var matches = data.identifier.match(/^(fig-[0-9]+-[0-9]+)-([0-9])+?/);
+							var figureId = matches[1];
+							var occurrence = matches[2] ? parseInt(matches[2],10) : 1;
+
+							var refs = $(".figure_reference").filter("[href='#" + figureId + "']");
+							if (refs.length) {
+								if (refs.length === 1) {
+									page_for_id = this.getPageForElement(refs[0]);
+								} else {
+									//find visible occurence
+									var occurrenceCount = 0;
+									for (var j = 0, l = refs.length; j < l; j++) {
+										if (this.isElementVisible(refs[j])) {
+											occurrenceCount++;
+
+											if (occurrenceCount === occurrence) {
+												page_for_id = this.getPageForElement(refs[j]);
+												break;
+											}
+										}
+									}
+								}
+							}
+
 						} else {
 							page_for_id = this.getPageForElementId(data.identifier);
 						}
+
 						if (page_for_id !== null) {
 							gotoPage = page_for_id;
 						} else {
 							gotoPage = 1;
-							console.log('id', data.identifier, 'not found in any page');
+							console.log('Navigation error: ', data.identifier, 'not found in any page');
 						}
+
 						break;
 				}
 			}
@@ -2512,6 +2562,29 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 		OsciTk.views.MultiColumnSection.__super__.initialize.call(this);
 	},
 
+	isElementVisible: function(elem) {
+		//determine if it is visible
+		var $elem = $(elem);
+		var inColumn = $elem.parents(".column");
+		var checkContainer = null;
+		var visible = true;
+
+		if (inColumn.length) {
+			checkContainer = inColumn;
+		} else {
+			checkContainer = $elem.parents(".page");
+		}
+
+		if (checkContainer.length) {
+			var position = $elem.position();
+			if (position.top < 0 || position.top > checkContainer.height()) {
+				visible = false;
+			}
+		}
+
+		return visible;
+	},
+
 	preRender: function() {
 		//make sure no figure views are hanging around
 		app.views.figures = {};
@@ -2534,6 +2607,14 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 		//create a placeholder for figures that do not fit on a page
 		this.unplacedFigures = [];
 
+		//if there is a plate image, make sure it gets moved to the front
+		var plateFigures = app.collections.figures.where({plate: true});
+		if (plateFigures.length) {
+			_.each(plateFigures, function(fig) {
+				this.unplacedFigures.push(fig.id);
+			}, this);
+		}
+
 		this.layoutData.items = this.layoutData.data.length;
 
 		var i = 0;
@@ -2541,7 +2622,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 		var paragraphNumber = 1;
 		var paragraphsOnPage = 0;
 		var itemsOnPage = 0;
-		while(this.layoutData.items > 0) {
+		while(this.layoutData.items > 0 || this.unplacedFigures.length > 0) {
 			var pageView = this.getPageForProcessing(undefined, "#pages");
 			var layoutResults = null;
 			var figureIds = [];
@@ -2672,6 +2753,16 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 		//get window height / width
 		var windowWidth = $(window).width();
 		var windowHeight = $(window).height();
+
+		//min width to prevent lockup
+		if (windowWidth < 300) {
+			windowWidth = 300;
+		}
+
+		//min height to prevent lockup
+		if (windowHeight < 300) {
+			windowHeight = 300;
+		}
 
 		//if the window size did not change, no need to recalculate dimensions
 		if (dimensions.windowWidth && dimensions.windowWidth === windowWidth && dimensions.windowHeight && dimensions.windowHeight === windowHeight) {
@@ -2880,7 +2971,12 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	},
 
 	setCurrentNavigationItem: function(section_id) {
-		this.currentNavigationItem = app.collections.navigationItems.get(section_id);
+		var section = app.collections.navigationItems.get(section_id);
+		if (section) {
+			this.currentNavigationItem = app.collections.navigationItems.get(section_id);
+		} else {
+			this.currentNavigationItem = app.collections.navigationItems.first();
+		}
 		app.dispatcher.trigger('currentNavigationItemChanged', this.currentNavigationItem);
 	},
 
@@ -3109,7 +3205,7 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 			page: 0,
 			keyword: null,
 			filters: [],
-			sort: null
+			sort: ''
 		};
 
 		// define results object
@@ -3128,7 +3224,8 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 		'click .search-result': 'gotoResult',
 		'click .facet': 'addFacet',
 		'click .filter': 'addFilter',
-		'click #reset-search': 'resetSearch'
+		'click #reset-search': 'resetSearch',
+		'click .sort-button': 'addSort'
 	},
 	render: function() {
 		this.$el.html(this.template(this));
@@ -3159,8 +3256,12 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 		var queryParams = {
 			key: this.query.keyword,
 			group: 'true',
-			page: this.query.page
+			page: this.query.page,
+			sort: this.query.sort
 		};
+
+		// filter by publication id
+		this.query.filters.push('pid:' + app.models.docPackage.get('id'));
 
 		if (this.query.filters.length) {
 			queryParams['filters'] = this.query.filters.join(' ');
@@ -3172,8 +3273,6 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 			data: queryParams,
 			success: function(data) {
 				data = JSON.parse(data);
-				if(data.numFound === 0) return;
-
 				// add the incoming docs to the results collection
 				that.response.docs.reset(data.docs);
 				that.response.facets = data.facets;
@@ -3201,6 +3300,23 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 
 		app.router.navigate("section/" + resultModel.get("ss_section_id") + "/" + resultModel.get("id"), {trigger: true});
 		app.views.toolbarView.contentClose();
+	},
+	addSort: function(e) {
+		e.preventDefault();
+		var sort = $(e.currentTarget).data('sort');
+		var exists = sort === this.query.sort;
+
+		this.$el.find('.sort-button').removeClass("active");
+
+		if (!exists) {
+			this.query.sort = sort;
+		}
+
+		if (this.hasSearched) {
+			this.search();
+		}
+
+		$(e.currentTarget).addClass('active');
 	},
 	addFilter: function(e) {
 		e.preventDefault();
@@ -3457,6 +3573,1487 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 		this.isContentOpen = false;
 	}
 });
+var $ = jQuery;
+
+var LICollection = function() {
+	var collection = [];
+	
+	this.add = function(asset) {
+		var i, count;
+		
+		// check that this asset isn't already in the collection
+		for (i=0, count = collection.length; i < count; i++) {
+			if (collection[i].id == asset.id) {
+				return false;
+			}
+		}
+		collection.push(asset);
+		return true;
+	};
+	
+	this.remove = function(asset) {
+		var i, count;
+		// allow an asset or a string id to be passed in
+		if (typeof asset == "string") {
+			asset = {id: asset};
+		}
+		
+		// find this asset in the collection by id
+		for (i=0, count = collection.length; i < count; i++) {
+			if (collection[i].id == asset.id) {
+				collection.splice(i, 1);
+			}
+		}
+	};
+	
+	this.find = function(id) {
+		var i, count;
+		for (i=0, count = collection.length; i < count; i++) {
+			if (collection[i].id == id) {
+				return collection[i];
+			}
+		}
+		return false;
+	};
+	
+	this.list = function() {
+		return collection;
+	};
+
+	this.userIsDraggingAsset = false;
+};
+	
+
+var LayeredImage = function(container) { // container should be a html element
+	var i, count, layerData;
+	
+	// check prereqs
+	if (jQuery !== undefined) {
+		var $ = this.$ = jQuery;
+	}
+	else return false;
+	if (org.polymaps !== undefined) {
+		this.polymaps = org.polymaps;
+	}
+	else return false;
+
+	// turn the element into a jQuery object
+	this.container = $(container);
+
+	// ensure we have something to work on
+	if (this.container.length < 1) {
+		return false;
+	}
+	
+	// push this new asset into the registry, only render if not already present
+	if (!window.liCollection.add(this)) {
+		return;
+	}
+	
+	// load the layered image id and configuration
+	this.id = this.container.attr('id');
+	this.settings = this.container.data();
+	this.settings.zoomStep = this.settings.zoomStep || 0.1;
+	this.settings.annotationSelectorVisible = false;
+	this.settings.dragging = undefined;
+	
+	// detect and incorporate figure options
+	var figure = this.container.parents('figure:first');
+	var optString = figure.attr('data-options');
+	if (figure.length > 0 && optString) {
+		this.figureOptions = JSON.parse(optString);
+	}
+	// provide defaults if options not set
+	if (!this.figureOptions) {
+		this.figureOptions = {
+			disable_interaction: false,
+			disable_annotation: false,
+			sliderPosition: 0
+		};
+	}
+	if (!this.figureOptions.sliderPosition) {
+		this.figureOptions.sliderPosition = 0;
+	}
+	// detect and incorporate the caption if it exists
+	this.settings.captionMarkup = this.container.parents('figure:first').find('figcaption').clone();
+
+	// store a copy of the original html - will be used to
+	// regenerate markup for fullscreen
+	this.settings.originalMarkup = outerHTML(this.container[0]);
+
+	// extract the layer data
+	this.layers = [];
+	var layerContainer = this.container.find('.layered_image-layers');
+	var layerItems = layerContainer.find('li');
+	for (i=0, count = layerItems.length; i < count; i++) {
+		var layerMarkup = $(layerItems[i]);
+		this.layers.push(layerMarkup.data());
+	}
+	layerContainer.remove();
+
+	// sort the layers so that annotations are always last (on top)
+	this.layers.sort(function(a,b) {
+		var layer1 = a.annotation;
+		var layer2 = b.annotation;
+		if (layer1 == layer2) return 0;
+		if (layer1 && !layer2) return 1;
+		if (!layer1 && layer2) return -1;
+		return 0;
+	});
+
+	// we must order their layer_num properties
+	// also create separate arrays of base and annotation layers for convenience
+	this.baseLayers = [];
+	this.annotationLayers = [];
+	for (i=0, count = this.layers.length; i < count; i++) {
+		layerData = this.layers[i];
+		layerData.layer_num = i + 1;
+		if (layerData.annotation) {
+			this.annotationLayers.push(layerData);
+		}
+		else {
+			this.baseLayers.push(layerData);
+		}
+	}
+
+	// initialize the container as a polymap
+	this.map = this.polymaps.map();
+	this.map.container(this.container[0].appendChild(this.polymaps.svg('svg')));
+	this.map.tileSize({
+		x: 256,
+		y: 256
+	});
+
+	// calculate zoom levels if not already present
+	for (i=0, count = this.layers.length; i < count; i++) {
+		layerData = this.layers[i];
+		if (!layerData.zoom_levels) {
+			layerData.zoom_levels = this.getZoomLevels(layerData.width, layerData.height);
+		}
+	}
+	// create the first two layers, using preset data if available
+	var baseLayerPreset = this.figureOptions.baseLayerPreset ? this.figureOptions.baseLayerPreset : [],
+		numBaseLayerPresets = baseLayerPreset.length,
+		usedPresetLayers = false;
+		
+	if (numBaseLayerPresets > 0) {
+		var firstLayer = this.getLayerById(baseLayerPreset[0]);
+		var secondLayer;
+		
+		if (numBaseLayerPresets > 1) {
+			secondLayer = this.getLayerById(baseLayerPreset[1]);
+		}
+		
+		if (firstLayer && (secondLayer || numBaseLayerPresets == 1)) {
+			this.createLayer(firstLayer);
+			
+			if (secondLayer) {
+				this.createLayer(secondLayer);
+				$('#' + secondLayer.id).css('opacity', 0);
+			}
+			
+			usedPresetLayers = true;
+		}
+	}
+	
+	if (!usedPresetLayers && this.baseLayers.length) {
+		// create first layer, second layer, and make second transparent
+		this.createLayer(this.baseLayers[0]);
+		if (this.baseLayers[1]) {
+			this.createLayer(this.baseLayers[1]);
+			$('#' + this.baseLayers[1].id).css('opacity', 0);
+		}
+	}
+	
+	// create control interface
+	this.createUI();
+	
+	// if any annotation presets are present, display those layers
+	this.showAnnotationPresets();
+
+	// fit to the map to its container and set the zoom range
+	this.zoomToContainer();
+	
+	// if fullscreen extents are present, this CA needs to be positioned
+	// as its parent was
+	var extents = [];
+	if (this.figureOptions.fullscreenExtents) {
+		extents = [
+			{
+				lon: this.figureOptions.fullscreenExtents.swLon,
+				lat: this.figureOptions.fullscreenExtents.swLat
+			},
+			{
+				lon: this.figureOptions.fullscreenExtents.neLon,
+				lat: this.figureOptions.fullscreenExtents.neLat
+			}
+		];
+		this.setExtents(extents);
+	}
+	// else use the starting postion from the figure options markup
+	// - if initial extents were given, honor them
+	else if (this.figureOptions.swLat) {
+		extents = [
+			{
+				lon: this.figureOptions.swLon,
+				lat: this.figureOptions.swLat
+			},
+			{
+				lon: this.figureOptions.neLon,
+				lat: this.figureOptions.neLat
+			}
+		];
+		this.setExtents(extents);
+	}
+};
+
+
+LayeredImage.prototype.createLayer = function(layerData) {
+	// alias jquery
+	var $ = this.$;
+	var layer;
+	
+	if (layerData === undefined) {
+		return;
+	}
+
+	// provide zoom_levels if missing
+	if (!layerData.zoom_levels) {
+		layerData.zoom_levels = this.getZoomLevels(layerData.width, layerData.height);
+	}
+
+	// determine type of layer
+	if (layerData.type == 'image') {
+		layer = this.createLayerImage(layerData);
+	}
+	if (layerData.type == 'iip') {
+		layer = this.createLayerIIP(layerData);
+	}
+	if (layerData.type == 'svg') {
+		layer = this.createLayerSVG(layerData);
+	}
+
+	// flag the layer as visible and
+	// give the layer a reference to its polymap object
+	layerData.visible = true;
+	layerData.polymapLayer = layer;
+	
+	// give the layer its id, and add it to the map
+	layer.id(layerData.id);
+	this.map.add(layer);
+	
+};
+
+
+LayeredImage.prototype.removeLayer = function(layerData) {
+	if (layerData.polymapLayer) {
+		this.map.remove(layerData.polymapLayer);
+	}
+	layerData.polymapLayer = undefined;
+	layerData.visible = false;
+};
+
+
+LayeredImage.prototype.toggleLayer = function(layerData) {
+	if (layerData.visible) {
+		this.removeLayer(layerData);
+	}
+	else {
+		this.createLayer(layerData);
+	}
+};
+
+LayeredImage.prototype.repaintLayer = function(layerData) {
+	this.removeLayer(layerData);
+	this.createLayer(layerData);
+};
+
+LayeredImage.prototype.createLayerIIP = function(layerData) {
+	var CA = this;
+	var layer = this.polymaps.image();
+	var tileLoader = function(c) {
+		var iipsrv = layerData.ptiff_server;
+		var ptiff = layerData.ptiff_path;
+		var image_h = layerData.height;
+		var image_w = layerData.width;
+		var tile_size = 256;
+		var scale = CA.getScale(layerData.zoom_levels - 1, c.zoom);
+		//var scale = CA.getScale(layerData.zoom_levels, c.zoom);
+		var mw = Math.round(image_w / scale);
+		var mh = Math.round(image_h / scale);
+		var tw = Math.ceil(mw / tile_size);
+		var th = Math.ceil(mh / tile_size);
+		if (c.row < 0 || c.row >= th || c.column < 0 || c.column >= tw) return null;
+		if (c.row == (th - 1)) {
+			c.element.setAttribute("height", mh % tile_size);
+		}
+		if (c.column == (tw - 1)) {
+			c.element.setAttribute("width", mw % tile_size);
+		}
+		var ret =  iipsrv+"?fif="+ptiff+"&jtl="+(c.zoom)+","+((c.row * tw) + c.column);
+		return ret;
+	};
+	layer.url(tileLoader);
+	return layer;
+};
+
+
+LayeredImage.prototype.createLayerImage = function(layerData) {
+	// alias polymaps, as our load and unload functions change "this" inside
+	var CA = this;
+	var load = function(tile) {
+		var scale = CA.getScale(layerData.zoom_levels, tile.zoom);
+		tile.element = CA.polymaps.svg('image');
+		tile.element.setAttribute("preserveAspectRatio", "none");
+		tile.element.setAttribute("x", 0);
+		tile.element.setAttribute("y", 0);
+		tile.element.setAttribute("width", layerData.width / scale);
+		tile.element.setAttribute("height", layerData.height / scale);
+		tile.element.setAttributeNS("http://www.w3.org/1999/xlink", "href", layerData.image_path);
+		tile.ready = true;
+	};
+
+	var unload = function(tile) {
+		if (tile.request) tile.request.abort(true);
+	};
+
+	var layer = this.polymaps.layer(load, unload).tile(false);
+	return layer;
+};
+
+
+LayeredImage.prototype.createLayerSVG = function(layerData) {
+	// alias polymaps, as our load and unload functions change "this" inside
+	var CA = this;
+	var load = function(tile) {
+		var scale = CA.getScale(layerData.zoom_levels, tile.zoom);
+		tile.element = CA.polymaps.svg('image');
+		tile.element.setAttribute("preserveAspectRatio", "none");
+		tile.element.setAttribute("x", 0);
+		tile.element.setAttribute("y", 0);
+		tile.element.setAttribute("width", layerData.width / scale);
+		tile.element.setAttribute("height", layerData.height / scale);
+		tile.element.setAttributeNS("http://www.w3.org/1999/xlink", "href", layerData.svg_path);
+		tile.ready = true;
+	};
+
+	var unload = function(tile) {
+		if (tile.request) tile.request.abort(true);
+	};
+
+	var layer = this.polymaps.layer(load, unload).tile(false);
+	return layer;
+};
+
+
+LayeredImage.prototype.zoomToContainer = function() {
+	// always calculate at the highest possible zoom, 18,
+	// for max fineness of alignment
+	var zoomToCalculateAt = 18, i, count;
+
+	// calculate tw and th for each layer
+	for (i=0, count = this.layers.length; i < count; i++) {
+		var layerData = this.layers[i];
+		var scale = this.getScale(layerData.zoom_levels - 0, zoomToCalculateAt);
+		// TODO: figure out why this is a special case:
+		if (layerData.type == 'iip') {
+			scale = this.getScale(layerData.zoom_levels - 1, zoomToCalculateAt);
+		}
+		var mw = Math.round(layerData.width / scale);
+		var mh = Math.round(layerData.height / scale);
+		var tw = Math.ceil(mw / this.map.tileSize().x);
+		var th = Math.ceil(mh / this.map.tileSize().y);
+		layerData.tiles_wide = tw;
+		layerData.tiles_high = th;
+		layerData.tiles_zoom = zoomToCalculateAt;
+	}
+
+	// scan the layers and find the greatest extents
+	var tiles_wide = 0;
+	var tiles_high = 0;
+	for (i=0, count = this.layers.length; i < count; i++) {
+		if (this.layers[i].tiles_high > tiles_high) {
+			tiles_high = this.layers[i].tiles_high;
+		}
+		if (this.layers[i].tiles_wide > tiles_wide) {
+			tiles_wide = this.layers[i].tiles_wide;
+		}
+	}
+
+	// now that we know our max extents, calculate the
+	// southwest and northeast corners to fit in container
+	this.settings.containerFitSW = this.map.coordinateLocation({
+		zoom: zoomToCalculateAt,
+		column: 0,
+		row: tiles_high
+	});
+	this.settings.containerFitNE = this.map.coordinateLocation({
+		zoom: zoomToCalculateAt,
+		column: tiles_wide,
+		row: 0
+	});
+
+	// apply those extents to the map, bringing all our layers into view
+	this.map.extent([this.settings.containerFitSW, this.settings.containerFitNE]);
+
+	// now that the image is zoomed to fit it's container, store the
+	// "to fit" zoom level so we can recall it later
+	this.settings.containerFitZoomLevel = this.map.zoom();
+
+	// reset the zoom range
+	this.resetZoomRange(this.settings.containerFitZoomLevel);
+};
+
+
+LayeredImage.prototype.createUI = function() {
+	// local aliases
+	var $ = this.$, CA = this, fullscreenClass, currentLayer;
+
+	// hook up polymap drag interaction
+	if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
+		this.map
+			.add(this.polymaps.drag())
+			.add(this.polymaps.wheel())
+			.add(this.polymaps.dblclick())
+			.add(this.polymaps.touch());
+
+		// we need to augment the polymap event handlers, since the built in polymaps
+		// wheel interaction doesn't allow us to update our user interface controls
+		$(this.container).bind({
+			'mousewheel' : function(event) {
+				CA.ui.zoomSlider.slider('value', CA.map.zoom());
+
+				//refresh the viewport if displayed
+				CA.refreshViewfinderViewport();
+			},
+			'DOMMouseScroll' : function(event) {
+				CA.ui.zoomSlider.slider('value', CA.map.zoom());
+
+				//refresh the viewport if displayed
+				CA.refreshViewfinderViewport();
+			},
+			'dblclick' : function(event) {
+				CA.ui.zoomSlider.slider('value', CA.map.zoom());
+
+				//refresh the viewport if displayed
+				CA.refreshViewfinderViewport();
+			},
+			'mousedown' : function(event) {
+				CA.settings.dragging = {
+					x: event.clientX,
+					y: event.clientY
+				};
+				liCollection.userIsDraggingAsset = CA.id;
+			}
+		});
+	}
+	
+	// init ui object
+	this.ui = {};
+	this.ui.legendItemsCount = 0;
+
+	// init bottom control bar
+	this.ui.controlbar = $('<div class="ca-ui-controlbar"></div>');
+
+	// fullscreen control
+	if (this.settings.collapsed) {
+		fullscreenClass = "collapsed";
+	}
+	else {
+		fullscreenClass = "expanded";
+	}
+	this.ui.fullscreen = $('<div class="ca-ui-fullscreen '+fullscreenClass+'"></div>')
+	.bind('click', function() {
+		if (CA.settings.collapsed) {
+			CA.fullscreen();
+		}
+		else {
+			window.liCollection.remove(CA);
+			$('.ca-ui-fullscreen-modal').remove();
+			if (window.scrollOffset) {
+				window.scrollTo(window.scrollOffset[0], window.scrollOffset[1]);
+			}
+		}
+	})
+	.appendTo(this.ui.controlbar);
+	
+	// reset control
+	this.ui.reset = $('<div class="ca-ui-reset"></div>')
+	.bind('click', function(event) {
+		CA.reset();
+	});
+	if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
+		this.ui.reset.appendTo(this.ui.controlbar);
+	}
+
+	// annotation control
+	if (this.annotationLayers.length > 0) {
+		this.ui.annotation = $('<div class="ca-ui-annotation"></div>')
+			.bind('click', function(event) {
+				CA.toggleAnnotationSelector();
+			});
+		if (!this.figureOptions.disable_annotation || this.figureOptions.editing) {
+			this.ui.annotation.appendTo(this.ui.controlbar);
+		}
+	}
+	
+	// layer controls
+	var baseLayers = this.getVisibleBaseLayers();
+	this.settings.currentLayer1 = baseLayers[0];
+	if (baseLayers.length > 1) {
+		this.settings.currentLayer2 = baseLayers[1];
+
+		// layer selector
+		this.ui.layerSelector = $('<div class="ca-ui-layer-selector"></div>');
+
+		// only provide selectable layers if there are at least three
+		if (this.baseLayers.length > 2) {
+			this.ui.layerSelector
+			.bind('click', {
+				layeredImage: this
+			}, this.toggleLayerSelector);
+		}
+		if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
+			this.ui.controlbar.append(this.ui.layerSelector);
+		}
+
+		// opacity slider
+		this.ui.sliderContainer = $('<div class="ca-ui-layer-slider-container"></div>');
+		this.ui.sliderLayerText = $('<div class="ca-ui-layer-slider-layer-text"></div>')
+			.text(this.settings.currentLayer1.title + " - " + this.settings.currentLayer2.title)
+			.appendTo(this.ui.sliderContainer);
+		this.ui.slider = $('<div class="ca-ui-layer-slider"></div>')
+			.slider({
+				slide: function(event, ui) {
+					// set the opacity of layers
+					// var primaryOpacity = (100 - ui.value) / 100;
+					var secondaryOpacity = ui.value / 100;
+					// $('#'+CA.settings.currentLayer1.id).css('opacity', primaryOpacity);
+					$('#'+CA.settings.currentLayer2.id).css('opacity', secondaryOpacity);
+					CA.refreshViewfinderOpacity(secondaryOpacity);
+				},
+				change: function(event, ui) {
+					var secondaryOpacity = ui.value / 100;
+					$('#'+CA.settings.currentLayer2.id).css('opacity', secondaryOpacity);
+					CA.refreshViewfinderOpacity(secondaryOpacity);
+				}
+			})
+			.appendTo(this.ui.sliderContainer);
+		
+		if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
+			this.ui.sliderContainer.appendTo(this.ui.controlbar);
+			this.ui.layerSelector.after(this.ui.sliderContainer);
+		}
+		// restore preset if available
+		if (this.figureOptions.sliderPosition !== undefined) {
+			this.ui.slider.slider('value', this.figureOptions.sliderPosition);
+		}
+	}
+	
+	// add controlbar to container
+	this.ui.controlbar.appendTo(this.container);
+	this.resizeControlBar();
+
+	// zoom control
+	this.ui.zoom = $('<div class="ca-ui-zoom"></div>');
+	
+	this.ui.zoomIn = $('<div class="ca-ui-zoom-in"></div>')
+	.bind('click', function(event) {
+		var currentVal = CA.ui.zoomSlider.slider('value');
+		var newVal = currentVal + CA.settings.zoomStep;
+		CA.ui.zoomSlider.slider('value', newVal);
+		CA.map.zoom(newVal);
+	})
+	.appendTo(this.ui.zoom);
+	
+	this.ui.zoomSlider = $('<div class="ca-ui-zoom-slider"></div>')
+	.slider({
+		step: this.settings.zoomStep,
+		orientation: 'vertical',
+		slide: function(event, ui) {
+			var newZoom = ui.value;
+			var currentZoom = CA.map.zoom();
+			if (newZoom != currentZoom) {
+				CA.map.zoom(newZoom);
+			}
+		}
+	})
+	.appendTo(this.ui.zoom);
+	
+	this.ui.zoomOut = $('<div class="ca-ui-zoom-out"></div>')
+	.bind('click', function(event) {
+		// get the current value, and add one to it
+		var currentVal = CA.ui.zoomSlider.slider('value');
+		var newVal = currentVal - CA.settings.zoomStep;
+		CA.ui.zoomSlider.slider('value', newVal);
+		CA.map.zoom(newVal);
+	})
+	.appendTo(this.ui.zoom);
+	if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
+		this.ui.zoom.appendTo(this.container);
+	}
+
+	// viewfinder control
+	this.ui.viewfinder = $('<div class="ca-ui-viewfinder viewfinder-closed"></div>');
+	
+	if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
+		this.ui.viewfinder.appendTo(this.container);
+	}
+	
+	this.ui.viewfinder.bind('click', function(event) {
+		if (CA.ui.viewfinder.hasClass('viewfinder-open')) {
+			// close
+			CA.ui.viewfinder.empty().css('height', '');
+			CA.ui.viewfinder.removeClass('viewfinder-open').addClass('viewfinder-closed');
+			CA.ui.viewfinderViewport = null;
+		}
+		else {
+			// open
+			CA.ui.viewfinder.removeClass('viewfinder-closed').addClass('viewfinder-open');
+			CA.refreshViewfinder();
+		}
+	});
+	
+	// store references to the control elements, so they can be manipulated as a collection
+	this.ui.controls = [this.ui.controlbar, this.ui.zoom, this.ui.viewfinder, this.ui.currentPopup, this.ui.annotation, this.ui.layerSelector];
+	
+	// configure events to show/hide controls
+	this.container.bind('mousemove', function(event) {
+		var container = CA.container;
+		var date = new Date();
+		
+		container.attr('data-controls-time', date.getTime());
+		var controlState = container.attr('data-controls') || 'false';
+		if (controlState == 'false') {
+			// ensure no other CA has its controls up
+			var assets = window.liCollection.list();
+			for (var i=0, count = assets.length; i < count; i++) {
+				var asset = assets[i];
+				if (asset.container.attr('data-controls') == 'true') {
+					asset.container.attr('data-controls', 'false');
+					asset.toggleControls();
+				}
+			}
+			// turn on this CA's controls
+			container.attr('data-controls', 'true');
+			CA.toggleControls();
+		}
+		CA.ui.controlsTimeout = setTimeout(function() {
+			var date = new Date();
+			// check if the mouse is over a control, if it is, don't hide
+			if (container.attr('data-controls') == 'true' &&
+				(date.getTime() - container.attr('data-controls-time')) >= 1750) {
+				
+				if (container.attr('data-controls-lock') != 'true') {
+					container.attr('data-controls', 'false');
+					CA.clearPopups();
+					CA.toggleControls();
+				}
+			}
+		}, 2000);
+	});
+	// mousing over a control locks them "on"
+	$.each(this.ui.controls, function() {
+		// test if this is still around.  we include popups, and other transients
+		if (typeof(this.bind) == 'function') {
+			this.bind('mouseenter', function() {
+				CA.container.attr('data-controls-lock', 'true');
+			});
+			this.bind('mouseleave', function() {
+				CA.container.attr('data-controls-lock', 'false');
+			});
+		}
+	});
+};
+
+LayeredImage.prototype.reset = function() {
+	var $ = this.$, i, count,
+		CA = this;
+		
+	CA.clearPopups();
+
+	// reset to provided inset, or container bounds otherwise
+	if (typeof CA.figureOptions.swLat != 'undefined' && !CA.figureOptions.editing) {
+		var extents =  [
+			{
+				lon: CA.figureOptions.swLon,
+				lat: CA.figureOptions.swLat
+			},
+			{
+				lon: CA.figureOptions.neLon,
+				lat: CA.figureOptions.neLat
+			}
+			];
+		CA.map.extent(extents);
+	}
+	else {
+		CA.zoomToContainer();
+	}
+	// correct zoom control to reflect new zoom
+	CA.ui.zoomSlider.slider('value', CA.map.zoom());
+
+	// reset initial slider position
+	if (CA.figureOptions.sliderPosition !== undefined) {
+		if (CA.ui.slider) {
+			CA.ui.slider.slider('value', CA.figureOptions.sliderPosition);
+		}
+	}
+	/*
+	 * Reset original layer selection
+	 */
+	var baseLayers;
+	if (CA.figureOptions.baseLayerPreset) {
+		baseLayers = [];
+		for (i=0, count = CA.figureOptions.baseLayerPreset.length; i < count; i++) {
+			baseLayers.push(CA.getLayerById(CA.figureOptions.baseLayerPreset[i]));
+		}
+	}
+	else {
+		baseLayers = CA.baseLayers;
+	}
+	for (i = 0, count = baseLayers.length; i < count && i < 2; i++) {
+		currentLayer = CA.settings['currentLayer' + (i + 1)];
+		// turn off current layer
+		CA.toggleLayer(currentLayer);
+		// turn on new
+		CA.toggleLayer(baseLayers[i]);
+		// upkeep state
+		CA.settings['currentLayer' + (i + 1)] = baseLayers[i];
+		// update layer selector ui
+		if (CA.ui['layerSelector' + (i + 1)]) {
+			CA.ui['layerSelector'+ (i + 1)].find('span').html(baseLayers[i].title);
+		}
+	}
+	// if more than one layer, restore transparency setting
+	if (baseLayers.length > 1 && CA.ui.slider) {
+		$('#'+CA.settings.currentLayer2.id).css('opacity', CA.ui.slider.slider('value') / 100);
+		if (CA.ui.viewfinderLayer2) {
+			CA.ui.viewfinderLayer2.css('opacity', CA.ui.slider.slider('value') / 100);
+		}
+	}
+
+	// reset annotation layer visibility
+	CA.showAnnotationPresets();
+};
+
+
+LayeredImage.prototype.refreshViewfinder = function() {
+	var $ = this.$;
+	var CA = this;
+	// first clear out any contents
+	this.ui.viewfinder.empty();
+	
+	// get image urls from current layers
+	var thumbUrl1 = this.settings.currentLayer1.thumb;
+	this.ui.viewfinderLayer1 = $('<div class="ca-ui-viewfinderLayer viewfinderLayer1"></div>');
+	$('<img />').attr('src', thumbUrl1).appendTo(this.ui.viewfinderLayer1);
+	this.ui.viewfinder.append(this.ui.viewfinderLayer1);
+	
+	if (this.settings.currentLayer2) {
+		var thumbUrl2 = this.settings.currentLayer2.thumb;
+		this.ui.viewfinderLayer2 = $('<div class="ca-ui-viewfinderLayer viewfinderLayer2"></div>');
+		$('<img />').attr('src', thumbUrl2).appendTo(this.ui.viewfinderLayer2);
+		this.ui.viewfinder.append(this.ui.viewfinderLayer2);
+		// set opacity to match
+		this.ui.viewfinderLayer2.css('opacity', this.ui.slider.slider("value") / 100);
+	}
+	
+	// set height based on width and aspect
+	var vfWidth = this.ui.viewfinder.width();
+	var vfHeight = Math.floor(vfWidth / this.settings.aspect);
+	this.ui.viewfinder.height(vfHeight);
+	
+	// bounds div
+	this.refreshViewfinderViewport();
+	
+	// - hook up drag events so the div can be dragged
+	// - when dragged reflect the change on the map
+};
+
+
+LayeredImage.prototype.refreshViewfinderViewport = function() {
+	
+	if (this.ui.viewfinder.hasClass('viewfinder-open')) {
+		var $ = this.$;
+		var vfWidth = this.ui.viewfinder.width();
+		var vfHeight = Math.floor(vfWidth / this.settings.aspect);
+
+		// - draw the div and position it
+		if (!this.ui.viewfinderViewport) {
+			this.ui.viewfinderViewport = $('<div class="ca-ui-viewfinder-viewport">&nbsp;</div>').appendTo(this.ui.viewfinder);
+
+			if (this.settings.viewPortBorderWidth === undefined) {
+				this.settings.viewPortBorderWidth = parseInt(this.ui.viewfinderViewport.css("border-left-width"), 10);
+			}
+		}
+
+		// calculate inset percentage on all sides
+		var pointSW = this.map.locationPoint(this.settings.containerFitSW);
+		var pointNE = this.map.locationPoint(this.settings.containerFitNE);
+
+		//calculate the top left offsets
+		var offsetX = (((pointSW.x * -1.0) / (pointNE.x - pointSW.x)) * vfWidth) - this.settings.viewPortBorderWidth;
+		var offsetY = (((pointNE.y * -1.0) / (pointSW.y - pointNE.y)) * vfHeight) - this.settings.viewPortBorderWidth;
+
+		// calculate the height and width of the viewport
+		var ratioX = this.map.size().x / (pointNE.x - pointSW.x);
+		var ratioY = this.map.size().y / (pointSW.y - pointNE.y);
+		
+		var vpWidth = ratioX * vfWidth;
+		var vpHeight = ratioY * vfHeight;
+
+		this.ui.viewfinderViewport.css({
+			top : offsetY + "px",
+			left : offsetX + "px",
+			width : vpWidth + "px",
+			height : vpHeight + "px"
+		});
+	}
+};
+
+
+LayeredImage.prototype.refreshViewfinderOpacity = function(opacity) {
+	if (this.ui.viewfinderLayer2) {
+		this.ui.viewfinderLayer2.css('opacity', opacity);
+	}
+};
+
+
+LayeredImage.prototype.fullscreen = function(reset) {
+	var $ = this.$;
+	var CA = this;
+
+	// create a parent container that spans the full screen
+	var modal = $('<div class="ca-ui-fullscreen-modal"></div>').appendTo(document.body);
+	// if the modal background is clicked, close the fullscreen mode
+	modal.bind('click', function(event) {
+		if ($(event.target).hasClass('ca-ui-fullscreen-modal')) {
+			$(this).find('.ca-ui-fullscreen').trigger('click');
+		}
+	});
+	var wrapper = $('<div class="ca-ui-fullscreen-wrap"></div>').appendTo(modal),
+		modalOffset = modal.offset(),
+		modalHeight = modal.height() - modalOffset.top,
+		modalWidth = modal.outerWidth() - modalOffset.left;
+
+	wrapper.css({
+		height: Math.round(modalHeight * 0.9) + 'px',
+		top:	Math.round(modalHeight * 0.05) + 'px',
+		width:	Math.round(modalWidth * 0.9) + 'px',
+		left:	Math.round(modalWidth * 0.05) + 'px'
+	});
+	// retrieve the original markup for this LayeredImage and
+	// remap the IDs of the asset and its layers
+	var markup = $(this.settings.originalMarkup);
+	markup.attr('id', markup.attr('id') + '-fullscreen');
+	markup.attr('data-collapsed', 'false');
+	markup.find('li').each(function() {
+		var el = $(this);
+		el.data('id', el.data('id') + '-fullscreen');
+		el.data('parent_asset', el.data('parent_asset') + '-fullscreen');
+	});
+	 
+	// the extents of the current map should be restored on full screen
+	var extents = this.map.extent();
+	this.figureOptions.fullscreenExtents = {
+		swLon: extents[0].lon,
+		swLat: extents[0].lat,
+		neLon: extents[1].lon,
+		neLat: extents[1].lat
+	};
+	
+	var figureWrapper = $('<figure></figure>')
+		.attr('data-options', JSON.stringify(this.figureOptions))
+		.css({
+			height : Math.round(modalHeight * 0.9) + 'px',
+			width : Math.round(modalWidth * 0.9) + 'px'
+		})
+		.appendTo(wrapper);
+	
+	// if a caption is present in the figure options, append it to the fullscreen
+	var captionHeight = 0;
+	if (this.settings.captionMarkup) {
+		figureWrapper.append(this.settings.captionMarkup);
+		captionHeight = this.settings.captionMarkup.outerHeight(true);
+	}
+	
+	$('<div>', {
+		'class' : 'figureContent',
+		css : {
+			'height' : (Math.round(modalHeight * 0.9) - captionHeight) + 'px',
+			'width' : Math.round(modalWidth * 0.9) + 'px'
+		}
+	})
+	.append(markup)
+	.prependTo(figureWrapper);
+	
+	var tempCA = new LayeredImage(markup);
+	
+	if (reset) {
+		tempCA.reset();
+	}
+};
+
+//resize the control bar so no wrapping occurs
+LayeredImage.prototype.resizeControlBar = function()
+{
+	var containerWidth = this.container.outerWidth(),
+		controlBarWidth = this.ui.controlbar.outerWidth(),
+		maxWidth = containerWidth - (parseInt(this.ui.controlbar.css('right'), 10) * 2);
+		
+	//if controlbar is wider than asset width resize it
+	if (controlBarWidth > maxWidth) {
+		this.ui.controlbar.css({
+			'max-width' : maxWidth + 'px'
+		});
+		
+		//shrink layer names (only works nicely if a min-width set in css & overflow ellipsis)
+		//this might need redone later depending on browser support and custom styles
+		this.ui.controlbar.find('.ca-ui-layer > span').css({
+			width: '1px'
+		});
+	}
+	
+};
+
+LayeredImage.prototype.toggleLayerSelector = function(event) {
+	// set up aliases and build dynamic variable names
+	var $ = jQuery;
+	var CA = event.data.layeredImage;
+	var layerSelector = $(this);
+	// var layerControlNum = event.data.layerControlNum;
+	// var layerControlOther = (layerControlNum == 1) ? 2 : 1;
+	// var layerSelectorPopup = 'layerSelectorPopup';
+	// var currentLayer = CA.settings['currentLayer'+layerControlNum];
+	var currentLayer1 = CA.settings['currentLayer1'];
+	var currentLayer2 = CA.settings['currentLayer2'];
+	// var otherLayer = CA.settings['currentLayer'+layerControlOther];
+	
+	// if visible already, remove and set state
+	if (CA.ui.currentPopup && CA.ui.currentPopup == CA.ui['layerSelectorPopup']) {
+		CA.clearPopups();
+	}
+	else {
+		// check that the other popup is closed
+		CA.clearPopups();
+
+		// set an active class on the button to change appearance
+		layerSelector.addClass('active');
+
+		// create a button row for each layer
+		rows = $('<div class="ca-ui-layer-selector-rows"></div>');
+		for (var i = 0; i < CA.baseLayers.length; i++) {
+			var baseLayer = CA.baseLayers[i];
+			rowLayerButton1 = $('<div class="ca-ui-layer-selector-row-button1"><div class="ca-ui-layer-selector-button"></div></div>')
+				.attr('data-layer_index', i);
+			rowTitle = $('<div class="ca-ui-layer-selector-row-title"><span>' + baseLayer.title + '</span></div>');
+			rowLayerButton2 = $('<div class="ca-ui-layer-selector-row-button2"><div class="ca-ui-layer-selector-button"></div></div>')
+				.attr('data-layer_index', i);
+			
+			// indicate current layers
+			if (baseLayer == CA.settings.currentLayer1) {
+				rowLayerButton1
+					.find('.ca-ui-layer-selector-button')
+					.first()
+					.addClass('active');
+			}
+			if (baseLayer == CA.settings.currentLayer2) {
+				rowLayerButton2
+					.find('.ca-ui-layer-selector-button')
+					.first()
+					.addClass('active');
+			}
+
+			// bind button events
+			rowLayerButton1.bind('click', {CA: CA, layerNum: 1}, CA.layerSelect);
+			rowLayerButton2.bind('click', {CA: CA, layerNum: 2}, CA.layerSelect);
+
+			// assemble
+			row = $('<div class="ca-ui-layer-selector-row"></div>')
+				.append(rowLayerButton1)
+				.append(rowTitle)
+				.append(rowLayerButton2);
+			rows.append(row);
+		}
+
+		// figure out where to place the popup
+		var bottom = parseInt(CA.ui.controlbar.css('bottom'), 10) + CA.ui.controlbar.height();
+		var left = CA.ui.controlbar.position().left;
+		var width = CA.ui.sliderContainer.outerWidth() + layerSelector.outerWidth();
+		var cssParams = {
+			bottom : bottom + 'px',
+			left: left + 'px'
+			// width: width + 'px'
+		};
+
+		// create the popup
+		CA.ui.layerSelectorPopup = $('<div class="ca-ui-layer-selector-popup"></div>')
+		.css(cssParams)
+		.bind('mouseenter', function() {
+			CA.container.attr('data-controls-lock', 'true');
+		})
+		.bind('mouseleave', function() {
+			CA.container.attr('data-controls-lock', 'false');
+		})
+		.append(rows)
+		.appendTo(CA.container);
+		CA.ui.currentPopup = CA.ui.layerSelectorPopup;
+	}
+};
+
+
+LayeredImage.prototype.toggleAnnotationSelector = function() {
+	
+	// local aliases
+	var $ = this.$;
+	var CA = this;
+
+	if (this.ui.currentPopup && this.ui.currentPopup == this.ui.annotationSelector) {
+		// remove the control
+		this.clearPopups();
+	}
+	else {
+		this.clearPopups();
+
+		// set an active class on the button to change appearance
+		this.ui.annotation.addClass('active');
+
+		// get the position of the button's top right corner - this is where to bind the popup
+		var parentOffset = this.ui.annotation.offsetParent().position();
+		var elOffset = this.ui.annotation.position();
+		var elWidth = this.ui.annotation.outerWidth();
+		var totalWidth = this.ui.annotation.offsetParent().parent().width();
+		var totalHeight = this.ui.annotation.offsetParent().parent().height();
+		var right = totalWidth - parentOffset.left - elOffset.left - elWidth;
+		var bottom = totalHeight - parentOffset.top - elOffset.top;
+
+		// create the annotation selector box
+		this.settings.annotationSelectorVisible = true;
+		this.ui.annotationSelector = $('<div class="ca-ui-annotation-selector"></div>')
+			.css({
+				right: right,
+				bottom: bottom
+			});
+		$('<div class="title">Annotations</div>').appendTo(this.ui.annotationSelector);
+		this.ui.annotationSelectorList = $('<ul class="ca-ui-annotation-selector-list"></ul>');
+		for (var i=0, count = this.annotationLayers.length; i < count; i++) {
+			var layerData = this.annotationLayers[i];
+
+			// add list item for annotation layer
+			var layerItem = $('<li></li>')
+			.bind('click', {
+				layerData: layerData,
+				CA: CA
+			}, CA.annotationLayerClick);
+			var layerItemBox = $('<div class="ca-ui-annotation-selector-item-box"></div>')
+			.addClass(layerData.visible ? 'filled' : 'empty');
+			
+			// add the custom layer color if applicable
+			if (layerData.visible && layerData.annotation) {
+				layerItemBox.css('background-color', '#'+layerData.color);
+			}
+
+			// append the layerItem
+			layerItem
+			.append(layerItemBox)
+			.append('<span>'+layerData.title+'</span>')
+			.appendTo(this.ui.annotationSelectorList);
+
+		}
+		// append the finished selector box
+		this.ui.annotationSelector
+		.bind('mouseenter', function() {
+			CA.container.attr('data-controls-lock', 'true');
+		})
+		.bind('mouseleave', function() {
+			CA.container.attr('data-controls-lock', 'false');
+		})
+		.append(this.ui.annotationSelectorList)
+		.appendTo(this.container);
+		this.ui.currentPopup = this.ui.annotationSelector;
+	}
+};
+
+LayeredImage.prototype.annotationLayerClick = function(event) {
+	var layerData = event.data.layerData;
+	var CA = event.data.CA;
+	// toggle the layer on
+	CA.toggleLayer(layerData);
+	// fill the status box according to layer's visibility state
+	var layerItemBox = $(this).find('.ca-ui-annotation-selector-item-box');
+	if (layerData.visible) {
+		layerItemBox.removeClass('empty').addClass('filled');
+		// if this is an annotation, use the selected color, and show  layer in legend
+		if (layerData.annotation && layerData.type == 'svg') {
+			var bgColor = layerData.color || '#fff';
+			layerItemBox.css('background-color', '#' + bgColor);
+			CA.addLegendItem(layerData);
+		}
+	}
+	else {
+		layerItemBox.removeClass('filled').addClass('empty');
+		// if annotation, reset the elements background color to fall back to stylesheet
+		// and remove layer from legend
+		if (layerData.annotation && layerData.type == 'svg') {
+			layerItemBox.css('background-color', '');
+			CA.removeLegendItem(layerData);
+		}
+	}
+};
+
+LayeredImage.prototype.resetZoomRange = function(zoomMin) {
+	// set the zoom range
+	zoomMin = zoomMin || 0;
+	var zoomMax = 0;
+	for (var i=0, count = this.layers.length; i < count; i++) {
+		if (this.layers[i].type == 'iip') {
+			if (this.layers[i].zoom_levels - 1 > zoomMax) {
+				zoomMax = this.layers[i].zoom_levels - 1;
+			}
+		}
+		else {
+			if (this.layers[i].zoom_levels > zoomMax) {
+				zoomMax = this.layers[i].zoom_levels;
+			}
+		}
+	}
+	this.map.zoomRange([zoomMin, zoomMax]);
+
+	// set the range of the ui slider to match
+	this.ui.zoomSlider.slider('option', 'min', zoomMin);
+	this.ui.zoomSlider.slider('option', 'max', zoomMax);
+};
+
+
+LayeredImage.prototype.getZoomLevels = function(width, height) {
+	var tileSize = this.map.tileSize().x;
+	// there is always at least one zoom level
+	var zoomLevels = 1;
+	while (width > tileSize || height > tileSize) {
+		zoomLevels++;
+		width = width / 2;
+		height = height / 2;
+	}
+	return zoomLevels;
+};
+
+
+LayeredImage.prototype.getScale = function(zoom_levels, zoom) {
+	return Math.pow(2, zoom_levels - zoom);
+};
+
+
+LayeredImage.prototype.realignLayers = function() {
+	var $ = this.$, i, count;
+	
+	// grab the layers out of the dom
+	var map = this.container.find('svg.map');
+	var layers = map.find('g.layer').remove();
+	
+	// sort the layers
+	// find the first layer
+	for (i=0, count = layers.length; i < count; i++) {
+		if ($(layers[i]).attr('id') == this.settings.currentLayer1.id) {
+			map.append(layers[i]);
+			layers.splice(i,1);
+		}
+	}
+	// find the second layer
+	for (i=0, count = layers.length; i < count; i++) {
+		if ($(layers[i]).attr('id') == this.settings.currentLayer2.id) {
+			map.append(layers[i]);
+			layers.splice(i, 1);
+		}
+	}
+	// put the rest of the layers back into the dom
+	map.append(layers);
+};
+
+
+LayeredImage.prototype.clearPopups = function() {
+	var CA = this;
+
+	if (this.ui.currentPopup) {
+		this.ui.currentPopup.fadeOut(400, function() {
+			$(this).remove();
+		});
+		this.ui.currentPopup = false;
+	}
+	if (this.ui.controls) {
+		$.each(this.ui.controls, function() {
+			$(this).removeClass('active');
+		});
+	}
+};
+
+
+LayeredImage.prototype.toggleControls = function(duration) {
+	duration = duration || 400;
+	var $ = this.$;
+	
+	$.each(this.ui.controls, function() {
+		// do this test, this.currentPopup could be false making "this" the window
+		if (this != window) {
+			this.fadeToggle(duration);
+		}
+	});
+   
+};
+
+LayeredImage.prototype.addLegendItem = function(layerData) {
+	var $ = this.$;
+	
+	// only show if there is color data
+	if (!layerData.color || layerData.color === '') {
+		return;
+	}
+	
+	// if the legend does not exist yet, create it here
+	if (!this.ui.legend) {
+		// legend control
+		this.ui.legend = $('<div class="ca-ui-legend"><ul class="legendList"></ul></div>')
+		.appendTo(this.container);
+		if (this.container.attr('data-controls') != 'true') {
+			this.ui.legend.css('display', 'none');
+		}
+		this.ui.controls.push(this.ui.legend);
+	}
+	
+	var legendList = this.ui.legend.find('ul');
+	
+	var legendItem = $('<li data-layer_num="'+layerData.layer_num+'">'+layerData.title+'</li>')
+	.appendTo(legendList);
+	
+	var itemBox = $('<div class="item-box"></div>')
+		.css('background-color', '#'+layerData.color)
+		.prependTo(legendItem);
+	
+	this.ui.legendItemsCount++;
+};
+
+
+LayeredImage.prototype.removeLegendItem = function(layerData) {
+	var $ = this.$;
+	var CA = this;
+	
+	if (this.ui.legend) {
+		var legendItems = this.ui.legend.find('ul').children();
+		// find the item with the matching layer num and remove it
+		legendItems.each(function() {
+			if ($(this).attr('data-layer_num') == layerData.layer_num) {
+				$(this).remove();
+				CA.ui.legendItemsCount--;
+			}
+		});
+
+		// if the legend is empty, remove it
+		if (this.ui.legendItemsCount <= 0) {
+			this.ui.legend.remove();
+			delete this.ui.legend;
+			// remove from control array
+			for (var i=0, count = this.ui.controls.length; i < count; i++) {
+				if ($(this.ui.controls[i]).hasClass('ca-ui-legend')) {
+					this.ui.controls.splice(i, 1);
+				}
+			}
+		}
+	}
+};
+
+// toggle on any annotation layer that's configured from the figure options
+LayeredImage.prototype.showAnnotationPresets = function() {
+	for (var j=0, layerCount = this.annotationLayers.length; j < layerCount; j++) {
+		this.removeLayer(this.annotationLayers[j]);
+		this.removeLegendItem(this.annotationLayers[j]);
+		
+		if (this.figureOptions.annotationPreset) {
+			// each preset is a layer_id for a layer in this.layers
+			for (var i=0, count = this.figureOptions.annotationPreset.length; i < count; i++) {
+				var presetLayerId = this.figureOptions.annotationPreset[i];
+				if (this.annotationLayers[j].layer_id == presetLayerId) {
+					this.repaintLayer(this.annotationLayers[j]);
+					
+					if (!this.figureOptions.disable_annotation || this.figureOptions.editing) {
+						this.addLegendItem(this.annotationLayers[j]);
+					}
+					break;
+				}
+			}
+		}
+	}
+};
+
+LayeredImage.prototype.getVisibleBaseLayers = function() {
+	var i, count,
+		layers = [];
+	
+	for (i=0, count = this.baseLayers.length; i< count; i++) {
+		var layerData = this.baseLayers[i];
+		if (layerData.visible) {
+			layers.push(layerData);
+		}
+	}
+	
+	return layers;
+};
+
+LayeredImage.prototype.getVisibleBaseLayerIds = function() {
+	var i, count,
+		layers = [];
+	
+	for (i=0, count = this.baseLayers.length; i< count; i++) {
+		var layerData = this.baseLayers[i];
+		if (layerData.visible) {
+			layers.push(layerData.layer_id);
+		}
+	}
+	
+	return layers;
+};
+
+
+LayeredImage.prototype.getVisibleAnnotationIds = function() {
+	var i, count,
+		annotations = [];
+	
+	for (i=0, count = this.annotationLayers.length; i < count; i++) {
+		var layerData = this.annotationLayers[i];
+		if (layerData.visible) {
+			annotations.push(layerData.layer_id);
+		}
+	}
+	
+	return annotations;
+};
+
+
+LayeredImage.prototype.getExtents = function() {
+	var extents = this.map.extent();
+	return {
+		swLon: extents[0].lon,
+		swLat: extents[0].lat,
+		neLon: extents[1].lon,
+		neLat: extents[1].lat
+	};
+};
+
+
+LayeredImage.prototype.setExtents = function(extents) {
+	this.map.extent(extents);
+	// update zoom slider
+	if (this.ui.zoomSlider) {
+		this.ui.zoomSlider.slider('value', this.map.zoom());
+	}
+};
+
+
+LayeredImage.prototype.getSliderPosition = function() {
+	if (typeof this.ui.slider != 'undefined') {
+		return this.ui.slider.slider('value');
+	}
+	else {
+		return 0;
+	}
+};
+
+
+LayeredImage.prototype.getLayerById = function(id) {
+	for (var i=0, count = this.layers.length; i < count; i++) {
+		if (this.layers[i].layer_id && this.layers[i].layer_id == id) {
+			return this.layers[i];
+		}
+	}
+	return false;
+};
+
+LayeredImage.prototype.layerSelect = function(event) {
+	var CA = event.data.CA;
+	var layerNum = event.data.layerNum;
+	var layerIndex = parseInt($(this).attr('data-layer_index'), 10);
+
+	// if this button is already active do nothing
+	var button = $(this).find('.ca-ui-layer-selector-button');
+	if (button.hasClass('active')) {
+		return;
+	}
+
+	// if this button is already selected on the other side, do nothing
+	var otherNum = (layerNum == 1) ? 2: 1;
+	var otherSideButton = CA.ui.layerSelectorPopup
+		.find('.ca-ui-layer-selector-row-button' + otherNum + '[data-layer_index="' + layerIndex + '"] .ca-ui-layer-selector-button');
+	if (otherSideButton.hasClass('active')) {
+		return;
+	}
+
+	// switch the old layer with the new
+	CA.removeLayer(CA.settings['currentLayer' + layerNum]);
+	CA.createLayer(CA.baseLayers[layerIndex]);
+	CA.settings['currentLayer' + layerNum] = CA.baseLayers[layerIndex];
+	if (layerNum == 2) {
+		// set the opacity according to slider
+		var sliderVal = CA.ui.slider.slider('value');
+		var opacity = sliderVal / 100;
+		$('#'+ CA.settings.currentLayer2.id).css('opacity', opacity);
+	}
+
+	// update button display
+	CA.ui.layerSelectorPopup
+		.find('.ca-ui-layer-selector-row-button' + layerNum + ' .ca-ui-layer-selector-button')
+		.removeClass('active');
+	button.addClass('active');
+
+	// update slider layer text
+	CA.ui.sliderLayerText.text(CA.settings.currentLayer1.title + ' - ' + CA.settings.currentLayer2.title);
+
+	// realign layers
+	CA.realignLayers();
+};
+
+function outerHTML(node){
+	// if IE, Chrome take the internal method otherwise build one
+	return node.outerHTML || (
+		function(n){
+			var div = document.createElement('div'), h;
+			div.appendChild( n.cloneNode(true) );
+			h = div.innerHTML;
+			div = null;
+			return h;
+		})(node);
+}
+
+window.liCollection = new LICollection();
+
+// update the viewfinder if an asset is being dragged
+function liMousemove(e) {
+	if (window.liCollection && liCollection.userIsDraggingAsset) {
+		var asset = liCollection.find(liCollection.userIsDraggingAsset);
+
+		if (asset) {
+			if (!asset.settings.dragging) {
+				return;
+			}
+
+			asset.refreshViewfinderViewport();
+
+			if (e.conservationDraggingRemove) {
+				asset.settings.dragging = undefined;
+				liCollection.userIsDraggingAsset = false;
+			}
+		}
+	}
+}
+
+// update the viewfinder and remove the dragging flag when done dragging
+function liMouseup(e) {
+	if (window.liCollection && liCollection.userIsDraggingAsset) {
+		e.conservationDraggingRemove = true;
+		liMousemove(e);
+	}
+}
+
+// bind the mouse events for asset dragging and viewfinder updating
+window.addEventListener("mousemove", liMousemove, false);
+window.addEventListener("mouseup", liMouseup, false);
 app = {
 	dispatcher : undefined,
 	router : undefined,
@@ -3490,11 +5087,45 @@ app = {
 		
 		// init main view
 		this.views.app = new OsciTk.views.App();
-		// load package document
-		this.models.docPackage = new OsciTk.models.Package({url: this.config.get('packageUrl')});
 	},
 
 	run : function() {
+		// load package document
+		this.models.docPackage = new OsciTk.models.Package({url: this.config.get('packageUrl')});
 		Backbone.history.start();
 	}
+};
+
+app.zotero = {
+    init: function() {
+        app.dispatcher.on('packageLoaded', function(model) {
+            // Get date
+            var d = new Date(model.get('dc:date'));
+            d = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+
+            // Build COInS data
+            var coins = [
+                'ctx_ver=Z39.88-2004',
+                'rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook',
+                'rft.genre=book',
+                'rft.date=' + d,
+                'rfr_id=' + model.get('dc:identifier'),
+                'rft.btitle=' + model.get('dc:title'),
+                'rft.atitle=' + model.get('dc:title'),
+                'rft.au=' + model.get('dc:creator'),
+                'rft.pub=' + model.get('dc:publisher')
+            ];
+
+            // Append coins data to body
+            var span = $('<span></span>');
+            span.addClass('Z3988');
+            span.attr('title', coins.join('&'));
+            span.appendTo($('body'));
+
+            // Trigger zotero to search for biblio data
+            var ev = document.createEvent('HTMLEvents');
+            ev.initEvent('ZoteroItemUpdated', true, true);
+            document.dispatchEvent(ev);
+        }, this);
+    }
 };

@@ -7,12 +7,13 @@
 	<div id="results-sort">
 		Sort By:
 		<ul>
-			<li id="results-sort-relevance" class="sort-button"><a href="#" class="sort-button">Relevance</a></li>
-			<li id="results-sort-type"><a href="#" class="sort-button">Type</a></li>
+			<li><a href="#" class="sort-button" data-sort="score">Relevance</a></li>
+			<li><a href="#" class="sort-button" data-sort="content">Type</a></li>
 		</ul>
 	</div>
 </div>
 <div id="search-results-container">
+	<% if (response.numFound !== 0) { %>
 	<div id="search-results">
 		<div id="search-results-content">
 			<% _.each(results, function(group) { var first = true;%>
@@ -32,6 +33,9 @@
 			<% }); %>
 		</div>
 	</div>
+	<% } else { %>
+	No results found.
+	<% } %>
 	<div id="filter-by-section">
 		<div class="section-title">Filter by section</div>
 		<ul>

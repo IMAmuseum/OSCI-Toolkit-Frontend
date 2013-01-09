@@ -36,19 +36,47 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 						gotoPage = 1;
 						break;
 					default:
-						var page_for_id;
-						if(data.identifier.search(/^p-[0-9]-[0-9]+/) > -1) {
+						var page_for_id = null;
+
+						if(data.identifier.search(/^p-[0-9]+/) > -1) {
 							var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
 							page_for_id = this.getPageForParagraphId(pid);
+						} else if (data.identifier.search(/^fig-[0-9]+-[0-9]+-[0-9]+/) > -1) {
+							var matches = data.identifier.match(/^(fig-[0-9]+-[0-9]+)-([0-9])+?/);
+							var figureId = matches[1];
+							var occurrence = matches[2] ? parseInt(matches[2],10) : 1;
+
+							var refs = $(".figure_reference").filter("[href='#" + figureId + "']");
+							if (refs.length) {
+								if (refs.length === 1) {
+									page_for_id = this.getPageForElement(refs[0]);
+								} else {
+									//find visible occurence
+									var occurrenceCount = 0;
+									for (var j = 0, l = refs.length; j < l; j++) {
+										if (this.isElementVisible(refs[j])) {
+											occurrenceCount++;
+
+											if (occurrenceCount === occurrence) {
+												page_for_id = this.getPageForElement(refs[j]);
+												break;
+											}
+										}
+									}
+								}
+							}
+
 						} else {
 							page_for_id = this.getPageForElementId(data.identifier);
 						}
+
 						if (page_for_id !== null) {
 							gotoPage = page_for_id;
 						} else {
 							gotoPage = 1;
-							console.log('id', data.identifier, 'not found in any page');
+							console.log('Navigation error: ', data.identifier, 'not found in any page');
 						}
+
 						break;
 				}
 			}
@@ -97,6 +125,29 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 		OsciTk.views.MultiColumnSection.__super__.initialize.call(this);
 	},
 
+	isElementVisible: function(elem) {
+		//determine if it is visible
+		var $elem = $(elem);
+		var inColumn = $elem.parents(".column");
+		var checkContainer = null;
+		var visible = true;
+
+		if (inColumn.length) {
+			checkContainer = inColumn;
+		} else {
+			checkContainer = $elem.parents(".page");
+		}
+
+		if (checkContainer.length) {
+			var position = $elem.position();
+			if (position.top < 0 || position.top > checkContainer.height()) {
+				visible = false;
+			}
+		}
+
+		return visible;
+	},
+
 	preRender: function() {
 		//make sure no figure views are hanging around
 		app.views.figures = {};
@@ -119,6 +170,14 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 		//create a placeholder for figures that do not fit on a page
 		this.unplacedFigures = [];
 
+		//if there is a plate image, make sure it gets moved to the front
+		var plateFigures = app.collections.figures.where({plate: true});
+		if (plateFigures.length) {
+			_.each(plateFigures, function(fig) {
+				this.unplacedFigures.push(fig.id);
+			}, this);
+		}
+
 		this.layoutData.items = this.layoutData.data.length;
 
 		var i = 0;
@@ -126,7 +185,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 		var paragraphNumber = 1;
 		var paragraphsOnPage = 0;
 		var itemsOnPage = 0;
-		while(this.layoutData.items > 0) {
+		while(this.layoutData.items > 0 || this.unplacedFigures.length > 0) {
 			var pageView = this.getPageForProcessing(undefined, "#pages");
 			var layoutResults = null;
 			var figureIds = [];

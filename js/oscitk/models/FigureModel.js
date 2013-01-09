@@ -8,7 +8,8 @@ OsciTk.models.Figure = OsciTk.models.BaseModel.extend({
 			columns: null,
 			aspect: 1,
 			body: null,
-			options: {}
+			options: {},
+			plate: false
 		};
 	},
 
@@ -20,7 +21,13 @@ OsciTk.models.Figure = OsciTk.models.BaseModel.extend({
 		var position = this.get('position');
 		var parsedPosition;
 
-		if (position.length > 1) {
+		//set a flag for easily identifing the plate figure
+		if (position === "plate") {
+			this.set('plate', true);
+			position = "p";
+		}
+
+		if (position.length == 2) {
 			parsedPosition = {
 				vertical: position[0],
 				horizontal: position[1]
