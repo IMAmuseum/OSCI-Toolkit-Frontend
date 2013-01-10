@@ -15,6 +15,7 @@ app = {
 		this.collections.figures = new OsciTk.collections.Figures();
 		this.collections.footnotes = new OsciTk.collections.Footnotes();
 		this.collections.navigationItems = new OsciTk.collections.NavigationItems();
+		app.collections.glossaryTerms = new OsciTk.collections.GlossaryTerms();
 		
 		//setup window resizing, to trigger an event
 		window.onresize = function() {

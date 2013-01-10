@@ -1,0 +1,19 @@
+#glossary-container {
+	width: 100%;
+}
+#glossary-sidebar {
+	float: left;
+	width: 20%;
+}
+#glossary-content {
+	float: right;
+	width: 80%;
+}
+#glossary-term-listing {
+	list-style: none;
+	height: 200px;
+	overflow-y: scroll;
+}
+#glossary-term-listing li {
+	cursor: pointer;
+}

@@ -38,5 +38,8 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 		// Add the citation view to the AppView
 		app.views.citationView = new OsciTk.views.Citation();
+
+		// setup glossary tooltips
+		app.views.glossaryTooltipView = new OsciTk.views.GlossaryTooltip();
 	}
 });

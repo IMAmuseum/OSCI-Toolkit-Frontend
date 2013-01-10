@@ -139,6 +139,9 @@ div.Account-toolbar-item {
 
 	background: url('../img/icon-user.png') center center no-repeat;
 }
+div.Glossary-toolbar-item {
+	background: url('../img/icon-glossary.png') center center no-repeat;	
+}
 div.Search-toolbar-item {
 
 	background: url('../img/icon-search.png') center center no-repeat;
@@ -157,7 +160,8 @@ div.Toc-toolbar-item,
 div.Account-toolbar-item,
 div.Search-toolbar-item,
 div.Font-toolbar-item,
-div.Figures-toolbar-item {
+div.Figures-toolbar-item,
+div.Glossary-toolbar-item {
 	opacity:.7;
 }
 div.Notes-toolbar-item:hover,
@@ -165,7 +169,8 @@ div.Toc-toolbar-item:hover,
 div.Account-toolbar-item:hover,
 div.Search-toolbar-item:hover,
 div.Font-toolbar-item:hover,
-div.Figures-toolbar-item:hover {
+div.Figures-toolbar-item:hover
+div.Glossary-toolbar-item:hover {
 	opacity:1;
 }
 

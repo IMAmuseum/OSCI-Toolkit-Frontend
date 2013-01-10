@@ -1,0 +1,15 @@
+<h3>Glossary</h3>
+<div id="glossary-container">
+	<div id="glossary-sidebar">
+		<input type="text" id="glossary-filter" placeholder="Search Glossary" />
+		<ul id="glossary-term-listing">
+		<% _.each(glossary, function(item) { %>
+			<li data-tid="<%= item.get('id') %>"><%= item.get('term') %></li>
+		<% }); %>
+		</ul>
+	</div>
+	<div id="glossary-content">
+		<h4></h4>
+		<p></p>
+	</div>
+</div>
