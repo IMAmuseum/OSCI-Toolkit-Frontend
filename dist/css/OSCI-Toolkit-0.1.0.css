@@ -1,7 +1,7 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2012-12-18
+ * OSCI Toolkit - v0.1.0 - 2013-01-10
  * http://oscitoolkit.org/
- * Copyright (c) 2010-2012 The Art Institute of Chicago and the Indianapolis Museum of Art
+ * Copyright (c) 2010-2013 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
  */
 
@@ -370,6 +370,9 @@ div.Account-toolbar-item {
 
 	background: url('../img/icon-user.png') center center no-repeat;
 }
+div.Glossary-toolbar-item {
+	background: url('../img/icon-glossary.png') center center no-repeat;	
+}
 div.Search-toolbar-item {
 
 	background: url('../img/icon-search.png') center center no-repeat;
@@ -388,7 +391,8 @@ div.Toc-toolbar-item,
 div.Account-toolbar-item,
 div.Search-toolbar-item,
 div.Font-toolbar-item,
-div.Figures-toolbar-item {
+div.Figures-toolbar-item,
+div.Glossary-toolbar-item {
 	opacity:.7;
 }
 div.Notes-toolbar-item:hover,
@@ -396,7 +400,8 @@ div.Toc-toolbar-item:hover,
 div.Account-toolbar-item:hover,
 div.Search-toolbar-item:hover,
 div.Font-toolbar-item:hover,
-div.Figures-toolbar-item:hover {
+div.Figures-toolbar-item:hover
+div.Glossary-toolbar-item:hover {
 	opacity:1;
 }
 
