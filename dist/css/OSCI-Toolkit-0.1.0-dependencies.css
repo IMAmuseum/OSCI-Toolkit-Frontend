@@ -1,5 +1,5 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2013-01-10
+ * OSCI Toolkit - v0.1.0 - 2013-01-11
  * http://oscitoolkit.org/
  * Copyright (c) 2010-2013 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
