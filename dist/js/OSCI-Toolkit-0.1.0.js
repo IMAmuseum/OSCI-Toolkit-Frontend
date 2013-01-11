@@ -93,7 +93,7 @@ OsciTk.router = Backbone.Router.extend({
 	},
 
 	routeToSection: function(section_id, identifier) {
-		app.dispatcher.trigger('routedToSection', {section_id: section_id, identifier: identifier});
+		Backbone.trigger('routedToSection', {section_id: section_id, identifier: identifier});
 	}
 });
 OsciTk.templateManager = {
@@ -807,7 +807,7 @@ OsciTk.models.Package = OsciTk.models.BaseModel.extend({
 		this.set('version', data['package'].version);
 		this.set('xmlns', data['package'].xmlns);
 
-		app.dispatcher.trigger('packageLoaded', this);
+		Backbone.trigger('packageLoaded', this);
 	},
 
 	sync: function(method, model, options) {
@@ -906,9 +906,9 @@ OsciTk.models.Section = OsciTk.models.BaseModel.extend({
 		// parse out footnotes and figures, make them available via event
 		var footnotes = content.find('section#footnotes');
 		var figures   = content.find('figure');
-		app.dispatcher.trigger('footnotesAvailable', footnotes);
-		app.dispatcher.trigger('figuresAvailable', figures);
-		app.dispatcher.trigger('sectionLoaded', this);
+		Backbone.trigger('footnotesAvailable', footnotes);
+		Backbone.trigger('figuresAvailable', figures);
+		Backbone.trigger('sectionLoaded', this);
 	},
 
 	removeAllPages : function() {
@@ -919,10 +919,10 @@ OsciTk.collections.Figures = OsciTk.collections.BaseCollection.extend({
 	model: OsciTk.models.Figure,
 
 	initialize: function() {
-		app.dispatcher.on('figuresAvailable', function(figures) {
+		this.listenTo(Backbone, 'figuresAvailable', function(figures) {
 			this.populateFromMarkup(figures);
-			app.dispatcher.trigger('figuresLoaded', this);
-		}, this);
+			Backbone.trigger('figuresLoaded', this);
+		});
 	},
 
 	comparator: function(figure) {
@@ -984,10 +984,10 @@ OsciTk.collections.Footnotes = OsciTk.collections.BaseCollection.extend({
 	model: OsciTk.models.Footnote,
 
 	initialize: function() {
-		app.dispatcher.on('footnotesAvailable', function(footnotes) {
+		this.listenTo(Backbone, 'footnotesAvailable', function(footnotes) {
 			this.populateFromMarkup(footnotes);
-			app.dispatcher.trigger('footnotesLoaded', this);
-		}, this);
+			Backbone.trigger('footnotesLoaded', this);
+		});
 	},
 
 	populateFromMarkup: function(data) {
@@ -1007,7 +1007,7 @@ OsciTk.collections.Footnotes = OsciTk.collections.BaseCollection.extend({
 OsciTk.collections.GlossaryTerms = OsciTk.collections.BaseCollection.extend({
 	model: OsciTk.models.GlossaryTerm,
 	initialize: function() {
-		app.dispatcher.on('packageLoaded', this.parseGlossary, this);
+		this.listenTo(Backbone, 'packageLoaded', this.parseGlossary);
 	},
 	parseGlossary: function(packageModel) {
 		// retrieve glossary from manifest
@@ -1045,7 +1045,7 @@ OsciTk.collections.NavigationItems = OsciTk.collections.BaseCollection.extend({
 	currentNavigationItem: null,
 	initialize: function() {
 		// bind packageLoaded to build navigation model
-		app.dispatcher.on('packageLoaded', function(packageModel) {
+		this.listenTo(Backbone, 'packageLoaded', function(packageModel) {
 			var nav = _.find(packageModel.get('manifest').item, function(item){
 				return item.properties == 'nav';
 			});
@@ -1064,9 +1064,9 @@ OsciTk.collections.NavigationItems = OsciTk.collections.BaseCollection.extend({
 					}
 				}
 
-				app.dispatcher.trigger('navigationLoaded', this);
+				Backbone.trigger('navigationLoaded', this);
 			}
-		}, this);
+		});
 	},
 	parseChildren: function(items, parent, depth) {
 		if (_.isArray(items) === false) {
@@ -1120,12 +1120,12 @@ OsciTk.collections.NavigationItems = OsciTk.collections.BaseCollection.extend({
 OsciTk.collections.Notes = OsciTk.collections.BaseCollection.extend({
 	model: OsciTk.models.Note,
 	initialize: function() {
-		app.dispatcher.on('currentNavigationItemChanged', function(navItem) {
+		this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
 			//TODO: Refactor once Gray cleans up the NavigationItemModel
 			if (navItem.id) {
 				app.collections.notes.getNotesForSection(navItem.id);
 			}
-		}, this);
+		});
 	},
 	comparator: function(note) {
 		// parse out the content id number and use that for internal sorting
@@ -1151,7 +1151,7 @@ OsciTk.collections.Notes = OsciTk.collections.BaseCollection.extend({
 				if (data.success === true) {
 					// notes were returned, set to the notes collection
 					app.collections.notes.reset(data.notes);
-					app.dispatcher.trigger('notesLoaded', app.collections.notes);
+					Backbone.trigger('notesLoaded', app.collections.notes);
 				}
 			}
 		});
@@ -1213,7 +1213,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 		});
 
 		// bind sectionChanged
-		app.dispatcher.on('currentNavigationItemChanged', function(navItem) {
+		this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
 			if (navItem) {
 				// loading section content
 				app.models.section = new OsciTk.models.Section({
@@ -1225,7 +1225,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 				this.changeModel(app.models.section);
 				this.render();
 			}
-		}, this);
+		});
 
 	},
 	render: function() {
@@ -1237,9 +1237,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 		this.model.removeAllPages();
 		this.removeAllChildViews();
 
-		app.dispatcher.trigger("layoutStart");
+		Backbone.trigger("layoutStart");
 		this.renderContent();
-		app.dispatcher.trigger("layoutComplete", {numPages : this.model.get('pages').length});
+		Backbone.trigger("layoutComplete", {numPages : this.model.get('pages').length});
 		return this;
 	},
 	onClose: function() {
@@ -1324,10 +1324,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 OsciTk.views.figureTypeRegistry["default"] = "MultiColumnFigure";
 
 OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
-
 	tagName: 'figure',
 	template: OsciTk.templateManager.get('multi-column-figure'),
-
 	initialize: function() {
 		//set some defaults
 		this.layoutComplete = false;
@@ -1340,17 +1338,11 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 		this.$el.attr("id", this.model.get("id"));
 
 		//TODO: this does not scale
-		//app.dispatcher.on("pageChanged", this.toggleVisibility, this);
+		//this.listenTo(Backbone, 'pageChanged', this.toggleVisibility);
 	},
-
 	events: {
 		"click .figure_content" : "fullscreen"
 	},
-
-	onClose: function() {
-		app.dispatcher.off("pageChanged", this.toggleVisibility, this);
-	},
-
 	toggleVisibility: function(data) {
 		if (this.parent.options.pageNumber === data.page) {
 			if (!this.contentRendered) {
@@ -1362,7 +1354,6 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 			this.$el.css("visibility", "hidden");
 		}
 	},
-
 	render: function() {
 		//template the element
 		this.$el.html(this.template(this.model.toJSON()));
@@ -1384,19 +1375,16 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 
 		return this;
 	},
-
 	renderContent: function() {
 		this.$el.find(".figure_content").html(this.model.get('content'));
 
 		this.contentRendered = true;
 	},
-
 	fullscreen: function() {
 		$.fancybox.open({
 			content: this.model.get('content')
 		});
 	},
-
 	positionElement: function() {
 		var modelData = this.model.toJSON();
 		var dimensions = this.options.sectionDimensions;
@@ -1528,7 +1516,6 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 
 		return positioned;
 	},
-
 	sizeElement: function() {
 		var width, height;
 		var dimensions = this.options.sectionDimensions;
@@ -1748,7 +1735,7 @@ OsciTk.views.Citation = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('citation'),
 	initialize: function() {
 
-		app.dispatcher.on("toggleCiteDialog", function(data) {
+		this.listenTo(Backbone, "toggleCiteDialog", function(data) {
 			var citationView = this;
 			var contentId = data.contentId;
 			var content = $('#' + contentId);
@@ -1843,7 +1830,7 @@ OsciTk.views.Citation = OsciTk.views.BaseView.extend({
 			});
 
 
-		}, this);
+		});
 	}
 
 });
@@ -1852,9 +1839,9 @@ OsciTk.views.Figures = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('figures'),
 	initialize: function() {
 		// re-render this view when collection changes
-		app.collections.figures.on('add remove reset', function() {
+		this.listenTo(app.collections.figures, 'add remove reset', function() {
 			this.render();
-		}, this);
+		});
 	},
 	events: {
 		"click .figure-preview": "onFigurePreviewClicked",
@@ -1909,7 +1896,7 @@ OsciTk.views.Figures = OsciTk.views.BaseView.extend({
 		return false;
 	},
 	onViewInContextClicked: function(event_data) {
-		app.dispatcher.trigger('navigate', { identifier: $(event_data.target).parent('figure').attr('data-figure-id') });
+		Backbone.trigger('navigate', { identifier: $(event_data.target).parent('figure').attr('data-figure-id') });
 		app.views.toolbarView.contentClose();
 		return false;
 	},
@@ -1963,7 +1950,7 @@ OsciTk.views.Font = OsciTk.views.BaseView.extend({
 			"font-size": this.currentFontSize + "%"
 		});
 
-		app.dispatcher.trigger("windowResized");
+		Backbone.trigger("windowResized");
 	},
 	changeTheme: function(e) {
 		e.preventDefault();
@@ -1981,7 +1968,7 @@ OsciTk.views.Footnotes = OsciTk.views.BaseView.extend({
 	id: 'footnote',
 	initialize: function() {
 		// listen to layoutComplete event
-		app.dispatcher.on('layoutComplete', function(params) {
+		this.listenTo(Backbone, 'layoutComplete', function(params) {
 			// find all footnote links in the section content
 			var fnLinks = app.views.sectionView.$el.find('a.footnote-reference');
 			_.each(fnLinks, function(link) {
@@ -1998,12 +1985,12 @@ OsciTk.views.Footnotes = OsciTk.views.BaseView.extend({
 					});
 				}
 			});
-		}, this);
+		});
 	}
 });
 OsciTk.views.GlossaryTooltip = OsciTk.views.BaseView.extend({
 	initialize: function() {
-		app.dispatcher.on('layoutComplete', function() {
+		this.listenTo(Backbone, 'layoutComplete', function() {
 			$('.glossary-term').qtip({
 				content: {
 					title: 'Title',
@@ -2036,9 +2023,6 @@ OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
 	id: 'glossary-view',
 	className: 'toolbar-item-view',
 	template: OsciTk.templateManager.get('glossary'),
-	initialize: function() {
-	
-	},
 	events: {
 		'keyup #glossary-filter': 'filterTerms',
 		'click li': 'selectTerm'
@@ -2078,7 +2062,7 @@ OsciTk.views.InlineNotes = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('note-popup'),
 	initialize: function() {
 
-		app.dispatcher.on('toggleNoteDialog', function(data) {
+		this.listenTo(Backbone, 'toggleNoteDialog', function(data) {
 			var $this = this;
 			var contentId = data.contentId;
 			var content = $('#' + contentId);
@@ -2167,10 +2151,10 @@ OsciTk.views.InlineNotes = OsciTk.views.BaseView.extend({
 					}
 				});
 			}
-		}, this);
+		});
 
 		// place icon next to paragraphs with notes after layout is complete
-		app.dispatcher.on('notesLoaded', function(params) {
+		this.listenTo(Backbone, 'notesLoaded', function(params) {
 			_.each(app.collections.notes.models, function(n) {
 				// place a class on the paragraph identifier to indicate a note is present
 				var paragraphControls = app.views.sectionView.$el.find('.paragraph-controls[data-osci_content_id=' + n.get('content_id') + ']');
@@ -2178,7 +2162,7 @@ OsciTk.views.InlineNotes = OsciTk.views.BaseView.extend({
 					paragraphControls.addClass('notes-present');
 				}
 			});
-		}, this);
+		});
 	}
 });
 //Add this view to the figure type registry
@@ -2576,10 +2560,10 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
 	initialize: function() {
 		this._super('initialize');
-		
+
 		this.options.pageView = 'MultiColumnPage';
 
-		app.dispatcher.on("windowResized", function() {
+		this.listenTo(Backbone, "windowResized", function() {
 			//get the identifier of the first element on the page to try and keep the reader in the same location
 			var identifier;
 			var page = this.getChildViewByIndex(app.views.navigationView.page - 1);
@@ -2594,9 +2578,9 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 			}
 
 			this.render();
-		}, this);
+		});
 
-		app.dispatcher.on("navigate", function(data) {
+		this.listenTo(Backbone, "navigate", function(data) {
 			var gotoPage = 1;
 			if (data.page) {
 				gotoPage = data.page;
@@ -2678,9 +2662,9 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 			});
 
 			//trigger event so other elements can update with current page
-			app.dispatcher.trigger("pageChanged", {page: gotoPage});
+			Backbone.trigger("pageChanged", {page: gotoPage});
 
-		}, this);
+		});
 
 		this.$el.addClass("oscitk_multi_column");
 
@@ -2999,27 +2983,27 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		this.page = null;
 
 		// when section is loaded, render the navigation control
-		app.dispatcher.on('layoutComplete', function(section) {
+		this.listenTo(Backbone, 'layoutComplete', function(section) {
 			if (this.identifier) {
-				app.dispatcher.trigger("navigate", {identifier: this.identifier});
+				Backbone.trigger("navigate", {identifier: this.identifier});
 				this.identifier = null;
 			}
 			else {
-				app.dispatcher.trigger("navigate", {page: 1});
+				Backbone.trigger("navigate", {page: 1});
 			}
 			this.numPages = section.numPages;
 			this.render();
-		}, this);
+		});
 
-		app.dispatcher.on('pageChanged', function(info) {
+		this.listenTo(Backbone, 'pageChanged', function(info) {
 			// clear old identifier in url
 			// app.router.navigate("section/" + previous.id + "/end");
 			this.page = info.page;
 			this.update(info.page);
-		}, this);
+		});
 
 		// bind routedTo
-		app.dispatcher.on('routedToSection', function(params) {
+		this.listenTo(Backbone, 'routedToSection', function(params) {
 			this.identifier = params.identifier;
 			if (!params.section_id) {
 				// go to first section
@@ -3036,7 +3020,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			title = (title) ? title + " | ": "";
 			title += this.getCurrentNavigationItem().get('title');
 			document.title = title;
-		}, this);
+		});
 
 		// Respond to keyboard events
 		$(document).keydown(function(event) {
@@ -3051,7 +3035,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 							app.router.navigate("section/" + next.id, {trigger: true});
 						}
 					} else {
-						app.dispatcher.trigger('navigate', {page: p});
+						Backbone.trigger('navigate', {page: p});
 					}
 					break;
 				case 37:
@@ -3063,7 +3047,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 							app.router.navigate("section/" + previous.id + "/end", {trigger: true});
 						}
 					} else {
-						app.dispatcher.trigger('navigate', {page: p});
+						Backbone.trigger('navigate', {page: p});
 					}
 					break;
 			}
@@ -3093,7 +3077,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// Navigate to the appropriate page when mousedown happens in the pager
 		$('.pager').mousedown(function(data) {
 			var p = parseInt(app.views.navigationView.numPages * data.offsetX / $(this).width(), 10);
-			app.dispatcher.trigger('navigate', { page: p+1 });
+			Backbone.trigger('navigate', { page: p+1 });
 		});
 
 		// Do other things that can happen whenever the page changes
@@ -3112,7 +3096,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		} else {
 			this.currentNavigationItem = app.collections.navigationItems.first();
 		}
-		app.dispatcher.trigger('currentNavigationItemChanged', this.currentNavigationItem);
+		Backbone.trigger('currentNavigationItemChanged', this.currentNavigationItem);
 	},
 
 	update: function(page) {
@@ -3144,7 +3128,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			this.$el.find('.prev-page .label').html('Previous');
 			this.$el.find('.prev-page').removeClass('inactive').click(function () {
 				app.router.navigate("section/" + $this.currentNavigationItem.id);
-				app.dispatcher.trigger('navigate', {page:(page-1)});
+				Backbone.trigger('navigate', {page:(page-1)});
 			});
 		}
 
@@ -3165,7 +3149,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		} else if (this.numPages > 1) {
 			this.$el.find('.next-page .label').html('Next');
 			this.$el.find('.next-page').removeClass('inactive').click(function () {
-				app.dispatcher.trigger('navigate', { page: page+1 });
+				Backbone.trigger('navigate', { page: page+1 });
 			});
 		}
 	}
@@ -3175,12 +3159,12 @@ OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('notes'),
 	initialize: function() {
 		// re-render this view when collection changes
-		app.collections.notes.on('add remove change', function() {
+		this.listenTo(app.collections.notes, 'add remove change', function() {
 			this.render();
-		}, this);
+		});
 
 		// catch the page changed event and highlight any notes in list that are on current page
-		app.dispatcher.on('pageChanged notesLoaded', function(data) {
+		this.listenTo(Backbone, 'pageChanged notesLoaded', function(data) {
 			var page;
 			if (typeof(data.page) === 'undefined') {
 				page = app.views.navigationView.page;
@@ -3199,7 +3183,7 @@ OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 				}
 			});
 			this.render();
-		}, this);
+		});
 	},
 	events: {
 		"click .noteLink": "noteLinkClick"
@@ -3209,8 +3193,8 @@ OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 		var target = $(e.target);
 		var content_id = target.attr('data-content_id');
 		if (content_id) {
-			app.dispatcher.trigger('navigate', {identifier: content_id});
-			app.dispatcher.trigger('toggleNoteDialog', { contentId: content_id });
+			Backbone.trigger('navigate', {identifier: content_id});
+			Backbone.trigger('toggleNoteDialog', { contentId: content_id });
 			$('#'+content_id).click();
 			app.views.toolbarView.contentClose();
 		}
@@ -3297,7 +3281,7 @@ OsciTk.views.ParagraphControlsView = OsciTk.views.BaseView.extend({
 
 		this.$el.on('click', 'a', {content: this.options.content}, function(e) {
 			e.preventDefault();
-			app.dispatcher.trigger(
+			Backbone.trigger(
 				$(this).data('event'),
 				{
 					contentId: $(e.data.content).attr('data-osci_content_id')
@@ -3505,12 +3489,12 @@ OsciTk.views.Title = OsciTk.views.BaseView.extend({
 	className: 'title-view',
 	template: OsciTk.templateManager.get('title'),
 	initialize: function() {
-		app.dispatcher.on('packageLoaded', function(packageModel) {
+		this.listenTo(Backbone, 'packageLoaded', function(packageModel) {
 			var title = packageModel.getTitle();
 			if (title) {
 				this.$el.find("#publication-title").text(title);
 			}
-		}, this);
+		});
 
 		this.render();
 	},
@@ -3521,7 +3505,7 @@ OsciTk.views.Title = OsciTk.views.BaseView.extend({
 	events: {
 		"click #publication-title": function(e) {
 			e.preventDefault();
-			app.dispatcher.trigger('navigate', {identifier: "start"});
+			Backbone.trigger('navigate', {identifier: "start"});
 		}
 	}
 });
@@ -3534,9 +3518,9 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 	initialize: function() {
 		this.parent = this.options.parent;
 
-		app.dispatcher.on("currentNavigationItemChanged", function() {
+		this.listenTo(Backbone, "currentNavigationItemChanged", function() {
 			this.render();
-		}, this);
+		});
 	},
 	render: function() {
 		this.$el.html(this.template({
@@ -3547,7 +3531,7 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 		event.preventDefault();
 
 		var sectionId = $(event.currentTarget).attr('data-section-id');
-		// app.dispatcher.trigger('navigateToSection', sectionId);
+		// Backbone.trigger('navigateToSection', sectionId);
 		// TODO: don't really want to address the appRouter directly
 		app.router.navigate("section/" + sectionId, {trigger: true});
 		app.views.toolbarView.contentClose();
@@ -3613,13 +3597,13 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 		this.activeToolbarItemViewChanged = false;
 		this.render();
 
-		app.dispatcher.on("packageLoaded", function(packageModel) {
+		this.listenTo(Backbone, "packageLoaded", function(packageModel) {
 			//Add the publication title to the Toolbar
 			var title = packageModel.getTitle();
 			if (title) {
 				this.$el.find("#toolbar-title").text(title);
 			}
-		}, this);
+		});
 
 		//Close the toolbar if a user clicks outside of it
 		$(window).on("click", {view: this}, function(e) {
@@ -5190,7 +5174,6 @@ function liMouseup(e) {
 window.addEventListener("mousemove", liMousemove, false);
 window.addEventListener("mouseup", liMouseup, false);
 app = {
-	dispatcher : undefined,
 	router : undefined,
 	config : undefined,
 	views : {},
@@ -5198,7 +5181,6 @@ app = {
 	collections : {},
 
 	bootstrap : function(config) {
-		this.dispatcher = _.extend({}, Backbone.Events);
 		this.config = new OsciTk.models.Config(config);
 		this.router = new OsciTk.router();
 		this.account = new OsciTk.models.Account();
@@ -5215,7 +5197,7 @@ app = {
 			}
 
 			var onWindowResize = function(){
-				app.dispatcher.trigger("windowResized");
+				Backbone.trigger('windowResized');
 			};
 
 			window.resizeTimer = setTimeout(onWindowResize, 200);
@@ -5232,9 +5214,9 @@ app = {
 	}
 };
 
-app.zotero = {
+app.zotero = _.extend({
     init: function() {
-        app.dispatcher.on('packageLoaded', function(model) {
+        this.listenTo(Backbone, 'packageLoaded', function(model) {
             // Get date
             var d = new Date(model.get('dc:date'));
             d = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
@@ -5262,6 +5244,6 @@ app.zotero = {
             var ev = document.createEvent('HTMLEvents');
             ev.initEvent('ZoteroItemUpdated', true, true);
             document.dispatchEvent(ev);
-        }, this);
+        });
     }
-};
+}, Backbone.Events);

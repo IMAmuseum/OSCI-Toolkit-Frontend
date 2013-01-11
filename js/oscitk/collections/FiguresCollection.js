@@ -2,10 +2,10 @@ OsciTk.collections.Figures = OsciTk.collections.BaseCollection.extend({
 	model: OsciTk.models.Figure,
 
 	initialize: function() {
-		app.dispatcher.on('figuresAvailable', function(figures) {
+		this.listenTo(Backbone, 'figuresAvailable', function(figures) {
 			this.populateFromMarkup(figures);
-			app.dispatcher.trigger('figuresLoaded', this);
-		}, this);
+			Backbone.trigger('figuresLoaded', this);
+		});
 	},
 
 	comparator: function(figure) {

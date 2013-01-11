@@ -4,10 +4,10 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
 	initialize: function() {
 		this._super('initialize');
-		
+
 		this.options.pageView = 'MultiColumnPage';
 
-		app.dispatcher.on("windowResized", function() {
+		this.listenTo(Backbone, "windowResized", function() {
 			//get the identifier of the first element on the page to try and keep the reader in the same location
 			var identifier;
 			var page = this.getChildViewByIndex(app.views.navigationView.page - 1);
@@ -22,9 +22,9 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 			}
 
 			this.render();
-		}, this);
+		});
 
-		app.dispatcher.on("navigate", function(data) {
+		this.listenTo(Backbone, "navigate", function(data) {
 			var gotoPage = 1;
 			if (data.page) {
 				gotoPage = data.page;
@@ -106,9 +106,9 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 			});
 
 			//trigger event so other elements can update with current page
-			app.dispatcher.trigger("pageChanged", {page: gotoPage});
+			Backbone.trigger("pageChanged", {page: gotoPage});
 
-		}, this);
+		});
 
 		this.$el.addClass("oscitk_multi_column");
 

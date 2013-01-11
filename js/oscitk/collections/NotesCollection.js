@@ -1,12 +1,12 @@
 OsciTk.collections.Notes = OsciTk.collections.BaseCollection.extend({
 	model: OsciTk.models.Note,
 	initialize: function() {
-		app.dispatcher.on('currentNavigationItemChanged', function(navItem) {
+		this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
 			//TODO: Refactor once Gray cleans up the NavigationItemModel
 			if (navItem.id) {
 				app.collections.notes.getNotesForSection(navItem.id);
 			}
-		}, this);
+		});
 	},
 	comparator: function(note) {
 		// parse out the content id number and use that for internal sorting
@@ -32,7 +32,7 @@ OsciTk.collections.Notes = OsciTk.collections.BaseCollection.extend({
 				if (data.success === true) {
 					// notes were returned, set to the notes collection
 					app.collections.notes.reset(data.notes);
-					app.dispatcher.trigger('notesLoaded', app.collections.notes);
+					Backbone.trigger('notesLoaded', app.collections.notes);
 				}
 			}
 		});

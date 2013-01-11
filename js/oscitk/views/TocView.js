@@ -7,9 +7,9 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 	initialize: function() {
 		this.parent = this.options.parent;
 
-		app.dispatcher.on("currentNavigationItemChanged", function() {
+		this.listenTo(Backbone, "currentNavigationItemChanged", function() {
 			this.render();
-		}, this);
+		});
 	},
 	render: function() {
 		this.$el.html(this.template({
@@ -20,7 +20,7 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 		event.preventDefault();
 
 		var sectionId = $(event.currentTarget).attr('data-section-id');
-		// app.dispatcher.trigger('navigateToSection', sectionId);
+		// Backbone.trigger('navigateToSection', sectionId);
 		// TODO: don't really want to address the appRouter directly
 		app.router.navigate("section/" + sectionId, {trigger: true});
 		app.views.toolbarView.contentClose();

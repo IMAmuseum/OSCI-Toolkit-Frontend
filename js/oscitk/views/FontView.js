@@ -29,7 +29,7 @@ OsciTk.views.Font = OsciTk.views.BaseView.extend({
 			"font-size": this.currentFontSize + "%"
 		});
 
-		app.dispatcher.trigger("windowResized");
+		Backbone.trigger("windowResized");
 	},
 	changeTheme: function(e) {
 		e.preventDefault();

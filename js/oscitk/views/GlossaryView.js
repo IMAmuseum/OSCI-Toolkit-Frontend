@@ -2,9 +2,6 @@ OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
 	id: 'glossary-view',
 	className: 'toolbar-item-view',
 	template: OsciTk.templateManager.get('glossary'),
-	initialize: function() {
-	
-	},
 	events: {
 		'keyup #glossary-filter': 'filterTerms',
 		'click li': 'selectTerm'

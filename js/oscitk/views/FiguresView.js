@@ -3,9 +3,9 @@ OsciTk.views.Figures = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('figures'),
 	initialize: function() {
 		// re-render this view when collection changes
-		app.collections.figures.on('add remove reset', function() {
+		this.listenTo(app.collections.figures, 'add remove reset', function() {
 			this.render();
-		}, this);
+		});
 	},
 	events: {
 		"click .figure-preview": "onFigurePreviewClicked",
@@ -60,7 +60,7 @@ OsciTk.views.Figures = OsciTk.views.BaseView.extend({
 		return false;
 	},
 	onViewInContextClicked: function(event_data) {
-		app.dispatcher.trigger('navigate', { identifier: $(event_data.target).parent('figure').attr('data-figure-id') });
+		Backbone.trigger('navigate', { identifier: $(event_data.target).parent('figure').attr('data-figure-id') });
 		app.views.toolbarView.contentClose();
 		return false;
 	},

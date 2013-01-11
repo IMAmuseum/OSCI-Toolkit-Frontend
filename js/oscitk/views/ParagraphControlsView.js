@@ -57,7 +57,7 @@ OsciTk.views.ParagraphControlsView = OsciTk.views.BaseView.extend({
 
 		this.$el.on('click', 'a', {content: this.options.content}, function(e) {
 			e.preventDefault();
-			app.dispatcher.trigger(
+			Backbone.trigger(
 				$(this).data('event'),
 				{
 					contentId: $(e.data.content).attr('data-osci_content_id')

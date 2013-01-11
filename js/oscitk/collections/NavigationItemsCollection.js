@@ -3,7 +3,7 @@ OsciTk.collections.NavigationItems = OsciTk.collections.BaseCollection.extend({
 	currentNavigationItem: null,
 	initialize: function() {
 		// bind packageLoaded to build navigation model
-		app.dispatcher.on('packageLoaded', function(packageModel) {
+		this.listenTo(Backbone, 'packageLoaded', function(packageModel) {
 			var nav = _.find(packageModel.get('manifest').item, function(item){
 				return item.properties == 'nav';
 			});
@@ -22,9 +22,9 @@ OsciTk.collections.NavigationItems = OsciTk.collections.BaseCollection.extend({
 					}
 				}
 
-				app.dispatcher.trigger('navigationLoaded', this);
+				Backbone.trigger('navigationLoaded', this);
 			}
-		}, this);
+		});
 	},
 	parseChildren: function(items, parent, depth) {
 		if (_.isArray(items) === false) {

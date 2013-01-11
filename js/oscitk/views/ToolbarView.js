@@ -11,13 +11,13 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 		this.activeToolbarItemViewChanged = false;
 		this.render();
 
-		app.dispatcher.on("packageLoaded", function(packageModel) {
+		this.listenTo(Backbone, "packageLoaded", function(packageModel) {
 			//Add the publication title to the Toolbar
 			var title = packageModel.getTitle();
 			if (title) {
 				this.$el.find("#toolbar-title").text(title);
 			}
-		}, this);
+		});
 
 		//Close the toolbar if a user clicks outside of it
 		$(window).on("click", {view: this}, function(e) {

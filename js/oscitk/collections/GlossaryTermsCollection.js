@@ -1,7 +1,7 @@
 OsciTk.collections.GlossaryTerms = OsciTk.collections.BaseCollection.extend({
 	model: OsciTk.models.GlossaryTerm,
 	initialize: function() {
-		app.dispatcher.on('packageLoaded', this.parseGlossary, this);
+		this.listenTo(Backbone, 'packageLoaded', this.parseGlossary);
 	},
 	parseGlossary: function(packageModel) {
 		// retrieve glossary from manifest

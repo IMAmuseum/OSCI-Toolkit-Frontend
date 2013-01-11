@@ -1,6 +1,6 @@
 OsciTk.views.GlossaryTooltip = OsciTk.views.BaseView.extend({
 	initialize: function() {
-		app.dispatcher.on('layoutComplete', function() {
+		this.listenTo(Backbone, 'layoutComplete', function() {
 			$('.glossary-term').qtip({
 				content: {
 					title: 'Title',
