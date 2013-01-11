@@ -2019,6 +2019,8 @@ OsciTk.views.GlossaryTooltip = OsciTk.views.BaseView.extend({
 				},
 				events: {
 					show: function(event, api) {
+						$('.glossary-tooltip').not(event.target).qtip('destroy');
+
 						var tid = $(event.originalEvent.target).data('tid');
 						var item = app.collections.glossaryTerms.get(tid);
 						// set the tooltip contents
@@ -2257,11 +2259,11 @@ OsciTk.views.MultiColumnFigureLayeredImage = OsciTk.views.MultiColumnFigure.exte
 
 OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 	initialize: function() {
+		this._super('initialize');
+		
 		this.columnTemplate = OsciTk.templateManager.get('multi-column-column');
 		this.visible = false;
 		this.paragraphControlsViews = [];
-
-		OsciTk.views.MultiColumnPage.__super__.initialize.call(this);
 	},
 
 	onClose: function() {
@@ -2573,6 +2575,8 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 	template: OsciTk.templateManager.get('multi-column-section'),
 
 	initialize: function() {
+		this._super('initialize');
+		
 		this.options.pageView = 'MultiColumnPage';
 
 		app.dispatcher.on("windowResized", function() {
@@ -2691,8 +2695,6 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
 		//initialize dimensions object
 		this.dimensions = {};
-
-		OsciTk.views.MultiColumnSection.__super__.initialize.call(this);
 	},
 
 	isElementVisible: function(elem) {

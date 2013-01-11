@@ -3,6 +3,8 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 	template: OsciTk.templateManager.get('multi-column-section'),
 
 	initialize: function() {
+		this._super('initialize');
+		
 		this.options.pageView = 'MultiColumnPage';
 
 		app.dispatcher.on("windowResized", function() {
@@ -121,8 +123,6 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
 		//initialize dimensions object
 		this.dimensions = {};
-
-		OsciTk.views.MultiColumnSection.__super__.initialize.call(this);
 	},
 
 	isElementVisible: function(elem) {
