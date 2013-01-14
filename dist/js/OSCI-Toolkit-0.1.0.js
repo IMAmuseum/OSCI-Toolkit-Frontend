@@ -1,5 +1,5 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2013-01-11
+ * OSCI Toolkit - v0.1.0 - 2013-01-14
  * http://oscitoolkit.org/
  * Copyright (c) 2010-2013 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
@@ -2006,7 +2006,6 @@ OsciTk.views.GlossaryTooltip = OsciTk.views.BaseView.extend({
 				},
 				events: {
 					show: function(event, api) {
-						$('.glossary-tooltip').not(event.target).qtip('destroy');
 
 						var tid = $(event.originalEvent.target).data('tid');
 						var item = app.collections.glossaryTerms.get(tid);
@@ -2016,6 +2015,10 @@ OsciTk.views.GlossaryTooltip = OsciTk.views.BaseView.extend({
 					}
 				}
 			});
+		});
+
+		this.listenTo(Backbone, 'routedToSection', function() {
+			$('.glossary-tooltip').not(event.target).qtip('destroy');
 		});
 	}
 });
