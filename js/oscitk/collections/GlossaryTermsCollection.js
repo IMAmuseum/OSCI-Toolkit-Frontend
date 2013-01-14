@@ -28,6 +28,7 @@ OsciTk.collections.GlossaryTerms = OsciTk.collections.BaseCollection.extend({
 				}
 			}
 		}
+		Backbone.trigger('osci.glossary.loaded', this);
 	},
 	filterByKeyword: function(keyword) {
 		var regExp = new RegExp('\\b' + keyword, "gi");
