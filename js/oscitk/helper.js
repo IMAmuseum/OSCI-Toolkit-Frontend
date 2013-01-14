@@ -57,6 +57,11 @@ function xmlToJson(xml, namespace) {
 	return(result);
 }
 
+function objectToArray(obj) {
+	if(obj === undefined) return;
+	return Object.prototype.toString.call(obj) !== '[object Array]' ? [obj] : obj;
+}
+
 String.prototype.replaceArray = function(find, replace) {
 	var replaceString = this;
 	for (var i = 0; i < find.length; i++) {

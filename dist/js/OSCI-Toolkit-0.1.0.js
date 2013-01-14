@@ -71,6 +71,11 @@ function xmlToJson(xml, namespace) {
 	return(result);
 }
 
+function objectToArray(obj) {
+	if(obj === undefined) return;
+	return Object.prototype.toString.call(obj) !== '[object Array]' ? [obj] : obj;
+}
+
 String.prototype.replaceArray = function(find, replace) {
 	var replaceString = this;
 	for (var i = 0; i < find.length; i++) {
@@ -1019,14 +1024,19 @@ OsciTk.collections.GlossaryTerms = OsciTk.collections.BaseCollection.extend({
 			// retrieve glossary doc
 			var data = xmlToJson(loadXMLDoc(doc.href));
 
-			// add terms to collection
-			for (var i = 0, count = data.dl.td.length; i < count; i++) {
-				var item = {
-					id: data.dl.td[i]['data-tid'],
-					term: data.dl.td[i].dfn.value,
-					definition: data.dl.dd[i].value
-				};
-				this.add(item);
+			if (!_.isUndefined(data.dl.td) && !_.isUndefined(data.dl.dd)) {
+				data.dl.td = objectToArray(data.dl.td);
+				data.dl.dd = objectToArray(data.dl.dd);
+
+				// add terms to collection
+				for (var i = 0, count = data.dl.td.length; i < count; i++) {
+					var item = {
+						id: data.dl.td[i]['data-tid'],
+						term: data.dl.td[i].dfn.value,
+						definition: data.dl.dd[i].value
+					};
+					this.add(item);
+				}
 			}
 		}
 	},
@@ -1991,30 +2001,31 @@ OsciTk.views.Footnotes = OsciTk.views.BaseView.extend({
 OsciTk.views.GlossaryTooltip = OsciTk.views.BaseView.extend({
 	initialize: function() {
 		this.listenTo(Backbone, 'layoutComplete', function() {
-			$('.glossary-term').qtip({
-				content: {
-					title: 'Title',
-					text: 'Definition'
-				},
-				position: {
-					viewport: $(window)
-				},
-				style: {
-					classes: 'glossary-tooltip',
-					def: false,
-					width: app.views.sectionView.dimensions.columnWidth + 'px'
-				},
-				events: {
-					show: function(event, api) {
-
-						var tid = $(event.originalEvent.target).data('tid');
-						var item = app.collections.glossaryTerms.get(tid);
-						// set the tooltip contents
-						api.set('content.title.text', item.get('term'));
-						api.set('content.text', item.get('definition'));
+			if (app.collections.glossaryTerms.length !== 0) {
+				$('.glossary-term').qtip({
+					content: {
+						title: ' ',
+						text: ' '
+					},
+					position: {
+						viewport: $(window)
+					},
+					style: {
+						classes: 'glossary-tooltip',
+						def: false,
+						width: app.views.sectionView.dimensions.columnWidth + 'px'
+					},
+					events: {
+						show: function(event, api) {
+							var tid = $(event.originalEvent.target).data('tid');
+							var item = app.collections.glossaryTerms.get(tid);
+							// set the tooltip contents
+							api.set('content.title.text', item.get('term'));
+							api.set('content.text', item.get('definition'));
+						}
 					}
-				}
-			});
+				});
+			}
 		});
 
 		this.listenTo(Backbone, 'routedToSection', function() {

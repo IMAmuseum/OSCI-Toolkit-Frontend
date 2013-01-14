@@ -13,14 +13,19 @@ OsciTk.collections.GlossaryTerms = OsciTk.collections.BaseCollection.extend({
 			// retrieve glossary doc
 			var data = xmlToJson(loadXMLDoc(doc.href));
 
-			// add terms to collection
-			for (var i = 0, count = data.dl.td.length; i < count; i++) {
-				var item = {
-					id: data.dl.td[i]['data-tid'],
-					term: data.dl.td[i].dfn.value,
-					definition: data.dl.dd[i].value
-				};
-				this.add(item);
+			if (!_.isUndefined(data.dl.td) && !_.isUndefined(data.dl.dd)) {
+				data.dl.td = objectToArray(data.dl.td);
+				data.dl.dd = objectToArray(data.dl.dd);
+
+				// add terms to collection
+				for (var i = 0, count = data.dl.td.length; i < count; i++) {
+					var item = {
+						id: data.dl.td[i]['data-tid'],
+						term: data.dl.td[i].dfn.value,
+						definition: data.dl.dd[i].value
+					};
+					this.add(item);
+				}
 			}
 		}
 	},
