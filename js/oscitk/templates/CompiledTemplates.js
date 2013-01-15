@@ -122,7 +122,7 @@ return __p;
 OsciTk.templates['glossary'] = function(obj){
 var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
-__p+='<h3>Glossary</h3>\n<div id="glossary-container">\n\t<div id="glossary-sidebar">\n\t\t<input type="text" id="glossary-filter" placeholder="Search Glossary" />\n\t\t<ul id="glossary-term-listing">\n\t\t';
+__p+='<h3>Glossary</h3>\n<div id="glossary-container">\n\t<div id="glossary-sidebar">\n\t\t<input type="text" id="glossary-filter" placeholder="Search Glossary" />\n\t\t<div id="glossary-filter-clear"></div>\n\t\t<ul id="glossary-term-listing">\n\t\t';
  _.each(glossary, function(item) { 
 __p+='\n\t\t\t<li data-tid="'+
 ((__t=( item.get('id') ))==null?'':__t)+

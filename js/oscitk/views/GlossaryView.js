@@ -4,6 +4,7 @@ OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('glossary'),
 	events: {
 		'keyup #glossary-filter': 'filterTerms',
+		'click #glossary-filter-clear': 'clearFilter',
 		'click li': 'selectTerm'
 	},
 	render: function() {
@@ -28,6 +29,16 @@ OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
 			var el = view.make('li', {'data-tid': item.get('id')}, item.get('term'));
 			$('#glossary-term-listing').append(el);
 		});
+
+		if (!$('#glossary-filter').val().length) {
+			$('#glossary-filter-clear').hide();
+		} else {
+			$('#glossary-filter-clear').show();
+		}
+	},
+	clearFilter: function() {
+		$('#glossary-filter').val('');
+		this.filterTerms();
 	},
 	selectTerm: function(e) {
 		var tid = $(e.target).data('tid');

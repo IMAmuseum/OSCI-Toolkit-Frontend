@@ -4,16 +4,50 @@
 #glossary-sidebar {
 	float: left;
 	width: 20%;
+	height: 100%;
+	position: relative;
+}
+#glossary-sidebar #glossary-filter {
+	line-height: 1.4em;
+	text-indent: 10px;
+	border-radius: 50px;
+	border: none;
+	font-size: 18px;
+	background: #fff;
+	border: 2px inset #ccc;
+	width: 100%;
+	-webkit-appearance: none;
+}
+#glossary-filter-clear {
+	display: none;
+	cursor: pointer;
+	position: absolute;
+	top: 6px;
+	right: 3px;
+	width: 20px;
+	height: 20px;
+	background: url(../img/close-circle.svg) 0 0 no-repeat;
+}
+#glossary-term-listing {
+	margin: 10px 0;
+	list-style: none;
+	height: 200px;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+}
+#glossary-term-listing li {
+	cursor: pointer;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 10px;
+	border-bottom: 1px solid rgba(0,0,0,.2);
+	box-shadow: 0 1px 0 rgba(255,255,255,.5);
 }
 #glossary-content {
 	float: right;
 	width: 80%;
+	height: 100%;
 }
-#glossary-term-listing {
-	list-style: none;
-	height: 200px;
-	overflow-y: scroll;
-}
-#glossary-term-listing li {
-	cursor: pointer;
+#glossary-content * {
+	padding: 0 20px;
 }

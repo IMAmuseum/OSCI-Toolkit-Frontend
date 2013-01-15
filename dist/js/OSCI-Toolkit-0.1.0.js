@@ -1,5 +1,5 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2013-01-14
+ * OSCI Toolkit - v0.1.0 - 2013-01-15
  * http://oscitoolkit.org/
  * Copyright (c) 2010-2013 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
@@ -365,7 +365,7 @@ return __p;
 OsciTk.templates['glossary'] = function(obj){
 var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
-__p+='<h3>Glossary</h3>\n<div id="glossary-container">\n\t<div id="glossary-sidebar">\n\t\t<input type="text" id="glossary-filter" placeholder="Search Glossary" />\n\t\t<ul id="glossary-term-listing">\n\t\t';
+__p+='<h3>Glossary</h3>\n<div id="glossary-container">\n\t<div id="glossary-sidebar">\n\t\t<input type="text" id="glossary-filter" placeholder="Search Glossary" />\n\t\t<div id="glossary-filter-clear"></div>\n\t\t<ul id="glossary-term-listing">\n\t\t';
  _.each(glossary, function(item) { 
 __p+='\n\t\t\t<li data-tid="'+
 ((__t=( item.get('id') ))==null?'':__t)+
@@ -2040,6 +2040,7 @@ OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('glossary'),
 	events: {
 		'keyup #glossary-filter': 'filterTerms',
+		'click #glossary-filter-clear': 'clearFilter',
 		'click li': 'selectTerm'
 	},
 	render: function() {
@@ -2064,6 +2065,16 @@ OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
 			var el = view.make('li', {'data-tid': item.get('id')}, item.get('term'));
 			$('#glossary-term-listing').append(el);
 		});
+
+		if (!$('#glossary-filter').val().length) {
+			$('#glossary-filter-clear').hide();
+		} else {
+			$('#glossary-filter-clear').show();
+		}
+	},
+	clearFilter: function() {
+		$('#glossary-filter').val('');
+		this.filterTerms();
 	},
 	selectTerm: function(e) {
 		var tid = $(e.target).data('tid');
