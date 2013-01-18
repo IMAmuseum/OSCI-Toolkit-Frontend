@@ -1,5 +1,5 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2013-01-15
+ * OSCI Toolkit - v0.1.0 - 2013-01-18
  * http://oscitoolkit.org/
  * Copyright (c) 2010-2013 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
@@ -931,16 +931,31 @@ h1, h2, h3, h4, h5 {
 #search-view #search-box {
 	float: left;
 	display: inline-block;
-	padding-right: 20px;
-	margin-bottom: 20px;
+	margin: 0 20px 20px 0;
+	position: relative;
 }
 #search-view #search-keyword {
+	line-height: 1.4em;
+	text-indent: 10px;
+	border-radius: 50px;
+	border: none;
+	font-size: 18px;
+	background: #fff;
+	border: 2px inset #ccc;
 	width: 300px;
-	height: 30px;
-	font-size: 1.2em;
-	color: #999;
-	padding: 10px 12px;
-	border-radius: 25px;
+	-webkit-appearance: none;
+	padding-right: 25px;
+}
+#search-submit {
+	display: block;
+	cursor: pointer;
+	position: absolute;
+	top: 6px;
+	right: 3px;
+	width: 20px;
+	height: 20px;
+	background: url(../img/icon-search.png) 0 0 no-repeat;
+	background-size: 16px;
 }
 #search-view #search-filters-container {
 	height: 30px;

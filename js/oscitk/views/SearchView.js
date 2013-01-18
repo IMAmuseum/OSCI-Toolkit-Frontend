@@ -24,6 +24,7 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 	},
 	events: {
 		'submit #search-form': 'submitSearch',
+		'click #search-submit': 'submitSearch',
 		'click .search-result': 'gotoResult',
 		'click .facet': 'addFacet',
 		'click .filter': 'addFilter',

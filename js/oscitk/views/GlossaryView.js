@@ -13,6 +13,12 @@ OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
 	filterTerms: function() {
 		var keyword = $('#glossary-filter').val();
 
+		if (!keyword.length) {
+			$('#glossary-filter-clear').hide();
+		} else {
+			$('#glossary-filter-clear').show();
+		}
+
 		var terms;
 		if (_.isEmpty(keyword)) {
 			terms = app.collections.glossaryTerms.models;
@@ -29,12 +35,6 @@ OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
 			var el = view.make('li', {'data-tid': item.get('id')}, item.get('term'));
 			$('#glossary-term-listing').append(el);
 		});
-
-		if (!$('#glossary-filter').val().length) {
-			$('#glossary-filter-clear').hide();
-		} else {
-			$('#glossary-filter-clear').show();
-		}
 	},
 	clearFilter: function() {
 		$('#glossary-filter').val('');

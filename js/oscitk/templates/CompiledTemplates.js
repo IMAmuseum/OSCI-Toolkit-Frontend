@@ -122,7 +122,11 @@ return __p;
 OsciTk.templates['glossary'] = function(obj){
 var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
-__p+='<h3>Glossary</h3>\n<div id="glossary-container">\n\t<div id="glossary-sidebar">\n\t\t<input type="text" id="glossary-filter" placeholder="Search Glossary" />\n\t\t<div id="glossary-filter-clear"></div>\n\t\t<ul id="glossary-term-listing">\n\t\t';
+__p+='<h3>Glossary</h3>\n<div id="glossary-container">\n\t<div id="glossary-sidebar">\n\t\t<input type="text" id="glossary-filter" placeholder="Search Glossary" />\n\t\t<div id="glossary-filter-search-icon"></div>\n\t\t<div id="glossary-filter-clear"></div>\n\t\t';
+ if (_.isEmpty(glossary)) { 
+__p+='\n\t\t\tNo terms found.\n\t\t';
+ } else { 
+__p+='\n\t\t<ul id="glossary-term-listing">\n\t\t';
  _.each(glossary, function(item) { 
 __p+='\n\t\t\t<li data-tid="'+
 ((__t=( item.get('id') ))==null?'':__t)+
@@ -130,7 +134,9 @@ __p+='\n\t\t\t<li data-tid="'+
 ((__t=( item.get('term') ))==null?'':__t)+
 '</li>\n\t\t';
  }); 
-__p+='\n\t\t</ul>\n\t</div>\n\t<div id="glossary-content">\n\t\t<h4></h4>\n\t\t<p></p>\n\t</div>\n</div>';
+__p+='\n\t\t</ul>\n\t\t';
+ } 
+__p+='\n\t</div>\n\t<div id="glossary-content">\n\t\t<h4></h4>\n\t\t<p></p>\n\t</div>\n</div>';
 }
 return __p;
 }
@@ -269,9 +275,9 @@ return __p;
 OsciTk.templates['search'] = function(obj){
 var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
-__p+='<div id="search-header">\n\t<h3>Search</h3>\n\t<div id="search-box">\n\t\t<form id="search-form" name="search-form" method="POST">\n\t\t\t<input type="text" name="keyword" id="search-keyword" placeholder="search" value="'+
+__p+='<div id="search-header">\n\t<h3>Search</h3>\n\t<div id="search-box">\n\t\t<form id="search-form" name="search-form" method="POST">\n\t\t\t<input type="text" name="keyword" id="search-keyword" placeholder="Search" value="'+
 ((__t=( query.keyword ))==null?'':__t)+
-'"/>\n\t\t\t<input type="hidden" name="page" id="search-page" />\n\t\t</form>\n\t</div>\n\t<div id="search-filters-container">\n\t\t<div class="label">Filter |</div>\n\t\t<ul class="search-filters">\n\t\t\t<li class="filter" data-filter="type:content" id="search-filter-content"><div class="dot">&nbsp;</div><div class="label">Content</div></li>\n\t\t\t<li class="filter" data-filter="type:notes" id="search-filter-notes"><div class="dot">&nbsp;</div><div class="label">My Notes</div></li>\n\t\t\t<li class="filter" data-filter="type:footnotes" id="search-filter-footnotes"><div class="dot">&nbsp;</div><div class="label">Footnotes</div></li>\n\t\t\t<li class="filter" data-filter="type:figures" id="search-filter-figures"><div class="dot">&nbsp;</div><div class="label">Figures</div></li>\n\t\t</ul>\n\t\t<div class="search-filter-select">\n\t\t<select class="search-filters">\n\t\t\t<option>Select a filter</option>\n\t\t\t<option value="content">Content</option>\n\t\t\t<option value="notes">My Notes</option>\n\t\t\t<option value="footnotes">Footnotes</option>\n\t\t\t<option value="figures">Figures</option>\n\t\t</select>\n\t</div>\n\t</div>\n</div>\n<div id="search-results-wrapper"></div>';
+'"/>\n\t\t\t<div id="search-submit"></div>\n\t\t\t<input type="hidden" name="page" id="search-page" />\n\t\t</form>\n\t</div>\n\t<div id="search-filters-container">\n\t\t<div class="label">Filter |</div>\n\t\t<ul class="search-filters">\n\t\t\t<li class="filter" data-filter="type:content" id="search-filter-content"><div class="dot">&nbsp;</div><div class="label">Content</div></li>\n\t\t\t<li class="filter" data-filter="type:notes" id="search-filter-notes"><div class="dot">&nbsp;</div><div class="label">My Notes</div></li>\n\t\t\t<li class="filter" data-filter="type:footnotes" id="search-filter-footnotes"><div class="dot">&nbsp;</div><div class="label">Footnotes</div></li>\n\t\t\t<li class="filter" data-filter="type:figures" id="search-filter-figures"><div class="dot">&nbsp;</div><div class="label">Figures</div></li>\n\t\t</ul>\n\t\t<div class="search-filter-select">\n\t\t<select class="search-filters">\n\t\t\t<option>Select a filter</option>\n\t\t\t<option value="content">Content</option>\n\t\t\t<option value="notes">My Notes</option>\n\t\t\t<option value="footnotes">Footnotes</option>\n\t\t\t<option value="figures">Figures</option>\n\t\t</select>\n\t</div>\n\t</div>\n</div>\n<div id="search-results-wrapper"></div>';
 }
 return __p;
 }

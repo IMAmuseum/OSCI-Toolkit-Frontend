@@ -1,3 +1,7 @@
+.glossary-term {
+	cursor: pointer;
+	color: #52818C;
+}
 #glossary-container {
 	width: 100%;
 }
@@ -17,6 +21,16 @@
 	border: 2px inset #ccc;
 	width: 100%;
 	-webkit-appearance: none;
+	padding: 0 25px;
+}
+#glossary-filter-search-icon {
+	position: absolute;
+	top: 6px;
+	left: 8px;
+	width: 20px;
+	height: 20px;
+	background: url(../img/icon-search.png) 0 0 no-repeat;
+	background-size: 18px 18px;
 }
 #glossary-filter-clear {
 	display: none;
@@ -32,7 +46,7 @@
 	margin: 10px 0;
 	list-style: none;
 	height: 200px;
-	overflow-y: scroll;
+	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
 }
 #glossary-term-listing li {
