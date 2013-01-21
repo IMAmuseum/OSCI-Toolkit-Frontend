@@ -25,7 +25,13 @@
 					<div class="search-result" data-id="<%= result.get('id') %>">
 						<div class="result-content">
 							<div class="result-type <%= result.get('bundle') %>"><%= result.get('bundle') %></div>
-							<div class="result-body"><%= result.get('teaser') %></div>
+							<div class="result-body">
+							<% if (_.isEmpty(result.get('teaser'))) { %>
+								&nbsp;
+							<% } else { %>
+							<%= result.get('teaser') %>
+							<% } %>
+							</div>
 						</div>
 					</div>
 					<% }); %>
@@ -38,11 +44,17 @@
 	<% } %>
 	<div id="filter-by-section">
 		<div class="section-title">Filter by section</div>
-		<ul>
-			<% _.each(response.facets, function(facet) { %>
-				<li><a href="#" data-filter="section:<%= facet.section_id %>" class="facet"><%= facet.section %></a> (<%= facet.count %>)</li>
-			<% }); %>
-		</ul>
+		<div id="section-list-container">
+			<ul>
+				<% _.each(response.facets, function(facet) { %>
+					<li>
+						<a href="#" data-filter="section:<%= facet.section_id %>" class="facet"><%= facet.section %></a> 
+						(<%= facet.count %>)
+					</li>
+				<% }); %>
+			</ul>
+		<div style="clear:both;">&nbsp;</div>
+	</div>
 	</div>
 </div>
 <% } %>
