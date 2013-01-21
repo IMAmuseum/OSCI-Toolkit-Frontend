@@ -7,8 +7,8 @@
 	<div id="results-sort">
 		Sort By:
 		<ul>
-			<li><a href="#" class="sort-button" data-sort="score">Relevance</a></li>
-			<li><a href="#" class="sort-button" data-sort="content">Type</a></li>
+			<li><a href="#" class="sort-button <%= (query.sort === 'score') ? 'active' : '' %>" data-sort="score">Relevance</a></li>
+			<li><a href="#" class="sort-button <%= (query.sort === 'content') ? 'active' : '' %>" data-sort="content">Type</a></li>
 		</ul>
 	</div>
 </div>

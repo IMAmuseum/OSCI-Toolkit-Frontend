@@ -116,6 +116,9 @@
 	margin: 10px 0;
 	padding-top: 10px;
 }
+.sort-button.active {
+	font-weight: bold;
+}
 #results-sort ul {
 	margin-left: 10px;
 	display: inline;
@@ -152,6 +155,7 @@
 }
 #search-results .search-result {
 	padding: 10px 5px;
+	cursor: pointer;
 }
 #search-results .result-section {
 	border-bottom: 1px solid #8C8C8C;

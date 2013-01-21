@@ -1,5 +1,5 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2013-01-18
+ * OSCI Toolkit - v0.1.0 - 2013-01-20
  * http://oscitoolkit.org/
  * Copyright (c) 2010-2013 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
@@ -1026,6 +1026,9 @@ h1, h2, h3, h4, h5 {
 	margin: 10px 0;
 	padding-top: 10px;
 }
+.sort-button.active {
+	font-weight: bold;
+}
 #results-sort ul {
 	margin-left: 10px;
 	display: inline;
@@ -1047,11 +1050,13 @@ h1, h2, h3, h4, h5 {
 }
 #search-results-container {
 	height: 100%;
+	overflow: hidden;
 }
 #search-results-container #filter-by-section {
 	float: left;
 	width: 250px;
 	margin-left: -100%;
+	height: 100%;
 }
 #search-results-content {
 	margin-left: 250px;
@@ -1060,6 +1065,7 @@ h1, h2, h3, h4, h5 {
 }
 #search-results .search-result {
 	padding: 10px 5px;
+	cursor: pointer;
 }
 #search-results .result-section {
 	border-bottom: 1px solid #8C8C8C;
@@ -1107,9 +1113,10 @@ h1, h2, h3, h4, h5 {
 #filter-by-section .section-title {
 	font-weight: bold;
 }
-#filter-by-section ul {
-	margin-top: 10px;
-	margin-right: 20px;
+#section-list-container {
+	overflow-y:auto;
+	height:100%;
+	margin-right: 10px;
 }
 #filter-by-section ul li {
 	padding: 10px 0;

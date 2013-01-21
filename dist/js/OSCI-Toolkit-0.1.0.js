@@ -1,5 +1,5 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2013-01-18
+ * OSCI Toolkit - v0.1.0 - 2013-01-20
  * http://oscitoolkit.org/
  * Copyright (c) 2010-2013 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
@@ -471,7 +471,11 @@ __p+='\n<div id="search-results-header">\n\t<div id="search-summary">\n\t\tResul
 ((__t=( query.keyword ))==null?'':__t)+
 '"</span> ('+
 ((__t=( response.numFound ))==null?'':__t)+
-')\n\t\t<a id="reset-search" href="#">RESET</a>\n\t</div>\n\t<div id="results-sort">\n\t\tSort By:\n\t\t<ul>\n\t\t\t<li><a href="#" class="sort-button" data-sort="score">Relevance</a></li>\n\t\t\t<li><a href="#" class="sort-button" data-sort="content">Type</a></li>\n\t\t</ul>\n\t</div>\n</div>\n<div id="search-results-container">\n\t';
+')\n\t\t<a id="reset-search" href="#">RESET</a>\n\t</div>\n\t<div id="results-sort">\n\t\tSort By:\n\t\t<ul>\n\t\t\t<li><a href="#" class="sort-button '+
+((__t=( (query.sort === 'score') ? 'active' : '' ))==null?'':__t)+
+'" data-sort="score">Relevance</a></li>\n\t\t\t<li><a href="#" class="sort-button '+
+((__t=( (query.sort === 'content') ? 'active' : '' ))==null?'':__t)+
+'" data-sort="content">Type</a></li>\n\t\t</ul>\n\t</div>\n</div>\n<div id="search-results-container">\n\t';
  if (response.numFound !== 0) { 
 __p+='\n\t<div id="search-results">\n\t\t<div id="search-results-content">\n\t\t\t';
  _.each(results, function(group) { var first = true;
@@ -489,9 +493,15 @@ __p+='\n\t\t\t\t\t<div class="search-result" data-id="'+
 ((__t=( result.get('bundle') ))==null?'':__t)+
 '">'+
 ((__t=( result.get('bundle') ))==null?'':__t)+
-'</div>\n\t\t\t\t\t\t\t<div class="result-body">'+
+'</div>\n\t\t\t\t\t\t\t<div class="result-body">\n\t\t\t\t\t\t\t';
+ if (_.isEmpty(result.get('teaser'))) { 
+__p+='\n\t\t\t\t\t\t\t\t&nbsp;\n\t\t\t\t\t\t\t';
+ } else { 
+__p+='\n\t\t\t\t\t\t\t'+
 ((__t=( result.get('teaser') ))==null?'':__t)+
-'</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t';
+'\n\t\t\t\t\t\t\t';
+ } 
+__p+='\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t';
  }); 
 __p+='\n\t\t\t\t</div>\n\t\t\t';
  }); 
@@ -499,17 +509,17 @@ __p+='\n\t\t</div>\n\t</div>\n\t';
  } else { 
 __p+='\n\tNo results found.\n\t';
  } 
-__p+='\n\t<div id="filter-by-section">\n\t\t<div class="section-title">Filter by section</div>\n\t\t<ul>\n\t\t\t';
+__p+='\n\t<div id="filter-by-section">\n\t\t<div class="section-title">Filter by section</div>\n\t\t<div id="section-list-container">\n\t\t\t<ul>\n\t\t\t\t';
  _.each(response.facets, function(facet) { 
-__p+='\n\t\t\t\t<li><a href="#" data-filter="section:'+
+__p+='\n\t\t\t\t\t<li>\n\t\t\t\t\t\t<a href="#" data-filter="section:'+
 ((__t=( facet.section_id ))==null?'':__t)+
 '" class="facet">'+
 ((__t=( facet.section ))==null?'':__t)+
-'</a> ('+
+'</a> \n\t\t\t\t\t\t('+
 ((__t=( facet.count ))==null?'':__t)+
-')</li>\n\t\t\t';
+')\n\t\t\t\t\t</li>\n\t\t\t\t';
  }); 
-__p+='\n\t\t</ul>\n\t</div>\n</div>\n';
+__p+='\n\t\t\t</ul>\n\t\t<div style="clear:both;">&nbsp;</div>\n\t</div>\n\t</div>\n</div>\n';
  } 
 __p+='';
 }
@@ -3324,28 +3334,6 @@ OsciTk.views.ParagraphControlsView = OsciTk.views.BaseView.extend({
 		return this;
 	}
 });
-OsciTk.views.SearchResults = OsciTk.views.BaseView.extend({
-	id: 'search-results-container',
-	template: OsciTk.templateManager.get('search-results'),
-	initialize: function(response) {
-		console.log(response);
-		this.searchResults = new OsciTk.collections.SearchResults({docs: response.docs});
-		this.render();
-	},
-	render: function() {
-		this.$el.html(this.template());
-	}
-});
-OsciTk.views.SearchResult = OsciTk.views.BaseView.extend({
-	id: 'search-results-container',
-	template: OsciTk.templateManager.get('search-result'),
-	initialize: function(results) {
-		this.render();
-	},
-	render: function() {
-		this.$el.html(this.template());
-	}
-});
 OsciTk.views.Search = OsciTk.views.BaseView.extend({
 	id: 'search-view',
 	className: 'toolbar-item-view',
@@ -3356,7 +3344,7 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 			page: 0,
 			keyword: null,
 			filters: [],
-			sort: ''
+			sort: 'score'
 		};
 
 		// define results object
@@ -3393,6 +3381,11 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 
 		var newContainerHeight = containerSize - searchHeaderSize - resultsHeaderSize;
 		this.$el.find('#search-results-container').height(newContainerHeight);
+	},
+	prepareResults: function() {
+		this.results = _.groupBy(this.response.docs.models, function(doc) {
+			return doc.get('ss_section_id');
+		});
 	},
 	search: function() {
 		var that = this;
@@ -3434,16 +3427,12 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 				// handle container resizing
 				app.views.toolbarView.contentOpen();
 				that.resizeResultsContainer();
-				// set scroll position to last known
+
+				Backbone.trigger('osci.search.finished');
 			},
 			error: function() {
 				// error handling
 			}
-		});
-	},
-	prepareResults: function() {
-		this.results = _.groupBy(this.response.docs.models, function(doc) {
-			return doc.get('ss_section_id');
 		});
 	},
 	gotoResult: function(e) {
@@ -3468,7 +3457,7 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 			this.search();
 		}
 
-		$(e.currentTarget).addClass('active');
+		this.$el.find(e.currentTarget).addClass('active');
 	},
 	addFilter: function(e) {
 		e.preventDefault();

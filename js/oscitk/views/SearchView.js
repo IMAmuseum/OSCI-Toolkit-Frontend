@@ -8,7 +8,7 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 			page: 0,
 			keyword: null,
 			filters: [],
-			sort: ''
+			sort: 'score'
 		};
 
 		// define results object
@@ -45,6 +45,11 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 
 		var newContainerHeight = containerSize - searchHeaderSize - resultsHeaderSize;
 		this.$el.find('#search-results-container').height(newContainerHeight);
+	},
+	prepareResults: function() {
+		this.results = _.groupBy(this.response.docs.models, function(doc) {
+			return doc.get('ss_section_id');
+		});
 	},
 	search: function() {
 		var that = this;
@@ -86,16 +91,12 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 				// handle container resizing
 				app.views.toolbarView.contentOpen();
 				that.resizeResultsContainer();
-				// set scroll position to last known
+
+				Backbone.trigger('osci.search.finished');
 			},
 			error: function() {
 				// error handling
 			}
-		});
-	},
-	prepareResults: function() {
-		this.results = _.groupBy(this.response.docs.models, function(doc) {
-			return doc.get('ss_section_id');
 		});
 	},
 	gotoResult: function(e) {
@@ -120,7 +121,7 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 			this.search();
 		}
 
-		$(e.currentTarget).addClass('active');
+		this.$el.find(e.currentTarget).addClass('active');
 	},
 	addFilter: function(e) {
 		e.preventDefault();
