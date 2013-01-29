@@ -31,8 +31,13 @@
 	width: 100%;
 	padding: 20px 20px;
 	overflow: hidden;
+	position: relative;
 	/*background: url('../img/bg-fold-shadow.png') center 98% no-repeat;*/
 
+}
+#toolbar-content .toolbar-item-view {
+	height: 100%;
+	overflow: hidden;
 }
 #toolbar-content:after {
 	content: "";
@@ -94,8 +99,17 @@
 	transition: all .5s ease;
 }
 #toolbar h2 {
-	margin: 6px 0 6px 0;
-	border-bottom: 5px solid #8C8C8C;
+	margin: 0;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+	height: 40px;
+	line-height: 40px;
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	-o-transition: all .5s ease;
+	-ms-transition: all .5s ease;
+	transition: all .5s ease;
 }
 #toolbar h3 {
 	color: #444;
@@ -543,15 +557,12 @@ background-image: -webkit-gradient(
 
 /* When less than 600px... */
 @media (max-width:600px) {
-
-	/*
-	div.Figures-toolbar-item,
-	div.Notes-toolbar-item {
-		display: none;
-	}
-	*/
 	#toolbar {
-		top: -57px;
+		top: -60px;
+	}
+
+	#toolbar h2 {
+		font-size: 1em;
 	}
 
 	#toolbar-handle {

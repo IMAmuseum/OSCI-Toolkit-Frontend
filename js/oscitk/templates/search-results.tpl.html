@@ -12,7 +12,7 @@
 		</ul>
 	</div>
 </div>
-<div id="search-results-container">
+<div id="search-results-column-wrapper">
 	<% if (response.numFound !== 0) { %>
 	<div id="search-results">
 		<div id="search-results-content">
@@ -44,17 +44,16 @@
 	<% } %>
 	<div id="filter-by-section">
 		<div class="section-title">Filter by section</div>
-		<div id="section-list-container">
-			<ul>
+		<div id="filter-sections-container">
+			<ul id="filter-sections">
 				<% _.each(response.facets, function(facet) { %>
-					<li>
+					<li class="filter-section">
 						<a href="#" data-filter="section:<%= facet.section_id %>" class="facet"><%= facet.section %></a> 
 						(<%= facet.count %>)
 					</li>
 				<% }); %>
 			</ul>
-		<div style="clear:both;">&nbsp;</div>
-	</div>
+		</div>
 	</div>
 </div>
 <% } %>
