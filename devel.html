@@ -15,6 +15,7 @@
 	<link type="text/css" rel="stylesheet" href="css/search.css">
 	<link type="text/css" rel="stylesheet" href="css/navigation.css">
 	<link type="text/css" rel="stylesheet" href="css/notes.css">
+	<link type="text/css" rel="stylesheet" href="css/glossary.css">
 	<link type="text/css" rel="stylesheet" href="css/layered_image.css">
 	<link type="text/css" rel="stylesheet" href="css/citation.css">
 	<link type="text/css" rel="stylesheet" href="css/themeNight.css">
@@ -22,13 +23,14 @@
 	<script src="js/external/json2.js"></script>
 	<script src="js/external/jquery-1.7.1.js"></script>
 	<script src="js/external/jquery.qtip.js"></script>
-	<script src="js/external/underscore-1.3.3.js"></script>
+	<script src="js/external/underscore-1.4.3.js"></script>
 	<script src="js/external/backbone.js"></script>
+	<script src="js/external/backbone-super.js"></script>
 	<script src="js/external/fancybox/jquery.fancybox.js"></script>
 	<script src="js/external/polymaps.min.js"></script>
 	<script src="js/external/jquery-ui-1.8.23.custom.min.js"></script>
 	<script src="js/oscitk/osci_tk_layered_image.js"></script>
-	<script src="js/oscitk/devel.js"></script>
+	<!--<script src="js/oscitk/devel.js"></script>-->
 	<script src="js/oscitk/OsciTk.js"></script>
 	<script src="js/oscitk/TemplateManager.js"></script>
 	<script src="js/oscitk/models/BaseModel.js"></script>
@@ -42,6 +44,7 @@
 	<script src="js/oscitk/models/AccountModel.js"></script>
 	<script src="js/oscitk/models/PageModel.js"></script>
 	<script src="js/oscitk/models/SectionModel.js"></script>
+	<script src="js/oscitk/models/GlossaryTermModel.js"></script>
 	<script src="js/oscitk/collections/BaseCollection.js"></script>
 	<script src="js/oscitk/collections/FiguresCollection.js"></script>
 	<script src="js/oscitk/collections/NavigationItemsCollection.js"></script>
@@ -49,6 +52,7 @@
 	<script src="js/oscitk/collections/NotesCollection.js"></script>
 	<script src="js/oscitk/collections/PagesCollection.js"></script>
 	<script src="js/oscitk/collections/SearchResultsCollection.js"></script>
+	<script src="js/oscitk/collections/GlossaryTermsCollection.js"></script>
 	<script src="js/oscitk/views/BaseView.js"></script>
 	<script src="js/oscitk/views/AppView.js"></script>
 	<script src="js/oscitk/views/SectionView.js"></script>
@@ -63,13 +67,13 @@
 	<script src="js/oscitk/views/ToolbarItemView.js"></script>
 	<script src="js/oscitk/views/NavigationView.js"></script>
 	<script src="js/oscitk/views/SearchView.js"></script>
-	<script src="js/oscitk/views/SearchResultsView.js"></script>
-	<script src="js/oscitk/views/SearchResultView.js"></script>
 	<script src="js/oscitk/views/NotesView.js"></script>
 	<script src="js/oscitk/views/InlineNotesView.js"></script>
 	<script src="js/oscitk/views/CitationView.js"></script>
 	<script src="js/oscitk/views/FootnotesView.js"></script>
 	<script src="js/oscitk/views/FiguresView.js"></script>
+	<script src="js/oscitk/views/GlossaryView.js"></script>
+	<script src="js/oscitk/views/GlossaryTooltipView.js"></script>
 	<script src="js/oscitk/views/TocView.js"></script>
 	<script src="js/oscitk/views/AccountView.js"></script>
 	<script src="js/oscitk/views/FontView.js"></script>
@@ -96,6 +100,7 @@
 					{view: 'Toc', text: 'ToC'},
 					{view: 'Notes', text: 'Notes'},
 					{view: 'Figures', text:' Figures'},
+					{view: 'Glossary', text: 'Glossary'},
 					{view: 'Search', text: 'Search'},
 					{view: 'Font', text: 'Font'},
 					{view: 'Account', text: 'Account'}

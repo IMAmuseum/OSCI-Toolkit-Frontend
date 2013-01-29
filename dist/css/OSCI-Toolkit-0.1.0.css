@@ -1,7 +1,7 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2012-12-18
+ * OSCI Toolkit - v0.1.0 - 2013-01-20
  * http://oscitoolkit.org/
- * Copyright (c) 2010-2012 The Art Institute of Chicago and the Indianapolis Museum of Art
+ * Copyright (c) 2010-2013 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
  */
 
@@ -370,6 +370,9 @@ div.Account-toolbar-item {
 
 	background: url('../img/icon-user.png') center center no-repeat;
 }
+div.Glossary-toolbar-item {
+	background: url('../img/icon-glossary.png') center center no-repeat;	
+}
 div.Search-toolbar-item {
 
 	background: url('../img/icon-search.png') center center no-repeat;
@@ -388,7 +391,8 @@ div.Toc-toolbar-item,
 div.Account-toolbar-item,
 div.Search-toolbar-item,
 div.Font-toolbar-item,
-div.Figures-toolbar-item {
+div.Figures-toolbar-item,
+div.Glossary-toolbar-item {
 	opacity:.7;
 }
 div.Notes-toolbar-item:hover,
@@ -396,7 +400,8 @@ div.Toc-toolbar-item:hover,
 div.Account-toolbar-item:hover,
 div.Search-toolbar-item:hover,
 div.Font-toolbar-item:hover,
-div.Figures-toolbar-item:hover {
+div.Figures-toolbar-item:hover
+div.Glossary-toolbar-item:hover {
 	opacity:1;
 }
 
@@ -926,16 +931,31 @@ h1, h2, h3, h4, h5 {
 #search-view #search-box {
 	float: left;
 	display: inline-block;
-	padding-right: 20px;
-	margin-bottom: 20px;
+	margin: 0 20px 20px 0;
+	position: relative;
 }
 #search-view #search-keyword {
+	line-height: 1.4em;
+	text-indent: 10px;
+	border-radius: 50px;
+	border: none;
+	font-size: 18px;
+	background: #fff;
+	border: 2px inset #ccc;
 	width: 300px;
-	height: 30px;
-	font-size: 1.2em;
-	color: #999;
-	padding: 10px 12px;
-	border-radius: 25px;
+	-webkit-appearance: none;
+	padding-right: 25px;
+}
+#search-submit {
+	display: block;
+	cursor: pointer;
+	position: absolute;
+	top: 6px;
+	right: 3px;
+	width: 20px;
+	height: 20px;
+	background: url(../img/icon-search.png) 0 0 no-repeat;
+	background-size: 16px;
 }
 #search-view #search-filters-container {
 	height: 30px;
@@ -1006,6 +1026,9 @@ h1, h2, h3, h4, h5 {
 	margin: 10px 0;
 	padding-top: 10px;
 }
+.sort-button.active {
+	font-weight: bold;
+}
 #results-sort ul {
 	margin-left: 10px;
 	display: inline;
@@ -1027,11 +1050,13 @@ h1, h2, h3, h4, h5 {
 }
 #search-results-container {
 	height: 100%;
+	overflow: hidden;
 }
 #search-results-container #filter-by-section {
 	float: left;
 	width: 250px;
 	margin-left: -100%;
+	height: 100%;
 }
 #search-results-content {
 	margin-left: 250px;
@@ -1040,6 +1065,7 @@ h1, h2, h3, h4, h5 {
 }
 #search-results .search-result {
 	padding: 10px 5px;
+	cursor: pointer;
 }
 #search-results .result-section {
 	border-bottom: 1px solid #8C8C8C;
@@ -1087,9 +1113,10 @@ h1, h2, h3, h4, h5 {
 #filter-by-section .section-title {
 	font-weight: bold;
 }
-#filter-by-section ul {
-	margin-top: 10px;
-	margin-right: 20px;
+#section-list-container {
+	overflow-y:auto;
+	height:100%;
+	margin-right: 10px;
 }
 #filter-by-section ul li {
 	padding: 10px 0;

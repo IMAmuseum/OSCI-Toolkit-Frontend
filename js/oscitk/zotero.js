@@ -1,6 +1,6 @@
-app.zotero = {
+app.zotero = _.extend({
     init: function() {
-        app.dispatcher.on('packageLoaded', function(model) {
+        this.listenTo(Backbone, 'packageLoaded', function(model) {
             // Get date
             var d = new Date(model.get('dc:date'));
             d = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
@@ -28,6 +28,6 @@ app.zotero = {
             var ev = document.createEvent('HTMLEvents');
             ev.initEvent('ZoteroItemUpdated', true, true);
             document.dispatchEvent(ev);
-        }, this);
+        });
     }
-};
+}, Backbone.Events);

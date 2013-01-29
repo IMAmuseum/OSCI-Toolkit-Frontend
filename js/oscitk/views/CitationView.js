@@ -2,7 +2,7 @@ OsciTk.views.Citation = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('citation'),
 	initialize: function() {
 
-		app.dispatcher.on("toggleCiteDialog", function(data) {
+		this.listenTo(Backbone, "toggleCiteDialog", function(data) {
 			var citationView = this;
 			var contentId = data.contentId;
 			var content = $('#' + contentId);
@@ -97,7 +97,7 @@ OsciTk.views.Citation = OsciTk.views.BaseView.extend({
 			});
 
 
-		}, this);
+		});
 	}
 
 });

@@ -1,7 +1,7 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2012-12-18
+ * OSCI Toolkit - v0.1.0 - 2013-01-20
  * http://oscitoolkit.org/
- * Copyright (c) 2010-2012 The Art Institute of Chicago and the Indianapolis Museum of Art
+ * Copyright (c) 2010-2013 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
  */
 
@@ -71,6 +71,11 @@ function xmlToJson(xml, namespace) {
 	return(result);
 }
 
+function objectToArray(obj) {
+	if(obj === undefined) return;
+	return Object.prototype.toString.call(obj) !== '[object Array]' ? [obj] : obj;
+}
+
 String.prototype.replaceArray = function(find, replace) {
 	var replaceString = this;
 	for (var i = 0; i < find.length; i++) {
@@ -93,7 +98,7 @@ OsciTk.router = Backbone.Router.extend({
 	},
 
 	routeToSection: function(section_id, identifier) {
-		app.dispatcher.trigger('routedToSection', {section_id: section_id, identifier: identifier});
+		Backbone.trigger('routedToSection', {section_id: section_id, identifier: identifier});
 	}
 });
 OsciTk.templateManager = {
@@ -357,6 +362,27 @@ __p+='<h3>Reading Settings</h3>\n<div class="font-control">\n\t<h3>Font Size</h3
 }
 return __p;
 }
+OsciTk.templates['glossary'] = function(obj){
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
+with(obj||{}){
+__p+='<h3>Glossary</h3>\n<div id="glossary-container">\n\t<div id="glossary-sidebar">\n\t\t<input type="text" id="glossary-filter" placeholder="Search Glossary" />\n\t\t<div id="glossary-filter-search-icon"></div>\n\t\t<div id="glossary-filter-clear"></div>\n\t\t';
+ if (_.isEmpty(glossary)) { 
+__p+='\n\t\t\tNo terms found.\n\t\t';
+ } else { 
+__p+='\n\t\t<ul id="glossary-term-listing">\n\t\t';
+ _.each(glossary, function(item) { 
+__p+='\n\t\t\t<li data-tid="'+
+((__t=( item.get('id') ))==null?'':__t)+
+'">'+
+((__t=( item.get('term') ))==null?'':__t)+
+'</li>\n\t\t';
+ }); 
+__p+='\n\t\t</ul>\n\t\t';
+ } 
+__p+='\n\t</div>\n\t<div id="glossary-content">\n\t\t<h4></h4>\n\t\t<p></p>\n\t</div>\n</div>';
+}
+return __p;
+}
 OsciTk.templates['multi-column-column'] = function(obj){
 var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
@@ -445,7 +471,11 @@ __p+='\n<div id="search-results-header">\n\t<div id="search-summary">\n\t\tResul
 ((__t=( query.keyword ))==null?'':__t)+
 '"</span> ('+
 ((__t=( response.numFound ))==null?'':__t)+
-')\n\t\t<a id="reset-search" href="#">RESET</a>\n\t</div>\n\t<div id="results-sort">\n\t\tSort By:\n\t\t<ul>\n\t\t\t<li><a href="#" class="sort-button" data-sort="score">Relevance</a></li>\n\t\t\t<li><a href="#" class="sort-button" data-sort="content">Type</a></li>\n\t\t</ul>\n\t</div>\n</div>\n<div id="search-results-container">\n\t';
+')\n\t\t<a id="reset-search" href="#">RESET</a>\n\t</div>\n\t<div id="results-sort">\n\t\tSort By:\n\t\t<ul>\n\t\t\t<li><a href="#" class="sort-button '+
+((__t=( (query.sort === 'score') ? 'active' : '' ))==null?'':__t)+
+'" data-sort="score">Relevance</a></li>\n\t\t\t<li><a href="#" class="sort-button '+
+((__t=( (query.sort === 'content') ? 'active' : '' ))==null?'':__t)+
+'" data-sort="content">Type</a></li>\n\t\t</ul>\n\t</div>\n</div>\n<div id="search-results-container">\n\t';
  if (response.numFound !== 0) { 
 __p+='\n\t<div id="search-results">\n\t\t<div id="search-results-content">\n\t\t\t';
  _.each(results, function(group) { var first = true;
@@ -463,9 +493,15 @@ __p+='\n\t\t\t\t\t<div class="search-result" data-id="'+
 ((__t=( result.get('bundle') ))==null?'':__t)+
 '">'+
 ((__t=( result.get('bundle') ))==null?'':__t)+
-'</div>\n\t\t\t\t\t\t\t<div class="result-body">'+
+'</div>\n\t\t\t\t\t\t\t<div class="result-body">\n\t\t\t\t\t\t\t';
+ if (_.isEmpty(result.get('teaser'))) { 
+__p+='\n\t\t\t\t\t\t\t\t&nbsp;\n\t\t\t\t\t\t\t';
+ } else { 
+__p+='\n\t\t\t\t\t\t\t'+
 ((__t=( result.get('teaser') ))==null?'':__t)+
-'</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t';
+'\n\t\t\t\t\t\t\t';
+ } 
+__p+='\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t';
  }); 
 __p+='\n\t\t\t\t</div>\n\t\t\t';
  }); 
@@ -473,17 +509,17 @@ __p+='\n\t\t</div>\n\t</div>\n\t';
  } else { 
 __p+='\n\tNo results found.\n\t';
  } 
-__p+='\n\t<div id="filter-by-section">\n\t\t<div class="section-title">Filter by section</div>\n\t\t<ul>\n\t\t\t';
+__p+='\n\t<div id="filter-by-section">\n\t\t<div class="section-title">Filter by section</div>\n\t\t<div id="section-list-container">\n\t\t\t<ul>\n\t\t\t\t';
  _.each(response.facets, function(facet) { 
-__p+='\n\t\t\t\t<li><a href="#" data-filter="section:'+
+__p+='\n\t\t\t\t\t<li>\n\t\t\t\t\t\t<a href="#" data-filter="section:'+
 ((__t=( facet.section_id ))==null?'':__t)+
 '" class="facet">'+
 ((__t=( facet.section ))==null?'':__t)+
-'</a> ('+
+'</a> \n\t\t\t\t\t\t('+
 ((__t=( facet.count ))==null?'':__t)+
-')</li>\n\t\t\t';
+')\n\t\t\t\t\t</li>\n\t\t\t\t';
  }); 
-__p+='\n\t\t</ul>\n\t</div>\n</div>\n';
+__p+='\n\t\t\t</ul>\n\t\t<div style="clear:both;">&nbsp;</div>\n\t</div>\n\t</div>\n</div>\n';
  } 
 __p+='';
 }
@@ -492,9 +528,9 @@ return __p;
 OsciTk.templates['search'] = function(obj){
 var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
-__p+='<div id="search-header">\n\t<h3>Search</h3>\n\t<div id="search-box">\n\t\t<form id="search-form" name="search-form" method="POST">\n\t\t\t<input type="text" name="keyword" id="search-keyword" placeholder="search" value="'+
+__p+='<div id="search-header">\n\t<h3>Search</h3>\n\t<div id="search-box">\n\t\t<form id="search-form" name="search-form" method="POST">\n\t\t\t<input type="text" name="keyword" id="search-keyword" placeholder="Search" value="'+
 ((__t=( query.keyword ))==null?'':__t)+
-'"/>\n\t\t\t<input type="hidden" name="page" id="search-page" />\n\t\t</form>\n\t</div>\n\t<div id="search-filters-container">\n\t\t<div class="label">Filter |</div>\n\t\t<ul class="search-filters">\n\t\t\t<li class="filter" data-filter="type:content" id="search-filter-content"><div class="dot">&nbsp;</div><div class="label">Content</div></li>\n\t\t\t<li class="filter" data-filter="type:notes" id="search-filter-notes"><div class="dot">&nbsp;</div><div class="label">My Notes</div></li>\n\t\t\t<li class="filter" data-filter="type:footnotes" id="search-filter-footnotes"><div class="dot">&nbsp;</div><div class="label">Footnotes</div></li>\n\t\t\t<li class="filter" data-filter="type:figures" id="search-filter-figures"><div class="dot">&nbsp;</div><div class="label">Figures</div></li>\n\t\t</ul>\n\t\t<div class="search-filter-select">\n\t\t<select class="search-filters">\n\t\t\t<option>Select a filter</option>\n\t\t\t<option value="content">Content</option>\n\t\t\t<option value="notes">My Notes</option>\n\t\t\t<option value="footnotes">Footnotes</option>\n\t\t\t<option value="figures">Figures</option>\n\t\t</select>\n\t</div>\n\t</div>\n</div>\n<div id="search-results-wrapper"></div>';
+'"/>\n\t\t\t<div id="search-submit"></div>\n\t\t\t<input type="hidden" name="page" id="search-page" />\n\t\t</form>\n\t</div>\n\t<div id="search-filters-container">\n\t\t<div class="label">Filter |</div>\n\t\t<ul class="search-filters">\n\t\t\t<li class="filter" data-filter="type:content" id="search-filter-content"><div class="dot">&nbsp;</div><div class="label">Content</div></li>\n\t\t\t<li class="filter" data-filter="type:notes" id="search-filter-notes"><div class="dot">&nbsp;</div><div class="label">My Notes</div></li>\n\t\t\t<li class="filter" data-filter="type:footnotes" id="search-filter-footnotes"><div class="dot">&nbsp;</div><div class="label">Footnotes</div></li>\n\t\t\t<li class="filter" data-filter="type:figures" id="search-filter-figures"><div class="dot">&nbsp;</div><div class="label">Figures</div></li>\n\t\t</ul>\n\t\t<div class="search-filter-select">\n\t\t<select class="search-filters">\n\t\t\t<option>Select a filter</option>\n\t\t\t<option value="content">Content</option>\n\t\t\t<option value="notes">My Notes</option>\n\t\t\t<option value="footnotes">Footnotes</option>\n\t\t\t<option value="figures">Figures</option>\n\t\t</select>\n\t</div>\n\t</div>\n</div>\n<div id="search-results-wrapper"></div>';
 }
 return __p;
 }
@@ -644,6 +680,14 @@ OsciTk.models.Footnote = OsciTk.models.BaseModel.extend({
 		console.log('Footnote.sync: ' + method);
 	}
 });
+OsciTk.models.GlossaryTerm = OsciTk.models.BaseModel.extend({
+	defaults: function() {
+		return {
+			term: '',
+			definition: ''
+		};
+	}
+});
 OsciTk.models.NavigationItem = OsciTk.models.BaseModel.extend({
 	defaults: function() {
 		return {
@@ -784,7 +828,7 @@ OsciTk.models.Package = OsciTk.models.BaseModel.extend({
 		this.set('version', data['package'].version);
 		this.set('xmlns', data['package'].xmlns);
 
-		app.dispatcher.trigger('packageLoaded', this);
+		Backbone.trigger('packageLoaded', this);
 	},
 
 	sync: function(method, model, options) {
@@ -883,9 +927,9 @@ OsciTk.models.Section = OsciTk.models.BaseModel.extend({
 		// parse out footnotes and figures, make them available via event
 		var footnotes = content.find('section#footnotes');
 		var figures   = content.find('figure');
-		app.dispatcher.trigger('footnotesAvailable', footnotes);
-		app.dispatcher.trigger('figuresAvailable', figures);
-		app.dispatcher.trigger('sectionLoaded', this);
+		Backbone.trigger('footnotesAvailable', footnotes);
+		Backbone.trigger('figuresAvailable', figures);
+		Backbone.trigger('sectionLoaded', this);
 	},
 
 	removeAllPages : function() {
@@ -896,10 +940,10 @@ OsciTk.collections.Figures = OsciTk.collections.BaseCollection.extend({
 	model: OsciTk.models.Figure,
 
 	initialize: function() {
-		app.dispatcher.on('figuresAvailable', function(figures) {
+		this.listenTo(Backbone, 'figuresAvailable', function(figures) {
 			this.populateFromMarkup(figures);
-			app.dispatcher.trigger('figuresLoaded', this);
-		}, this);
+			Backbone.trigger('figuresLoaded', this);
+		});
 	},
 
 	comparator: function(figure) {
@@ -961,10 +1005,10 @@ OsciTk.collections.Footnotes = OsciTk.collections.BaseCollection.extend({
 	model: OsciTk.models.Footnote,
 
 	initialize: function() {
-		app.dispatcher.on('footnotesAvailable', function(footnotes) {
+		this.listenTo(Backbone, 'footnotesAvailable', function(footnotes) {
 			this.populateFromMarkup(footnotes);
-			app.dispatcher.trigger('footnotesLoaded', this);
-		}, this);
+			Backbone.trigger('footnotesLoaded', this);
+		});
 	},
 
 	populateFromMarkup: function(data) {
@@ -981,12 +1025,54 @@ OsciTk.collections.Footnotes = OsciTk.collections.BaseCollection.extend({
 		}, this);
 	}
 });
+OsciTk.collections.GlossaryTerms = OsciTk.collections.BaseCollection.extend({
+	model: OsciTk.models.GlossaryTerm,
+	initialize: function() {
+		this.listenTo(Backbone, 'packageLoaded', this.parseGlossary);
+	},
+	parseGlossary: function(packageModel) {
+		// retrieve glossary from manifest
+		var doc = _.find(packageModel.get('manifest').item, function(item) {
+			return item.id === 'glossary';
+		});
+
+		if (doc) {
+			// retrieve glossary doc
+			var data = xmlToJson(loadXMLDoc(doc.href));
+
+			if (!_.isUndefined(data.dl.td) && !_.isUndefined(data.dl.dd)) {
+				data.dl.td = objectToArray(data.dl.td);
+				data.dl.dd = objectToArray(data.dl.dd);
+
+				// add terms to collection
+				for (var i = 0, count = data.dl.td.length; i < count; i++) {
+					var item = {
+						id: data.dl.td[i]['data-tid'],
+						term: data.dl.td[i].dfn.value,
+						definition: data.dl.dd[i].value
+					};
+					this.add(item);
+				}
+			}
+		}
+		Backbone.trigger('osci.glossary.loaded', this);
+	},
+	filterByKeyword: function(keyword) {
+		var regExp = new RegExp('\\b' + keyword, "gi");
+		return _.filter(this.models, function(item) {
+			return item.get('term').search(regExp) !== -1;
+		});
+	},
+	comparator: function(item) {
+		return item.get('term');
+	}
+});
 OsciTk.collections.NavigationItems = OsciTk.collections.BaseCollection.extend({
 	model: OsciTk.models.NavigationItem,
 	currentNavigationItem: null,
 	initialize: function() {
 		// bind packageLoaded to build navigation model
-		app.dispatcher.on('packageLoaded', function(packageModel) {
+		this.listenTo(Backbone, 'packageLoaded', function(packageModel) {
 			var nav = _.find(packageModel.get('manifest').item, function(item){
 				return item.properties == 'nav';
 			});
@@ -1005,9 +1091,9 @@ OsciTk.collections.NavigationItems = OsciTk.collections.BaseCollection.extend({
 					}
 				}
 
-				app.dispatcher.trigger('navigationLoaded', this);
+				Backbone.trigger('navigationLoaded', this);
 			}
-		}, this);
+		});
 	},
 	parseChildren: function(items, parent, depth) {
 		if (_.isArray(items) === false) {
@@ -1061,12 +1147,12 @@ OsciTk.collections.NavigationItems = OsciTk.collections.BaseCollection.extend({
 OsciTk.collections.Notes = OsciTk.collections.BaseCollection.extend({
 	model: OsciTk.models.Note,
 	initialize: function() {
-		app.dispatcher.on('currentNavigationItemChanged', function(navItem) {
+		this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
 			//TODO: Refactor once Gray cleans up the NavigationItemModel
 			if (navItem.id) {
 				app.collections.notes.getNotesForSection(navItem.id);
 			}
-		}, this);
+		});
 	},
 	comparator: function(note) {
 		// parse out the content id number and use that for internal sorting
@@ -1092,7 +1178,7 @@ OsciTk.collections.Notes = OsciTk.collections.BaseCollection.extend({
 				if (data.success === true) {
 					// notes were returned, set to the notes collection
 					app.collections.notes.reset(data.notes);
-					app.dispatcher.trigger('notesLoaded', app.collections.notes);
+					Backbone.trigger('notesLoaded', app.collections.notes);
 				}
 			}
 		});
@@ -1154,7 +1240,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 		});
 
 		// bind sectionChanged
-		app.dispatcher.on('currentNavigationItemChanged', function(navItem) {
+		this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
 			if (navItem) {
 				// loading section content
 				app.models.section = new OsciTk.models.Section({
@@ -1166,7 +1252,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 				this.changeModel(app.models.section);
 				this.render();
 			}
-		}, this);
+		});
 
 	},
 	render: function() {
@@ -1178,9 +1264,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 		this.model.removeAllPages();
 		this.removeAllChildViews();
 
-		app.dispatcher.trigger("layoutStart");
+		Backbone.trigger("layoutStart");
 		this.renderContent();
-		app.dispatcher.trigger("layoutComplete", {numPages : this.model.get('pages').length});
+		Backbone.trigger("layoutComplete", {numPages : this.model.get('pages').length});
 		return this;
 	},
 	onClose: function() {
@@ -1265,10 +1351,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 OsciTk.views.figureTypeRegistry["default"] = "MultiColumnFigure";
 
 OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
-
 	tagName: 'figure',
 	template: OsciTk.templateManager.get('multi-column-figure'),
-
 	initialize: function() {
 		//set some defaults
 		this.layoutComplete = false;
@@ -1281,17 +1365,11 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 		this.$el.attr("id", this.model.get("id"));
 
 		//TODO: this does not scale
-		//app.dispatcher.on("pageChanged", this.toggleVisibility, this);
+		//this.listenTo(Backbone, 'pageChanged', this.toggleVisibility);
 	},
-
 	events: {
 		"click .figure_content" : "fullscreen"
 	},
-
-	onClose: function() {
-		app.dispatcher.off("pageChanged", this.toggleVisibility, this);
-	},
-
 	toggleVisibility: function(data) {
 		if (this.parent.options.pageNumber === data.page) {
 			if (!this.contentRendered) {
@@ -1303,7 +1381,6 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 			this.$el.css("visibility", "hidden");
 		}
 	},
-
 	render: function() {
 		//template the element
 		this.$el.html(this.template(this.model.toJSON()));
@@ -1325,19 +1402,16 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 
 		return this;
 	},
-
 	renderContent: function() {
 		this.$el.find(".figure_content").html(this.model.get('content'));
 
 		this.contentRendered = true;
 	},
-
 	fullscreen: function() {
 		$.fancybox.open({
 			content: this.model.get('content')
 		});
 	},
-
 	positionElement: function() {
 		var modelData = this.model.toJSON();
 		var dimensions = this.options.sectionDimensions;
@@ -1469,7 +1543,6 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 
 		return positioned;
 	},
-
 	sizeElement: function() {
 		var width, height;
 		var dimensions = this.options.sectionDimensions;
@@ -1680,13 +1753,16 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 		// Add the citation view to the AppView
 		app.views.citationView = new OsciTk.views.Citation();
+
+		// setup glossary tooltips
+		app.views.glossaryTooltipView = new OsciTk.views.GlossaryTooltip();
 	}
 });
 OsciTk.views.Citation = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('citation'),
 	initialize: function() {
 
-		app.dispatcher.on("toggleCiteDialog", function(data) {
+		this.listenTo(Backbone, "toggleCiteDialog", function(data) {
 			var citationView = this;
 			var contentId = data.contentId;
 			var content = $('#' + contentId);
@@ -1781,7 +1857,7 @@ OsciTk.views.Citation = OsciTk.views.BaseView.extend({
 			});
 
 
-		}, this);
+		});
 	}
 
 });
@@ -1790,9 +1866,9 @@ OsciTk.views.Figures = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('figures'),
 	initialize: function() {
 		// re-render this view when collection changes
-		app.collections.figures.on('add remove reset', function() {
+		this.listenTo(app.collections.figures, 'add remove reset', function() {
 			this.render();
-		}, this);
+		});
 	},
 	events: {
 		"click .figure-preview": "onFigurePreviewClicked",
@@ -1847,7 +1923,7 @@ OsciTk.views.Figures = OsciTk.views.BaseView.extend({
 		return false;
 	},
 	onViewInContextClicked: function(event_data) {
-		app.dispatcher.trigger('navigate', { identifier: $(event_data.target).parent('figure').attr('data-figure-id') });
+		Backbone.trigger('navigate', { identifier: $(event_data.target).parent('figure').attr('data-figure-id') });
 		app.views.toolbarView.contentClose();
 		return false;
 	},
@@ -1901,7 +1977,7 @@ OsciTk.views.Font = OsciTk.views.BaseView.extend({
 			"font-size": this.currentFontSize + "%"
 		});
 
-		app.dispatcher.trigger("windowResized");
+		Backbone.trigger("windowResized");
 	},
 	changeTheme: function(e) {
 		e.preventDefault();
@@ -1919,7 +1995,7 @@ OsciTk.views.Footnotes = OsciTk.views.BaseView.extend({
 	id: 'footnote',
 	initialize: function() {
 		// listen to layoutComplete event
-		app.dispatcher.on('layoutComplete', function(params) {
+		this.listenTo(Backbone, 'layoutComplete', function(params) {
 			// find all footnote links in the section content
 			var fnLinks = app.views.sectionView.$el.find('a.footnote-reference');
 			_.each(fnLinks, function(link) {
@@ -1936,14 +2012,99 @@ OsciTk.views.Footnotes = OsciTk.views.BaseView.extend({
 					});
 				}
 			});
-		}, this);
+		});
+	}
+});
+OsciTk.views.GlossaryTooltip = OsciTk.views.BaseView.extend({
+	initialize: function() {
+		this.listenTo(Backbone, 'layoutComplete', function() {
+			if (app.collections.glossaryTerms.length !== 0) {
+				$('.glossary-term').qtip({
+					content: {
+						title: ' ',
+						text: ' '
+					},
+					position: {
+						viewport: $(window)
+					},
+					style: {
+						classes: 'glossary-tooltip',
+						def: false,
+						width: app.views.sectionView.dimensions.columnWidth + 'px'
+					},
+					events: {
+						show: function(event, api) {
+							var tid = $(event.originalEvent.target).data('tid');
+							var item = app.collections.glossaryTerms.get(tid);
+							// set the tooltip contents
+							api.set('content.title.text', item.get('term'));
+							api.set('content.text', item.get('definition'));
+						}
+					}
+				});
+			}
+		});
+
+		this.listenTo(Backbone, 'routedToSection', function() {
+			$('.glossary-tooltip').not(event.target).qtip('destroy');
+		});
+	}
+});
+OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
+	id: 'glossary-view',
+	className: 'toolbar-item-view',
+	template: OsciTk.templateManager.get('glossary'),
+	events: {
+		'keyup #glossary-filter': 'filterTerms',
+		'click #glossary-filter-clear': 'clearFilter',
+		'click li': 'selectTerm'
+	},
+	render: function() {
+		this.$el.html(this.template({glossary: app.collections.glossaryTerms.models}));
+	},
+	filterTerms: function() {
+		var keyword = $('#glossary-filter').val();
+
+		if (!keyword.length) {
+			$('#glossary-filter-clear').hide();
+		} else {
+			$('#glossary-filter-clear').show();
+		}
+
+		var terms;
+		if (_.isEmpty(keyword)) {
+			terms = app.collections.glossaryTerms.models;
+		} else {
+			terms = app.collections.glossaryTerms.filterByKeyword(keyword);
+		}
+
+		// clear out list
+		$('#glossary-term-listing').empty();
+
+		// re-add terms to list
+		_.each(terms, function(item) {
+			var view = new Backbone.View();
+			var el = view.make('li', {'data-tid': item.get('id')}, item.get('term'));
+			$('#glossary-term-listing').append(el);
+		});
+	},
+	clearFilter: function() {
+		$('#glossary-filter').val('');
+		this.filterTerms();
+	},
+	selectTerm: function(e) {
+		var tid = $(e.target).data('tid');
+		var item = app.collections.glossaryTerms.get(tid);
+
+		this.$el.find('h4').html(item.get('term'));
+		this.$el.find('p').html(item.get('definition'));
 	}
 });
 OsciTk.views.InlineNotes = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('note-popup'),
 	initialize: function() {
 
-		app.dispatcher.on('toggleNoteDialog', function(data) {
+		this.listenTo(Backbone, 'toggleNoteDialog', function(data) {
 			var $this = this;
 			var contentId = data.contentId;
 			var content = $('#' + contentId);
@@ -2032,10 +2193,10 @@ OsciTk.views.InlineNotes = OsciTk.views.BaseView.extend({
 					}
 				});
 			}
-		}, this);
+		});
 
 		// place icon next to paragraphs with notes after layout is complete
-		app.dispatcher.on('notesLoaded', function(params) {
+		this.listenTo(Backbone, 'notesLoaded', function(params) {
 			_.each(app.collections.notes.models, function(n) {
 				// place a class on the paragraph identifier to indicate a note is present
 				var paragraphControls = app.views.sectionView.$el.find('.paragraph-controls[data-osci_content_id=' + n.get('content_id') + ']');
@@ -2043,7 +2204,7 @@ OsciTk.views.InlineNotes = OsciTk.views.BaseView.extend({
 					paragraphControls.addClass('notes-present');
 				}
 			});
-		}, this);
+		});
 	}
 });
 //Add this view to the figure type registry
@@ -2124,11 +2285,11 @@ OsciTk.views.MultiColumnFigureLayeredImage = OsciTk.views.MultiColumnFigure.exte
 
 OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 	initialize: function() {
+		this._super('initialize');
+		
 		this.columnTemplate = OsciTk.templateManager.get('multi-column-column');
 		this.visible = false;
 		this.paragraphControlsViews = [];
-
-		OsciTk.views.MultiColumnPage.__super__.initialize.call(this);
 	},
 
 	onClose: function() {
@@ -2440,9 +2601,11 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 	template: OsciTk.templateManager.get('multi-column-section'),
 
 	initialize: function() {
+		this._super('initialize');
+
 		this.options.pageView = 'MultiColumnPage';
 
-		app.dispatcher.on("windowResized", function() {
+		this.listenTo(Backbone, "windowResized", function() {
 			//get the identifier of the first element on the page to try and keep the reader in the same location
 			var identifier;
 			var page = this.getChildViewByIndex(app.views.navigationView.page - 1);
@@ -2457,9 +2620,9 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 			}
 
 			this.render();
-		}, this);
+		});
 
-		app.dispatcher.on("navigate", function(data) {
+		this.listenTo(Backbone, "navigate", function(data) {
 			var gotoPage = 1;
 			if (data.page) {
 				gotoPage = data.page;
@@ -2541,9 +2704,9 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 			});
 
 			//trigger event so other elements can update with current page
-			app.dispatcher.trigger("pageChanged", {page: gotoPage});
+			Backbone.trigger("pageChanged", {page: gotoPage});
 
-		}, this);
+		});
 
 		this.$el.addClass("oscitk_multi_column");
 
@@ -2558,8 +2721,6 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
 		//initialize dimensions object
 		this.dimensions = {};
-
-		OsciTk.views.MultiColumnSection.__super__.initialize.call(this);
 	},
 
 	isElementVisible: function(elem) {
@@ -2864,27 +3025,27 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		this.page = null;
 
 		// when section is loaded, render the navigation control
-		app.dispatcher.on('layoutComplete', function(section) {
+		this.listenTo(Backbone, 'layoutComplete', function(section) {
 			if (this.identifier) {
-				app.dispatcher.trigger("navigate", {identifier: this.identifier});
+				Backbone.trigger("navigate", {identifier: this.identifier});
 				this.identifier = null;
 			}
 			else {
-				app.dispatcher.trigger("navigate", {page: 1});
+				Backbone.trigger("navigate", {page: 1});
 			}
 			this.numPages = section.numPages;
 			this.render();
-		}, this);
+		});
 
-		app.dispatcher.on('pageChanged', function(info) {
+		this.listenTo(Backbone, 'pageChanged', function(info) {
 			// clear old identifier in url
 			// app.router.navigate("section/" + previous.id + "/end");
 			this.page = info.page;
 			this.update(info.page);
-		}, this);
+		});
 
 		// bind routedTo
-		app.dispatcher.on('routedToSection', function(params) {
+		this.listenTo(Backbone, 'routedToSection', function(params) {
 			this.identifier = params.identifier;
 			if (!params.section_id) {
 				// go to first section
@@ -2901,7 +3062,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			title = (title) ? title + " | ": "";
 			title += this.getCurrentNavigationItem().get('title');
 			document.title = title;
-		}, this);
+		});
 
 		// Respond to keyboard events
 		$(document).keydown(function(event) {
@@ -2916,7 +3077,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 							app.router.navigate("section/" + next.id, {trigger: true});
 						}
 					} else {
-						app.dispatcher.trigger('navigate', {page: p});
+						Backbone.trigger('navigate', {page: p});
 					}
 					break;
 				case 37:
@@ -2928,7 +3089,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 							app.router.navigate("section/" + previous.id + "/end", {trigger: true});
 						}
 					} else {
-						app.dispatcher.trigger('navigate', {page: p});
+						Backbone.trigger('navigate', {page: p});
 					}
 					break;
 			}
@@ -2958,7 +3119,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// Navigate to the appropriate page when mousedown happens in the pager
 		$('.pager').mousedown(function(data) {
 			var p = parseInt(app.views.navigationView.numPages * data.offsetX / $(this).width(), 10);
-			app.dispatcher.trigger('navigate', { page: p+1 });
+			Backbone.trigger('navigate', { page: p+1 });
 		});
 
 		// Do other things that can happen whenever the page changes
@@ -2977,7 +3138,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		} else {
 			this.currentNavigationItem = app.collections.navigationItems.first();
 		}
-		app.dispatcher.trigger('currentNavigationItemChanged', this.currentNavigationItem);
+		Backbone.trigger('currentNavigationItemChanged', this.currentNavigationItem);
 	},
 
 	update: function(page) {
@@ -3009,7 +3170,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			this.$el.find('.prev-page .label').html('Previous');
 			this.$el.find('.prev-page').removeClass('inactive').click(function () {
 				app.router.navigate("section/" + $this.currentNavigationItem.id);
-				app.dispatcher.trigger('navigate', {page:(page-1)});
+				Backbone.trigger('navigate', {page:(page-1)});
 			});
 		}
 
@@ -3030,7 +3191,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		} else if (this.numPages > 1) {
 			this.$el.find('.next-page .label').html('Next');
 			this.$el.find('.next-page').removeClass('inactive').click(function () {
-				app.dispatcher.trigger('navigate', { page: page+1 });
+				Backbone.trigger('navigate', { page: page+1 });
 			});
 		}
 	}
@@ -3040,12 +3201,12 @@ OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('notes'),
 	initialize: function() {
 		// re-render this view when collection changes
-		app.collections.notes.on('add remove change', function() {
+		this.listenTo(app.collections.notes, 'add remove change', function() {
 			this.render();
-		}, this);
+		});
 
 		// catch the page changed event and highlight any notes in list that are on current page
-		app.dispatcher.on('pageChanged notesLoaded', function(data) {
+		this.listenTo(Backbone, 'pageChanged notesLoaded', function(data) {
 			var page;
 			if (typeof(data.page) === 'undefined') {
 				page = app.views.navigationView.page;
@@ -3064,7 +3225,7 @@ OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 				}
 			});
 			this.render();
-		}, this);
+		});
 	},
 	events: {
 		"click .noteLink": "noteLinkClick"
@@ -3074,8 +3235,8 @@ OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 		var target = $(e.target);
 		var content_id = target.attr('data-content_id');
 		if (content_id) {
-			app.dispatcher.trigger('navigate', {identifier: content_id});
-			app.dispatcher.trigger('toggleNoteDialog', { contentId: content_id });
+			Backbone.trigger('navigate', {identifier: content_id});
+			Backbone.trigger('toggleNoteDialog', { contentId: content_id });
 			$('#'+content_id).click();
 			app.views.toolbarView.contentClose();
 		}
@@ -3162,7 +3323,7 @@ OsciTk.views.ParagraphControlsView = OsciTk.views.BaseView.extend({
 
 		this.$el.on('click', 'a', {content: this.options.content}, function(e) {
 			e.preventDefault();
-			app.dispatcher.trigger(
+			Backbone.trigger(
 				$(this).data('event'),
 				{
 					contentId: $(e.data.content).attr('data-osci_content_id')
@@ -3171,28 +3332,6 @@ OsciTk.views.ParagraphControlsView = OsciTk.views.BaseView.extend({
 		});
 
 		return this;
-	}
-});
-OsciTk.views.SearchResults = OsciTk.views.BaseView.extend({
-	id: 'search-results-container',
-	template: OsciTk.templateManager.get('search-results'),
-	initialize: function(response) {
-		console.log(response);
-		this.searchResults = new OsciTk.collections.SearchResults({docs: response.docs});
-		this.render();
-	},
-	render: function() {
-		this.$el.html(this.template());
-	}
-});
-OsciTk.views.SearchResult = OsciTk.views.BaseView.extend({
-	id: 'search-results-container',
-	template: OsciTk.templateManager.get('search-result'),
-	initialize: function(results) {
-		this.render();
-	},
-	render: function() {
-		this.$el.html(this.template());
 	}
 });
 OsciTk.views.Search = OsciTk.views.BaseView.extend({
@@ -3205,7 +3344,7 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 			page: 0,
 			keyword: null,
 			filters: [],
-			sort: ''
+			sort: 'score'
 		};
 
 		// define results object
@@ -3221,6 +3360,7 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 	},
 	events: {
 		'submit #search-form': 'submitSearch',
+		'click #search-submit': 'submitSearch',
 		'click .search-result': 'gotoResult',
 		'click .facet': 'addFacet',
 		'click .filter': 'addFilter',
@@ -3241,6 +3381,11 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 
 		var newContainerHeight = containerSize - searchHeaderSize - resultsHeaderSize;
 		this.$el.find('#search-results-container').height(newContainerHeight);
+	},
+	prepareResults: function() {
+		this.results = _.groupBy(this.response.docs.models, function(doc) {
+			return doc.get('ss_section_id');
+		});
 	},
 	search: function() {
 		var that = this;
@@ -3282,16 +3427,12 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 				// handle container resizing
 				app.views.toolbarView.contentOpen();
 				that.resizeResultsContainer();
-				// set scroll position to last known
+
+				Backbone.trigger('osci.search.finished');
 			},
 			error: function() {
 				// error handling
 			}
-		});
-	},
-	prepareResults: function() {
-		this.results = _.groupBy(this.response.docs.models, function(doc) {
-			return doc.get('ss_section_id');
 		});
 	},
 	gotoResult: function(e) {
@@ -3316,7 +3457,7 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 			this.search();
 		}
 
-		$(e.currentTarget).addClass('active');
+		this.$el.find(e.currentTarget).addClass('active');
 	},
 	addFilter: function(e) {
 		e.preventDefault();
@@ -3370,12 +3511,12 @@ OsciTk.views.Title = OsciTk.views.BaseView.extend({
 	className: 'title-view',
 	template: OsciTk.templateManager.get('title'),
 	initialize: function() {
-		app.dispatcher.on('packageLoaded', function(packageModel) {
+		this.listenTo(Backbone, 'packageLoaded', function(packageModel) {
 			var title = packageModel.getTitle();
 			if (title) {
 				this.$el.find("#publication-title").text(title);
 			}
-		}, this);
+		});
 
 		this.render();
 	},
@@ -3386,7 +3527,7 @@ OsciTk.views.Title = OsciTk.views.BaseView.extend({
 	events: {
 		"click #publication-title": function(e) {
 			e.preventDefault();
-			app.dispatcher.trigger('navigate', {identifier: "start"});
+			Backbone.trigger('navigate', {identifier: "start"});
 		}
 	}
 });
@@ -3399,9 +3540,9 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 	initialize: function() {
 		this.parent = this.options.parent;
 
-		app.dispatcher.on("currentNavigationItemChanged", function() {
+		this.listenTo(Backbone, "currentNavigationItemChanged", function() {
 			this.render();
-		}, this);
+		});
 	},
 	render: function() {
 		this.$el.html(this.template({
@@ -3412,7 +3553,7 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 		event.preventDefault();
 
 		var sectionId = $(event.currentTarget).attr('data-section-id');
-		// app.dispatcher.trigger('navigateToSection', sectionId);
+		// Backbone.trigger('navigateToSection', sectionId);
 		// TODO: don't really want to address the appRouter directly
 		app.router.navigate("section/" + sectionId, {trigger: true});
 		app.views.toolbarView.contentClose();
@@ -3478,13 +3619,13 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 		this.activeToolbarItemViewChanged = false;
 		this.render();
 
-		app.dispatcher.on("packageLoaded", function(packageModel) {
+		this.listenTo(Backbone, "packageLoaded", function(packageModel) {
 			//Add the publication title to the Toolbar
 			var title = packageModel.getTitle();
 			if (title) {
 				this.$el.find("#toolbar-title").text(title);
 			}
-		}, this);
+		});
 
 		//Close the toolbar if a user clicks outside of it
 		$(window).on("click", {view: this}, function(e) {
@@ -5055,7 +5196,6 @@ function liMouseup(e) {
 window.addEventListener("mousemove", liMousemove, false);
 window.addEventListener("mouseup", liMouseup, false);
 app = {
-	dispatcher : undefined,
 	router : undefined,
 	config : undefined,
 	views : {},
@@ -5063,7 +5203,6 @@ app = {
 	collections : {},
 
 	bootstrap : function(config) {
-		this.dispatcher = _.extend({}, Backbone.Events);
 		this.config = new OsciTk.models.Config(config);
 		this.router = new OsciTk.router();
 		this.account = new OsciTk.models.Account();
@@ -5071,6 +5210,7 @@ app = {
 		this.collections.figures = new OsciTk.collections.Figures();
 		this.collections.footnotes = new OsciTk.collections.Footnotes();
 		this.collections.navigationItems = new OsciTk.collections.NavigationItems();
+		this.collections.glossaryTerms = new OsciTk.collections.GlossaryTerms();
 		
 		//setup window resizing, to trigger an event
 		window.onresize = function() {
@@ -5079,7 +5219,7 @@ app = {
 			}
 
 			var onWindowResize = function(){
-				app.dispatcher.trigger("windowResized");
+				Backbone.trigger('windowResized');
 			};
 
 			window.resizeTimer = setTimeout(onWindowResize, 200);
@@ -5096,9 +5236,9 @@ app = {
 	}
 };
 
-app.zotero = {
+app.zotero = _.extend({
     init: function() {
-        app.dispatcher.on('packageLoaded', function(model) {
+        this.listenTo(Backbone, 'packageLoaded', function(model) {
             // Get date
             var d = new Date(model.get('dc:date'));
             d = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
@@ -5126,6 +5266,6 @@ app.zotero = {
             var ev = document.createEvent('HTMLEvents');
             ev.initEvent('ZoteroItemUpdated', true, true);
             document.dispatchEvent(ev);
-        }, this);
+        });
     }
-};
+}, Backbone.Events);

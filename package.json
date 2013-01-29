@@ -1,6 +1,6 @@
 {
-  "name": "OSCI Toolkit Frontend",
-  "version": "0.1",
+  "name": "OSCI_Toolkit_Frontend",
+  "version": "0.1.0",
   "devDependencies": {
     "grunt": "~0.4.0",
     "grunt-css": "~0.3.2",

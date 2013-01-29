@@ -45,8 +45,9 @@ module.exports = function(grunt) {
 				src: [
 					'js/external/json2.js',
 					'js/external/jquery-1.7.1.js',
-					'js/external/underscore-1.3.3.js',
+					'js/external/underscore-1.4.3.js',
 					'js/external/backbone.js',
+					'js/external/backbone-super.js',
 					'js/external/jquery.qtip.js',
 					'js/external/fancybox/jquery.fancybox.js',
 					'js/external/polymaps.min.js',

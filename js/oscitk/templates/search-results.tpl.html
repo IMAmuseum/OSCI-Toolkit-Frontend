@@ -7,12 +7,12 @@
 	<div id="results-sort">
 		Sort By:
 		<ul>
-			<li><a href="#" class="sort-button" data-sort="score">Relevance</a></li>
-			<li><a href="#" class="sort-button" data-sort="content">Type</a></li>
+			<li><a href="#" class="sort-button <%= (query.sort === 'score') ? 'active' : '' %>" data-sort="score">Relevance</a></li>
+			<li><a href="#" class="sort-button <%= (query.sort === 'content') ? 'active' : '' %>" data-sort="content">Type</a></li>
 		</ul>
 	</div>
 </div>
-<div id="search-results-container">
+<div id="search-results-column-wrapper">
 	<% if (response.numFound !== 0) { %>
 	<div id="search-results">
 		<div id="search-results-content">
@@ -25,7 +25,13 @@
 					<div class="search-result" data-id="<%= result.get('id') %>">
 						<div class="result-content">
 							<div class="result-type <%= result.get('bundle') %>"><%= result.get('bundle') %></div>
-							<div class="result-body"><%= result.get('teaser') %></div>
+							<div class="result-body">
+							<% if (_.isEmpty(result.get('teaser'))) { %>
+								&nbsp;
+							<% } else { %>
+							<%= result.get('teaser') %>
+							<% } %>
+							</div>
 						</div>
 					</div>
 					<% }); %>
@@ -38,11 +44,16 @@
 	<% } %>
 	<div id="filter-by-section">
 		<div class="section-title">Filter by section</div>
-		<ul>
-			<% _.each(response.facets, function(facet) { %>
-				<li><a href="#" data-filter="section:<%= facet.section_id %>" class="facet"><%= facet.section %></a> (<%= facet.count %>)</li>
-			<% }); %>
-		</ul>
+		<div id="filter-sections-container">
+			<ul id="filter-sections">
+				<% _.each(response.facets, function(facet) { %>
+					<li class="filter-section">
+						<a href="#" data-filter="section:<%= facet.section_id %>" class="facet"><%= facet.section %></a> 
+						(<%= facet.count %>)
+					</li>
+				<% }); %>
+			</ul>
+		</div>
 	</div>
 </div>
 <% } %>

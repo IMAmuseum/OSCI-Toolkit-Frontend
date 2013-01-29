@@ -7,7 +7,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 		});
 
 		// bind sectionChanged
-		app.dispatcher.on('currentNavigationItemChanged', function(navItem) {
+		this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
 			if (navItem) {
 				// loading section content
 				app.models.section = new OsciTk.models.Section({
@@ -19,7 +19,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 				this.changeModel(app.models.section);
 				this.render();
 			}
-		}, this);
+		});
 
 	},
 	render: function() {
@@ -31,9 +31,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 		this.model.removeAllPages();
 		this.removeAllChildViews();
 
-		app.dispatcher.trigger("layoutStart");
+		Backbone.trigger("layoutStart");
 		this.renderContent();
-		app.dispatcher.trigger("layoutComplete", {numPages : this.model.get('pages').length});
+		Backbone.trigger("layoutComplete", {numPages : this.model.get('pages').length});
 		return this;
 	},
 	onClose: function() {

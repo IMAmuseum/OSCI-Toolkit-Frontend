@@ -2,10 +2,8 @@
 OsciTk.views.figureTypeRegistry["default"] = "MultiColumnFigure";
 
 OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
-
 	tagName: 'figure',
 	template: OsciTk.templateManager.get('multi-column-figure'),
-
 	initialize: function() {
 		//set some defaults
 		this.layoutComplete = false;
@@ -18,17 +16,11 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 		this.$el.attr("id", this.model.get("id"));
 
 		//TODO: this does not scale
-		//app.dispatcher.on("pageChanged", this.toggleVisibility, this);
+		//this.listenTo(Backbone, 'pageChanged', this.toggleVisibility);
 	},
-
 	events: {
 		"click .figure_content" : "fullscreen"
 	},
-
-	onClose: function() {
-		app.dispatcher.off("pageChanged", this.toggleVisibility, this);
-	},
-
 	toggleVisibility: function(data) {
 		if (this.parent.options.pageNumber === data.page) {
 			if (!this.contentRendered) {
@@ -40,7 +32,6 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 			this.$el.css("visibility", "hidden");
 		}
 	},
-
 	render: function() {
 		//template the element
 		this.$el.html(this.template(this.model.toJSON()));
@@ -62,19 +53,16 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 
 		return this;
 	},
-
 	renderContent: function() {
 		this.$el.find(".figure_content").html(this.model.get('content'));
 
 		this.contentRendered = true;
 	},
-
 	fullscreen: function() {
 		$.fancybox.open({
 			content: this.model.get('content')
 		});
 	},
-
 	positionElement: function() {
 		var modelData = this.model.toJSON();
 		var dimensions = this.options.sectionDimensions;
@@ -206,7 +194,6 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 
 		return positioned;
 	},
-
 	sizeElement: function() {
 		var width, height;
 		var dimensions = this.options.sectionDimensions;

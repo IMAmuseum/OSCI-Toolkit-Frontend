@@ -2,7 +2,7 @@ OsciTk.views.InlineNotes = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('note-popup'),
 	initialize: function() {
 
-		app.dispatcher.on('toggleNoteDialog', function(data) {
+		this.listenTo(Backbone, 'toggleNoteDialog', function(data) {
 			var $this = this;
 			var contentId = data.contentId;
 			var content = $('#' + contentId);
@@ -91,10 +91,10 @@ OsciTk.views.InlineNotes = OsciTk.views.BaseView.extend({
 					}
 				});
 			}
-		}, this);
+		});
 
 		// place icon next to paragraphs with notes after layout is complete
-		app.dispatcher.on('notesLoaded', function(params) {
+		this.listenTo(Backbone, 'notesLoaded', function(params) {
 			_.each(app.collections.notes.models, function(n) {
 				// place a class on the paragraph identifier to indicate a note is present
 				var paragraphControls = app.views.sectionView.$el.find('.paragraph-controls[data-osci_content_id=' + n.get('content_id') + ']');
@@ -102,6 +102,6 @@ OsciTk.views.InlineNotes = OsciTk.views.BaseView.extend({
 					paragraphControls.addClass('notes-present');
 				}
 			});
-		}, this);
+		});
 	}
 });

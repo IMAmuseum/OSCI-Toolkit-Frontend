@@ -9,27 +9,27 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		this.page = null;
 
 		// when section is loaded, render the navigation control
-		app.dispatcher.on('layoutComplete', function(section) {
+		this.listenTo(Backbone, 'layoutComplete', function(section) {
 			if (this.identifier) {
-				app.dispatcher.trigger("navigate", {identifier: this.identifier});
+				Backbone.trigger("navigate", {identifier: this.identifier});
 				this.identifier = null;
 			}
 			else {
-				app.dispatcher.trigger("navigate", {page: 1});
+				Backbone.trigger("navigate", {page: 1});
 			}
 			this.numPages = section.numPages;
 			this.render();
-		}, this);
+		});
 
-		app.dispatcher.on('pageChanged', function(info) {
+		this.listenTo(Backbone, 'pageChanged', function(info) {
 			// clear old identifier in url
 			// app.router.navigate("section/" + previous.id + "/end");
 			this.page = info.page;
 			this.update(info.page);
-		}, this);
+		});
 
 		// bind routedTo
-		app.dispatcher.on('routedToSection', function(params) {
+		this.listenTo(Backbone, 'routedToSection', function(params) {
 			this.identifier = params.identifier;
 			if (!params.section_id) {
 				// go to first section
@@ -46,7 +46,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			title = (title) ? title + " | ": "";
 			title += this.getCurrentNavigationItem().get('title');
 			document.title = title;
-		}, this);
+		});
 
 		// Respond to keyboard events
 		$(document).keydown(function(event) {
@@ -61,7 +61,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 							app.router.navigate("section/" + next.id, {trigger: true});
 						}
 					} else {
-						app.dispatcher.trigger('navigate', {page: p});
+						Backbone.trigger('navigate', {page: p});
 					}
 					break;
 				case 37:
@@ -73,7 +73,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 							app.router.navigate("section/" + previous.id + "/end", {trigger: true});
 						}
 					} else {
-						app.dispatcher.trigger('navigate', {page: p});
+						Backbone.trigger('navigate', {page: p});
 					}
 					break;
 			}
@@ -103,7 +103,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// Navigate to the appropriate page when mousedown happens in the pager
 		$('.pager').mousedown(function(data) {
 			var p = parseInt(app.views.navigationView.numPages * data.offsetX / $(this).width(), 10);
-			app.dispatcher.trigger('navigate', { page: p+1 });
+			Backbone.trigger('navigate', { page: p+1 });
 		});
 
 		// Do other things that can happen whenever the page changes
@@ -122,7 +122,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		} else {
 			this.currentNavigationItem = app.collections.navigationItems.first();
 		}
-		app.dispatcher.trigger('currentNavigationItemChanged', this.currentNavigationItem);
+		Backbone.trigger('currentNavigationItemChanged', this.currentNavigationItem);
 	},
 
 	update: function(page) {
@@ -154,7 +154,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			this.$el.find('.prev-page .label').html('Previous');
 			this.$el.find('.prev-page').removeClass('inactive').click(function () {
 				app.router.navigate("section/" + $this.currentNavigationItem.id);
-				app.dispatcher.trigger('navigate', {page:(page-1)});
+				Backbone.trigger('navigate', {page:(page-1)});
 			});
 		}
 
@@ -175,7 +175,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		} else if (this.numPages > 1) {
 			this.$el.find('.next-page .label').html('Next');
 			this.$el.find('.next-page').removeClass('inactive').click(function () {
-				app.dispatcher.trigger('navigate', { page: page+1 });
+				Backbone.trigger('navigate', { page: page+1 });
 			});
 		}
 	}

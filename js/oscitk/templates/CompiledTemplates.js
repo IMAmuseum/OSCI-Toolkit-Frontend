@@ -119,6 +119,27 @@ __p+='<h3>Reading Settings</h3>\n<div class="font-control">\n\t<h3>Font Size</h3
 }
 return __p;
 }
+OsciTk.templates['glossary'] = function(obj){
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
+with(obj||{}){
+__p+='<h3>Glossary</h3>\n<div id="glossary-container">\n\t<div id="glossary-sidebar">\n\t\t<input type="text" id="glossary-filter" placeholder="Search Glossary" />\n\t\t<div id="glossary-filter-search-icon"></div>\n\t\t<div id="glossary-filter-clear"></div>\n\t\t';
+ if (_.isEmpty(glossary)) { 
+__p+='\n\t\t\tNo terms found.\n\t\t';
+ } else { 
+__p+='\n\t\t<ul id="glossary-term-listing">\n\t\t';
+ _.each(glossary, function(item) { 
+__p+='\n\t\t\t<li data-tid="'+
+((__t=( item.get('id') ))==null?'':__t)+
+'">'+
+((__t=( item.get('term') ))==null?'':__t)+
+'</li>\n\t\t';
+ }); 
+__p+='\n\t\t</ul>\n\t\t';
+ } 
+__p+='\n\t</div>\n\t<div id="glossary-content">\n\t\t<h4></h4>\n\t\t<p></p>\n\t</div>\n</div>';
+}
+return __p;
+}
 OsciTk.templates['multi-column-column'] = function(obj){
 var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
@@ -207,7 +228,11 @@ __p+='\n<div id="search-results-header">\n\t<div id="search-summary">\n\t\tResul
 ((__t=( query.keyword ))==null?'':__t)+
 '"</span> ('+
 ((__t=( response.numFound ))==null?'':__t)+
-')\n\t\t<a id="reset-search" href="#">RESET</a>\n\t</div>\n\t<div id="results-sort">\n\t\tSort By:\n\t\t<ul>\n\t\t\t<li><a href="#" class="sort-button" data-sort="score">Relevance</a></li>\n\t\t\t<li><a href="#" class="sort-button" data-sort="content">Type</a></li>\n\t\t</ul>\n\t</div>\n</div>\n<div id="search-results-container">\n\t';
+')\n\t\t<a id="reset-search" href="#">RESET</a>\n\t</div>\n\t<div id="results-sort">\n\t\tSort By:\n\t\t<ul>\n\t\t\t<li><a href="#" class="sort-button '+
+((__t=( (query.sort === 'score') ? 'active' : '' ))==null?'':__t)+
+'" data-sort="score">Relevance</a></li>\n\t\t\t<li><a href="#" class="sort-button '+
+((__t=( (query.sort === 'content') ? 'active' : '' ))==null?'':__t)+
+'" data-sort="content">Type</a></li>\n\t\t</ul>\n\t</div>\n</div>\n<div id="search-results-container">\n\t';
  if (response.numFound !== 0) { 
 __p+='\n\t<div id="search-results">\n\t\t<div id="search-results-content">\n\t\t\t';
  _.each(results, function(group) { var first = true;
@@ -225,9 +250,15 @@ __p+='\n\t\t\t\t\t<div class="search-result" data-id="'+
 ((__t=( result.get('bundle') ))==null?'':__t)+
 '">'+
 ((__t=( result.get('bundle') ))==null?'':__t)+
-'</div>\n\t\t\t\t\t\t\t<div class="result-body">'+
+'</div>\n\t\t\t\t\t\t\t<div class="result-body">\n\t\t\t\t\t\t\t';
+ if (_.isEmpty(result.get('teaser'))) { 
+__p+='\n\t\t\t\t\t\t\t\t&nbsp;\n\t\t\t\t\t\t\t';
+ } else { 
+__p+='\n\t\t\t\t\t\t\t'+
 ((__t=( result.get('teaser') ))==null?'':__t)+
-'</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t';
+'\n\t\t\t\t\t\t\t';
+ } 
+__p+='\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t';
  }); 
 __p+='\n\t\t\t\t</div>\n\t\t\t';
  }); 
@@ -235,17 +266,17 @@ __p+='\n\t\t</div>\n\t</div>\n\t';
  } else { 
 __p+='\n\tNo results found.\n\t';
  } 
-__p+='\n\t<div id="filter-by-section">\n\t\t<div class="section-title">Filter by section</div>\n\t\t<ul>\n\t\t\t';
+__p+='\n\t<div id="filter-by-section">\n\t\t<div class="section-title">Filter by section</div>\n\t\t<div id="section-list-container">\n\t\t\t<ul>\n\t\t\t\t';
  _.each(response.facets, function(facet) { 
-__p+='\n\t\t\t\t<li><a href="#" data-filter="section:'+
+__p+='\n\t\t\t\t\t<li>\n\t\t\t\t\t\t<a href="#" data-filter="section:'+
 ((__t=( facet.section_id ))==null?'':__t)+
 '" class="facet">'+
 ((__t=( facet.section ))==null?'':__t)+
-'</a> ('+
+'</a> \n\t\t\t\t\t\t('+
 ((__t=( facet.count ))==null?'':__t)+
-')</li>\n\t\t\t';
+')\n\t\t\t\t\t</li>\n\t\t\t\t';
  }); 
-__p+='\n\t\t</ul>\n\t</div>\n</div>\n';
+__p+='\n\t\t\t</ul>\n\t\t<div style="clear:both;">&nbsp;</div>\n\t</div>\n\t</div>\n</div>\n';
  } 
 __p+='';
 }
@@ -254,9 +285,9 @@ return __p;
 OsciTk.templates['search'] = function(obj){
 var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
-__p+='<div id="search-header">\n\t<h3>Search</h3>\n\t<div id="search-box">\n\t\t<form id="search-form" name="search-form" method="POST">\n\t\t\t<input type="text" name="keyword" id="search-keyword" placeholder="search" value="'+
+__p+='<div id="search-header">\n\t<h3>Search</h3>\n\t<div id="search-box">\n\t\t<form id="search-form" name="search-form" method="POST">\n\t\t\t<input type="text" name="keyword" id="search-keyword" placeholder="Search" value="'+
 ((__t=( query.keyword ))==null?'':__t)+
-'"/>\n\t\t\t<input type="hidden" name="page" id="search-page" />\n\t\t</form>\n\t</div>\n\t<div id="search-filters-container">\n\t\t<div class="label">Filter |</div>\n\t\t<ul class="search-filters">\n\t\t\t<li class="filter" data-filter="type:content" id="search-filter-content"><div class="dot">&nbsp;</div><div class="label">Content</div></li>\n\t\t\t<li class="filter" data-filter="type:notes" id="search-filter-notes"><div class="dot">&nbsp;</div><div class="label">My Notes</div></li>\n\t\t\t<li class="filter" data-filter="type:footnotes" id="search-filter-footnotes"><div class="dot">&nbsp;</div><div class="label">Footnotes</div></li>\n\t\t\t<li class="filter" data-filter="type:figures" id="search-filter-figures"><div class="dot">&nbsp;</div><div class="label">Figures</div></li>\n\t\t</ul>\n\t\t<div class="search-filter-select">\n\t\t<select class="search-filters">\n\t\t\t<option>Select a filter</option>\n\t\t\t<option value="content">Content</option>\n\t\t\t<option value="notes">My Notes</option>\n\t\t\t<option value="footnotes">Footnotes</option>\n\t\t\t<option value="figures">Figures</option>\n\t\t</select>\n\t</div>\n\t</div>\n</div>\n<div id="search-results-wrapper"></div>';
+'"/>\n\t\t\t<div id="search-submit"></div>\n\t\t\t<input type="hidden" name="page" id="search-page" />\n\t\t</form>\n\t</div>\n\t<div id="search-filters-container">\n\t\t<div class="label">Filter |</div>\n\t\t<ul class="search-filters">\n\t\t\t<li class="filter" data-filter="type:content" id="search-filter-content"><div class="dot">&nbsp;</div><div class="label">Content</div></li>\n\t\t\t<li class="filter" data-filter="type:notes" id="search-filter-notes"><div class="dot">&nbsp;</div><div class="label">My Notes</div></li>\n\t\t\t<li class="filter" data-filter="type:footnotes" id="search-filter-footnotes"><div class="dot">&nbsp;</div><div class="label">Footnotes</div></li>\n\t\t\t<li class="filter" data-filter="type:figures" id="search-filter-figures"><div class="dot">&nbsp;</div><div class="label">Figures</div></li>\n\t\t</ul>\n\t\t<div class="search-filter-select">\n\t\t<select class="search-filters">\n\t\t\t<option>Select a filter</option>\n\t\t\t<option value="content">Content</option>\n\t\t\t<option value="notes">My Notes</option>\n\t\t\t<option value="footnotes">Footnotes</option>\n\t\t\t<option value="figures">Figures</option>\n\t\t</select>\n\t</div>\n\t</div>\n</div>\n<div id="search-results-wrapper"></div>';
 }
 return __p;
 }

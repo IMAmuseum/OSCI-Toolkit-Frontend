@@ -3,12 +3,12 @@ OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('notes'),
 	initialize: function() {
 		// re-render this view when collection changes
-		app.collections.notes.on('add remove change', function() {
+		this.listenTo(app.collections.notes, 'add remove change', function() {
 			this.render();
-		}, this);
+		});
 
 		// catch the page changed event and highlight any notes in list that are on current page
-		app.dispatcher.on('pageChanged notesLoaded', function(data) {
+		this.listenTo(Backbone, 'pageChanged notesLoaded', function(data) {
 			var page;
 			if (typeof(data.page) === 'undefined') {
 				page = app.views.navigationView.page;
@@ -27,7 +27,7 @@ OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 				}
 			});
 			this.render();
-		}, this);
+		});
 	},
 	events: {
 		"click .noteLink": "noteLinkClick"
@@ -37,8 +37,8 @@ OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 		var target = $(e.target);
 		var content_id = target.attr('data-content_id');
 		if (content_id) {
-			app.dispatcher.trigger('navigate', {identifier: content_id});
-			app.dispatcher.trigger('toggleNoteDialog', { contentId: content_id });
+			Backbone.trigger('navigate', {identifier: content_id});
+			Backbone.trigger('toggleNoteDialog', { contentId: content_id });
 			$('#'+content_id).click();
 			app.views.toolbarView.contentClose();
 		}

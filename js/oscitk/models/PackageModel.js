@@ -38,7 +38,7 @@ OsciTk.models.Package = OsciTk.models.BaseModel.extend({
 		this.set('version', data['package'].version);
 		this.set('xmlns', data['package'].xmlns);
 
-		app.dispatcher.trigger('packageLoaded', this);
+		Backbone.trigger('packageLoaded', this);
 	},
 
 	sync: function(method, model, options) {

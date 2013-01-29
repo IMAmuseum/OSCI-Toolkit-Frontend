@@ -31,8 +31,13 @@
 	width: 100%;
 	padding: 20px 20px;
 	overflow: hidden;
+	position: relative;
 	/*background: url('../img/bg-fold-shadow.png') center 98% no-repeat;*/
 
+}
+#toolbar-content .toolbar-item-view {
+	height: 100%;
+	overflow: hidden;
 }
 #toolbar-content:after {
 	content: "";
@@ -94,8 +99,17 @@
 	transition: all .5s ease;
 }
 #toolbar h2 {
-	margin: 6px 0 6px 0;
-	border-bottom: 5px solid #8C8C8C;
+	margin: 0;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+	height: 40px;
+	line-height: 40px;
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	-o-transition: all .5s ease;
+	-ms-transition: all .5s ease;
+	transition: all .5s ease;
 }
 #toolbar h3 {
 	color: #444;
@@ -139,6 +153,9 @@ div.Account-toolbar-item {
 
 	background: url('../img/icon-user.png') center center no-repeat;
 }
+div.Glossary-toolbar-item {
+	background: url('../img/icon-glossary.png') center center no-repeat;	
+}
 div.Search-toolbar-item {
 
 	background: url('../img/icon-search.png') center center no-repeat;
@@ -157,7 +174,8 @@ div.Toc-toolbar-item,
 div.Account-toolbar-item,
 div.Search-toolbar-item,
 div.Font-toolbar-item,
-div.Figures-toolbar-item {
+div.Figures-toolbar-item,
+div.Glossary-toolbar-item {
 	opacity:.7;
 }
 div.Notes-toolbar-item:hover,
@@ -165,7 +183,8 @@ div.Toc-toolbar-item:hover,
 div.Account-toolbar-item:hover,
 div.Search-toolbar-item:hover,
 div.Font-toolbar-item:hover,
-div.Figures-toolbar-item:hover {
+div.Figures-toolbar-item:hover
+div.Glossary-toolbar-item:hover {
 	opacity:1;
 }
 
@@ -538,15 +557,12 @@ background-image: -webkit-gradient(
 
 /* When less than 600px... */
 @media (max-width:600px) {
-
-	/*
-	div.Figures-toolbar-item,
-	div.Notes-toolbar-item {
-		display: none;
-	}
-	*/
 	#toolbar {
-		top: -57px;
+		top: -60px;
+	}
+
+	#toolbar h2 {
+		font-size: 1em;
 	}
 
 	#toolbar-handle {

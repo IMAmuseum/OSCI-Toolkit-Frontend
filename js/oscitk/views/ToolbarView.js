@@ -11,13 +11,13 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 		this.activeToolbarItemViewChanged = false;
 		this.render();
 
-		app.dispatcher.on("packageLoaded", function(packageModel) {
+		this.listenTo(Backbone, "packageLoaded", function(packageModel) {
 			//Add the publication title to the Toolbar
 			var title = packageModel.getTitle();
 			if (title) {
 				this.$el.find("#toolbar-title").text(title);
 			}
-		}, this);
+		});
 
 		//Close the toolbar if a user clicks outside of it
 		$(window).on("click", {view: this}, function(e) {
@@ -79,19 +79,18 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 		this.isContentOpen = true;
 	},
 	updateHeight: function() {
-		var toolbarContent = this.$el.find('#toolbar-content');
-
-		var toolbarHeight = this.$el.height();
 		//clear height form content or resize does not work
-		toolbarContent.height("");
-		var toolbarContentHeight = toolbarContent.height();
+		this.$el.find('#toolbar-content').height('');
+		var toolbarHeight = this.$el.height();
+
+		var toolbarContentHeight = this.$el.find('#toolbar-content').outerHeight();
 
 		var toolbarTitleHeight = $('#toolbar-title-container').outerHeight();
 
 		if (toolbarContentHeight > (toolbarHeight - toolbarTitleHeight)) {
-			toolbarContent.height((toolbarHeight - toolbarTitleHeight) + 'px');
+			this.$el.find('#toolbar-content').height((toolbarHeight - toolbarTitleHeight) + 'px');
 		} else {
-			toolbarContent.height('');
+			this.$el.find('#toolbar-content').height('');
 		}
 
 		this.$el.css({
