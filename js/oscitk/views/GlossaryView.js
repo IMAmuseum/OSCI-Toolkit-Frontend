@@ -5,7 +5,8 @@ OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
 	events: {
 		'keyup #glossary-filter': 'filterTerms',
 		'click #glossary-filter-clear': 'clearFilter',
-		'click li': 'selectTerm'
+		'click #glossary-term-listing li': 'selectTerm',
+		'click #glossary-term-listing-mobile li': 'expandTerm'
 	},
 	render: function() {
 		this.$el.html(this.template({glossary: app.collections.glossaryTerms.models}));
@@ -46,5 +47,13 @@ OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
 
 		this.$el.find('h4').html(item.get('term'));
 		this.$el.find('p').html(item.get('definition'));
+	},
+	expandTerm: function(e) {
+		if ($(e.target).find('ul').is(":visible")) {
+			$(e.target).find('ul').hide();
+		} else {
+			this.$el.find('#glossary-term-listing-mobile ul').hide();
+			$(e.target).find('ul').show();
+		}
 	}
 });

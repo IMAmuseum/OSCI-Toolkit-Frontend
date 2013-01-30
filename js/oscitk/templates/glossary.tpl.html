@@ -14,6 +14,16 @@
 			<li data-tid="<%= item.get('id') %>"><%= item.get('term') %></li>
 		<% }); %>
 		</ul>
+		<ul id="glossary-term-listing-mobile">
+		<% _.each(glossary, function(item) { %>
+			<li data-tid="<%= item.get('id') %>">
+				<%= item.get('term') %>
+				<ul>
+					<li class="term-description"><%= item.get('definition') %></li>
+				</ul>
+			</li>
+		<% }); %>
+		</ul>
 		<% } %>
 	</div>
 	<div id="glossary-content">
