@@ -75,6 +75,11 @@
 	box-shadow: none;
 	padding: 5px 0;
 	line-height: normal;
+	cursor: default;
+	font-weight: normal;
+}
+#glossary-term-listing-mobile .active-term {
+	font-weight: bold;
 }
 #glossary-content {
 	display: table-cell;

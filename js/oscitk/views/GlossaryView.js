@@ -49,11 +49,13 @@ OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
 		this.$el.find('p').html(item.get('definition'));
 	},
 	expandTerm: function(e) {
+		$(e.target).removeClass('active-term');
 		if ($(e.target).find('ul').is(":visible")) {
 			$(e.target).find('ul').hide();
 		} else {
 			this.$el.find('#glossary-term-listing-mobile ul').hide();
 			$(e.target).find('ul').show();
+			$(e.target).addClass('active-term');
 		}
 	}
 });
