@@ -1,12 +1,10 @@
 <h3>Search</h3>
 <div id="search-container">
-	<div id="search-form">
+	<form id="search-form" name="search-form" method="POST">
 		<div id="search-box">
-			<form id="search-form" name="search-form" method="POST">
-				<input type="text" name="keyword" id="search-keyword" placeholder="Search" value="<%= query.keyword %>"/>
-				<div id="search-submit"></div>
-				<input type="hidden" name="page" id="search-page" />
-			</form>
+			<input type="text" name="keyword" id="search-keyword" placeholder="Search" value="<%= query.keyword %>"/>
+			<div id="search-submit"></div>
+			<input type="hidden" name="page" id="search-page" />
 		</div>
 		<div id="search-filters-container">
 			<div class="label">Filter |</div>
@@ -19,13 +17,13 @@
 			<div class="search-filter-select">
 				<select class="search-filters">
 					<option>Select a filter</option>
-					<option value="content">Content</option>
-					<option value="notes">My Notes</option>
-					<option value="footnotes">Footnotes</option>
-					<option value="figures">Figures</option>
+					<option value="type:content">Content</option>
+					<option value="type:notes">My Notes</option>
+					<option value="type:footnotes">Footnotes</option>
+					<option value="type:figures">Figures</option>
 				</select>
 			</div>
 		</div>
-	</div>
+	</form>
 	<div id="search-results-container"></div>
 </div>

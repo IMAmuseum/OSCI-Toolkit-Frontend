@@ -42,12 +42,12 @@
 	<% } else { %>
 	No results found.
 	<% } %>
-	<div id="filter-by-section">
+	<div id="facet-by-section">
 		<div class="section-title">Filter by section</div>
-		<div id="filter-sections-container">
-			<ul id="filter-sections">
+		<div id="facet-sections-container">
+			<ul id="facet-sections">
 				<% _.each(response.facets, function(facet) { %>
-					<li class="filter-section">
+					<li class="facet-section">
 						<a href="#" data-filter="section:<%= facet.section_id %>" class="facet"><%= facet.section %></a> 
 						(<%= facet.count %>)
 					</li>

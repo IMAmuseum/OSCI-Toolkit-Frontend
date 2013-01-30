@@ -27,6 +27,7 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 		'click .search-result': 'gotoResult',
 		'click .facet': 'addFacet',
 		'click .filter': 'addFilter',
+		'change .search-filters': 'addFilter',
 		'click #reset-search': 'resetSearch',
 		'click .sort-button': 'addSort'
 	},
@@ -44,7 +45,6 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 	},
 	search: function() {
 		var that = this;
-
 		// set keyword
 		this.query.keyword = this.$el.find('#search-keyword').val();
 		// reset collection
@@ -60,8 +60,12 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 			sort: this.query.sort
 		};
 
-		// filter by publication id
-		this.query.filters.push('pid:' + app.models.docPackage.get('id'));
+		var publicationId = 'pid:' + app.models.docPackage.get('id');
+		// check if publication filter already exists
+		if (_.indexOf(this.query.filters, publicationId) === -1) {
+			// filter by publication id
+			this.query.filters.push(publicationId);
+		}
 
 		if (this.query.filters.length) {
 			queryParams['filters'] = this.query.filters.join(' ');
@@ -113,7 +117,13 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 	},
 	addFilter: function(e) {
 		e.preventDefault();
-		var filter = $(e.currentTarget).data('filter');
+
+		var filter;
+		if (e.type === 'change') {
+			filter = $(e.currentTarget).val();
+		} else {
+			filter = $(e.currentTarget).data('filter');
+		}
 		var exists = _.indexOf(this.query.filters, filter);
 
 		this.$el.find(".filter").removeClass("active");
@@ -180,8 +190,8 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 		var resultsHeaderHeight = this.$el.find('#search-results-header').outerHeight(true);
 		this.$el.find('#search-results-column-wrapper').height(newContainerHeight - searchFormHeight - resultsHeaderHeight);
 
-		// calculate width of filter column
-		var filterSectionContainer = $('#filter-by-section').find('.section-title').outerHeight(true);
-		this.$el.find('#filter-sections-container').height(newContainerHeight - searchFormHeight - resultsHeaderHeight - filterSectionContainer);
+		// calculate width of facet column
+		var filterSectionContainer = $('#facet-by-section').find('.section-title').outerHeight(true);
+		this.$el.find('#facet-sections-container').height(newContainerHeight - searchFormHeight - resultsHeaderHeight - filterSectionContainer);
 	}
 });

@@ -23,6 +23,8 @@
 	display: inline-block;
 	margin: 0 20px 20px 0;
 	position: relative;
+	width: 100%;
+	max-width: 320px;
 }
 .search-view #search-keyword {
 	line-height: 1.4em;
@@ -32,9 +34,10 @@
 	font-size: 18px;
 	background: #fff;
 	border: 2px inset #ccc;
-	width: 320px;
 	-webkit-appearance: none;
 	padding-right: 25px;
+	width: 100%;
+	max-width: 320px;
 }
 #search-submit {
 	display: block;
@@ -67,7 +70,8 @@
 	background-color: #999966;
 }
 #search-filters-container select {
-	width: 320px;
+	width: 100%;
+	max-width: 320px;
 	font-size: 1.2em;
 }
 .search-view #search-filters-container {
@@ -143,7 +147,7 @@
 #search-results-column-wrapper {
 	overflow: hidden;
 }
-#search-results-column-wrapper #filter-by-section {
+#search-results-column-wrapper #facet-by-section {
 	float: left;
 	width: 250px;
 	margin-left: -100%;
@@ -201,22 +205,26 @@
 	font-size:11px;
 	text-indent:0px;
 }
-#filter-by-section .section-title {
+#facet-by-section .section-title {
 	font-weight: bold;
 	padding: 10px 0;
 }
-#filter-by-section ul li {
+#facet-by-section ul li {
 	padding: 10px 0;
 	list-style-type: none;
 	border-top: 1px solid #8C8C8C;
 }
-#filter-sections-container {
+#facet-sections-container {
 	margin-right: 10px;
 	overflow-y: auto;
 	height: 100%;
 }
 @media only screen and (max-width: 481px), only screen and (max-device-width: 481px) {
-	#filter-by-section {
+	#search-filters-container {
+		width: 100%;
+		max-width: 320px;
+	}
+	#facet-by-section {
 		display: none;
 	}
 	#search-results-content {
@@ -236,6 +244,10 @@
 }
 
 @media only screen and (max-width: 960px), only screen and (max-device-width: 480px) {
+	#search-filters-container {
+		width: 100%;
+
+	}
 	#search-filters-container .label,
 	ul.search-filters,
 	ul.search-filters li {
