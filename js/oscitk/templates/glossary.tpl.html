@@ -1,9 +1,11 @@
 <h3>Glossary</h3>
 <div id="glossary-container">
 	<div id="glossary-sidebar">
-		<input type="text" id="glossary-filter" placeholder="Search Glossary" />
-		<div id="glossary-filter-search-icon"></div>
-		<div id="glossary-filter-clear"></div>
+		<div id="glossary-filter-box">
+			<input type="text" id="glossary-filter" placeholder="Search Glossary" />
+			<div id="glossary-filter-search-icon"></div>
+			<div id="glossary-filter-clear"></div>
+		</div>
 		<% if (_.isEmpty(glossary)) { %>
 			No terms found.
 		<% } else { %>
