@@ -6,24 +6,11 @@
 			<div id="glossary-filter-search-icon"></div>
 			<div id="glossary-filter-clear"></div>
 		</div>
-		<% if (_.isEmpty(glossary)) { %>
+		<% if (!hasResults) { %>
 			No terms found.
 		<% } else { %>
-		<ul id="glossary-term-listing">
-		<% _.each(glossary, function(item) { %>
-			<li data-tid="<%= item.get('id') %>"><%= item.get('term') %></li>
-		<% }); %>
-		</ul>
-		<ul id="glossary-term-listing-mobile">
-		<% _.each(glossary, function(item) { %>
-			<li data-tid="<%= item.get('id') %>">
-				<%= item.get('term') %>
-				<ul>
-					<li class="term-description"><%= item.get('definition') %></li>
-				</ul>
-			</li>
-		<% }); %>
-		</ul>
+		<ul id="glossary-term-listing"></ul>
+		<ul id="glossary-term-listing-mobile"></ul>
 		<% } %>
 	</div>
 	<div id="glossary-content">

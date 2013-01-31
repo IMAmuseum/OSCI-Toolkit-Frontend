@@ -1,5 +1,5 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2013-01-20
+ * OSCI Toolkit - v0.1.0 - 2013-01-31
  * http://oscitoolkit.org/
  * Copyright (c) 2010-2013 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
@@ -362,22 +362,38 @@ __p+='<h3>Reading Settings</h3>\n<div class="font-control">\n\t<h3>Font Size</h3
 }
 return __p;
 }
-OsciTk.templates['glossary'] = function(obj){
+OsciTk.templates['glossary-term-mobile'] = function(obj){
 var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
-__p+='<h3>Glossary</h3>\n<div id="glossary-container">\n\t<div id="glossary-sidebar">\n\t\t<input type="text" id="glossary-filter" placeholder="Search Glossary" />\n\t\t<div id="glossary-filter-search-icon"></div>\n\t\t<div id="glossary-filter-clear"></div>\n\t\t';
- if (_.isEmpty(glossary)) { 
-__p+='\n\t\t\tNo terms found.\n\t\t';
- } else { 
-__p+='\n\t\t<ul id="glossary-term-listing">\n\t\t';
- _.each(glossary, function(item) { 
-__p+='\n\t\t\t<li data-tid="'+
+__p+='<li data-tid="'+
+((__t=( item.get('id') ))==null?'':__t)+
+'">\n\t'+
+((__t=( item.get('term') ))==null?'':__t)+
+'\n\t<ul>\n\t\t<li class="term-description">'+
+((__t=( item.get('definition') ))==null?'':__t)+
+'</li>\n\t</ul>\n</li>';
+}
+return __p;
+}
+OsciTk.templates['glossary-term'] = function(obj){
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
+with(obj||{}){
+__p+='<li data-tid="'+
 ((__t=( item.get('id') ))==null?'':__t)+
 '">'+
 ((__t=( item.get('term') ))==null?'':__t)+
-'</li>\n\t\t';
- }); 
-__p+='\n\t\t</ul>\n\t\t';
+'</li>';
+}
+return __p;
+}
+OsciTk.templates['glossary'] = function(obj){
+var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
+with(obj||{}){
+__p+='<h3>Glossary</h3>\n<div id="glossary-container">\n\t<div id="glossary-sidebar">\n\t\t<div id="glossary-filter-box">\n\t\t\t<input type="text" id="glossary-filter" placeholder="Search Glossary" />\n\t\t\t<div id="glossary-filter-search-icon"></div>\n\t\t\t<div id="glossary-filter-clear"></div>\n\t\t</div>\n\t\t';
+ if (!hasResults) { 
+__p+='\n\t\t\tNo terms found.\n\t\t';
+ } else { 
+__p+='\n\t\t<ul id="glossary-term-listing"></ul>\n\t\t<ul id="glossary-term-listing-mobile"></ul>\n\t\t';
  } 
 __p+='\n\t</div>\n\t<div id="glossary-content">\n\t\t<h4></h4>\n\t\t<p></p>\n\t</div>\n</div>';
 }
@@ -475,7 +491,7 @@ __p+='\n<div id="search-results-header">\n\t<div id="search-summary">\n\t\tResul
 ((__t=( (query.sort === 'score') ? 'active' : '' ))==null?'':__t)+
 '" data-sort="score">Relevance</a></li>\n\t\t\t<li><a href="#" class="sort-button '+
 ((__t=( (query.sort === 'content') ? 'active' : '' ))==null?'':__t)+
-'" data-sort="content">Type</a></li>\n\t\t</ul>\n\t</div>\n</div>\n<div id="search-results-container">\n\t';
+'" data-sort="content">Type</a></li>\n\t\t</ul>\n\t</div>\n</div>\n<div id="search-results-column-wrapper">\n\t';
  if (response.numFound !== 0) { 
 __p+='\n\t<div id="search-results">\n\t\t<div id="search-results-content">\n\t\t\t';
  _.each(results, function(group) { var first = true;
@@ -509,9 +525,9 @@ __p+='\n\t\t</div>\n\t</div>\n\t';
  } else { 
 __p+='\n\tNo results found.\n\t';
  } 
-__p+='\n\t<div id="filter-by-section">\n\t\t<div class="section-title">Filter by section</div>\n\t\t<div id="section-list-container">\n\t\t\t<ul>\n\t\t\t\t';
+__p+='\n\t<div id="facet-by-section">\n\t\t<div class="section-title">Filter by section</div>\n\t\t<div id="facet-sections-container">\n\t\t\t<ul id="facet-sections">\n\t\t\t\t';
  _.each(response.facets, function(facet) { 
-__p+='\n\t\t\t\t\t<li>\n\t\t\t\t\t\t<a href="#" data-filter="section:'+
+__p+='\n\t\t\t\t\t<li class="facet-section">\n\t\t\t\t\t\t<a href="#" data-filter="section:'+
 ((__t=( facet.section_id ))==null?'':__t)+
 '" class="facet">'+
 ((__t=( facet.section ))==null?'':__t)+
@@ -519,7 +535,7 @@ __p+='\n\t\t\t\t\t<li>\n\t\t\t\t\t\t<a href="#" data-filter="section:'+
 ((__t=( facet.count ))==null?'':__t)+
 ')\n\t\t\t\t\t</li>\n\t\t\t\t';
  }); 
-__p+='\n\t\t\t</ul>\n\t\t<div style="clear:both;">&nbsp;</div>\n\t</div>\n\t</div>\n</div>\n';
+__p+='\n\t\t\t</ul>\n\t\t</div>\n\t</div>\n</div>\n';
  } 
 __p+='';
 }
@@ -528,9 +544,9 @@ return __p;
 OsciTk.templates['search'] = function(obj){
 var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
-__p+='<div id="search-header">\n\t<h3>Search</h3>\n\t<div id="search-box">\n\t\t<form id="search-form" name="search-form" method="POST">\n\t\t\t<input type="text" name="keyword" id="search-keyword" placeholder="Search" value="'+
+__p+='<h3>Search</h3>\n<div id="search-container">\n\t<form id="search-form" name="search-form" method="POST">\n\t\t<div id="search-box">\n\t\t\t<input type="text" name="keyword" id="search-keyword" placeholder="Search" value="'+
 ((__t=( query.keyword ))==null?'':__t)+
-'"/>\n\t\t\t<div id="search-submit"></div>\n\t\t\t<input type="hidden" name="page" id="search-page" />\n\t\t</form>\n\t</div>\n\t<div id="search-filters-container">\n\t\t<div class="label">Filter |</div>\n\t\t<ul class="search-filters">\n\t\t\t<li class="filter" data-filter="type:content" id="search-filter-content"><div class="dot">&nbsp;</div><div class="label">Content</div></li>\n\t\t\t<li class="filter" data-filter="type:notes" id="search-filter-notes"><div class="dot">&nbsp;</div><div class="label">My Notes</div></li>\n\t\t\t<li class="filter" data-filter="type:footnotes" id="search-filter-footnotes"><div class="dot">&nbsp;</div><div class="label">Footnotes</div></li>\n\t\t\t<li class="filter" data-filter="type:figures" id="search-filter-figures"><div class="dot">&nbsp;</div><div class="label">Figures</div></li>\n\t\t</ul>\n\t\t<div class="search-filter-select">\n\t\t<select class="search-filters">\n\t\t\t<option>Select a filter</option>\n\t\t\t<option value="content">Content</option>\n\t\t\t<option value="notes">My Notes</option>\n\t\t\t<option value="footnotes">Footnotes</option>\n\t\t\t<option value="figures">Figures</option>\n\t\t</select>\n\t</div>\n\t</div>\n</div>\n<div id="search-results-wrapper"></div>';
+'"/>\n\t\t\t<div id="search-submit"></div>\n\t\t\t<input type="hidden" name="page" id="search-page" />\n\t\t</div>\n\t\t<div id="search-filters-container">\n\t\t\t<div class="label">Filter |</div>\n\t\t\t<ul class="search-filters">\n\t\t\t\t<li class="filter" data-filter="type:content" id="search-filter-content"><div class="dot">&nbsp;</div><div class="label">Content</div></li>\n\t\t\t\t<li class="filter" data-filter="type:notes" id="search-filter-notes"><div class="dot">&nbsp;</div><div class="label">My Notes</div></li>\n\t\t\t\t<li class="filter" data-filter="type:footnotes" id="search-filter-footnotes"><div class="dot">&nbsp;</div><div class="label">Footnotes</div></li>\n\t\t\t\t<li class="filter" data-filter="type:figures" id="search-filter-figures"><div class="dot">&nbsp;</div><div class="label">Figures</div></li>\n\t\t\t</ul>\n\t\t\t<div class="search-filter-select">\n\t\t\t\t<select class="search-filters">\n\t\t\t\t\t<option>Select a filter</option>\n\t\t\t\t\t<option value="type:content">Content</option>\n\t\t\t\t\t<option value="type:notes">My Notes</option>\n\t\t\t\t\t<option value="type:footnotes">Footnotes</option>\n\t\t\t\t\t<option value="type:figures">Figures</option>\n\t\t\t\t</select>\n\t\t\t</div>\n\t\t</div>\n\t</form>\n\t<div id="search-results-container"></div>\n</div>';
 }
 return __p;
 }
@@ -2057,13 +2073,24 @@ OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
 	events: {
 		'keyup #glossary-filter': 'filterTerms',
 		'click #glossary-filter-clear': 'clearFilter',
-		'click li': 'selectTerm'
+		'click #glossary-term-listing li': 'selectTerm',
+		'click #glossary-term-listing-mobile li': 'expandTerm'
 	},
 	render: function() {
-		this.$el.html(this.template({glossary: app.collections.glossaryTerms.models}));
+		var that = this;
+		this.$el.html(this.template({hasResults: !_.isEmpty(app.collections.glossaryTerms.models)}));
+
+		_.each(app.collections.glossaryTerms.models, function(item) {
+			var termView = OsciTk.templateManager.get('glossary-term');
+			that.$el.find('#glossary-term-listing').append(termView({item: item}));
+
+			var termViewMobile = OsciTk.templateManager.get('glossary-term-mobile');
+			that.$el.find('#glossary-term-listing-mobile').append(termViewMobile({item: item}));
+		});
 	},
 	filterTerms: function() {
-		var keyword = $('#glossary-filter').val();
+		var that = this,
+			keyword = $('#glossary-filter').val();
 
 		if (!keyword.length) {
 			$('#glossary-filter-clear').hide();
@@ -2080,12 +2107,15 @@ OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
 
 		// clear out list
 		$('#glossary-term-listing').empty();
+		$('#glossary-term-listing-mobile').empty();
 
 		// re-add terms to list
 		_.each(terms, function(item) {
-			var view = new Backbone.View();
-			var el = view.make('li', {'data-tid': item.get('id')}, item.get('term'));
-			$('#glossary-term-listing').append(el);
+			var termView = OsciTk.templateManager.get('glossary-term');
+			that.$el.find('#glossary-term-listing').append(termView({item: item}));
+
+			var termViewMobile = OsciTk.templateManager.get('glossary-term-mobile');
+			that.$el.find('#glossary-term-listing-mobile').append(termViewMobile({item: item}));
 		});
 	},
 	clearFilter: function() {
@@ -2098,6 +2128,16 @@ OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
 
 		this.$el.find('h4').html(item.get('term'));
 		this.$el.find('p').html(item.get('definition'));
+	},
+	expandTerm: function(e) {
+		$(e.target).removeClass('active-term');
+		if ($(e.target).find('ul').is(":visible")) {
+			$(e.target).find('ul').hide();
+		} else {
+			this.$el.find('#glossary-term-listing-mobile ul').hide();
+			$(e.target).find('ul').show();
+			$(e.target).addClass('active-term');
+		}
 	}
 });
 OsciTk.views.InlineNotes = OsciTk.views.BaseView.extend({
@@ -2596,6 +2636,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 		return figurePlaced;
 	}
 });
+
 OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
 	template: OsciTk.templateManager.get('multi-column-section'),
@@ -3335,8 +3376,7 @@ OsciTk.views.ParagraphControlsView = OsciTk.views.BaseView.extend({
 	}
 });
 OsciTk.views.Search = OsciTk.views.BaseView.extend({
-	id: 'search-view',
-	className: 'toolbar-item-view',
+	className: 'search-view',
 	template: OsciTk.templateManager.get('search'),
 	initialize: function() {
 		// define defaults for the query
@@ -3364,6 +3404,7 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 		'click .search-result': 'gotoResult',
 		'click .facet': 'addFacet',
 		'click .filter': 'addFilter',
+		'change .search-filters': 'addFilter',
 		'click #reset-search': 'resetSearch',
 		'click .sort-button': 'addSort'
 	},
@@ -3372,15 +3413,7 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 	},
 	renderResults: function() {
 		this.prepareResults();
-		this.$el.find("#search-results-wrapper").html(this.resultsTemplate(this));
-	},
-	resizeResultsContainer: function() {
-		var containerSize = $('#toolbar-content').height();
-		var searchHeaderSize = this.$el.find('#search-header').outerHeight();
-		var resultsHeaderSize = this.$el.find('#search-results-header').outerHeight();
-
-		var newContainerHeight = containerSize - searchHeaderSize - resultsHeaderSize;
-		this.$el.find('#search-results-container').height(newContainerHeight);
+		this.$el.find("#search-results-container").html(this.resultsTemplate(this));
 	},
 	prepareResults: function() {
 		this.results = _.groupBy(this.response.docs.models, function(doc) {
@@ -3389,7 +3422,6 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 	},
 	search: function() {
 		var that = this;
-
 		// set keyword
 		this.query.keyword = this.$el.find('#search-keyword').val();
 		// reset collection
@@ -3405,8 +3437,12 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 			sort: this.query.sort
 		};
 
-		// filter by publication id
-		this.query.filters.push('pid:' + app.models.docPackage.get('id'));
+		var publicationId = 'pid:' + app.models.docPackage.get('id');
+		// check if publication filter already exists
+		if (_.indexOf(this.query.filters, publicationId) === -1) {
+			// filter by publication id
+			this.query.filters.push(publicationId);
+		}
 
 		if (this.query.filters.length) {
 			queryParams['filters'] = this.query.filters.join(' ');
@@ -3425,10 +3461,7 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 				// re-render the search view
 				that.renderResults();
 				// handle container resizing
-				app.views.toolbarView.contentOpen();
-				that.resizeResultsContainer();
-
-				Backbone.trigger('osci.search.finished');
+				that.resizeContainers();
 			},
 			error: function() {
 				// error handling
@@ -3461,7 +3494,13 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 	},
 	addFilter: function(e) {
 		e.preventDefault();
-		var filter = $(e.currentTarget).data('filter');
+
+		var filter;
+		if (e.type === 'change') {
+			filter = $(e.currentTarget).val();
+		} else {
+			filter = $(e.currentTarget).data('filter');
+		}
 		var exists = _.indexOf(this.query.filters, filter);
 
 		this.$el.find(".filter").removeClass("active");
@@ -3500,11 +3539,37 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 
 		this.initialize();
 		this.$el.find("#search-results-header").remove();
-		this.$el.find("#search-results-container").remove();
-		this.$el.find("#search-keyword").val("");
-
+		this.$el.find("#search-results-column-wrapper").remove();
+		this.$el.find("#search-keyword").val('');
+		this.resizeContainers();
+	},
+	resizeContainers: function() {
+				this.$el.find("#search-container").height('');
 		app.views.toolbarView.contentOpen();
-		this.resizeResultsContainer();
+		
+		// calculate height for search container
+		var containerSize = $('#toolbar-content').height();
+		var headerSize = this.$el.find("h3").outerHeight(true);
+		var newContainerHeight = containerSize - headerSize;
+
+		var toolbarSize = $('#toolbar').height();
+
+		var toolbarTitleHeight = $('#toolbar-title-container').outerHeight();
+		var toolbarHandleSize = $('#toolbar-handle').height();
+
+		if (newContainerHeight > toolbarSize) {
+			newContainerHeight = toolbarSize - toolbarTitleHeight - headerSize - toolbarHandleSize;
+		}
+		this.$el.find("#search-container").height(newContainerHeight);
+
+		// calculate size for column wrapper
+		var searchFormHeight = this.$el.find('#search-form').outerHeight(true);
+		var resultsHeaderHeight = this.$el.find('#search-results-header').outerHeight(true);
+		this.$el.find('#search-results-column-wrapper').height(newContainerHeight - searchFormHeight - resultsHeaderHeight);
+
+		// calculate width of facet column
+		var filterSectionContainer = $('#facet-by-section').find('.section-title').outerHeight(true);
+		this.$el.find('#facet-sections-container').height(newContainerHeight - searchFormHeight - resultsHeaderHeight - filterSectionContainer);
 	}
 });
 OsciTk.views.Title = OsciTk.views.BaseView.extend({
@@ -3687,19 +3752,18 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 		this.isContentOpen = true;
 	},
 	updateHeight: function() {
-		var toolbarContent = this.$el.find('#toolbar-content');
-
-		var toolbarHeight = this.$el.height();
 		//clear height form content or resize does not work
-		toolbarContent.height("");
-		var toolbarContentHeight = toolbarContent.height();
+		this.$el.find('#toolbar-content').height('');
+		var toolbarHeight = this.$el.height();
+
+		var toolbarContentHeight = this.$el.find('#toolbar-content').outerHeight();
 
 		var toolbarTitleHeight = $('#toolbar-title-container').outerHeight();
 
 		if (toolbarContentHeight > (toolbarHeight - toolbarTitleHeight)) {
-			toolbarContent.height((toolbarHeight - toolbarTitleHeight) + 'px');
+			this.$el.find('#toolbar-content').height((toolbarHeight - toolbarTitleHeight) + 'px');
 		} else {
-			toolbarContent.height('');
+			this.$el.find('#toolbar-content').height('');
 		}
 
 		this.$el.css({
