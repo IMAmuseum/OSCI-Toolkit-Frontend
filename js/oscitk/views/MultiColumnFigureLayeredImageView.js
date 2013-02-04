@@ -1,5 +1,7 @@
 //Add this view to the figure type registry
 OsciTk.views.figureTypeRegistry["layered_image"] = "MultiColumnFigureLayeredImage";
+OsciTk.views.figureTypeRegistry["iip_asset"] = "MultiColumnFigureLayeredImage";
+
 
 OsciTk.views.MultiColumnFigureLayeredImage = OsciTk.views.MultiColumnFigure.extend({
 	// override MultiColumnFigure's events - polymaps handles events for this class
