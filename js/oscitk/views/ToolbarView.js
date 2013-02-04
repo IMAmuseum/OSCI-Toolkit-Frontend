@@ -79,19 +79,18 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 		this.isContentOpen = true;
 	},
 	updateHeight: function() {
-		var toolbarContent = this.$el.find('#toolbar-content');
-
-		var toolbarHeight = this.$el.height();
 		//clear height form content or resize does not work
-		toolbarContent.height("");
-		var toolbarContentHeight = toolbarContent.height();
+		this.$el.find('#toolbar-content').height('');
+		var toolbarHeight = this.$el.height();
+
+		var toolbarContentHeight = this.$el.find('#toolbar-content').outerHeight();
 
 		var toolbarTitleHeight = $('#toolbar-title-container').outerHeight();
 
 		if (toolbarContentHeight > (toolbarHeight - toolbarTitleHeight)) {
-			toolbarContent.height((toolbarHeight - toolbarTitleHeight) + 'px');
+			this.$el.find('#toolbar-content').height((toolbarHeight - toolbarTitleHeight) + 'px');
 		} else {
-			toolbarContent.height('');
+			this.$el.find('#toolbar-content').height('');
 		}
 
 		this.$el.css({

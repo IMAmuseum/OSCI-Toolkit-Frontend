@@ -5,13 +5,24 @@ OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
 	events: {
 		'keyup #glossary-filter': 'filterTerms',
 		'click #glossary-filter-clear': 'clearFilter',
-		'click li': 'selectTerm'
+		'click #glossary-term-listing li': 'selectTerm',
+		'click #glossary-term-listing-mobile li': 'expandTerm'
 	},
 	render: function() {
-		this.$el.html(this.template({glossary: app.collections.glossaryTerms.models}));
+		var that = this;
+		this.$el.html(this.template({hasResults: !_.isEmpty(app.collections.glossaryTerms.models)}));
+
+		_.each(app.collections.glossaryTerms.models, function(item) {
+			var termView = OsciTk.templateManager.get('glossary-term');
+			that.$el.find('#glossary-term-listing').append(termView({item: item}));
+
+			var termViewMobile = OsciTk.templateManager.get('glossary-term-mobile');
+			that.$el.find('#glossary-term-listing-mobile').append(termViewMobile({item: item}));
+		});
 	},
 	filterTerms: function() {
-		var keyword = $('#glossary-filter').val();
+		var that = this,
+			keyword = $('#glossary-filter').val();
 
 		if (!keyword.length) {
 			$('#glossary-filter-clear').hide();
@@ -28,12 +39,15 @@ OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
 
 		// clear out list
 		$('#glossary-term-listing').empty();
+		$('#glossary-term-listing-mobile').empty();
 
 		// re-add terms to list
 		_.each(terms, function(item) {
-			var view = new Backbone.View();
-			var el = view.make('li', {'data-tid': item.get('id')}, item.get('term'));
-			$('#glossary-term-listing').append(el);
+			var termView = OsciTk.templateManager.get('glossary-term');
+			that.$el.find('#glossary-term-listing').append(termView({item: item}));
+
+			var termViewMobile = OsciTk.templateManager.get('glossary-term-mobile');
+			that.$el.find('#glossary-term-listing-mobile').append(termViewMobile({item: item}));
 		});
 	},
 	clearFilter: function() {
@@ -46,5 +60,15 @@ OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
 
 		this.$el.find('h4').html(item.get('term'));
 		this.$el.find('p').html(item.get('definition'));
+	},
+	expandTerm: function(e) {
+		$(e.target).removeClass('active-term');
+		if ($(e.target).find('ul').is(":visible")) {
+			$(e.target).find('ul').hide();
+		} else {
+			this.$el.find('#glossary-term-listing-mobile ul').hide();
+			$(e.target).find('ul').show();
+			$(e.target).addClass('active-term');
+		}
 	}
 });

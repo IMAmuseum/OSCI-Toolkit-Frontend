@@ -1,6 +1,5 @@
 OsciTk.views.Search = OsciTk.views.BaseView.extend({
-	id: 'search-view',
-	className: 'toolbar-item-view',
+	className: 'search-view',
 	template: OsciTk.templateManager.get('search'),
 	initialize: function() {
 		// define defaults for the query
@@ -28,6 +27,7 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 		'click .search-result': 'gotoResult',
 		'click .facet': 'addFacet',
 		'click .filter': 'addFilter',
+		'change .search-filters': 'addFilter',
 		'click #reset-search': 'resetSearch',
 		'click .sort-button': 'addSort'
 	},
@@ -36,15 +36,7 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 	},
 	renderResults: function() {
 		this.prepareResults();
-		this.$el.find("#search-results-wrapper").html(this.resultsTemplate(this));
-	},
-	resizeResultsContainer: function() {
-		var containerSize = $('#toolbar-content').height();
-		var searchHeaderSize = this.$el.find('#search-header').outerHeight();
-		var resultsHeaderSize = this.$el.find('#search-results-header').outerHeight();
-
-		var newContainerHeight = containerSize - searchHeaderSize - resultsHeaderSize;
-		this.$el.find('#search-results-container').height(newContainerHeight);
+		this.$el.find("#search-results-container").html(this.resultsTemplate(this));
 	},
 	prepareResults: function() {
 		this.results = _.groupBy(this.response.docs.models, function(doc) {
@@ -53,7 +45,6 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 	},
 	search: function() {
 		var that = this;
-
 		// set keyword
 		this.query.keyword = this.$el.find('#search-keyword').val();
 		// reset collection
@@ -69,8 +60,12 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 			sort: this.query.sort
 		};
 
-		// filter by publication id
-		this.query.filters.push('pid:' + app.models.docPackage.get('id'));
+		var publicationId = 'pid:' + app.models.docPackage.get('id');
+		// check if publication filter already exists
+		if (_.indexOf(this.query.filters, publicationId) === -1) {
+			// filter by publication id
+			this.query.filters.push(publicationId);
+		}
 
 		if (this.query.filters.length) {
 			queryParams['filters'] = this.query.filters.join(' ');
@@ -89,10 +84,7 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 				// re-render the search view
 				that.renderResults();
 				// handle container resizing
-				app.views.toolbarView.contentOpen();
-				that.resizeResultsContainer();
-
-				Backbone.trigger('osci.search.finished');
+				that.resizeContainers();
 			},
 			error: function() {
 				// error handling
@@ -125,7 +117,13 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 	},
 	addFilter: function(e) {
 		e.preventDefault();
-		var filter = $(e.currentTarget).data('filter');
+
+		var filter;
+		if (e.type === 'change') {
+			filter = $(e.currentTarget).val();
+		} else {
+			filter = $(e.currentTarget).data('filter');
+		}
 		var exists = _.indexOf(this.query.filters, filter);
 
 		this.$el.find(".filter").removeClass("active");
@@ -164,10 +162,36 @@ OsciTk.views.Search = OsciTk.views.BaseView.extend({
 
 		this.initialize();
 		this.$el.find("#search-results-header").remove();
-		this.$el.find("#search-results-container").remove();
-		this.$el.find("#search-keyword").val("");
-
+		this.$el.find("#search-results-column-wrapper").remove();
+		this.$el.find("#search-keyword").val('');
+		this.resizeContainers();
+	},
+	resizeContainers: function() {
+				this.$el.find("#search-container").height('');
 		app.views.toolbarView.contentOpen();
-		this.resizeResultsContainer();
+		
+		// calculate height for search container
+		var containerSize = $('#toolbar-content').height();
+		var headerSize = this.$el.find("h3").outerHeight(true);
+		var newContainerHeight = containerSize - headerSize;
+
+		var toolbarSize = $('#toolbar').height();
+
+		var toolbarTitleHeight = $('#toolbar-title-container').outerHeight();
+		var toolbarHandleSize = $('#toolbar-handle').height();
+
+		if (newContainerHeight > toolbarSize) {
+			newContainerHeight = toolbarSize - toolbarTitleHeight - headerSize - toolbarHandleSize;
+		}
+		this.$el.find("#search-container").height(newContainerHeight);
+
+		// calculate size for column wrapper
+		var searchFormHeight = this.$el.find('#search-form').outerHeight(true);
+		var resultsHeaderHeight = this.$el.find('#search-results-header').outerHeight(true);
+		this.$el.find('#search-results-column-wrapper').height(newContainerHeight - searchFormHeight - resultsHeaderHeight);
+
+		// calculate width of facet column
+		var filterSectionContainer = $('#facet-by-section').find('.section-title').outerHeight(true);
+		this.$el.find('#facet-sections-container').height(newContainerHeight - searchFormHeight - resultsHeaderHeight - filterSectionContainer);
 	}
 });

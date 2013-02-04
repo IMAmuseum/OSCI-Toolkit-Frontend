@@ -1,5 +1,5 @@
 /*
- * OSCI Toolkit - v0.1.0 - 2013-01-20
+ * OSCI Toolkit - v0.1.0 - 2013-01-31
  * http://oscitoolkit.org/
  * Copyright (c) 2010-2013 The Art Institute of Chicago and the Indianapolis Museum of Art
  * GNU General Public License
@@ -262,8 +262,13 @@ a.footnote-reference {
 	width: 100%;
 	padding: 20px 20px;
 	overflow: hidden;
+	position: relative;
 	/*background: url('../img/bg-fold-shadow.png') center 98% no-repeat;*/
 
+}
+#toolbar-content .toolbar-item-view {
+	height: 100%;
+	overflow: hidden;
 }
 #toolbar-content:after {
 	content: "";
@@ -325,8 +330,17 @@ a.footnote-reference {
 	transition: all .5s ease;
 }
 #toolbar h2 {
-	margin: 6px 0 6px 0;
-	border-bottom: 5px solid #8C8C8C;
+	margin: 0;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+	height: 40px;
+	line-height: 40px;
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	-o-transition: all .5s ease;
+	-ms-transition: all .5s ease;
+	transition: all .5s ease;
 }
 #toolbar h3 {
 	color: #444;
@@ -774,15 +788,12 @@ background-image: -webkit-gradient(
 
 /* When less than 600px... */
 @media (max-width:600px) {
-
-	/*
-	div.Figures-toolbar-item,
-	div.Notes-toolbar-item {
-		display: none;
-	}
-	*/
 	#toolbar {
-		top: -57px;
+		top: -60px;
+	}
+
+	#toolbar h2 {
+		font-size: 1em;
 	}
 
 	#toolbar-handle {
@@ -908,13 +919,13 @@ h1, h2, h3, h4, h5 {
 }
 
 
-#search-view #search-header {
-	padding-top: 0;
-	padding-bottom: 15px;
+.search-view {
+	overflow: hidden;
 }
 #search-results-header {
 	border-top: 5px solid #8c8c8c;
-	padding-top: 20px;
+	margin: 10px 0;
+	padding-top: 10px;
 }
 #search-summary {
 	font-size: 1.2em;
@@ -928,13 +939,15 @@ h1, h2, h3, h4, h5 {
 	color: #000;
 	font-style: italic;
 }
-#search-view #search-box {
+.search-view #search-box {
 	float: left;
 	display: inline-block;
 	margin: 0 20px 20px 0;
 	position: relative;
+	width: 100%;
+	max-width: 320px;
 }
-#search-view #search-keyword {
+.search-view #search-keyword {
 	line-height: 1.4em;
 	text-indent: 10px;
 	border-radius: 50px;
@@ -942,9 +955,10 @@ h1, h2, h3, h4, h5 {
 	font-size: 18px;
 	background: #fff;
 	border: 2px inset #ccc;
-	width: 300px;
 	-webkit-appearance: none;
 	padding-right: 25px;
+	width: 100%;
+	max-width: 320px;
 }
 #search-submit {
 	display: block;
@@ -954,13 +968,13 @@ h1, h2, h3, h4, h5 {
 	right: 3px;
 	width: 20px;
 	height: 20px;
-	background: url(../img/icon-search.png) 0 0 no-repeat;
+	background: url(../img/icon-magnify-gray.png) 0 0 no-repeat;
 	background-size: 16px;
 }
-#search-view #search-filters-container {
+.search-view #search-filters-container {
 	height: 30px;
 }
-#search-view #search-filters-container div.label {
+.search-view #search-filters-container div.label {
 	float: left;
 	padding-top: 5px;
 }
@@ -976,19 +990,23 @@ h1, h2, h3, h4, h5 {
 #search-filter-figures .dot {
 	background-color: #999966;
 }
-
-#search-view #search-filters-container {
+#search-filters-container select {
+	width: 100%;
+	max-width: 320px;
+	font-size: 1.2em;
+}
+.search-view #search-filters-container {
 	display: inline-block;
 }
 
-#search-view #search-filters-container ul {
+.search-view #search-filters-container ul {
 	display: block;
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
 	float: left;
 }
-#search-view #search-filters-container ul li {
+.search-view #search-filters-container ul li {
 	margin: 0 5px;
 	padding: 5px 0;
 	color: #FFF;
@@ -1002,18 +1020,18 @@ h1, h2, h3, h4, h5 {
 	font-size: .9em;
 	cursor: hand;
 }
-#search-view #search-filters-container ul li.active {
+.search-view #search-filters-container ul li.active {
 	background-color: #dedede;
 	color: #8c8c8c;
 }
-#search-view #search-filters-container ul li .dot {
+.search-view #search-filters-container ul li .dot {
 	margin: 4px 0 0 8px;
 	width: 13px;
 	height: 13px;
 	border-radius: 10px;
 	float: left;
 }
-#search-view #search-filters-container ul li .label {
+.search-view #search-filters-container ul li .label {
 	float: left;
 	padding-left: 5px;
 	padding-top: 4px;
@@ -1023,7 +1041,6 @@ h1, h2, h3, h4, h5 {
 	border-top: 1px solid #8C8C8C;
 	height: 40px;
 	background: #D7D7D7;
-	margin: 10px 0;
 	padding-top: 10px;
 }
 .sort-button.active {
@@ -1048,11 +1065,10 @@ h1, h2, h3, h4, h5 {
 	float: left;
 	width: 100%;
 }
-#search-results-container {
-	height: 100%;
+#search-results-column-wrapper {
 	overflow: hidden;
 }
-#search-results-container #filter-by-section {
+#search-results-column-wrapper #facet-by-section {
 	float: left;
 	width: 250px;
 	margin-left: -100%;
@@ -1110,18 +1126,31 @@ h1, h2, h3, h4, h5 {
 	font-size:11px;
 	text-indent:0px;
 }
-#filter-by-section .section-title {
+#facet-by-section .section-title {
 	font-weight: bold;
+	padding: 10px 0;
 }
-#section-list-container {
-	overflow-y:auto;
-	height:100%;
-	margin-right: 10px;
-}
-#filter-by-section ul li {
+#facet-by-section ul li {
 	padding: 10px 0;
 	list-style-type: none;
 	border-top: 1px solid #8C8C8C;
+}
+#facet-sections-container {
+	margin-right: 10px;
+	overflow-y: auto;
+	height: 100%;
+}
+@media only screen and (max-width: 481px), only screen and (max-device-width: 481px) {
+	#search-filters-container {
+		width: 100%;
+		max-width: 320px;
+	}
+	#facet-by-section {
+		display: none;
+	}
+	#search-results-content {
+		margin-left: 0;
+	}
 }
 
 @media only screen and (min-width: 481px), only screen and (min-device-width: 960px) {
@@ -1136,6 +1165,10 @@ h1, h2, h3, h4, h5 {
 }
 
 @media only screen and (max-width: 960px), only screen and (max-device-width: 480px) {
+	#search-filters-container {
+		width: 100%;
+
+	}
 	#search-filters-container .label,
 	ul.search-filters,
 	ul.search-filters li {
