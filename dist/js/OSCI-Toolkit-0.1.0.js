@@ -3533,23 +3533,19 @@ var LayeredImage = function(container) { // container should be a html element
 		this.figureOptions = JSON.parse(optString);
 	}
 	// provide defaults if options not set
-	if (!this.figureOptions) {
-		this.figureOptions = {
-			disable_interaction: false,
-			disable_annotation: false,
-			sliderPosition: 0
-		};
+	if (typeof(this.figureOptions) === 'undefined') {
+		this.figureOptions = {};
 	}
-	if (typeof(this.figureOptions.disable_interaction) === undefined) {
+	if (typeof(this.figureOptions.disable_interaction) === 'undefined') {
 		this.figureOptions.disable_interaction = false;
 	}
-	if (typeof(this.figureOptions.disable_annotation) === undefined) {
+	if (typeof(this.figureOptions.disable_annotation) === 'undefined') {
 		this.figureOptions.disable_annotation = false;
 	}
-	if (typeof(this.figureOptions.sliderPosition) === undefined) {
+	if (typeof(this.figureOptions.sliderPosition) === 'undefined') {
 		this.figureOptions.sliderPosition = 0;
 	}
-	
+
 	// detect and incorporate the caption if it exists
 	this.settings.captionMarkup = this.container.parents('figure:first').find('figcaption').clone();
 
