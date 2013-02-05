@@ -3540,9 +3540,16 @@ var LayeredImage = function(container) { // container should be a html element
 			sliderPosition: 0
 		};
 	}
-	if (!this.figureOptions.sliderPosition) {
+	if (typeof(this.figureOptions.disable_interaction) === undefined) {
+		this.figureOptions.disable_interaction = false;
+	}
+	if (typeof(this.figureOptions.disable_annotation) === undefined) {
+		this.figureOptions.disable_annotation = false;
+	}
+	if (typeof(this.figureOptions.sliderPosition) === undefined) {
 		this.figureOptions.sliderPosition = 0;
 	}
+	
 	// detect and incorporate the caption if it exists
 	this.settings.captionMarkup = this.container.parents('figure:first').find('figcaption').clone();
 
