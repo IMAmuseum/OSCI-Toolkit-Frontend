@@ -15,8 +15,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 
 		this.$el.attr("id", this.model.get("id"));
 
-		//TODO: this does not scale
-		//this.listenTo(Backbone, 'pageChanged', this.toggleVisibility);
+		this.listenTo(Backbone, 'pageChanged', this.toggleVisibility);
 	},
 	events: {
 		"click .figure_content" : "fullscreen"
@@ -44,11 +43,6 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 
 		if (isPositioned) {
 			this.layoutComplete = true;
-		}
-
-		//remove this
-		if (!this.contentRendered) {
-			this.renderContent();
 		}
 
 		return this;
