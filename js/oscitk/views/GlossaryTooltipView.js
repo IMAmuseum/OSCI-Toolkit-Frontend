@@ -28,8 +28,8 @@ OsciTk.views.GlossaryTooltip = OsciTk.views.BaseView.extend({
 			}
 		});
 
-		this.listenTo(Backbone, 'routedToSection', function() {
-			$('.glossary-tooltip').not(event.target).qtip('destroy');
+		this.listenTo(Backbone, 'routedToSection', function(section) {
+			$('.glossary-tooltip').qtip('destroy');
 		});
 	}
 });
