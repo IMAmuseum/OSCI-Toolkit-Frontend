@@ -205,6 +205,11 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 			modelData.columns = Math.ceil((parseInt(modelData.columns, 10) / 100) * dimensions.columnsPerPage);
 		}
 
+		//for plate images set width to full page
+		if (modelData.position.horizontal === 'p') {
+			modelData.columns = dimensions.columnsPerPage;
+		}
+
 		//Calculate maximum width for a figure
 		if (modelData.columns > dimensions.columnsPerPage || modelData.position === 'p') {
 			width = dimensions.innerSectionWidth;
