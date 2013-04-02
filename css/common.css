@@ -73,6 +73,10 @@ a.footnote-reference {
 
 
 /* figure tables */
+figcaption p {
+	display: inline;
+}
+
 .figure_content table {
 	width:100%;
 }
