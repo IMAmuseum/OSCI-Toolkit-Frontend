@@ -146,7 +146,12 @@ var LayeredImage = function(container) { // container should be a html element
 
 	// initialize the container as a polymap
 	this.map = this.polymaps.map();
-	this.map.container(this.container[0].appendChild(this.polymaps.svg('svg')));
+	var svg = this.polymaps.svg('svg');
+	$(svg).css({
+		'height': '100%',
+		'width': '100%'
+	});
+	this.map.container(this.container[0].appendChild(svg));
 	this.map.tileSize({
 		x: 256,
 		y: 256
