@@ -1,7 +1,9 @@
 OsciTk.views.Page = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('page'),
 	className: "page",
-	initialize: function() {
+	initialize: function(options) {
+		this.options = options;
+
 		this.processingData = {
 			complete : false
 		};

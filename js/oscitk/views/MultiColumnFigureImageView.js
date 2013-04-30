@@ -16,8 +16,15 @@ OsciTk.views.MultiColumnFigureImage = OsciTk.views.MultiColumnFigure.extend({
 		this.contentRendered = true;
 	},
 	fullscreen: function() {
+		console.log(this);
 		$.fancybox.open({
-			href: $(this.model.get('content')).attr('src')
+			href: this.$el.find("img").attr('src'),
+			title: this.model.get("caption"),
+			helpers: {
+				title: {
+					type : 'inside'
+				}
+			}
 		});
 	}
 });

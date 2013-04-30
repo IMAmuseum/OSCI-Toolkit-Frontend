@@ -2,9 +2,9 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
 	template: OsciTk.templateManager.get('multi-column-section'),
 
-	initialize: function() {
+	initialize: function(options) {
 		this._super('initialize');
-
+		this.options = options;
 		this.options.pageView = 'MultiColumnPage';
 
 		this.listenTo(Backbone, "windowResized", function() {

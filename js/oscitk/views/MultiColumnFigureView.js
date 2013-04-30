@@ -4,7 +4,8 @@ OsciTk.views.figureTypeRegistry["default"] = "MultiColumnFigure";
 OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 	tagName: 'figure',
 	template: OsciTk.templateManager.get('multi-column-figure'),
-	initialize: function() {
+	initialize: function(options) {
+		this.options = options;
 		//set some defaults
 		this.layoutComplete = false;
 		this.contentRendered = false;

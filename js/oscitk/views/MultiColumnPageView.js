@@ -1,7 +1,7 @@
 OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
-	initialize: function() {
+	initialize: function(options) {
 		this._super('initialize');
-		
+		this.options = options;
 		this.columnTemplate = OsciTk.templateManager.get('multi-column-column');
 		this.visible = false;
 		this.paragraphControlsViews = [];

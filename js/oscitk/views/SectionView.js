@@ -1,6 +1,7 @@
 OsciTk.views.Section = OsciTk.views.BaseView.extend({
 	id: 'section',
-	initialize: function() {
+	initialize: function(options) {
+		this.options = options ? options : {};
 
 		_.defaults(this.options, {
 			pageView : 'Page'

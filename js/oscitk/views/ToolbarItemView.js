@@ -1,7 +1,8 @@
 OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 	className: 'toolbar-item',
 	template: OsciTk.templateManager.get('toolbar-item'),
-	initialize: function() {
+	initialize: function(options) {
+		this.options = options;
 		// add a class to this element based on view button uses
 		this.$el.addClass(this.options.toolbarItem.view + '-toolbar-item');
 		// tracks the view to render in the content area when this view is clicked

@@ -1,7 +1,8 @@
 OsciTk.views.ParagraphControlsView = OsciTk.views.BaseView.extend({
 	className: 'paragraph-controls',
 
-	initialize: function() {
+	initialize: function(options) {
+		this.options = options;
 		this.options.paragraphNumber = this.options.content.data("paragraph_number");
 		this.options.contentIdentifier = this.options.content.data("osci_content_id");
 		this.options.linkItems = app.config.get('paragraphControls');

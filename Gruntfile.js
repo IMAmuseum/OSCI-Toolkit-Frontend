@@ -166,29 +166,42 @@ module.exports = function(grunt) {
 		grunt.log.writeln('File "' + this.file.dest + '" created.');
 	});
 
-	//Helper for compiligin Underscore templates
-	grunt.registerHelper('precompileTemplates', function(files) {
-		var output = '';
+	//MultiTask for Compiling Underscore templates into a single file
+    grunt.registerMultiTask('precompileTemplates', 'Precompile Underscore templates', function() {
+        this.files.forEach(function(f) {
+            var src = f.src.filter(function(filepath) {
+                // Warn on and remove invalid source files (if nonull was set).
+                if (!grunt.file.exists(filepath)) {
+                    grunt.log.warn('Source file "' + filepath + '" not found.');
+                    return false;
+                } else {
+                    return true;
+                }
+            }).map(function(filepath) {
+                // Read file source.
+                var src = grunt.file.read(filepath);
+                // Process files as templates if requested.
+                src = grunt.util._.template(src).source;
 
-		if (files) {
-			output += files.map(function(filepath) {
-				var templateHtml = grunt.task.directive(filepath, grunt.file.read),
-					templateSrc = grunt.utils._.template(templateHtml).source,
-					fileParts = filepath.split("\/"),
-					fileName = fileParts[fileParts.length - 1];
+                var fileParts = filepath.split("\/");
+                var fileName = fileParts[fileParts.length - 1];
 
-				return "OsciTk.templates['" + fileName.substr(0,fileName.indexOf('.tpl.html')) + "'] = " + templateSrc;
-			}).join('\n');
-		}
+                return "OsciTk.templates['" + fileName.substr(0,fileName.indexOf('.tpl.html')) + "'] = " + src;
+            }).join(grunt.util.normalizelf(";\n\n"));
 
-		return output;
-	});
+            // Write the destination file.
+            grunt.file.write(f.dest, src);
+
+            // Print a success message.
+            grunt.log.writeln('File "' + f.dest + '" created.');
+        });
+    });
 
 	grunt.loadNpmTasks('grunt-css');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-compress');
 
 	// Default task.
-	grunt.registerTask('default', 'precompileTemplates concat min cssmin copy compress');
+	grunt.registerTask('default', ['precompileTemplates', 'cssmin', 'copy', 'jshint']);
 
 };
