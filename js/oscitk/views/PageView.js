@@ -24,8 +24,15 @@ OsciTk.views.Page = OsciTk.views.BaseView.extend({
 
 		return this;
 	},
+	removeContent : function(contentId) {
+		this.model.removeContent(contentId);
+		return this;
+	},
+	getContentById : function(contentId) {
+		return this.model.getContent(contentId);
+	},
 	hasContent : function(hasContent) {
-		return this.model.get('content').length ? true : false;
+		return this.model.contentLength() ? true : false;
 	},
 	isPageComplete : function() {
 		return this.processingData.complete;

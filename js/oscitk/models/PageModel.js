@@ -2,30 +2,34 @@ OsciTk.models.Page = OsciTk.models.BaseModel.extend({
 
 	defaults: function() {
 		return {
-			content : [],
+			content : {},
 			pageNumber : 0
 		};
 	},
 
 	addContent : function(newContent) {
 		var content = this.get('content');
-		content.push(newContent);
+		content[$(newContent[0]).data("osci_content_id")] = newContent[0];
 
 		return this;
 	},
 
 	removeContentAt : function(index) {
 		var content = this.get('content');
-		content.splice(index, 1);
+		delete content[index];
 
 		return this;
 	},
 
 	removeAllContent : function() {
-		this.set('content', []);
+		this.set('content', {});
 	},
 
 	contentLength : function() {
 		return this.get('content').length;
+	},
+
+	getContent : function(id) {
+		return this.get('content')[id];
 	}
 });

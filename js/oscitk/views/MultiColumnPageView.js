@@ -68,9 +68,9 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 		return this;
 	},
 
-	layoutContent : function() {
+	layoutContent : function(contentId) {
 		var overflow = 'none';
-		var column = this.getCurrentColumn();
+		var column = this.getCurrentColumn(contentId);
 
 		if (column === null) {
 			this.processingComplete();
@@ -78,7 +78,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 			return overflow;
 		}
 
-		var content = $(this.model.get('content')[(this.model.get('content').length - 1)]);
+		var content = $(this.getContentById(contentId));
 
 		column.$el.append(content);
 
@@ -97,6 +97,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
 		//If offset defined (should always be negative) add it to the height of the content to get the correct top margin
 		var offset = 0;
+		var columnOffset = column.offset;
 		if (column.offset < 0) {
 			offset = contentHeight + column.offset;
 
@@ -122,21 +123,21 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
 		//If we have negative height remaining, the content must be repeated in the next column
 		if (heightRemain < 0) {
-			var overflowHeight = heightRemain;
-			var hiddenLines = Math.floor(overflowHeight / lineHeight);
-			var newHeight = contentPosition.top + content.outerHeight() + (hiddenLines * lineHeight);
+			//var temp = Math.floor((column.height - contentPosition.top) / lineHeight);
 
-			//assign the new height to remove any partial lines of text
-			column.height = newHeight;
-			column.$el.height(newHeight + "px");
+			var visibleLines = Math.floor((column.height - contentPosition.top) / lineHeight);
+			var newHeight = (visibleLines * lineHeight) + contentPosition.top;
+			var heightDiff = column.height - newHeight;
 
-			if (hiddenLines === 0) {
-				heightRemain = 0;
-				overflow = 'none';
-			} else {
-				heightRemain = (hiddenLines * lineHeight) - contentMargin.bottom;
-				overflow = 'contentOverflow';
+			if (heightDiff > 0) {
+				//assign the new height to remove any partial lines of text
+				column.height = newHeight;
+				column.$el.height(newHeight + "px");
+
+				heightRemain = heightRemain - heightDiff;
 			}
+
+			overflow = 'contentOverflow';
 
 			if (this.processingData.currentColumn === (this.parent.dimensions.columnsPerPage - 1)) {
 				this.processingComplete();
@@ -145,6 +146,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 			//If all of the content is overflowing the column remove it and move to next column
 			if ((column.height - contentPosition.top) < lineHeight) {
 				content.remove();
+				this.removeContent(content.data("osci_content_id"));
 				column.heightRemain = 0;
 				overflow = 'contentOverflow';
 				return overflow;
@@ -181,7 +183,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 		return overflow;
 	},
 
-	getCurrentColumn : function() {
+	getCurrentColumn : function(contentId) {
 		var currentColumn = null;
 		var lineHeight = parseInt(this.$el.css("line-height"), 10);
 		lineHeight = lineHeight ? lineHeight : this.parent.options.defaultLineHeight;
@@ -193,7 +195,8 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 			currentColumn = this.processingData.columns[this.processingData.currentColumn];
 		} else {
 			for(var i = 0; i < this.parent.dimensions.columnsPerPage; i++) {
-				if (this.processingData.columns[i].height >= minColHeight &&
+				if (this.processingData.columns[i] !== undefined &&
+					this.processingData.columns[i].height >= minColHeight &&
 					this.processingData.columns[i].heightRemain > 0) {
 					currentColumn = this.processingData.columns[i];
 					this.processingData.currentColumn = i;
@@ -206,7 +209,8 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 			if (this.processingData.currentColumn > 0) {
 				currentColumn.offset = this.processingData.columns[(this.processingData.currentColumn - 1)].heightRemain;
 			} else {
-				var previousPage = this.parent.getChildViewByIndex(this.parent.getChildViews().length - 2);
+				var pageNum = this.parent.getPageNumberForSelector("[data-osci_content_id='" + contentId + "']");
+				var previousPage = this.parent.getChildViewByIndex(pageNum - 1);
 				if (previousPage) {
 					currentColumn.offset = previousPage.processingData.columns[previousPage.processingData.columns.length - 1].heightRemain;
 				}
@@ -233,6 +237,9 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
 		var pageFigures = this.getChildViewsByType('figure');
 		var numPageFigures = pageFigures.length;
+		var lineHeight = parseInt(this.$el.css("line-height"), 10);
+		lineHeight = lineHeight ? lineHeight : this.parent.options.defaultLineHeight;
+		var minColHeight =  lineHeight * this.parent.dimensions.minLinesPerColumn;
 
 		for (var i = 0; i < this.parent.dimensions.columnsPerPage; i++) {
 			var leftPosition = (i * this.parent.dimensions.columnWidth) + (this.parent.dimensions.gutterWidth * (i + 1));
@@ -275,16 +282,18 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 			}
 
 			height = Math.floor(height);
-			this.processingData.columns[i] = {
-				height : height,
-				heightRemain : height > 0 ? height : 0,
-				'$el' : null,
-				offset : 0,
-				position : {
-					left : columnPosition.x[0],
-					top : columnPosition.y[0]
-				}
-			};
+			if (height > minColHeight) {
+				this.processingData.columns.push({
+					height : height,
+					heightRemain : height > 0 ? height : 0,
+					'$el' : null,
+					offset : 0,
+					position : {
+						left : columnPosition.x[0],
+						top : columnPosition.y[0]
+					}
+				});
+			}
 		}
 
 		this.processingData.currentColumn = 0;

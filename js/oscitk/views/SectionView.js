@@ -50,7 +50,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 		}
 		return null;
 	},
-	getPageForElement: function(element) {
+	getPageNumberForSelector: function(element) {
 		var page = $(element).parents(".page");
 		if (page) {
 			return page.data("page_num");
@@ -58,7 +58,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
 		return null;
 	},
-	getPageForElementId : function(id) {
+	getPageNumberForElementId : function(id) {
 		var views = this.getChildViews();
 		var p = _.find(views, function(view) { return view.containsElementId(id); });
 		if ((p !== undefined) && (p !== -1)) {

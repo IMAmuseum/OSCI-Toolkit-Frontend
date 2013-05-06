@@ -51,7 +51,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 							var refs = $(".figure_reference").filter("[href='#" + figureId + "']");
 							if (refs.length) {
 								if (refs.length === 1) {
-									page_for_id = this.getPageForElement(refs[0]);
+									page_for_id = this.getPageNumberForSelector(refs[0]);
 								} else {
 									//find visible occurence
 									var occurrenceCount = 0;
@@ -60,7 +60,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 											occurrenceCount++;
 
 											if (occurrenceCount === occurrence) {
-												page_for_id = this.getPageForElement(refs[j]);
+												page_for_id = this.getPageNumberForSelector(refs[j]);
 												break;
 											}
 										}
@@ -69,7 +69,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 							}
 
 						} else {
-							page_for_id = this.getPageForElementId(data.identifier);
+							page_for_id = this.getPageNumberForElementId(data.identifier);
 						}
 
 						if (page_for_id !== null) {
@@ -267,18 +267,19 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 			}
 
 			if (layoutResults === null) {
+				var contentId = 'osci-content-' + i;
 				if (firstOccurence) {
-					content.attr('id', 'osci-content-' + i);
+					content.attr('id', contentId);
 				}
 
 				//add a data attribute for all content for when content is repeated it still has an identifier
-				content.attr("data-osci_content_id", 'osci-content-' + i);
+				content.attr("data-osci_content_id", contentId);
 
 				if (content.is("p")) {
 					content.attr("data-paragraph_number", paragraphNumber);
 				}
 
-				layoutResults = pageView.addContent(content).layoutContent();
+				layoutResults = pageView.addContent(content).layoutContent(contentId);
 			}
 
 			switch (layoutResults) {
