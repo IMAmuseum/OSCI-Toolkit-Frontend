@@ -6,7 +6,7 @@ OsciTk.views.figureTypeRegistry["iip_asset"] = "MultiColumnFigureLayeredImage";
 OsciTk.views.MultiColumnFigureLayeredImage = OsciTk.views.MultiColumnFigure.extend({
 	// override MultiColumnFigure's events - polymaps handles events for this class
 	events: {},
-	renderContent: function() {
+	renderContent: function(callback) {
 		this.figContent = this.figContent || null;
 		var container = this.$el.find(".figure_content");
 		var containerHeight = container.height();
@@ -34,6 +34,9 @@ OsciTk.views.MultiColumnFigureLayeredImage = OsciTk.views.MultiColumnFigure.exte
 						$this.figContent = $(data).filter('.layered_image-asset').first();
 						$this.LIMarkup = $this.figContent.clone();
 						$this.renderFromContentDoc();
+						if (callback !== undefined) {
+							callback($this);
+						}
 					}
 				});
 			}
@@ -47,8 +50,16 @@ OsciTk.views.MultiColumnFigureLayeredImage = OsciTk.views.MultiColumnFigure.exte
 		new window.LayeredImage(contentDiv.find('.layered_image-asset')[0]);
 		this.contentRendered = true;
 	},
-	fullscreen: function() {
-		var li = liCollection.find(this.LIMarkup.attr('id'));
-		li.fullscreen();
+	fullscreen: function(that) {
+		if (that === undefined) {
+			that = this;
+		}
+		if (!that.contentRendered) {
+			that.renderContent(that.fullscreen);
+		}
+		else {
+			var li = liCollection.find(that.LIMarkup.attr('id'));
+			li.fullscreen();
+		}
 	}
 });

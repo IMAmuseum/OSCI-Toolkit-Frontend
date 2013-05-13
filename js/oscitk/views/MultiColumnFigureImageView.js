@@ -16,6 +16,9 @@ OsciTk.views.MultiColumnFigureImage = OsciTk.views.MultiColumnFigure.extend({
 		this.contentRendered = true;
 	},
 	fullscreen: function() {
+		if (!this.contentRendered) {
+			this.renderContent();
+		}
 		$.fancybox.open({
 			href: this.$el.find("img").attr('src'),
 			title: this.model.get("caption"),
