@@ -110,7 +110,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 			}
 
 			var addLeftPadding = 0;
-			if (this.calculatedWidth < availableWidth) {
+			if (this.calculatedWidth < availableWidth && availableWidth <= dimensions.innerSectionWidth) {
 				addLeftPadding = Math.floor((availableWidth - this.calculatedWidth) / 2);
 			}
 
