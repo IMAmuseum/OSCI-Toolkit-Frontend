@@ -266,7 +266,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 				}
 			}
 
-			if (layoutResults === null) {
+			if (layoutResults === null && content.length) {
 				var contentId = 'osci-content-' + i;
 				if (firstOccurence) {
 					content.attr('id', contentId);
@@ -307,6 +307,10 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 					}
 
 					firstOccurence = true;
+
+					if (this.layoutData.items <= 0) {
+						paveView.processingComplete();
+					}
 			}
 		}
 	},
