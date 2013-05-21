@@ -309,7 +309,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 					firstOccurence = true;
 
 					if (this.layoutData.items <= 0) {
-						paveView.processingComplete();
+						pageView.processingComplete();
 					}
 			}
 		}
