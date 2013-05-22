@@ -11,18 +11,15 @@ OsciTk.collections.GlossaryTerms = OsciTk.collections.BaseCollection.extend({
 
 		if (doc) {
 			// retrieve glossary doc
-			var data = xmlToJson(loadXMLDoc(doc.href));
-
-			if (!_.isUndefined(data.dl.td) && !_.isUndefined(data.dl.dd)) {
-				data.dl.td = objectToArray(data.dl.td);
-				data.dl.dd = objectToArray(data.dl.dd);
-
-				// add terms to collection
-				for (var i = 0, count = data.dl.td.length; i < count; i++) {
+			var data =loadXMLDoc(doc.href);
+			var dds = $(data).find('dd');
+			var dts = $(data).find('dt');
+			if (dds.length > 0 && dts.length > 0) {
+				for (var i = 0, count=dts.length; i < count; i++) {
 					var item = {
-						id: data.dl.td[i]['data-tid'],
-						term: data.dl.td[i].dfn.value,
-						definition: data.dl.dd[i].value
+						id: $(dts[i]).attr('data-tid'),
+						term: $(dts[i]).find('dfn:first').html(),
+						definition: $(dds[i]).html()
 					};
 					this.add(item);
 				}
