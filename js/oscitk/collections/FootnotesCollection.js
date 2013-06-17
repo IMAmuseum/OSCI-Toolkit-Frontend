@@ -9,6 +9,7 @@ OsciTk.collections.Footnotes = OsciTk.collections.BaseCollection.extend({
 	},
 
 	populateFromMarkup: function(data) {
+		this.reset();
 		_.each($('aside', data), function(markup) {
 			var idComponents = markup.id.match(/\w+-(\d+)-(\d+)/);
 			var footnote = {
