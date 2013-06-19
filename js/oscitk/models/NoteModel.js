@@ -11,16 +11,12 @@ OsciTk.models.Note = OsciTk.models.BaseModel.extend({
 
 	initialize: function(attributes, options) {
 		this.on('error', function(model, error) {
-			console.log([model, error], 'error fired');
+            throw new Error('an error has occured');
 		});
 	},
 
 	sync: function(method, model, options) {
 		var endpoint = app.config.get('endpoints').OsciTkNote;
-
-		console.log('Note.sync: ' + method);
-		console.log(model, 'model');
-		console.log(options, 'options');
 
 		switch (method) {
 			case 'create':
@@ -32,7 +28,6 @@ OsciTk.models.Note = OsciTk.models.BaseModel.extend({
 				// and properly error if necessary
 				options.success = function(data, textStatus, jqXHR) {
 					var response = JSON.parse(data);
-					console.log(response, 'response');
 					if (!response.success) {
 						options.error(model, jqXHR);
 					}
@@ -49,7 +44,6 @@ OsciTk.models.Note = OsciTk.models.BaseModel.extend({
 				options.data = model.toJSON();
 				options.success = function(data, textStatus, jqXHR) {
 					var response = JSON.parse(data);
-					console.log(response, 'update response');
 					if (!response.success) {
 						options.error(model, jqXHR);
 					}
@@ -67,7 +61,6 @@ OsciTk.models.Note = OsciTk.models.BaseModel.extend({
 				options.type = 'POST';
 				options.success = function(data, textStatus, jqXHR) {
 					var response = JSON.parse(data);
-					console.log(response, 'delete response');
 					if (!response.success) {
 						options.error(model, jqXHR);
 					}
