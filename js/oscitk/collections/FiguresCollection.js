@@ -37,7 +37,8 @@ OsciTk.collections.Figures = OsciTk.collections.BaseCollection.extend({
 				thumbnail_url: undefined, // Defaults to image defined in css
 				type:       $markup.data('figure_type'),
 				aspect:     $markup.data('aspect'),
-				order:      $markup.data('order')
+				order:      $markup.data('order'),
+				count:      $markup.data('count')
 			};
 
 			// First, check for an explicit thumbnail
