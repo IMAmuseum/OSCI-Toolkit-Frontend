@@ -327,14 +327,7 @@
 ----------------------------------*/
 
 /* states and images */
-.ui-icon { width: 16px; height: 16px; background-image: ; }
-.ui-widget-content .ui-icon {background-image: ; }
-.ui-widget-header .ui-icon {background-image: ; }
-.ui-state-default .ui-icon { background-image: ; }
-.ui-state-hover .ui-icon, .ui-state-focus .ui-icon {background-image: ; }
-.ui-state-active .ui-icon {background-image: ; }
-.ui-state-highlight .ui-icon {background-image: ; }
-.ui-state-error .ui-icon, .ui-state-error-text .ui-icon {background-image: ; }
+.ui-icon { width: 16px; height: 16px; }
 
 /* positioning */
 .ui-icon-carat-1-n { background-position: 0 0; }
