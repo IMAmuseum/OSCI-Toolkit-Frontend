@@ -76,7 +76,6 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 							gotoPage = page_for_id;
 						} else {
 							gotoPage = 1;
-							console.log('Navigation error: ', data.identifier, 'not found in any page');
 						}
 
 						break;
