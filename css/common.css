@@ -72,36 +72,65 @@ a.footnote-reference {
 }
 
 
-/* figure tables */
+/* figures */
 figcaption p {
 	display: inline;
 }
-
-.figure_content table {
-	width:100%;
-}
-.figure_content table thead{
-
-}
-.figure_content table thead tr {
-
-}
-.figure_content table thead th {
-	text-align:left;
-	padding:5px;
+figure.html_asset .figureContent {
+    overflow: auto;
 }
 
-.figure_content table tbody {
+/* ------------------ Table Styles ------------------ */
 
+table {
+  border: 0;
+  border-spacing: 0;
+  font-size: 0.857em;
+  margin: 10px 0;
+  width: 100%;
 }
-.figure_content table tbody tr {
-
+table table {
+  font-size: 1em;
 }
-.figure_content table tbody tr:nth-child(odd) {
-	background: #eee;
+#footer-wrapper table {
+  font-size: 1em;
 }
-.figure_content table tbody td {
-	padding:5px;
+table tr th {
+  background: #757575;
+  background: rgba(0, 0, 0, 0.51);
+  border-bottom-style: none;
+}
+table tr th,
+table tr th a,
+table tr th a:hover {
+  color: #FFF;
+  font-weight: bold;
+}
+table tbody tr th {
+  vertical-align: top;
+}
+tr td,
+tr th {
+  padding: 4px 9px;
+  border: 1px solid #fff;
+  text-align: left; /* LTR */
+}
+tr.odd {
+  background: #e4e4e4;
+  background: rgba(0, 0, 0, 0.105);
+}
+tr,
+tr.even {
+  background: #efefef;
+  background: rgba(0, 0, 0, 0.063);
+}
+table ul.links {
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+}
+table ul.links li {
+  padding: 0 1em 0 0;
 }
 
 /* paragraph number controls */
@@ -207,9 +236,6 @@ figcaption p {
 	border:1px solid #f2f2f2;
 	border-radius:4px!important;
 }
-
-
-/* blah */
 
 
 /* misc */

@@ -15,6 +15,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 		this.position = {x:[0,0], y:[0,0]};
 
 		this.$el.attr("id", this.model.get("id"));
+		this.$el.addClass(this.model.get("type"));
 
 		this.listenTo(Backbone, 'pageChanged', this.toggleVisibility);
 	},
