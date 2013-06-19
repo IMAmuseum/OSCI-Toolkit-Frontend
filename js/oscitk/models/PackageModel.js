@@ -42,7 +42,6 @@ OsciTk.models.Package = OsciTk.models.BaseModel.extend({
 	},
 
 	sync: function(method, model, options) {
-		console.log('Package.sync: ' + method);
 	},
 
 	getTitle: function() {
