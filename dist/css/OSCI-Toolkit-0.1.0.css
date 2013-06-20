@@ -20,8 +20,8 @@ a {
 
 #reader {
 	position: relative;
-	top: 0px;
-	left: 0px;
+	top: 0;
+	left: 0;
 	height: 100%;
 	width: 100%;
 }
@@ -60,9 +60,6 @@ figcaption {
 	font-family:Arial, Helvetica, sans-serif;
 }
 
-a.figure_reference {
-
-}
 a.footnote-reference {
 	vertical-align:super;
 	font-size:10px;
@@ -143,18 +140,11 @@ table ul.links li {
 .paragraph-controls span {
 	padding:2px 5px;
 }
-.paragraph-controls.notes-present:after {
-	/*content: url('../img/bg-note-indicator.png');
-	display:block;
-	position:relative;
-	bottom:0px;
-	left:0px;*/
-}
 
 /* tooltips */
 .toggleNoteDialog, .toggleCiteDialog {
 	line-height:16px;height:16px;
-	vertical-align:center;
+	vertical-align:middle;
 	text-shadow:0 1px 1px rgba(255,255,255,.8);
 	text-transform:uppercase;
 	text-decoration:none;
@@ -162,19 +152,16 @@ table ul.links li {
 }
 .toggleNoteDialog {
 	display:inline-block;
-
 	background: url('../img/icon-note-mini.png') no-repeat left center;
 	margin-bottom:8px;
 }
 .toggleCiteDialog {
 	display:inline-block;
-
 	background: url('../img/icon-cite-mini.png') no-repeat left center;
 }
 .ui-tooltip-content {
 	position: relative;
 	padding: 5px 9px;
-	overflow: hidden;
 	text-align: left;
 	word-wrap: break-word;
 	overflow: hidden;
@@ -187,8 +174,7 @@ table ul.links li {
 	display:none!important;
 }
 .ui-tooltip, .qtip {
-	max-width:auto!important;
-
+	width:auto!important;
 	margin-left:-10px;
 }
 
@@ -240,8 +226,8 @@ table ul.links li {
 
 /* misc */
 .fancybox-close {
-	top: 0px!important;
-	right: 0px!important;
+	top: 0!important;
+	right: 0!important;
 	opacity:.4;
 }
 .fancybox-close:hover { opacity: 1; }
@@ -257,7 +243,7 @@ table ul.links li {
 	z-index: 100;
 	position: absolute;
 	top: -87px;
-	left: 0px;
+	left: 0;
 /*	height: 0;*/
 	max-height: 80%;
 	min-height: 40px;
@@ -296,7 +282,7 @@ table ul.links li {
 #toolbar-content:after {
 	content: "";
 	position: relative;
-	bottom:7px;left:0px;right:10px;
+	bottom:7px;left:0;right:10px;
 	background: url('../img/bg-fold-shadow.png') no-repeat center top transparent;
 	background-size: 100% 6px;
 	height:6px;display:block;
@@ -319,7 +305,7 @@ table ul.links li {
 	position: absolute;
 	top: 3px;
 	right: 20px;
-	padding: 0px;
+	padding: 0;
 	cursor: pointer;
 	height:30px;
 	width:30px;
@@ -341,7 +327,7 @@ table ul.links li {
 	z-index: 9;
 	position: absolute;
 	top: 0;
-	left: 0px;
+	left: 0;
 	padding: 0 20px;
 	width: 100%;
 	pointer-events:none;
@@ -375,7 +361,7 @@ div.toolbar-item {
 	/*float: left;*/
 	cursor: pointer;
 	display:inline-block;
-	top:0px;
+	top:0;
 	position:relative;
 	overflow:hidden;
 	text-indent: -9999px;
@@ -386,10 +372,9 @@ div.toolbar-item:after {
 	overflow:hidden;display:block;
 	white-space:nowrap;text-indent:100%;
 	background: url('../img/bg-toolbar-divider.png') left center no-repeat;
-	position:relative;
-	margin:0px;padding:0px;
+	margin:0;padding:0;
 	vertical-align:middle;
-	position:absolute;top:0px;
+	position:absolute;top:0;
 }
 div.toolbar-item:first-child:after {
 	display:none!important;
@@ -444,7 +429,7 @@ div.Glossary-toolbar-item:hover {
 
 /* TOC VIEW */
 div.toc-view > ul {
-	padding-left: 0px;
+	padding-left: 0;
 	list-style: none;
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -460,7 +445,7 @@ div.toc-view > ul > li > a {
 	height: 50px;
 }
 div.toc-view h4, div.toc-view h5 {
-	margin: 0px;
+	margin: 0;
 }
 div.toc-view h5 {
 	color: #8C8C8C
@@ -560,11 +545,11 @@ div.font-view div.theme-control a {
 	line-height:28px;
 	height:28px; /* for firefox */
 	text-transform:uppercase;
-	margin:0px;
+	margin:0;
 	padding:0 20px;
 	font-family: Arial, Helvetica, sans-serif;
-	box-shadow: 0px 1px 1px #e3e3e3;
-	text-shadow:0px 1px 1px #D7E5EB;
+	box-shadow: 0 1px 1px #e3e3e3;
+	text-shadow:0 1px 1px #D7E5EB;
 	display:inline-block!important;
 	text-decoration:none;
 }
@@ -655,12 +640,12 @@ div.font-view div.theme-control a:active {
 
 #toolbar .figure-nav.prev {
 	top: 160px;
-	left: 0px;
+	left: 0;
 }
 
 #toolbar .figure-nav.next {
 	top: 160px;
-	right: 0px;
+	right: 0;
 }
 
 #toolbar figure {
@@ -668,9 +653,11 @@ div.font-view div.theme-control a:active {
 }
 
 #toolbar figure {
-	margin-left: 0px;
-	-webkit-margin-before: 0px;
-	-webkit-margin-start: 0px;
+	margin-left: 0;
+	-webkit-margin-before: 0;
+	-moz-margin-before: 0;
+	-webkit-margin-start: 0;
+	-moz-margin-start: 0;
 }
 
 #toolbar .figure-thumbnail {
@@ -678,6 +665,7 @@ div.font-view div.theme-control a:active {
 	height: 140px;
 	cursor: pointer;
 	-webkit-margin-end: 20px;
+	-moz-margin-end: 20px;
 	background-position: center;
 	background-size: cover;
 	background-image: url('../img/osci-default-figure.png');
@@ -704,9 +692,12 @@ div.font-view div.theme-control a:active {
 
 #toolbar figure.preview {
 	display: none;
-	-webkit-margin-before: 0px;
-	-webkit-margin-start: 0px;
-	-webkit-margin-end: 0px;
+	-webkit-margin-before: 0;
+	-moz-margin-before: 0;
+	-webkit-margin-start: 0;
+	-moz-margin-start: 0;
+	-webkit-margin-end: 0;
+	-moz-margin-end: 0;
 }
 
 #toolbar .back-to-grid {
@@ -743,29 +734,28 @@ div.font-view div.theme-control a:active {
 
 button {
 	background-image: linear-gradient(bottom, rgb(189,207,211) 5%, rgb(255,255,255) 90%);
-background-image: -o-linear-gradient(bottom, rgb(189,207,211) 5%, rgb(255,255,255) 90%);
-background-image: -moz-linear-gradient(bottom, rgb(189,207,211) 5%, rgb(255,255,255) 90%);
-background-image: -webkit-linear-gradient(bottom, rgb(189,207,211) 5%, rgb(255,255,255) 90%);
-background-image: -ms-linear-gradient(bottom, rgb(189,207,211) 5%, rgb(255,255,255) 90%);
-
-background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0.05, rgb(189,207,211)),
-	color-stop(0.9, rgb(255,255,255))
-);
+    background-image: -o-linear-gradient(bottom, rgb(189,207,211) 5%, rgb(255,255,255) 90%);
+    background-image: -moz-linear-gradient(bottom, rgb(189,207,211) 5%, rgb(255,255,255) 90%);
+    background-image: -webkit-linear-gradient(bottom, rgb(189,207,211) 5%, rgb(255,255,255) 90%);
+    background-image: -ms-linear-gradient(bottom, rgb(189,207,211) 5%, rgb(255,255,255) 90%);
+    background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+	    left top,
+	    color-stop(0.05, rgb(189,207,211)),
+	    color-stop(0.9, rgb(255,255,255))
+    );
 	color:#52818C!important;
 	border:1px solid #999;
 	border-radius:4px;
 	font-size:12px;line-height:28px;
 	height:28px; /* for firefox */
 	text-transform:uppercase;
-	margin:0px;
+	margin:0;
 	padding:0 20px;
 	font-family: Arial, Helvetica, sans-serif;
-	box-shadow: 0px 1px 1px #e3e3e3;
-	text-shadow:0px 1px 1px #D7E5EB;
+	box-shadow: 0 1px 1px #e3e3e3;
+	text-shadow:0 1px 1px #D7E5EB;
 }
 button:hover {
 	background-image: linear-gradient(bottom, rgb(159,185,191) 5%, rgb(237,242,243) 90%);
@@ -821,7 +811,7 @@ background-image: -webkit-gradient(
 
 	#toolbar-handle {
 		width: 100%;
-		right: 0px;
+		right: 0;
 		border-bottom-left-radius:0;
 		border-bottom-right-radius:0;
 	}
@@ -964,7 +954,7 @@ h1, h2, h3, h4, h5 {
 }
 .search-view #search-box {
 	float: left;
-	display: inline-block;
+	display: inline;
 	margin: 0 20px 20px 0;
 	position: relative;
 	width: 100%;
@@ -974,11 +964,11 @@ h1, h2, h3, h4, h5 {
 	line-height: 1.4em;
 	text-indent: 10px;
 	border-radius: 50px;
-	border: none;
 	font-size: 18px;
 	background: #fff;
 	border: 2px inset #ccc;
 	-webkit-appearance: none;
+	-moz-appearance: none;
 	padding-right: 25px;
 	width: 100%;
 	max-width: 320px;
@@ -1129,7 +1119,7 @@ h1, h2, h3, h4, h5 {
 	text-indent: 5px;
 	float: left;
 	text-transform: uppercase;
-	display: inline-block;
+	display: inline;
 	width: 80px;
 	font-size: 0.7em;
 	color: #FFF;
@@ -1140,14 +1130,14 @@ h1, h2, h3, h4, h5 {
 	background-color: #8fa6ac;
 	text-align:center;
 	font-size:11px;
-	text-indent:0px;
+	text-indent:0;
 }
 .result-type.figure {
 	display: inline-block;
 	background-color: #999966;
 	text-align:center;
 	font-size:11px;
-	text-indent:0px;
+	text-indent:0;
 }
 #facet-by-section .section-title {
 	font-weight: bold;
@@ -1201,6 +1191,7 @@ h1, h2, h3, h4, h5 {
 		display: block;
 	}
 }
+
 #navigation {
 	font-family: sans-serif;
 	font-size: 0.8em;
@@ -1221,12 +1212,12 @@ h1, h2, h3, h4, h5 {
 #navigation .header:hover { color:#333; }
 
 #navigation .prev-page.side {
-	left: 0px;
+	left: 0;
 	text-align:center;
 }
 
 #navigation .next-page.side {
-	right: 0px;
+	right: 0;
 	text-align:center;
 }
 
@@ -1255,7 +1246,7 @@ h1, h2, h3, h4, h5 {
 
 #navigation .side {
 	position: fixed;
-	top: 0px;
+	top: 0;
 	height: 100%;
 	color: #ccc;
 	cursor: pointer;	
@@ -1273,13 +1264,13 @@ h1, h2, h3, h4, h5 {
 #navigation .prev-page.corner {
 	position: absolute;
 	top: 50%;
-	left: 0px;
+	left: 0;
 }
 
 #navigation .next-page.corner {
 	position: absolute;
 	top: 50%;
-	right: 0px;
+	right: 0;
 }
 
 #navigation .corner {
@@ -1301,18 +1292,12 @@ h1, h2, h3, h4, h5 {
 	height: 6px;
 	width: 100px;
 }
-#navigation .button:hover {
-	
-}
 
 #navigation .corner.inactive {
 	color: #ccc;
 	cursor: auto;
 }
 
-#navigation .corner.inactive .button {
-	
-}
 .prev-page .button {
 	background: url('../img/bg-pager-arrow-prev.png') no-repeat left -6px #A8C0C5;
 }
@@ -1340,7 +1325,7 @@ h1, h2, h3, h4, h5 {
 	height: 6px;
 	background-color: #ddd;
 	/*border-radius: 5px;	*/
-	margin: 0px 20px;
+	margin: 0 20px;
 }
 
 #navigation .pager .head {
@@ -1348,7 +1333,7 @@ h1, h2, h3, h4, h5 {
 	left: 33%;
 	width: 33%;
 	height: 6px;
-	top: 0px;
+	top: 0;
 	background-color: #333;
 	/*border: 1px solid black;*/
 }
@@ -1361,10 +1346,11 @@ h1, h2, h3, h4, h5 {
 		display: none;
 	}
 	#navigation .pager {
-		left: 0px;
-		right: 0px;
+		left: 0;
+		right: 0;
 	}
 }
+
 .note-tooltip textarea {
 	background-color: #FFFFA3;
 	border: none;
@@ -1403,11 +1389,11 @@ h1, h2, h3, h4, h5 {
 	margin-bottom:10px;
 	line-height:1.2;
 	font-size:12px;
-	text-shadow: 0 1px 0px rgba(255,255,255,.6);
+	text-shadow: 0 1px 0 rgba(255,255,255,.6);
 }
 
 .ui-tooltip-titlebar .ui-state-default {
-	top:10px!important;border:none !important;right:0px!important;
+	top:10px!important;border:none !important;right:0!important;
 }
 .ui-tooltip-icon .ui-icon {
 	width: 14px!important;
@@ -1454,7 +1440,6 @@ ul.notesList li {
 	display:block;
 	float:left;
 	width:180px;
-	vertical-align:top;
 	margin-right:20px;
 	font-size:13px;
 }
@@ -1466,7 +1451,7 @@ ul.notesList li {
 }
 .the-note:after {
 	position:absolute;
-	left:0px;bottom:0px;
+	left:0;bottom:0;
 	content:"";
 	width:180px;height:40px;margin:0;padding:0;
 	display:block;
@@ -1492,9 +1477,6 @@ ul.notesList li {
 }
 ul.notesList li a {
 	padding-right: 10px;
-}
-.notes-present {
-	/*background-color: #F00;*/
 }
 .noteLink.onCurrentPage {
 	background-color: red;
@@ -1600,7 +1582,7 @@ div.layered_image-asset .ui-slider-handle {
 }
 
 .ca-ui-layer span {
-	display: inline-block;
+	display: inline;
 	float: left;
 	vertical-align: middle;
 	text-align: center;

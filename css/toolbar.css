@@ -3,7 +3,7 @@
 	z-index: 100;
 	position: absolute;
 	top: -87px;
-	left: 0px;
+	left: 0;
 /*	height: 0;*/
 	max-height: 80%;
 	min-height: 40px;
@@ -42,7 +42,7 @@
 #toolbar-content:after {
 	content: "";
 	position: relative;
-	bottom:7px;left:0px;right:10px;
+	bottom:7px;left:0;right:10px;
 	background: url('../img/bg-fold-shadow.png') no-repeat center top transparent;
 	background-size: 100% 6px;
 	height:6px;display:block;
@@ -65,7 +65,7 @@
 	position: absolute;
 	top: 3px;
 	right: 20px;
-	padding: 0px;
+	padding: 0;
 	cursor: pointer;
 	height:30px;
 	width:30px;
@@ -87,7 +87,7 @@
 	z-index: 9;
 	position: absolute;
 	top: 0;
-	left: 0px;
+	left: 0;
 	padding: 0 20px;
 	width: 100%;
 	pointer-events:none;
@@ -121,7 +121,7 @@ div.toolbar-item {
 	/*float: left;*/
 	cursor: pointer;
 	display:inline-block;
-	top:0px;
+	top:0;
 	position:relative;
 	overflow:hidden;
 	text-indent: -9999px;
@@ -132,10 +132,9 @@ div.toolbar-item:after {
 	overflow:hidden;display:block;
 	white-space:nowrap;text-indent:100%;
 	background: url('../img/bg-toolbar-divider.png') left center no-repeat;
-	position:relative;
-	margin:0px;padding:0px;
+	margin:0;padding:0;
 	vertical-align:middle;
-	position:absolute;top:0px;
+	position:absolute;top:0;
 }
 div.toolbar-item:first-child:after {
 	display:none!important;
@@ -190,7 +189,7 @@ div.Glossary-toolbar-item:hover {
 
 /* TOC VIEW */
 div.toc-view > ul {
-	padding-left: 0px;
+	padding-left: 0;
 	list-style: none;
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -206,7 +205,7 @@ div.toc-view > ul > li > a {
 	height: 50px;
 }
 div.toc-view h4, div.toc-view h5 {
-	margin: 0px;
+	margin: 0;
 }
 div.toc-view h5 {
 	color: #8C8C8C
@@ -306,11 +305,11 @@ div.font-view div.theme-control a {
 	line-height:28px;
 	height:28px; /* for firefox */
 	text-transform:uppercase;
-	margin:0px;
+	margin:0;
 	padding:0 20px;
 	font-family: Arial, Helvetica, sans-serif;
-	box-shadow: 0px 1px 1px #e3e3e3;
-	text-shadow:0px 1px 1px #D7E5EB;
+	box-shadow: 0 1px 1px #e3e3e3;
+	text-shadow:0 1px 1px #D7E5EB;
 	display:inline-block!important;
 	text-decoration:none;
 }
@@ -401,12 +400,12 @@ div.font-view div.theme-control a:active {
 
 #toolbar .figure-nav.prev {
 	top: 160px;
-	left: 0px;
+	left: 0;
 }
 
 #toolbar .figure-nav.next {
 	top: 160px;
-	right: 0px;
+	right: 0;
 }
 
 #toolbar figure {
@@ -414,9 +413,11 @@ div.font-view div.theme-control a:active {
 }
 
 #toolbar figure {
-	margin-left: 0px;
-	-webkit-margin-before: 0px;
-	-webkit-margin-start: 0px;
+	margin-left: 0;
+	-webkit-margin-before: 0;
+	-moz-margin-before: 0;
+	-webkit-margin-start: 0;
+	-moz-margin-start: 0;
 }
 
 #toolbar .figure-thumbnail {
@@ -424,6 +425,7 @@ div.font-view div.theme-control a:active {
 	height: 140px;
 	cursor: pointer;
 	-webkit-margin-end: 20px;
+	-moz-margin-end: 20px;
 	background-position: center;
 	background-size: cover;
 	background-image: url('../img/osci-default-figure.png');
@@ -450,9 +452,12 @@ div.font-view div.theme-control a:active {
 
 #toolbar figure.preview {
 	display: none;
-	-webkit-margin-before: 0px;
-	-webkit-margin-start: 0px;
-	-webkit-margin-end: 0px;
+	-webkit-margin-before: 0;
+	-moz-margin-before: 0;
+	-webkit-margin-start: 0;
+	-moz-margin-start: 0;
+	-webkit-margin-end: 0;
+	-moz-margin-end: 0;
 }
 
 #toolbar .back-to-grid {
@@ -489,29 +494,28 @@ div.font-view div.theme-control a:active {
 
 button {
 	background-image: linear-gradient(bottom, rgb(189,207,211) 5%, rgb(255,255,255) 90%);
-background-image: -o-linear-gradient(bottom, rgb(189,207,211) 5%, rgb(255,255,255) 90%);
-background-image: -moz-linear-gradient(bottom, rgb(189,207,211) 5%, rgb(255,255,255) 90%);
-background-image: -webkit-linear-gradient(bottom, rgb(189,207,211) 5%, rgb(255,255,255) 90%);
-background-image: -ms-linear-gradient(bottom, rgb(189,207,211) 5%, rgb(255,255,255) 90%);
-
-background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0.05, rgb(189,207,211)),
-	color-stop(0.9, rgb(255,255,255))
-);
+    background-image: -o-linear-gradient(bottom, rgb(189,207,211) 5%, rgb(255,255,255) 90%);
+    background-image: -moz-linear-gradient(bottom, rgb(189,207,211) 5%, rgb(255,255,255) 90%);
+    background-image: -webkit-linear-gradient(bottom, rgb(189,207,211) 5%, rgb(255,255,255) 90%);
+    background-image: -ms-linear-gradient(bottom, rgb(189,207,211) 5%, rgb(255,255,255) 90%);
+    background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+	    left top,
+	    color-stop(0.05, rgb(189,207,211)),
+	    color-stop(0.9, rgb(255,255,255))
+    );
 	color:#52818C!important;
 	border:1px solid #999;
 	border-radius:4px;
 	font-size:12px;line-height:28px;
 	height:28px; /* for firefox */
 	text-transform:uppercase;
-	margin:0px;
+	margin:0;
 	padding:0 20px;
 	font-family: Arial, Helvetica, sans-serif;
-	box-shadow: 0px 1px 1px #e3e3e3;
-	text-shadow:0px 1px 1px #D7E5EB;
+	box-shadow: 0 1px 1px #e3e3e3;
+	text-shadow:0 1px 1px #D7E5EB;
 }
 button:hover {
 	background-image: linear-gradient(bottom, rgb(159,185,191) 5%, rgb(237,242,243) 90%);
@@ -567,7 +571,7 @@ background-image: -webkit-gradient(
 
 	#toolbar-handle {
 		width: 100%;
-		right: 0px;
+		right: 0;
 		border-bottom-left-radius:0;
 		border-bottom-right-radius:0;
 	}
