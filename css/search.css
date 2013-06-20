@@ -20,7 +20,7 @@
 }
 .search-view #search-box {
 	float: left;
-	display: inline-block;
+	display: inline;
 	margin: 0 20px 20px 0;
 	position: relative;
 	width: 100%;
@@ -30,11 +30,11 @@
 	line-height: 1.4em;
 	text-indent: 10px;
 	border-radius: 50px;
-	border: none;
 	font-size: 18px;
 	background: #fff;
 	border: 2px inset #ccc;
 	-webkit-appearance: none;
+	-moz-appearance: none;
 	padding-right: 25px;
 	width: 100%;
 	max-width: 320px;
@@ -185,7 +185,7 @@
 	text-indent: 5px;
 	float: left;
 	text-transform: uppercase;
-	display: inline-block;
+	display: inline;
 	width: 80px;
 	font-size: 0.7em;
 	color: #FFF;
@@ -196,14 +196,14 @@
 	background-color: #8fa6ac;
 	text-align:center;
 	font-size:11px;
-	text-indent:0px;
+	text-indent:0;
 }
 .result-type.figure {
 	display: inline-block;
 	background-color: #999966;
 	text-align:center;
 	font-size:11px;
-	text-indent:0px;
+	text-indent:0;
 }
 #facet-by-section .section-title {
 	font-weight: bold;

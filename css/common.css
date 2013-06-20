@@ -20,8 +20,8 @@ a {
 
 #reader {
 	position: relative;
-	top: 0px;
-	left: 0px;
+	top: 0;
+	left: 0;
 	height: 100%;
 	width: 100%;
 }
@@ -60,9 +60,6 @@ figcaption {
 	font-family:Arial, Helvetica, sans-serif;
 }
 
-a.figure_reference {
-
-}
 a.footnote-reference {
 	vertical-align:super;
 	font-size:10px;
@@ -143,18 +140,11 @@ table ul.links li {
 .paragraph-controls span {
 	padding:2px 5px;
 }
-.paragraph-controls.notes-present:after {
-	/*content: url('../img/bg-note-indicator.png');
-	display:block;
-	position:relative;
-	bottom:0px;
-	left:0px;*/
-}
 
 /* tooltips */
 .toggleNoteDialog, .toggleCiteDialog {
 	line-height:16px;height:16px;
-	vertical-align:center;
+	vertical-align:middle;
 	text-shadow:0 1px 1px rgba(255,255,255,.8);
 	text-transform:uppercase;
 	text-decoration:none;
@@ -162,19 +152,16 @@ table ul.links li {
 }
 .toggleNoteDialog {
 	display:inline-block;
-
 	background: url('../img/icon-note-mini.png') no-repeat left center;
 	margin-bottom:8px;
 }
 .toggleCiteDialog {
 	display:inline-block;
-
 	background: url('../img/icon-cite-mini.png') no-repeat left center;
 }
 .ui-tooltip-content {
 	position: relative;
 	padding: 5px 9px;
-	overflow: hidden;
 	text-align: left;
 	word-wrap: break-word;
 	overflow: hidden;
@@ -187,8 +174,7 @@ table ul.links li {
 	display:none!important;
 }
 .ui-tooltip, .qtip {
-	max-width:auto!important;
-
+	width:auto!important;
 	margin-left:-10px;
 }
 
@@ -240,8 +226,8 @@ table ul.links li {
 
 /* misc */
 .fancybox-close {
-	top: 0px!important;
-	right: 0px!important;
+	top: 0!important;
+	right: 0!important;
 	opacity:.4;
 }
 .fancybox-close:hover { opacity: 1; }
