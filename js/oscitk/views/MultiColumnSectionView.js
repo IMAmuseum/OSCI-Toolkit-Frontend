@@ -267,7 +267,8 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
 			if (layoutResults === null && content.length) {
 				var contentId = 'osci-content-' + i;
-				if (firstOccurence) {
+				var existingId = content.attr('id') || "";
+				if (firstOccurence && existingId.indexOf('_anchor') === -1) {
 					content.attr('id', contentId);
 				}
 
