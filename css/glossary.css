@@ -19,12 +19,12 @@
 	line-height: 1.4em;
 	text-indent: 10px;
 	border-radius: 50px;
-	border: none;
 	font-size: 18px;
 	background: #fff;
 	border: 2px inset #ccc;
 	width: 100%;
 	-webkit-appearance: none;
+	-moz-appearance: none;
 	padding: 0 25px;
 }
 #glossary-filter-search-icon {

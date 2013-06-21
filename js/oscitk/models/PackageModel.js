@@ -52,5 +52,10 @@ OsciTk.models.Package = OsciTk.models.BaseModel.extend({
 		}
 
 		return title;
-	}
+	},
+    getPubId: function() {
+        var metadata = this.get("metadata");
+        var vals = metadata['dc:identifier'].value.split(":");
+        return vals[2];
+    }
 });
