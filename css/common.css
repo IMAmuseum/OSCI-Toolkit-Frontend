@@ -20,8 +20,8 @@ a {
 
 #reader {
 	position: relative;
-	top: 0px;
-	left: 0px;
+	top: 0;
+	left: 0;
 	height: 100%;
 	width: 100%;
 }
@@ -60,9 +60,6 @@ figcaption {
 	font-family:Arial, Helvetica, sans-serif;
 }
 
-a.figure_reference {
-
-}
 a.footnote-reference {
 	vertical-align:super;
 	font-size:10px;
@@ -72,36 +69,65 @@ a.footnote-reference {
 }
 
 
-/* figure tables */
+/* figures */
 figcaption p {
 	display: inline;
 }
-
-.figure_content table {
-	width:100%;
-}
-.figure_content table thead{
-
-}
-.figure_content table thead tr {
-
-}
-.figure_content table thead th {
-	text-align:left;
-	padding:5px;
+figure.html_asset .figureContent {
+    overflow: auto;
 }
 
-.figure_content table tbody {
+/* ------------------ Table Styles ------------------ */
 
+table {
+  border: 0;
+  border-spacing: 0;
+  font-size: 0.857em;
+  margin: 10px 0;
+  width: 100%;
 }
-.figure_content table tbody tr {
-
+table table {
+  font-size: 1em;
 }
-.figure_content table tbody tr:nth-child(odd) {
-	background: #eee;
+#footer-wrapper table {
+  font-size: 1em;
 }
-.figure_content table tbody td {
-	padding:5px;
+table tr th {
+  background: #757575;
+  background: rgba(0, 0, 0, 0.51);
+  border-bottom-style: none;
+}
+table tr th,
+table tr th a,
+table tr th a:hover {
+  color: #FFF;
+  font-weight: bold;
+}
+table tbody tr th {
+  vertical-align: top;
+}
+tr td,
+tr th {
+  padding: 4px 9px;
+  border: 1px solid #fff;
+  text-align: left; /* LTR */
+}
+tr.odd {
+  background: #e4e4e4;
+  background: rgba(0, 0, 0, 0.105);
+}
+tr,
+tr.even {
+  background: #efefef;
+  background: rgba(0, 0, 0, 0.063);
+}
+table ul.links {
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+}
+table ul.links li {
+  padding: 0 1em 0 0;
 }
 
 /* paragraph number controls */
@@ -114,18 +140,11 @@ figcaption p {
 .paragraph-controls span {
 	padding:2px 5px;
 }
-.paragraph-controls.notes-present:after {
-	/*content: url('../img/bg-note-indicator.png');
-	display:block;
-	position:relative;
-	bottom:0px;
-	left:0px;*/
-}
 
 /* tooltips */
 .toggleNoteDialog, .toggleCiteDialog {
 	line-height:16px;height:16px;
-	vertical-align:center;
+	vertical-align:middle;
 	text-shadow:0 1px 1px rgba(255,255,255,.8);
 	text-transform:uppercase;
 	text-decoration:none;
@@ -133,19 +152,16 @@ figcaption p {
 }
 .toggleNoteDialog {
 	display:inline-block;
-
 	background: url('../img/icon-note-mini.png') no-repeat left center;
 	margin-bottom:8px;
 }
 .toggleCiteDialog {
 	display:inline-block;
-
 	background: url('../img/icon-cite-mini.png') no-repeat left center;
 }
 .ui-tooltip-content {
 	position: relative;
 	padding: 5px 9px;
-	overflow: hidden;
 	text-align: left;
 	word-wrap: break-word;
 	overflow: hidden;
@@ -158,8 +174,7 @@ figcaption p {
 	display:none!important;
 }
 .ui-tooltip, .qtip {
-	max-width:auto!important;
-
+	width:auto!important;
 	margin-left:-10px;
 }
 
@@ -209,13 +224,10 @@ figcaption p {
 }
 
 
-/* blah */
-
-
 /* misc */
 .fancybox-close {
-	top: 0px!important;
-	right: 0px!important;
+	top: 0!important;
+	right: 0!important;
 	opacity:.4;
 }
 .fancybox-close:hover { opacity: 1; }

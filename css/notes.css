@@ -36,11 +36,11 @@
 	margin-bottom:10px;
 	line-height:1.2;
 	font-size:12px;
-	text-shadow: 0 1px 0px rgba(255,255,255,.6);
+	text-shadow: 0 1px 0 rgba(255,255,255,.6);
 }
 
 .ui-tooltip-titlebar .ui-state-default {
-	top:10px!important;border:none !important;right:0px!important;
+	top:10px!important;border:none !important;right:0!important;
 }
 .ui-tooltip-icon .ui-icon {
 	width: 14px!important;
@@ -87,7 +87,6 @@ ul.notesList li {
 	display:block;
 	float:left;
 	width:180px;
-	vertical-align:top;
 	margin-right:20px;
 	font-size:13px;
 }
@@ -99,7 +98,7 @@ ul.notesList li {
 }
 .the-note:after {
 	position:absolute;
-	left:0px;bottom:0px;
+	left:0;bottom:0;
 	content:"";
 	width:180px;height:40px;margin:0;padding:0;
 	display:block;
@@ -125,9 +124,6 @@ ul.notesList li {
 }
 ul.notesList li a {
 	padding-right: 10px;
-}
-.notes-present {
-	/*background-color: #F00;*/
 }
 .noteLink.onCurrentPage {
 	background-color: red;

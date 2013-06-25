@@ -79,7 +79,7 @@ div.layered_image-asset .ui-slider-handle {
 }
 
 .ca-ui-layer span {
-	display: inline-block;
+	display: inline;
 	float: left;
 	vertical-align: middle;
 	text-align: center;

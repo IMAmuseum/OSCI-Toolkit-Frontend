@@ -76,7 +76,6 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 							gotoPage = page_for_id;
 						} else {
 							gotoPage = 1;
-							console.log('Navigation error: ', data.identifier, 'not found in any page');
 						}
 
 						break;
@@ -268,7 +267,8 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
 			if (layoutResults === null && content.length) {
 				var contentId = 'osci-content-' + i;
-				if (firstOccurence) {
+				var existingId = content.attr('id') || "";
+				if (firstOccurence && existingId.indexOf('_anchor') === -1) {
 					content.attr('id', contentId);
 				}
 

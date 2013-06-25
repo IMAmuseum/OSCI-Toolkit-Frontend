@@ -8,6 +8,5 @@ OsciTk.models.Footnote = OsciTk.models.BaseModel.extend({
 	},
 
 	sync: function(method, model, options) {
-		console.log('Footnote.sync: ' + method);
 	}
 });

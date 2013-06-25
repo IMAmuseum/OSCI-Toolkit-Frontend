@@ -8,7 +8,6 @@ OsciTk.models.Account = OsciTk.models.BaseModel.extend({
 		this.getSessionState();
 	},
 	sync: function(method, model, options) {
-		console.log(method, 'account sync');
 	},
 	getSessionState: function() {
 		// alias this for use in success function
