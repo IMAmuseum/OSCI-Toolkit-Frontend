@@ -133,6 +133,9 @@ var LayeredImage = function(container) { // container should be a html element
 	// also create separate arrays of base and annotation layers for convenience
 	this.baseLayers = [];
 	this.annotationLayers = [];
+	this.max_zoom_level = 0;
+	this.max_width = 0;
+	this.max_height = 0;
 	for (i=0, count = this.layers.length; i < count; i++) {
 		layerData = this.layers[i];
 		layerData.layer_num = i + 1;
@@ -141,6 +144,20 @@ var LayeredImage = function(container) { // container should be a html element
 		}
 		else {
 			this.baseLayers.push(layerData);
+		}
+		// manually adjust zoom level for IIPs, should be one lower than IIP server reports
+		if (layerData.type === "iip") {
+			layerData.zoom_levels = layerData.zoom_levels - 1;
+		}
+		// keep track of the max zoom levels and max dimensions
+		if (layerData.width > this.max_width) {
+			this.max_width = layerData.width;
+		}
+		if (layerData.height > this.max_height) {
+			this.max_height = layerData.height;
+		}
+		if (layerData.zoom_levels > this.max_zoom_level) {
+			this.max_zoom_level = layerData.zoom_levels;
 		}
 	}
 
@@ -310,8 +327,7 @@ LayeredImage.prototype.createLayerIIP = function(layerData) {
 		var image_h = layerData.height;
 		var image_w = layerData.width;
 		var tile_size = 256;
-		var scale = CA.getScale(layerData.zoom_levels - 1, c.zoom);
-		//var scale = CA.getScale(layerData.zoom_levels, c.zoom);
+		var scale = CA.getScale(layerData.zoom_levels, c.zoom);
 		var mw = Math.round(image_w / scale);
 		var mh = Math.round(image_h / scale);
 		var tw = Math.ceil(mw / tile_size);
@@ -335,13 +351,13 @@ LayeredImage.prototype.createLayerImage = function(layerData) {
 	// alias polymaps, as our load and unload functions change "this" inside
 	var CA = this;
 	var load = function(tile) {
-		var scale = CA.getScale(layerData.zoom_levels + 1, tile.zoom);
+		var scale = CA.getScale(CA.max_zoom_levels, tile.zoom);
 		tile.element = CA.polymaps.svg('image');
 		tile.element.setAttribute("preserveAspectRatio", "none");
 		tile.element.setAttribute("x", 0);
 		tile.element.setAttribute("y", 0);
-		tile.element.setAttribute("width", layerData.width / scale);
-		tile.element.setAttribute("height", layerData.height / scale);
+		tile.element.setAttribute("width", CA.max_width / scale);
+		tile.element.setAttribute("height", CA.max_height / scale);
 		tile.element.setAttributeNS("http://www.w3.org/1999/xlink", "href", layerData.image_path);
 		tile.ready = true;
 	};
@@ -359,13 +375,13 @@ LayeredImage.prototype.createLayerSVG = function(layerData) {
 	// alias polymaps, as our load and unload functions change "this" inside
 	var CA = this;
 	var load = function(tile) {
-		var scale = CA.getScale(layerData.zoom_levels + 1, tile.zoom);
+		var scale = CA.getScale(CA.max_zoom_level, tile.zoom);
 		tile.element = CA.polymaps.svg('image');
 		tile.element.setAttribute("preserveAspectRatio", "none");
 		tile.element.setAttribute("x", 0);
 		tile.element.setAttribute("y", 0);
-		tile.element.setAttribute("width", layerData.width / scale);
-		tile.element.setAttribute("height", layerData.height / scale);
+		tile.element.setAttribute("width", CA.max_width / scale);
+		tile.element.setAttribute("height", CA.max_height / scale);
 		tile.element.setAttributeNS("http://www.w3.org/1999/xlink", "href", layerData.svg_path);
 		tile.ready = true;
 	};
@@ -387,10 +403,10 @@ LayeredImage.prototype.zoomToContainer = function() {
 	// calculate tw and th for each layer
 	for (i=0, count = this.layers.length; i < count; i++) {
 		var layerData = this.layers[i];
-		var scale = this.getScale(layerData.zoom_levels - 0, zoomToCalculateAt);
+		var scale = this.getScale(layerData.zoom_levels, zoomToCalculateAt);
 		// TODO: figure out why this is a special case:
 		if (layerData.type == 'iip') {
-			scale = this.getScale(layerData.zoom_levels - 1, zoomToCalculateAt);
+			scale = this.getScale(layerData.zoom_levels, zoomToCalculateAt);
 		}
 		var mw = Math.round(layerData.width / scale);
 		var mh = Math.round(layerData.height / scale);
