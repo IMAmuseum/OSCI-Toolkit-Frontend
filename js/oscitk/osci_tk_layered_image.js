@@ -351,7 +351,7 @@ LayeredImage.prototype.createLayerImage = function(layerData) {
 	// alias polymaps, as our load and unload functions change "this" inside
 	var CA = this;
 	var load = function(tile) {
-		var scale = CA.getScale(CA.max_zoom_levels, tile.zoom);
+		var scale = CA.getScale(CA.max_zoom_level, tile.zoom);
 		tile.element = CA.polymaps.svg('image');
 		tile.element.setAttribute("preserveAspectRatio", "none");
 		tile.element.setAttribute("x", 0);
