@@ -3,7 +3,10 @@
  */
 function loadXMLDoc(url) {
 	xhttp = new XMLHttpRequest();
-	xhttp.overrideMimeType('text/xml');
+    //IE9 and IE10 doesn't suport .overrideMimeType(), so we need to check for it.
+    if (xhttp.overrideMimeType) {
+        xhttp.overrideMimeType('text/xml');
+    }  
 	xhttp.open('GET', url, false);
 	xhttp.send();
 	return xhttp.responseXML;
