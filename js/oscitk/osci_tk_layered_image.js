@@ -118,6 +118,19 @@ var LayeredImage = function(container) { // container should be a html element
 		this.layers.push(layerMarkup.data());
 	}
 	layerContainer.remove();
+	
+	// initialize the container as a polymap
+	this.map = this.polymaps.map();
+	var svg = this.polymaps.svg('svg');
+	$(svg).css({
+		'height': '100%',
+		'width': '100%'
+	});
+	this.map.container(this.container[0].appendChild(svg));
+	this.map.tileSize({
+		x: 256,
+		y: 256
+	});
 
 	// sort the layers so that annotations are always last (on top)
 	this.layers.sort(function(a,b) {
@@ -129,8 +142,7 @@ var LayeredImage = function(container) { // container should be a html element
 		return 0;
 	});
 
-	// we must order their layer_num properties
-	// also create separate arrays of base and annotation layers for convenience
+	// prepare layers
 	this.baseLayers = [];
 	this.annotationLayers = [];
 	this.max_zoom_level = 0;
@@ -139,6 +151,10 @@ var LayeredImage = function(container) { // container should be a html element
 	for (i=0, count = this.layers.length; i < count; i++) {
 		layerData = this.layers[i];
 		layerData.layer_num = i + 1;
+		// provide zoom_levels if missing
+		if (!layerData.zoom_levels) {
+			layerData.zoom_levels = this.getZoomLevels(layerData.width, layerData.height);
+		}
 		if (layerData.annotation) {
 			this.annotationLayers.push(layerData);
 		}
@@ -161,26 +177,6 @@ var LayeredImage = function(container) { // container should be a html element
 		}
 	}
 
-	// initialize the container as a polymap
-	this.map = this.polymaps.map();
-	var svg = this.polymaps.svg('svg');
-	$(svg).css({
-		'height': '100%',
-		'width': '100%'
-	});
-	this.map.container(this.container[0].appendChild(svg));
-	this.map.tileSize({
-		x: 256,
-		y: 256
-	});
-
-	// calculate zoom levels if not already present
-	for (i=0, count = this.layers.length; i < count; i++) {
-		layerData = this.layers[i];
-		if (!layerData.zoom_levels) {
-			layerData.zoom_levels = this.getZoomLevels(layerData.width, layerData.height);
-		}
-	}
 	// create the first two layers, using preset data if available
 	var baseLayerPreset = this.figureOptions.baseLayerPreset ? this.figureOptions.baseLayerPreset : [],
 		numBaseLayerPresets = baseLayerPreset.length,
@@ -265,11 +261,6 @@ LayeredImage.prototype.createLayer = function(layerData) {
 
 	if (layerData === undefined) {
 		return;
-	}
-
-	// provide zoom_levels if missing
-	if (!layerData.zoom_levels) {
-		layerData.zoom_levels = this.getZoomLevels(layerData.width, layerData.height);
 	}
 
 	// determine type of layer
