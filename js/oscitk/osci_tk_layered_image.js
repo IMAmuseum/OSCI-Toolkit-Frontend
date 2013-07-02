@@ -2,10 +2,10 @@ var $ = jQuery;
 
 var LICollection = function() {
 	var collection = [];
-	
+
 	this.add = function(asset) {
 		var i, count;
-		
+
 		// check that this asset isn't already in the collection
 		for (i=0, count = collection.length; i < count; i++) {
 			if (collection[i].id == asset.id) {
@@ -15,14 +15,14 @@ var LICollection = function() {
 		collection.push(asset);
 		return true;
 	};
-	
+
 	this.remove = function(asset) {
 		var i, count;
 		// allow an asset or a string id to be passed in
 		if (typeof asset == "string") {
 			asset = {id: asset};
 		}
-		
+
 		// find this asset in the collection by id
 		for (i=0, count = collection.length; i < count; i++) {
 			if (collection[i].id == asset.id) {
@@ -30,7 +30,7 @@ var LICollection = function() {
 			}
 		}
 	};
-	
+
 	this.find = function(id) {
 		var i, count;
 		for (i=0, count = collection.length; i < count; i++) {
@@ -40,18 +40,18 @@ var LICollection = function() {
 		}
 		return false;
 	};
-	
+
 	this.list = function() {
 		return collection;
 	};
 
 	this.userIsDraggingAsset = false;
 };
-	
+
 
 var LayeredImage = function(container) { // container should be a html element
 	var i, count, layerData;
-	
+
 	// check prereqs
 	if (jQuery !== undefined) {
 		var $ = this.$ = jQuery;
@@ -69,19 +69,19 @@ var LayeredImage = function(container) { // container should be a html element
 	if (this.container.length < 1) {
 		return false;
 	}
-	
+
 	// push this new asset into the registry, only render if not already present
 	if (!window.liCollection.add(this)) {
 		return;
 	}
-	
+
 	// load the layered image id and configuration
 	this.id = this.container.attr('id');
 	this.settings = this.container.data();
 	this.settings.zoomStep = this.settings.zoomStep || 0.1;
 	this.settings.annotationSelectorVisible = false;
 	this.settings.dragging = undefined;
-	
+
 	// detect and incorporate figure options
 	var figure = this.container.parents('figure:first');
 	var optString = figure.attr('data-options');
@@ -185,27 +185,27 @@ var LayeredImage = function(container) { // container should be a html element
 	var baseLayerPreset = this.figureOptions.baseLayerPreset ? this.figureOptions.baseLayerPreset : [],
 		numBaseLayerPresets = baseLayerPreset.length,
 		usedPresetLayers = false;
-		
+
 	if (numBaseLayerPresets > 0) {
 		var firstLayer = this.getLayerById(baseLayerPreset[0]);
 		var secondLayer;
-		
+
 		if (numBaseLayerPresets > 1) {
 			secondLayer = this.getLayerById(baseLayerPreset[1]);
 		}
-		
+
 		if (firstLayer && (secondLayer || numBaseLayerPresets == 1)) {
 			this.createLayer(firstLayer);
-			
+
 			if (secondLayer) {
 				this.createLayer(secondLayer);
 				$('#' + secondLayer.id).css('opacity', 0);
 			}
-			
+
 			usedPresetLayers = true;
 		}
 	}
-	
+
 	if (!usedPresetLayers && this.baseLayers.length) {
 		// create first layer, second layer, and make second transparent
 		this.createLayer(this.baseLayers[0]);
@@ -214,16 +214,16 @@ var LayeredImage = function(container) { // container should be a html element
 			$('#' + this.baseLayers[1].id).css('opacity', 0);
 		}
 	}
-	
+
 	// create control interface
 	this.createUI();
-	
+
 	// if any annotation presets are present, display those layers
 	this.showAnnotationPresets();
 
 	// fit to the map to its container and set the zoom range
 	this.zoomToContainer();
-	
+
 	// if fullscreen extents are present, this CA needs to be positioned
 	// as its parent was
 	var extents = [];
@@ -262,7 +262,7 @@ LayeredImage.prototype.createLayer = function(layerData) {
 	// alias jquery
 	var $ = this.$;
 	var layer;
-	
+
 	if (layerData === undefined) {
 		return;
 	}
@@ -287,11 +287,11 @@ LayeredImage.prototype.createLayer = function(layerData) {
 	// give the layer a reference to its polymap object
 	layerData.visible = true;
 	layerData.polymapLayer = layer;
-	
+
 	// give the layer its id, and add it to the map
 	layer.id(layerData.id);
 	this.map.add(layer);
-	
+
 };
 
 
@@ -396,21 +396,19 @@ LayeredImage.prototype.createLayerSVG = function(layerData) {
 
 
 LayeredImage.prototype.zoomToContainer = function() {
-	// always calculate at the highest possible zoom, 18,
-	// for max fineness of alignment
-	var zoomToCalculateAt = 18, i, count;
+	var i, count;
 
 	// calculate tw and th for each layer
 	for (i=0, count = this.layers.length; i < count; i++) {
 		var layerData = this.layers[i];
-		var scale = this.getScale(layerData.zoom_levels, zoomToCalculateAt);
+		var scale = this.getScale(this.max_zoom_level, layerData.zoom_levels);
 		var mw = Math.round(layerData.width / scale);
 		var mh = Math.round(layerData.height / scale);
 		var tw = Math.ceil(mw / this.map.tileSize().x);
 		var th = Math.ceil(mh / this.map.tileSize().y);
 		layerData.tiles_wide = tw;
 		layerData.tiles_high = th;
-		layerData.tiles_zoom = zoomToCalculateAt;
+		layerData.tiles_zoom = layerData.zoom_level;
 	}
 
 	// scan the layers and find the greatest extents
@@ -428,12 +426,12 @@ LayeredImage.prototype.zoomToContainer = function() {
 	// now that we know our max extents, calculate the
 	// southwest and northeast corners to fit in container
 	this.settings.containerFitSW = this.map.coordinateLocation({
-		zoom: zoomToCalculateAt,
+		zoom: this.max_zoom_level,
 		column: 0,
 		row: tiles_high
 	});
 	this.settings.containerFitNE = this.map.coordinateLocation({
-		zoom: zoomToCalculateAt,
+		zoom: this.max_zoom_level,
 		column: tiles_wide,
 		row: 0
 	});
@@ -492,7 +490,7 @@ LayeredImage.prototype.createUI = function() {
 			}
 		});
 	}
-	
+
 	// init ui object
 	this.ui = {};
 	this.ui.legendItemsCount = 0;
@@ -521,7 +519,7 @@ LayeredImage.prototype.createUI = function() {
 		}
 	})
 	.appendTo(this.ui.controlbar);
-	
+
 	// reset control
 	this.ui.reset = $('<div class="ca-ui-reset"></div>')
 	.bind('click', function(event) {
@@ -541,7 +539,7 @@ LayeredImage.prototype.createUI = function() {
 			this.ui.annotation.appendTo(this.ui.controlbar);
 		}
 	}
-	
+
 	// layer controls
 	var baseLayers = this.getVisibleBaseLayers();
 	this.settings.currentLayer1 = baseLayers[0];
@@ -584,7 +582,7 @@ LayeredImage.prototype.createUI = function() {
 				}
 			})
 			.appendTo(this.ui.sliderContainer);
-		
+
 		if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
 			this.ui.sliderContainer.appendTo(this.ui.controlbar);
 			this.ui.layerSelector.after(this.ui.sliderContainer);
@@ -594,14 +592,14 @@ LayeredImage.prototype.createUI = function() {
 			this.ui.slider.slider('value', this.figureOptions.sliderPosition);
 		}
 	}
-	
+
 	// add controlbar to container
 	this.ui.controlbar.appendTo(this.container);
 	this.resizeControlBar();
 
 	// zoom control
 	this.ui.zoom = $('<div class="ca-ui-zoom"></div>');
-	
+
 	this.ui.zoomIn = $('<div class="ca-ui-zoom-in"></div>')
 	.bind('click', function(event) {
 		var currentVal = CA.ui.zoomSlider.slider('value');
@@ -610,7 +608,7 @@ LayeredImage.prototype.createUI = function() {
 		CA.map.zoom(newVal);
 	})
 	.appendTo(this.ui.zoom);
-	
+
 	this.ui.zoomSlider = $('<div class="ca-ui-zoom-slider"></div>')
 	.slider({
 		step: this.settings.zoomStep,
@@ -624,7 +622,7 @@ LayeredImage.prototype.createUI = function() {
 		}
 	})
 	.appendTo(this.ui.zoom);
-	
+
 	this.ui.zoomOut = $('<div class="ca-ui-zoom-out"></div>')
 	.bind('click', function(event) {
 		// get the current value, and add one to it
@@ -640,11 +638,11 @@ LayeredImage.prototype.createUI = function() {
 
 	// viewfinder control
 	this.ui.viewfinder = $('<div class="ca-ui-viewfinder viewfinder-closed"></div>');
-	
+
 	if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
 		this.ui.viewfinder.appendTo(this.container);
 	}
-	
+
 	this.ui.viewfinder.bind('click', function(event) {
 		if (CA.ui.viewfinder.hasClass('viewfinder-open')) {
 			// close
@@ -658,15 +656,15 @@ LayeredImage.prototype.createUI = function() {
 			CA.refreshViewfinder();
 		}
 	});
-	
+
 	// store references to the control elements, so they can be manipulated as a collection
 	this.ui.controls = [this.ui.controlbar, this.ui.zoom, this.ui.viewfinder, this.ui.currentPopup, this.ui.annotation, this.ui.layerSelector];
-	
+
 	// configure events to show/hide controls
 	this.container.bind('mousemove', function(event) {
 		var container = CA.container;
 		var date = new Date();
-		
+
 		container.attr('data-controls-time', date.getTime());
 		var controlState = container.attr('data-controls') || 'false';
 		if (controlState == 'false') {
@@ -688,7 +686,7 @@ LayeredImage.prototype.createUI = function() {
 			// check if the mouse is over a control, if it is, don't hide
 			if (container.attr('data-controls') == 'true' &&
 				(date.getTime() - container.attr('data-controls-time')) >= 1750) {
-				
+
 				if (container.attr('data-controls-lock') != 'true') {
 					container.attr('data-controls', 'false');
 					CA.clearPopups();
@@ -712,11 +710,9 @@ LayeredImage.prototype.createUI = function() {
 };
 
 LayeredImage.prototype.reset = function() {
-	var $ = this.$, i, count,
-		CA = this;
-		
-	CA.clearPopups();
+	var $ = this.$, CA = this, i, count;
 
+	CA.clearPopups();
 	// reset to provided inset, or container bounds otherwise
 	if (typeof CA.figureOptions.swLat != 'undefined' && !CA.figureOptions.editing) {
 		var extents =  [
@@ -787,13 +783,13 @@ LayeredImage.prototype.refreshViewfinder = function() {
 	var CA = this;
 	// first clear out any contents
 	this.ui.viewfinder.empty();
-	
+
 	// get image urls from current layers
 	var thumbUrl1 = this.settings.currentLayer1.thumb;
 	this.ui.viewfinderLayer1 = $('<div class="ca-ui-viewfinderLayer viewfinderLayer1"></div>');
 	$('<img />').attr('src', thumbUrl1).appendTo(this.ui.viewfinderLayer1);
 	this.ui.viewfinder.append(this.ui.viewfinderLayer1);
-	
+
 	if (this.settings.currentLayer2) {
 		var thumbUrl2 = this.settings.currentLayer2.thumb;
 		this.ui.viewfinderLayer2 = $('<div class="ca-ui-viewfinderLayer viewfinderLayer2"></div>');
@@ -802,22 +798,22 @@ LayeredImage.prototype.refreshViewfinder = function() {
 		// set opacity to match
 		this.ui.viewfinderLayer2.css('opacity', this.ui.slider.slider("value") / 100);
 	}
-	
+
 	// set height based on width and aspect
 	var vfWidth = this.ui.viewfinder.width();
 	var vfHeight = Math.floor(vfWidth / this.settings.aspect);
 	this.ui.viewfinder.height(vfHeight);
-	
+
 	// bounds div
 	this.refreshViewfinderViewport();
-	
+
 	// - hook up drag events so the div can be dragged
 	// - when dragged reflect the change on the map
 };
 
 
 LayeredImage.prototype.refreshViewfinderViewport = function() {
-	
+
 	if (this.ui.viewfinder.hasClass('viewfinder-open')) {
 		var $ = this.$;
 		var vfWidth = this.ui.viewfinder.width();
@@ -843,7 +839,7 @@ LayeredImage.prototype.refreshViewfinderViewport = function() {
 		// calculate the height and width of the viewport
 		var ratioX = this.map.size().x / (pointNE.x - pointSW.x);
 		var ratioY = this.map.size().y / (pointSW.y - pointNE.y);
-		
+
 		var vpWidth = ratioX * vfWidth;
 		var vpHeight = ratioY * vfHeight;
 
@@ -883,9 +879,9 @@ LayeredImage.prototype.fullscreen = function(reset) {
 
 	wrapper.css({
 		height: Math.round(modalHeight * 0.9) + 'px',
-		top:	Math.round(modalHeight * 0.05) + 'px',
-		width:	Math.round(modalWidth * 0.9) + 'px',
-		left:	Math.round(modalWidth * 0.05) + 'px'
+		top:    Math.round(modalHeight * 0.05) + 'px',
+		width:  Math.round(modalWidth * 0.9) + 'px',
+		left:   Math.round(modalWidth * 0.05) + 'px'
 	});
 	// retrieve the original markup for this LayeredImage and
 	// remap the IDs of the asset and its layers
@@ -897,7 +893,7 @@ LayeredImage.prototype.fullscreen = function(reset) {
 		el.data('id', el.data('id') + '-fullscreen');
 		el.data('parent_asset', el.data('parent_asset') + '-fullscreen');
 	});
-	 
+
 	// the extents of the current map should be restored on full screen
 	var extents = this.map.extent();
 	this.figureOptions.fullscreenExtents = {
@@ -906,7 +902,7 @@ LayeredImage.prototype.fullscreen = function(reset) {
 		neLon: extents[1].lon,
 		neLat: extents[1].lat
 	};
-	
+
 	var figureWrapper = $('<figure></figure>')
 		.attr('data-options', JSON.stringify(this.figureOptions))
 		.css({
@@ -914,14 +910,14 @@ LayeredImage.prototype.fullscreen = function(reset) {
 			width : Math.round(modalWidth * 0.9) + 'px'
 		})
 		.appendTo(wrapper);
-	
+
 	// if a caption is present in the figure options, append it to the fullscreen
 	var captionHeight = 0;
 	if (this.settings.captionMarkup) {
 		figureWrapper.append(this.settings.captionMarkup);
 		captionHeight = this.settings.captionMarkup.outerHeight(true);
 	}
-	
+
 	$('<div>', {
 		'class' : 'figureContent',
 		css : {
@@ -931,9 +927,9 @@ LayeredImage.prototype.fullscreen = function(reset) {
 	})
 	.append(markup)
 	.prependTo(figureWrapper);
-	
+
 	var tempCA = new LayeredImage(markup);
-	
+
 	if (reset) {
 		tempCA.reset();
 	}
@@ -945,20 +941,20 @@ LayeredImage.prototype.resizeControlBar = function()
 	var containerWidth = this.container.outerWidth(),
 		controlBarWidth = this.ui.controlbar.outerWidth(),
 		maxWidth = containerWidth - (parseInt(this.ui.controlbar.css('right'), 10) * 2);
-		
+
 	//if controlbar is wider than asset width resize it
 	if (controlBarWidth > maxWidth) {
 		this.ui.controlbar.css({
 			'max-width' : maxWidth + 'px'
 		});
-		
+
 		//shrink layer names (only works nicely if a min-width set in css & overflow ellipsis)
 		//this might need redone later depending on browser support and custom styles
 		this.ui.controlbar.find('.ca-ui-layer > span').css({
 			width: '1px'
 		});
 	}
-	
+
 };
 
 LayeredImage.prototype.toggleLayerSelector = function(event) {
@@ -973,7 +969,7 @@ LayeredImage.prototype.toggleLayerSelector = function(event) {
 	var currentLayer1 = CA.settings['currentLayer1'];
 	var currentLayer2 = CA.settings['currentLayer2'];
 	// var otherLayer = CA.settings['currentLayer'+layerControlOther];
-	
+
 	// if visible already, remove and set state
 	if (CA.ui.currentPopup && CA.ui.currentPopup == CA.ui['layerSelectorPopup']) {
 		CA.clearPopups();
@@ -994,7 +990,7 @@ LayeredImage.prototype.toggleLayerSelector = function(event) {
 			rowTitle = $('<div class="ca-ui-layer-selector-row-title"><span>' + baseLayer.title + '</span></div>');
 			rowLayerButton2 = $('<div class="ca-ui-layer-selector-row-button2"><div class="ca-ui-layer-selector-button"></div></div>')
 				.attr('data-layer_index', i);
-			
+
 			// indicate current layers
 			if (baseLayer == CA.settings.currentLayer1) {
 				rowLayerButton1
@@ -1048,7 +1044,7 @@ LayeredImage.prototype.toggleLayerSelector = function(event) {
 
 
 LayeredImage.prototype.toggleAnnotationSelector = function() {
-	
+
 	// local aliases
 	var $ = this.$;
 	var CA = this;
@@ -1092,7 +1088,7 @@ LayeredImage.prototype.toggleAnnotationSelector = function() {
 			}, CA.annotationLayerClick);
 			var layerItemBox = $('<div class="ca-ui-annotation-selector-item-box"></div>')
 			.addClass(layerData.visible ? 'filled' : 'empty');
-			
+
 			// add the custom layer color if applicable
 			if (layerData.visible && layerData.annotation) {
 				layerItemBox.css('background-color', '#'+layerData.color);
@@ -1190,11 +1186,11 @@ LayeredImage.prototype.getScale = function(zoom_levels, zoom) {
 
 LayeredImage.prototype.realignLayers = function() {
 	var $ = this.$, i, count;
-	
+
 	// grab the layers out of the dom
 	var map = this.container.find('svg.map');
 	var layers = map.find('g.layer').remove();
-	
+
 	// sort the layers
 	// find the first layer
 	for (i=0, count = layers.length; i < count; i++) {
@@ -1235,24 +1231,24 @@ LayeredImage.prototype.clearPopups = function() {
 LayeredImage.prototype.toggleControls = function(duration) {
 	duration = duration || 400;
 	var $ = this.$;
-	
+
 	$.each(this.ui.controls, function() {
 		// do this test, this.currentPopup could be false making "this" the window
 		if (this != window) {
 			this.fadeToggle(duration);
 		}
 	});
-   
+
 };
 
 LayeredImage.prototype.addLegendItem = function(layerData) {
 	var $ = this.$;
-	
+
 	// only show if there is color data
 	if (!layerData.color || layerData.color === '') {
 		return;
 	}
-	
+
 	// if the legend does not exist yet, create it here
 	if (!this.ui.legend) {
 		// legend control
@@ -1263,16 +1259,16 @@ LayeredImage.prototype.addLegendItem = function(layerData) {
 		}
 		this.ui.controls.push(this.ui.legend);
 	}
-	
+
 	var legendList = this.ui.legend.find('ul');
-	
+
 	var legendItem = $('<li data-layer_num="'+layerData.layer_num+'">'+layerData.title+'</li>')
 	.appendTo(legendList);
-	
+
 	var itemBox = $('<div class="item-box"></div>')
 		.css('background-color', '#'+layerData.color)
 		.prependTo(legendItem);
-	
+
 	this.ui.legendItemsCount++;
 };
 
@@ -1280,7 +1276,7 @@ LayeredImage.prototype.addLegendItem = function(layerData) {
 LayeredImage.prototype.removeLegendItem = function(layerData) {
 	var $ = this.$;
 	var CA = this;
-	
+
 	if (this.ui.legend) {
 		var legendItems = this.ui.legend.find('ul').children();
 		// find the item with the matching layer num and remove it
@@ -1310,14 +1306,14 @@ LayeredImage.prototype.showAnnotationPresets = function() {
 	for (var j=0, layerCount = this.annotationLayers.length; j < layerCount; j++) {
 		this.removeLayer(this.annotationLayers[j]);
 		this.removeLegendItem(this.annotationLayers[j]);
-		
+
 		if (this.figureOptions.annotationPreset) {
 			// each preset is a layer_id for a layer in this.layers
 			for (var i=0, count = this.figureOptions.annotationPreset.length; i < count; i++) {
 				var presetLayerId = this.figureOptions.annotationPreset[i];
 				if (this.annotationLayers[j].layer_id == presetLayerId) {
 					this.repaintLayer(this.annotationLayers[j]);
-					
+
 					if (!this.figureOptions.disable_annotation || this.figureOptions.editing) {
 						this.addLegendItem(this.annotationLayers[j]);
 					}
@@ -1331,28 +1327,28 @@ LayeredImage.prototype.showAnnotationPresets = function() {
 LayeredImage.prototype.getVisibleBaseLayers = function() {
 	var i, count,
 		layers = [];
-	
+
 	for (i=0, count = this.baseLayers.length; i< count; i++) {
 		var layerData = this.baseLayers[i];
 		if (layerData.visible) {
 			layers.push(layerData);
 		}
 	}
-	
+
 	return layers;
 };
 
 LayeredImage.prototype.getVisibleBaseLayerIds = function() {
 	var i, count,
 		layers = [];
-	
+
 	for (i=0, count = this.baseLayers.length; i< count; i++) {
 		var layerData = this.baseLayers[i];
 		if (layerData.visible) {
 			layers.push(layerData.layer_id);
 		}
 	}
-	
+
 	return layers;
 };
 
@@ -1360,14 +1356,14 @@ LayeredImage.prototype.getVisibleBaseLayerIds = function() {
 LayeredImage.prototype.getVisibleAnnotationIds = function() {
 	var i, count,
 		annotations = [];
-	
+
 	for (i=0, count = this.annotationLayers.length; i < count; i++) {
 		var layerData = this.annotationLayers[i];
 		if (layerData.visible) {
 			annotations.push(layerData.layer_id);
 		}
 	}
-	
+
 	return annotations;
 };
 
