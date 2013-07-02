@@ -404,10 +404,6 @@ LayeredImage.prototype.zoomToContainer = function() {
 	for (i=0, count = this.layers.length; i < count; i++) {
 		var layerData = this.layers[i];
 		var scale = this.getScale(layerData.zoom_levels, zoomToCalculateAt);
-		// TODO: figure out why this is a special case:
-		if (layerData.type == 'iip') {
-			scale = this.getScale(layerData.zoom_levels, zoomToCalculateAt);
-		}
 		var mw = Math.round(layerData.width / scale);
 		var mh = Math.round(layerData.height / scale);
 		var tw = Math.ceil(mw / this.map.tileSize().x);
@@ -732,7 +728,7 @@ LayeredImage.prototype.reset = function() {
 				lon: CA.figureOptions.neLon,
 				lat: CA.figureOptions.neLat
 			}
-			];
+		];
 		CA.map.extent(extents);
 	}
 	else {
