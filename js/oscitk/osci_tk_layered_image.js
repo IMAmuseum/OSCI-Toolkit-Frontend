@@ -56,11 +56,15 @@ var LayeredImage = function(container) { // container should be a html element
 	if (jQuery !== undefined) {
 		var $ = this.$ = jQuery;
 	}
-	else return false;
+	else {
+        return false;
+    }
 	if (org.polymaps !== undefined) {
 		this.polymaps = org.polymaps;
 	}
-	else return false;
+	else {
+        return false;
+    }
 
 	// turn the element into a jQuery object
 	this.container = $(container);
