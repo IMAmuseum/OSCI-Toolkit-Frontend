@@ -9,17 +9,25 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
 		// bind sectionChanged
 		this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
-			if (navItem) {
-				// loading section content
-				app.models.section = new OsciTk.models.Section({
-					uri : navItem.get('uri'),
-					id : navItem.get('id')
-				});
+            var that = this;
+            $('body').append('<div id="loader">Loading...</div>');
 
-				app.models.section.loadContent();
-				this.changeModel(app.models.section);
-				this.render();
-			}
+            $('#loader').fadeTo(500, 0.7, function() {
+
+			    if (navItem) {
+				    // loading section content
+				    app.models.section = new OsciTk.models.Section({
+					    uri : navItem.get('uri'),
+					    id : navItem.get('id')
+				    });
+
+				    app.models.section.loadContent();
+				    that.changeModel(app.models.section);
+				    that.render();
+			    }
+
+                $('#loader').remove();
+            });
 		});
 
 	},
