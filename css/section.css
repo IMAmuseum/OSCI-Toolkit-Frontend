@@ -25,6 +25,7 @@
 	}
 }
 
+.anchor-link,
 section figure img.thumbnail {
 	display: none;
 }
@@ -40,3 +41,4 @@ section figure img.thumbnail {
     font-size: 3em;
     padding-top: 20%;
 }
+
