@@ -2,272 +2,277 @@
 OsciTk.views.figureTypeRegistry["default"] = "MultiColumnFigure";
 
 OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
-	tagName: 'figure',
-	template: OsciTk.templateManager.get('multi-column-figure'),
-	initialize: function(options) {
-		this.options = options;
-		//set some defaults
-		this.layoutComplete = false;
-		this.contentRendered = false;
-		this.sizeCalculated = false;
-		this.calculatedHeight = 0;
-		this.calculatedWidth = 0;
-		this.position = {x:[0,0], y:[0,0]};
+    tagName: 'figure',
+    template: OsciTk.templateManager.get('multi-column-figure'),
+    initialize: function(options) {
+        this.options = options;
+        //set some defaults
+        this.layoutComplete = false;
+        this.contentRendered = false;
+        this.sizeCalculated = false;
+        this.calculatedHeight = 0;
+        this.calculatedWidth = 0;
+        this.position = {x:[0,0], y:[0,0]};
 
-		this.$el.attr("id", this.model.get("id"));
-		this.$el.addClass(this.model.get("type"));
+        this.$el.attr("id", this.model.get("id"));
+        this.$el.addClass(this.model.get("type"));
 
-		this.listenTo(Backbone, 'pageChanged', this.toggleVisibility);
-	},
-	events: {
-		"click .figure_content" : "fullscreen"
-	},
-	toggleVisibility: function(data) {
-		if (this.parent.options.pageNumber === data.page) {
-			if (!this.contentRendered) {
-				this.renderContent();
-			}
+        this.listenTo(Backbone, 'pageChanged', this.toggleVisibility);
+    },
+    events: {
+        "click .figure_content" : "fullscreen"
+    },
+    toggleVisibility: function(data) {
+        if (this.parent.options.pageNumber === data.page) {
+            if (!this.contentRendered) {
+                this.renderContent();
+            }
 
-			this.$el.css("visibility", "visible");
-		} else {
-			this.$el.css("visibility", "hidden");
-		}
-	},
-	render: function() {
-		//template the element
-		this.$el.html(this.template(this.model.toJSON()));
+            this.$el.css("visibility", "visible");
+        } else {
+            this.$el.css("visibility", "hidden");
+        }
+    },
+    render: function() {
+        //template the element
+        this.$el.html(this.template(this.model.toJSON()));
 
-		//calculate the size based on layout hints
-		this.sizeElement();
+        //calculate the size based on layout hints
+        this.sizeElement();
 
-		//position the element on the page
-		var isPositioned = this.positionElement();
+        //position the element on the page
+        var isPositioned = this.positionElement();
 
-		if (isPositioned) {
-			this.layoutComplete = true;
-		}
+        if (isPositioned) {
+            this.layoutComplete = true;
+        }
 
-		return this;
-	},
-	renderContent: function() {
-		this.$el.find(".figure_content").html(this.model.get('content'));
+        return this;
+    },
+    renderContent: function() {
+        this.$el.find(".figure_content").html(this.model.get('content'));
 
-		this.contentRendered = true;
-	},
-	fullscreen: function() {
-		$.fancybox.open({
-			content: this.model.get('content')
-		});
-	},
-	positionElement: function() {
-		var modelData = this.model.toJSON();
-		var dimensions = this.options.sectionDimensions;
+        this.contentRendered = true;
+    },
+    fullscreen: function() {
+        $.fancybox.open({
+            content: this.model.get('content')
+        });
+    },
+    positionElement: function() {
+        var modelData = this.model.toJSON();
+        var dimensions = this.options.sectionDimensions;
 
-		//if element shouold not be visible on the page, hide it and return
-		if (modelData.position.vertical === "n") {
-			this.$el.hide();
-			return true;
-		}
+        //if element shouold not be visible on the page, hide it and return
+        if (modelData.position.vertical === "n") {
+            this.$el.hide();
+            return true;
+        }
 
-		var column;
-		//Detemine the start column based on the layout hint
-		switch (modelData.position.horizontal) {
-			//right
-			case 'r':
-				column = dimensions.columnsPerPage - 1;
-				break;
-			//left & fullpage
-			case 'l':
-			case 'p':
-				column = 0;
-				break;
-			//In the current column
-			default:
-				column = this.parent.processingData.currentColumn;
-		}
+        var column;
+        //Detemine the start column based on the layout hint
+        switch (modelData.position.horizontal) {
+            //right
+            case 'r':
+                column = dimensions.columnsPerPage - 1;
+                break;
+            //left & fullpage
+            case 'l':
+            case 'p':
+                column = 0;
+                break;
+            //In the current column
+            default:
+                column = this.parent.processingData.currentColumn;
+        }
 
-		var positioned = false;
-		var numColumns = this.model.get('calculatedColumns');
-		var offsetLeft = 0;
-		var offsetTop = 0;
-		var maxPositionAttemps = numColumns;
-		var positionAttempt = 0;
+        var positioned = false;
+        var numColumns = this.model.get('calculatedColumns');
+        var offsetLeft = 0;
+        var offsetTop = 0;
+        var maxPositionAttemps = numColumns;
+        var positionAttempt = 0;
 
-		whilePositioned:
-		while (!positioned && positionAttempt <= maxPositionAttemps) {
-			positionAttempt++;
+        whilePositioned:
+        while (!positioned && positionAttempt <= maxPositionAttemps) {
+            positionAttempt++;
 
-			//Detemine the left offset start column and width of the figure
-			if ((column + numColumns) > dimensions.columnsPerPage) {
-				column -= (column + numColumns) - dimensions.columnsPerPage;
-			}
+            //Detemine the left offset start column and width of the figure
+            if ((column + numColumns) > dimensions.columnsPerPage) {
+                column -= (column + numColumns) - dimensions.columnsPerPage;
+            }
 
-			//If the figure is not as wide as the available space, center it
-			var availableWidth = 0;
-			if (modelData.position.horizontal === "p") {
-				availableWidth = (dimensions.columnWidth * numColumns) + (numColumns * dimensions.gutterWidth);
-			} else {
-				availableWidth = (dimensions.columnWidth * numColumns) + ((numColumns + 1) * dimensions.gutterWidth);
-			}
+            //If the figure is not as wide as the available space, center it
+            var availableWidth = 0;
+            if (modelData.position.horizontal === "p") {
+                availableWidth = (dimensions.columnWidth * numColumns) + (numColumns * dimensions.gutterWidth);
+            } else {
+                availableWidth = (dimensions.columnWidth * numColumns) + ((numColumns + 1) * dimensions.gutterWidth);
+            }
 
-			var addLeftPadding = 0;
-			if (this.calculatedWidth < availableWidth && availableWidth <= dimensions.innerSectionWidth) {
-				addLeftPadding = Math.floor((availableWidth - this.calculatedWidth) / 2);
-			}
+            var addLeftPadding = 0;
+            if (this.calculatedWidth < availableWidth && availableWidth <= dimensions.innerSectionWidth) {
+                addLeftPadding = Math.floor((availableWidth - this.calculatedWidth) / 2);
+            }
 
-			offsetLeft = (column * dimensions.columnWidth) + (column * dimensions.gutterWidth) + addLeftPadding;
-			this.$el.css("left", offsetLeft + "px");
+            offsetLeft = (column * dimensions.columnWidth) + (column * dimensions.gutterWidth) + addLeftPadding;
+            this.$el.css("left", offsetLeft + "px");
 
-			//Determine the top offset based on the layout hint
-			switch (modelData.position.vertical) {
-				//top & fullpage
-				case 't':
-				case 'p':
-					offsetTop = 0;
-					break;
-				//bottom
-				case 'b':
-					offsetTop = dimensions.innerSectionHeight - this.calculatedHeight;
-					break;
-			}
-			this.$el.css("top", offsetTop + "px");
+            //Determine the top offset based on the layout hint
+            switch (modelData.position.vertical) {
+                //top & fullpage
+                case 't':
+                case 'p':
+                    offsetTop = 0;
+                    break;
+                //bottom
+                case 'b':
+                    offsetTop = dimensions.innerSectionHeight - this.calculatedHeight;
+                    break;
+            }
+            this.$el.css("top", offsetTop + "px");
 
-			var figureX = [offsetLeft, offsetLeft + this.calculatedWidth];
-			var figureY = [offsetTop, offsetTop + this.calculatedHeight];
-			this.position = {
-				x : figureX,
-				y : figureY
-			};
+            var figureX = [offsetLeft, offsetLeft + this.calculatedWidth];
+            var figureY = [offsetTop, offsetTop + this.calculatedHeight];
+            this.position = {
+                x : figureX,
+                y : figureY
+            };
 
-			positioned = true;
+            positioned = true;
 
-			if (offsetLeft < 0 || figureX[1] > dimensions.innerSectionWidth) {
-				positioned = false;
-			}
+            if (offsetLeft < 0 || figureX[1] > dimensions.innerSectionWidth) {
+                positioned = false;
+            }
 
-			//check if current placement overlaps any other figures
-			var pageFigures = this.parent.getChildViewsByType('figure');
-			var numPageFigures = pageFigures.length;
-			if (positioned && numPageFigures && numPageFigures > 1) {
-				for (i = 0; i < numPageFigures; i++) {
-					if (pageFigures[i].cid === this.cid) {
-						continue;
-					}
+            //check if current placement overlaps any other figures
+            var pageFigures = this.parent.getChildViewsByType('figure');
+            var numPageFigures = pageFigures.length;
+            if (positioned && numPageFigures && numPageFigures > 1) {
+                for (i = 0; i < numPageFigures; i++) {
+                    if (pageFigures[i].cid === this.cid) {
+                        continue;
+                    }
 
-					var elemX = pageFigures[i].position.x;
-					var elemY = pageFigures[i].position.y;
+                    var elemX = pageFigures[i].position.x;
+                    var elemY = pageFigures[i].position.y;
 
-					if (figureX[0] < elemX[1] && figureX[1] > elemX[0] &&
-						figureY[0] < elemY[1] && figureY[1] > elemY[0]
-					) {
-						positioned = false;
-						break;
-					}
-				}
-			}
+                    if (figureX[0] < elemX[1] && figureX[1] > elemX[0] &&
+                        figureY[0] < elemY[1] && figureY[1] > elemY[0]
+                    ) {
+                        positioned = false;
+                        break;
+                    }
+                }
+            }
 
-			if (!positioned) {
-				//adjust the start column to see if the figure can be positioned on the page
-				switch (modelData.position.horizontal) {
-					//right
-					case 'r':
-						column--;
-						if (column < 0) {
-							break whilePositioned;
-						}
-						break;
-					//left & fullpage
-					case 'l':
-					case 'p':
-						column++;
-						if (column >= dimensions.columnsPerPage) {
-							break whilePositioned;
-						}
-						break;
-					//no horizontal position
-					default:
-						column++;
-						if (column > dimensions.columnsPerPage) {
-							column = 0;
-						}
-				}
-			}
-		}
+            if (!positioned) {
+                //adjust the start column to see if the figure can be positioned on the page
+                switch (modelData.position.horizontal) {
+                    //right
+                    case 'r':
+                        column--;
+                        if (column < 0) {
+                            break whilePositioned;
+                        }
+                        break;
+                    //left & fullpage
+                    case 'l':
+                    case 'p':
+                        column++;
+                        if (column >= dimensions.columnsPerPage) {
+                            break whilePositioned;
+                        }
+                        break;
+                    //no horizontal position
+                    default:
+                        column++;
+                        if (column > dimensions.columnsPerPage) {
+                            column = 0;
+                        }
+                }
+            }
+        }
 
-		return positioned;
-	},
-	sizeElement: function() {
-		var width, height;
-		var dimensions = this.options.sectionDimensions;
-		var modelData = this.model.toJSON();
+        return positioned;
+    },
+    sizeElement: function() {
+        var width, height;
+        var dimensions = this.options.sectionDimensions;
+        var modelData = this.model.toJSON();
 
-		//Only process size data if figure will be displayed
-		if (modelData.position === "n") {
-			this.calculatedHeight = this.$el.height();
-			this.calculatedWidth = this.$el.width();
-			return this;
-		}
+        //Only process size data if figure will be displayed
+        if (modelData.position === "n") {
+            this.calculatedHeight = this.$el.height();
+            this.calculatedWidth = this.$el.width();
+            return this;
+        }
 
-		//If a percentage based width hint is specified, convert to number of columns to cover
-		if (typeof(modelData.columns) === 'string' && modelData.columns.indexOf("%") > 0) {
-			modelData.columns = Math.ceil((parseInt(modelData.columns, 10) / 100) * dimensions.columnsPerPage);
-		}
+        //If a percentage based width hint is specified, convert to number of columns to cover
+        if (typeof(modelData.columns) === 'string' && modelData.columns.indexOf("%") > 0) {
+            modelData.columns = Math.ceil((parseInt(modelData.columns, 10) / 100) * dimensions.columnsPerPage);
+        }
 
-		//for plate images set width to full page
-		if (modelData.position.horizontal === 'p') {
-			modelData.columns = dimensions.columnsPerPage;
-		}
+        //for plate images set width to full page
+        if (modelData.position.horizontal === 'p') {
+            modelData.columns = dimensions.columnsPerPage;
+        }
 
-		//Calculate maximum width for a figure
-		if (modelData.columns > dimensions.columnsPerPage || modelData.position === 'p') {
-			width = dimensions.innerSectionWidth;
-			modelData.columns = dimensions.columnsPerPage;
-		} else {
-			width = (modelData.columns * dimensions.columnWidth) + (dimensions.gutterWidth * (modelData.columns - 1));
-		}
-		width = Math.floor(width);
-		this.$el.css("width", width + "px");
+        //Calculate maximum width for a figure
+        if (modelData.columns > dimensions.columnsPerPage || modelData.position === 'p') {
+            width = dimensions.innerSectionWidth;
+            modelData.columns = dimensions.columnsPerPage;
+        } else {
+            width = (modelData.columns * dimensions.columnWidth) + (dimensions.gutterWidth * (modelData.columns - 1));
+        }
+        width = Math.floor(width);
+        this.$el.css("width", width + "px");
 
-		//Get the height of the caption
-		var captionHeight = this.$el.find("figcaption").outerHeight(true);
+        //Get the height of the caption
+        var captionHeight = this.$el.find("figcaption").outerHeight(true);
 
-		//Calculate height of figure plus the caption
-		height = (width / modelData.aspect) + captionHeight;
+        //Calculate height of figure plus the caption
+        if (modelData.aspect) {
+            height = (width / modelData.aspect) + captionHeight;
+        } else {
+            this.renderContent();
+            height = this.$el.find('.figure_content').outerHeight(true) + captionHeight;
+        }
 
-		//If the height of the figure is greater than the page height, scale it down
-		if (height > dimensions.innerSectionHeight) {
-			height = dimensions.innerSectionHeight;
+        //If the height of the figure is greater than the page height, scale it down
+        if (height > dimensions.innerSectionHeight) {
+            height = dimensions.innerSectionHeight;
 
-			//set new width and the new column coverage number
-			width = (height - captionHeight) * modelData.aspect;
-			this.$el.css("width", width + "px");
+            //set new width and the new column coverage number
+            width = (height - captionHeight) * modelData.aspect;
+            this.$el.css("width", width + "px");
 
-			//update caption height at new width
-			captionHeight = this.$el.find("figcaption").outerHeight(true);
+            //update caption height at new width
+            captionHeight = this.$el.find("figcaption").outerHeight(true);
 
-			//update column coverage
-			modelData.columns = Math.ceil((width + dimensions.gutterWidth) / (dimensions.gutterWidth + dimensions.columnWidth));
-		}
+            //update column coverage
+            modelData.columns = Math.ceil((width + dimensions.gutterWidth) / (dimensions.gutterWidth + dimensions.columnWidth));
+        }
 
-		//dont use partial pixels
-		width = Math.floor(width);
-		height = Math.floor(height);
+        //dont use partial pixels
+        width = Math.floor(width);
+        height = Math.floor(height);
 
-		this.$el.css({ height : height + "px", width : width + "px"});
+        this.$el.css({ height : height + "px", width : width + "px"});
 
-		this.calculatedHeight = height;
-		this.calculatedWidth = width;
+        this.calculatedHeight = height;
+        this.calculatedWidth = width;
 
-		//update model number of columns based on calculations
-		this.model.set('calculatedColumns', modelData.columns);
+        //update model number of columns based on calculations
+        this.model.set('calculatedColumns', modelData.columns);
 
-		//Set the size of the figure content div inside the actual figure element
-		this.$el.find('.figure_content').css({
-			width : width,
-			height : height - captionHeight
-		});
+        //Set the size of the figure content div inside the actual figure element
+        this.$el.find('.figure_content').css({
+            width : width,
+            height : height - captionHeight
+        });
 
-		this.sizeCalculated = true;
-		return this;
-	}
+        this.sizeCalculated = true;
+        return this;
+    }
 });
