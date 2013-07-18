@@ -6,7 +6,7 @@ OsciTk.models.Figure = OsciTk.models.BaseModel.extend({
 			caption: null,
 			position: null,
 			columns: null,
-			aspect: 1,
+			aspect: 0,
 			body: null,
 			options: {},
 			plate: false
