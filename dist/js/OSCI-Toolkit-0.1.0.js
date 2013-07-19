@@ -9,79 +9,83 @@ OsciTk.views = {
  * Load xml document
  */
 function loadXMLDoc(url) {
-	xhttp = new XMLHttpRequest();
-	xhttp.overrideMimeType('text/xml');
-	xhttp.open('GET', url, false);
-	xhttp.send();
-	return xhttp.responseXML;
+    xhttp = new XMLHttpRequest();
+    //IE9 and IE10 doesn't suport .overrideMimeType(), so we need to check for it.
+    if (xhttp.overrideMimeType) {
+        xhttp.overrideMimeType('text/xml');
+    }  
+    xhttp.open('GET', url, false);
+    xhttp.send();
+    return xhttp.responseXML;
 }
 
 /*
  * Convert xml to JSON
  */
 function xmlToJson(xml, namespace) {
-	var obj = true,
-		i = 0;
-	// retrieve namespaces
-	if(!namespace) {
-		namespace = ['xml:'];
-		for(i = 0; i < xml.documentElement.attributes.length; i++) {
-			if(xml.documentElement.attributes.item(i).nodeName.indexOf('xmlns') != -1) {
-				namespace.push(xml.documentElement.attributes.item(i).nodeName.replace('xmlns:', '') + ':');
-			}
-		}
-	}
+    var obj = true,
+        i = 0;
+    // retrieve namespaces
+    if(!namespace) {
+        namespace = ['xml:'];
+        for(i = 0; i < xml.documentElement.attributes.length; i++) {
+            if(xml.documentElement.attributes.item(i).nodeName.indexOf('xmlns') != -1) {
+                namespace.push(xml.documentElement.attributes.item(i).nodeName.replace('xmlns:', '') + ':');
+            }
+        }
+    }
 
-	var result = true;
-	if (xml.attributes && xml.attributes.length > 0) {
-		var attribute;
-		result = {};
-		for (var attributeID = 0; attributeID < xml.attributes.length; attributeID++) {
-			attribute = xml.attributes.item(attributeID);
-			result[attribute.nodeName.replaceArray(namespace, '').toCamel()] = attribute.nodeValue;
-		}
-	}
-	if (xml.hasChildNodes()) {
-		var key, value, xmlChild;
-		if (result === true) { result = {}; }
-		for (var child = 0; child < xml.childNodes.length; child++) {
-			xmlChild = xml.childNodes.item(child);
-			if ((xmlChild.nodeType & 7) === 1) {
-				key = xmlChild.nodeName.replaceArray(namespace, '').toCamel();
-				value = xmlToJson(xmlChild, namespace);
-				if (result.hasOwnProperty(key)) {
-					if (result[key].constructor !== Array) { result[key] = [result[key]]; }
-					result[key].push(value);
-				} else { result[key] = value; }
-			} else if ((xmlChild.nodeType - 1 | 1) === 3) {
-				key = 'value';
-				value = xmlChild.nodeType === 3 ? xmlChild.nodeValue.replace(/^\s+|\s+$/g, '') : xmlChild.nodeValue;
-				if (result.hasOwnProperty(key)) { result[key] += value; }
-				else if (xmlChild.nodeType === 4 || value !== '') { result[key] = value; }
-			}
-		}
-	}
-	return(result);
+    var result = true;
+    if (xml.attributes && xml.attributes.length > 0) {
+        var attribute;
+        result = {};
+        for (var attributeID = 0; attributeID < xml.attributes.length; attributeID++) {
+            attribute = xml.attributes.item(attributeID);
+            result[attribute.nodeName.replaceArray(namespace, '').toCamel()] = attribute.nodeValue;
+        }
+    }
+    if (xml.hasChildNodes()) {
+        var key, value, xmlChild;
+        if (result === true) { result = {}; }
+        for (var child = 0; child < xml.childNodes.length; child++) {
+            xmlChild = xml.childNodes.item(child);
+            if ((xmlChild.nodeType & 7) === 1) {
+                key = xmlChild.nodeName.replaceArray(namespace, '').toCamel();
+                value = xmlToJson(xmlChild, namespace);
+                if (result.hasOwnProperty(key)) {
+                    if (result[key].constructor !== Array) { result[key] = [result[key]]; }
+                    result[key].push(value);
+                } else { result[key] = value; }
+            } else if ((xmlChild.nodeType - 1 | 1) === 3) {
+                key = 'value';
+                value = xmlChild.nodeType === 3 ? xmlChild.nodeValue.replace(/^\s+|\s+$/g, '') : xmlChild.nodeValue;
+                if (result.hasOwnProperty(key)) { result[key] += value; }
+                else if (xmlChild.nodeType === 4 || value !== '') { result[key] = value; }
+            }
+        }
+    }
+    return(result);
 }
 
 function objectToArray(obj) {
-	if(obj === undefined) return;
-	return Object.prototype.toString.call(obj) !== '[object Array]' ? [obj] : obj;
+    if(obj === undefined) return;
+    return Object.prototype.toString.call(obj) !== '[object Array]' ? [obj] : obj;
 }
 
 String.prototype.replaceArray = function(find, replace) {
-	var replaceString = this;
-	for (var i = 0; i < find.length; i++) {
-		replaceString = replaceString.replace(find[i], replace);
-	}
-	return replaceString;
+    var replaceString = this;
+    for (var i = 0; i < find.length; i++) {
+        replaceString = replaceString.replace(find[i], replace);
+    }
+    return replaceString;
 };
 
 String.prototype.toCamel = function(){
     return this.replace(/\s(.)/g, function($1) { return $1.toUpperCase(); })
-		.replace(/\s/g, '')
-		.replace(/^(.)/, function($1) { return $1.toLowerCase(); });
+        .replace(/\s/g, '')
+        .replace(/^(.)/, function($1) { return $1.toLowerCase(); });
 };
+
 OsciTk.router = Backbone.Router.extend({
 
 	routes: {
@@ -658,7 +662,7 @@ OsciTk.models.Figure = OsciTk.models.BaseModel.extend({
 			caption: null,
 			position: null,
 			columns: null,
-			aspect: 1,
+			aspect: 0,
 			body: null,
 			options: {},
 			plate: false
@@ -701,6 +705,7 @@ OsciTk.models.Figure = OsciTk.models.BaseModel.extend({
 		return this;
 	}
 });
+
 OsciTk.models.Footnote = OsciTk.models.BaseModel.extend({
 	defaults: function() {
 		return {
@@ -947,11 +952,13 @@ OsciTk.models.Section = OsciTk.models.BaseModel.extend({
 	},
 
 	loadContent: function() {
+
 		var content = null;
 		if (this.get('contentLoaded') === false) {
 			var data = (loadXMLDoc(this.get('uri')));
 
 			content = $(data);
+
 			this.set('title', data.title);
 			this.set('content', content);
 			this.set('contentLoaded', true);
@@ -964,15 +971,18 @@ OsciTk.models.Section = OsciTk.models.BaseModel.extend({
 		// parse out footnotes and figures, make them available via event
 		var footnotes = content.find('section#footnotes');
 		var figures   = content.find('figure');
+
 		Backbone.trigger('footnotesAvailable', footnotes);
 		Backbone.trigger('figuresAvailable', figures);
 		Backbone.trigger('sectionLoaded', this);
+
 	},
 
 	removeAllPages : function() {
 		this.set('pages', new OsciTk.collections.Pages());
 	}
 });
+
 OsciTk.collections.Figures = OsciTk.collections.BaseCollection.extend({
 	model: OsciTk.models.Figure,
 
@@ -1278,394 +1288,408 @@ OsciTk.views.Page = OsciTk.views.BaseView.extend({
 	}
 });
 OsciTk.views.Section = OsciTk.views.BaseView.extend({
-	id: 'section',
-	initialize: function(options) {
-		this.options = options ? options : {};
+    id: 'section',
+    initialize: function(options) {
+        this.options = options ? options : {};
 
-		_.defaults(this.options, {
-			pageView : 'Page'
-		});
+        _.defaults(this.options, {
+            pageView : 'Page'
+        });
 
-		// bind sectionChanged
-		this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
-			if (navItem) {
-				// loading section content
-				app.models.section = new OsciTk.models.Section({
-					uri : navItem.get('uri'),
-					id : navItem.get('id')
-				});
+        // bind sectionChanged
+        this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
+            var that = this;
+            $('body').append('<div id="loader">Loading...</div>');
 
-				app.models.section.loadContent();
-				this.changeModel(app.models.section);
-				this.render();
-			}
-		});
+            $('#loader').fadeTo(500, 0.7, function() {
 
-	},
-	render: function() {
-		//Allow subclasses to do something before we render
-		if (this.preRender) {
-			this.preRender();
-		}
-		//clean up the view incase we have already rendered this before
-		this.model.removeAllPages();
-		this.removeAllChildViews();
+                if (navItem) {
+                    // loading section content
+                    app.models.section = new OsciTk.models.Section({
+                        uri : navItem.get('uri'),
+                        id : navItem.get('id')
+                    });
 
-		Backbone.trigger("layoutStart");
-		this.renderContent();
-		Backbone.trigger("layoutComplete", {numPages : this.model.get('pages').length});
-		return this;
-	},
-	onClose: function() {
-		this.model.removeAllPages();
-	},
-	getPageForParagraphId: function(pid) {
-		var views = this.getChildViews();
-		var p = _.find(views, function(view) {
-			return view.$el.find("[data-paragraph_identifier='" + pid + "']").length !== 0;
-		});
-		if ((p !== undefined) && (p !== -1)) {
-			return _.indexOf(views, p) + 1;
-		}
-		return null;
-	},
-	getPageNumberForSelector: function(element) {
-		var page = $(element).parents(".page");
-		if (page) {
-			return page.data("page_num");
-		}
+                    app.models.section.loadContent();
+                    that.changeModel(app.models.section);
+                    that.render();
+                }
 
-		return null;
-	},
-	getPageNumberForElementId : function(id) {
-		var views = this.getChildViews();
-		var p = _.find(views, function(view) { return view.containsElementId(id); });
-		if ((p !== undefined) && (p !== -1)) {
-			return _.indexOf(views, p) + 1;
-		}
-		return null;
-	},
-	isElementVisible: function(element) {
-		return true;
-	},
-	getPageForProcessing : function(id, newTarget) {
-		var page;
+                $('#loader').remove();
+            });
+        });
 
-		if (id !== undefined) {
-			page = this.getChildViewById(id);
-		} else {
-			page = _.filter(this.getChildViews(), function(page){
-				return page.isPageComplete() === false;
-			});
+    },
+    render: function() {
+        //Allow subclasses to do something before we render
+        if (this.preRender) {
+            this.preRender();
+        }
+        //clean up the view incase we have already rendered this before
+        this.model.removeAllPages();
+        this.removeAllChildViews();
 
-			if (page.length === 0) {
-				var pagesCollection = this.model.get('pages');
-				pagesCollection.add({
-					pageNumber: this.model.get('pages').length + 1
-				});
+        Backbone.trigger("layoutStart");
+        this.renderContent();
+        Backbone.trigger("layoutComplete", {numPages : this.model.get('pages').length});
+        return this;
+    },
+    onClose: function() {
+        this.model.removeAllPages();
+    },
+    getPageForParagraphId: function(pid) {
+        var views = this.getChildViews();
+        var p = _.find(views, function(view) {
+            return view.$el.find("[data-paragraph_identifier='" + pid + "']").length !== 0;
+        });
+        if ((p !== undefined) && (p !== -1)) {
+            return _.indexOf(views, p) + 1;
+        }
+        return null;
+    },
+    getPageNumberForSelector: function(element) {
+        var page = $(element).parents(".page");
+        if (page) {
+            return page.data("page_num");
+        }
 
-				page = new OsciTk.views[this.options.pageView]({
-					model : pagesCollection.last(),
-					pageNumber : this.model.get('pages').length
-				});
-				this.addView(page, newTarget);
-			} else {
-				page = page.pop();
-			}
-		}
+        return null;
+    },
+    getPageNumberForElementId : function(id) {
+        var views = this.getChildViews();
+        var p = _.find(views, function(view) { return view.containsElementId(id); });
+        if ((p !== undefined) && (p !== -1)) {
+            return _.indexOf(views, p) + 1;
+        }
+        return null;
+    },
+    isElementVisible: function(element) {
+        return true;
+    },
+    getPageForProcessing : function(id, newTarget) {
+        var page;
 
-		return page;
-	},
-	getCurrentPageView: function() {
-		// TODO: so the only possible child view of a section is a page???
-		return this.getChildViewByIndex(app.views.navigationView.page - 1);
-	},
-	renderContent: function() {
-		//basic layout just loads the content into a single page with scrolling
-		var pageView = this.getPageForProcessing();
+        if (id !== undefined) {
+            page = this.getChildViewById(id);
+        } else {
+            page = _.filter(this.getChildViews(), function(page){
+                return page.isPageComplete() === false;
+            });
 
-		//add the content to the view/model
-		pageView.addContent(this.model.get('content').find('body').html());
+            if (page.length === 0) {
+                var pagesCollection = this.model.get('pages');
+                pagesCollection.add({
+                    pageNumber: this.model.get('pages').length + 1
+                });
 
-		//render the view
-		pageView.render();
+                page = new OsciTk.views[this.options.pageView]({
+                    model : pagesCollection.last(),
+                    pageNumber : this.model.get('pages').length
+                });
+                this.addView(page, newTarget);
+            } else {
+                page = page.pop();
+            }
+        }
 
-		//mark processing complete (not necessary, but here for example)
-		pageView.processingComplete();
-	}
+        return page;
+    },
+    getCurrentPageView: function() {
+        // TODO: so the only possible child view of a section is a page???
+        return this.getChildViewByIndex(app.views.navigationView.page - 1);
+    },
+    renderContent: function() {
+        //basic layout just loads the content into a single page with scrolling
+        var pageView = this.getPageForProcessing();
+
+        //add the content to the view/model
+        pageView.addContent(this.model.get('content').find('body').html());
+
+        //render the view
+        pageView.render();
+
+        //mark processing complete (not necessary, but here for example)
+        pageView.processingComplete();
+    }
 });
+
 //Add this view to the figure type registry
 OsciTk.views.figureTypeRegistry["default"] = "MultiColumnFigure";
 
 OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
-	tagName: 'figure',
-	template: OsciTk.templateManager.get('multi-column-figure'),
-	initialize: function(options) {
-		this.options = options;
-		//set some defaults
-		this.layoutComplete = false;
-		this.contentRendered = false;
-		this.sizeCalculated = false;
-		this.calculatedHeight = 0;
-		this.calculatedWidth = 0;
-		this.position = {x:[0,0], y:[0,0]};
+    tagName: 'figure',
+    template: OsciTk.templateManager.get('multi-column-figure'),
+    initialize: function(options) {
+        this.options = options;
+        //set some defaults
+        this.layoutComplete = false;
+        this.contentRendered = false;
+        this.sizeCalculated = false;
+        this.calculatedHeight = 0;
+        this.calculatedWidth = 0;
+        this.position = {x:[0,0], y:[0,0]};
 
-		this.$el.attr("id", this.model.get("id"));
-		this.$el.addClass(this.model.get("type"));
+        this.$el.attr("id", this.model.get("id"));
+        this.$el.addClass(this.model.get("type"));
 
-		this.listenTo(Backbone, 'pageChanged', this.toggleVisibility);
-	},
-	events: {
-		"click .figure_content" : "fullscreen"
-	},
-	toggleVisibility: function(data) {
-		if (this.parent.options.pageNumber === data.page) {
-			if (!this.contentRendered) {
-				this.renderContent();
-			}
+        this.listenTo(Backbone, 'pageChanged', this.toggleVisibility);
+    },
+    events: {
+        "click .figure_content" : "fullscreen"
+    },
+    toggleVisibility: function(data) {
+        if (this.parent.options.pageNumber === data.page) {
+            if (!this.contentRendered) {
+                this.renderContent();
+            }
 
-			this.$el.css("visibility", "visible");
-		} else {
-			this.$el.css("visibility", "hidden");
-		}
-	},
-	render: function() {
-		//template the element
-		this.$el.html(this.template(this.model.toJSON()));
+            this.$el.css("visibility", "visible");
+        } else {
+            this.$el.css("visibility", "hidden");
+        }
+    },
+    render: function() {
+        //template the element
+        this.$el.html(this.template(this.model.toJSON()));
 
-		//calculate the size based on layout hints
-		this.sizeElement();
+        //calculate the size based on layout hints
+        this.sizeElement();
 
-		//position the element on the page
-		var isPositioned = this.positionElement();
+        //position the element on the page
+        var isPositioned = this.positionElement();
 
-		if (isPositioned) {
-			this.layoutComplete = true;
-		}
+        if (isPositioned) {
+            this.layoutComplete = true;
+        }
 
-		return this;
-	},
-	renderContent: function() {
-		this.$el.find(".figure_content").html(this.model.get('content'));
+        return this;
+    },
+    renderContent: function() {
+        this.$el.find(".figure_content").html(this.model.get('content'));
 
-		this.contentRendered = true;
-	},
-	fullscreen: function() {
-		$.fancybox.open({
-			content: this.model.get('content')
-		});
-	},
-	positionElement: function() {
-		var modelData = this.model.toJSON();
-		var dimensions = this.options.sectionDimensions;
+        this.contentRendered = true;
+    },
+    fullscreen: function() {
+        $.fancybox.open({
+            content: this.model.get('content')
+        });
+    },
+    positionElement: function() {
+        var modelData = this.model.toJSON();
+        var dimensions = this.options.sectionDimensions;
 
-		//if element shouold not be visible on the page, hide it and return
-		if (modelData.position.vertical === "n") {
-			this.$el.hide();
-			return true;
-		}
+        //if element shouold not be visible on the page, hide it and return
+        if (modelData.position.vertical === "n") {
+            this.$el.hide();
+            return true;
+        }
 
-		var column;
-		//Detemine the start column based on the layout hint
-		switch (modelData.position.horizontal) {
-			//right
-			case 'r':
-				column = dimensions.columnsPerPage - 1;
-				break;
-			//left & fullpage
-			case 'l':
-			case 'p':
-				column = 0;
-				break;
-			//In the current column
-			default:
-				column = this.parent.processingData.currentColumn;
-		}
+        var column;
+        //Detemine the start column based on the layout hint
+        switch (modelData.position.horizontal) {
+            //right
+            case 'r':
+                column = dimensions.columnsPerPage - 1;
+                break;
+            //left & fullpage
+            case 'l':
+            case 'p':
+                column = 0;
+                break;
+            //In the current column
+            default:
+                column = this.parent.processingData.currentColumn;
+        }
 
-		var positioned = false;
-		var numColumns = this.model.get('calculatedColumns');
-		var offsetLeft = 0;
-		var offsetTop = 0;
-		var maxPositionAttemps = numColumns;
-		var positionAttempt = 0;
+        var positioned = false;
+        var numColumns = this.model.get('calculatedColumns');
+        var offsetLeft = 0;
+        var offsetTop = 0;
+        var maxPositionAttemps = numColumns;
+        var positionAttempt = 0;
 
-		whilePositioned:
-		while (!positioned && positionAttempt <= maxPositionAttemps) {
-			positionAttempt++;
+        whilePositioned:
+        while (!positioned && positionAttempt <= maxPositionAttemps) {
+            positionAttempt++;
 
-			//Detemine the left offset start column and width of the figure
-			if ((column + numColumns) > dimensions.columnsPerPage) {
-				column -= (column + numColumns) - dimensions.columnsPerPage;
-			}
+            //Detemine the left offset start column and width of the figure
+            if ((column + numColumns) > dimensions.columnsPerPage) {
+                column -= (column + numColumns) - dimensions.columnsPerPage;
+            }
 
-			//If the figure is not as wide as the available space, center it
-			var availableWidth = 0;
-			if (modelData.position.horizontal === "p") {
-				availableWidth = (dimensions.columnWidth * numColumns) + (numColumns * dimensions.gutterWidth);
-			} else {
-				availableWidth = (dimensions.columnWidth * numColumns) + ((numColumns + 1) * dimensions.gutterWidth);
-			}
+            //If the figure is not as wide as the available space, center it
+            var availableWidth = 0;
+            if (modelData.position.horizontal === "p") {
+                availableWidth = (dimensions.columnWidth * numColumns) + (numColumns * dimensions.gutterWidth);
+            } else {
+                availableWidth = (dimensions.columnWidth * numColumns) + ((numColumns + 1) * dimensions.gutterWidth);
+            }
 
-			var addLeftPadding = 0;
-			if (this.calculatedWidth < availableWidth && availableWidth <= dimensions.innerSectionWidth) {
-				addLeftPadding = Math.floor((availableWidth - this.calculatedWidth) / 2);
-			}
+            var addLeftPadding = 0;
+            if (this.calculatedWidth < availableWidth && availableWidth <= dimensions.innerSectionWidth) {
+                addLeftPadding = Math.floor((availableWidth - this.calculatedWidth) / 2);
+            }
 
-			offsetLeft = (column * dimensions.columnWidth) + (column * dimensions.gutterWidth) + addLeftPadding;
-			this.$el.css("left", offsetLeft + "px");
+            offsetLeft = (column * dimensions.columnWidth) + (column * dimensions.gutterWidth) + addLeftPadding;
+            this.$el.css("left", offsetLeft + "px");
 
-			//Determine the top offset based on the layout hint
-			switch (modelData.position.vertical) {
-				//top & fullpage
-				case 't':
-				case 'p':
-					offsetTop = 0;
-					break;
-				//bottom
-				case 'b':
-					offsetTop = dimensions.innerSectionHeight - this.calculatedHeight;
-					break;
-			}
-			this.$el.css("top", offsetTop + "px");
+            //Determine the top offset based on the layout hint
+            switch (modelData.position.vertical) {
+                //top & fullpage
+                case 't':
+                case 'p':
+                    offsetTop = 0;
+                    break;
+                //bottom
+                case 'b':
+                    offsetTop = dimensions.innerSectionHeight - this.calculatedHeight;
+                    break;
+            }
+            this.$el.css("top", offsetTop + "px");
 
-			var figureX = [offsetLeft, offsetLeft + this.calculatedWidth];
-			var figureY = [offsetTop, offsetTop + this.calculatedHeight];
-			this.position = {
-				x : figureX,
-				y : figureY
-			};
+            var figureX = [offsetLeft, offsetLeft + this.calculatedWidth];
+            var figureY = [offsetTop, offsetTop + this.calculatedHeight];
+            this.position = {
+                x : figureX,
+                y : figureY
+            };
 
-			positioned = true;
+            positioned = true;
 
-			if (offsetLeft < 0 || figureX[1] > dimensions.innerSectionWidth) {
-				positioned = false;
-			}
+            if (offsetLeft < 0 || figureX[1] > dimensions.innerSectionWidth) {
+                positioned = false;
+            }
 
-			//check if current placement overlaps any other figures
-			var pageFigures = this.parent.getChildViewsByType('figure');
-			var numPageFigures = pageFigures.length;
-			if (positioned && numPageFigures && numPageFigures > 1) {
-				for (i = 0; i < numPageFigures; i++) {
-					if (pageFigures[i].cid === this.cid) {
-						continue;
-					}
+            //check if current placement overlaps any other figures
+            var pageFigures = this.parent.getChildViewsByType('figure');
+            var numPageFigures = pageFigures.length;
+            if (positioned && numPageFigures && numPageFigures > 1) {
+                for (i = 0; i < numPageFigures; i++) {
+                    if (pageFigures[i].cid === this.cid) {
+                        continue;
+                    }
 
-					var elemX = pageFigures[i].position.x;
-					var elemY = pageFigures[i].position.y;
+                    var elemX = pageFigures[i].position.x;
+                    var elemY = pageFigures[i].position.y;
 
-					if (figureX[0] < elemX[1] && figureX[1] > elemX[0] &&
-						figureY[0] < elemY[1] && figureY[1] > elemY[0]
-					) {
-						positioned = false;
-						break;
-					}
-				}
-			}
+                    if (figureX[0] < elemX[1] && figureX[1] > elemX[0] &&
+                        figureY[0] < elemY[1] && figureY[1] > elemY[0]
+                    ) {
+                        positioned = false;
+                        break;
+                    }
+                }
+            }
 
-			if (!positioned) {
-				//adjust the start column to see if the figure can be positioned on the page
-				switch (modelData.position.horizontal) {
-					//right
-					case 'r':
-						column--;
-						if (column < 0) {
-							break whilePositioned;
-						}
-						break;
-					//left & fullpage
-					case 'l':
-					case 'p':
-						column++;
-						if (column >= dimensions.columnsPerPage) {
-							break whilePositioned;
-						}
-						break;
-					//no horizontal position
-					default:
-						column++;
-						if (column > dimensions.columnsPerPage) {
-							column = 0;
-						}
-				}
-			}
-		}
+            if (!positioned) {
+                //adjust the start column to see if the figure can be positioned on the page
+                switch (modelData.position.horizontal) {
+                    //right
+                    case 'r':
+                        column--;
+                        if (column < 0) {
+                            break whilePositioned;
+                        }
+                        break;
+                    //left & fullpage
+                    case 'l':
+                    case 'p':
+                        column++;
+                        if (column >= dimensions.columnsPerPage) {
+                            break whilePositioned;
+                        }
+                        break;
+                    //no horizontal position
+                    default:
+                        column++;
+                        if (column > dimensions.columnsPerPage) {
+                            column = 0;
+                        }
+                }
+            }
+        }
 
-		return positioned;
-	},
-	sizeElement: function() {
-		var width, height;
-		var dimensions = this.options.sectionDimensions;
-		var modelData = this.model.toJSON();
+        return positioned;
+    },
+    sizeElement: function() {
+        var width, height;
+        var dimensions = this.options.sectionDimensions;
+        var modelData = this.model.toJSON();
 
-		//Only process size data if figure will be displayed
-		if (modelData.position === "n") {
-			this.calculatedHeight = this.$el.height();
-			this.calculatedWidth = this.$el.width();
-			return this;
-		}
+        //Only process size data if figure will be displayed
+        if (modelData.position === "n") {
+            this.calculatedHeight = this.$el.height();
+            this.calculatedWidth = this.$el.width();
+            return this;
+        }
 
-		//If a percentage based width hint is specified, convert to number of columns to cover
-		if (typeof(modelData.columns) === 'string' && modelData.columns.indexOf("%") > 0) {
-			modelData.columns = Math.ceil((parseInt(modelData.columns, 10) / 100) * dimensions.columnsPerPage);
-		}
+        //If a percentage based width hint is specified, convert to number of columns to cover
+        if (typeof(modelData.columns) === 'string' && modelData.columns.indexOf("%") > 0) {
+            modelData.columns = Math.ceil((parseInt(modelData.columns, 10) / 100) * dimensions.columnsPerPage);
+        }
 
-		//for plate images set width to full page
-		if (modelData.position.horizontal === 'p') {
-			modelData.columns = dimensions.columnsPerPage;
-		}
+        //for plate images set width to full page
+        if (modelData.position.horizontal === 'p') {
+            modelData.columns = dimensions.columnsPerPage;
+        }
 
-		//Calculate maximum width for a figure
-		if (modelData.columns > dimensions.columnsPerPage || modelData.position === 'p') {
-			width = dimensions.innerSectionWidth;
-			modelData.columns = dimensions.columnsPerPage;
-		} else {
-			width = (modelData.columns * dimensions.columnWidth) + (dimensions.gutterWidth * (modelData.columns - 1));
-		}
-		width = Math.floor(width);
-		this.$el.css("width", width + "px");
+        //Calculate maximum width for a figure
+        if (modelData.columns > dimensions.columnsPerPage || modelData.position === 'p') {
+            width = dimensions.innerSectionWidth;
+            modelData.columns = dimensions.columnsPerPage;
+        } else {
+            width = (modelData.columns * dimensions.columnWidth) + (dimensions.gutterWidth * (modelData.columns - 1));
+        }
+        width = Math.floor(width);
+        this.$el.css("width", width + "px");
 
-		//Get the height of the caption
-		var captionHeight = this.$el.find("figcaption").outerHeight(true);
+        //Get the height of the caption
+        var captionHeight = this.$el.find("figcaption").outerHeight(true);
 
-		//Calculate height of figure plus the caption
-		height = (width / modelData.aspect) + captionHeight;
+        //Calculate height of figure plus the caption
+        if (modelData.aspect) {
+            height = (width / modelData.aspect) + captionHeight;
+        } else {
+            this.renderContent();
+            height = this.$el.find('.figure_content').outerHeight(true) + captionHeight;
+        }
 
-		//If the height of the figure is greater than the page height, scale it down
-		if (height > dimensions.innerSectionHeight) {
-			height = dimensions.innerSectionHeight;
+        //If the height of the figure is greater than the page height, scale it down
+        if (height > dimensions.innerSectionHeight) {
+            height = dimensions.innerSectionHeight;
 
-			//set new width and the new column coverage number
-			width = (height - captionHeight) * modelData.aspect;
-			this.$el.css("width", width + "px");
+            //set new width and the new column coverage number
+            width = (height - captionHeight) * modelData.aspect;
+            this.$el.css("width", width + "px");
 
-			//update caption height at new width
-			captionHeight = this.$el.find("figcaption").outerHeight(true);
+            //update caption height at new width
+            captionHeight = this.$el.find("figcaption").outerHeight(true);
 
-			//update column coverage
-			modelData.columns = Math.ceil((width + dimensions.gutterWidth) / (dimensions.gutterWidth + dimensions.columnWidth));
-		}
+            //update column coverage
+            modelData.columns = Math.ceil((width + dimensions.gutterWidth) / (dimensions.gutterWidth + dimensions.columnWidth));
+        }
 
-		//dont use partial pixels
-		width = Math.floor(width);
-		height = Math.floor(height);
+        //dont use partial pixels
+        width = Math.floor(width);
+        height = Math.floor(height);
 
-		this.$el.css({ height : height + "px", width : width + "px"});
+        this.$el.css({ height : height + "px", width : width + "px"});
 
-		this.calculatedHeight = height;
-		this.calculatedWidth = width;
+        this.calculatedHeight = height;
+        this.calculatedWidth = width;
 
-		//update model number of columns based on calculations
-		this.model.set('calculatedColumns', modelData.columns);
+        //update model number of columns based on calculations
+        this.model.set('calculatedColumns', modelData.columns);
 
-		//Set the size of the figure content div inside the actual figure element
-		this.$el.find('.figure_content').css({
-			width : width,
-			height : height - captionHeight
-		});
+        //Set the size of the figure content div inside the actual figure element
+        this.$el.find('.figure_content').css({
+            width : width,
+            height : height - captionHeight
+        });
 
-		this.sizeCalculated = true;
-		return this;
-	}
+        this.sizeCalculated = true;
+        return this;
+    }
 });
 
 OsciTk.views.Account = OsciTk.views.BaseView.extend({
@@ -2483,9 +2507,8 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
 		//If offset defined (should always be negative) add it to the height of the content to get the correct top margin
 		var offset = 0;
-		var columnOffset = column.offset;
 		if (column.offset < 0) {
-			offset = contentHeight + column.offset;
+			offset = Math.floor(contentHeight + column.offset);
 
 			//Set the top margin
 			content.css("margin-top", "-" + offset + "px");
@@ -3312,6 +3335,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		}
 	}
 });
+
 OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 	className: 'notes-view',
 	template: OsciTk.templateManager.get('notes'),
@@ -3707,6 +3731,7 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 		this.$el.find("ul").height(newContainerHeight);
 	}
 });
+
 OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 	className: 'toolbar-item',
 	template: OsciTk.templateManager.get('toolbar-item'),
@@ -3913,11 +3938,15 @@ var LayeredImage = function(container) { // container should be a html element
 	if (jQuery !== undefined) {
 		var $ = this.$ = jQuery;
 	}
-	else return false;
+	else {
+        return false;
+    }
 	if (org.polymaps !== undefined) {
 		this.polymaps = org.polymaps;
 	}
-	else return false;
+	else {
+        return false;
+    }
 
 	// turn the element into a jQuery object
 	this.container = $(container);
@@ -5344,6 +5373,7 @@ function liMouseup(e) {
 // bind the mouse events for asset dragging and viewfinder updating
 window.addEventListener("mousemove", liMousemove, false);
 window.addEventListener("mouseup", liMouseup, false);
+
 app = {
 	router : undefined,
 	config : undefined,

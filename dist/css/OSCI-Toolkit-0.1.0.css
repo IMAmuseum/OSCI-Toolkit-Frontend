@@ -854,9 +854,24 @@ background-image: -webkit-gradient(
 	}
 }
 
+.anchor-link,
 section figure img.thumbnail {
 	display: none;
 }
+
+#loader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    display: none;
+    z-index: 1000;
+    text-align: center;
+    font-size: 3em;
+    padding-top: 20%;
+}
+
+
 * {
 	margin: 0;
 	padding: 0;
