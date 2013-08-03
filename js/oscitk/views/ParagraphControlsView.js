@@ -22,7 +22,7 @@ OsciTk.views.ParagraphControlsView = OsciTk.views.BaseView.extend({
 
 		//remove qtip if already present
 		if(this.$el.data("qtip")) {
-			this.$el.qtip("destroy");
+			this.$el.qtip("destroy", "true");
 		}
 
 		var tipContent = '';

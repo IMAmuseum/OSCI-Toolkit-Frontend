@@ -12,7 +12,8 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 	},
 
 	events: {
-		'click a.figure_reference': 'onFigureReferenceClicked'
+		'click a.figure_reference': 'onFigureReferenceClicked',
+		'click .content-paragraph': 'onParagraphClicked'
 	},
 
 	onFigureReferenceClicked: function(event_data) {
@@ -22,6 +23,15 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 			figureView.fullscreen();
 		}
 		return false;
+	},
+
+	onParagraphClicked: function(e) {
+		e.preventDefault();
+
+		var p = $(e.currentTarget);
+		var pNum = p.data("paragraph_number");
+
+		Backbone.trigger("paragraphClicked", {paragraphNumber: pNum});
 	},
 
 	hide: function() {
@@ -164,6 +174,9 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 			var paragraphNumber = content.data("paragraph_number");
 			var contentIdentifier = content.data("osci_content_id");
 			var pidIsOnPage = this.$el.find(".paragraph-identifier-" + paragraphNumber);
+
+			//add a class so we can attach global events
+			p.addClass("content-paragraph");
 
 			if (pidIsOnPage.length === 0) {
 				var columnPosition = column.$el.position();
