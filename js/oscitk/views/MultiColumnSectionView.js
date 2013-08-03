@@ -117,7 +117,8 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 			maxColumnWidth : 300,
 			gutterWidth : 40,
 			minLinesPerColumn : 5,
-			defaultLineHeight: 16
+			defaultLineHeight: 16,
+			figureContentGutter : 20
 		});
 
 		//initialize dimensions object
@@ -343,6 +344,9 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
 		//copy gutter width out of the options for easy access
 		dimensions.gutterWidth = this.options.gutterWidth;
+
+		//copy top column margin for easy access
+		dimensions.figureContentGutter = this.options.figureContentGutter;
 
 		//copy minLinesPerColumn out of options for eacy access
 		dimensions.minLinesPerColumn = this.options.minLinesPerColumn;

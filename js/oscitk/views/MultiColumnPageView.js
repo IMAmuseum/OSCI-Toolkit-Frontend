@@ -260,7 +260,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 					if (columnPosition.x[0] < elemX[1] && columnPosition.x[1] > elemX[0] &&
 						columnPosition.y[0] < elemY[1] && columnPosition.y[1] > elemY[0]
 					) {
-						height = height - pageFigures[j].calculatedHeight - this.parent.dimensions.gutterWidth;
+						height = height - pageFigures[j].calculatedHeight - this.parent.dimensions.figureContentGutter;
 
 						//Adjust column top offset based on vertical location of the figure
 						switch (pageFigures[j].model.get("position").vertical) {
@@ -268,7 +268,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 							case 't':
 							//fullpage
 							case 'p':
-								topPosition = topPosition + pageFigures[j].calculatedHeight + this.parent.dimensions.gutterWidth;
+								topPosition = topPosition + pageFigures[j].calculatedHeight + this.parent.dimensions.figureContentGutter;
 								break;
 							//bottom
 							case 'b':
