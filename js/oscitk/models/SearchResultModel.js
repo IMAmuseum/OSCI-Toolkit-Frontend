@@ -14,6 +14,11 @@ OsciTk.models.SearchResult = OsciTk.models.BaseModel.extend({
 			case 'url':
 
 				break;
+            case 'teaser':
+                var teaser = this.attributes[attr];
+                var tmp = document.createElement("DIV");
+                tmp.innerHTML = teaser;
+                return tmp.textContent || tmpinnerText || "";
 			default:
 				return this.attributes[attr];
 		}
