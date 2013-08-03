@@ -12,7 +12,8 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
     },
 
     events: {
-        'click a.figure_reference': 'onFigureReferenceClicked'
+        'click a.figure_reference': 'onFigureReferenceClicked',
+        'click .content-paragraph': 'onParagraphClicked'
     },
 
     onFigureReferenceClicked: function(event_data) {
@@ -22,6 +23,15 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             figureView.fullscreen();
         }
         return false;
+    },
+
+    onParagraphClicked: function(e) {
+        e.preventDefault();
+
+        var p = $(e.currentTarget);
+        var pNum = p.data("paragraph_number");
+
+        Backbone.trigger("paragraphClicked", {paragraphNumber: pNum});
     },
 
     hide: function() {
