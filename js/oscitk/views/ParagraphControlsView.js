@@ -43,6 +43,7 @@ OsciTk.views.ParagraphControlsView = OsciTk.views.BaseView.extend({
             },
             show: {
                 target: $("p[data-osci_content_id='" + this.options.contentIdentifier + "']"),
+                'event': 'click',
                 ready: false,
                 solo: true
             },
