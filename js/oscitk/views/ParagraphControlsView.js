@@ -9,6 +9,14 @@ OsciTk.views.ParagraphControlsView = OsciTk.views.BaseView.extend({
 
 		if (this.options.linkItems) {
 			this.render();
+
+			this.listenTo(Backbone, "paragraphClicked", function(data) {
+				var pNum = data.paragraphNumber;
+				if (this.options.paragraphNumber === pNum) {
+					var tip = this.$el.qtip("api");
+					tip.toggle();
+				}
+			});
 		}
 	},
 
