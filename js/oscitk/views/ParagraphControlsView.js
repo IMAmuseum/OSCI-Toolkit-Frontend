@@ -31,6 +31,9 @@ OsciTk.views.ParagraphControlsView = OsciTk.views.BaseView.extend({
             tipContent += '<a href="' + i + '" data-event="' + i + '" class="' + i +'">' + text + '</a> ';
         }
 
+        var targets = $("p[data-osci_content_id='" + this.options.contentIdentifier + "']");
+        targets.push(this.$el);
+
         this.$el.qtip({
             position: {
                 my: "left center",
@@ -42,7 +45,7 @@ OsciTk.views.ParagraphControlsView = OsciTk.views.BaseView.extend({
                 }
             },
             show: {
-                target: $("p[data-osci_content_id='" + this.options.contentIdentifier + "']"),
+                target: targets,
                 'event': 'click',
                 ready: false,
                 solo: true
