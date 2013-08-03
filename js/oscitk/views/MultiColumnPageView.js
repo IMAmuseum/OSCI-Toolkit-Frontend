@@ -188,6 +188,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 					}
 				});
 				this.addView(pcv);
+				pcv.initializeTooltip();
 
 				this.paragraphControlsViews.push(pcv);
 			}

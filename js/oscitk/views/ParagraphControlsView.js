@@ -25,14 +25,26 @@ OsciTk.views.ParagraphControlsView = OsciTk.views.BaseView.extend({
             this.$el.qtip("destroy", "true");
         }
 
+        this.$el.on('click', 'a', {content: this.options.content}, function(e) {
+            e.preventDefault();
+            Backbone.trigger(
+                $(this).data('event'),
+                {
+                    contentId: $(e.data.content).attr('data-osci_content_id')
+                }
+            );
+        });
+
+        return this;
+    },
+    initializeTooltip: function() {
         var tipContent = '';
         for(var i in this.options.linkItems) {
             var text = this.options.linkItems[i];
             tipContent += '<a href="' + i + '" data-event="' + i + '" class="' + i +'">' + text + '</a> ';
         }
 
-        var targets = $("p[data-osci_content_id='" + this.options.contentIdentifier + "']");
-        targets.push(this.$el);
+        var targets = $("[data-osci_content_id='" + this.options.contentIdentifier + "']");
 
         this.$el.qtip({
             position: {
@@ -61,17 +73,5 @@ OsciTk.views.ParagraphControlsView = OsciTk.views.BaseView.extend({
             overwrite: false,
             content: tipContent
         });
-
-        this.$el.on('click', 'a', {content: this.options.content}, function(e) {
-            e.preventDefault();
-            Backbone.trigger(
-                $(this).data('event'),
-                {
-                    contentId: $(e.data.content).attr('data-osci_content_id')
-                }
-            );
-        });
-
-        return this;
     }
 });
