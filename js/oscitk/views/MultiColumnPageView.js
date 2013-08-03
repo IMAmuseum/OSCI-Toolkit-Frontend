@@ -176,7 +176,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 			var pidIsOnPage = this.$el.find(".paragraph-identifier-" + paragraphNumber);
 
 			//add a class so we can attach global events
-			p.addClass("content-paragraph");
+			content.addClass("content-paragraph");
 
 			if (pidIsOnPage.length === 0) {
 				var columnPosition = column.$el.position();
