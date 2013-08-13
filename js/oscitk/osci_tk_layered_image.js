@@ -656,7 +656,7 @@ LayeredImage.prototype.createUI = function() {
 	this.ui.controls = [this.ui.controlbar, this.ui.zoom, this.ui.viewfinder, this.ui.currentPopup, this.ui.annotation, this.ui.layerSelector];
 
 	// configure events to show/hide controls
-	this.container.bind('mousemove', function(event) {
+	this.container.bind('mousemove mousewheel DOMMouseScroll', function(event) {
 		var container = CA.container;
 		var date = new Date();
 
