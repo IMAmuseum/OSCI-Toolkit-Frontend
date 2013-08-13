@@ -51,7 +51,7 @@ module.exports = function(grunt) {
                     'js/external/jquery.qtip.js',
                     'js/external/fancybox/jquery.fancybox.js',
                     'js/external/polymaps.min.js',
-                    'js/external/jquery-ui-1.8.23.custom.min.js'
+                    'js/external/jquery-ui/jquery-ui.min.js'
                 ],
                 dest: 'dist/js/OSCI-Toolkit-<%= meta.version %>-dependencies.js'
             },
@@ -76,7 +76,7 @@ module.exports = function(grunt) {
                 src: [
                     '<banner:meta.banner>',
                     'js/external/fancybox/jquery.fancybox.css',
-                    'js/external/jquery-ui.custom.css',
+                    'js/external/jquery-ui/jquery-ui.min.css',
                     'js/external/jquery.qtip.css'
                 ],
                 dest: 'dist/css/OSCI-Toolkit-<%= meta.version %>-dependencies.css'
