@@ -20,7 +20,7 @@ OsciTk.views.GlossaryTooltip = OsciTk.views.BaseView.extend({
 							var tid = $(event.originalEvent.target).data('tid');
 							var item = app.collections.glossaryTerms.get(tid);
 							// set the tooltip contents
-							api.set('content.title.text', item.get('term'));
+							api.set('content.title', item.get('term'));
 							api.set('content.text', item.get('definition'));
 						}
 					}
