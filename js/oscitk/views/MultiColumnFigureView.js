@@ -30,7 +30,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 
             this.$el.css("visibility", "visible");
         } else {
-            this.$el.css("visibility", "none");
+            this.$el.css("visibility", "hidden");
         }
     },
     render: function() {
