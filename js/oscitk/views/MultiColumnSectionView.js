@@ -415,8 +415,18 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 		//remove the footnotes section
 		this.layoutData.data.find("#footnotes").remove();
 
+		var finalItems = [];
+		this.layoutData.data.find('section').each(function(i, section) {
+			var $section = $(section);
+			var sId = $section.attr('id');
+			$section.children().each(function(j, c){
+                $(c).attr('data-sectionId', sId);
+                finalItems.push(c);
+			});
+		});
+
 		//chunk the data into managable parts
-		this.layoutData.data = this.layoutData.data.find('section').children();
+		this.layoutData.data = finalItems;
 	},
 
 	getFigureView: function(figureId) {

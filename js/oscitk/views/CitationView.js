@@ -10,7 +10,8 @@ OsciTk.views.Citation = OsciTk.views.BaseView.extend({
 			var citationRequestParams = {
 				'section_id': app.models.section.get('id'),
 				'publication_id': app.models.docPackage.get('id'),
-				'element_id': data.contentId
+				'element_id': data.contentId,
+				'field': content.attr('data-sectionId')
 			};
 
 			var colWidth = app.views.sectionView.dimensions.columnWidth;
