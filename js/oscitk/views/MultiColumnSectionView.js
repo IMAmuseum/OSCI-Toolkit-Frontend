@@ -25,6 +25,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 		});
 
 		this.listenTo(Backbone, "navigate", function(data) {
+			var matches, refs, occurrenceCount, j;
 			var gotoPage = 1;
 			if (data.page) {
 				gotoPage = data.page;
@@ -39,26 +40,25 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 						break;
 					default:
 						var page_for_id = null;
-
 						if(data.identifier.search(/^p-[0-9]+/) > -1) {
 							var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
 							page_for_id = this.getPageForParagraphId(pid);
 						} else if (data.identifier.search(/^fig-[0-9]+-[0-9]+-[0-9]+/) > -1) {
-							var matches = data.identifier.match(/^(fig-[0-9]+-[0-9]+)-([0-9])+?/);
+							// Route for figure references
+							matches = data.identifier.match(/^(fig-[0-9]+-[0-9]+)-([0-9])+?/);
 							var figureId = matches[1];
 							var occurrence = matches[2] ? parseInt(matches[2],10) : 1;
 
-							var refs = $(".figure_reference").filter("[href='#" + figureId + "']");
+							refs = $(".figure_reference").filter("[href='#" + figureId + "']");
 							if (refs.length) {
 								if (refs.length === 1) {
 									page_for_id = this.getPageNumberForSelector(refs[0]);
 								} else {
 									//find visible occurence
-									var occurrenceCount = 0;
-									for (var j = 0, l = refs.length; j < l; j++) {
+									occurrenceCount = 0;
+									for (j = 0, l = refs.length; j < l; j++) {
 										if (this.isElementVisible(refs[j])) {
 											occurrenceCount++;
-
 											if (occurrenceCount === occurrence) {
 												page_for_id = this.getPageNumberForSelector(refs[j]);
 												break;
@@ -67,7 +67,22 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 									}
 								}
 							}
-
+						} else if (data.identifier.search(/^fn-[0-9]+-[0-9]+/) > -1) {
+							// Route for footnote references
+							matches = data.identifier.match(/^fn-[0-9]+-[0-9]+/);
+							refs = $('a[href="#' + matches[0] + '"]');
+							if (refs.length === 1) {
+								page_for_id = this.getPageNumberForSelector(refs[0]);
+							}
+							else {
+								// find visible occurence
+								for (j = 0; j < refs.length; j++) {
+									if (this.isElementVisible(refs[j])) {
+										page_for_id = this.getPageNumberForSelector(refs[j]);
+										break;
+									}
+								}
+							}
 						} else {
 							page_for_id = this.getPageNumberForElementId(data.identifier);
 						}
