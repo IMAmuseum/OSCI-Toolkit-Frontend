@@ -2,6 +2,21 @@
 	max-width: none;
 }
 
+.citation-wrapper {
+	max-width: 300px;
+	max-height: 400px;
+}
+
+.citation-wrapper h2 {
+	background-color: #444;
+	color: #FFF;
+	padding: 4px 0 4px 10px;
+	margin: 0;
+	-webkit-border-radius: 4px 4px 0 0;
+	-moz-border-radius: 4px 4px 0 0;
+	border-radius: 4px 4px 0 0;
+}
+
 .citation {
 	border: 1px solid #8e8e8e;
 	background: #FFF;
@@ -12,16 +27,22 @@
 	line-height: 16px;
 }
 
+.citations {
+	padding: 0 10px;
+}
+
 .citations > span {
 	font-weight:bold;
 	font-size:14px;
 	font-family:Arial, Helvetica, sans-serif;
+	display: inline-block;
+	margin-top: 10px;
 }
 
 .citations .formats {
 	list-style-type: none;
 	padding: 4px 0;
-	margin: -14px 0 0 60px;
+	margin: -22px 0 0 60px;
 }
 
 .citations li {
@@ -51,7 +72,7 @@
 }
 
 .citation_url {
-	margin: 0 0 16px 0;
+	margin: 0 10px 16px 10px;
 }
 
 .citation_url span {
@@ -67,6 +88,10 @@
 	border: 1px solid #8e8e8e;
 	border-radius: 4px;
 	padding: 4px;
+}
+
+.reference_text {
+	margin: 0 10px 10px 10px;
 }
 
 .reference_text span {

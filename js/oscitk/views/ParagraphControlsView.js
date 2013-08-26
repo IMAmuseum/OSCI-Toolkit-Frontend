@@ -17,13 +17,20 @@ OsciTk.views.ParagraphControlsView = OsciTk.views.BaseView.extend({
                     if (tip.rendered === false) {
                         tip.show();
                     } else {
-                       tip.toggle();
+                        tip.toggle();
                     }
                 }
             });
         }
     },
-
+    events: {
+        'click a': 'clicked'
+    },
+    clicked: function(e) {
+        e.preventDefault();
+        var evt = $(e.target).data('event');
+        Backbone.trigger(evt, {contentId: this.options.contentIdentifier});
+    },
     render: function() {
         var contentPosition = this.options.content.position();
 
@@ -68,16 +75,6 @@ OsciTk.views.ParagraphControlsView = OsciTk.views.BaseView.extend({
             },
             overwrite: false,
             content: tipContent
-        });
-
-        this.$el.on('click', 'a', {content: this.options.content}, function(e) {
-            e.preventDefault();
-            Backbone.trigger(
-                $(this).data('event'),
-                {
-                    contentId: $(e.data.content).attr('data-osci_content_id')
-                }
-            );
         });
 
         return this;
