@@ -4,7 +4,7 @@ OsciTk.collections.Notes = OsciTk.collections.BaseCollection.extend({
 		this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
 			//TODO: Refactor once Gray cleans up the NavigationItemModel
 			if (navItem.id) {
-				app.collections.notes.getNotesForSection(navItem.id);
+				this.getNotesForSection(navItem.id);
 			}
 		});
 	},
@@ -24,7 +24,7 @@ OsciTk.collections.Notes = OsciTk.collections.BaseCollection.extend({
 	getNotesForSection: function(sectionId) {
 		// make an api call to get the notes for the current user and section
 		$.ajax({
-			url: app.config.get('endpoints').OsciTkNotes,
+			url: app.config.get('endpoints').OsciTkNote,
 			data: {section_id: sectionId},
 			type: 'GET',
 			dataType: 'json',

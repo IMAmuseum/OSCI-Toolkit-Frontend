@@ -1,30 +1,55 @@
-.note-tooltip textarea {
+.note-popup {
+	max-width: 300px;
+	max-height: 400px;
+	width: 300px;
+}
+
+.note-popup h2 {
+	background-color: #444;
+	color: #FFF;
+	padding: 4px 0 4px 10px;
+	margin: 0;
+	-webkit-border-radius: 4px 4px 0 0;
+	-moz-border-radius: 4px 4px 0 0;
+	border-radius: 4px 4px 0 0;
+}
+.note-popup form.noteForm {
+	margin: 10px;
+}
+.note-popup textarea {
 	background-color: #FFFFA3;
 	border: none;
 	width:100%;
 	box-shadow: 0 1px 3px rgba(0,0,0,.4);
 	margin-bottom:10px;
-	padding:5px;
 	max-width:100%;
 	min-height:100px;
 	font-size:12px;
+	padding: 5px;
 }
-.note-tooltip textarea:focus {
+.note-popup label {
+	display: block;
+}
+.note-popup input {
+	padding: 5px;
+	width: 100%;
+}
+.note-popup textarea:focus {
 	border:none!important;outline:none!important;
 	box-shadow: 0 1px 3px rgba(0,0,0,.8);
 }
-.note-tooltip .reference-text-content {
+.note-popup .reference-text-content {
 	max-height:80px;
 	overflow:auto;
 
 	background:
-		/* Shadow covers */
-		linear-gradient(white 30%, rgba(255,255,255,0)),
-		linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
+	/* Shadow covers */
+	linear-gradient(white 30%, rgba(255,255,255,0)),
+	linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
 
-		/* Shadows */
-		radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
-		radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+	/* Shadows */
+	radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
+	radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
 	background-repeat: no-repeat;
 	background-color: #ccc;
 	background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
@@ -38,28 +63,7 @@
 	font-size:12px;
 	text-shadow: 0 1px 0 rgba(255,255,255,.6);
 }
-
-.ui-tooltip-titlebar .ui-state-default {
-	top:10px!important;border:none !important;right:0!important;
-}
-.ui-tooltip-icon .ui-icon {
-	width: 14px!important;
-	height: 14px;
-	text-align: center;
-	text-indent: 0;
-	font: normal bold 10px/13px Tahoma,sans-serif;
-
-	/*background: transparent none no-repeat -100em -100em;*/
-	background: rgba(0,0,0,.3)!important;
-	border-radius:14px!important;
-	color:#fff!important;
-	border:none!important;
-}
-.ui-tooltip-icon .ui-icon:hover {
-	background: rgba(0,0,0,.7)!important;
-}
-
-.note-tooltip .reference-text-label {
+.note-popup .reference-text-label {
 	font-weight:bold;
 	font-size:12px;
 	font-family:Arial, Helvetica, sans-serif;
@@ -67,10 +71,11 @@
 	margin-bottom:5px;
 	display:block;
 }
-.note-tooltip .status, .citation-tooltip .status {
+.note-popup .status {
 	text-align:right;
 	opacity:.8;
 	font-family:Arial, Helvetica, sans-serif;
+	margin: 0 10px 10px 0;
 }
 .notesReel {
 	overflow-y: hidden;
