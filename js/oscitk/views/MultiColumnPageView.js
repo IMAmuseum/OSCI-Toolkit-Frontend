@@ -254,8 +254,14 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
         lineHeight = lineHeight ? lineHeight : this.parent.options.defaultLineHeight;
         var minColHeight =  lineHeight * this.parent.dimensions.minLinesPerColumn;
 
+        var gutterWidth = this.parent.dimensions.gutterWidth;
         for (var i = 0; i < this.parent.dimensions.columnsPerPage; i++) {
-            var leftPosition = (i * this.parent.dimensions.columnWidth) + (this.parent.dimensions.gutterWidth * (i + 1));
+            if (i === 0) {
+                gutterWidth = this.parent.dimensions.sectionPadding.left < gutterWidth ? gutterWidth - this.parent.dimensions.sectionPadding.left : gutterWidth;
+            } else {
+                gutterWidth = gutterWidth + this.parent.dimensions.gutterWidth;
+            }
+            var leftPosition = (i * this.parent.dimensions.columnWidth) + gutterWidth;
             var height = this.parent.dimensions.innerSectionHeight;
             var topPosition = 0;
 
