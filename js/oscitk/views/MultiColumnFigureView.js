@@ -115,15 +115,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 				addLeftPadding = Math.floor((availableWidth - this.calculatedWidth) / 2);
 			}
 
-			var gutterWidth = dimensions.gutterWidth;
-			if (modelData.position.horizontal === "p") {
-				gutterWidth = 0;
-			} else {
-				gutterWidth = dimensions.sectionPadding.left < gutterWidth ? gutterWidth - dimensions.sectionPadding.left : gutterWidth;
-				gutterWidth = gutterWidth + ((column - 1) * dimensions.gutterWidth);
-			}
-
-			offsetLeft = (column * dimensions.columnWidth) + gutterWidth + addLeftPadding;
+			offsetLeft = (column * dimensions.columnWidth) + (column * dimensions.gutterWidth) + addLeftPadding;
 			this.$el.css("left", offsetLeft + "px");
 
 			//Determine the top offset based on the layout hint
