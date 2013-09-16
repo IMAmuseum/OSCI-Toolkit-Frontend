@@ -11,7 +11,10 @@ OsciTk.collections.GlossaryTerms = OsciTk.collections.BaseCollection.extend({
 
 		if (doc) {
 			// retrieve glossary doc
-			var data =loadXMLDoc(doc.href);
+			var data = loadXMLDoc(doc.href);
+			if (data === null) {
+				return;
+			}
 			var dds = $(data).find('dd');
 			var dts = $(data).find('dt');
 			if (dds.length > 0 && dts.length > 0) {
