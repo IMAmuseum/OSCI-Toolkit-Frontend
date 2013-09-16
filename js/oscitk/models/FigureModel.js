@@ -15,6 +15,7 @@ OsciTk.models.Figure = OsciTk.models.BaseModel.extend({
 
 	initialize: function() {
 		this.parsePositionData();
+		this.set('content', $.trim(this.get('content')));
 	},
 
 	parsePositionData: function() {

@@ -14,9 +14,9 @@ OsciTk.models.Section = OsciTk.models.BaseModel.extend({
 
 		var content = null;
 		if (this.get('contentLoaded') === false) {
-			var data = (loadXMLDoc(this.get('uri')));
+			var data = (loadHTMLDoc(this.get('uri')));
 
-			content = $(data);
+			content = $('<div />').html(data);
 
 			this.set('title', data.title);
 			this.set('content', content);

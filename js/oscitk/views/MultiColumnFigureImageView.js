@@ -1,5 +1,5 @@
 //Add this view to the figure type registry
-OsciTk.views.figureTypeRegistry["image_asset"] = "MultiColumnFigureLayeredImage";
+OsciTk.views.figureTypeRegistry["image_asset"] = "MultiColumnFigureImage";
 
 OsciTk.views.MultiColumnFigureImage = OsciTk.views.MultiColumnFigure.extend({
 	renderContent: function() {

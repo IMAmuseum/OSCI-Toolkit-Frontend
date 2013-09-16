@@ -2,14 +2,28 @@
  * Load xml document
  */
 function loadXMLDoc(url) {
-    xhttp = new XMLHttpRequest();
+    var xhttp = new XMLHttpRequest();
     //IE9 and IE10 doesn't suport .overrideMimeType(), so we need to check for it.
     if (xhttp.overrideMimeType) {
         xhttp.overrideMimeType('text/xml');
-    }  
+    }
     xhttp.open('GET', url, false);
     xhttp.send();
     return xhttp.responseXML;
+}
+
+function loadHTMLDoc(url) {
+    var xhttp = new XMLHttpRequest();
+    if (xhttp.overrideMimeType) {
+        xhttp.overrideMimeType('text/html');
+    }
+    xhttp.open('GET', url, false);
+    xhttp.send();
+
+    var response = xhttp.responseText;
+    response = response.replace('xmlns="http://www.w3.org/1999/xhtml"', '');
+    response = response.replace('xmlns:epub="http://www.idpf.org/2007/ops"', '');
+    return response;
 }
 
 /*
