@@ -216,6 +216,10 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
             var content = $(this.layoutData.data[i]).clone();
 
+            if (figureIds.length === 0 && content.length === 0) {
+                break;
+            }
+
             //Process any figures in the content
             var figureLinks = content.find("a.figure_reference");
             var numFigureLinks = figureLinks.length;

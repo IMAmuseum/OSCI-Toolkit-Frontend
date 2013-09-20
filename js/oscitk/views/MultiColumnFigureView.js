@@ -104,18 +104,19 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 
 			//If the figure is not as wide as the available space, center it
 			var availableWidth = 0;
-			if (modelData.position.horizontal === "p") {
-				availableWidth = (dimensions.columnWidth * numColumns) + (numColumns * dimensions.gutterWidth);
+			if (modelData.position.horizontal === "p" || dimensions.columnsPerPage === 1) {
+				availableWidth = dimensions.outerSectionWidth;
 			} else {
 				availableWidth = (dimensions.columnWidth * numColumns) + ((numColumns + 1) * dimensions.gutterWidth);
 			}
 
 			var addLeftPadding = 0;
-			if (this.calculatedWidth < availableWidth && availableWidth <= dimensions.innerSectionWidth) {
+			if (this.calculatedWidth < availableWidth && availableWidth <= dimensions.outerSectionWidth) {
 				addLeftPadding = Math.floor((availableWidth - this.calculatedWidth) / 2);
 			}
 
-			offsetLeft = (column * dimensions.columnWidth) + (column * dimensions.gutterWidth) + addLeftPadding;
+			var gutters = column;
+			offsetLeft = (column * dimensions.columnWidth) + (gutters * dimensions.gutterWidth) + addLeftPadding;
 			this.$el.css("left", offsetLeft + "px");
 
 			//Determine the top offset based on the layout hint
@@ -141,7 +142,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 
 			positioned = true;
 
-			if (offsetLeft < 0 || figureX[1] > dimensions.innerSectionWidth) {
+			if (offsetLeft < 0 || figureX[1] > dimensions.outerSectionWidth) {
 				positioned = false;
 			}
 
@@ -192,6 +193,10 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 						}
 				}
 			}
+		}
+
+		if (maxPositionAttemps === positionAttempt && dimensions.columnsPerPage === 1) {
+			positioned = true;
 		}
 
 		return positioned;
