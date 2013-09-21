@@ -22,6 +22,7 @@
 					<% if (first) { %>
 					<div class="result-title"><%= result.get('label') %></div>
 					<% first = false; } %>
+					<% if (!_.isEmpty(result.get('teaser'))) { %>
 					<div class="search-result" data-id="<%= result.get('id') %>">
 						<div class="result-content">
 							<div class="result-type <%= result.get('bundle') %>"><%= result.get('bundle') %></div>
@@ -34,6 +35,7 @@
 							</div>
 						</div>
 					</div>
+					<% } %>
 					<% }); %>
 				</div>
 			<% }); %>
@@ -48,7 +50,7 @@
 			<ul id="facet-sections">
 				<% _.each(response.facets, function(facet) { %>
 					<li class="facet-section">
-						<a href="#" data-filter="section:<%= facet.section_id %>" class="facet"><%= facet.section %></a> 
+						<a href="#" data-filter="section:<%= facet.section_id %>" class="facet"><%= facet.section %></a>
 						(<%= facet.count %>)
 					</li>
 				<% }); %>
