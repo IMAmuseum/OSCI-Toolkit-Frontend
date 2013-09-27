@@ -41,19 +41,27 @@ OsciTk.collections.Figures = OsciTk.collections.BaseCollection.extend({
 				count:      $markup.data('count')
 			};
 
-			// First, check for an explicit thumbnail
-			var thumbnail = $markup.children('img.thumbnail').remove();
-			if (thumbnail.length) {
-				figure.thumbnail_url = thumbnail.attr('src');
-				figure.preview_url = thumbnail.attr('src');
-			} else {
-				// No explicit thumbnail, default to the first image in the figure content
-				var image = $('.figure_content img', markup);
-				if (image.length) {
-					figure.thumbnail_url = image.attr('src');
-					figure.preview_url = image.attr('src');
+			// First, check for a preview uri in the figure options
+			if (figure.options.previewUri) {
+				figure.thumbnail_url = figure.options.previewUri;
+				figure.preview_url = figure.options.previewUri;
+			}
+			else {
+				// Second, check for an explicit thumbnail
+				var thumbnail = $markup.children('img.thumbnail').remove();
+				if (thumbnail.length) {
+					figure.thumbnail_url = thumbnail.attr('src');
+					figure.preview_url = thumbnail.attr('src');
 				}
-				// TODO: Default to the figure type default? Also via css?
+				else {
+					// No explicit thumbnail, default to the first image in the figure content
+					var image = $('.figure_content img', markup);
+					if (image.length) {
+						figure.thumbnail_url = image.attr('src');
+						figure.preview_url = image.attr('src');
+					}
+					// TODO: Default to the figure type default? Also via css?
+				}
 			}
 
 			// add the figure to the array for adding to the collection
