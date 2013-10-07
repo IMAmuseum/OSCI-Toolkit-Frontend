@@ -16,11 +16,17 @@ OsciTk.models.Section = OsciTk.models.BaseModel.extend({
 		if (this.get('contentLoaded') === false) {
 			var data = (loadHTMLDoc(this.get('uri')));
 
+			var addClasses = [];
+			var bodyClasses = /body([^>]*)class=(["']+)([^"']*)(["']+)/gi.exec(data.substring(data.indexOf("<body"), data.indexOf("</body>") + 7));
+			if (_.isArray(bodyClasses) && !_.isUndefined(bodyClasses[3])) {
+				addClasses = bodyClasses[3].split(' ');
+			}
 			content = $('<div />').html(data);
 
-			this.set('title', data.title);
+			this.set('title', content.find('title').html());
 			this.set('content', content);
 			this.set('contentLoaded', true);
+			this.set('classes', addClasses);
 		}
 
 		if (content === null) {
