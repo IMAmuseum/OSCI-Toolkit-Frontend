@@ -130,6 +130,11 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 				case 'b':
 					offsetTop = dimensions.innerSectionHeight - this.calculatedHeight;
 					break;
+				//case inline
+				case 'i':
+					var columnData = this.parent.processingData.columns[column];
+					offsetTop = columnData.height - columnData.heightRemain + columnData.offset;
+					break;
 			}
 			this.$el.css("top", offsetTop + "px");
 
