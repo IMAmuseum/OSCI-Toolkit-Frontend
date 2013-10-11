@@ -277,6 +277,8 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
                         //Adjust column top offset based on vertical location of the figure
                         switch (pageFigures[j].model.get("position").vertical) {
+                            //inline
+                            case 'i':
                             //top
                             case 't':
                             //fullpage
