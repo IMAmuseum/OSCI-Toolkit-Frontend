@@ -250,6 +250,14 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
         var pageFigures = this.getChildViewsByType('figure');
         var numPageFigures = pageFigures.length;
+        if (numPageFigures) {
+            //sort page figures into vertical order
+            if (numPageFigures > 1) {
+                pageFigures = _.sortBy(pageFigures, function(fig) {
+                    return fig.position.y[0];
+                });
+            }
+        }
         var lineHeight = parseInt(this.$el.css("line-height"), 10);
         lineHeight = lineHeight ? lineHeight : this.parent.options.defaultLineHeight;
         var minColHeight =  lineHeight * this.parent.dimensions.minLinesPerColumn;
@@ -264,6 +272,54 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                 y : [topPosition, topPosition + height]
             };
 
+            var vertColumns = [{
+                position: columnPosition,
+                height: height
+            }];
+            if (numPageFigures) {
+                var currentVertColumnIndex = 0;
+                var heightRemain = height;
+                for (var j = 0; j < numPageFigures; j++) {
+                    var currentVertColumn = vertColumns[currentVertColumnIndex];
+                    var elemX = pageFigures[j].position.x;
+                    var elemY = pageFigures[j].position.y;
+                    var currentTop = currentVertColumn.position.y[0];
+
+                    if (columnPosition.x[0] < elemX[1] && columnPosition.x[1] > elemX[0] &&
+                        columnPosition.y[0] < elemY[1] && columnPosition.y[1] > elemY[0]
+                    ) {
+                        var checkHeight = elemY[0] - currentTop;
+                        var adjustHeight = 0;
+                        if (checkHeight === 0) {
+                            //adjust top and height
+                            adjustHeight = currentVertColumn.height - pageFigures[j].calculatedHeight - this.parent.dimensions.figureContentGutter;
+                            currentTop = pageFigures[j].calculatedHeight + this.parent.dimensions.figureContentGutter;
+                            currentVertColumn.position.y = [currentTop, currentTop + adjustHeight];
+                            currentVertColumn.height = adjustHeight;
+                            heightRemain = heightRemain - pageFigures[j].calculatedHeight - this.parent.dimensions.figureContentGutter;
+                        } else {
+                            //create new vert col
+                            adjustHeight = elemY[0] - currentTop;
+                            currentVertColumn.position.y = [currentTop, currentTop + adjustHeight];
+                            currentVertColumn.height = adjustHeight;
+                            currentVertColumnIndex++;
+
+                            heightRemain = heightRemain - adjustHeight - pageFigures[j].calculatedHeight - this.parent.dimensions.figureContentGutter;
+
+                            vertColumns.push({
+                                position: {
+                                    x : [leftPosition, leftPosition + this.parent.dimensions.columnWidth],
+                                    y : [topPosition, topPosition + height]
+                                },
+                                height: heightRemain
+                            });
+                        }
+                    }
+                }
+            }
+            console.log(vertColumns);
+
+
             if (numPageFigures) {
                 for (var j = 0; j < numPageFigures; j++) {
 
@@ -277,8 +333,6 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
                         //Adjust column top offset based on vertical location of the figure
                         switch (pageFigures[j].model.get("position").vertical) {
-                            //inline
-                            case 'i':
                             //top
                             case 't':
                             //fullpage
