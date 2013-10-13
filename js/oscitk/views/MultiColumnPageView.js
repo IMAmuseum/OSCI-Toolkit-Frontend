@@ -309,7 +309,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                             vertColumns.push({
                                 position: {
                                     x : [leftPosition, leftPosition + this.parent.dimensions.columnWidth],
-                                    y : [elemY[1], elemY[1] + height]
+                                    y : [elemY[1], elemY[1] + heightRemain]
                                 },
                                 height: heightRemain
                             });
