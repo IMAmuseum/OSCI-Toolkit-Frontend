@@ -138,9 +138,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 					offsetTop = currentColumn.position.top + currentColumn.height - currentColumn.heightRemain;
 					break;
 			}
-			if (offsetTop > 0) {
-				this.$el.css("top", offsetTop + "px");
-			}
+			this.$el.css("top", offsetTop + "px");
 
 			var figureX = [offsetLeft, offsetLeft + this.calculatedWidth];
 			var figureY = [offsetTop, offsetTop + this.calculatedHeight];
@@ -200,6 +198,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 						if (column > dimensions.columnsPerPage) {
 							column = 0;
 						}
+						currentColumn = this.parent.processingData.columns[column];
 				}
 			}
 		}
