@@ -149,7 +149,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
             overflow = 'contentOverflow';
 
-            if (this.processingData.currentColumn === (this.parent.dimensions.columnsPerPage - 1)) {
+            if (this.processingData.currentColumn === (this.processingData.numberOfColumns - 1)) {
                 this.processingComplete();
             }
 
@@ -163,7 +163,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             }
         }
 
-        if (heightRemain === 0 && this.processingData.currentColumn === (this.parent.dimensions.columnsPerPage - 1)) {
+        if (heightRemain === 0 && this.processingData.currentColumn === (this.processingData.numberOfColumns - 1)) {
             this.processingComplete();
         }
 
@@ -208,7 +208,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             this.processingData.columns[this.processingData.currentColumn].isVertCol)) {
             currentColumn = this.processingData.columns[this.processingData.currentColumn];
         } else {
-            for(var i = 0; i < this.parent.dimensions.columnsPerPage; i++) {
+            for(var i = 0; i < this.processingData.numberOfColumns; i++) {
                 if (this.processingData.columns[i] !== undefined &&
                     this.processingData.columns[i].height >= minColHeight &&
                     this.processingData.columns[i].heightRemain > 0) {
@@ -372,6 +372,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             }
         }
 
+        this.processingData.numberOfColumns = this.processingData.columns.length;
         this.processingData.currentColumn = 0;
     },
 
