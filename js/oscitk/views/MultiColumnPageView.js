@@ -273,7 +273,10 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             };
 
             var vertColumns = [{
-                position: columnPosition,
+                position: {
+                    x : [leftPosition, leftPosition + this.parent.dimensions.columnWidth],
+                    y : [topPosition, topPosition + height]
+                },
                 height: height
             }];
             if (numPageFigures) {
