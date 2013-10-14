@@ -135,9 +135,6 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 					break;
 				//case inline
 				case 'i':
-					if (positionAttempt) {
-						currentColumn = this.parent.processingData.columns[column];
-					}
 					offsetTop = currentColumn.position.top + currentColumn.height - currentColumn.heightRemain;
 					break;
 			}
