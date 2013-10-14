@@ -85,8 +85,8 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 			//case 'i':
 			default:
 				//load the current column to make sure we get the correct one
-				this.parent.getCurrentColumn();
-				column = this.parent.processingData.currentColumn;
+				var currentColumn = this.parent.getCurrentColumn();
+				column = currentColumn.pageColumnNum;
 		}
 
 		var positioned = false;

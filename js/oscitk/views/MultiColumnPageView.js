@@ -365,7 +365,8 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                             left : vertCol.position.x[0],
                             top : vertCol.position.y[0]
                         },
-                        isVertCol: numVertCols > 1 ? true : false
+                        isVertCol: numVertCols > 1 ? true : false,
+                        pageColumnNum: i
                     });
                 }
             }
