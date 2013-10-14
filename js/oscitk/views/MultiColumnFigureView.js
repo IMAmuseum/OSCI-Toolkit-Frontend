@@ -151,7 +151,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 
 			positioned = true;
 
-			if (offsetLeft < 0 || figureX[1] > dimensions.outerSectionWidth) {
+			if (offsetLeft < 0 || figureX[1] > dimensions.outerSectionWidth || figureY[1] > dimensions.outerSectionHeight) {
 				positioned = false;
 			}
 
