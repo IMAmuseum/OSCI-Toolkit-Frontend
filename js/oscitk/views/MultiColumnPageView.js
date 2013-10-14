@@ -355,7 +355,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             for (var k = 0, numVertCols = vertColumns.length; k < numVertCols; k++) {
                 var vertCol = vertColumns[k];
                 height = Math.floor(vertCol.height);
-                if (height > minColHeight) {
+                if (height > minColHeight || numVertCols > 1) {
                     this.processingData.columns.push({
                         height : height,
                         heightRemain : height > 0 ? height : 0,
