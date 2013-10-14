@@ -321,7 +321,6 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                     }
                 }
             }
-            console.log(vertColumns);
 
             // if (numPageFigures) {
             //     for (var j = 0; j < numPageFigures; j++) {

@@ -82,7 +82,10 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 				column = 0;
 				break;
 			//In the current column
+			//case 'i':
 			default:
+				//load the current column to make sure we get the correct one
+				this.parent.getCurrentColumn();
 				column = this.parent.processingData.currentColumn;
 		}
 
