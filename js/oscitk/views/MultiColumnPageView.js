@@ -203,8 +203,9 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
         var minColHeight =  lineHeight * this.parent.dimensions.minLinesPerColumn;
 
         if (this.processingData.columns[this.processingData.currentColumn] &&
-            this.processingData.columns[this.processingData.currentColumn].height >= minColHeight &&
-            this.processingData.columns[this.processingData.currentColumn].heightRemain > 0) {
+            this.processingData.columns[this.processingData.currentColumn].heightRemain > 0 &&
+            (this.processingData.columns[this.processingData.currentColumn].height >= minColHeight ||
+            this.processingData.columns[this.processingData.currentColumn].isVertCol)) {
             currentColumn = this.processingData.columns[this.processingData.currentColumn];
         } else {
             for(var i = 0; i < this.parent.dimensions.columnsPerPage; i++) {
@@ -364,7 +365,8 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                         position : {
                             left : vertCol.position.x[0],
                             top : vertCol.position.y[0]
-                        }
+                        },
+                        isVertCol: numVertCols > 1 ? true : false
                     });
                 }
             }
