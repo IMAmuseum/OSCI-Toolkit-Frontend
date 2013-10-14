@@ -322,49 +322,51 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             }
             console.log(vertColumns);
 
+            // if (numPageFigures) {
+            //     for (var j = 0; j < numPageFigures; j++) {
 
-            if (numPageFigures) {
-                for (var j = 0; j < numPageFigures; j++) {
+            //         var elemX = pageFigures[j].position.x;
+            //         var elemY = pageFigures[j].position.y;
 
-                    var elemX = pageFigures[j].position.x;
-                    var elemY = pageFigures[j].position.y;
+            //         if (columnPosition.x[0] < elemX[1] && columnPosition.x[1] > elemX[0] &&
+            //             columnPosition.y[0] < elemY[1] && columnPosition.y[1] > elemY[0]
+            //         ) {
+            //             height = height - pageFigures[j].calculatedHeight - this.parent.dimensions.figureContentGutter;
 
-                    if (columnPosition.x[0] < elemX[1] && columnPosition.x[1] > elemX[0] &&
-                        columnPosition.y[0] < elemY[1] && columnPosition.y[1] > elemY[0]
-                    ) {
-                        height = height - pageFigures[j].calculatedHeight - this.parent.dimensions.figureContentGutter;
+            //             //Adjust column top offset based on vertical location of the figure
+            //             switch (pageFigures[j].model.get("position").vertical) {
+            //                 //top
+            //                 case 't':
+            //                 //fullpage
+            //                 case 'p':
+            //                     topPosition = topPosition + pageFigures[j].calculatedHeight + this.parent.dimensions.figureContentGutter;
+            //                     break;
+            //                 //bottom
+            //                 case 'b':
+            //                     topPosition = topPosition;
+            //                     break;
+            //             }
 
-                        //Adjust column top offset based on vertical location of the figure
-                        switch (pageFigures[j].model.get("position").vertical) {
-                            //top
-                            case 't':
-                            //fullpage
-                            case 'p':
-                                topPosition = topPosition + pageFigures[j].calculatedHeight + this.parent.dimensions.figureContentGutter;
-                                break;
-                            //bottom
-                            case 'b':
-                                topPosition = topPosition;
-                                break;
+            //             columnPosition.y = [topPosition, topPosition + height];
+            //         }
+            //     }
+            // }
+
+            for (var k = 0, numVertCols = vertColumns.length; k < numVertCols; k++) {
+                var vertCol = vertColumns[k];
+                height = Math.floor(vertCol.height);
+                if (height > minColHeight) {
+                    this.processingData.columns.push({
+                        height : height,
+                        heightRemain : height > 0 ? height : 0,
+                        '$el' : null,
+                        offset : 0,
+                        position : {
+                            left : vertCol.position.x[0],
+                            top : vertCol.position.y[0]
                         }
-
-                        columnPosition.y = [topPosition, topPosition + height];
-                    }
+                    });
                 }
-            }
-
-            height = Math.floor(height);
-            if (height > minColHeight) {
-                this.processingData.columns.push({
-                    height : height,
-                    heightRemain : height > 0 ? height : 0,
-                    '$el' : null,
-                    offset : 0,
-                    position : {
-                        left : columnPosition.x[0],
-                        top : columnPosition.y[0]
-                    }
-                });
             }
         }
 
