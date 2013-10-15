@@ -202,7 +202,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 							column = 0;
 						}
 						currentColumn = _.first(this.parent.processingData.columns, function(col) {
-							return col === column.pageColumnNum;
+							return column === col.pageColumnNum;
 						});
 				}
 			}
