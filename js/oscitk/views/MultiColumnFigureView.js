@@ -185,42 +185,44 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 			}
 
 			if (!positioned) {
-				//adjust the start column to see if the figure can be positioned on the page
-				switch (modelData.position.horizontal) {
-					//right
-					case 'r':
-						column--;
-						if (column < 0) {
-							break whilePositioned;
-						}
-						break;
-					//left & fullpage
-					case 'l':
-					case 'p':
-						column++;
-						if (column >= dimensions.columnsPerPage) {
-							break whilePositioned;
-						}
-						break;
-					//no horizontal position
-					default:
-						column++;
-						if (column >= dimensions.columnsPerPage) {
-							column = 0;
-						}
-				}
-
-				//update the currentColumn
-				if (modelData.position.horizontal === 'i') {
-					currentColumn = this.parent.processingData.columns[column];
-				} else {
-					if ((column + numColumns) > dimensions.columnsPerPage) {
-						column -= (column + numColumns) - dimensions.columnsPerPage;
+				do {
+					//adjust the start column to see if the figure can be positioned on the page
+					switch (modelData.position.horizontal) {
+						//right
+						case 'r':
+							column--;
+							if (column < 0) {
+								break whilePositioned;
+							}
+							break;
+						//left & fullpage
+						case 'l':
+						case 'p':
+							column++;
+							if (column >= dimensions.columnsPerPage) {
+								break whilePositioned;
+							}
+							break;
+						//no horizontal position
+						default:
+							column++;
+							if (column >= dimensions.columnsPerPage) {
+								column = 0;
+							}
 					}
-					currentColumn = _.find(this.parent.processingData.columns, function(col) {
-						return col.pageColumnNum === column;
-					});
-				}
+
+					//update the currentColumn
+					if (modelData.position.horizontal === 'i') {
+						currentColumn = this.parent.processingData.columns[column];
+					} else {
+						if ((column + numColumns) > dimensions.columnsPerPage) {
+							column -= (column + numColumns) - dimensions.columnsPerPage;
+						}
+						currentColumn = _.find(this.parent.processingData.columns, function(col) {
+							return col.pageColumnNum === column;
+						});
+					}
+				} while (_.isUndefined(currentColumn));
 			}
 		}
 
