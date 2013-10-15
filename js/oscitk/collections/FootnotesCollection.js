@@ -10,16 +10,20 @@ OsciTk.collections.Footnotes = OsciTk.collections.BaseCollection.extend({
 
 	populateFromMarkup: function(data) {
 		this.reset();
-		_.each($('aside', data), function(markup) {
-			var idComponents = markup.id.match(/\w+-(\d+)-(\d+)/);
-			var footnote = {
-				id:         markup.id,
-				rawData:    markup,
-				body:       markup.innerHTML,
+		var raw = data.find('aside');
+		var rawLen = raw.length;
+		var parsed = [];
+		for (var i = 0; i < rawLen; i++) {
+			var fn = raw[i];
+			var idComponents = fn.id.match(/\w+-(\d+)-(\d+)/);
+			parsed.push({
+				id:         fn.id,
+				rawData:    fn,
+				body:       fn.innerHTML,
 				section_id: idComponents[1],
 				delta:      idComponents[2]
-			};
-			this.add(footnote);
-		}, this);
+			});
+		}
+		this.reset(parsed);
 	}
 });
