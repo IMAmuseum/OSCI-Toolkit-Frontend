@@ -102,15 +102,16 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 		}
 		var positionAttempt = 0;
 		var pageFigures = this.parent.getChildViewsByType('figure');
+		var numPageFigures = pageFigures.length;
+
+		//Detemine the left offset start column and width of the figure
+		if ((column + numColumns) > dimensions.columnsPerPage) {
+			column -= (column + numColumns) - dimensions.columnsPerPage;
+		}
 
 		whilePositioned:
 		while (!positioned && positionAttempt <= maxPositionAttemps) {
 			positionAttempt++;
-
-			//Detemine the left offset start column and width of the figure
-			if ((column + numColumns) > dimensions.columnsPerPage) {
-				column -= (column + numColumns) - dimensions.columnsPerPage;
-			}
 
 			//If the figure is not as wide as the available space, center it
 			var availableWidth = 0;
@@ -125,9 +126,8 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 				addLeftPadding = Math.floor((availableWidth - this.calculatedWidth) / 2);
 			}
 
-			var gutters = column;
-			offsetLeft = (column * dimensions.columnWidth) + (gutters * dimensions.gutterWidth) + addLeftPadding;
-			this.$el.css("left", offsetLeft + "px");
+			var gutters = currentColumn.pageColumnNum;
+			offsetLeft = (currentColumn.pageColumnNum * dimensions.columnWidth) + (gutters * dimensions.gutterWidth) + addLeftPadding;
 
 			//Determine the top offset based on the layout hint
 			switch (modelData.position.vertical) {
@@ -145,7 +145,12 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 					offsetTop = currentColumn.position.top + currentColumn.height - currentColumn.heightRemain;
 					break;
 			}
-			this.$el.css("top", offsetTop + "px");
+
+			//set the offsets
+			this.$el.css({
+				'top': offsetTop + 'px',
+				'left': offsetLeft + 'px'
+			});
 
 			var figureX = [offsetLeft, offsetLeft + this.calculatedWidth];
 			var figureY = [offsetTop, offsetTop + this.calculatedHeight];
@@ -161,7 +166,6 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 			}
 
 			//check if current placement overlaps any other figures
-			var numPageFigures = pageFigures.length;
 			if (positioned && numPageFigures && numPageFigures > 1) {
 				for (i = 0; i < numPageFigures; i++) {
 					if (pageFigures[i].cid === this.cid) {
@@ -204,7 +208,18 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 						if (column >= dimensions.columnsPerPage) {
 							column = 0;
 						}
-						currentColumn = this.parent.processingData.columns[column];
+				}
+
+				//update the currentColumn
+				if (modelData.position.horizontal === 'i') {
+					currentColumn = this.parent.processingData.columns[column];
+				} else {
+					if ((column + numColumns) > dimensions.columnsPerPage) {
+						column -= (column + numColumns) - dimensions.columnsPerPage;
+					}
+					currentColumn = _find(this.parent.processingData.columns, function(col) {
+						return col.pageColumnNum === column;
+					});
 				}
 			}
 		}
