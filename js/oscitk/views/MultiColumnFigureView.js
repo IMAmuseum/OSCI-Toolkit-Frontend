@@ -96,7 +96,10 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 		var numColumns = this.model.get('calculatedColumns');
 		var offsetLeft = 0;
 		var offsetTop = 0;
-		var maxPositionAttemps = numColumns;
+		var maxPositionAttemps = Math.ceil(dimensions.columnsPerPage / numColumns);
+		if (modelData.position.horizontal === 'i') {
+			maxPositionAttemps = this.parent.processingData.columns.length;
+		}
 		var positionAttempt = 0;
 		var pageFigures = this.parent.getChildViewsByType('figure');
 
@@ -201,9 +204,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 						if (column > dimensions.columnsPerPage) {
 							column = 0;
 						}
-						currentColumn = _.find(this.parent.processingData.columns, function(col) {
-							return column === col.pageColumnNum;
-						});
+						currentColumn = this.parent.processingData.columns[column];
 				}
 			}
 		}
