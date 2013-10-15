@@ -71,6 +71,9 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 
 		var column;
 		var currentColumn = this.parent.getCurrentColumn();
+		if (currentColumn === null) {
+			currentColumn = this.parent.processingData.columns[this.parent.processingData.currentColumn];
+		}
 		//Detemine the start column based on the layout hint
 		switch (modelData.position.horizontal) {
 			//right
@@ -86,11 +89,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 			//case 'i':
 			default:
 				//load the current column to make sure we get the correct one
-				if (currentColumn === null) {
-					column = this.parent.processingData.currentColumn;
-				} else {
-					column = currentColumn.pageColumnNum;
-				}
+				column = currentColumn.pageColumnNum;
 		}
 
 		var positioned = false;
