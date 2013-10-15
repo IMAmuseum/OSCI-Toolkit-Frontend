@@ -217,7 +217,11 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
             var content = $(this.layoutData.data[i]).clone();
 
             if (figureIds.length === 0 && content.length === 0) {
-                break;
+                if (this.unplacedFigures.length) {
+                    figureIds = figureIds.concat(this.unplacedFigures);
+                } else {
+                    break;
+                }
             }
 
             //Process any figures in the content
