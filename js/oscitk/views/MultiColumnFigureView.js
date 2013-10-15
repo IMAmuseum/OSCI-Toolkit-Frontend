@@ -98,6 +98,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 		var offsetTop = 0;
 		var maxPositionAttemps = numColumns;
 		var positionAttempt = 0;
+		var pageFigures = this.parent.getChildViewsByType('figure');
 
 		whilePositioned:
 		while (!positioned && positionAttempt <= maxPositionAttemps) {
@@ -157,7 +158,6 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 			}
 
 			//check if current placement overlaps any other figures
-			var pageFigures = this.parent.getChildViewsByType('figure');
 			var numPageFigures = pageFigures.length;
 			if (positioned && numPageFigures && numPageFigures > 1) {
 				for (i = 0; i < numPageFigures; i++) {
@@ -201,7 +201,9 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 						if (column > dimensions.columnsPerPage) {
 							column = 0;
 						}
-						currentColumn = this.parent.processingData.columns[column];
+						currentColumn = _.first(this.parent.processingData.columns, function(col) {
+							return col === column.pageColumnNum;
+						});
 				}
 			}
 		}
