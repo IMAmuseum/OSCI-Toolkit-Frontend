@@ -217,7 +217,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 					if ((column + numColumns) > dimensions.columnsPerPage) {
 						column -= (column + numColumns) - dimensions.columnsPerPage;
 					}
-					currentColumn = _find(this.parent.processingData.columns, function(col) {
+					currentColumn = _.find(this.parent.processingData.columns, function(col) {
 						return col.pageColumnNum === column;
 					});
 				}
