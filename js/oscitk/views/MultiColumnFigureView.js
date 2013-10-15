@@ -201,7 +201,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 					//no horizontal position
 					default:
 						column++;
-						if (column > dimensions.columnsPerPage) {
+						if (column >= dimensions.columnsPerPage) {
 							column = 0;
 						}
 						currentColumn = this.parent.processingData.columns[column];
