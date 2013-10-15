@@ -55,6 +55,10 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
         this.$el.children(':not(figure)').remove();
 
         this.initializeColumns();
+
+        if (this.processingData.numberOfColumns === 0) {
+            this.processingComplete();
+        }
     },
 
     render : function() {
