@@ -27,6 +27,12 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
     onParagraphClicked: function(e) {
         e.preventDefault();
+        e.stopPropagation();
+
+        if (e.target.tagName === "A") {
+            window.location = e.target.href;
+            return true;
+        }
 
         var p = $(e.currentTarget);
         var pNum = p.data("paragraph_number");
