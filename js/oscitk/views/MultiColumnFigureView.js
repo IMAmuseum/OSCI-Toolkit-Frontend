@@ -244,6 +244,11 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 			return this;
 		}
 
+		var aspect = modelData.aspect;
+		if (!_.isUndefined(modelData.options.aspect) && modelData.options.aspect > 0) {
+			aspect = modelData.options.aspect;
+		}
+
 		//If a percentage based width hint is specified, convert to number of columns to cover
 		if (typeof(modelData.columns) === 'string' && modelData.columns.indexOf("%") > 0) {
 			modelData.columns = Math.ceil((parseInt(modelData.columns, 10) / 100) * dimensions.columnsPerPage);
@@ -268,14 +273,14 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 		var captionHeight = this.$el.find("figcaption").outerHeight(true);
 
 		//Calculate height of figure plus the caption
-		height = (width / modelData.aspect) + captionHeight;
+		height = (width / aspect) + captionHeight;
 
 		//If the height of the figure is greater than the page height, scale it down
 		if (height > dimensions.innerSectionHeight) {
 			height = dimensions.innerSectionHeight;
 
 			//set new width and the new column coverage number
-			width = (height - captionHeight) * modelData.aspect;
+			width = (height - captionHeight) * aspect;
 			this.$el.css("width", width + "px");
 
 			//update caption height at new width
