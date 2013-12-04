@@ -25,7 +25,7 @@
 	}
 }
 
-section figure img.thumbnail {
+.anchor-link, section figure img.thumbnail {
 	display: none;
 }
 
