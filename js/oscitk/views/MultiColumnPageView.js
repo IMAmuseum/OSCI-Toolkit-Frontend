@@ -34,6 +34,12 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             return true;
         }
 
+        var parentCheck = $(e.target).parents("a");
+        if (parentCheck.length) {
+            parentCheck[0].click();
+            return true;
+        }
+
         var p = $(e.currentTarget);
         var pNum = p.data("paragraph_number");
 
