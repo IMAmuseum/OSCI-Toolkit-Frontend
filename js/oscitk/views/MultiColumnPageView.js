@@ -113,11 +113,10 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             return overflow;
         }
 
-        var contentHeight = content.outerHeight(true);
+        var contentHeight = content.outerHeight();
 
         //If offset defined (should always be negative) add it to the height of the content to get the correct top margin
         var offset = 0;
-        var columnOffset = column.offset;
         if (column.offset < 0) {
             offset = contentHeight + column.offset;
 
