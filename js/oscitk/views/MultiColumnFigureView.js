@@ -273,7 +273,12 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 		var captionHeight = this.$el.find("figcaption").outerHeight(true);
 
 		//Calculate height of figure plus the caption
-		height = (width / aspect) + captionHeight;
+		if (modelData.aspect) {
+			height = (width / modelData.aspect) + captionHeight;
+		} else {
+			this.renderContent();
+			height = this.$el.find('.figure_content').outerHeight(true) + captionHeight;
+		}
 
 		//If the height of the figure is greater than the page height, scale it down
 		if (height > dimensions.innerSectionHeight) {
