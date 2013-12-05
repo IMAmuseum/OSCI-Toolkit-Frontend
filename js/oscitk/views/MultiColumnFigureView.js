@@ -292,8 +292,10 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
             height = dimensions.innerSectionHeight;
 
             //set new width and the new column coverage number
-            width = (height - captionHeight) * aspect;
-            this.$el.css("width", width + "px");
+            if (aspect) {
+                width = (height - captionHeight) * aspect;
+                this.$el.css("width", width + "px");
+            }
 
             //update caption height at new width
             captionHeight = this.$el.find("figcaption").outerHeight(true);
