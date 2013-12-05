@@ -185,6 +185,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
             }
 
             if (!positioned) {
+                var columnAttempts = 0;
                 do {
                     //adjust the start column to see if the figure can be positioned on the page
                     switch (modelData.position.horizontal) {
@@ -222,7 +223,13 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
                             return col.pageColumnNum === column;
                         });
                     }
-                } while (_.isUndefined(currentColumn));
+                    //dont let this get caught in a loop
+                    columnAttempts++;
+                } while (_.isUndefined(currentColumn) && columnAttempts < numColumns);
+
+                if (_.isUndefined(currentColumn)) {
+                    break whilePositioned;
+                }
             }
         }
 
