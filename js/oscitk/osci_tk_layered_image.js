@@ -122,7 +122,7 @@ var LayeredImage = function(container) { // container should be a html element
 		this.layers.push(layerMarkup.data());
 	}
 	layerContainer.remove();
-	
+
 	// initialize the container as a polymap
 	this.map = this.polymaps.map();
 	var svg = this.polymaps.svg('svg');
@@ -1443,6 +1443,9 @@ LayeredImage.prototype.layerSelect = function(event) {
 
 	// realign layers
 	CA.realignLayers();
+
+	// Update the viewport with new layers
+	CA.refreshViewfinder();
 };
 
 function outerHTML(node){
