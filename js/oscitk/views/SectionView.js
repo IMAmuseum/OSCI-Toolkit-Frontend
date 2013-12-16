@@ -114,7 +114,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         var pageView = this.getPageForProcessing();
 
         //add the content to the view/model
-        pageView.addContent(this.model.get('content').find('body').html());
+        pageView.addContent(this.model.get('content').html());
 
         //render the view
         pageView.render();
