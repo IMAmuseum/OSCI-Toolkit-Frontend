@@ -9,11 +9,7 @@ OsciTk.models.Page = OsciTk.models.BaseModel.extend({
 
 	addContent : function(newContent) {
 		var content = this.get('content');
-		if (_.isArray(content)) {
-			content[$(newContent[0]).data("osci_content_id")] = newContent[0];
-		} else {
-			content['content'] = newContent;
-		}
+		content[$(newContent[0]).data("osci_content_id")] = newContent[0];
 
 		return this;
 	},
