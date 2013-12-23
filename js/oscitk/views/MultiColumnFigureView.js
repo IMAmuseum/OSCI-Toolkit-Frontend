@@ -143,6 +143,10 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
                 //case inline
                 case 'i':
                     offsetTop = currentColumn.position.top + currentColumn.height - currentColumn.heightRemain;
+                    //add figure gutter if not at top of a column
+                    if (currentColumn.height - currentColumn.heightRemain > 0) {
+                        offsetTop += dimensions.figureContentGutter;
+                    }
                     break;
             }
 

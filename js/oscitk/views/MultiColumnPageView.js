@@ -323,7 +323,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                             vertColumns[currentVertColumnIndex].height = adjustHeight;
                             currentVertColumnIndex++;
 
-                            heightRemain = heightRemain - adjustHeight - pageFigures[j].calculatedHeight - this.parent.dimensions.figureContentGutter;
+                            heightRemain = heightRemain - adjustHeight - pageFigures[j].calculatedHeight;
 
                             vertColumns.push({
                                 position: {
