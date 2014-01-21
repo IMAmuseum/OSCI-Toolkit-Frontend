@@ -26,6 +26,7 @@ OsciTk.views.GlossaryTooltip = OsciTk.views.BaseView.extend({
                     }
                 }).click(function(e) {
                     e.preventDefault();
+                    e.stopPropogation();
                 });
             }
         });
