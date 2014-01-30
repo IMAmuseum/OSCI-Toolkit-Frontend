@@ -115,7 +115,8 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 
             //If the figure is not as wide as the available space, center it
             var availableWidth = 0;
-            if (modelData.position.horizontal === "p" || dimensions.columnsPerPage === 1) {
+            if (dimensions.columnsPerPage === 1) {
+            //if (modelData.position.horizontal === "p" || dimensions.columnsPerPage === 1) {
                 availableWidth = dimensions.outerSectionWidth;
             } else {
                 availableWidth = (dimensions.columnWidth * numColumns) + ((numColumns + 1) * dimensions.gutterWidth);
