@@ -897,12 +897,14 @@ LayeredImage.prototype.fullscreen = function(reset) {
 
     // the extents of the current map should be restored on full screen
     var extents = this.map.extent();
-    this.figureOptions.fullscreenExtents = {
-        swLon: extents[0].lon,
-        swLat: extents[0].lat,
-        neLon: extents[1].lon,
-        neLat: extents[1].lat
-    };
+    if (this.map.zoom() !== 1) {
+        this.figureOptions.fullscreenExtents = {
+            swLon: extents[0].lon,
+            swLat: extents[0].lat,
+            neLon: extents[1].lon,
+            neLat: extents[1].lat
+        };
+    }
 
     var figureWrapper = $('<figure></figure>')
         .attr('data-options', JSON.stringify(this.figureOptions))
