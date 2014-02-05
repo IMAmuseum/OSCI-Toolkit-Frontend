@@ -36,9 +36,6 @@ OsciTk.collections.GlossaryTerms = OsciTk.collections.BaseCollection.extend({
 			return item.get('term').search(regExp) !== -1;
 		});
 	},
-	comparator: function(item) {
-		return item.get('term');
-	},
 	get_html_translation_table: function(table, quote_style) {
 		// http://kevin.vanzonneveld.net
 		// +   original by: Philip Peterson
