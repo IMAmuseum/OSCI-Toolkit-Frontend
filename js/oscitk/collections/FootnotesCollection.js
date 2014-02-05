@@ -21,7 +21,8 @@ OsciTk.collections.Footnotes = OsciTk.collections.BaseCollection.extend({
 				rawData:    fn,
 				body:       fn.innerHTML,
 				section_id: idComponents[1],
-				delta:      idComponents[2]
+				delta:      idComponents[2],
+                index:      fn.getAttribute('data-footnote_index')
 			});
 		}
 		this.reset(parsed);
