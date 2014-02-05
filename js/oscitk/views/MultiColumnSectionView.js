@@ -445,7 +445,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
             $section.children().each(function(j, c){
                 var $c = $(c);
                 var contentLen = $.trim($c.text()).length;
-                if (contentLen > 0) {
+                if (contentLen > 0 || $c.hasClass("anchor-link")) {
                     $c.attr('data-sectionId', sId);
                     finalItems.push(c);
                 }
