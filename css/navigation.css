@@ -29,7 +29,7 @@
 
 
 #navigation .side .indicator {
-	position: absolute;	
+	position: absolute;
 	top: 50%;
 	/*text-align: center;*/
 	text-indent:100%;overflow:hidden;
@@ -55,7 +55,7 @@
 	top: 0;
 	height: 100%;
 	color: #ccc;
-	cursor: pointer;	
+	cursor: pointer;
 	width: 40px;
 }
 
@@ -90,7 +90,7 @@
 	font-size:10px;
 	line-height:15px;
 	opacity:.4;
-	
+
 }
 #navigation .corner:hover label { opacity:1; }
 
@@ -100,8 +100,7 @@
 }
 
 #navigation .corner.inactive {
-	color: #ccc;
-	cursor: auto;
+	display: none;
 }
 
 .prev-page .button {
