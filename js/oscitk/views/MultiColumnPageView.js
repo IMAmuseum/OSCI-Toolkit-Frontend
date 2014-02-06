@@ -121,6 +121,14 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
         var contentHeight = content.outerHeight(true);
 
+        //if content is a header make sure there is room for content afterwards
+        if (content.is("H1, H2, H3, H4, H5, H6, H7, H8") && ((column.heightRemain - contentHeight) <= (lineHeight * 2))) {
+            content.remove();
+            column.heightRemain = 0;
+            overflow = 'contentOverflow';
+            return overflow;
+        }
+
         //If offset defined (should always be negative) add it to the height of the content to get the correct top margin
         var offset = 0;
         if (column.offset < 0) {
