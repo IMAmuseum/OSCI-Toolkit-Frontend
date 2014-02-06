@@ -876,13 +876,33 @@ LayeredImage.prototype.fullscreen = function(reset) {
     var wrapper = $('<div class="ca-ui-fullscreen-wrap"></div>').appendTo(modal),
         modalOffset = modal.offset(),
         modalHeight = modal.height() - modalOffset.top,
-        modalWidth = modal.outerWidth() - modalOffset.left;
+        modalWidth = modal.outerWidth() - modalOffset.left,
+        wrapHeight = 0,
+        wrapWidth = 0,
+        firstPass = true,
+        scaleFactor = .9;
+
+    if (CA.figureOptions.aspect <= 1) {
+        while (wrapWidth > modalWidth || firstPass) {
+            wrapHeight = Math.floor(modalHeight * scaleFactor);
+            wrapWidth = Math.floor(wrapHeight * CA.figureOptions.aspect);
+            scaleFactor = scaleFactor - .1;
+            firstPass = false;
+        }
+    } else {
+        while (wrapHeight > modalHeight || firstPass) {
+            wrapWidth = Math.floor(modalWidth * scaleFactor);
+            wrapHeight = Math.floor(wrapWidth / CA.figureOptions.aspect);
+            scaleFactor = scaleFactor - .1;
+            firstPass = false;
+        }
+    }
 
     wrapper.css({
-        height: Math.round(modalHeight * 0.9) + 'px',
-        top:    Math.round(modalHeight * 0.05) + 'px',
-        width:  Math.round(modalWidth * 0.9) + 'px',
-        left:   Math.round(modalWidth * 0.05) + 'px'
+        height: wrapHeight + 'px',
+        top:    Math.floor((modalHeight - wrapHeight) / 2) + 'px',
+        width:  wrapWidth + 'px',
+        left:   Math.floor((modalWidth - wrapWidth) / 2) + 'px'
     });
     // retrieve the original markup for this LayeredImage and
     // remap the IDs of the asset and its layers
@@ -909,8 +929,8 @@ LayeredImage.prototype.fullscreen = function(reset) {
     var figureWrapper = $('<figure></figure>')
         .attr('data-options', JSON.stringify(this.figureOptions))
         .css({
-            height : Math.round(modalHeight * 0.9) + 'px',
-            width : Math.round(modalWidth * 0.9) + 'px'
+            height : wrapHeight + 'px',
+            width : wrapWidth + 'px'
         })
         .appendTo(wrapper);
 
@@ -924,8 +944,8 @@ LayeredImage.prototype.fullscreen = function(reset) {
     $('<div>', {
         'class' : 'figureContent',
         css : {
-            'height' : (Math.round(modalHeight * 0.9) - captionHeight) + 'px',
-            'width' : Math.round(modalWidth * 0.9) + 'px'
+            'height' : (Math.round(wrapHeight) - captionHeight) + 'px',
+            'width' : wrapWidth + 'px'
         }
     })
     .append(markup)
