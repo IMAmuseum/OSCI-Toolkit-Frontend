@@ -440,18 +440,22 @@ div.layered_image-asset .ui-slider-handle {
 
 .ca-ui-layer-slider-container {
 	float: right;
-	width: 150px;
+	width: 200px;
 	height: 50px;
     color: #fff;
     font-size: 11px;
     padding: 12px 10px 0 10px;
     text-align: center;
+    position: relative;
 }
 
 .ca-ui-layer-slider {
 	height: 5px;
-	width: 100%;
+	width: 130px;
 	background: #444;
+    position: absolute;
+    left: 36px;
+    top: 20px;
 }
 
 .ca-ui-layer-slider-layer-text {
@@ -460,6 +464,36 @@ div.layered_image-asset .ui-slider-handle {
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+}
+
+.ca-ui-layer-slider-layer-text1 {
+    position: absolute;
+    left: 9px;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    background-color: #FFF;
+    color: #000;
+    text-align: center;
+    vertical-align: middle;
+    top: 14px;
+    padding: 3px 0 0 0;
+    cursor: pointer;
+}
+
+.ca-ui-layer-slider-layer-text2 {
+    position: absolute;
+    right: 9px;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    background-color: #FFF;
+    color: #000;
+    text-align: center;
+    vertical-align: middle;
+    top: 14px;
+    padding: 3px 0 0 0;
+    cursor: pointer;
 }
 
 .ca-ui-layer-slider .ui-slider-handle {

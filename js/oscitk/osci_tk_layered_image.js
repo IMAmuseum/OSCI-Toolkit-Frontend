@@ -545,21 +545,27 @@ LayeredImage.prototype.createUI = function() {
         this.ui.layerSelector = $('<div class="ca-ui-layer-selector"></div>');
 
         // only provide selectable layers if there are at least three
-        if (this.baseLayers.length > 2) {
-            this.ui.layerSelector
+        //if (this.baseLayers.length > 2) {
+        this.ui.layerSelector
             .bind('click', {
                 layeredImage: this
             }, this.toggleLayerSelector);
-        }
+        //}
         if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
             this.ui.controlbar.append(this.ui.layerSelector);
         }
 
         // opacity slider
         this.ui.sliderContainer = $('<div class="ca-ui-layer-slider-container"></div>');
-        this.ui.sliderLayerText = $('<div class="ca-ui-layer-slider-layer-text"></div>')
-            .text(this.settings.currentLayer1.title + " - " + this.settings.currentLayer2.title)
-            .appendTo(this.ui.sliderContainer);
+        // this.ui.sliderLayerText = $('<div class="ca-ui-layer-slider-layer-text"></div>')
+        //     .text(this.settings.currentLayer1.title + " - " + this.settings.currentLayer2.title)
+        //     .appendTo(this.ui.sliderContainer);
+
+        this.ui.sliderLayerText1 = $('<div class="ca-ui-layer-slider-layer-text1">1</div>')
+            .attr("title", this.settings.currentLayer1.title)
+            .appendTo(this.ui.sliderContainer)
+            .qtip();
+
         this.ui.slider = $('<div class="ca-ui-layer-slider"></div>')
             .slider({
                 slide: function(event, ui) {
@@ -577,6 +583,11 @@ LayeredImage.prototype.createUI = function() {
                 }
             })
             .appendTo(this.ui.sliderContainer);
+
+        this.ui.sliderLayerText2 = $('<div class="ca-ui-layer-slider-layer-text2">2</div>')
+            .attr("title", this.settings.currentLayer2.title)
+            .appendTo(this.ui.sliderContainer)
+            .qtip();
 
         if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
             this.ui.sliderContainer.appendTo(this.ui.controlbar);
@@ -676,19 +687,19 @@ LayeredImage.prototype.createUI = function() {
             container.attr('data-controls', 'true');
             CA.toggleControls();
         }
-        CA.ui.controlsTimeout = setTimeout(function() {
-            var date = new Date();
-            // check if the mouse is over a control, if it is, don't hide
-            if (container.attr('data-controls') == 'true' &&
-                (date.getTime() - container.attr('data-controls-time')) >= 1750) {
+        // CA.ui.controlsTimeout = setTimeout(function() {
+        //     var date = new Date();
+        //     // check if the mouse is over a control, if it is, don't hide
+        //     if (container.attr('data-controls') == 'true' &&
+        //         (date.getTime() - container.attr('data-controls-time')) >= 1750) {
 
-                if (container.attr('data-controls-lock') != 'true') {
-                    container.attr('data-controls', 'false');
-                    CA.clearPopups();
-                    CA.toggleControls();
-                }
-            }
-        }, 2000);
+        //         if (container.attr('data-controls-lock') != 'true') {
+        //             container.attr('data-controls', 'false');
+        //             CA.clearPopups();
+        //             CA.toggleControls();
+        //         }
+        //     }
+        // }, 2000);
     });
     // mousing over a control locks them "on"
     $.each(this.ui.controls, function() {
@@ -1467,7 +1478,9 @@ LayeredImage.prototype.layerSelect = function(event) {
     button.addClass('active');
 
     // update slider layer text
-    CA.ui.sliderLayerText.text(CA.settings.currentLayer1.title + ' - ' + CA.settings.currentLayer2.title);
+    //CA.ui.sliderLayerText.text(CA.settings.currentLayer1.title + ' - ' + CA.settings.currentLayer2.title);
+    CA.ui.sliderLayerText1.attr("title", CA.settings.currentLayer1.title);
+    CA.ui.sliderLayerText2.attr("title", CA.settings.currentLayer2.title);
 
     // realign layers
     CA.realignLayers();
