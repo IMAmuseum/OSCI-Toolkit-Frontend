@@ -30,7 +30,7 @@ app = {
 		
 		// init main view
 		this.views.app = new OsciTk.views.App();
-		/*just a test comment*/
+		
 	},
 
 	run : function() {
