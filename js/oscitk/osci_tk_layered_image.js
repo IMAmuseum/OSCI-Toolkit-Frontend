@@ -770,6 +770,10 @@ LayeredImage.prototype.reset = function() {
         if (CA.ui['layerSelector' + (i + 1)]) {
             CA.ui['layerSelector'+ (i + 1)].find('span').html(baseLayers[i].title);
         }
+        //set layer title in ui
+        if (CA.ui['sliderLayerText' + (i + 1)]) {
+            CA.ui['sliderLayerText' + (i + 1)].attr("title", CA.settings['currentLayer' + (i + 1)].title);
+        }
     }
     // if more than one layer, restore transparency setting
     if (baseLayers.length > 1 && CA.ui.slider) {
