@@ -133,7 +133,8 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
             gutterWidth : 40,
             minLinesPerColumn : 5,
             defaultLineHeight: 16,
-            figureContentGutter : 20
+            figureContentGutter : 20,
+            maxFigureWidth: 0
         });
 
         //initialize dimensions object
@@ -424,6 +425,14 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
             dimensions.columnWidth = (dimensions.innerSectionWidth - (this.options.gutterWidth * (dimensions.columnsPerPage))) / dimensions.columnsPerPage;
         }
         dimensions.columnWidth = Math.floor(dimensions.columnWidth);
+
+        //If a percentage based width hint is specified, convert to number of columns to cover
+        var maxFigureWidth = this.options.maxFigureWidth;
+        if (typeof(maxFigureWidth) === 'string' && maxFigureWidth.indexOf("%") > 0) {
+            maxFigureWidth = Math.ceil((parseInt(maxFigureWidth, 10) / 100) * dimensions.columnsPerPage);
+        }
+        dimensions.maxFigureWidth = maxFigureWidth;
+
 
         this.dimensions = dimensions;
         //set the height of the container
