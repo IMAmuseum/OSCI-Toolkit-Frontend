@@ -687,19 +687,19 @@ LayeredImage.prototype.createUI = function() {
             container.attr('data-controls', 'true');
             CA.toggleControls();
         }
-        CA.ui.controlsTimeout = setTimeout(function() {
-            var date = new Date();
-            // check if the mouse is over a control, if it is, don't hide
-            if (container.attr('data-controls') == 'true' &&
-                (date.getTime() - container.attr('data-controls-time')) >= 1750) {
+        // CA.ui.controlsTimeout = setTimeout(function() {
+        //     var date = new Date();
+        //     // check if the mouse is over a control, if it is, don't hide
+        //     if (container.attr('data-controls') == 'true' &&
+        //         (date.getTime() - container.attr('data-controls-time')) >= 1750) {
 
-                if (container.attr('data-controls-lock') != 'true') {
-                    container.attr('data-controls', 'false');
-                    CA.clearPopups();
-                    CA.toggleControls();
-                }
-            }
-        }, 2000);
+        //         if (container.attr('data-controls-lock') != 'true') {
+        //             container.attr('data-controls', 'false');
+        //             CA.clearPopups();
+        //             CA.toggleControls();
+        //         }
+        //     }
+        // }, 2000);
     });
     // mousing over a control locks them "on"
     $.each(this.ui.controls, function() {
@@ -977,8 +977,14 @@ LayeredImage.prototype.fullscreen = function(reset) {
 LayeredImage.prototype.resizeControlBar = function()
 {
     var containerWidth = this.container.outerWidth(),
-        controlBarWidth = this.ui.controlbar.outerWidth(),
-        maxWidth = containerWidth - (parseInt(this.ui.controlbar.css('right'), 10) * 2);
+        controlBarChildren = this.ui.controlbar.children(),
+        controlBarWidth = 0;
+
+    controlBarChildren.each(function() {
+        controlBarWidth += $(this).outerWidth();
+    });
+
+    var maxWidth = containerWidth - (parseInt(this.ui.controlbar.css('right'), 10) * 2);
 
     //if controlbar is wider than asset width resize it
     if (controlBarWidth > maxWidth) {
@@ -986,10 +992,15 @@ LayeredImage.prototype.resizeControlBar = function()
             'max-width' : maxWidth + 'px'
         });
 
-        //shrink layer names (only works nicely if a min-width set in css & overflow ellipsis)
-        //this might need redone later depending on browser support and custom styles
-        this.ui.controlbar.find('.ca-ui-layer > span').css({
-            width: '1px'
+        controlBarChildren.each(function() {
+            var item = $(this);
+            maxWidth = maxWidth - item.outerWidth();
+            if (maxWidth < 0) {
+                item.width(item.width() + maxWidth);
+                item.find(".ca-ui-layer-slider").each(function() {
+                    $(this).width($(this).width() + maxWidth);
+                });
+            }
         });
     }
 
