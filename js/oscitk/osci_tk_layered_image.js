@@ -770,6 +770,10 @@ LayeredImage.prototype.reset = function() {
         if (CA.ui['layerSelector' + (i + 1)]) {
             CA.ui['layerSelector'+ (i + 1)].find('span').html(baseLayers[i].title);
         }
+        //set layer title in ui
+        if (CA.ui['sliderLayerText' + (i + 1)]) {
+            CA.ui['sliderLayerText' + (i + 1)].attr("title", CA.settings['currentLayer' + (i + 1)].title);
+        }
     }
     // if more than one layer, restore transparency setting
     if (baseLayers.length > 1 && CA.ui.slider) {
@@ -973,8 +977,14 @@ LayeredImage.prototype.fullscreen = function(reset) {
 LayeredImage.prototype.resizeControlBar = function()
 {
     var containerWidth = this.container.outerWidth(),
-        controlBarWidth = this.ui.controlbar.outerWidth(),
-        maxWidth = containerWidth - (parseInt(this.ui.controlbar.css('right'), 10) * 2);
+        controlBarChildren = this.ui.controlbar.children(),
+        controlBarWidth = 0;
+
+    controlBarChildren.each(function() {
+        controlBarWidth += $(this).outerWidth();
+    });
+
+    var maxWidth = containerWidth - (parseInt(this.ui.controlbar.css('right'), 10) * 2);
 
     //if controlbar is wider than asset width resize it
     if (controlBarWidth > maxWidth) {
@@ -982,10 +992,15 @@ LayeredImage.prototype.resizeControlBar = function()
             'max-width' : maxWidth + 'px'
         });
 
-        //shrink layer names (only works nicely if a min-width set in css & overflow ellipsis)
-        //this might need redone later depending on browser support and custom styles
-        this.ui.controlbar.find('.ca-ui-layer > span').css({
-            width: '1px'
+        controlBarChildren.each(function() {
+            var item = $(this);
+            maxWidth = maxWidth - item.outerWidth();
+            if (maxWidth < 0) {
+                item.width(item.width() + maxWidth);
+                item.find(".ca-ui-layer-slider").each(function() {
+                    $(this).width($(this).width() + maxWidth);
+                });
+            }
         });
     }
 

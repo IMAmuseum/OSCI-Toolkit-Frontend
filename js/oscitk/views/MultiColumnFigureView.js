@@ -271,6 +271,11 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
             modelData.columns = dimensions.columnsPerPage;
         }
 
+        //If there is a max width for figures make sure it is applied
+        if (dimensions.maxFigureWidth > 0 && modelData.columns > dimensions.maxFigureWidth) {
+            modelData.columns = dimensions.maxFigureWidth;
+        }
+
         //Calculate maximum width for a figure
         if (modelData.columns > dimensions.columnsPerPage || modelData.position === 'p') {
             width = dimensions.innerSectionWidth;
