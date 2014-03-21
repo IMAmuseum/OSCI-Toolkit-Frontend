@@ -26,11 +26,8 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
     },
 
     onParagraphClicked: function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-
         if (e.target.tagName === "A") {
-            window.location = e.target.href;
+            //window.location = e.target.href;
             return true;
         }
 
@@ -39,6 +36,9 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             parentCheck[0].click();
             return true;
         }
+
+        e.preventDefault();
+        e.stopPropagation();
 
         var p = $(e.currentTarget);
         var pNum = p.data("paragraph_number");
