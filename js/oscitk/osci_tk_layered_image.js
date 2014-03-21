@@ -641,6 +641,7 @@ LayeredImage.prototype.createUI = function() {
     if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
         this.ui.zoom.appendTo(this.container);
     }
+    this.resizeZoomControls();
 
     // viewfinder control
     this.ui.viewfinder = $('<div class="ca-ui-viewfinder viewfinder-closed"></div>');
@@ -1005,6 +1006,36 @@ LayeredImage.prototype.resizeControlBar = function()
     }
 
 };
+
+//resize the zoom controls to fit if small height
+LayeredImage.prototype.resizeZoomControls = function()
+{
+    var containerHeight = this.container.outerHeight(),
+        zoomChildren = this.ui.zoom.children(),
+        zoomControlHeight = 0;
+
+    zoomChildren.each(function() {
+        zoomControlHeight += $(this).outerHeight();
+    });
+
+    var maxHeight = containerHeight - this.ui.controlbar.outerHeight() - 1;
+    if (zoomControlHeight > maxHeight) {
+        this.ui.zoom.css({
+            'max-height': maxHeight + 'px'
+        });
+
+        maxHeight -= this.ui.zoomIn.outerHeight() + this.ui.zoomOut.outerHeight();
+        if (maxHeight < 50) {
+            this.ui.zoomSlider.remove();
+            this.ui.zoom.css({
+                'max-height': '50px'
+            })
+        } else {
+            var currentHeight = this.ui.zoomSlider.outerHeight(true) - this.ui.zoomSlider.outerHeight();
+            this.ui.zoomSlider.height((maxHeight - currentHeight) + 'px');
+        }
+    }
+}
 
 LayeredImage.prototype.toggleLayerSelector = function(event) {
     // set up aliases and build dynamic variable names
