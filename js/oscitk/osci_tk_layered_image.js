@@ -1026,7 +1026,7 @@ LayeredImage.prototype.resizeZoomControls = function()
 
         maxHeight -= this.ui.zoomIn.outerHeight() + this.ui.zoomOut.outerHeight();
         if (maxHeight < 50) {
-            this.ui.zoomSlider.remove();
+            //this.ui.zoomSlider.remove();
             this.ui.zoom.css({
                 'max-height': '50px'
             })
