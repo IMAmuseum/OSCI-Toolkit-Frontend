@@ -74,7 +74,7 @@ OsciTk.views.InlineNotes = OsciTk.views.BaseView.extend({
                 var tempTags = notePop.find('input').val().split(',');
                 var tags = [];
                 for (var i = 0, len = tempTags.length; i < len; i++) {
-                    tags.push(tempTags[i].replace(/ /g,''));
+                    tags.push($.trim(tempTags[i]));
                 }
 
                 note.set('note', noteText);
