@@ -1020,9 +1020,9 @@ LayeredImage.prototype.resizeZoomControls = function()
 
         maxHeight -= this.ui.zoomIn.outerHeight() + this.ui.zoomOut.outerHeight();
         if (maxHeight < 50) {
-            //this.ui.zoomSlider.remove();
+            this.ui.zoomSlider.hide();
             this.ui.zoom.css({
-                'max-height': '50px'
+                'max-height': (this.ui.zoomIn.outerHeight() + this.ui.zoomOut.outerHeight()) + 'px'
             })
         } else {
             var currentHeight = this.ui.zoomSlider.outerHeight(true) - this.ui.zoomSlider.outerHeight();
