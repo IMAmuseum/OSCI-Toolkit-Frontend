@@ -394,28 +394,22 @@ LayeredImage.prototype.zoomToContainer = function() {
     var i, count;
 
     // calculate tw and th for each layer
+    var tiles_wide = 0;
+    var tiles_high = 0;
     for (i=0, count = this.layers.length; i < count; i++) {
         var layerData = this.layers[i];
         var scale = this.getScale(this.max_zoom_level, layerData.zoom_levels);
         var mw = Math.round(layerData.width / scale);
         var mh = Math.round(layerData.height / scale);
-        var tw = Math.ceil(mw / this.map.tileSize().x);
-        var th = Math.ceil(mh / this.map.tileSize().y);
+        var tw = mw / this.map.tileSize().x;
+        var th = mh / this.map.tileSize().y;
         layerData.tiles_wide = tw;
         layerData.tiles_high = th;
         layerData.tiles_zoom = layerData.zoom_level;
-    }
 
-    // scan the layers and find the greatest extents
-    var tiles_wide = 0;
-    var tiles_high = 0;
-    for (i=0, count = this.layers.length; i < count; i++) {
-        if (this.layers[i].tiles_high > tiles_high) {
-            tiles_high = this.layers[i].tiles_high;
-        }
-        if (this.layers[i].tiles_wide > tiles_wide) {
-            tiles_wide = this.layers[i].tiles_wide;
-        }
+        //find the max
+        tiles_high = (th > tiles_high) ? th : tiles_high;
+        tiles_wide = (tw > tiles_wide) ? tw : tiles_wide;
     }
 
     // now that we know our max extents, calculate the
