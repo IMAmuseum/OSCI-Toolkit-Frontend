@@ -29,7 +29,7 @@ OsciTk.views.ParagraphControlsView = OsciTk.views.BaseView.extend({
     clicked: function(e) {
         e.preventDefault();
         var evt = $(e.target).data('event');
-        Backbone.trigger(evt, {contentId: this.options.contentIdentifier});
+        Backbone.trigger(evt, {contentId: this.options.contentIdentifier, paragraphNumber: this.options.paragraphNumber});
     },
     render: function() {
         var contentPosition = this.options.content.position();

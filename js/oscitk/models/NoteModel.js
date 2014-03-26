@@ -5,7 +5,8 @@ OsciTk.models.Note = OsciTk.models.BaseModel.extend({
 			content_id: null,
 			section_id: null,
 			note: null,
-			tags: []
+			tags: [],
+			paragraph_number: null
 		};
 	},
 

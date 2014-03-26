@@ -35,7 +35,8 @@ OsciTk.views.InlineNotes = OsciTk.views.BaseView.extend({
             } else {
                 note = new OsciTk.models.Note({
                     content_id: contentId,
-                    section_id: app.models.section.id
+                    section_id: app.models.section.id,
+                    paragraph_number: data.paragraphNumber
                 });
                 app.collections.notes.add(note);
             }
