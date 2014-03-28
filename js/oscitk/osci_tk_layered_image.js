@@ -93,7 +93,7 @@ var LayeredImage = function(container) { // container should be a html element
         this.figureOptions = JSON.parse(optString);
     }
     // provide defaults if options not set
-    if (typeof(this.figureOptions) === 'undefined') {
+    if (typeof(this.figureOptions) === 'undefined' || typeof(this.figureOptions) !== 'object') {
         this.figureOptions = {};
     }
     if (typeof(this.figureOptions.disable_interaction) === 'undefined') {
@@ -890,19 +890,20 @@ LayeredImage.prototype.fullscreen = function(reset) {
         wrapHeight = 0,
         wrapWidth = 0,
         firstPass = true,
-        scaleFactor = .9;
+        scaleFactor = .9,
+        aspect = (CA.figureOptions && CA.figureOptions.aspect) !== undefined ? CA.figureOptions.aspect : CA.settings.aspect;
 
-    if (CA.figureOptions.aspect <= 1) {
+    if (aspect <= 1) {
         while (wrapWidth > modalWidth || firstPass) {
             wrapHeight = Math.floor(modalHeight * scaleFactor);
-            wrapWidth = Math.floor(wrapHeight * CA.figureOptions.aspect);
+            wrapWidth = Math.floor(wrapHeight * aspect);
             scaleFactor = scaleFactor - .1;
             firstPass = false;
         }
     } else {
         while (wrapHeight > modalHeight || firstPass) {
             wrapWidth = Math.floor(modalWidth * scaleFactor);
-            wrapHeight = Math.floor(wrapWidth / CA.figureOptions.aspect);
+            wrapHeight = Math.floor(wrapWidth / aspect);
             scaleFactor = scaleFactor - .1;
             firstPass = false;
         }
