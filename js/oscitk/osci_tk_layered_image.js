@@ -117,10 +117,22 @@ var LayeredImage = function(container) { // container should be a html element
     this.layers = [];
     var layerContainer = this.container.find('.layered_image-layers');
     var layerItems = layerContainer.find('li');
+    var annotationLayers = [];
     for (i=0, count = layerItems.length; i < count; i++) {
         var layerMarkup = $(layerItems[i]);
-        this.layers.push(layerMarkup.data());
+        var layerData = layerMarkup.data();
+        if (layerData.annotation) {
+            annotationLayers.push(layerData);
+        } else {
+            this.layers.push(layerData);
+        }
     }
+
+    //Add annotation layers to the end to make sure they are on top
+    if (annotationLayers.length) {
+        this.layers = this.layers.concat(annotationLayers);
+    }
+
     layerContainer.remove();
 
     // initialize the container as a polymap
@@ -134,16 +146,6 @@ var LayeredImage = function(container) { // container should be a html element
     this.map.tileSize({
         x: 256,
         y: 256
-    });
-
-    // sort the layers so that annotations are always last (on top)
-    this.layers.sort(function(a,b) {
-        var layer1 = a.annotation;
-        var layer2 = b.annotation;
-        if (layer1 == layer2) return 0;
-        if (layer1 && !layer2) return 1;
-        if (!layer1 && layer2) return -1;
-        return 0;
     });
 
     // prepare layers
