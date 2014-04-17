@@ -1,3 +1,4 @@
+var storeContentId; //variable to store content id
 OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
     initialize: function(options) {
         this._super('initialize');
@@ -130,8 +131,10 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
         //If offset defined (should always be negative) add it to the height of the content to get the correct top margin
         var offset = 0;
+		//console.log(column.offset, "column.offset");
         if (column.offset < 0) {
 				offset = Math.floor(contentHeight + column.offset);
+				//console.log(offset, "offset");
 				//Set the top margin
 				content.css("margin-top", "-" + offset + "px");			
 				//remove the offset so that all items are not shifted up
@@ -217,8 +220,16 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
     },
 
     getCurrentColumn : function(contentId) {
+		//console.log(contentId, "contentId");
+		if (contentId !== undefined) {
+			storeContentId = contentId; //value of storeContentId should be last contentId
+		} else if (contentId === undefined) {
+			contentId = storeContentId; //use storeContentId if value of contentId is undefined, so repetition of paragraphs does not occur
+		}
+		//console.log(contentId, "contentId2");
 		var previousColumnHeightRemain = null;
 		previousColumnHeightRemain = this.processingData.columns[this.processingData.currentColumn].heightRemain; //store previous column's remaining height
+		//console.log(previousColumnHeightRemain, "previousColumnHeightRemain");
         var currentColumn = null;
         var lineHeight = parseInt(this.$el.css("line-height"), 10);
         lineHeight = lineHeight ? lineHeight : this.parent.options.defaultLineHeight;
@@ -227,7 +238,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             this.processingData.columns[this.processingData.currentColumn].heightRemain > 0 &&
             (this.processingData.columns[this.processingData.currentColumn].height >= minColHeight ||
             this.processingData.columns[this.processingData.currentColumn].isVertCol)) {
-            currentColumn = this.processingData.columns[this.processingData.currentColumn];
+            	currentColumn = this.processingData.columns[this.processingData.currentColumn];
         } else {
             for(var i = 0; i < this.processingData.numberOfColumns; i++) {
                 if (this.processingData.columns[i] !== undefined &&
@@ -272,8 +283,9 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                 .addClass('column-' + this.processingData.currentColumn)
                 .css(columnCss);
         }
-
+		//console.log(currentColumn, "currentColumn");
         return currentColumn;
+		
     },
 
     initializeColumns: function() {
