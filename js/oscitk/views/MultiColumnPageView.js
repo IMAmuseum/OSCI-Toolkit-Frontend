@@ -31,7 +31,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
         e.stopPropagation();
 
         if (e.target.tagName === "A") {
-            //window.location = e.target.href; //commented this out because it was I think IMA commented it out
+            //window.location = e.target.href; 
             return true;
         }
 
@@ -131,10 +131,8 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
         //If offset defined (should always be negative) add it to the height of the content to get the correct top margin
         var offset = 0;
-		//console.log(column.offset, "column.offset");
         if (column.offset < 0) {
 				offset = Math.floor(contentHeight + column.offset);
-				//console.log(offset, "offset");
 				//Set the top margin
 				content.css("margin-top", "-" + offset + "px");			
 				//remove the offset so that all items are not shifted up
@@ -220,16 +218,13 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
     },
 
     getCurrentColumn : function(contentId) {
-		//console.log(contentId, "contentId");
 		if (contentId !== undefined) {
 			storeContentId = contentId; //value of storeContentId should be last contentId
 		} else if (contentId === undefined) {
 			contentId = storeContentId; //use storeContentId if value of contentId is undefined, so repetition of paragraphs does not occur
 		}
-		//console.log(contentId, "contentId2");
 		var previousColumnHeightRemain = null;
 		previousColumnHeightRemain = this.processingData.columns[this.processingData.currentColumn].heightRemain; //store previous column's remaining height
-		//console.log(previousColumnHeightRemain, "previousColumnHeightRemain");
         var currentColumn = null;
         var lineHeight = parseInt(this.$el.css("line-height"), 10);
         lineHeight = lineHeight ? lineHeight : this.parent.options.defaultLineHeight;
@@ -283,7 +278,6 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                 .addClass('column-' + this.processingData.currentColumn)
                 .css(columnCss);
         }
-		//console.log(currentColumn, "currentColumn");
         return currentColumn;
 		
     },
