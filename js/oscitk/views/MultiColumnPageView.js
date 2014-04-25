@@ -1,3 +1,4 @@
+var storeContentId; //variable to store content id
 OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
     initialize: function(options) {
         this._super('initialize');
@@ -17,9 +18,6 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
     },
 
     onFigureReferenceClicked: function(event_data) {
-        event_data.preventDefault();
-        event_data.stopPropagation();
-
         var figureId = event_data.currentTarget.hash.substring(1);
         var figureView = app.views.figures[figureId];
         if (figureView && figureView.fullscreen) {
@@ -29,8 +27,11 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
     },
 
     onParagraphClicked: function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
         if (e.target.tagName === "A") {
-            //window.location = e.target.href;
+            //window.location = e.target.href; 
             return true;
         }
 
@@ -39,9 +40,6 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             parentCheck[0].click();
             return true;
         }
-
-        e.preventDefault();
-        e.stopPropagation();
 
         var p = $(e.currentTarget);
         var pNum = p.data("paragraph_number");
@@ -100,7 +98,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
     layoutContent : function(contentId) {
         var overflow = 'none';
         var column = this.getCurrentColumn(contentId);
-
+		
         if (column === null) {
             this.processingComplete();
             overflow = 'contentOverflow';
@@ -108,11 +106,10 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
         }
 
         var content = $(this.getContentById(contentId));
-
         column.$el.append(content);
 
         var lineHeight = parseFloat(content.css("line-height"));
-        var contentPosition = content.position();
+        var contentPosition = content.position();		
 
         //If all of the content is overflowing the column remove it and move to next column
         if ((column.height - contentPosition.top) < lineHeight) {
@@ -135,13 +132,11 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
         //If offset defined (should always be negative) add it to the height of the content to get the correct top margin
         var offset = 0;
         if (column.offset < 0) {
-            offset = Math.floor(contentHeight + column.offset);
-
-            //Set the top margin
-            content.css("margin-top", "-" + offset + "px");
-
-            //remove the offset so that all items are not shifted up
-            column.offset = 0;
+				offset = Math.floor(contentHeight + column.offset);
+				//Set the top margin
+				content.css("margin-top", "-" + offset + "px");			
+				//remove the offset so that all items are not shifted up
+            	column.offset = 0;     
         }
 
         var contentMargin = {
@@ -159,9 +154,9 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
         //If we have negative height remaining, the content must be repeated in the next column
         if (heightRemain < 0) {
-            //var temp = Math.floor((column.height - contentPosition.top) / lineHeight);
-
+			//figure out how many lines of the current content to show
             var visibleLines = Math.floor((column.height - contentPosition.top) / lineHeight);
+			// calculate new column height based on visible lines
             var newHeight = (visibleLines * lineHeight) + contentPosition.top;
             var heightDiff = column.height - newHeight;
 
@@ -169,8 +164,8 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                 //assign the new height to remove any partial lines of text
                 column.height = newHeight;
                 column.$el.height(newHeight + "px");
-
-                heightRemain = heightRemain - heightDiff;
+				//get remaining height minus the visible lines
+				heightRemain = (heightRemain - heightDiff);
             }
 
             overflow = 'contentOverflow';
@@ -223,36 +218,51 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
     },
 
     getCurrentColumn : function(contentId) {
+		if (contentId !== undefined) {
+			storeContentId = contentId; //value of storeContentId should be last contentId
+		} else if (contentId === undefined) {
+			contentId = storeContentId; //use storeContentId if value of contentId is undefined, so repetition of paragraphs does not occur
+		}
+		var previousColumnHeightRemain = null;
+		previousColumnHeightRemain = this.processingData.columns[this.processingData.currentColumn].heightRemain; //store previous column's remaining height
         var currentColumn = null;
         var lineHeight = parseInt(this.$el.css("line-height"), 10);
         lineHeight = lineHeight ? lineHeight : this.parent.options.defaultLineHeight;
         var minColHeight =  lineHeight * this.parent.dimensions.minLinesPerColumn;
-
         if (this.processingData.columns[this.processingData.currentColumn] &&
             this.processingData.columns[this.processingData.currentColumn].heightRemain > 0 &&
             (this.processingData.columns[this.processingData.currentColumn].height >= minColHeight ||
             this.processingData.columns[this.processingData.currentColumn].isVertCol)) {
-            currentColumn = this.processingData.columns[this.processingData.currentColumn];
+            	currentColumn = this.processingData.columns[this.processingData.currentColumn];
         } else {
             for(var i = 0; i < this.processingData.numberOfColumns; i++) {
                 if (this.processingData.columns[i] !== undefined &&
                     this.processingData.columns[i].height >= minColHeight &&
-                    this.processingData.columns[i].heightRemain > 0) {
+                    this.processingData.columns[i].heightRemain > 0){
                     currentColumn = this.processingData.columns[i];
                     this.processingData.currentColumn = i;
                     break;
                 }
             }
         }
-
+			
+		// if there is a negative heightRemain, if there's content left over, it will go through this.
         if (currentColumn !== null && currentColumn.$el === null) {
             if (this.processingData.currentColumn > 0) {
-                currentColumn.offset = this.processingData.columns[(this.processingData.currentColumn - 1)].heightRemain;
+				//the previous column is on the same page
+                //currentColumn.offset =  this.processingData.columns[(this.processingData.currentColumn - 1)].heightRemain; //can't use since sometimes the previous column only contains an image, giving the wrong heightRemain value
+				currentColumn.offset = previousColumnHeightRemain;
             } else {
+				//the previous column is on the previous page
                 var pageNum = this.parent.getPageNumberForSelector("[data-osci_content_id='" + contentId + "']");
                 var previousPage = this.parent.getChildViewByIndex(pageNum - 1);
                 if (previousPage) {
-                    currentColumn.offset = previousPage.processingData.columns[previousPage.processingData.columns.length - 1].heightRemain;
+					//get last column's height remain. 
+					currentColumn.offset = previousPage.processingData.columns[previousPage.processingData.columns.length - 1].heightRemain;
+					//if an image takes up the entire last column, then get the next to last column's height remain. this value should be negative.
+					if (currentColumn.offset > 0) {
+						currentColumn.offset = previousPage.processingData.columns[previousPage.processingData.columns.length - 2].heightRemain;
+					}
                 }
             }
 
@@ -268,8 +278,8 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                 .addClass('column-' + this.processingData.currentColumn)
                 .css(columnCss);
         }
-
         return currentColumn;
+		
     },
 
     initializeColumns: function() {
