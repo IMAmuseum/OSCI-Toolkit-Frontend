@@ -221,7 +221,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 		if (contentId !== undefined) {
 			storeContentId = contentId; //value of storeContentId should be last contentId
 		} else if (contentId === undefined) {
-			contentId = storeContentId; //use storeContentId if value of contentId is undefined, so repetition of paragraphs does not occur
+			contentId = storeContentId; //use storeContentId if value of contentId is undefined, to avoid repetition of paragraphs
 		}
 		var previousColumnHeightRemain = null;
 		previousColumnHeightRemain = this.processingData.columns[this.processingData.currentColumn].heightRemain; //store previous column's remaining height
@@ -246,7 +246,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             }
         }
 			
-		// if there is a negative heightRemain, if there's content left over, it will go through this.
+		// if there is a negative heightRemain, if there's content left over, go through this
         if (currentColumn !== null && currentColumn.$el === null) {
             if (this.processingData.currentColumn > 0) {
 				//the previous column is on the same page
@@ -257,11 +257,12 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                 var pageNum = this.parent.getPageNumberForSelector("[data-osci_content_id='" + contentId + "']");
                 var previousPage = this.parent.getChildViewByIndex(pageNum - 1);
                 if (previousPage) {
-					//get last column's height remain. 
-					currentColumn.offset = previousPage.processingData.columns[previousPage.processingData.columns.length - 1].heightRemain;
-					//if an image takes up the entire last column, then get the next to last column's height remain. this value should be negative.
-					if (currentColumn.offset > 0) {
-						currentColumn.offset = previousPage.processingData.columns[previousPage.processingData.columns.length - 2].heightRemain;
+					//start with last column, and keep moving to the left until the last negative or 0 heightRemain is found or you run out of columns
+					for (var i=previousPage.processingData.columns.length - 1; i >= 0; i--) {
+						currentColumn.offset = previousPage.processingData.columns[i].heightRemain;
+						if (currentColumn.offset < 0) {
+							break;
+						}
 					}
                 }
             }
