@@ -18,6 +18,9 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
     },
 
     onFigureReferenceClicked: function(event_data) {
+		event_data.preventDefault();
+		event_data.stopPropagation();
+		
         var figureId = event_data.currentTarget.hash.substring(1);
         var figureView = app.views.figures[figureId];
         if (figureView && figureView.fullscreen) {
@@ -27,9 +30,6 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
     },
 
     onParagraphClicked: function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-
         if (e.target.tagName === "A") {
             //window.location = e.target.href; 
             return true;
@@ -41,6 +41,9 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             return true;
         }
 
+	    e.preventDefault();
+        e.stopPropagation();
+		
         var p = $(e.currentTarget);
         var pNum = p.data("paragraph_number");
 
