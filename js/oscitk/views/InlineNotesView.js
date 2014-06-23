@@ -19,7 +19,7 @@ OsciTk.views.InlineNotes = OsciTk.views.BaseView.extend({
     },
     render: function(data) {
         if (parseInt(app.account.id, 10) == 0) {
-            alert("You muse login to create notes.");
+            alert("You must login to create notes.");
             return;
         }
 
