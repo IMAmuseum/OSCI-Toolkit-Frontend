@@ -1,5 +1,6 @@
 OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	id: 'toolbar',
+	className: 'toolbar-closed',
 	template: OsciTk.templateManager.get('toolbar'),
 	initialize: function() {
 		// if toolbar items were provided, store them in the view
