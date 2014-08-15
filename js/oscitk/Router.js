@@ -6,18 +6,20 @@ OsciTk.router = Backbone.Router.extend({
 		'section/:section_id/:identifier' : 'routeToSection'
 	},
 
-    initialize: function(options) {
-        this.on('all', this._trackPageView);
-    },
+	initialize: function() {
+		this.bind('route', this._pageView);
+	},
 
 	routeToSection: function(section_id, identifier) {
 		Backbone.trigger('routedToSection', {section_id: section_id, identifier: identifier});
 	},
+	
+	_pageView: function() {
+	  var path = Backbone.history.getFragment();
+	  dataLayer.push({
+		'event': 'vpv',
+		'pageview': '/' + path
+	  })
+	}
 
-    _trackPageView: function() {
-        var url = Backbone.history.getFragment();
-        if (!_.isUndefined(window._gaq)) {
-            _gaq.push(['_trackPageview', "/#" + url])
-        }
-    }
 });
