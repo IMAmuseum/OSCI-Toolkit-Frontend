@@ -516,3 +516,10 @@ img.image_opaque {
 #edit-initial-frame figure {
 	border: 2px solid black;
 }
+
+.layer path {
+  fill: #FFF;
+  fill-opacity: 0;
+  stroke: #FFF;
+  stroke-width: 1.5px;
+}
