@@ -1,12 +1,12 @@
 /*
- * qTip2 - Pretty powerful tooltips - v2.1.1
+ * qTip2 - Pretty powerful tooltips - v2.2.0
  * http://qtip2.com
  *
  * Copyright (c) 2013 Craig Michael Thompson
  * Released under the MIT, GPL licenses
  * http://jquery.org/license
  *
- * Date: Thu Jul 11 2013 02:03 GMT+0100+0100
+ * Date: Thu Nov 21 2013 08:34 GMT+0000
  * Plugins: tips modal viewport svg imagemap ie6
  * Styles: basic css3
  */
@@ -596,8 +596,8 @@
 
 #qtip-overlay{
 	position: fixed;
-	left: -10000em;
-	top: -10000em;
+	left: 0; top: 0;
+	width: 100%; height: 100%;
 }
 
 	/* Applied to modals with show.modal.blur set to true */

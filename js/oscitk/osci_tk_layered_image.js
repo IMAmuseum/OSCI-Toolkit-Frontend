@@ -279,6 +279,9 @@ LayeredImage.prototype.createLayer = function(layerData) {
     if (layerData.type == 'svg') {
         layer = this.createLayerSVG(layerData);
     }
+	if (layerData.type == 'json') {
+		layer = this.createLayerJSON(layerData);	
+    }
 
     // flag the layer as visible and
     // give the layer a reference to its polymap object
@@ -314,6 +317,50 @@ LayeredImage.prototype.repaintLayer = function(layerData) {
     this.removeLayer(layerData);
     this.createLayer(layerData);
 };
+
+LayeredImage.prototype.createLayerJSON = function(layerData) {
+	var CA = this;
+	var layer = this.polymaps.geoJson();
+	var jsondata = layerData.json_data;
+	layer
+	.on("load", tooltips)
+	.url(jsondata)
+	return layer;
+};
+
+//tooltips for json layer
+function tooltips(e) {
+  for (var i = 0; i < e.features.length; i++) {
+    var f = e.features[i];
+    $(f.element).each(function() {
+		$(this).qtip({
+			content: {
+        		text: f.data.properties.html
+				},
+			show: {
+				effect: function() {
+					$(this).fadeTo(300, 1);
+					}
+				},
+			hide: {
+				fixed: true,
+				delay: 800,
+				effect: function() {
+					$(this).fadeTo(100, 0);
+					}
+				},
+			position: {
+				target: 'mouse',
+				adjust: {
+					mouse:false
+					},
+				my: 'top left'		
+				},
+			style: 'qtip-map'
+			});
+		});
+	}
+}
 
 LayeredImage.prototype.createLayerIIP = function(layerData) {
     var CA = this;
@@ -477,6 +524,7 @@ LayeredImage.prototype.createUI = function() {
                     x: event.clientX,
                     y: event.clientY
                 };
+				//console.log('locationPoint', CA.map.pointLocation({x: event.clientX, y: event.clientY}));
                 liCollection.userIsDraggingAsset = CA.id;
             }
         });
