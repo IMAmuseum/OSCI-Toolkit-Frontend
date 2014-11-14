@@ -15,6 +15,9 @@ OsciTk.views.Footnotes = OsciTk.views.BaseView.extend({
 						content: fn.get('body'),
 						style: {
 							def: false
+						},
+						position: {
+							viewport: $(window)
 						}
 					});
 				}
