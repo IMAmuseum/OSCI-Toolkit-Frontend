@@ -22,14 +22,10 @@ OsciTk.models.Figure = OsciTk.models.BaseModel.extend({
 		var position = this.get('position');
 		var parsedPosition;
 
-		//set a flag for easily identifing the plate figures
-		if (position === "plate" || position === 'platefull') {
+		//set a flag for easily identifing the plate figure
+		if (position === "plate") {
 			this.set('plate', true);
-			if (position === "plate") {
-				position = "p";
-			} else if (position === 'platefull') {
-				position = "ff";
-			}
+			position = "p";
 		}
 
 		if (position.length == 2) {
