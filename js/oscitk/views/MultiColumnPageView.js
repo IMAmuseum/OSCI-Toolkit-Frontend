@@ -426,9 +426,9 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
             if (figureViewInstance.layoutComplete) {
                 //end the page if plate image
-                if (figureViewInstance.model.get('position').horizontal === "f") {
-                	this.processingComplete();
-                }
+                // if (figureViewInstance.model.get('position').horizontal === "p") {
+                //     this.processingComplete();
+                // }
                 //figure was placed
                 figurePlaced = true;
             } else {

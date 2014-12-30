@@ -80,12 +80,9 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
             case 'r':
                 column = dimensions.columnsPerPage - 1;
                 break;
-            //left
+            //left & fullpage
             case 'l':
-			// regular plate image
             case 'p':
-			// full page plate
-			case 'f':
                 column = 0;
                 break;
             //In the current column
@@ -118,8 +115,8 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 
             //If the figure is not as wide as the available space, center it
             var availableWidth = 0;
-      		// full page plate
-            if (modelData.position.horizontal === "f" || dimensions.columnsPerPage === 1) {
+            if (dimensions.columnsPerPage === 1) {
+            //if (modelData.position.horizontal === "p" || dimensions.columnsPerPage === 1) {
                 availableWidth = dimensions.outerSectionWidth;
             } else {
                 availableWidth = (dimensions.columnWidth * numColumns) + ((numColumns + 1) * dimensions.gutterWidth);
@@ -135,15 +132,11 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 
             //Determine the top offset based on the layout hint
             switch (modelData.position.vertical) {
-                //top & regular plate image
+                //top & fullpage
                 case 't':
                 case 'p':
                     offsetTop = 0;
                     break;
-				// full page plate
-				case 'f':
-					offsetTop =  (dimensions.innerSectionHeight - this.calculatedHeight) / 2;
-					break;
                 //bottom
                 case 'b':
                     offsetTop = dimensions.innerSectionHeight - this.calculatedHeight;
@@ -211,7 +204,6 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
                         //left & fullpage
                         case 'l':
                         case 'p':
-						case 'f':
                             column++;
                             if (column >= dimensions.columnsPerPage) {
                                 break whilePositioned;
@@ -249,11 +241,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
         if (maxPositionAttemps === positionAttempt && dimensions.columnsPerPage === 1) {
             positioned = true;
         }
-		
-		if (modelData.position.horizontal === 'f') {
-			positioned = true;
-		}
-		
+
         return positioned;
     },
     sizeElement: function() {
@@ -279,7 +267,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
         }
 
         //for plate images set width to full page
-        if (modelData.position.horizontal === 'p' || modelData.position.horizontal === 'f') {
+        if (modelData.position.horizontal === 'p') {
             modelData.columns = dimensions.columnsPerPage;
         }
 
@@ -289,7 +277,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
         }
 
         //Calculate maximum width for a figure
-        if (modelData.columns > dimensions.columnsPerPage || modelData.position.horizontal === 'p' || modelData.position.horizontal === 'f') {
+        if (modelData.columns > dimensions.columnsPerPage || modelData.position === 'p') {
             width = dimensions.innerSectionWidth;
             modelData.columns = dimensions.columnsPerPage;
         } else {
@@ -343,7 +331,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
             width : width,
             height : height - captionHeight
         });
-		
+
         this.sizeCalculated = true;
         return this;
     }
