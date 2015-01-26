@@ -31,7 +31,7 @@
 	<script src="js/external/polymaps.min.js"></script>
 	<script src="js/external/jquery-ui/jquery-ui.min.js"></script>
 	<script src="js/oscitk/osci_tk_layered_image.js"></script>
-	<!--<script src="js/oscitk/devel.js"></script>-->
+	<!-- <script src="js/oscitk/devel.js"></script> -->
 	<script src="js/oscitk/OsciTk.js"></script>
 	<script src="js/oscitk/TemplateManager.js"></script>
 	<script src="js/oscitk/models/BaseModel.js"></script>
@@ -82,20 +82,20 @@
 	<script src="js/oscitk/Router.js"></script>
 	<script src="js/oscitk/helper.js"></script>
 	<script src="js/appBootstrap.js"></script>
-	<script src="js/oscitk/zotero.js"></script>
+<!-- 	// <script src="js/oscitk/zotero.js"></script> -->
 
 	<script>jQuery(function() {
 			app.bootstrap({
-				packageUrl: 'http://localhost/osci/frontend/sample/package.opf',
+				packageUrl: 'http://osci.dev:8000/api/epub/1/package.opf',
 				templateUrls: [
-					'js/oscitk/templates/'
+					'http://osci.dev:8000/osci-themes/js/oscitk/templates/'
 				],
 				endpoints: {
-					'OsciTkNote': '/osci_tk/api/notes/',
-					'OsciTkSearch': '/osci_tk/api/search/',
-					'OsciTkOpenSearch': '/osci_tk/api/opensearch/',
-					'OsciTkAccount': '/osci_tk/api/users/',
-					'OsciTkCitation': '/osci_tk/api/citations/'
+					'OsciTkNote': '/api/notes/',
+					'OsciTkSearch': '/api/search/',
+					'OsciTkOpenSearch': '/api/opensearch/',
+					'OsciTkAccount': '/api/users/',
+					'OsciTkCitation': '/api/citations/'
 				},
 				toolbarItems: [
 					{view: 'Toc', text: 'ToC'},
@@ -120,7 +120,7 @@
 				}
 			});
 
-            app.zotero.init();
+            // app.zotero.init();
 			app.run();
 		});
 	</script>

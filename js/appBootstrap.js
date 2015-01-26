@@ -9,12 +9,12 @@ app = {
 		this.config = new OsciTk.models.Config(config);
 		this.router = new OsciTk.router();
 		this.account = new OsciTk.models.Account();
-		this.collections.notes = new OsciTk.collections.Notes();
+		// this.collections.notes = new OsciTk.collections.Notes();
 		this.collections.figures = new OsciTk.collections.Figures();
 		this.collections.footnotes = new OsciTk.collections.Footnotes();
 		this.collections.navigationItems = new OsciTk.collections.NavigationItems();
-		this.collections.glossaryTerms = new OsciTk.collections.GlossaryTerms();
-		
+		// this.collections.glossaryTerms = new OsciTk.collections.GlossaryTerms();
+
 		//setup window resizing, to trigger an event
 		window.onresize = function() {
 			if (window.resizeTimer) {
@@ -27,10 +27,10 @@ app = {
 
 			window.resizeTimer = setTimeout(onWindowResize, 200);
 		};
-		
+
 		// init main view
 		this.views.app = new OsciTk.views.App();
-		
+
 	},
 
 	run : function() {

@@ -37,8 +37,13 @@ OsciTk.models.Package = OsciTk.models.BaseModel.extend({
 
         this.set('version', data['package'].version);
         this.set('xmlns', data['package'].xmlns);
-
         Backbone.trigger('packageLoaded', this);
+        // What listens for this event to trigger?
+        // - zotero.js - adds support for zotero - reference management software
+        // - titleView.js
+        // - navigationItemsCollection.js
+        // - toolbarView.js
+        // - glossaryTermsCollection.js
     },
 
     sync: function(method, model, options) {

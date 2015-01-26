@@ -25,40 +25,52 @@ return __p
 
 OsciTk.templates['citation'] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
-__p += '<div class="citations">\n\t<span>Format</span>\n\t<ul class="formats">\n\t\t<li class="active"><a href="#citation-format-chicago">Chicago</a></li>\n\t\t<li><a href="#citation-format-mla">MLA</a></li>\n\t</ul>\n\t<div id="citation-format-chicago" class="citation">\n\t\t' +
-((__t = ( obj.creator )) == null ? '' : __t) +
-', "<em>' +
-((__t = ( obj.title )) == null ? '' : __t) +
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<div class="citation-wrapper">\n\t<h2>Citation</h2>\n\t<div class="citations">\n\t\t<span>Format</span>\n\t\t<ul class="formats">\n\t\t\t<li class="active"><a href="#citation-format-chicago">Chicago</a></li>\n\t\t\t<li><a href="#citation-format-mla">MLA</a></li>\n\t\t</ul>\n\t\t<div id="citation-format-chicago" class="citation">\n\t\t\t';
+ if (creator.length > 0) { ;
+__p += ' ' +
+((__t = ( creator + ", " )) == null ? '' : __t) +
+' ';
+ } ;
+__p += '"<em>' +
+((__t = ( title )) == null ? '' : __t) +
 '</em>," in <em>' +
-((__t = ( obj.publicationTitle )) == null ? '' : __t) +
+((__t = ( publicationTitle )) == null ? '' : __t) +
 '</em>, ed. ' +
-((__t = ( obj.editor )) == null ? '' : __t) +
+((__t = ( editor )) == null ? '' : __t) +
 ' ' +
-((__t = ( obj.publisher )) == null ? '' : __t) +
+((__t = ( publisher )) == null ? '' : __t) +
 ' ' +
-((__t = ( obj.formattedDate )) == null ? '' : __t) +
+((__t = ( formattedDate )) == null ? '' : __t) +
 ', para ' +
-((__t = ( obj.paragraphNumber )) == null ? '' : __t) +
-'.\n\t</div>\n\t<div id="citation-format-mla" style="display: none;" class="citation">\n\t\t' +
-((__t = ( obj.creator )) == null ? '' : __t) +
-', "<em>' +
-((__t = ( obj.title )) == null ? '' : __t) +
+((__t = ( paragraphNumber )) == null ? '' : __t) +
+'.\n\t\t</div>\n\t\t<div id="citation-format-mla" style="display: none;" class="citation">\n\t\t\t';
+ if (creator.length > 0) { ;
+__p += ' ' +
+((__t = ( creator + ", " )) == null ? '' : __t) +
+' ';
+ } ;
+__p += '"<em>' +
+((__t = ( title )) == null ? '' : __t) +
 '</em>," in <span style="text-decoration:underline;">' +
-((__t = ( obj.publicationTitle )) == null ? '' : __t) +
+((__t = ( publicationTitle )) == null ? '' : __t) +
 '</span>, ed. ' +
-((__t = ( obj.editor )) == null ? '' : __t) +
+((__t = ( editor )) == null ? '' : __t) +
 ' (' +
-((__t = ( obj.publisher )) == null ? '' : __t) +
+((__t = ( publisher )) == null ? '' : __t) +
 '), ' +
-((__t = ( obj.formattedDate )) == null ? '' : __t) +
+((__t = ( formattedDate )) == null ? '' : __t) +
 ', ' +
-((__t = ( obj.paragraphNumber )) == null ? '' : __t) +
-'.\n\t</div>\n</div>\n<div class="citation_url">\n\t<span>Citation URL</span>\n\t<input disabled="disabled" value="' +
-((__t = ( obj.url )) == null ? '' : __t) +
-'" />\n</div>\n<div class="reference_text">\n\t<span>Reference Text</span>\n\t<textarea disabled="disabled">' +
-((__t = ( obj.referenceText )) == null ? '' : __t) +
-'</textarea>\n</div>';
+((__t = ( paragraphNumber )) == null ? '' : __t) +
+'.\n\t\t</div>\n\t</div>\n\t<div class="citation_url">\n\t\t<span>Citation URL</span>\n\t\t<input disabled="disabled" value="' +
+((__t = ( url )) == null ? '' : __t) +
+'" />\n\t</div>\n\t<div class="reference_text">\n\t\t<span>Reference Text</span>\n\t\t<textarea disabled="disabled">' +
+((__t = ( referenceText )) == null ? '' : __t) +
+'</textarea>\n\t</div>\n</div>';
+
+}
 return __p
 };
 
@@ -206,12 +218,16 @@ return __p
 
 OsciTk.templates['note-popup'] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
-__p += '<form class="noteForm">\n\t<textarea>' +
-((__t = ( obj.note )) == null ? '' : __t) +
-'</textarea>\n\t<div class="status">Saved</div>\n</form>\n<div class="reference-text">\n\t<span class="reference-text-label">Reference Text</span>\n\t<div class="reference-text-content">' +
-((__t = ( obj.referenceContent )) == null ? '' : __t) +
-'</div>\n</div>';
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<div class="note-popup">\n    <h2>Note</h2>\n    <form class="noteForm">\n    \t<textarea>' +
+((__t = ( note )) == null ? '' : __t) +
+'</textarea>\n        <label for="note-tags">Tags:</label>\n        <input type="text" name="note-tags" id="note-tags" value="' +
+((__t = ( tags.join(', ') )) == null ? '' : __t) +
+'" />\n    </form>\n    <div class="status">Saved</div>\n</div>';
+
+}
 return __p
 };
 
@@ -250,7 +266,7 @@ OsciTk.templates['page'] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
 __p +=
-((__t = ( obj.content )) == null ? '' : __t);
+((__t = ( obj.content.content )) == null ? '' : __t);
 return __p
 };
 
@@ -281,6 +297,8 @@ __p += '\n\t\t\t\t\t<div class="result-title">' +
 ((__t = ( result.get('label') )) == null ? '' : __t) +
 '</div>\n\t\t\t\t\t';
  first = false; } ;
+__p += '\n\t\t\t\t\t';
+ if (!_.isEmpty(result.get('teaser'))) { ;
 __p += '\n\t\t\t\t\t<div class="search-result" data-id="' +
 ((__t = ( result.get('id') )) == null ? '' : __t) +
 '">\n\t\t\t\t\t\t<div class="result-content">\n\t\t\t\t\t\t\t<div class="result-type ' +
@@ -296,6 +314,8 @@ __p += '\n\t\t\t\t\t\t\t' +
 '\n\t\t\t\t\t\t\t';
  } ;
 __p += '\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t';
+ } ;
+__p += '\n\t\t\t\t\t';
  }); ;
 __p += '\n\t\t\t\t</div>\n\t\t\t';
  }); ;
@@ -309,7 +329,7 @@ __p += '\n\t\t\t\t\t<li class="facet-section">\n\t\t\t\t\t\t<a href="#" data-fil
 ((__t = ( facet.section_id )) == null ? '' : __t) +
 '" class="facet">' +
 ((__t = ( facet.section )) == null ? '' : __t) +
-'</a> \n\t\t\t\t\t\t(' +
+'</a>\n\t\t\t\t\t\t(' +
 ((__t = ( facet.count )) == null ? '' : __t) +
 ')\n\t\t\t\t\t</li>\n\t\t\t\t';
  }); ;

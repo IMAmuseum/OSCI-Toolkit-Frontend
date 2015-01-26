@@ -48,7 +48,7 @@ function xmlToJson(xml, namespace) {
         result = {};
         for (var attributeID = 0; attributeID < xml.attributes.length; attributeID++) {
             attribute = xml.attributes.item(attributeID);
-            result[attribute.nodeName.replaceArray(namespace, '').toCamel()] = attribute.nodeValue;
+            result[attribute.nodeName.replaceArray(namespace, '').toCamel()] = attribute.value;
         }
     }
     if (xml.hasChildNodes()) {

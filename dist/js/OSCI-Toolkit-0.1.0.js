@@ -9,79 +9,97 @@ OsciTk.views = {
  * Load xml document
  */
 function loadXMLDoc(url) {
-	xhttp = new XMLHttpRequest();
-	xhttp.overrideMimeType('text/xml');
-	xhttp.open('GET', url, false);
-	xhttp.send();
-	return xhttp.responseXML;
+    var xhttp = new XMLHttpRequest();
+    //IE9 and IE10 doesn't suport .overrideMimeType(), so we need to check for it.
+    if (xhttp.overrideMimeType) {
+        xhttp.overrideMimeType('text/xml');
+    }
+    xhttp.open('GET', url, false);
+    xhttp.send();
+    return xhttp.responseXML;
+}
+
+function loadHTMLDoc(url) {
+    var xhttp = new XMLHttpRequest();
+    if (xhttp.overrideMimeType) {
+        xhttp.overrideMimeType('text/html');
+    }
+    xhttp.open('GET', url, false);
+    xhttp.send();
+
+    var response = xhttp.responseText;
+    response = response.replace('xmlns="http://www.w3.org/1999/xhtml"', '');
+    response = response.replace('xmlns:epub="http://www.idpf.org/2007/ops"', '');
+    return response;
 }
 
 /*
  * Convert xml to JSON
  */
 function xmlToJson(xml, namespace) {
-	var obj = true,
-		i = 0;
-	// retrieve namespaces
-	if(!namespace) {
-		namespace = ['xml:'];
-		for(i = 0; i < xml.documentElement.attributes.length; i++) {
-			if(xml.documentElement.attributes.item(i).nodeName.indexOf('xmlns') != -1) {
-				namespace.push(xml.documentElement.attributes.item(i).nodeName.replace('xmlns:', '') + ':');
-			}
-		}
-	}
+    var obj = true,
+        i = 0;
+    // retrieve namespaces
+    if(!namespace) {
+        namespace = ['xml:'];
+        for(i = 0; i < xml.documentElement.attributes.length; i++) {
+            if(xml.documentElement.attributes.item(i).nodeName.indexOf('xmlns') != -1) {
+                namespace.push(xml.documentElement.attributes.item(i).nodeName.replace('xmlns:', '') + ':');
+            }
+        }
+    }
 
-	var result = true;
-	if (xml.attributes && xml.attributes.length > 0) {
-		var attribute;
-		result = {};
-		for (var attributeID = 0; attributeID < xml.attributes.length; attributeID++) {
-			attribute = xml.attributes.item(attributeID);
-			result[attribute.nodeName.replaceArray(namespace, '').toCamel()] = attribute.nodeValue;
-		}
-	}
-	if (xml.hasChildNodes()) {
-		var key, value, xmlChild;
-		if (result === true) { result = {}; }
-		for (var child = 0; child < xml.childNodes.length; child++) {
-			xmlChild = xml.childNodes.item(child);
-			if ((xmlChild.nodeType & 7) === 1) {
-				key = xmlChild.nodeName.replaceArray(namespace, '').toCamel();
-				value = xmlToJson(xmlChild, namespace);
-				if (result.hasOwnProperty(key)) {
-					if (result[key].constructor !== Array) { result[key] = [result[key]]; }
-					result[key].push(value);
-				} else { result[key] = value; }
-			} else if ((xmlChild.nodeType - 1 | 1) === 3) {
-				key = 'value';
-				value = xmlChild.nodeType === 3 ? xmlChild.nodeValue.replace(/^\s+|\s+$/g, '') : xmlChild.nodeValue;
-				if (result.hasOwnProperty(key)) { result[key] += value; }
-				else if (xmlChild.nodeType === 4 || value !== '') { result[key] = value; }
-			}
-		}
-	}
-	return(result);
+    var result = true;
+    if (xml.attributes && xml.attributes.length > 0) {
+        var attribute;
+        result = {};
+        for (var attributeID = 0; attributeID < xml.attributes.length; attributeID++) {
+            attribute = xml.attributes.item(attributeID);
+            result[attribute.nodeName.replaceArray(namespace, '').toCamel()] = attribute.nodeValue;
+        }
+    }
+    if (xml.hasChildNodes()) {
+        var key, value, xmlChild;
+        if (result === true) { result = {}; }
+        for (var child = 0; child < xml.childNodes.length; child++) {
+            xmlChild = xml.childNodes.item(child);
+            if ((xmlChild.nodeType & 7) === 1) {
+                key = xmlChild.nodeName.replaceArray(namespace, '').toCamel();
+                value = xmlToJson(xmlChild, namespace);
+                if (result.hasOwnProperty(key)) {
+                    if (result[key].constructor !== Array) { result[key] = [result[key]]; }
+                    result[key].push(value);
+                } else { result[key] = value; }
+            } else if ((xmlChild.nodeType - 1 | 1) === 3) {
+                key = 'value';
+                value = xmlChild.nodeType === 3 ? xmlChild.nodeValue.replace(/^\s+|\s+$/g, '') : xmlChild.nodeValue;
+                if (result.hasOwnProperty(key)) { result[key] += value; }
+                else if (xmlChild.nodeType === 4 || value !== '') { result[key] = value; }
+            }
+        }
+    }
+    return(result);
 }
 
 function objectToArray(obj) {
-	if(obj === undefined) return;
-	return Object.prototype.toString.call(obj) !== '[object Array]' ? [obj] : obj;
+    if(obj === undefined) return;
+    return Object.prototype.toString.call(obj) !== '[object Array]' ? [obj] : obj;
 }
 
 String.prototype.replaceArray = function(find, replace) {
-	var replaceString = this;
-	for (var i = 0; i < find.length; i++) {
-		replaceString = replaceString.replace(find[i], replace);
-	}
-	return replaceString;
+    var replaceString = this;
+    for (var i = 0; i < find.length; i++) {
+        replaceString = replaceString.replace(find[i], replace);
+    }
+    return replaceString;
 };
 
 String.prototype.toCamel = function(){
     return this.replace(/\s(.)/g, function($1) { return $1.toUpperCase(); })
-		.replace(/\s/g, '')
-		.replace(/^(.)/, function($1) { return $1.toLowerCase(); });
+        .replace(/\s/g, '')
+        .replace(/^(.)/, function($1) { return $1.toLowerCase(); });
 };
+
 OsciTk.router = Backbone.Router.extend({
 
 	routes: {
@@ -90,9 +108,20 @@ OsciTk.router = Backbone.Router.extend({
 		'section/:section_id/:identifier' : 'routeToSection'
 	},
 
+    initialize: function(options) {
+        this.on('all', this._trackPageView);
+    },
+
 	routeToSection: function(section_id, identifier) {
 		Backbone.trigger('routedToSection', {section_id: section_id, identifier: identifier});
-	}
+	},
+
+    _trackPageView: function() {
+        var url = Backbone.history.getFragment();
+        if (!_.isUndefined(window._gaq)) {
+            _gaq.push(['_trackPageview', "/#" + url])
+        }
+    }
 });
 OsciTk.templateManager = {
 	get : function(templateName) {
@@ -261,40 +290,52 @@ return __p
 
 OsciTk.templates['citation'] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
-__p += '<div class="citations">\n\t<span>Format</span>\n\t<ul class="formats">\n\t\t<li class="active"><a href="#citation-format-chicago">Chicago</a></li>\n\t\t<li><a href="#citation-format-mla">MLA</a></li>\n\t</ul>\n\t<div id="citation-format-chicago" class="citation">\n\t\t' +
-((__t = ( obj.creator )) == null ? '' : __t) +
-', "<em>' +
-((__t = ( obj.title )) == null ? '' : __t) +
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<div class="citation-wrapper">\n\t<h2>Citation</h2>\n\t<div class="citations">\n\t\t<span>Format</span>\n\t\t<ul class="formats">\n\t\t\t<li class="active"><a href="#citation-format-chicago">Chicago</a></li>\n\t\t\t<li><a href="#citation-format-mla">MLA</a></li>\n\t\t</ul>\n\t\t<div id="citation-format-chicago" class="citation">\n\t\t\t';
+ if (creator.length > 0) { ;
+__p += ' ' +
+((__t = ( creator + ", " )) == null ? '' : __t) +
+' ';
+ } ;
+__p += '"<em>' +
+((__t = ( title )) == null ? '' : __t) +
 '</em>," in <em>' +
-((__t = ( obj.publicationTitle )) == null ? '' : __t) +
+((__t = ( publicationTitle )) == null ? '' : __t) +
 '</em>, ed. ' +
-((__t = ( obj.editor )) == null ? '' : __t) +
+((__t = ( editor )) == null ? '' : __t) +
 ' ' +
-((__t = ( obj.publisher )) == null ? '' : __t) +
+((__t = ( publisher )) == null ? '' : __t) +
 ' ' +
-((__t = ( obj.formattedDate )) == null ? '' : __t) +
+((__t = ( formattedDate )) == null ? '' : __t) +
 ', para ' +
-((__t = ( obj.paragraphNumber )) == null ? '' : __t) +
-'.\n\t</div>\n\t<div id="citation-format-mla" style="display: none;" class="citation">\n\t\t' +
-((__t = ( obj.creator )) == null ? '' : __t) +
-', "<em>' +
-((__t = ( obj.title )) == null ? '' : __t) +
+((__t = ( paragraphNumber )) == null ? '' : __t) +
+'.\n\t\t</div>\n\t\t<div id="citation-format-mla" style="display: none;" class="citation">\n\t\t\t';
+ if (creator.length > 0) { ;
+__p += ' ' +
+((__t = ( creator + ", " )) == null ? '' : __t) +
+' ';
+ } ;
+__p += '"<em>' +
+((__t = ( title )) == null ? '' : __t) +
 '</em>," in <span style="text-decoration:underline;">' +
-((__t = ( obj.publicationTitle )) == null ? '' : __t) +
+((__t = ( publicationTitle )) == null ? '' : __t) +
 '</span>, ed. ' +
-((__t = ( obj.editor )) == null ? '' : __t) +
+((__t = ( editor )) == null ? '' : __t) +
 ' (' +
-((__t = ( obj.publisher )) == null ? '' : __t) +
+((__t = ( publisher )) == null ? '' : __t) +
 '), ' +
-((__t = ( obj.formattedDate )) == null ? '' : __t) +
+((__t = ( formattedDate )) == null ? '' : __t) +
 ', ' +
-((__t = ( obj.paragraphNumber )) == null ? '' : __t) +
-'.\n\t</div>\n</div>\n<div class="citation_url">\n\t<span>Citation URL</span>\n\t<input disabled="disabled" value="' +
-((__t = ( obj.url )) == null ? '' : __t) +
-'" />\n</div>\n<div class="reference_text">\n\t<span>Reference Text</span>\n\t<textarea disabled="disabled">' +
-((__t = ( obj.referenceText )) == null ? '' : __t) +
-'</textarea>\n</div>';
+((__t = ( paragraphNumber )) == null ? '' : __t) +
+'.\n\t\t</div>\n\t</div>\n\t<div class="citation_url">\n\t\t<span>Citation URL</span>\n\t\t<input disabled="disabled" value="' +
+((__t = ( url )) == null ? '' : __t) +
+'" />\n\t</div>\n\t<div class="reference_text">\n\t\t<span>Reference Text</span>\n\t\t<textarea disabled="disabled">' +
+((__t = ( referenceText )) == null ? '' : __t) +
+'</textarea>\n\t</div>\n</div>';
+
+}
 return __p
 };
 
@@ -442,12 +483,16 @@ return __p
 
 OsciTk.templates['note-popup'] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
-__p += '<form class="noteForm">\n\t<textarea>' +
-((__t = ( obj.note )) == null ? '' : __t) +
-'</textarea>\n\t<div class="status">Saved</div>\n</form>\n<div class="reference-text">\n\t<span class="reference-text-label">Reference Text</span>\n\t<div class="reference-text-content">' +
-((__t = ( obj.referenceContent )) == null ? '' : __t) +
-'</div>\n</div>';
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<div class="note-popup">\n    <h2>Note</h2>\n    <form class="noteForm">\n    \t<textarea>' +
+((__t = ( note )) == null ? '' : __t) +
+'</textarea>\n        <label for="note-tags">Tags:</label>\n        <input type="text" name="note-tags" id="note-tags" value="' +
+((__t = ( tags.join(', ') )) == null ? '' : __t) +
+'" />\n    </form>\n    <div class="status">Saved</div>\n</div>';
+
+}
 return __p
 };
 
@@ -486,7 +531,7 @@ OsciTk.templates['page'] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
 __p +=
-((__t = ( obj.content )) == null ? '' : __t);
+((__t = ( obj.content.content )) == null ? '' : __t);
 return __p
 };
 
@@ -517,6 +562,8 @@ __p += '\n\t\t\t\t\t<div class="result-title">' +
 ((__t = ( result.get('label') )) == null ? '' : __t) +
 '</div>\n\t\t\t\t\t';
  first = false; } ;
+__p += '\n\t\t\t\t\t';
+ if (!_.isEmpty(result.get('teaser'))) { ;
 __p += '\n\t\t\t\t\t<div class="search-result" data-id="' +
 ((__t = ( result.get('id') )) == null ? '' : __t) +
 '">\n\t\t\t\t\t\t<div class="result-content">\n\t\t\t\t\t\t\t<div class="result-type ' +
@@ -532,6 +579,8 @@ __p += '\n\t\t\t\t\t\t\t' +
 '\n\t\t\t\t\t\t\t';
  } ;
 __p += '\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t';
+ } ;
+__p += '\n\t\t\t\t\t';
  }); ;
 __p += '\n\t\t\t\t</div>\n\t\t\t';
  }); ;
@@ -545,7 +594,7 @@ __p += '\n\t\t\t\t\t<li class="facet-section">\n\t\t\t\t\t\t<a href="#" data-fil
 ((__t = ( facet.section_id )) == null ? '' : __t) +
 '" class="facet">' +
 ((__t = ( facet.section )) == null ? '' : __t) +
-'</a> \n\t\t\t\t\t\t(' +
+'</a>\n\t\t\t\t\t\t(' +
 ((__t = ( facet.count )) == null ? '' : __t) +
 ')\n\t\t\t\t\t</li>\n\t\t\t\t';
  }); ;
@@ -658,7 +707,7 @@ OsciTk.models.Figure = OsciTk.models.BaseModel.extend({
 			caption: null,
 			position: null,
 			columns: null,
-			aspect: 1,
+			aspect: 0,
 			body: null,
 			options: {},
 			plate: false
@@ -667,16 +716,21 @@ OsciTk.models.Figure = OsciTk.models.BaseModel.extend({
 
 	initialize: function() {
 		this.parsePositionData();
+		this.set('content', $.trim(this.get('content')));
 	},
 
 	parsePositionData: function() {
 		var position = this.get('position');
 		var parsedPosition;
 
-		//set a flag for easily identifing the plate figure
-		if (position === "plate") {
+		//set a flag for easily identifing the plate figures
+		if (position === "plate" || position === 'platefull') {
 			this.set('plate', true);
-			position = "p";
+			if (position === "plate") {
+				position = "p";
+			} else if (position === 'platefull') {
+				position = "ff";
+			}
 		}
 
 		if (position.length == 2) {
@@ -747,7 +801,8 @@ OsciTk.models.Note = OsciTk.models.BaseModel.extend({
 			content_id: null,
 			section_id: null,
 			note: null,
-			tags: []
+			tags: [],
+			paragraph_number: null
 		};
 	},
 
@@ -817,63 +872,76 @@ OsciTk.models.Note = OsciTk.models.BaseModel.extend({
 });
 
 OsciTk.models.Package = OsciTk.models.BaseModel.extend({
-	defaults: function() {
-		return {
-			url: null,
-			lang: null,
-			spine: null,
-			manifest: null,
-			metadata: null,
-			id: null,
-			version: null,
-			xmlns: null
-		};
-	},
+    defaults: function() {
+        return {
+            url: null,
+            lang: null,
+            spine: null,
+            manifest: null,
+            metadata: null,
+            id: null,
+            version: null,
+            xmlns: null
+        };
+    },
 
-	initialize: function() {
-		// TODO: ERROR CHECK THE RETURN XML
-		var data = xmlToJson(loadXMLDoc(this.get('url')));
+    initialize: function() {
+        // TODO: ERROR CHECK THE RETURN XML
+        var data = xmlToJson(loadXMLDoc(this.get('url')));
 
-		this.set('lang', data['package'].lang);
-		this.set('spine', data['package'].spine);
-		this.set('manifest', data['package'].manifest);
-		this.set('metadata', data['package'].metadata);
+        this.set('lang', data['package'].lang);
+        this.set('spine', data['package'].spine);
+        this.set('manifest', data['package'].manifest);
+        this.set('metadata', data['package'].metadata);
 
-		//get the publication id
-		var ids = data['package']['metadata']['dc:identifier'];
-		if (!_.isArray(ids)) {
-			ids = [ids];
-		}
-		var numIds = ids.length;
-		for (var i = 0; i < numIds; i++) {
-			var pubId = ids[i];
-			if (pubId.value.indexOf('urn:osci_tk_identifier:') !== false) {
-				this.set('id', pubId.value.substr(23));
-				break;
-			}
-		}
+        //get the publication id
+        var ids = data['package']['metadata']['dc:identifier'];
+        if (!_.isArray(ids)) {
+            ids = [ids];
+        }
+        var numIds = ids.length;
+        for (var i = 0; i < numIds; i++) {
+            var pubId = ids[i];
+            if (pubId.value.indexOf('urn:osci_tk_identifier:') !== false) {
+                this.set('id', pubId.value.substr(23));
+                break;
+            }
+        }
 
-		this.set('version', data['package'].version);
-		this.set('xmlns', data['package'].xmlns);
+        this.set('version', data['package'].version);
+        this.set('xmlns', data['package'].xmlns);
 
-		Backbone.trigger('packageLoaded', this);
-	},
+        Backbone.trigger('packageLoaded', this);
+    },
 
-	sync: function(method, model, options) {
-	},
+    sync: function(method, model, options) {
+    },
 
-	getTitle: function() {
-		var title;
-		var metadata = this.get("metadata");
-		if (metadata['dc:title'] && metadata['dc:title']['value']) {
-			title = metadata['dc:title']['value'];
-		}
+    getTitle: function() {
+        var title;
+        var metadata = this.get("metadata");
+        if (metadata['dc:title'] && metadata['dc:title']['value']) {
+            title = metadata['dc:title']['value'];
+        }
 
-		return title;
-	},
+        return title;
+    },
     getPubId: function() {
         var metadata = this.get("metadata");
-        var vals = metadata['dc:identifier'].value.split(":");
+        var vals;
+
+        if (!_.isUndefined(metadata['dc:identifier'])) {
+            if (_.isArray(metadata['dc:identifier'])) {
+                var pubId = _.find(metadata['dc:identifier'], function(ident) {
+                    return ident.id === "publication-id" ? true : false;
+                });
+                if (pubId) {
+                    vals = pubId.value.split(":");
+                }
+            } else {
+                vals = metadata['dc:identifier'].value.split(":");
+            }
+        }
         return vals[2];
     }
 });
@@ -929,11 +997,17 @@ OsciTk.models.SearchResult = OsciTk.models.BaseModel.extend({
 			case 'url':
 
 				break;
+            case 'teaser':
+                var teaser = this.attributes[attr];
+                var tmp = document.createElement("DIV");
+                tmp.innerHTML = teaser;
+                return tmp.textContent || tmpinnerText || "";
 			default:
 				return this.attributes[attr];
 		}
 	}
 });
+
 OsciTk.models.Section = OsciTk.models.BaseModel.extend({
 	defaults: function() {
 		return {
@@ -947,14 +1021,22 @@ OsciTk.models.Section = OsciTk.models.BaseModel.extend({
 	},
 
 	loadContent: function() {
+
 		var content = null;
 		if (this.get('contentLoaded') === false) {
-			var data = (loadXMLDoc(this.get('uri')));
+			var data = (loadHTMLDoc(this.get('uri')));
 
-			content = $(data);
-			this.set('title', data.title);
+			var addClasses = [];
+			var bodyClasses = /body([^>]*)class=(["']+)([^"']*)(["']+)/gi.exec(data.substring(data.indexOf("<body"), data.indexOf("</body>") + 7));
+			if (_.isArray(bodyClasses) && !_.isUndefined(bodyClasses[3])) {
+				addClasses = bodyClasses[3].split(' ');
+			}
+			content = $('<div />').html(data);
+
+			this.set('title', content.find('title').html());
 			this.set('content', content);
 			this.set('contentLoaded', true);
+			this.set('classes', addClasses);
 		}
 
 		if (content === null) {
@@ -964,15 +1046,18 @@ OsciTk.models.Section = OsciTk.models.BaseModel.extend({
 		// parse out footnotes and figures, make them available via event
 		var footnotes = content.find('section#footnotes');
 		var figures   = content.find('figure');
+
 		Backbone.trigger('footnotesAvailable', footnotes);
 		Backbone.trigger('figuresAvailable', figures);
 		Backbone.trigger('sectionLoaded', this);
+
 	},
 
 	removeAllPages : function() {
 		this.set('pages', new OsciTk.collections.Pages());
 	}
 });
+
 OsciTk.collections.Figures = OsciTk.collections.BaseCollection.extend({
 	model: OsciTk.models.Figure,
 
@@ -1016,19 +1101,27 @@ OsciTk.collections.Figures = OsciTk.collections.BaseCollection.extend({
 				count:      $markup.data('count')
 			};
 
-			// First, check for an explicit thumbnail
-			var thumbnail = $markup.children('img.thumbnail').remove();
-			if (thumbnail.length) {
-				figure.thumbnail_url = thumbnail.attr('src');
-				figure.preview_url = thumbnail.attr('src');
-			} else {
-				// No explicit thumbnail, default to the first image in the figure content
-				var image = $('.figure_content img', markup);
-				if (image.length) {
-					figure.thumbnail_url = image.attr('src');
-					figure.preview_url = image.attr('src');
+			// First, check for a preview uri in the figure options
+			if (figure.options.previewUri) {
+				figure.thumbnail_url = figure.options.previewUri;
+				figure.preview_url = figure.options.previewUri;
+			}
+			else {
+				// Second, check for an explicit thumbnail
+				var thumbnail = $markup.children('img.thumbnail').remove();
+				if (thumbnail.length) {
+					figure.thumbnail_url = thumbnail.attr('src');
+					figure.preview_url = thumbnail.attr('src');
 				}
-				// TODO: Default to the figure type default? Also via css?
+				else {
+					// No explicit thumbnail, default to the first image in the figure content
+					var image = $('.figure_content img', markup);
+					if (image.length) {
+						figure.thumbnail_url = image.attr('src');
+						figure.preview_url = image.attr('src');
+					}
+					// TODO: Default to the figure type default? Also via css?
+				}
 			}
 
 			// add the figure to the array for adding to the collection
@@ -1052,19 +1145,25 @@ OsciTk.collections.Footnotes = OsciTk.collections.BaseCollection.extend({
 
 	populateFromMarkup: function(data) {
 		this.reset();
-		_.each($('aside', data), function(markup) {
-			var idComponents = markup.id.match(/\w+-(\d+)-(\d+)/);
-			var footnote = {
-				id:         markup.id,
-				rawData:    markup,
-				body:       markup.innerHTML,
+		var raw = data.find('aside');
+		var rawLen = raw.length;
+		var parsed = [];
+		for (var i = 0; i < rawLen; i++) {
+			var fn = raw[i];
+			var idComponents = fn.id.match(/\w+-(\d+)-(\d+)/);
+			parsed.push({
+				id:         fn.id,
+				rawData:    fn,
+				body:       fn.innerHTML,
 				section_id: idComponents[1],
-				delta:      idComponents[2]
-			};
-			this.add(footnote);
-		}, this);
+				delta:      idComponents[2],
+                index:      fn.getAttribute('data-footnote_index')
+			});
+		}
+		this.reset(parsed);
 	}
 });
+
 OsciTk.collections.GlossaryTerms = OsciTk.collections.BaseCollection.extend({
 	model: OsciTk.models.GlossaryTerm,
 	initialize: function() {
@@ -1078,7 +1177,10 @@ OsciTk.collections.GlossaryTerms = OsciTk.collections.BaseCollection.extend({
 
 		if (doc) {
 			// retrieve glossary doc
-			var data =loadXMLDoc(doc.href);
+			var data = loadXMLDoc(doc.href);
+			if (data === null) {
+				return;
+			}
 			var dds = $(data).find('dd');
 			var dts = $(data).find('dt');
 			if (dds.length > 0 && dts.length > 0) {
@@ -1086,7 +1188,7 @@ OsciTk.collections.GlossaryTerms = OsciTk.collections.BaseCollection.extend({
 					var item = {
 						id: $(dts[i]).attr('data-tid'),
 						term: $(dts[i]).find('dfn:first').html(),
-						definition: $(dds[i]).html()
+						definition: this.html_entity_decode($(dds[i]).html())
 					};
 					this.add(item);
 				}
@@ -1100,10 +1202,211 @@ OsciTk.collections.GlossaryTerms = OsciTk.collections.BaseCollection.extend({
 			return item.get('term').search(regExp) !== -1;
 		});
 	},
-	comparator: function(item) {
-		return item.get('term');
+	get_html_translation_table: function(table, quote_style) {
+		// http://kevin.vanzonneveld.net
+		// +   original by: Philip Peterson
+		// +    revised by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+		// +   bugfixed by: noname
+		// +   bugfixed by: Alex
+		// +   bugfixed by: Marco
+		// +   bugfixed by: madipta
+		// +   improved by: KELAN
+		// +   improved by: Brett Zamir (http://brett-zamir.me)
+		// +   bugfixed by: Brett Zamir (http://brett-zamir.me)
+		// +      input by: Frank Forte
+		// +   bugfixed by: T.Wild
+		// +      input by: Ratheous
+		// %          note: It has been decided that we're not going to add global
+		// %          note: dependencies to php.js, meaning the constants are not
+		// %          note: real constants, but strings instead. Integers are also supported if someone
+		// %          note: chooses to create the constants themselves.
+		// *     example 1: get_html_translation_table('HTML_SPECIALCHARS');
+		// *     returns 1: {'"': '&quot;', '&': '&amp;', '<': '&lt;', '>': '&gt;'}
+		var entities = {},
+			hash_map = {},
+			decimal;
+		var constMappingTable = {},
+			constMappingQuoteStyle = {};
+		var useTable = {},
+			useQuoteStyle = {};
+
+		// Translate arguments
+		constMappingTable[0] = 'HTML_SPECIALCHARS';
+		constMappingTable[1] = 'HTML_ENTITIES';
+		constMappingQuoteStyle[0] = 'ENT_NOQUOTES';
+		constMappingQuoteStyle[2] = 'ENT_COMPAT';
+		constMappingQuoteStyle[3] = 'ENT_QUOTES';
+
+		useTable = !isNaN(table) ? constMappingTable[table] : table ? table.toUpperCase() : 'HTML_SPECIALCHARS';
+		useQuoteStyle = !isNaN(quote_style) ? constMappingQuoteStyle[quote_style] : quote_style ? quote_style.toUpperCase() : 'ENT_COMPAT';
+
+		if (useTable !== 'HTML_SPECIALCHARS' && useTable !== 'HTML_ENTITIES') {
+			throw new Error("Table: " + useTable + ' not supported');
+			// return false;
+		}
+
+		entities['38'] = '&amp;';
+		if (useTable === 'HTML_ENTITIES') {
+			entities['160'] = '&nbsp;';
+			entities['161'] = '&iexcl;';
+			entities['162'] = '&cent;';
+			entities['163'] = '&pound;';
+			entities['164'] = '&curren;';
+			entities['165'] = '&yen;';
+			entities['166'] = '&brvbar;';
+			entities['167'] = '&sect;';
+			entities['168'] = '&uml;';
+			entities['169'] = '&copy;';
+			entities['170'] = '&ordf;';
+			entities['171'] = '&laquo;';
+			entities['172'] = '&not;';
+			entities['173'] = '&shy;';
+			entities['174'] = '&reg;';
+			entities['175'] = '&macr;';
+			entities['176'] = '&deg;';
+			entities['177'] = '&plusmn;';
+			entities['178'] = '&sup2;';
+			entities['179'] = '&sup3;';
+			entities['180'] = '&acute;';
+			entities['181'] = '&micro;';
+			entities['182'] = '&para;';
+			entities['183'] = '&middot;';
+			entities['184'] = '&cedil;';
+			entities['185'] = '&sup1;';
+			entities['186'] = '&ordm;';
+			entities['187'] = '&raquo;';
+			entities['188'] = '&frac14;';
+			entities['189'] = '&frac12;';
+			entities['190'] = '&frac34;';
+			entities['191'] = '&iquest;';
+			entities['192'] = '&Agrave;';
+			entities['193'] = '&Aacute;';
+			entities['194'] = '&Acirc;';
+			entities['195'] = '&Atilde;';
+			entities['196'] = '&Auml;';
+			entities['197'] = '&Aring;';
+			entities['198'] = '&AElig;';
+			entities['199'] = '&Ccedil;';
+			entities['200'] = '&Egrave;';
+			entities['201'] = '&Eacute;';
+			entities['202'] = '&Ecirc;';
+			entities['203'] = '&Euml;';
+			entities['204'] = '&Igrave;';
+			entities['205'] = '&Iacute;';
+			entities['206'] = '&Icirc;';
+			entities['207'] = '&Iuml;';
+			entities['208'] = '&ETH;';
+			entities['209'] = '&Ntilde;';
+			entities['210'] = '&Ograve;';
+			entities['211'] = '&Oacute;';
+			entities['212'] = '&Ocirc;';
+			entities['213'] = '&Otilde;';
+			entities['214'] = '&Ouml;';
+			entities['215'] = '&times;';
+			entities['216'] = '&Oslash;';
+			entities['217'] = '&Ugrave;';
+			entities['218'] = '&Uacute;';
+			entities['219'] = '&Ucirc;';
+			entities['220'] = '&Uuml;';
+			entities['221'] = '&Yacute;';
+			entities['222'] = '&THORN;';
+			entities['223'] = '&szlig;';
+			entities['224'] = '&agrave;';
+			entities['225'] = '&aacute;';
+			entities['226'] = '&acirc;';
+			entities['227'] = '&atilde;';
+			entities['228'] = '&auml;';
+			entities['229'] = '&aring;';
+			entities['230'] = '&aelig;';
+			entities['231'] = '&ccedil;';
+			entities['232'] = '&egrave;';
+			entities['233'] = '&eacute;';
+			entities['234'] = '&ecirc;';
+			entities['235'] = '&euml;';
+			entities['236'] = '&igrave;';
+			entities['237'] = '&iacute;';
+			entities['238'] = '&icirc;';
+			entities['239'] = '&iuml;';
+			entities['240'] = '&eth;';
+			entities['241'] = '&ntilde;';
+			entities['242'] = '&ograve;';
+			entities['243'] = '&oacute;';
+			entities['244'] = '&ocirc;';
+			entities['245'] = '&otilde;';
+			entities['246'] = '&ouml;';
+			entities['247'] = '&divide;';
+			entities['248'] = '&oslash;';
+			entities['249'] = '&ugrave;';
+			entities['250'] = '&uacute;';
+			entities['251'] = '&ucirc;';
+			entities['252'] = '&uuml;';
+			entities['253'] = '&yacute;';
+			entities['254'] = '&thorn;';
+			entities['255'] = '&yuml;';
+		}
+
+		if (useQuoteStyle !== 'ENT_NOQUOTES') {
+			entities['34'] = '&quot;';
+		}
+		if (useQuoteStyle === 'ENT_QUOTES') {
+			entities['39'] = '&#39;';
+		}
+		entities['60'] = '&lt;';
+		entities['62'] = '&gt;';
+
+
+		// ascii decimals to real symbols
+		for (decimal in entities) {
+			if (entities.hasOwnProperty(decimal)) {
+				hash_map[String.fromCharCode(decimal)] = entities[decimal];
+			}
+		}
+
+		return hash_map;
+	},
+	html_entity_decode: function (string, quote_style) {
+		// http://kevin.vanzonneveld.net
+		// +   original by: john (http://www.jd-tech.net)
+		// +      input by: ger
+		// +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+		// +    revised by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+		// +   bugfixed by: Onno Marsman
+		// +   improved by: marc andreu
+		// +    revised by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+		// +      input by: Ratheous
+		// +   bugfixed by: Brett Zamir (http://brett-zamir.me)
+		// +      input by: Nick Kolosov (http://sammy.ru)
+		// +   bugfixed by: Fox
+		// -    depends on: get_html_translation_table
+		// *     example 1: html_entity_decode('Kevin &amp; van Zonneveld');
+		// *     returns 1: 'Kevin & van Zonneveld'
+		// *     example 2: html_entity_decode('&amp;lt;');
+		// *     returns 2: '&lt;'
+		var hash_map = {},
+			symbol = '',
+			tmp_str = '',
+			entity = '';
+		tmp_str = string.toString();
+
+		if (false === (hash_map = this.get_html_translation_table('HTML_ENTITIES', quote_style))) {
+			return false;
+		}
+
+		// fix &amp; problem
+		// http://phpjs.org/functions/get_html_translation_table:416#comment_97660
+		delete(hash_map['&']);
+		hash_map['&'] = '&amp;';
+
+		for (symbol in hash_map) {
+			entity = hash_map[symbol];
+			tmp_str = tmp_str.split(entity).join(symbol);
+		}
+		tmp_str = tmp_str.split('&#039;').join("'");
+
+		return tmp_str;
 	}
 });
+
 OsciTk.collections.NavigationItems = OsciTk.collections.BaseCollection.extend({
 	model: OsciTk.models.NavigationItem,
 	currentNavigationItem: null,
@@ -1187,7 +1490,7 @@ OsciTk.collections.Notes = OsciTk.collections.BaseCollection.extend({
 		this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
 			//TODO: Refactor once Gray cleans up the NavigationItemModel
 			if (navItem.id) {
-				app.collections.notes.getNotesForSection(navItem.id);
+				this.getNotesForSection(navItem.id);
 			}
 		});
 	},
@@ -1207,7 +1510,7 @@ OsciTk.collections.Notes = OsciTk.collections.BaseCollection.extend({
 	getNotesForSection: function(sectionId) {
 		// make an api call to get the notes for the current user and section
 		$.ajax({
-			url: app.config.get('endpoints').OsciTkNotes,
+			url: app.config.get('endpoints').OsciTkNote,
 			data: {section_id: sectionId},
 			type: 'GET',
 			dataType: 'json',
@@ -1278,394 +1581,479 @@ OsciTk.views.Page = OsciTk.views.BaseView.extend({
 	}
 });
 OsciTk.views.Section = OsciTk.views.BaseView.extend({
-	id: 'section',
-	initialize: function(options) {
-		this.options = options ? options : {};
+    id: 'section',
+    initialize: function(options) {
+        this.options = options ? options : {};
 
-		_.defaults(this.options, {
-			pageView : 'Page'
-		});
+        _.defaults(this.options, {
+            pageView : 'Page'
+        });
 
-		// bind sectionChanged
-		this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
-			if (navItem) {
-				// loading section content
-				app.models.section = new OsciTk.models.Section({
-					uri : navItem.get('uri'),
-					id : navItem.get('id')
-				});
+        // bind sectionChanged
+        this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
+            var that = this;
+            $('body').append('<div id="loader">Loading...</div>');
 
-				app.models.section.loadContent();
-				this.changeModel(app.models.section);
-				this.render();
-			}
-		});
+            $('#loader').fadeTo(500, 0.7, function() {
 
-	},
-	render: function() {
-		//Allow subclasses to do something before we render
-		if (this.preRender) {
-			this.preRender();
-		}
-		//clean up the view incase we have already rendered this before
-		this.model.removeAllPages();
-		this.removeAllChildViews();
+                if (navItem) {
+                    // loading section content
+                    app.models.section = new OsciTk.models.Section({
+                        uri : navItem.get('uri'),
+                        id : navItem.get('id')
+                    });
 
-		Backbone.trigger("layoutStart");
-		this.renderContent();
-		Backbone.trigger("layoutComplete", {numPages : this.model.get('pages').length});
-		return this;
-	},
-	onClose: function() {
-		this.model.removeAllPages();
-	},
-	getPageForParagraphId: function(pid) {
-		var views = this.getChildViews();
-		var p = _.find(views, function(view) {
-			return view.$el.find("[data-paragraph_identifier='" + pid + "']").length !== 0;
-		});
-		if ((p !== undefined) && (p !== -1)) {
-			return _.indexOf(views, p) + 1;
-		}
-		return null;
-	},
-	getPageNumberForSelector: function(element) {
-		var page = $(element).parents(".page");
-		if (page) {
-			return page.data("page_num");
-		}
+                    app.models.section.loadContent();
+                    that.changeModel(app.models.section);
+                    that.render();
+                }
 
-		return null;
-	},
-	getPageNumberForElementId : function(id) {
-		var views = this.getChildViews();
-		var p = _.find(views, function(view) { return view.containsElementId(id); });
-		if ((p !== undefined) && (p !== -1)) {
-			return _.indexOf(views, p) + 1;
-		}
-		return null;
-	},
-	isElementVisible: function(element) {
-		return true;
-	},
-	getPageForProcessing : function(id, newTarget) {
-		var page;
+                $('#loader').remove();
+            });
+        });
 
-		if (id !== undefined) {
-			page = this.getChildViewById(id);
-		} else {
-			page = _.filter(this.getChildViews(), function(page){
-				return page.isPageComplete() === false;
-			});
+    },
+    render: function() {
+        //Allow subclasses to do something before we render
+        if (this.preRender) {
+            this.preRender();
+        }
+        //clean up the view incase we have already rendered this before
+        this.model.removeAllPages();
+        this.removeAllChildViews();
 
-			if (page.length === 0) {
-				var pagesCollection = this.model.get('pages');
-				pagesCollection.add({
-					pageNumber: this.model.get('pages').length + 1
-				});
+        Backbone.trigger("layoutStart");
+        this.renderContent();
+        Backbone.trigger("layoutComplete", {numPages : this.model.get('pages').length});
+        return this;
+    },
+    onClose: function() {
+        this.model.removeAllPages();
+    },
+    getPageForParagraphId: function(pid) {
+        var views = this.getChildViews();
+        var p = _.find(views, function(view) {
+            return view.$el.find("[data-paragraph_identifier='" + pid + "']").length !== 0;
+        });
+        if ((p !== undefined) && (p !== -1)) {
+            return _.indexOf(views, p) + 1;
+        }
+        return null;
+    },
+    getPageNumberForSelector: function(element) {
+        var page = $(element).parents(".page");
+        if (page) {
+            return page.data("page_num");
+        }
 
-				page = new OsciTk.views[this.options.pageView]({
-					model : pagesCollection.last(),
-					pageNumber : this.model.get('pages').length
-				});
-				this.addView(page, newTarget);
-			} else {
-				page = page.pop();
-			}
-		}
+        return null;
+    },
+    getPageNumberForElementId : function(id) {
+        var views = this.getChildViews();
+        var p = _.find(views, function(view) { return view.containsElementId(id); });
+        if ((p !== undefined) && (p !== -1)) {
+            return _.indexOf(views, p) + 1;
+        }
+        return null;
+    },
+    isElementVisible: function(element) {
+        return true;
+    },
+    getPageForProcessing : function(id, newTarget) {
+        var page;
 
-		return page;
-	},
-	getCurrentPageView: function() {
-		// TODO: so the only possible child view of a section is a page???
-		return this.getChildViewByIndex(app.views.navigationView.page - 1);
-	},
-	renderContent: function() {
-		//basic layout just loads the content into a single page with scrolling
-		var pageView = this.getPageForProcessing();
+        if (id !== undefined) {
+            page = this.getChildViewById(id);
+        } else {
+            page = _.filter(this.getChildViews(), function(page){
+                return page.isPageComplete() === false;
+            });
 
-		//add the content to the view/model
-		pageView.addContent(this.model.get('content').find('body').html());
+            if (page.length === 0) {
+                var pagesCollection = this.model.get('pages');
+                pagesCollection.add({
+                    pageNumber: this.model.get('pages').length + 1
+                });
 
-		//render the view
-		pageView.render();
+                page = new OsciTk.views[this.options.pageView]({
+                    model : pagesCollection.last(),
+                    pageNumber : this.model.get('pages').length
+                });
+                this.addView(page, newTarget);
+            } else {
+                page = page.pop();
+            }
+        }
 
-		//mark processing complete (not necessary, but here for example)
-		pageView.processingComplete();
-	}
+        return page;
+    },
+    getCurrentPageView: function() {
+        // TODO: so the only possible child view of a section is a page???
+        return this.getChildViewByIndex(app.views.navigationView.page - 1);
+    },
+    renderContent: function() {
+        //basic layout just loads the content into a single page with scrolling
+        var pageView = this.getPageForProcessing();
+
+        //add the content to the view/model
+        pageView.addContent(this.model.get('content').html());
+
+        //render the view
+        pageView.render();
+
+        //mark processing complete (not necessary, but here for example)
+        pageView.processingComplete();
+    }
 });
+
 //Add this view to the figure type registry
 OsciTk.views.figureTypeRegistry["default"] = "MultiColumnFigure";
 
 OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
-	tagName: 'figure',
-	template: OsciTk.templateManager.get('multi-column-figure'),
-	initialize: function(options) {
-		this.options = options;
-		//set some defaults
-		this.layoutComplete = false;
-		this.contentRendered = false;
-		this.sizeCalculated = false;
-		this.calculatedHeight = 0;
-		this.calculatedWidth = 0;
-		this.position = {x:[0,0], y:[0,0]};
+    tagName: 'figure',
+    template: OsciTk.templateManager.get('multi-column-figure'),
+    initialize: function(options) {
+        this.options = options;
+        //set some defaults
+        this.layoutComplete = false;
+        this.contentRendered = false;
+        this.sizeCalculated = false;
+        this.calculatedHeight = 0;
+        this.calculatedWidth = 0;
+        this.position = {x:[0,0], y:[0,0]};
 
-		this.$el.attr("id", this.model.get("id"));
-		this.$el.addClass(this.model.get("type"));
+        this.$el.attr("id", this.model.get("id"));
+        this.$el.addClass(this.model.get("type"));
 
-		this.listenTo(Backbone, 'pageChanged', this.toggleVisibility);
-	},
-	events: {
-		"click .figure_content" : "fullscreen"
-	},
-	toggleVisibility: function(data) {
-		if (this.parent.options.pageNumber === data.page) {
-			if (!this.contentRendered) {
-				this.renderContent();
+        this.listenTo(Backbone, 'pageChanged', this.toggleVisibility);
+    },
+    events: {
+        "click .figure_content" : "fullscreen"
+    },
+    toggleVisibility: function(data) {
+        if (this.parent.options.pageNumber === data.page) {
+            if (!this.contentRendered) {
+                this.renderContent();
+            }
+            //display figures except for ones with display set to none
+			var modelData = this.model.toJSON();
+			if (modelData.position.vertical !== "n") {
+				this.$el.css("visibility", "visible");
 			}
+        } else {
+            this.$el.css("visibility", "hidden");
+        }
+    },
+    render: function() {
+        //template the element
+        this.$el.html(this.template(this.model.toJSON()));
 
-			this.$el.css("visibility", "visible");
-		} else {
-			this.$el.css("visibility", "hidden");
-		}
-	},
-	render: function() {
-		//template the element
-		this.$el.html(this.template(this.model.toJSON()));
+        //calculate the size based on layout hints
+        this.sizeElement();
 
-		//calculate the size based on layout hints
-		this.sizeElement();
+        //position the element on the page
+        var isPositioned = this.positionElement();
 
-		//position the element on the page
-		var isPositioned = this.positionElement();
+        if (isPositioned) {
+            this.layoutComplete = true;
+        }
 
-		if (isPositioned) {
-			this.layoutComplete = true;
-		}
+        return this;
+    },
+    renderContent: function() {
+        this.$el.find(".figure_content").html(this.model.get('content'));
 
-		return this;
-	},
-	renderContent: function() {
-		this.$el.find(".figure_content").html(this.model.get('content'));
+        this.contentRendered = true;
+    },
+    fullscreen: function() {
+        $.fancybox.open({
+            content: this.model.get('content')
+        });
+    },
+    positionElement: function() {
+        var modelData = this.model.toJSON();
+        var dimensions = this.options.sectionDimensions;
 
-		this.contentRendered = true;
-	},
-	fullscreen: function() {
-		$.fancybox.open({
-			content: this.model.get('content')
-		});
-	},
-	positionElement: function() {
-		var modelData = this.model.toJSON();
-		var dimensions = this.options.sectionDimensions;
+        //if element shouold not be visible on the page, hide it and return
+        if (modelData.position.vertical === "n") {
+          	this.$el.css("visibility", "hidden");
+            return true;
+        }
 
-		//if element shouold not be visible on the page, hide it and return
-		if (modelData.position.vertical === "n") {
-			this.$el.hide();
-			return true;
-		}
+        var column;
+        var currentColumn = this.parent.getCurrentColumn();
+        if (currentColumn === null) {
+            currentColumn = this.parent.processingData.columns[this.parent.processingData.currentColumn];
+        }
+        //Detemine the start column based on the layout hint
+        switch (modelData.position.horizontal) {
+            //right
+            case 'r':
+                column = dimensions.columnsPerPage - 1;
+                break;
+            //left
+            case 'l':
+			// regular plate image
+            case 'p':
+			// full page plate
+			case 'f':
+                column = 0;
+                break;
+            //In the current column
+            //case 'i':
+            default:
+                //load the current column to make sure we get the correct one
+                column = currentColumn.pageColumnNum;
+        }
 
-		var column;
-		//Detemine the start column based on the layout hint
-		switch (modelData.position.horizontal) {
-			//right
-			case 'r':
-				column = dimensions.columnsPerPage - 1;
-				break;
-			//left & fullpage
-			case 'l':
-			case 'p':
-				column = 0;
-				break;
-			//In the current column
-			default:
-				column = this.parent.processingData.currentColumn;
-		}
+        var positioned = false;
+        var numColumns = this.model.get('calculatedColumns');
+        var offsetLeft = 0;
+        var offsetTop = 0;
+        var maxPositionAttemps = Math.ceil(dimensions.columnsPerPage / numColumns);
+        if (modelData.position.horizontal === 'i') {
+            maxPositionAttemps = this.parent.processingData.columns.length;
+        }
+        var positionAttempt = 0;
+        var pageFigures = this.parent.getChildViewsByType('figure');
+        var numPageFigures = pageFigures.length;
 
-		var positioned = false;
-		var numColumns = this.model.get('calculatedColumns');
-		var offsetLeft = 0;
-		var offsetTop = 0;
-		var maxPositionAttemps = numColumns;
-		var positionAttempt = 0;
+        //Detemine the left offset start column and width of the figure
+        if ((column + numColumns) > dimensions.columnsPerPage) {
+            column -= (column + numColumns) - dimensions.columnsPerPage;
+        }
 
-		whilePositioned:
-		while (!positioned && positionAttempt <= maxPositionAttemps) {
-			positionAttempt++;
+        whilePositioned:
+        while (!positioned && positionAttempt <= maxPositionAttemps) {
+            positionAttempt++;
 
-			//Detemine the left offset start column and width of the figure
-			if ((column + numColumns) > dimensions.columnsPerPage) {
-				column -= (column + numColumns) - dimensions.columnsPerPage;
-			}
+            //If the figure is not as wide as the available space, center it
+            var availableWidth = 0;
+			// full page plate
+            if (modelData.position.horizontal === "f" || dimensions.columnsPerPage === 1) {
+                availableWidth = dimensions.outerSectionWidth;
+            } else {
+                availableWidth = (dimensions.columnWidth * numColumns) + ((numColumns + 1) * dimensions.gutterWidth);
+            }
+			
+            var addLeftPadding = 0;
+            if (this.calculatedWidth < availableWidth && availableWidth <= dimensions.outerSectionWidth) {
+                addLeftPadding = Math.floor((availableWidth - this.calculatedWidth) / 2);
+            }
 
-			//If the figure is not as wide as the available space, center it
-			var availableWidth = 0;
-			if (modelData.position.horizontal === "p") {
-				availableWidth = (dimensions.columnWidth * numColumns) + (numColumns * dimensions.gutterWidth);
-			} else {
-				availableWidth = (dimensions.columnWidth * numColumns) + ((numColumns + 1) * dimensions.gutterWidth);
-			}
+            var gutters = currentColumn.pageColumnNum;
+            offsetLeft = (currentColumn.pageColumnNum * dimensions.columnWidth) + (gutters * dimensions.gutterWidth) + addLeftPadding;
 
-			var addLeftPadding = 0;
-			if (this.calculatedWidth < availableWidth && availableWidth <= dimensions.innerSectionWidth) {
-				addLeftPadding = Math.floor((availableWidth - this.calculatedWidth) / 2);
-			}
-
-			offsetLeft = (column * dimensions.columnWidth) + (column * dimensions.gutterWidth) + addLeftPadding;
-			this.$el.css("left", offsetLeft + "px");
-
-			//Determine the top offset based on the layout hint
-			switch (modelData.position.vertical) {
-				//top & fullpage
-				case 't':
-				case 'p':
-					offsetTop = 0;
+            //Determine the top offset based on the layout hint
+            switch (modelData.position.vertical) {
+                //top & regular plate image
+                case 't':
+                case 'p':
+                    offsetTop = 0;
+                    break;
+				// full page plate
+				case 'f':
+					offsetTop =  (dimensions.innerSectionHeight - this.calculatedHeight) / 2;	
 					break;
-				//bottom
-				case 'b':
-					offsetTop = dimensions.innerSectionHeight - this.calculatedHeight;
-					break;
-			}
-			this.$el.css("top", offsetTop + "px");
+                //bottom
+                case 'b':
+                    offsetTop = dimensions.innerSectionHeight - this.calculatedHeight;
+                    break;
+                //case inline
+                case 'i':
+                    offsetTop = currentColumn.position.top + currentColumn.height - currentColumn.heightRemain;
+                    //add figure gutter if not at top of a column
+                    if (currentColumn.height - currentColumn.heightRemain > 0) {
+                        offsetTop += dimensions.figureContentGutter;
+                    }
+                    break;
+            }
 
-			var figureX = [offsetLeft, offsetLeft + this.calculatedWidth];
-			var figureY = [offsetTop, offsetTop + this.calculatedHeight];
-			this.position = {
-				x : figureX,
-				y : figureY
-			};
+            //set the offsets
+            this.$el.css({
+                'top': offsetTop + 'px',
+                'left': offsetLeft + 'px'
+            });
 
-			positioned = true;
+            var figureX = [offsetLeft, offsetLeft + this.calculatedWidth];
+            var figureY = [offsetTop, offsetTop + this.calculatedHeight];
+            this.position = {
+                x : figureX,
+                y : figureY
+            };
 
-			if (offsetLeft < 0 || figureX[1] > dimensions.innerSectionWidth) {
-				positioned = false;
-			}
+            positioned = true;
 
-			//check if current placement overlaps any other figures
-			var pageFigures = this.parent.getChildViewsByType('figure');
-			var numPageFigures = pageFigures.length;
-			if (positioned && numPageFigures && numPageFigures > 1) {
-				for (i = 0; i < numPageFigures; i++) {
-					if (pageFigures[i].cid === this.cid) {
-						continue;
-					}
+            if (offsetLeft < 0 || figureX[1] > dimensions.innerSectionWidth || figureY[1] > dimensions.innerSectionHeight) {
+                positioned = false;
+            }
 
-					var elemX = pageFigures[i].position.x;
-					var elemY = pageFigures[i].position.y;
+            //check if current placement overlaps any other figures
+            if (positioned && numPageFigures && numPageFigures > 1) {
+                for (i = 0; i < numPageFigures; i++) {
+                    if (pageFigures[i].cid === this.cid) {
+                        continue;
+                    }
 
-					if (figureX[0] < elemX[1] && figureX[1] > elemX[0] &&
-						figureY[0] < elemY[1] && figureY[1] > elemY[0]
-					) {
-						positioned = false;
-						break;
-					}
-				}
-			}
+                    var elemX = pageFigures[i].position.x;
+                    var elemY = pageFigures[i].position.y;
 
-			if (!positioned) {
-				//adjust the start column to see if the figure can be positioned on the page
-				switch (modelData.position.horizontal) {
-					//right
-					case 'r':
-						column--;
-						if (column < 0) {
-							break whilePositioned;
-						}
-						break;
-					//left & fullpage
-					case 'l':
-					case 'p':
-						column++;
-						if (column >= dimensions.columnsPerPage) {
-							break whilePositioned;
-						}
-						break;
-					//no horizontal position
-					default:
-						column++;
-						if (column > dimensions.columnsPerPage) {
-							column = 0;
-						}
-				}
-			}
-		}
+                    if (figureX[0] < elemX[1] && figureX[1] > elemX[0] &&
+                        figureY[0] < elemY[1] && figureY[1] > elemY[0]
+                    ) {
+                        positioned = false;
+                        break;
+                    }
+                }
+            }
 
-		return positioned;
-	},
-	sizeElement: function() {
-		var width, height;
-		var dimensions = this.options.sectionDimensions;
-		var modelData = this.model.toJSON();
+            if (!positioned) {
+                var columnAttempts = 0;
+                do {
+                    //adjust the start column to see if the figure can be positioned on the page
+                    switch (modelData.position.horizontal) {
+                        //right
+                        case 'r':
+                            column--;
+                            if (column < 0) {
+                                break whilePositioned;
+                            }
+                            break;
+                        //left & fullpage
+                        case 'l':
+                        case 'p':
+						case 'f':
+                            column++;
+                            if (column >= dimensions.columnsPerPage) {
+                                break whilePositioned;
+                            }
+                            break;
+                        //no horizontal position
+                        default:
+                            column++;
+                            if (column >= dimensions.columnsPerPage) {
+                                column = 0;
+                            }
+                    }
 
-		//Only process size data if figure will be displayed
-		if (modelData.position === "n") {
-			this.calculatedHeight = this.$el.height();
-			this.calculatedWidth = this.$el.width();
-			return this;
-		}
+                    //update the currentColumn
+                    if (modelData.position.horizontal === 'i') {
+                        currentColumn = this.parent.processingData.columns[column];
+                    } else {
+                        if ((column + numColumns) > dimensions.columnsPerPage) {
+                            column -= (column + numColumns) - dimensions.columnsPerPage;
+                        }
+                        currentColumn = _.find(this.parent.processingData.columns, function(col) {
+                            return col.pageColumnNum === column;
+                        });
+                    }
+                    //dont let this get caught in a loop
+                    columnAttempts++;
+                } while (_.isUndefined(currentColumn) && columnAttempts < numColumns);
 
-		//If a percentage based width hint is specified, convert to number of columns to cover
-		if (typeof(modelData.columns) === 'string' && modelData.columns.indexOf("%") > 0) {
-			modelData.columns = Math.ceil((parseInt(modelData.columns, 10) / 100) * dimensions.columnsPerPage);
-		}
+                if (_.isUndefined(currentColumn)) {
+                    break whilePositioned;
+                }
+            }
+        }
 
-		//for plate images set width to full page
-		if (modelData.position.horizontal === 'p') {
-			modelData.columns = dimensions.columnsPerPage;
-		}
+        if (maxPositionAttemps === positionAttempt && dimensions.columnsPerPage === 1) {
+            positioned = true;
+        }
 
-		//Calculate maximum width for a figure
-		if (modelData.columns > dimensions.columnsPerPage || modelData.position === 'p') {
-			width = dimensions.innerSectionWidth;
-			modelData.columns = dimensions.columnsPerPage;
-		} else {
-			width = (modelData.columns * dimensions.columnWidth) + (dimensions.gutterWidth * (modelData.columns - 1));
-		}
-		width = Math.floor(width);
-		this.$el.css("width", width + "px");
+        return positioned;
+    },
+    sizeElement: function() {
+        var width, height;
+        var dimensions = this.options.sectionDimensions;
+        var modelData = this.model.toJSON();
 
-		//Get the height of the caption
-		var captionHeight = this.$el.find("figcaption").outerHeight(true);
+        //Only process size data if figure will be displayed
+        if (modelData.position === "n") {
+            this.calculatedHeight = this.$el.height();
+            this.calculatedWidth = this.$el.width();
+            return this;
+        }
 
-		//Calculate height of figure plus the caption
-		height = (width / modelData.aspect) + captionHeight;
+        var aspect = modelData.aspect;
+        if (!_.isUndefined(modelData.options.aspect) && modelData.options.aspect > 0) {
+            aspect = modelData.options.aspect;
+        }
 
-		//If the height of the figure is greater than the page height, scale it down
-		if (height > dimensions.innerSectionHeight) {
-			height = dimensions.innerSectionHeight;
+        //If a percentage based width hint is specified, convert to number of columns to cover
+        if (typeof(modelData.columns) === 'string' && modelData.columns.indexOf("%") > 0) {
+            modelData.columns = Math.ceil((parseInt(modelData.columns, 10) / 100) * dimensions.columnsPerPage);
+        }
 
-			//set new width and the new column coverage number
-			width = (height - captionHeight) * modelData.aspect;
-			this.$el.css("width", width + "px");
+        //for plate images set width to full page
+        if (modelData.position.horizontal === 'p' || modelData.position.horizontal === 'f') {
+            modelData.columns = dimensions.columnsPerPage;
+        }
 
-			//update caption height at new width
-			captionHeight = this.$el.find("figcaption").outerHeight(true);
+        //If there is a max width for figures make sure it is applied
+        if (dimensions.maxFigureWidth > 0 && modelData.columns > dimensions.maxFigureWidth) {
+            modelData.columns = dimensions.maxFigureWidth;
+        }
 
-			//update column coverage
-			modelData.columns = Math.ceil((width + dimensions.gutterWidth) / (dimensions.gutterWidth + dimensions.columnWidth));
-		}
+        //Calculate maximum width for a figure
+        if (modelData.columns > dimensions.columnsPerPage || modelData.position.horizontal === 'p' || modelData.position.horizontal === 'f') {
+            width = dimensions.innerSectionWidth;
+            modelData.columns = dimensions.columnsPerPage;
+        } else {
+            width = (modelData.columns * dimensions.columnWidth) + (dimensions.gutterWidth * (modelData.columns - 1));
+        }
+        width = Math.floor(width);
+        this.$el.css("width", width + "px");
 
-		//dont use partial pixels
-		width = Math.floor(width);
-		height = Math.floor(height);
+        //Get the height of the caption
+        var captionHeight = this.$el.find("figcaption").outerHeight(true);
 
-		this.$el.css({ height : height + "px", width : width + "px"});
+        //Calculate height of figure plus the caption
+        if (aspect) {
+            height = (width / aspect) + captionHeight;
+        } else {
+            this.renderContent();
+            height = this.$el.find('.figure_content').outerHeight(true) + captionHeight;
+        }
 
-		this.calculatedHeight = height;
-		this.calculatedWidth = width;
+        //If the height of the figure is greater than the page height, scale it down
+        if (height > dimensions.innerSectionHeight) {
+            height = dimensions.innerSectionHeight;
 
-		//update model number of columns based on calculations
-		this.model.set('calculatedColumns', modelData.columns);
+            //set new width and the new column coverage number
+            if (aspect) {
+                width = (height - captionHeight) * aspect;
+                this.$el.css("width", width + "px");
+            }
 
-		//Set the size of the figure content div inside the actual figure element
-		this.$el.find('.figure_content').css({
-			width : width,
-			height : height - captionHeight
-		});
+            //update caption height at new width
+            captionHeight = this.$el.find("figcaption").outerHeight(true);
 
-		this.sizeCalculated = true;
-		return this;
-	}
+            //update column coverage
+            modelData.columns = Math.ceil((width + dimensions.gutterWidth) / (dimensions.gutterWidth + dimensions.columnWidth));
+        }
+
+        //dont use partial pixels
+        width = Math.floor(width);
+        height = Math.floor(height);
+
+        this.$el.css({ height : height + "px", width : width + "px"});
+
+        this.calculatedHeight = height;
+        this.calculatedWidth = width;
+
+        //update model number of columns based on calculations
+        this.model.set('calculatedColumns', modelData.columns);
+
+        //Set the size of the figure content div inside the actual figure element
+        this.$el.find('.figure_content').css({
+            width : width,
+            height : height - captionHeight
+        });
+
+        this.sizeCalculated = true;
+        return this;
+    }
 });
 
 OsciTk.views.Account = OsciTk.views.BaseView.extend({
@@ -1814,107 +2202,68 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 	}
 });
 OsciTk.views.Citation = OsciTk.views.BaseView.extend({
-	template: OsciTk.templateManager.get('citation'),
-	initialize: function() {
+    template: OsciTk.templateManager.get('citation'),
+    initialize: function() {
 
-		this.listenTo(Backbone, "toggleCiteDialog", function(data) {
-			var citationView = this;
-			var contentId = data.contentId;
-			var content = $('#' + contentId);
+        this.listenTo(Backbone, "toggleCiteDialog", function(data) {
+            this.render(data);
+        });
+    },
+    render: function(data) {
+        var citationView = this;
+        var contentId = data.contentId;
+        var content = $('#' + contentId);
 
-			var citationRequestParams = {
-				'section_id': app.models.section.get('id'),
-				'publication_id': app.models.docPackage.get('id'),
-				'element_id': data.contentId
-			};
+        var citationRequestParams = {
+            'section_id': app.models.section.get('id'),
+            'publication_id': app.models.docPackage.get('id'),
+            'element_id': data.contentId,
+            'field': content.attr('data-sectionId')
+        };
 
-			var colWidth = app.views.sectionView.dimensions.columnWidth;
-			var windowWidth = $(window).width();
-			var tooltipWidth = colWidth;
-			if (colWidth * 1.5 < windowWidth) {
-				tooltipWidth = colWidth * 1.5;
-			}
+        $.ajax({
+            url: app.config.get('endpoints').OsciTkCitation,
+            data: citationRequestParams,
+            success: function(data, status) {
+                if (data.success) {
+                    //add reference text to the response
+                    data.citation.referenceText = content.text();
+                    data.citation.url = document.URL + "/p-" + app.models.section.get('id') + "-" + content.data('paragraph_number');
+                    data.citation.paragraphNumber = content.data('paragraph_number');
+                    data.citation.date = new Date(data.citation.date);
+                    data.citation.formattedDate = (data.citation.date.getMonth() + 1) + "/" + data.citation.date.getDate() + "/" + data.citation.date.getFullYear();
 
-			content.qtip("destroy");
-			content.qtip({
-				content: {
-					title: {
-						text: "Citation",
-						button: "Close"
-					},
-					text: "Loading...",
-					ajax: {
-						url: app.config.get('endpoints').OsciTkCitation,
-						data: citationRequestParams,
-						success: function(data, status) {
-							if (data.success) {
-								//add reference text to the response
-								data.citation.referenceText = content.text();
-								data.citation.url = document.URL + "/p-" + app.models.section.get('id') + "-" + content.data('paragraph_number');
-								data.citation.paragraphNumber = content.data('paragraph_number');
-								data.citation.date = new Date(data.citation.date);
-								data.citation.formattedDate = (data.citation.date.getMonth() + 1) + "/" + data.citation.date.getDate() + "/" + data.citation.date.getFullYear();
+                    //make sure data exists for all variables in templates
+                    data.citation.creator = data.citation.creator ? data.citation.creator : '';
+                    data.citation.description = data.citation.description ? data.citation.description : '';
+                    data.citation.editor = data.citation.editor ? data.citation.editor : '';
+                    data.citation.publicationTitle = data.citation.publicationTitle ? data.citation.publicationTitle : '';
+                    data.citation.publisher = data.citation.publisher ? data.citation.publisher : '';
+                    data.citation.rights = data.citation.rights ? data.citation.rights : '';
+                    data.citation.title = data.citation.title ? data.citation.title : '';
 
-								//make sure data exists for all variables in templates
-								data.citation.creator = data.citation.creator ? data.citation.creator : '';
-								data.citation.description = data.citation.description ? data.citation.description : '';
-								data.citation.editor = data.citation.editor ? data.citation.editor : '';
-								data.citation.publicationTitle = data.citation.publicationTitle ? data.citation.publicationTitle : '';
-								data.citation.publisher = data.citation.publisher ? data.citation.publisher : '';
-								data.citation.rights = data.citation.rights ? data.citation.rights : '';
-								data.citation.title = data.citation.title ? data.citation.title : '';
+                    $.fancybox({
+                        'padding'       : 0,
+                        'content'       : citationView.template(data.citation),
+                        'type'          : 'inline',
+                        'titleShow'     : false
+                    });
 
-								//update the display
-								this.set('content.text', citationView.template(data.citation));
+                    $(".citation-wrapper").on('click', 'a', function(e) {
+                        e.preventDefault();
+                        var $this = $(this);
 
-								this.elements.content.on('click', 'a', function(e) {
-									e.preventDefault();
-									var $this = $(this);
+                        var container = $this.parents(".citations");
+                        container.find('.citation').hide();
+                        container.find($this.attr('href')).show();
 
-									var container = $this.parents(".citations");
-									container.find('.citation').hide();
-									container.find($this.attr('href')).show();
-
-									container.find('li').removeClass('active');
-									$this.parent().addClass('active');
-								});
-							}
-						}
-					}
-				},
-				show: {
-					event: '',
-					ready: true,
-					modal: {
-						on:true,
-						dim: false
-					}
-				},
-				hide: {
-					fixed: true,
-					event: 'unfocus'
-				},
-				position: {
-					my: 'center',
-					at: 'center',
-					target: $(document.body)
-				},
-				style: {
-					classes: 'citation-tooltip',
-					def: false,
-					width: tooltipWidth + 'px'
-				},
-				events: {
-					hide: function(event, api) {
-						api.destroy();
-					}
-				}
-			});
-
-
-		});
-	}
-
+                        container.find('li').removeClass('active');
+                        $this.parent().addClass('active');
+                    });
+                }
+            }
+        });
+    }
 });
 OsciTk.views.Figures = OsciTk.views.BaseView.extend({
 	className: 'figures-view',
@@ -2063,6 +2412,9 @@ OsciTk.views.Footnotes = OsciTk.views.BaseView.extend({
 						content: fn.get('body'),
 						style: {
 							def: false
+						},
+						position: {
+							viewport: $(window)
 						}
 					});
 				}
@@ -2071,39 +2423,42 @@ OsciTk.views.Footnotes = OsciTk.views.BaseView.extend({
 	}
 });
 OsciTk.views.GlossaryTooltip = OsciTk.views.BaseView.extend({
-	initialize: function() {
-		this.listenTo(Backbone, 'layoutComplete', function() {
-			if (app.collections.glossaryTerms.length !== 0) {
-				$('.glossary-term').qtip({
-					content: {
-						title: ' ',
-						text: ' '
-					},
-					position: {
-						viewport: $(window)
-					},
-					style: {
-						classes: 'glossary-tooltip',
-						def: false,
-						width: app.views.sectionView.dimensions.columnWidth + 'px'
-					},
-					events: {
-						show: function(event, api) {
-							var tid = $(event.originalEvent.target).data('tid');
-							var item = app.collections.glossaryTerms.get(tid);
-							// set the tooltip contents
-							api.set('content.title.text', item.get('term'));
-							api.set('content.text', item.get('definition'));
-						}
-					}
-				});
-			}
-		});
+    initialize: function() {
+        this.listenTo(Backbone, 'layoutComplete', function() {
+            if (app.collections.glossaryTerms.length !== 0) {
+                $('.glossary-term').qtip({
+                    content: {
+                        title: ' ',
+                        text: ' '
+                    },
+                    position: {
+                        viewport: $(window)
+                    },
+                    style: {
+                        classes: 'glossary-tooltip',
+                        def: false,
+                        width: app.views.sectionView.dimensions.columnWidth + 'px'
+                    },
+                    events: {
+                        show: function(event, api) {
+                            var tid = $(event.originalEvent.target).data('tid');
+                            var item = app.collections.glossaryTerms.get(tid);
+                            // set the tooltip contents
+                            api.set('content.title', item.get('term'));
+                            api.set('content.text', item.get('definition'));
+                        }
+                    }
+                }).click(function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+            }
+        });
 
-		this.listenTo(Backbone, 'routedToSection', function(section) {
-			$('.glossary-tooltip').qtip('destroy');
-		});
-	}
+        this.listenTo(Backbone, 'routedToSection', function(section) {
+            $('.glossary-tooltip').qtip('destroy');
+        });
+    }
 });
 OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
 	id: 'glossary-view',
@@ -2180,111 +2535,101 @@ OsciTk.views.Glossary = OsciTk.views.BaseView.extend({
 	}
 });
 OsciTk.views.InlineNotes = OsciTk.views.BaseView.extend({
-	template: OsciTk.templateManager.get('note-popup'),
-	initialize: function() {
+    template: OsciTk.templateManager.get('note-popup'),
+    initialize: function() {
 
-		this.listenTo(Backbone, 'toggleNoteDialog', function(data) {
-			var $this = this;
-			var contentId = data.contentId;
-			var content = $('#' + contentId);
-			if (contentId) {
-				// find the note content if pre-existing
-				var note;
-				var notes = app.collections.notes.where({content_id: contentId});
-				if (notes[0]) {
-					note = notes[0];
-				}
-				else {
-					note = new OsciTk.models.Note({
-						content_id: contentId,
-						section_id: app.models.section.id
-					});
-					app.collections.notes.add(note);
-				}
-				var noteJson = note.toJSON();
-				noteJson.referenceContent =content.text();
+        this.listenTo(Backbone, 'toggleNoteDialog', function(data) {
+            this.render(data);
+        });
 
-				content.qtip("destroy");
-				content.qtip({
-					id: note.cid,
-					content: {
-						title: {
-							text: "Notes",
-							button: "Save & Close"
-						},
-						text: $this.template(noteJson)
-					},
-					show: {
-						ready: true,
-						event: '',
-						modal: {
-							on:true,
-							dim: false
-						}
-					},
-					hide: {
-						event: 'unfocus',
-						fixed: true
-					},
-					position: {
-						my: 'center',
-						at: 'center',
-						target: $(document.body)
-					},
-					style: {
-						classes: 'note-tooltip',
-						def: false,
-						width: app.views.sectionView.dimensions.columnWidth + 'px'
-					},
-					events: {
-						render: function(event, api) {
-							// bind to keyup on text area to sync changes to back end
-							api.elements.content.find('.noteForm textarea').on('keyup', function(e) {
-								// change status text
-								api.elements.content.find('.status').text('Saving...');
-								// save the content to the model in case the note disappears (user clicks off)
-								var cid = api.elements.tooltip.attr('id').match(/c\d+/)[0];
-								// search the collection for this cid
-								var note = app.collections.notes.getByCid(cid);
-								note.set('note', e.target.value);
-								// clear the previous timer if there is one
-								if (typeof($this['saveTimeout'+cid]) !== 'undefined') {
-									clearTimeout($this['saveTimeout'+cid]);
-									delete $this['saveTimeout'+cid];
-								}
-								// set timer to save the note
-								$this['saveTimeout'+cid] = window.setTimeout(function() {
-									note.save();
-									api.elements.content.find('.status').text('Saved');
-								}, 1500);
-							});
-						},
-						hide: function(event, api) {
-							// if closing the modal for a note with content, mark the paragraph control
-							// to indicate this paragraph has a note
-							var content = api.elements.content.find('textarea').val();
-							if (content.length > 0) {
-								var pageView = app.views.sectionView.getCurrentPageView();
-								var pc = pageView.$el.find('.paragraph-controls[data-osci_content_id=' + contentId + ']');
-								pc.addClass('notes-present');
-							}
-						}
-					}
-				});
-			}
-		});
+        // place icon next to paragraphs with notes after layout is complete
+        this.listenTo(Backbone, 'notesLoaded', function(params) {
+            _.each(app.collections.notes.models, function(n) {
+                // place a class on the paragraph identifier to indicate a note is present
+                var paragraphControls = app.views.sectionView.$el.find('.paragraph-controls[data-osci_content_id=' + n.get('content_id') + ']');
+                if (paragraphControls.length) {
+                    paragraphControls.addClass('notes-present');
+                }
+            });
+        });
+    },
+    render: function(data) {
+        if (parseInt(app.account.id, 10) == 0) {
+            alert("You must login to create notes.");
+            return;
+        }
 
-		// place icon next to paragraphs with notes after layout is complete
-		this.listenTo(Backbone, 'notesLoaded', function(params) {
-			_.each(app.collections.notes.models, function(n) {
-				// place a class on the paragraph identifier to indicate a note is present
-				var paragraphControls = app.views.sectionView.$el.find('.paragraph-controls[data-osci_content_id=' + n.get('content_id') + ']');
-				if (paragraphControls.length) {
-					paragraphControls.addClass('notes-present');
-				}
-			});
-		});
-	}
+        var $this = this;
+        var contentId = data.contentId;
+        var content = $('#' + contentId);
+        if (contentId) {
+            // find the note content if pre-existing
+            var note;
+            var notes = app.collections.notes.where({content_id: contentId});
+            if (notes[0]) {
+                note = notes[0];
+            } else {
+                note = new OsciTk.models.Note({
+                    content_id: contentId,
+                    section_id: app.models.section.id,
+                    paragraph_number: data.paragraphNumber
+                });
+                app.collections.notes.add(note);
+            }
+            var noteJson = note.toJSON();
+            noteJson.referenceContent = content.text();
+
+            $.fancybox({
+                'padding'       : 0,
+                'content'       : $this.template(noteJson),
+                'type'          : 'inline',
+                'titleShow'     : false,
+                'beforeClose'   : function() {
+                    // if closing the modal for a note with content, mark the paragraph control
+                    // to indicate this paragraph has a note
+                    var content = $('.note-popup').find('textarea').val();
+                    if (content.length > 0) {
+                        var pageView = app.views.sectionView.getCurrentPageView();
+                        var pc = pageView.$el.find('.paragraph-controls[data-osci_content_id=' + contentId + ']');
+                        pc.addClass('notes-present');
+                    }
+                }
+            });
+
+            var notePop = $('.note-popup');
+            notePop.attr("id", note.cid);
+
+            notePop.find('textarea, input').on('keyup', function(e) {
+                // change status text
+                notePop.find('.status').text('Saving...');
+                // save the content to the model in case the note disappears (user clicks off)
+                var cid = notePop.attr('id').match(/c\d+/)[0];
+                // search the collection for this cid
+                var note = app.collections.notes.get(cid);
+
+                var noteText = notePop.find('textarea').val();
+                var tempTags = notePop.find('input').val().split(',');
+                var tags = [];
+                for (var i = 0, len = tempTags.length; i < len; i++) {
+                    tags.push($.trim(tempTags[i]));
+                }
+
+                note.set('note', noteText);
+                note.set('tags', tags);
+
+                // clear the previous timer if there is one
+                if (typeof($this['saveTimeout'+cid]) !== 'undefined') {
+                    clearTimeout($this['saveTimeout'+cid]);
+                    delete $this['saveTimeout'+cid];
+                }
+                // set timer to save the note
+                $this['saveTimeout'+cid] = window.setTimeout(function() {
+                    note.save();
+                    notePop.find('.status').text('Saved');
+                }, 1500);
+            });
+        }
+    }
 });
 //Add this view to the figure type registry
 OsciTk.views.figureTypeRegistry["image_asset"] = "MultiColumnFigureImage";
@@ -2384,750 +2729,922 @@ OsciTk.views.MultiColumnFigureLayeredImage = OsciTk.views.MultiColumnFigure.exte
 	}
 });
 
+var storeContentId; //variable to store content id
 OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
-	initialize: function(options) {
-		this._super('initialize');
-		this.options = options;
-		this.columnTemplate = OsciTk.templateManager.get('multi-column-column');
-		this.visible = false;
-		this.paragraphControlsViews = [];
-	},
+    initialize: function(options) {
+        this._super('initialize');
+        this.options = options;
+        this.columnTemplate = OsciTk.templateManager.get('multi-column-column');
+        this.visible = false;
+        this.paragraphControlsViews = [];
+    },
 
-	onClose: function() {
-		this.model = undefined;
-	},
+    onClose: function() {
+        this.model = undefined;
+    },
 
-	events: {
-		'click a.figure_reference': 'onFigureReferenceClicked'
-	},
+    events: {
+        'click a.figure_reference': 'onFigureReferenceClicked',
+        'click .content-paragraph': 'onParagraphClicked'
+    },
 
-	onFigureReferenceClicked: function(event_data) {
-		var figureId = event_data.currentTarget.hash.substring(1);
-		var figureView = app.views.figures[figureId];
-		if (figureView && figureView.fullscreen) {
-			figureView.fullscreen();
+    onFigureReferenceClicked: function(event_data) {
+		event_data.preventDefault();
+		event_data.stopPropagation();
+		
+        var figureId = event_data.currentTarget.hash.substring(1);
+        var figureView = app.views.figures[figureId];
+        if (figureView && figureView.fullscreen) {
+            figureView.fullscreen();
+        }
+        return false;
+    },
+
+    onParagraphClicked: function(e) {
+        if (e.target.tagName === "A") {
+            //window.location = e.target.href; 
+            return true;
+        }
+
+        var parentCheck = $(e.target).parents("a");
+        if (parentCheck.length) {
+            parentCheck[0].click();
+            return true;
+        }
+
+	    e.preventDefault();
+        e.stopPropagation();
+		
+        var p = $(e.currentTarget);
+        var pNum = p.data("paragraph_number");
+
+        Backbone.trigger("paragraphClicked", {paragraphNumber: pNum});
+    },
+
+    hide: function() {
+        this.$el.css("visibility", "hidden");
+        this.visible = false;
+    },
+
+    show: function() {
+        this.$el.css("visibility", "visible");
+        this.visible = true;
+    },
+
+    resetPage: function() {
+        this.removeAllContent();
+
+        for(var i = 0, c = this.paragraphControlsViews.length; i < c; i++) {
+            this.removeView(this.paragraphControlsViews[i]);
+        }
+        this.paragraphControlsViews = [];
+
+        this.$el.children(':not(figure)').remove();
+
+        this.initializeColumns();
+
+        if (this.processingData.numberOfColumns === 0) {
+            this.processingComplete();
+        }
+    },
+
+    render : function() {
+        if (this.processingData.rendered) {
+            return this;
+        }
+
+        this.hide();
+
+        //size the page to fit the view window
+        this.$el.css({
+            width: this.parent.dimensions.innerSectionWidth,
+            height: this.parent.dimensions.innerSectionHeight
+        });
+
+        this.initializeColumns();
+
+        //set rendered flag so that render does not get called more than once while iterating over content
+        this.processingData.rendered = true;
+
+        return this;
+    },
+
+    layoutContent : function(contentId) {
+        var overflow = 'none';
+        var column = this.getCurrentColumn(contentId);
+		
+        if (column === null) {
+            this.processingComplete();
+            overflow = 'contentOverflow';
+            return overflow;
+        }
+
+        var content = $(this.getContentById(contentId));
+        column.$el.append(content);
+
+        var lineHeight = parseFloat(content.css("line-height"));
+        var contentPosition = content.position();		
+
+        //If all of the content is overflowing the column remove it and move to next column
+        if ((column.height - contentPosition.top) < lineHeight) {
+            content.remove();
+            column.heightRemain = 0;
+            overflow = 'contentOverflow';
+            return overflow;
+        }
+
+        var contentHeight = content.outerHeight(true);
+
+        //if content is a header make sure there is room for content afterwards
+        if (content.is("H1, H2, H3, H4, H5, H6, H7, H8") && ((column.heightRemain - contentHeight) <= (lineHeight * 2))) {
+            content.remove();
+            column.heightRemain = 0;
+            overflow = 'contentOverflow';
+            return overflow;
+        }
+
+        //If offset defined (should always be negative) add it to the height of the content to get the correct top margin
+        var offset = 0;
+        if (column.offset < 0) {
+				offset = Math.floor(contentHeight + column.offset);
+				//Set the top margin
+				content.css("margin-top", "-" + offset + "px");			
+				//remove the offset so that all items are not shifted up
+            	column.offset = 0;     
+        }
+
+        var contentMargin = {
+            top : parseInt(content.css("margin-top"), 10),
+            bottom : parseInt(content.css("margin-bottom"), 10)
+        };
+
+        //Update how much vertical height remains in the column
+        var heightRemain = column.heightRemain - content.outerHeight(true);
+        if (heightRemain > 0 && heightRemain < lineHeight) {
+            heightRemain = 0;
+        } else if (heightRemain < 0 && heightRemain >= (contentMargin.bottom * -1)) {
+            heightRemain = 0;
+        }
+
+        //If we have negative height remaining, the content must be repeated in the next column
+        if (heightRemain < 0) {
+			//figure out how many lines of the current content to show
+            var visibleLines = Math.floor((column.height - contentPosition.top) / lineHeight);
+			// calculate new column height based on visible lines
+            var newHeight = (visibleLines * lineHeight) + contentPosition.top;
+            var heightDiff = column.height - newHeight;
+
+            if (heightDiff > 0) {
+                //assign the new height to remove any partial lines of text
+                column.height = newHeight;
+                column.$el.height(newHeight + "px");
+				//get remaining height minus the visible lines
+				heightRemain = (heightRemain - heightDiff);
+            }
+
+            overflow = 'contentOverflow';
+
+            if (this.processingData.currentColumn === (this.processingData.numberOfColumns - 1)) {
+                this.processingComplete();
+            }
+
+            //If all of the content is overflowing the column remove it and move to next column
+            if ((column.height - contentPosition.top) < lineHeight) {
+                content.remove();
+                this.removeContent(content.data("osci_content_id"));
+                column.heightRemain = 0;
+                overflow = 'contentOverflow';
+                return overflow;
+            }
+        }
+
+        if (heightRemain === 0 && this.processingData.currentColumn === (this.processingData.numberOfColumns - 1)) {
+            this.processingComplete();
+        }
+
+        column.heightRemain = heightRemain;
+
+        //place a paragraph number
+        if (content.is("p")) {
+            var paragraphNumber = content.data("paragraph_number");
+            var contentIdentifier = content.data("osci_content_id");
+            var pidIsOnPage = this.$el.find(".paragraph-identifier-" + paragraphNumber);
+
+            //add a class so we can attach global events
+            content.addClass("content-paragraph");
+
+            if (pidIsOnPage.length === 0) {
+                var columnPosition = column.$el.position();
+                var pcv = new OsciTk.views.ParagraphControlsView({
+                    content: content,
+                    position: {
+                        top: (columnPosition.top + contentPosition.top) + "px",
+                        left: (columnPosition.left + contentPosition.left - this.parent.dimensions.gutterWidth) + "px"
+                    }
+                });
+                this.addView(pcv);
+
+                this.paragraphControlsViews.push(pcv);
+            }
+        }
+
+        return overflow;
+    },
+
+    getCurrentColumn : function(contentId) {
+		if (contentId !== undefined) {
+			storeContentId = contentId; //value of storeContentId should be last contentId
+		} else if (contentId === undefined) {
+			contentId = storeContentId; //use storeContentId if value of contentId is undefined, to avoid repetition of paragraphs
 		}
-		return false;
-	},
-
-	hide: function() {
-		this.$el.css("visibility", "hidden");
-		this.visible = false;
-	},
-
-	show: function() {
-		this.$el.css("visibility", "visible");
-		this.visible = true;
-	},
-
-	resetPage: function() {
-		this.removeAllContent();
-
-		for(var i = 0, c = this.paragraphControlsViews.length; i < c; i++) {
-			this.removeView(this.paragraphControlsViews[i]);
-		}
-		this.paragraphControlsViews = [];
-
-		this.$el.children(':not(figure)').remove();
-
-		this.initializeColumns();
-	},
-
-	render : function() {
-		if (this.processingData.rendered) {
-			return this;
-		}
-
-		this.hide();
-
-		//size the page to fit the view window
-		this.$el.css({
-			width: this.parent.dimensions.innerSectionWidth,
-			height: this.parent.dimensions.innerSectionHeight
-		});
-
-		this.initializeColumns();
-
-		//set rendered flag so that render does not get called more than once while iterating over content
-		this.processingData.rendered = true;
-
-		return this;
-	},
-
-	layoutContent : function(contentId) {
-		var overflow = 'none';
-		var column = this.getCurrentColumn(contentId);
-
-		if (column === null) {
-			this.processingComplete();
-			overflow = 'contentOverflow';
-			return overflow;
-		}
-
-		var content = $(this.getContentById(contentId));
-
-		column.$el.append(content);
-
-		var lineHeight = parseFloat(content.css("line-height"));
-		var contentPosition = content.position();
-
-		//If all of the content is overflowing the column remove it and move to next column
-		if ((column.height - contentPosition.top) < lineHeight) {
-			content.remove();
-			column.heightRemain = 0;
-			overflow = 'contentOverflow';
-			return overflow;
-		}
-
-		var contentHeight = content.outerHeight(true);
-
-		//If offset defined (should always be negative) add it to the height of the content to get the correct top margin
-		var offset = 0;
-		var columnOffset = column.offset;
-		if (column.offset < 0) {
-			offset = contentHeight + column.offset;
-
-			//Set the top margin
-			content.css("margin-top", "-" + offset + "px");
-
-			//remove the offset so that all items are not shifted up
-			column.offset = 0;
-		}
-
-		var contentMargin = {
-			top : parseInt(content.css("margin-top"), 10),
-			bottom : parseInt(content.css("margin-bottom"), 10)
-		};
-
-		//Update how much vertical height remains in the column
-		var heightRemain = column.heightRemain - content.outerHeight(true);
-		if (heightRemain > 0 && heightRemain < lineHeight) {
-			heightRemain = 0;
-		} else if (heightRemain < 0 && heightRemain >= (contentMargin.bottom * -1)) {
-			heightRemain = 0;
-		}
-
-		//If we have negative height remaining, the content must be repeated in the next column
-		if (heightRemain < 0) {
-			//var temp = Math.floor((column.height - contentPosition.top) / lineHeight);
-
-			var visibleLines = Math.floor((column.height - contentPosition.top) / lineHeight);
-			var newHeight = (visibleLines * lineHeight) + contentPosition.top;
-			var heightDiff = column.height - newHeight;
-
-			if (heightDiff > 0) {
-				//assign the new height to remove any partial lines of text
-				column.height = newHeight;
-				column.$el.height(newHeight + "px");
-
-				heightRemain = heightRemain - heightDiff;
-			}
-
-			overflow = 'contentOverflow';
-
-			if (this.processingData.currentColumn === (this.parent.dimensions.columnsPerPage - 1)) {
-				this.processingComplete();
-			}
-
-			//If all of the content is overflowing the column remove it and move to next column
-			if ((column.height - contentPosition.top) < lineHeight) {
-				content.remove();
-				this.removeContent(content.data("osci_content_id"));
-				column.heightRemain = 0;
-				overflow = 'contentOverflow';
-				return overflow;
-			}
-		}
-
-		if (heightRemain === 0 && this.processingData.currentColumn === (this.parent.dimensions.columnsPerPage - 1)) {
-			this.processingComplete();
-		}
-
-		column.heightRemain = heightRemain;
-
-		//place a paragraph number
-		if (content.is("p")) {
-			var paragraphNumber = content.data("paragraph_number");
-			var contentIdentifier = content.data("osci_content_id");
-			var pidIsOnPage = this.$el.find(".paragraph-identifier-" + paragraphNumber);
-
-			if (pidIsOnPage.length === 0) {
-				var columnPosition = column.$el.position();
-				var pcv = new OsciTk.views.ParagraphControlsView({
-					content: content,
-					position: {
-						top: (columnPosition.top + contentPosition.top) + "px",
-						left: (columnPosition.left + contentPosition.left - this.parent.dimensions.gutterWidth) + "px"
-					}
-				});
-				this.addView(pcv);
-
-				this.paragraphControlsViews.push(pcv);
-			}
-		}
-
-		return overflow;
-	},
-
-	getCurrentColumn : function(contentId) {
-		var currentColumn = null;
-		var lineHeight = parseInt(this.$el.css("line-height"), 10);
-		lineHeight = lineHeight ? lineHeight : this.parent.options.defaultLineHeight;
-		var minColHeight =  lineHeight * this.parent.dimensions.minLinesPerColumn;
-
-		if (this.processingData.columns[this.processingData.currentColumn] &&
-			this.processingData.columns[this.processingData.currentColumn].height >= minColHeight &&
-			this.processingData.columns[this.processingData.currentColumn].heightRemain > 0) {
-			currentColumn = this.processingData.columns[this.processingData.currentColumn];
-		} else {
-			for(var i = 0; i < this.parent.dimensions.columnsPerPage; i++) {
-				if (this.processingData.columns[i] !== undefined &&
-					this.processingData.columns[i].height >= minColHeight &&
-					this.processingData.columns[i].heightRemain > 0) {
-					currentColumn = this.processingData.columns[i];
-					this.processingData.currentColumn = i;
-					break;
-				}
-			}
-		}
-
-		if (currentColumn !== null && currentColumn.$el === null) {
-			if (this.processingData.currentColumn > 0) {
-				currentColumn.offset = this.processingData.columns[(this.processingData.currentColumn - 1)].heightRemain;
-			} else {
-				var pageNum = this.parent.getPageNumberForSelector("[data-osci_content_id='" + contentId + "']");
-				var previousPage = this.parent.getChildViewByIndex(pageNum - 1);
-				if (previousPage) {
-					currentColumn.offset = previousPage.processingData.columns[previousPage.processingData.columns.length - 1].heightRemain;
-				}
-			}
-
-			var columnCss = {
-				width : this.parent.dimensions.columnWidth + "px",
-				height : currentColumn.height + "px",
-				left : this.processingData.columns[this.processingData.currentColumn].position.left,
-				top : this.processingData.columns[this.processingData.currentColumn].position.top
-			};
-
-			currentColumn.$el = $(this.columnTemplate())
-				.appendTo(this.$el)
-				.addClass('column-' + this.processingData.currentColumn)
-				.css(columnCss);
-		}
-
-		return currentColumn;
-	},
-
-	initializeColumns: function() {
-		this.processingData.columns = [];
-
-		var pageFigures = this.getChildViewsByType('figure');
-		var numPageFigures = pageFigures.length;
-		var lineHeight = parseInt(this.$el.css("line-height"), 10);
-		lineHeight = lineHeight ? lineHeight : this.parent.options.defaultLineHeight;
-		var minColHeight =  lineHeight * this.parent.dimensions.minLinesPerColumn;
-
-		for (var i = 0; i < this.parent.dimensions.columnsPerPage; i++) {
-			var leftPosition = (i * this.parent.dimensions.columnWidth) + (this.parent.dimensions.gutterWidth * (i + 1));
-			var height = this.parent.dimensions.innerSectionHeight;
-			var topPosition = 0;
-
-			var columnPosition = {
-				x : [leftPosition, leftPosition + this.parent.dimensions.columnWidth],
-				y : [topPosition, topPosition + height]
-			};
-
-			if (numPageFigures) {
-				for (var j = 0; j < numPageFigures; j++) {
-
-					var elemX = pageFigures[j].position.x;
-					var elemY = pageFigures[j].position.y;
-
-					if (columnPosition.x[0] < elemX[1] && columnPosition.x[1] > elemX[0] &&
-						columnPosition.y[0] < elemY[1] && columnPosition.y[1] > elemY[0]
-					) {
-						height = height - pageFigures[j].calculatedHeight - this.parent.dimensions.gutterWidth;
-
-						//Adjust column top offset based on vertical location of the figure
-						switch (pageFigures[j].model.get("position").vertical) {
-							//top
-							case 't':
-							//fullpage
-							case 'p':
-								topPosition = topPosition + pageFigures[j].calculatedHeight + this.parent.dimensions.gutterWidth;
-								break;
-							//bottom
-							case 'b':
-								topPosition = topPosition;
-								break;
+		var previousColumnHeightRemain = null;
+		previousColumnHeightRemain = this.processingData.columns[this.processingData.currentColumn].heightRemain; //store previous column's remaining height
+        var currentColumn = null;
+        var lineHeight = parseInt(this.$el.css("line-height"), 10);
+        lineHeight = lineHeight ? lineHeight : this.parent.options.defaultLineHeight;
+        var minColHeight =  lineHeight * this.parent.dimensions.minLinesPerColumn;
+        if (this.processingData.columns[this.processingData.currentColumn] &&
+            this.processingData.columns[this.processingData.currentColumn].heightRemain > 0 &&
+            (this.processingData.columns[this.processingData.currentColumn].height >= minColHeight ||
+            this.processingData.columns[this.processingData.currentColumn].isVertCol)) {
+            	currentColumn = this.processingData.columns[this.processingData.currentColumn];
+        } else {
+            for(var i = 0; i < this.processingData.numberOfColumns; i++) {
+                if (this.processingData.columns[i] !== undefined &&
+                    this.processingData.columns[i].height >= minColHeight &&
+                    this.processingData.columns[i].heightRemain > 0){
+                    currentColumn = this.processingData.columns[i];
+                    this.processingData.currentColumn = i;
+                    break;
+                }
+            }
+        }
+			
+		// if there is a negative heightRemain, if there's content left over, go through this
+        if (currentColumn !== null && currentColumn.$el === null) {
+            if (this.processingData.currentColumn > 0) {
+				//the previous column is on the same page
+                //currentColumn.offset =  this.processingData.columns[(this.processingData.currentColumn - 1)].heightRemain; //can't use since sometimes the previous column only contains an image, giving the wrong heightRemain value
+				currentColumn.offset = previousColumnHeightRemain;
+            } else {
+				//the previous column is on the previous page
+                var pageNum = this.parent.getPageNumberForSelector("[data-osci_content_id='" + contentId + "']");
+                var previousPage = this.parent.getChildViewByIndex(pageNum - 1);
+                if (previousPage) {
+					//start with last column, and keep moving to the left until the last negative or 0 heightRemain is found or you run out of columns
+					for (var i=previousPage.processingData.columns.length - 1; i >= 0; i--) {
+						currentColumn.offset = previousPage.processingData.columns[i].heightRemain;
+						if (currentColumn.offset < 0) {
+							break;
 						}
-
-						columnPosition.y = [topPosition, topPosition + height];
 					}
-				}
-			}
+                }
+            }
 
-			height = Math.floor(height);
-			if (height > minColHeight) {
-				this.processingData.columns.push({
-					height : height,
-					heightRemain : height > 0 ? height : 0,
-					'$el' : null,
-					offset : 0,
-					position : {
-						left : columnPosition.x[0],
-						top : columnPosition.y[0]
-					}
-				});
-			}
-		}
+            var columnCss = {
+                width : this.parent.dimensions.columnWidth + "px",
+                height : currentColumn.height + "px",
+                left : this.processingData.columns[this.processingData.currentColumn].position.left,
+                top : this.processingData.columns[this.processingData.currentColumn].position.top
+            };
 
-		this.processingData.currentColumn = 0;
-	},
+            currentColumn.$el = $(this.columnTemplate())
+                .appendTo(this.$el)
+                .addClass('column-' + this.processingData.currentColumn)
+                .css(columnCss);
+        }
+        return currentColumn;
+		
+    },
 
-	addFigure: function(figureViewInstance) {
-		var figurePlaced = false;
+    initializeColumns: function() {
+        this.processingData.columns = [];
 
-		this.addView(figureViewInstance);
+        var pageFigures = this.getChildViewsByType('figure');
+        var numPageFigures = pageFigures.length;
+        if (numPageFigures) {
+            //sort page figures into vertical order
+            if (numPageFigures > 1) {
+                pageFigures = _.sortBy(pageFigures, function(fig) {
+                    return fig.position.y[0];
+                });
+            }
+        }
+        var lineHeight = parseInt(this.$el.css("line-height"), 10);
+        lineHeight = lineHeight ? lineHeight : this.parent.options.defaultLineHeight;
+        var minColHeight =  lineHeight * this.parent.dimensions.minLinesPerColumn;
 
-		if (!figureViewInstance.layoutComplete) {
-			figureViewInstance.render();
+        for (var i = 0; i < this.parent.dimensions.columnsPerPage; i++) {
+            var leftPosition = (i * this.parent.dimensions.columnWidth) + (this.parent.dimensions.gutterWidth * (i + 1));
+            var height = this.parent.dimensions.innerSectionHeight;
+            var topPosition = 0;
 
-			if (figureViewInstance.layoutComplete) {
-				//figure was placed
-				figurePlaced = true;
-			} else {
-				//figure was not placed... carryover to next page
-				figurePlaced = false;
-				this.removeView(figureViewInstance, false);
-			}
-		}
+            var columnPosition = {
+                x : [leftPosition, leftPosition + this.parent.dimensions.columnWidth],
+                y : [topPosition, topPosition + height]
+            };
 
-		return figurePlaced;
-	}
+            var vertColumns = [{
+                position: {
+                    x : [leftPosition, leftPosition + this.parent.dimensions.columnWidth],
+                    y : [topPosition, topPosition + height]
+                },
+                height: height
+            }];
+            if (numPageFigures) {
+                var currentVertColumnIndex = 0;
+                var heightRemain = height;
+                for (var j = 0; j < numPageFigures; j++) {
+                    var currentVertColumn = vertColumns[currentVertColumnIndex];
+                    var elemX = pageFigures[j].position.x;
+                    var elemY = pageFigures[j].position.y;
+                    var currentTop = currentVertColumn.position.y[0];
+
+                    if (columnPosition.x[0] < elemX[1] && columnPosition.x[1] > elemX[0] &&
+                        columnPosition.y[0] < elemY[1] && columnPosition.y[1] > elemY[0]
+                    ) {
+                        var checkHeight = elemY[0] - currentTop;
+                        var adjustHeight = 0;
+                        if (checkHeight === 0) {
+                            //adjust top and height
+                            adjustHeight = currentVertColumn.height - pageFigures[j].calculatedHeight - this.parent.dimensions.figureContentGutter;
+                            currentTop = pageFigures[j].position.y[1] + this.parent.dimensions.figureContentGutter;
+                            vertColumns[currentVertColumnIndex].position.y = [currentTop, currentTop + adjustHeight];
+                            vertColumns[currentVertColumnIndex].height = adjustHeight;
+                            heightRemain = heightRemain - pageFigures[j].calculatedHeight - this.parent.dimensions.figureContentGutter;
+                        } else {
+                            //create new vert col
+                            adjustHeight = elemY[0] - currentTop;
+                            vertColumns[currentVertColumnIndex].position.y = [currentTop, currentTop + adjustHeight];
+                            vertColumns[currentVertColumnIndex].height = adjustHeight;
+                            currentVertColumnIndex++;
+
+                            heightRemain = heightRemain - adjustHeight - pageFigures[j].calculatedHeight;
+
+                            vertColumns.push({
+                                position: {
+                                    x : [leftPosition, leftPosition + this.parent.dimensions.columnWidth],
+                                    y : [elemY[1] + this.parent.dimensions.figureContentGutter, elemY[1] + heightRemain + this.parent.dimensions.figureContentGutter]
+                                },
+                                height: heightRemain
+                            });
+                        }
+                    }
+                }
+            }
+
+            // if (numPageFigures) {
+            //     for (var j = 0; j < numPageFigures; j++) {
+
+            //         var elemX = pageFigures[j].position.x;
+            //         var elemY = pageFigures[j].position.y;
+
+            //         if (columnPosition.x[0] < elemX[1] && columnPosition.x[1] > elemX[0] &&
+            //             columnPosition.y[0] < elemY[1] && columnPosition.y[1] > elemY[0]
+            //         ) {
+            //             height = height - pageFigures[j].calculatedHeight - this.parent.dimensions.figureContentGutter;
+
+            //             //Adjust column top offset based on vertical location of the figure
+            //             switch (pageFigures[j].model.get("position").vertical) {
+            //                 //top
+            //                 case 't':
+            //                 //fullpage
+            //                 case 'p':
+            //                     topPosition = topPosition + pageFigures[j].calculatedHeight + this.parent.dimensions.figureContentGutter;
+            //                     break;
+            //                 //bottom
+            //                 case 'b':
+            //                     topPosition = topPosition;
+            //                     break;
+            //             }
+
+            //             columnPosition.y = [topPosition, topPosition + height];
+            //         }
+            //     }
+            // }
+
+            for (var k = 0, numVertCols = vertColumns.length; k < numVertCols; k++) {
+                var vertCol = vertColumns[k];
+                height = Math.floor(vertCol.height);
+                if (height > minColHeight || (numVertCols > 1 && height > 0)) {
+                    this.processingData.columns.push({
+                        height : height,
+                        heightRemain : height > 0 ? height : 0,
+                        '$el' : null,
+                        offset : 0,
+                        position : {
+                            left : vertCol.position.x[0],
+                            top : vertCol.position.y[0]
+                        },
+                        isVertCol: numVertCols > 1 ? true : false,
+                        pageColumnNum: i
+                    });
+                }
+            }
+        }
+
+        this.processingData.numberOfColumns = this.processingData.columns.length;
+        this.processingData.currentColumn = 0;
+    },
+
+    addFigure: function(figureViewInstance) {
+        var figurePlaced = false;
+
+        this.addView(figureViewInstance);
+
+        if (!figureViewInstance.layoutComplete) {
+            figureViewInstance.render();
+
+            if (figureViewInstance.layoutComplete) {
+                //end the page if full page plate
+                if (figureViewInstance.model.get('position').horizontal === "f") {
+                	this.processingComplete();
+                }
+                //figure was placed
+                figurePlaced = true;
+            } else {
+                //figure was not placed... carryover to next page
+                figurePlaced = false;
+                this.removeView(figureViewInstance, false);
+            }
+        }
+
+        return figurePlaced;
+    }
 });
 
 OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
-	template: OsciTk.templateManager.get('multi-column-section'),
-
-	initialize: function(options) {
-		this._super('initialize');
-		this.options = options;
-		this.options.pageView = 'MultiColumnPage';
-
-		this.listenTo(Backbone, "windowResized", function() {
-			//get the identifier of the first element on the page to try and keep the reader in the same location
-			var identifier;
-			var page = this.getChildViewByIndex(app.views.navigationView.page - 1);
-			var element = page.$el.find("[id]:first");
-			if (element.length) {
-				identifier = element.attr("id");
-			}
-
-			//update the navigationView identifier if found
-			if (identifier) {
-				app.views.navigationView.identifier = identifier;
-			}
-
-			this.render();
-		});
-
-		this.listenTo(Backbone, "navigate", function(data) {
-			var gotoPage = 1;
-			if (data.page) {
-				gotoPage = data.page;
-			}
-			else if (data.identifier) {
-				switch (data.identifier) {
-					case 'end':
-						gotoPage = this.model.get('pages').length;
-						break;
-					case 'start':
-						gotoPage = 1;
-						break;
-					default:
-						var page_for_id = null;
-
-						if(data.identifier.search(/^p-[0-9]+/) > -1) {
-							var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
-							page_for_id = this.getPageForParagraphId(pid);
-						} else if (data.identifier.search(/^fig-[0-9]+-[0-9]+-[0-9]+/) > -1) {
-							var matches = data.identifier.match(/^(fig-[0-9]+-[0-9]+)-([0-9])+?/);
-							var figureId = matches[1];
-							var occurrence = matches[2] ? parseInt(matches[2],10) : 1;
-
-							var refs = $(".figure_reference").filter("[href='#" + figureId + "']");
-							if (refs.length) {
-								if (refs.length === 1) {
-									page_for_id = this.getPageNumberForSelector(refs[0]);
-								} else {
-									//find visible occurence
-									var occurrenceCount = 0;
-									for (var j = 0, l = refs.length; j < l; j++) {
-										if (this.isElementVisible(refs[j])) {
-											occurrenceCount++;
-
-											if (occurrenceCount === occurrence) {
-												page_for_id = this.getPageNumberForSelector(refs[j]);
-												break;
-											}
-										}
-									}
-								}
-							}
-
-						} else {
-							page_for_id = this.getPageNumberForElementId(data.identifier);
-						}
-
-						if (page_for_id !== null) {
-							gotoPage = page_for_id;
-						} else {
-							gotoPage = 1;
-						}
-
-						break;
-				}
-			}
-
-			//make the view visible
-			this.getChildViewByIndex(gotoPage - 1).show();
-
-			//calculate the page offset to move the page into view
-			var offset = (gotoPage - 1) * (this.dimensions.innerSectionHeight) * -1;
-
-			//TODO: add step to hide all other pages
-			var pages = this.getChildViews();
-			var numPages = pages.length;
-			for(var i = 0; i < numPages; i++) {
-				if (i !== (gotoPage - 1)) {
-					pages[i].hide();
-				}
-			}
-
-			//move all the pages to the proper offset
-			this.$el.find("#pages").css({
-				"-webkit-transform": "translate3d(0, " + offset + "px, 0)",
-				"-moz-transform": "translate3d(0, " + offset + "px, 0)",
-				"transform": "translate3d(0, " + offset + "px, 0)"
-			});
-
-			//trigger event so other elements can update with current page
-			Backbone.trigger("pageChanged", {page: gotoPage});
-
-		});
-
-		this.$el.addClass("oscitk_multi_column");
-
-		//set the default options
-		_.defaults(this.options, {
-			minColumnWidth : 200,
-			maxColumnWidth : 300,
-			gutterWidth : 40,
-			minLinesPerColumn : 5,
-			defaultLineHeight: 16
-		});
-
-		//initialize dimensions object
-		this.dimensions = {};
-	},
-
-	isElementVisible: function(elem) {
-		//determine if it is visible
-		var $elem = $(elem);
-		var inColumn = $elem.parents(".column");
-		var checkContainer = null;
-		var visible = true;
-
-		if (inColumn.length) {
-			checkContainer = inColumn;
-		} else {
-			checkContainer = $elem.parents(".page");
-		}
-
-		if (checkContainer.length) {
-			var position = $elem.position();
-			if (position.top < 0 || position.top > checkContainer.height()) {
-				visible = false;
-			}
-		}
-
-		return visible;
-	},
-
-	preRender: function() {
-		//make sure no figure views are hanging around
-		app.views.figures = {};
-	},
-
-	renderContent: function() {
-		this.$el.html(this.template());
-
-		this.calculateDimensions();
-
-		//setup location to store layout housekeeping information
-		this.layoutData = {
-			data : this.model.get('content'),
-			items : null
-		};
-
-		//remove unwanted sections & parse sections
-		this.cleanData();
-
-		//create a placeholder for figures that do not fit on a page
-		this.unplacedFigures = [];
-
-		//if there is a plate image, make sure it gets moved to the front
-		var plateFigures = app.collections.figures.where({plate: true});
-		if (plateFigures.length) {
-			_.each(plateFigures, function(fig) {
-				this.unplacedFigures.push(fig.id);
-			}, this);
-		}
-
-		this.layoutData.items = this.layoutData.data.length;
-
-		var i = 0;
-		var firstOccurence = true;
-		var paragraphNumber = 1;
-		var paragraphsOnPage = 0;
-		var itemsOnPage = 0;
-		while(this.layoutData.items > 0 || this.unplacedFigures.length > 0) {
-			var pageView = this.getPageForProcessing(undefined, "#pages");
-			var layoutResults = null;
-			var figureIds = [];
-
-			if (!pageView.processingData.rendered) {
-				itemsOnPage = 0;
-				paragraphsOnPage = 0;
-				pageView.render();
-
-				//load any unplaced figures
-				figureIds = figureIds.concat(this.unplacedFigures);
-			}
-
-			var content = $(this.layoutData.data[i]).clone();
-
-			//Process any figures in the content
-			var figureLinks = content.find("a.figure_reference");
-			var numFigureLinks = figureLinks.length;
-			var inlineFigures = content.find("figure");
-			var numinlineFigures = inlineFigures.length;
-			if (content.is("figure") || numFigureLinks || numinlineFigures || figureIds.length) {
-				var j;
-
-				if (content.is("figure")) {
-					figureIds.push(content.attr("id"));
-				}
-
-				if (numFigureLinks) {
-					for (j = 0; j < numFigureLinks; j++) {
-						figureIds.push($(figureLinks[j]).attr("href").substring(1));
-					}
-				}
-
-				if (numinlineFigures) {
-					for (j = 0; j < numinlineFigures; j++) {
-						var tempFigure = $(inlineFigures[j]).remove();
-						figureIds.push(tempFigure.attr("id"));
-					}
-				}
-
-				var numFigureIds = figureIds.length;
-				for (j = 0; j < numFigureIds; j++) {
-					var figure = app.collections.figures.get(figureIds[j]);
-					var figureType = figure.get('type');
-					var figureViewType = OsciTk.views.figureTypeRegistry[figureType] ? OsciTk.views.figureTypeRegistry[figureType] : OsciTk.views.figureTypeRegistry['default'];
-					var figureViewInstance = this.getFigureView(figure.get('id'));
-
-					if (!figureViewInstance) {
-						//create instance and add it to app.views for ease of access
-						app.views.figures[figureIds[j]] = figureViewInstance = new OsciTk.views[figureViewType]({
-							model : figure,
-							sectionDimensions : this.dimensions
-						});
-					}
-
-					if (!figureViewInstance.layoutComplete) {
-						if (pageView.addFigure(figureViewInstance)) {
-							//figure was added to the page... restart page processing
-							layoutResults = 'figurePlaced';
-							var inUnplaced = _.indexOf(this.unplacedFigures, figureIds[j]);
-							if (inUnplaced > -1) {
-								this.unplacedFigures.splice(inUnplaced, 1);
-							}
-							break;
-						} else {
-							if (_.indexOf(this.unplacedFigures, figureIds[j]) === -1) {
-								this.unplacedFigures.push(figureIds[j]);
-							}
-							if (content.is("figure")) {
-								layoutResults = 'next';
-							}
-						}
-					} else {
-						if (content.is("figure")) {
-							layoutResults = 'next';
-						}
-					}
-				}
-			}
-
-			if (layoutResults === null && content.length) {
-				var contentId = 'osci-content-' + i;
-				if (firstOccurence) {
-					content.attr('id', contentId);
-				}
-
-				//add a data attribute for all content for when content is repeated it still has an identifier
-				content.attr("data-osci_content_id", contentId);
-
-				if (content.is("p")) {
-					content.attr("data-paragraph_number", paragraphNumber);
-				}
-
-				layoutResults = pageView.addContent(content).layoutContent(contentId);
-			}
-
-			switch (layoutResults) {
-				case 'contentOverflow':
-					firstOccurence = false;
-					break;
-				case 'figurePlaced':
-					pageView.resetPage();
-
-					paragraphNumber -= paragraphsOnPage;
-					paragraphsOnPage = 0;
-
-					this.layoutData.items += itemsOnPage;
-					i -= itemsOnPage;
-					itemsOnPage = 0;
-					break;
-				default:
-					i++;
-					this.layoutData.items--;
-					itemsOnPage++;
-
-					if (content.is("p")) {
-						paragraphNumber++;
-						paragraphsOnPage++;
-					}
-
-					firstOccurence = true;
-
-					if (this.layoutData.items <= 0) {
-						pageView.processingComplete();
-					}
-			}
-		}
-	},
-
-	calculateDimensions: function() {
-		var dimensions = this.dimensions;
-
-		//get window height / width
-		var windowWidth = $(window).width();
-		var windowHeight = $(window).height();
-
-		//min width to prevent lockup
-		if (windowWidth < 300) {
-			windowWidth = 300;
-		}
-
-		//min height to prevent lockup
-		if (windowHeight < 300) {
-			windowHeight = 300;
-		}
-
-		//if the window size did not change, no need to recalculate dimensions
-		if (dimensions.windowWidth && dimensions.windowWidth === windowWidth && dimensions.windowHeight && dimensions.windowHeight === windowHeight) {
-			return;
-		}
-
-		//cache the window height/width
-		dimensions.windowHeight = windowHeight;
-		dimensions.windowWidth = windowWidth;
-
-		//copy gutter width out of the options for easy access
-		dimensions.gutterWidth = this.options.gutterWidth;
-
-		//copy minLinesPerColumn out of options for eacy access
-		dimensions.minLinesPerColumn = this.options.minLinesPerColumn;
-
-		//get the margins of the section container
-		dimensions.sectionMargin = {
-			left : parseInt(this.$el.css("margin-left"), 10),
-			top : parseInt(this.$el.css("margin-top"), 10),
-			right : parseInt(this.$el.css("margin-right"), 10),
-			bottom : parseInt(this.$el.css("margin-bottom"), 10)
-		};
-
-		//get the padding of the section container
-		dimensions.sectionPadding = {
-			left : parseInt(this.$el.css("padding-left"), 10),
-			top : parseInt(this.$el.css("padding-top"), 10),
-			right : parseInt(this.$el.css("padding-right"), 10),
-			bottom : parseInt(this.$el.css("padding-bottom"), 10)
-		};
-
-		//determine the correct height for the section container to eliminate scrolling
-		dimensions.outerSectionHeight = windowHeight - dimensions.sectionMargin.top - dimensions.sectionMargin.bottom;
-		dimensions.innerSectionHeight = dimensions.outerSectionHeight - dimensions.sectionPadding.top - dimensions.sectionPadding.bottom;
-
-		//determine the correct width for the section container
-		dimensions.outerSectionWidth = this.$el.outerWidth();
-		dimensions.innerSectionWidth = dimensions.outerSectionWidth - dimensions.sectionPadding.left - dimensions.sectionPadding.right;
-
-		//column width
-		if (dimensions.innerSectionWidth < this.options.maxColumnWidth) {
-			dimensions.columnWidth = dimensions.innerSectionWidth;
-		} else {
-			dimensions.columnWidth = this.options.maxColumnWidth;
-		}
-
-		//Determine the number of columns per page
-		dimensions.columnsPerPage = Math.floor(dimensions.innerSectionWidth / dimensions.columnWidth);
-		if (dimensions.innerSectionWidth < (dimensions.columnsPerPage * dimensions.columnWidth) + ((dimensions.columnsPerPage) * this.options.gutterWidth))
-		{
-			dimensions.columnsPerPage = dimensions.columnsPerPage - 1;
-		}
-
-		//If we ended up with no columns, force it to one column
-		if (dimensions.columnsPerPage === 0) {
-			dimensions.columnsPerPage = 1;
-			dimensions.columnWidth = dimensions.innerSectionWidth - this.options.gutterWidth;
-		}
-
-		//Large gutters look ugly... reset column width if gutters get too big
-		var gutterCheck = (dimensions.innerSectionWidth - (dimensions.columnsPerPage * dimensions.columnWidth)) / (dimensions.columnsPerPage);
-		if (gutterCheck > this.options.gutterWidth) {
-			dimensions.columnWidth = (dimensions.innerSectionWidth - (this.options.gutterWidth * (dimensions.columnsPerPage))) / dimensions.columnsPerPage;
-		}
-		dimensions.columnWidth = Math.floor(dimensions.columnWidth);
-
-		this.dimensions = dimensions;
-		//set the height of the container
-		//dont need this if styled correctly I think
-		//this.$el.height(dimensions.pageHeight);
-	},
-
-	cleanData: function() {
-		//remove the figure section
-		this.layoutData.data.find("#figures").remove();
-
-		//remove the footnotes section
-		this.layoutData.data.find("#footnotes").remove();
-
-		//chunk the data into managable parts
-		this.layoutData.data = this.layoutData.data.find('section').children();
-	},
-
-	getFigureView: function(figureId) {
-		if (app.views.figures[figureId]) {
-			return app.views.figures[figureId];
-		}
-	}
+    template: OsciTk.templateManager.get('multi-column-section'),
+
+    initialize: function(options) {
+        this._super('initialize');
+        this.options = options;
+        this.options.pageView = 'MultiColumnPage';
+
+        this.listenTo(Backbone, "windowResized", function() {
+            //get the identifier of the first element on the page to try and keep the reader in the same location
+            var identifier;
+            var page = this.getChildViewByIndex(app.views.navigationView.page - 1);
+            var element = page.$el.find("[id]:first");
+            if (element.length) {
+                identifier = element.attr("id");
+            }
+
+            //update the navigationView identifier if found
+            if (identifier) {
+                app.views.navigationView.identifier = identifier;
+            }
+
+            this.render();
+        });
+
+        this.listenTo(Backbone, "navigate", function(data) {
+            var matches, refs, occurrenceCount, j;
+            var gotoPage = 1;
+            if (data.page) {
+                gotoPage = data.page;
+            }
+            else if (data.identifier) {
+                switch (data.identifier) {
+                    case 'end':
+                        gotoPage = this.model.get('pages').length;
+                        break;
+                    case 'start':
+                        gotoPage = 1;
+                        break;
+                    default:
+                        var page_for_id = null;
+                        if(data.identifier.search(/^p-[0-9]+/) > -1) {
+                            var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
+                            page_for_id = this.getPageForParagraphId(pid);
+                        } else if (data.identifier.search(/^fig-[0-9]+-[0-9]+-[0-9]+/) > -1) {
+                            // Route for figure references
+                            matches = data.identifier.match(/^(fig-[0-9]+-[0-9]+)-([0-9])+?/);
+                            var figureId = matches[1];
+                            var occurrence = matches[2] ? parseInt(matches[2],10) : 1;
+
+                            refs = $(".figure_reference").filter("[href='#" + figureId + "']");
+                            if (refs.length) {
+                                if (refs.length === 1) {
+                                    page_for_id = this.getPageNumberForSelector(refs[0]);
+                                } else {
+                                    //find visible occurence
+                                    occurrenceCount = 0;
+                                    for (j = 0, l = refs.length; j < l; j++) {
+                                        if (this.isElementVisible(refs[j])) {
+                                            occurrenceCount++;
+                                            if (occurrenceCount === occurrence) {
+                                                page_for_id = this.getPageNumberForSelector(refs[j]);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        } else if (data.identifier.search(/^fn-[0-9]+-[0-9]+/) > -1) {
+                            // Route for footnote references
+                            matches = data.identifier.match(/^fn-[0-9]+-[0-9]+/);
+                            refs = $('a[href="#' + matches[0] + '"]');
+                            if (refs.length === 1) {
+                                page_for_id = this.getPageNumberForSelector(refs[0]);
+                            }
+                            else {
+                                // find visible occurence
+                                for (j = 0; j < refs.length; j++) {
+                                    if (this.isElementVisible(refs[j])) {
+                                        page_for_id = this.getPageNumberForSelector(refs[j]);
+                                        break;
+                                    }
+                                }
+                            }
+                        } else {
+                            page_for_id = this.getPageNumberForElementId(data.identifier);
+                        }
+
+                        if (page_for_id !== null) {
+                            gotoPage = page_for_id;
+                        } else {
+                            gotoPage = 1;
+                        }
+
+                        break;
+                }
+            }
+
+            //make the view visible
+            this.getChildViewByIndex(gotoPage - 1).show();
+
+            //calculate the page offset to move the page into view
+            var offset = (gotoPage - 1) * (this.dimensions.innerSectionHeight) * -1;
+
+            //TODO: add step to hide all other pages
+            var pages = this.getChildViews();
+            var numPages = pages.length;
+            for(var i = 0; i < numPages; i++) {
+                if (i !== (gotoPage - 1)) {
+                    pages[i].hide();
+                }
+            }
+
+            //move all the pages to the proper offset
+            this.$el.find("#pages").css({
+                "-webkit-transform": "translate3d(0, " + offset + "px, 0)",
+                "-moz-transform": "translate3d(0, " + offset + "px, 0)",
+                "transform": "translate3d(0, " + offset + "px, 0)"
+            });
+
+            //trigger event so other elements can update with current page
+            Backbone.trigger("pageChanged", {page: gotoPage});
+
+        });
+
+        this.$el.addClass("oscitk_multi_column");
+
+        //set the default options
+        _.defaults(this.options, {
+            minColumnWidth : 200,
+            maxColumnWidth : 300,
+            gutterWidth : 40,
+            minLinesPerColumn : 5,
+            defaultLineHeight: 16,
+            figureContentGutter : 20,
+            maxFigureWidth: 0
+        });
+
+        //initialize dimensions object
+        this.dimensions = {};
+    },
+
+    isElementVisible: function(elem) {
+        //determine if it is visible
+        var $elem = $(elem);
+        var inColumn = $elem.parents(".column");
+        var checkContainer = null;
+        var visible = true;
+
+        if (inColumn.length) {
+            checkContainer = inColumn;
+        } else {
+            checkContainer = $elem.parents(".page");
+        }
+
+        if (checkContainer.length) {
+            var position = $elem.position();
+            if (position.top < 0 || position.top > checkContainer.height()) {
+                visible = false;
+            }
+        }
+
+        return visible;
+    },
+
+    preRender: function() {
+        //make sure no figure views are hanging around
+        app.views.figures = {};
+    },
+
+    renderContent: function() {
+        this.$el.html(this.template());
+
+        this.calculateDimensions();
+
+        //setup location to store layout housekeeping information
+        this.layoutData = {
+            data : this.model.get('content'),
+            items : null
+        };
+
+        //remove unwanted sections & parse sections
+        this.cleanData();
+
+        //create a placeholder for figures that do not fit on a page
+        this.unplacedFigures = [];
+
+        //if there is a plate image, make sure it gets moved to the front
+        var plateFigures = app.collections.figures.where({plate: true});
+        if (plateFigures.length) {
+            _.each(plateFigures, function(fig) {
+                this.unplacedFigures.push(fig.id);
+            }, this);
+        }
+
+        this.layoutData.items = this.layoutData.data.length;
+
+        var i = 0;
+        var firstOccurence = true;
+        var paragraphNumber = 1;
+        var paragraphsOnPage = 0;
+        var itemsOnPage = 0;
+        while(this.layoutData.items > 0 || this.unplacedFigures.length > 0) {
+            var pageView = this.getPageForProcessing(undefined, "#pages");
+            var layoutResults = null;
+            var figureIds = [];
+
+            if (!pageView.processingData.rendered) {
+                itemsOnPage = 0;
+                paragraphsOnPage = 0;
+                pageView.render();
+
+                //load any unplaced figures
+                figureIds = figureIds.concat(this.unplacedFigures);
+            }
+
+            var content = $(this.layoutData.data[i]).clone();
+
+            if (figureIds.length === 0 && content.length === 0) {
+                if (this.unplacedFigures.length) {
+                    figureIds = figureIds.concat(this.unplacedFigures);
+                } else {
+                    break;
+                }
+            }
+
+            //Process any figures in the content
+            var figureLinks = content.find("a.figure_reference");
+            var numFigureLinks = figureLinks.length;
+            var inlineFigures = content.find("figure");
+            var numinlineFigures = inlineFigures.length;
+            if (content.is("figure") || numFigureLinks || numinlineFigures || figureIds.length) {
+                var j;
+
+                if (content.is("figure")) {
+                    figureIds.push(content.attr("id"));
+                }
+
+                if (numFigureLinks) {
+                    for (j = 0; j < numFigureLinks; j++) {
+                        figureIds.push($(figureLinks[j]).attr("href").substring(1));
+                    }
+                }
+
+                if (numinlineFigures) {
+                    for (j = 0; j < numinlineFigures; j++) {
+                        var tempFigure = $(inlineFigures[j]).remove();
+                        figureIds.push(tempFigure.attr("id"));
+                    }
+                }
+
+                var numFigureIds = figureIds.length;
+                for (j = 0; j < numFigureIds; j++) {
+                    var figure = app.collections.figures.get(figureIds[j]);
+                    var figureType = figure.get('type');
+                    var figureViewType = OsciTk.views.figureTypeRegistry[figureType] ? OsciTk.views.figureTypeRegistry[figureType] : OsciTk.views.figureTypeRegistry['default'];
+                    var figureViewInstance = this.getFigureView(figure.get('id'));
+
+                    if (!figureViewInstance) {
+                        //create instance and add it to app.views for ease of access
+                        app.views.figures[figureIds[j]] = figureViewInstance = new OsciTk.views[figureViewType]({
+                            model : figure,
+                            sectionDimensions : this.dimensions
+                        });
+                    }
+
+                    if (!figureViewInstance.layoutComplete) {
+                        if (pageView.addFigure(figureViewInstance)) {
+                            //figure was added to the page... restart page processing
+                            layoutResults = 'figurePlaced';
+                            var inUnplaced = _.indexOf(this.unplacedFigures, figureIds[j]);
+                            if (inUnplaced > -1) {
+                                this.unplacedFigures.splice(inUnplaced, 1);
+                            }
+                            break;
+                        } else {
+                            if (_.indexOf(this.unplacedFigures, figureIds[j]) === -1) {
+                                this.unplacedFigures.push(figureIds[j]);
+                            }
+                            if (content.is("figure")) {
+                                layoutResults = 'next';
+                            }
+                        }
+                    } else {
+                        if (content.is("figure")) {
+                            layoutResults = 'next';
+                        }
+                    }
+                }
+            }
+
+            if (layoutResults === null && content.length) {
+                var contentId = 'osci-content-' + i;
+                var existingId = content.attr('id') || "";
+                if (firstOccurence && existingId.indexOf('_anchor') === -1) {
+                    content.attr('id', contentId);
+                }
+
+                //add a data attribute for all content for when content is repeated it still has an identifier
+                content.attr("data-osci_content_id", contentId);
+
+                if (content.is("p")) {
+                    content.attr("data-paragraph_number", paragraphNumber);
+                }
+
+                layoutResults = pageView.addContent(content).layoutContent(contentId);
+            }
+
+            switch (layoutResults) {
+                case 'contentOverflow':
+                    firstOccurence = false;
+                    break;
+                case 'figurePlaced':
+                    pageView.resetPage();
+
+                    paragraphNumber -= paragraphsOnPage;
+                    paragraphsOnPage = 0;
+
+                    this.layoutData.items += itemsOnPage;
+                    i -= itemsOnPage;
+                    itemsOnPage = 0;
+                    break;
+                default:
+                    i++;
+                    this.layoutData.items--;
+                    itemsOnPage++;
+
+                    if (content.is("p")) {
+                        paragraphNumber++;
+                        paragraphsOnPage++;
+                    }
+
+                    firstOccurence = true;
+
+                    if (this.layoutData.items <= 0) {
+                        pageView.processingComplete();
+                    }
+            }
+        }
+    },
+
+    calculateDimensions: function() {
+        var dimensions = this.dimensions;
+
+        //get window height / width
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+
+        //min width to prevent lockup
+        if (windowWidth < 300) {
+            windowWidth = 300;
+        }
+
+        //min height to prevent lockup
+        if (windowHeight < 300) {
+            windowHeight = 300;
+        }
+
+        //if the window size did not change, no need to recalculate dimensions
+        if (dimensions.windowWidth && dimensions.windowWidth === windowWidth && dimensions.windowHeight && dimensions.windowHeight === windowHeight) {
+            return;
+        }
+
+        //cache the window height/width
+        dimensions.windowHeight = windowHeight;
+        dimensions.windowWidth = windowWidth;
+
+        //copy gutter width out of the options for easy access
+        dimensions.gutterWidth = this.options.gutterWidth;
+
+        //copy top column margin for easy access
+        dimensions.figureContentGutter = this.options.figureContentGutter;
+
+        //copy minLinesPerColumn out of options for eacy access
+        dimensions.minLinesPerColumn = this.options.minLinesPerColumn;
+
+        //get the margins of the section container
+        dimensions.sectionMargin = {
+            left : parseInt(this.$el.css("margin-left"), 10),
+            top : parseInt(this.$el.css("margin-top"), 10),
+            right : parseInt(this.$el.css("margin-right"), 10),
+            bottom : parseInt(this.$el.css("margin-bottom"), 10)
+        };
+
+        //get the padding of the section container
+        dimensions.sectionPadding = {
+            left : parseInt(this.$el.css("padding-left"), 10),
+            top : parseInt(this.$el.css("padding-top"), 10),
+            right : parseInt(this.$el.css("padding-right"), 10),
+            bottom : parseInt(this.$el.css("padding-bottom"), 10)
+        };
+
+        //determine the correct height for the section container to eliminate scrolling
+        dimensions.outerSectionHeight = windowHeight - dimensions.sectionMargin.top - dimensions.sectionMargin.bottom;
+        dimensions.innerSectionHeight = dimensions.outerSectionHeight - dimensions.sectionPadding.top - dimensions.sectionPadding.bottom;
+
+        //determine the correct width for the section container
+        dimensions.outerSectionWidth = this.$el.outerWidth();
+        dimensions.innerSectionWidth = dimensions.outerSectionWidth - dimensions.sectionPadding.left - dimensions.sectionPadding.right;
+
+        //column width
+        if (dimensions.innerSectionWidth < this.options.maxColumnWidth) {
+            dimensions.columnWidth = dimensions.innerSectionWidth;
+        } else {
+            dimensions.columnWidth = this.options.maxColumnWidth;
+        }
+
+        //Determine the number of columns per page
+        dimensions.columnsPerPage = Math.floor(dimensions.innerSectionWidth / dimensions.columnWidth);
+        if (dimensions.innerSectionWidth < (dimensions.columnsPerPage * dimensions.columnWidth) + ((dimensions.columnsPerPage) * this.options.gutterWidth))
+        {
+            dimensions.columnsPerPage = dimensions.columnsPerPage - 1;
+        }
+
+        //If we ended up with no columns, force it to one column
+        if (dimensions.columnsPerPage === 0) {
+            dimensions.columnsPerPage = 1;
+            dimensions.columnWidth = dimensions.innerSectionWidth - this.options.gutterWidth;
+        }
+
+        //Large gutters look ugly... reset column width if gutters get too big
+        var gutterCheck = (dimensions.innerSectionWidth - (dimensions.columnsPerPage * dimensions.columnWidth)) / (dimensions.columnsPerPage);
+        if (gutterCheck > this.options.gutterWidth) {
+            dimensions.columnWidth = (dimensions.innerSectionWidth - (this.options.gutterWidth * (dimensions.columnsPerPage))) / dimensions.columnsPerPage;
+        }
+        dimensions.columnWidth = Math.floor(dimensions.columnWidth);
+
+        //If a percentage based width hint is specified, convert to number of columns to cover
+        var maxFigureWidth = this.options.maxFigureWidth;
+        if (typeof(maxFigureWidth) === 'string' && maxFigureWidth.indexOf("%") > 0) {
+            maxFigureWidth = Math.ceil((parseInt(maxFigureWidth, 10) / 100) * dimensions.columnsPerPage);
+        }
+        dimensions.maxFigureWidth = maxFigureWidth;
+
+
+        this.dimensions = dimensions;
+        //set the height of the container
+        //dont need this if styled correctly I think
+        //this.$el.height(dimensions.pageHeight);
+    },
+
+    cleanData: function() {
+        //remove the figure section
+        this.layoutData.data.find("#figures").remove();
+
+        //remove the footnotes section
+        this.layoutData.data.find("#footnotes").remove();
+
+        var finalItems = [];
+        this.layoutData.data.find('section').each(function(i, section) {
+            var $section = $(section);
+            var sId = $section.attr('id');
+            $section.children().each(function(j, c){
+                var $c = $(c);
+                var contentLen = $.trim($c.text()).length;
+                if (contentLen > 0 || $c.hasClass("anchor-link")) {
+                    $c.attr('data-sectionId', sId);
+                    finalItems.push(c);
+                }
+            });
+        });
+
+        //chunk the data into managable parts
+        this.layoutData.data = finalItems;
+    },
+
+    getFigureView: function(figureId) {
+        if (app.views.figures[figureId]) {
+            return app.views.figures[figureId];
+        }
+    }
 });
 
 OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
@@ -3312,6 +3829,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		}
 	}
 });
+
 OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 	className: 'notes-view',
 	template: OsciTk.templateManager.get('notes'),
@@ -3381,75 +3899,86 @@ OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 	}
 });
 OsciTk.views.ParagraphControlsView = OsciTk.views.BaseView.extend({
-	className: 'paragraph-controls',
+    className: 'paragraph-controls',
 
-	initialize: function(options) {
-		this.options = options;
-		this.options.paragraphNumber = this.options.content.data("paragraph_number");
-		this.options.contentIdentifier = this.options.content.data("osci_content_id");
-		this.options.linkItems = app.config.get('paragraphControls');
+    initialize: function(options) {
+        this.options = options;
+        this.options.paragraphNumber = this.options.content.data("paragraph_number");
+        this.options.contentIdentifier = this.options.content.data("osci_content_id");
+        this.options.linkItems = app.config.get('paragraphControls');
 
-		if (this.options.linkItems) {
-			this.render();
-		}
-	},
+        if (this.options.linkItems) {
+            this.render();
 
-	render: function() {
-		var contentPosition = this.options.content.position();
+            this.listenTo(Backbone, "paragraphClicked", function(data) {
+                var pNum = data.paragraphNumber;
+                if (this.options.paragraphNumber === pNum) {
+                    var tip = this.$el.qtip("api");
+                    if (tip.rendered === false) {
+                        tip.show();
+                    } else {
+                        tip.toggle();
+                    }
+                }
+            });
+        }
+    },
+    events: {
+        'click a': 'clicked'
+    },
+    clicked: function(e) {
+        e.preventDefault();
+        var evt = $(e.target).data('event');
+        Backbone.trigger(evt, {contentId: this.options.contentIdentifier, paragraphNumber: this.options.paragraphNumber});
+    },
+    render: function() {
+        var contentPosition = this.options.content.position();
 
-		this.$el.attr('data-osci_content_id', this.options.contentIdentifier);
-		this.$el.attr('data-paragraph_identifier', this.options.paragraphNumber);
-		this.$el.html('<span class="paragraph-identifier paragraph-identifier-' + this.options.paragraphNumber + '">' + (this.options.paragraphNumber) + '</span>');
-		this.$el.css(this.options.position);
+        this.$el.attr('data-osci_content_id', this.options.contentIdentifier);
+        this.$el.attr('data-paragraph_identifier', this.options.paragraphNumber);
+        this.$el.html('<span class="paragraph-identifier paragraph-identifier-' + this.options.paragraphNumber + '">' + (this.options.paragraphNumber) + '</span>');
+        this.$el.css(this.options.position);
 
-		//remove qtip if already present
-		if(this.$el.data("qtip")) {
-			this.$el.qtip("destroy");
-		}
+        //remove qtip if already present
+        if(this.$el.data("qtip")) {
+            this.$el.qtip("destroy", "true");
+        }
 
-		var tipContent = '';
-		for(var i in this.options.linkItems) {
-			var text = this.options.linkItems[i];
-			tipContent += '<a href="' + i + '" data-event="' + i + '" class="' + i +'">' + text + '</a> ';
-		}
+        var tipContent = '';
+        for(var i in this.options.linkItems) {
+            var text = this.options.linkItems[i];
+            tipContent += '<a href="' + i + '" data-event="' + i + '" class="' + i +'">' + text + '</a> ';
+        }
 
-		this.$el.qtip({
-			position: {
-				my: "left center",
-				at: "right center",
-				target: this.$el,
-				container: this.$el,
-				adjust: {
-					y: -10
-				}
-			},
-			show: {
-				ready: false,
-				solo: true
-			},
-			hide: {
-				fixed: true,
-				delay: 500
-			},
-			style: {
-				def: false
-			},
-			overwrite: false,
-			content: tipContent
-		});
+        this.$el.qtip({
+            position: {
+                my: "left center",
+                at: "right center",
+                target: this.$el,
+                container: this.$el,
+                adjust: {
+                    y: -10
+                }
+            },
+            show: {
+                'event': 'click',
+                ready: false,
+                solo: true
+            },
+            hide: {
+                'event': 'unfocus click',
+                fixed: true,
+                delay: 500
+            },
+            style: {
+                def: false
+            },
+            overwrite: false,
+            content: tipContent
+        });
 
-		this.$el.on('click', 'a', {content: this.options.content}, function(e) {
-			e.preventDefault();
-			Backbone.trigger(
-				$(this).data('event'),
-				{
-					contentId: $(e.data.content).attr('data-osci_content_id')
-				}
-			);
-		});
-
-		return this;
-	}
+        return this;
+    }
 });
 OsciTk.views.Search = OsciTk.views.BaseView.extend({
 	className: 'search-view',
@@ -3707,6 +4236,7 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 		this.$el.find("ul").height(newContainerHeight);
 	}
 });
+
 OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 	className: 'toolbar-item',
 	template: OsciTk.templateManager.get('toolbar-item'),
@@ -3750,6 +4280,7 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 });
 OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	id: 'toolbar',
+	className: 'toolbar-closed',
 	template: OsciTk.templateManager.get('toolbar'),
 	initialize: function() {
 		// if toolbar items were provided, store them in the view
@@ -3826,6 +4357,8 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	contentOpen: function() {
 		this.updateHeight();
 
+		this.$el.removeClass('toolbar-closed').addClass('toolbar-open');
+
 		this.isContentOpen = true;
 	},
 	updateHeight: function() {
@@ -3852,1498 +4385,1591 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 			top: '-' + this.$el.height() + 'px'
 		});
 
+		this.$el.removeClass('toolbar-open').addClass('toolbar-closed');
+
 		this.isContentOpen = false;
 	}
 });
 var $ = jQuery;
 
 var LICollection = function() {
-	var collection = [];
-	
-	this.add = function(asset) {
-		var i, count;
-		
-		// check that this asset isn't already in the collection
-		for (i=0, count = collection.length; i < count; i++) {
-			if (collection[i].id == asset.id) {
-				return false;
-			}
-		}
-		collection.push(asset);
-		return true;
-	};
-	
-	this.remove = function(asset) {
-		var i, count;
-		// allow an asset or a string id to be passed in
-		if (typeof asset == "string") {
-			asset = {id: asset};
-		}
-		
-		// find this asset in the collection by id
-		for (i=0, count = collection.length; i < count; i++) {
-			if (collection[i].id == asset.id) {
-				collection.splice(i, 1);
-			}
-		}
-	};
-	
-	this.find = function(id) {
-		var i, count;
-		for (i=0, count = collection.length; i < count; i++) {
-			if (collection[i].id == id) {
-				return collection[i];
-			}
-		}
-		return false;
-	};
-	
-	this.list = function() {
-		return collection;
-	};
+    var collection = [];
 
-	this.userIsDraggingAsset = false;
+    this.add = function(asset) {
+        var i, count;
+
+        // check that this asset isn't already in the collection
+        for (i=0, count = collection.length; i < count; i++) {
+            if (collection[i].id == asset.id) {
+                return false;
+            }
+        }
+        collection.push(asset);
+        return true;
+    };
+
+    this.remove = function(asset) {
+        var i, count;
+        // allow an asset or a string id to be passed in
+        if (typeof asset == "string") {
+            asset = {id: asset};
+        }
+
+        // find this asset in the collection by id
+        for (i=0, count = collection.length; i < count; i++) {
+            if (collection[i].id == asset.id) {
+                collection.splice(i, 1);
+            }
+        }
+    };
+
+    this.find = function(id) {
+        var i, count;
+        for (i=0, count = collection.length; i < count; i++) {
+            if (collection[i].id == id) {
+                return collection[i];
+            }
+        }
+        return false;
+    };
+
+    this.list = function() {
+        return collection;
+    };
+
+    this.userIsDraggingAsset = false;
 };
-	
+
 
 var LayeredImage = function(container) { // container should be a html element
-	var i, count, layerData;
-	
-	// check prereqs
-	if (jQuery !== undefined) {
-		var $ = this.$ = jQuery;
-	}
-	else return false;
-	if (org.polymaps !== undefined) {
-		this.polymaps = org.polymaps;
-	}
-	else return false;
+    var i, count, layerData;
 
-	// turn the element into a jQuery object
-	this.container = $(container);
+    // check prereqs
+    if (jQuery !== undefined) {
+        var $ = this.$ = jQuery;
+    }
+    else {
+        return false;
+    }
+    if (org.polymaps !== undefined) {
+        this.polymaps = org.polymaps;
+    }
+    else {
+        return false;
+    }
 
-	// ensure we have something to work on
-	if (this.container.length < 1) {
-		return false;
-	}
-	
-	// push this new asset into the registry, only render if not already present
-	if (!window.liCollection.add(this)) {
-		return;
-	}
-	
-	// load the layered image id and configuration
-	this.id = this.container.attr('id');
-	this.settings = this.container.data();
-	this.settings.zoomStep = this.settings.zoomStep || 0.1;
-	this.settings.annotationSelectorVisible = false;
-	this.settings.dragging = undefined;
-	
-	// detect and incorporate figure options
-	var figure = this.container.parents('figure:first');
-	var optString = figure.attr('data-options');
-	if (figure.length > 0 && optString) {
-		this.figureOptions = JSON.parse(optString);
-	}
-	// provide defaults if options not set
-	if (typeof(this.figureOptions) === 'undefined') {
-		this.figureOptions = {};
-	}
-	if (typeof(this.figureOptions.disable_interaction) === 'undefined') {
-		this.figureOptions.disable_interaction = false;
-	}
-	if (typeof(this.figureOptions.disable_annotation) === 'undefined') {
-		this.figureOptions.disable_annotation = false;
-	}
-	if (typeof(this.figureOptions.sliderPosition) === 'undefined') {
-		this.figureOptions.sliderPosition = 0;
-	}
+    // turn the element into a jQuery object
+    this.container = $(container);
 
-	// detect and incorporate the caption if it exists
-	this.settings.captionMarkup = this.container.parents('figure:first').find('figcaption').clone();
+    // ensure we have something to work on
+    if (this.container.length < 1) {
+        return false;
+    }
 
-	// store a copy of the original html - will be used to
-	// regenerate markup for fullscreen
-	this.settings.originalMarkup = outerHTML(this.container[0]);
+    // push this new asset into the registry, only render if not already present
+    if (!window.liCollection.add(this)) {
+        return;
+    }
 
-	// extract the layer data
-	this.layers = [];
-	var layerContainer = this.container.find('.layered_image-layers');
-	var layerItems = layerContainer.find('li');
-	for (i=0, count = layerItems.length; i < count; i++) {
-		var layerMarkup = $(layerItems[i]);
-		this.layers.push(layerMarkup.data());
-	}
-	layerContainer.remove();
+    // load the layered image id and configuration
+    this.id = this.container.attr('id');
+    this.settings = this.container.data();
+    this.settings.zoomStep = this.settings.zoomStep || 0.1;
+    this.settings.annotationSelectorVisible = false;
+    this.settings.dragging = undefined;
 
-	// sort the layers so that annotations are always last (on top)
-	this.layers.sort(function(a,b) {
-		var layer1 = a.annotation;
-		var layer2 = b.annotation;
-		if (layer1 == layer2) return 0;
-		if (layer1 && !layer2) return 1;
-		if (!layer1 && layer2) return -1;
-		return 0;
-	});
+    // detect and incorporate figure options
+    var figure = this.container.parents('figure:first');
+    var optString = figure.attr('data-options');
+    if (figure.length > 0 && optString) {
+        this.figureOptions = JSON.parse(optString);
+    }
+    // provide defaults if options not set
+    if (typeof(this.figureOptions) === 'undefined' || typeof(this.figureOptions) !== 'object') {
+        this.figureOptions = {};
+    }
+    if (typeof(this.figureOptions.disable_interaction) === 'undefined') {
+        this.figureOptions.disable_interaction = false;
+    }
+    if (typeof(this.figureOptions.disable_annotation) === 'undefined') {
+        this.figureOptions.disable_annotation = false;
+    }
+    if (typeof(this.figureOptions.sliderPosition) === 'undefined') {
+        this.figureOptions.sliderPosition = 0;
+    }
 
-	// we must order their layer_num properties
-	// also create separate arrays of base and annotation layers for convenience
-	this.baseLayers = [];
-	this.annotationLayers = [];
-	for (i=0, count = this.layers.length; i < count; i++) {
-		layerData = this.layers[i];
-		layerData.layer_num = i + 1;
-		if (layerData.annotation) {
-			this.annotationLayers.push(layerData);
-		}
-		else {
-			this.baseLayers.push(layerData);
-		}
-	}
+    // detect and incorporate the caption if it exists
+    this.settings.captionMarkup = this.container.parents('figure:first').find('figcaption').clone();
 
-	// initialize the container as a polymap
-	this.map = this.polymaps.map();
-	var svg = this.polymaps.svg('svg');
-	$(svg).css({
-		'height': '100%',
-		'width': '100%'
-	});
-	this.map.container(this.container[0].appendChild(svg));
-	this.map.tileSize({
-		x: 256,
-		y: 256
-	});
+    // store a copy of the original html - will be used to
+    // regenerate markup for fullscreen
+    this.settings.originalMarkup = outerHTML(this.container[0]);
 
-	// calculate zoom levels if not already present
-	for (i=0, count = this.layers.length; i < count; i++) {
-		layerData = this.layers[i];
-		if (!layerData.zoom_levels) {
-			layerData.zoom_levels = this.getZoomLevels(layerData.width, layerData.height);
-		}
-	}
-	// create the first two layers, using preset data if available
-	var baseLayerPreset = this.figureOptions.baseLayerPreset ? this.figureOptions.baseLayerPreset : [],
-		numBaseLayerPresets = baseLayerPreset.length,
-		usedPresetLayers = false;
-		
-	if (numBaseLayerPresets > 0) {
-		var firstLayer = this.getLayerById(baseLayerPreset[0]);
-		var secondLayer;
-		
-		if (numBaseLayerPresets > 1) {
-			secondLayer = this.getLayerById(baseLayerPreset[1]);
-		}
-		
-		if (firstLayer && (secondLayer || numBaseLayerPresets == 1)) {
-			this.createLayer(firstLayer);
-			
-			if (secondLayer) {
-				this.createLayer(secondLayer);
-				$('#' + secondLayer.id).css('opacity', 0);
-			}
-			
-			usedPresetLayers = true;
-		}
-	}
-	
-	if (!usedPresetLayers && this.baseLayers.length) {
-		// create first layer, second layer, and make second transparent
-		this.createLayer(this.baseLayers[0]);
-		if (this.baseLayers[1]) {
-			this.createLayer(this.baseLayers[1]);
-			$('#' + this.baseLayers[1].id).css('opacity', 0);
-		}
-	}
-	
-	// create control interface
-	this.createUI();
-	
-	// if any annotation presets are present, display those layers
-	this.showAnnotationPresets();
+    // extract the layer data
+    this.layers = [];
+    var layerContainer = this.container.find('.layered_image-layers');
+    var layerItems = layerContainer.find('li');
+    var annotationLayers = [];
+    for (i=0, count = layerItems.length; i < count; i++) {
+        var layerMarkup = $(layerItems[i]);
+        var layerData = layerMarkup.data();
+        if (layerData.annotation) {
+            annotationLayers.push(layerData);
+        } else {
+            this.layers.push(layerData);
+        }
+    }
 
-	// fit to the map to its container and set the zoom range
-	this.zoomToContainer();
-	
-	// if fullscreen extents are present, this CA needs to be positioned
-	// as its parent was
-	var extents = [];
-	if (this.figureOptions.fullscreenExtents) {
-		extents = [
-			{
-				lon: this.figureOptions.fullscreenExtents.swLon,
-				lat: this.figureOptions.fullscreenExtents.swLat
-			},
-			{
-				lon: this.figureOptions.fullscreenExtents.neLon,
-				lat: this.figureOptions.fullscreenExtents.neLat
-			}
-		];
-		this.setExtents(extents);
-	}
-	// else use the starting postion from the figure options markup
-	// - if initial extents were given, honor them
-	else if (this.figureOptions.swLat) {
-		extents = [
-			{
-				lon: this.figureOptions.swLon,
-				lat: this.figureOptions.swLat
-			},
-			{
-				lon: this.figureOptions.neLon,
-				lat: this.figureOptions.neLat
-			}
-		];
-		this.setExtents(extents);
-	}
+    //Add annotation layers to the end to make sure they are on top
+    if (annotationLayers.length) {
+        this.layers = this.layers.concat(annotationLayers);
+    }
+
+    layerContainer.remove();
+
+    // initialize the container as a polymap
+    this.map = this.polymaps.map();
+    var svg = this.polymaps.svg('svg');
+    $(svg).css({
+        'height': '100%',
+        'width': '100%'
+    });
+    this.map.container(this.container[0].appendChild(svg));
+    this.map.tileSize({
+        x: 256,
+        y: 256
+    });
+
+    // prepare layers
+    this.baseLayers = [];
+    this.annotationLayers = [];
+    this.max_zoom_level = 0;
+    this.max_width = 0;
+    this.max_height = 0;
+    for (i=0, count = this.layers.length; i < count; i++) {
+        layerData = this.layers[i];
+        layerData.layer_num = i + 1;
+        // provide zoom_levels if missing
+        if (!layerData.zoom_levels) {
+            layerData.zoom_levels = this.getZoomLevels(layerData.width, layerData.height);
+        }
+        if (layerData.annotation) {
+            this.annotationLayers.push(layerData);
+        }
+        else {
+            this.baseLayers.push(layerData);
+        }
+        // manually adjust zoom level for IIPs, should be one lower than IIP server reports
+        if (layerData.type === "iip") {
+            layerData.zoom_levels = layerData.zoom_levels - 1;
+        }
+        // keep track of the max zoom levels and max dimensions
+        if (layerData.width > this.max_width) {
+            this.max_width = layerData.width;
+        }
+        if (layerData.height > this.max_height) {
+            this.max_height = layerData.height;
+        }
+        if (layerData.zoom_levels > this.max_zoom_level) {
+            this.max_zoom_level = layerData.zoom_levels;
+        }
+    }
+
+    // create the first two layers, using preset data if available
+    var baseLayerPreset = this.figureOptions.baseLayerPreset ? this.figureOptions.baseLayerPreset : [],
+        numBaseLayerPresets = baseLayerPreset.length,
+        usedPresetLayers = false;
+
+    if (numBaseLayerPresets > 0) {
+        var firstLayer = this.getLayerById(baseLayerPreset[0]);
+        var secondLayer;
+
+        if (numBaseLayerPresets > 1) {
+            secondLayer = this.getLayerById(baseLayerPreset[1]);
+        }
+
+        if (firstLayer && (secondLayer || numBaseLayerPresets == 1)) {
+            this.createLayer(firstLayer);
+
+            if (secondLayer) {
+                this.createLayer(secondLayer);
+                $('#' + secondLayer.id).css('opacity', 0);
+            }
+
+            usedPresetLayers = true;
+        }
+    }
+
+    if (!usedPresetLayers && this.baseLayers.length) {
+        // create first layer, second layer, and make second transparent
+        this.createLayer(this.baseLayers[0]);
+        if (this.baseLayers[1]) {
+            this.createLayer(this.baseLayers[1]);
+            $('#' + this.baseLayers[1].id).css('opacity', 0);
+        }
+    }
+
+    // create control interface
+    this.createUI();
+
+    // if any annotation presets are present, display those layers
+    this.showAnnotationPresets();
+
+    // fit to the map to its container and set the zoom range
+    this.zoomToContainer();
+
+    // if fullscreen extents are present, this CA needs to be positioned
+    // as its parent was
+    var extents = [];
+    if (this.figureOptions.fullscreenExtents) {
+        extents = [
+            {
+                lon: this.figureOptions.fullscreenExtents.swLon,
+                lat: this.figureOptions.fullscreenExtents.swLat
+            },
+            {
+                lon: this.figureOptions.fullscreenExtents.neLon,
+                lat: this.figureOptions.fullscreenExtents.neLat
+            }
+        ];
+        this.setExtents(extents);
+    }
+    // else use the starting postion from the figure options markup
+    // - if initial extents were given, honor them
+    else if (this.figureOptions.swLat) {
+        extents = [
+            {
+                lon: this.figureOptions.swLon,
+                lat: this.figureOptions.swLat
+            },
+            {
+                lon: this.figureOptions.neLon,
+                lat: this.figureOptions.neLat
+            }
+        ];
+        this.setExtents(extents);
+    }
 };
 
 
 LayeredImage.prototype.createLayer = function(layerData) {
-	// alias jquery
-	var $ = this.$;
-	var layer;
-	
-	if (layerData === undefined) {
-		return;
-	}
+    // alias jquery
+    var $ = this.$;
+    var layer;
 
-	// provide zoom_levels if missing
-	if (!layerData.zoom_levels) {
-		layerData.zoom_levels = this.getZoomLevels(layerData.width, layerData.height);
-	}
+    if (layerData === undefined) {
+        return;
+    }
 
-	// determine type of layer
-	if (layerData.type == 'image') {
-		layer = this.createLayerImage(layerData);
-	}
-	if (layerData.type == 'iip') {
-		layer = this.createLayerIIP(layerData);
-	}
-	if (layerData.type == 'svg') {
-		layer = this.createLayerSVG(layerData);
-	}
+    // determine type of layer
+    if (layerData.type == 'image') {
+        layer = this.createLayerImage(layerData);
+    }
+    if (layerData.type == 'iip') {
+        layer = this.createLayerIIP(layerData);
+    }
+    if (layerData.type == 'svg') {
+        layer = this.createLayerSVG(layerData);
+    }
 
-	// flag the layer as visible and
-	// give the layer a reference to its polymap object
-	layerData.visible = true;
-	layerData.polymapLayer = layer;
-	
-	// give the layer its id, and add it to the map
-	layer.id(layerData.id);
-	this.map.add(layer);
-	
+    // flag the layer as visible and
+    // give the layer a reference to its polymap object
+    layerData.visible = true;
+    layerData.polymapLayer = layer;
+
+    // give the layer its id, and add it to the map
+    layer.id(layerData.id);
+    this.map.add(layer);
+
 };
 
 
 LayeredImage.prototype.removeLayer = function(layerData) {
-	if (layerData.polymapLayer) {
-		this.map.remove(layerData.polymapLayer);
-	}
-	layerData.polymapLayer = undefined;
-	layerData.visible = false;
+    if (layerData.polymapLayer) {
+        this.map.remove(layerData.polymapLayer);
+    }
+    layerData.polymapLayer = undefined;
+    layerData.visible = false;
 };
 
 
 LayeredImage.prototype.toggleLayer = function(layerData) {
-	if (layerData.visible) {
-		this.removeLayer(layerData);
-	}
-	else {
-		this.createLayer(layerData);
-	}
+    if (layerData.visible) {
+        this.removeLayer(layerData);
+    }
+    else {
+        this.createLayer(layerData);
+    }
 };
 
 LayeredImage.prototype.repaintLayer = function(layerData) {
-	this.removeLayer(layerData);
-	this.createLayer(layerData);
+    this.removeLayer(layerData);
+    this.createLayer(layerData);
 };
 
 LayeredImage.prototype.createLayerIIP = function(layerData) {
-	var CA = this;
-	var layer = this.polymaps.image();
-	var tileLoader = function(c) {
-		var iipsrv = layerData.ptiff_server;
-		var ptiff = layerData.ptiff_path;
-		var image_h = layerData.height;
-		var image_w = layerData.width;
-		var tile_size = 256;
-		var scale = CA.getScale(layerData.zoom_levels - 1, c.zoom);
-		//var scale = CA.getScale(layerData.zoom_levels, c.zoom);
-		var mw = Math.round(image_w / scale);
-		var mh = Math.round(image_h / scale);
-		var tw = Math.ceil(mw / tile_size);
-		var th = Math.ceil(mh / tile_size);
-		if (c.row < 0 || c.row >= th || c.column < 0 || c.column >= tw) return null;
-		if (c.row == (th - 1)) {
-			c.element.setAttribute("height", mh % tile_size);
-		}
-		if (c.column == (tw - 1)) {
-			c.element.setAttribute("width", mw % tile_size);
-		}
-		var ret =  iipsrv+"?fif="+ptiff+"&jtl="+(c.zoom)+","+((c.row * tw) + c.column);
-		return ret;
-	};
-	layer.url(tileLoader);
-	return layer;
+    var CA = this;
+    var layer = this.polymaps.image();
+    var tileLoader = function(c) {
+        var iipsrv = layerData.ptiff_server;
+        var ptiff = layerData.ptiff_path;
+        var image_h = layerData.height;
+        var image_w = layerData.width;
+        var tile_size = 256;
+        var scale = CA.getScale(layerData.zoom_levels, c.zoom);
+        var mw = Math.round(image_w / scale);
+        var mh = Math.round(image_h / scale);
+        var tw = Math.ceil(mw / tile_size);
+        var th = Math.ceil(mh / tile_size);
+        if (c.row < 0 || c.row >= th || c.column < 0 || c.column >= tw) return null;
+        if (c.row == (th - 1)) {
+            c.element.setAttribute("height", mh % tile_size);
+        }
+        if (c.column == (tw - 1)) {
+            c.element.setAttribute("width", mw % tile_size);
+        }
+        var ret =  iipsrv+"?fif="+ptiff+"&jtl="+(c.zoom)+","+((c.row * tw) + c.column);
+        return ret;
+    };
+    layer.url(tileLoader);
+    return layer;
 };
 
 
 LayeredImage.prototype.createLayerImage = function(layerData) {
-	// alias polymaps, as our load and unload functions change "this" inside
-	var CA = this;
-	var load = function(tile) {
-		var scale = CA.getScale(layerData.zoom_levels, tile.zoom);
-		tile.element = CA.polymaps.svg('image');
-		tile.element.setAttribute("preserveAspectRatio", "none");
-		tile.element.setAttribute("x", 0);
-		tile.element.setAttribute("y", 0);
-		tile.element.setAttribute("width", layerData.width / scale);
-		tile.element.setAttribute("height", layerData.height / scale);
-		tile.element.setAttributeNS("http://www.w3.org/1999/xlink", "href", layerData.image_path);
-		tile.ready = true;
-	};
+    // alias polymaps, as our load and unload functions change "this" inside
+    var CA = this;
+    var load = function(tile) {
+        var scale = CA.getScale(CA.max_zoom_level, tile.zoom);
+        tile.element = CA.polymaps.svg('image');
+        tile.element.setAttribute("preserveAspectRatio", "none");
+        tile.element.setAttribute("x", 0);
+        tile.element.setAttribute("y", 0);
+        tile.element.setAttribute("width", CA.max_width / scale);
+        tile.element.setAttribute("height", CA.max_height / scale);
+        tile.element.setAttributeNS("http://www.w3.org/1999/xlink", "href", layerData.image_path);
+        tile.ready = true;
+    };
 
-	var unload = function(tile) {
-		if (tile.request) tile.request.abort(true);
-	};
+    var unload = function(tile) {
+        if (tile.request) tile.request.abort(true);
+    };
 
-	var layer = this.polymaps.layer(load, unload).tile(false);
-	return layer;
+    var layer = this.polymaps.layer(load, unload).tile(false);
+    return layer;
 };
 
 
 LayeredImage.prototype.createLayerSVG = function(layerData) {
-	// alias polymaps, as our load and unload functions change "this" inside
-	var CA = this;
-	var load = function(tile) {
-		var scale = CA.getScale(layerData.zoom_levels, tile.zoom);
-		tile.element = CA.polymaps.svg('image');
-		tile.element.setAttribute("preserveAspectRatio", "none");
-		tile.element.setAttribute("x", 0);
-		tile.element.setAttribute("y", 0);
-		tile.element.setAttribute("width", layerData.width / scale);
-		tile.element.setAttribute("height", layerData.height / scale);
-		tile.element.setAttributeNS("http://www.w3.org/1999/xlink", "href", layerData.svg_path);
-		tile.ready = true;
-	};
+    // alias polymaps, as our load and unload functions change "this" inside
+    var CA = this;
+    var load = function(tile) {
+        var scale = CA.getScale(CA.max_zoom_level, tile.zoom);
+        tile.element = CA.polymaps.svg('image');
+        tile.element.setAttribute("preserveAspectRatio", "none");
+        tile.element.setAttribute("x", 0);
+        tile.element.setAttribute("y", 0);
+        tile.element.setAttribute("width", CA.max_width / scale);
+        tile.element.setAttribute("height", CA.max_height / scale);
+        tile.element.setAttributeNS("http://www.w3.org/1999/xlink", "href", layerData.svg_path);
+        tile.ready = true;
+    };
 
-	var unload = function(tile) {
-		if (tile.request) tile.request.abort(true);
-	};
+    var unload = function(tile) {
+        if (tile.request) tile.request.abort(true);
+    };
 
-	var layer = this.polymaps.layer(load, unload).tile(false);
-	return layer;
+    var layer = this.polymaps.layer(load, unload).tile(false);
+    return layer;
 };
 
 
 LayeredImage.prototype.zoomToContainer = function() {
-	// always calculate at the highest possible zoom, 18,
-	// for max fineness of alignment
-	var zoomToCalculateAt = 18, i, count;
+    var i, count;
 
-	// calculate tw and th for each layer
-	for (i=0, count = this.layers.length; i < count; i++) {
-		var layerData = this.layers[i];
-		var scale = this.getScale(layerData.zoom_levels - 0, zoomToCalculateAt);
-		// TODO: figure out why this is a special case:
-		if (layerData.type == 'iip') {
-			scale = this.getScale(layerData.zoom_levels - 1, zoomToCalculateAt);
-		}
-		var mw = Math.round(layerData.width / scale);
-		var mh = Math.round(layerData.height / scale);
-		var tw = Math.ceil(mw / this.map.tileSize().x);
-		var th = Math.ceil(mh / this.map.tileSize().y);
-		layerData.tiles_wide = tw;
-		layerData.tiles_high = th;
-		layerData.tiles_zoom = zoomToCalculateAt;
-	}
+    // calculate tw and th for each layer
+    var tiles_wide = 0;
+    var tiles_high = 0;
+    for (i=0, count = this.layers.length; i < count; i++) {
+        var layerData = this.layers[i];
+        var scale = this.getScale(this.max_zoom_level, layerData.zoom_levels);
+        var mw = Math.round(layerData.width / scale);
+        var mh = Math.round(layerData.height / scale);
+        var tw = mw / this.map.tileSize().x;
+        var th = mh / this.map.tileSize().y;
+        layerData.tiles_wide = tw;
+        layerData.tiles_high = th;
+        layerData.tiles_zoom = layerData.zoom_level;
 
-	// scan the layers and find the greatest extents
-	var tiles_wide = 0;
-	var tiles_high = 0;
-	for (i=0, count = this.layers.length; i < count; i++) {
-		if (this.layers[i].tiles_high > tiles_high) {
-			tiles_high = this.layers[i].tiles_high;
-		}
-		if (this.layers[i].tiles_wide > tiles_wide) {
-			tiles_wide = this.layers[i].tiles_wide;
-		}
-	}
+        //find the max
+        tiles_high = (th > tiles_high) ? th : tiles_high;
+        tiles_wide = (tw > tiles_wide) ? tw : tiles_wide;
+    }
 
-	// now that we know our max extents, calculate the
-	// southwest and northeast corners to fit in container
-	this.settings.containerFitSW = this.map.coordinateLocation({
-		zoom: zoomToCalculateAt,
-		column: 0,
-		row: tiles_high
-	});
-	this.settings.containerFitNE = this.map.coordinateLocation({
-		zoom: zoomToCalculateAt,
-		column: tiles_wide,
-		row: 0
-	});
+    // now that we know our max extents, calculate the
+    // southwest and northeast corners to fit in container
+    this.settings.containerFitSW = this.map.coordinateLocation({
+        zoom: this.max_zoom_level,
+        column: 0,
+        row: tiles_high
+    });
+    this.settings.containerFitNE = this.map.coordinateLocation({
+        zoom: this.max_zoom_level,
+        column: tiles_wide,
+        row: 0
+    });
 
-	// apply those extents to the map, bringing all our layers into view
-	this.map.extent([this.settings.containerFitSW, this.settings.containerFitNE]);
+    // apply those extents to the map, bringing all our layers into view
+    this.map.extent([this.settings.containerFitSW, this.settings.containerFitNE]);
 
-	// now that the image is zoomed to fit it's container, store the
-	// "to fit" zoom level so we can recall it later
-	this.settings.containerFitZoomLevel = this.map.zoom();
+    // now that the image is zoomed to fit it's container, store the
+    // "to fit" zoom level so we can recall it later
+    this.settings.containerFitZoomLevel = this.map.zoom();
 
-	// reset the zoom range
-	this.resetZoomRange(this.settings.containerFitZoomLevel);
+    // reset the zoom range
+    this.resetZoomRange(this.settings.containerFitZoomLevel);
 };
 
 
 LayeredImage.prototype.createUI = function() {
-	// local aliases
-	var $ = this.$, CA = this, fullscreenClass, currentLayer;
+    // local aliases
+    var $ = this.$, CA = this, fullscreenClass, currentLayer;
 
-	// hook up polymap drag interaction
-	if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
-		this.map
-			.add(this.polymaps.drag())
-			.add(this.polymaps.wheel())
-			.add(this.polymaps.dblclick())
-			.add(this.polymaps.touch());
+    // hook up polymap drag interaction
+    if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
+        this.map
+            .add(this.polymaps.drag())
+            .add(this.polymaps.wheel())
+            .add(this.polymaps.dblclick())
+            .add(this.polymaps.touch());
 
-		// we need to augment the polymap event handlers, since the built in polymaps
-		// wheel interaction doesn't allow us to update our user interface controls
-		$(this.container).bind({
-			'mousewheel' : function(event) {
-				CA.ui.zoomSlider.slider('value', CA.map.zoom());
+        // we need to augment the polymap event handlers, since the built in polymaps
+        // wheel interaction doesn't allow us to update our user interface controls
+        $(this.container).bind({
+            'mousewheel' : function(event) {
+                CA.ui.zoomSlider.slider('value', CA.map.zoom());
 
-				//refresh the viewport if displayed
-				CA.refreshViewfinderViewport();
-			},
-			'DOMMouseScroll' : function(event) {
-				CA.ui.zoomSlider.slider('value', CA.map.zoom());
+                //refresh the viewport if displayed
+                CA.refreshViewfinderViewport();
+            },
+            'DOMMouseScroll' : function(event) {
+                CA.ui.zoomSlider.slider('value', CA.map.zoom());
 
-				//refresh the viewport if displayed
-				CA.refreshViewfinderViewport();
-			},
-			'dblclick' : function(event) {
-				CA.ui.zoomSlider.slider('value', CA.map.zoom());
+                //refresh the viewport if displayed
+                CA.refreshViewfinderViewport();
+            },
+            'dblclick' : function(event) {
+                CA.ui.zoomSlider.slider('value', CA.map.zoom());
 
-				//refresh the viewport if displayed
-				CA.refreshViewfinderViewport();
-			},
-			'mousedown' : function(event) {
-				CA.settings.dragging = {
-					x: event.clientX,
-					y: event.clientY
-				};
-				liCollection.userIsDraggingAsset = CA.id;
-			}
-		});
-	}
-	
-	// init ui object
-	this.ui = {};
-	this.ui.legendItemsCount = 0;
+                //refresh the viewport if displayed
+                CA.refreshViewfinderViewport();
+            },
+            'mousedown' : function(event) {
+                CA.settings.dragging = {
+                    x: event.clientX,
+                    y: event.clientY
+                };
+                liCollection.userIsDraggingAsset = CA.id;
+            }
+        });
+    }
 
-	// init bottom control bar
-	this.ui.controlbar = $('<div class="ca-ui-controlbar"></div>');
+    // init ui object
+    this.ui = {};
+    this.ui.legendItemsCount = 0;
 
-	// fullscreen control
-	if (this.settings.collapsed) {
-		fullscreenClass = "collapsed";
-	}
-	else {
-		fullscreenClass = "expanded";
-	}
-	this.ui.fullscreen = $('<div class="ca-ui-fullscreen '+fullscreenClass+'"></div>')
-	.bind('click', function() {
-		if (CA.settings.collapsed) {
-			CA.fullscreen();
-		}
-		else {
-			window.liCollection.remove(CA);
-			$('.ca-ui-fullscreen-modal').remove();
-			if (window.scrollOffset) {
-				window.scrollTo(window.scrollOffset[0], window.scrollOffset[1]);
-			}
-		}
-	})
-	.appendTo(this.ui.controlbar);
-	
-	// reset control
-	this.ui.reset = $('<div class="ca-ui-reset"></div>')
-	.bind('click', function(event) {
-		CA.reset();
-	});
-	if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
-		this.ui.reset.appendTo(this.ui.controlbar);
-	}
+    // init bottom control bar
+    this.ui.controlbar = $('<div class="ca-ui-controlbar"></div>');
 
-	// annotation control
-	if (this.annotationLayers.length > 0) {
-		this.ui.annotation = $('<div class="ca-ui-annotation"></div>')
-			.bind('click', function(event) {
-				CA.toggleAnnotationSelector();
-			});
-		if (!this.figureOptions.disable_annotation || this.figureOptions.editing) {
-			this.ui.annotation.appendTo(this.ui.controlbar);
-		}
-	}
-	
-	// layer controls
-	var baseLayers = this.getVisibleBaseLayers();
-	this.settings.currentLayer1 = baseLayers[0];
-	if (baseLayers.length > 1) {
-		this.settings.currentLayer2 = baseLayers[1];
+    // fullscreen control
+    if (this.settings.collapsed) {
+        fullscreenClass = "collapsed";
+    }
+    else {
+        fullscreenClass = "expanded";
+    }
+    this.ui.fullscreen = $('<div class="ca-ui-fullscreen '+fullscreenClass+'"></div>')
+    .bind('click', function() {
+        if (CA.settings.collapsed) {
+            CA.fullscreen();
+        }
+        else {
+            window.liCollection.remove(CA);
+            $('.ca-ui-fullscreen-modal').remove();
+            if (window.scrollOffset) {
+                window.scrollTo(window.scrollOffset[0], window.scrollOffset[1]);
+            }
+        }
+    })
+    .appendTo(this.ui.controlbar);
 
-		// layer selector
-		this.ui.layerSelector = $('<div class="ca-ui-layer-selector"></div>');
+    // reset control
+    this.ui.reset = $('<div class="ca-ui-reset"></div>')
+    .bind('click', function(event) {
+        CA.reset();
+    });
+    if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
+        this.ui.reset.appendTo(this.ui.controlbar);
+    }
 
-		// only provide selectable layers if there are at least three
-		if (this.baseLayers.length > 2) {
-			this.ui.layerSelector
-			.bind('click', {
-				layeredImage: this
-			}, this.toggleLayerSelector);
-		}
-		if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
-			this.ui.controlbar.append(this.ui.layerSelector);
-		}
+    // annotation control
+    if (this.annotationLayers.length > 0) {
+        this.ui.annotation = $('<div class="ca-ui-annotation"></div>')
+            .bind('click', function(event) {
+                CA.toggleAnnotationSelector();
+            });
+        if (!this.figureOptions.disable_annotation || this.figureOptions.editing) {
+            this.ui.annotation.appendTo(this.ui.controlbar);
+        }
+    }
 
-		// opacity slider
-		this.ui.sliderContainer = $('<div class="ca-ui-layer-slider-container"></div>');
-		this.ui.sliderLayerText = $('<div class="ca-ui-layer-slider-layer-text"></div>')
-			.text(this.settings.currentLayer1.title + " - " + this.settings.currentLayer2.title)
-			.appendTo(this.ui.sliderContainer);
-		this.ui.slider = $('<div class="ca-ui-layer-slider"></div>')
-			.slider({
-				slide: function(event, ui) {
-					// set the opacity of layers
-					// var primaryOpacity = (100 - ui.value) / 100;
-					var secondaryOpacity = ui.value / 100;
-					// $('#'+CA.settings.currentLayer1.id).css('opacity', primaryOpacity);
-					$('#'+CA.settings.currentLayer2.id).css('opacity', secondaryOpacity);
-					CA.refreshViewfinderOpacity(secondaryOpacity);
-				},
-				change: function(event, ui) {
-					var secondaryOpacity = ui.value / 100;
-					$('#'+CA.settings.currentLayer2.id).css('opacity', secondaryOpacity);
-					CA.refreshViewfinderOpacity(secondaryOpacity);
-				}
-			})
-			.appendTo(this.ui.sliderContainer);
-		
-		if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
-			this.ui.sliderContainer.appendTo(this.ui.controlbar);
-			this.ui.layerSelector.after(this.ui.sliderContainer);
-		}
-		// restore preset if available
-		if (this.figureOptions.sliderPosition !== undefined) {
-			this.ui.slider.slider('value', this.figureOptions.sliderPosition);
-		}
-	}
-	
-	// add controlbar to container
-	this.ui.controlbar.appendTo(this.container);
-	this.resizeControlBar();
+    // layer controls
+    var baseLayers = this.getVisibleBaseLayers();
+    this.settings.currentLayer1 = baseLayers[0];
+    if (baseLayers.length > 1) {
+        this.settings.currentLayer2 = baseLayers[1];
 
-	// zoom control
-	this.ui.zoom = $('<div class="ca-ui-zoom"></div>');
-	
-	this.ui.zoomIn = $('<div class="ca-ui-zoom-in"></div>')
-	.bind('click', function(event) {
-		var currentVal = CA.ui.zoomSlider.slider('value');
-		var newVal = currentVal + CA.settings.zoomStep;
-		CA.ui.zoomSlider.slider('value', newVal);
-		CA.map.zoom(newVal);
-	})
-	.appendTo(this.ui.zoom);
-	
-	this.ui.zoomSlider = $('<div class="ca-ui-zoom-slider"></div>')
-	.slider({
-		step: this.settings.zoomStep,
-		orientation: 'vertical',
-		slide: function(event, ui) {
-			var newZoom = ui.value;
-			var currentZoom = CA.map.zoom();
-			if (newZoom != currentZoom) {
-				CA.map.zoom(newZoom);
-			}
-		}
-	})
-	.appendTo(this.ui.zoom);
-	
-	this.ui.zoomOut = $('<div class="ca-ui-zoom-out"></div>')
-	.bind('click', function(event) {
-		// get the current value, and add one to it
-		var currentVal = CA.ui.zoomSlider.slider('value');
-		var newVal = currentVal - CA.settings.zoomStep;
-		CA.ui.zoomSlider.slider('value', newVal);
-		CA.map.zoom(newVal);
-	})
-	.appendTo(this.ui.zoom);
-	if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
-		this.ui.zoom.appendTo(this.container);
-	}
+        // layer selector
+        this.ui.layerSelector = $('<div class="ca-ui-layer-selector"></div>');
 
-	// viewfinder control
-	this.ui.viewfinder = $('<div class="ca-ui-viewfinder viewfinder-closed"></div>');
-	
-	if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
-		this.ui.viewfinder.appendTo(this.container);
-	}
-	
-	this.ui.viewfinder.bind('click', function(event) {
-		if (CA.ui.viewfinder.hasClass('viewfinder-open')) {
-			// close
-			CA.ui.viewfinder.empty().css('height', '');
-			CA.ui.viewfinder.removeClass('viewfinder-open').addClass('viewfinder-closed');
-			CA.ui.viewfinderViewport = null;
-		}
-		else {
-			// open
-			CA.ui.viewfinder.removeClass('viewfinder-closed').addClass('viewfinder-open');
-			CA.refreshViewfinder();
-		}
-	});
-	
-	// store references to the control elements, so they can be manipulated as a collection
-	this.ui.controls = [this.ui.controlbar, this.ui.zoom, this.ui.viewfinder, this.ui.currentPopup, this.ui.annotation, this.ui.layerSelector];
-	
-	// configure events to show/hide controls
-	this.container.bind('mousemove', function(event) {
-		var container = CA.container;
-		var date = new Date();
-		
-		container.attr('data-controls-time', date.getTime());
-		var controlState = container.attr('data-controls') || 'false';
-		if (controlState == 'false') {
-			// ensure no other CA has its controls up
-			var assets = window.liCollection.list();
-			for (var i=0, count = assets.length; i < count; i++) {
-				var asset = assets[i];
-				if (asset.container.attr('data-controls') == 'true') {
-					asset.container.attr('data-controls', 'false');
-					asset.toggleControls();
-				}
-			}
-			// turn on this CA's controls
-			container.attr('data-controls', 'true');
-			CA.toggleControls();
-		}
-		CA.ui.controlsTimeout = setTimeout(function() {
-			var date = new Date();
-			// check if the mouse is over a control, if it is, don't hide
-			if (container.attr('data-controls') == 'true' &&
-				(date.getTime() - container.attr('data-controls-time')) >= 1750) {
-				
-				if (container.attr('data-controls-lock') != 'true') {
-					container.attr('data-controls', 'false');
-					CA.clearPopups();
-					CA.toggleControls();
-				}
-			}
-		}, 2000);
-	});
-	// mousing over a control locks them "on"
-	$.each(this.ui.controls, function() {
-		// test if this is still around.  we include popups, and other transients
-		if (typeof(this.bind) == 'function') {
-			this.bind('mouseenter', function() {
-				CA.container.attr('data-controls-lock', 'true');
-			});
-			this.bind('mouseleave', function() {
-				CA.container.attr('data-controls-lock', 'false');
-			});
-		}
-	});
+        // only provide selectable layers if there are at least three
+        //if (this.baseLayers.length > 2) {
+        this.ui.layerSelector
+            .bind('click', {
+                layeredImage: this
+            }, this.toggleLayerSelector);
+        //}
+        if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
+            this.ui.controlbar.append(this.ui.layerSelector);
+        }
+
+        // opacity slider
+        this.ui.sliderContainer = $('<div class="ca-ui-layer-slider-container"></div>');
+        // this.ui.sliderLayerText = $('<div class="ca-ui-layer-slider-layer-text"></div>')
+        //     .text(this.settings.currentLayer1.title + " - " + this.settings.currentLayer2.title)
+        //     .appendTo(this.ui.sliderContainer);
+
+        this.ui.sliderLayerText1 = $('<div class="ca-ui-layer-slider-layer-text1">1</div>')
+            .attr("title", this.settings.currentLayer1.title)
+            .appendTo(this.ui.sliderContainer)
+            .qtip();
+
+        this.ui.slider = $('<div class="ca-ui-layer-slider"></div>')
+            .slider({
+                slide: function(event, ui) {
+                    // set the opacity of layers
+                    // var primaryOpacity = (100 - ui.value) / 100;
+                    var secondaryOpacity = ui.value / 100;
+                    // $('#'+CA.settings.currentLayer1.id).css('opacity', primaryOpacity);
+                    $('#'+CA.settings.currentLayer2.id).css('opacity', secondaryOpacity);
+                    CA.refreshViewfinderOpacity(secondaryOpacity);
+                },
+                change: function(event, ui) {
+                    var secondaryOpacity = ui.value / 100;
+                    $('#'+CA.settings.currentLayer2.id).css('opacity', secondaryOpacity);
+                    CA.refreshViewfinderOpacity(secondaryOpacity);
+                }
+            })
+            .appendTo(this.ui.sliderContainer);
+
+        this.ui.sliderLayerText2 = $('<div class="ca-ui-layer-slider-layer-text2">2</div>')
+            .attr("title", this.settings.currentLayer2.title)
+            .appendTo(this.ui.sliderContainer)
+            .qtip();
+
+        if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
+            this.ui.sliderContainer.appendTo(this.ui.controlbar);
+            this.ui.layerSelector.after(this.ui.sliderContainer);
+        }
+        // restore preset if available
+        if (this.figureOptions.sliderPosition !== undefined) {
+            this.ui.slider.slider('value', this.figureOptions.sliderPosition);
+        }
+    }
+
+    // add controlbar to container
+    this.ui.controlbar.appendTo(this.container);
+    this.resizeControlBar();
+
+    // zoom control
+    this.ui.zoom = $('<div class="ca-ui-zoom"></div>');
+
+    this.ui.zoomIn = $('<div class="ca-ui-zoom-in"></div>')
+    .bind('click', function(event) {
+        var currentVal = CA.ui.zoomSlider.slider('value');
+        var newVal = currentVal + CA.settings.zoomStep;
+        CA.ui.zoomSlider.slider('value', newVal);
+        CA.map.zoom(newVal);
+    })
+    .appendTo(this.ui.zoom);
+
+    this.ui.zoomSlider = $('<div class="ca-ui-zoom-slider"></div>')
+    .slider({
+        step: this.settings.zoomStep,
+        orientation: 'vertical',
+        slide: function(event, ui) {
+            var newZoom = ui.value;
+            var currentZoom = CA.map.zoom();
+            if (newZoom != currentZoom) {
+                CA.map.zoom(newZoom);
+            }
+        }
+    })
+    .appendTo(this.ui.zoom);
+
+    this.ui.zoomOut = $('<div class="ca-ui-zoom-out"></div>')
+    .bind('click', function(event) {
+        // get the current value, and add one to it
+        var currentVal = CA.ui.zoomSlider.slider('value');
+        var newVal = currentVal - CA.settings.zoomStep;
+        CA.ui.zoomSlider.slider('value', newVal);
+        CA.map.zoom(newVal);
+    })
+    .appendTo(this.ui.zoom);
+    if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
+        this.ui.zoom.appendTo(this.container);
+    }
+    this.resizeZoomControls();
+
+    // viewfinder control
+    this.ui.viewfinder = $('<div class="ca-ui-viewfinder viewfinder-closed"></div>');
+
+    if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
+        this.ui.viewfinder.appendTo(this.container);
+    }
+
+    this.ui.viewfinder.bind('click', function(event) {
+        if (CA.ui.viewfinder.hasClass('viewfinder-open')) {
+            // close
+            CA.ui.viewfinder.empty().css('height', '');
+            CA.ui.viewfinder.removeClass('viewfinder-open').addClass('viewfinder-closed');
+            CA.ui.viewfinderViewport = null;
+        }
+        else {
+            // open
+            CA.ui.viewfinder.removeClass('viewfinder-closed').addClass('viewfinder-open');
+            CA.refreshViewfinder();
+        }
+    });
+
+    // store references to the control elements, so they can be manipulated as a collection
+    this.ui.controls = [this.ui.controlbar, this.ui.zoom, this.ui.viewfinder, this.ui.currentPopup, this.ui.annotation, this.ui.layerSelector];
+
+    // configure events to show/hide controls
+    this.container.bind('mousemove mousewheel DOMMouseScroll', function(event) {
+        var container = CA.container;
+        var date = new Date();
+
+        container.attr('data-controls-time', date.getTime());
+        var controlState = container.attr('data-controls') || 'false';
+        if (controlState == 'false') {
+            // ensure no other CA has its controls up
+            var assets = window.liCollection.list();
+            for (var i=0, count = assets.length; i < count; i++) {
+                var asset = assets[i];
+                if (asset.container.attr('data-controls') == 'true') {
+                    asset.container.attr('data-controls', 'false');
+                    asset.toggleControls();
+                }
+            }
+            // turn on this CA's controls
+            container.attr('data-controls', 'true');
+            CA.toggleControls();
+        }
+        CA.ui.controlsTimeout = setTimeout(function() {
+            var date = new Date();
+            // check if the mouse is over a control, if it is, don't hide
+            if (container.attr('data-controls') == 'true' &&
+                (date.getTime() - container.attr('data-controls-time')) >= 1750) {
+
+                if (container.attr('data-controls-lock') != 'true') {
+                    container.attr('data-controls', 'false');
+                    CA.clearPopups();
+                    CA.toggleControls();
+                }
+            }
+        }, 2000);
+    });
+    // mousing over a control locks them "on"
+    $.each(this.ui.controls, function() {
+        // test if this is still around.  we include popups, and other transients
+        if (typeof(this.bind) == 'function') {
+            this.bind('mouseenter', function() {
+                CA.container.attr('data-controls-lock', 'true');
+            });
+            this.bind('mouseleave', function() {
+                CA.container.attr('data-controls-lock', 'false');
+            });
+        }
+    });
 };
 
 LayeredImage.prototype.reset = function() {
-	var $ = this.$, i, count,
-		CA = this;
-		
-	CA.clearPopups();
+    var $ = this.$, CA = this, i, count;
 
-	// reset to provided inset, or container bounds otherwise
-	if (typeof CA.figureOptions.swLat != 'undefined' && !CA.figureOptions.editing) {
-		var extents =  [
-			{
-				lon: CA.figureOptions.swLon,
-				lat: CA.figureOptions.swLat
-			},
-			{
-				lon: CA.figureOptions.neLon,
-				lat: CA.figureOptions.neLat
-			}
-			];
-		CA.map.extent(extents);
-	}
-	else {
-		CA.zoomToContainer();
-	}
-	// correct zoom control to reflect new zoom
-	CA.ui.zoomSlider.slider('value', CA.map.zoom());
+    CA.clearPopups();
+    // reset to provided inset, or container bounds otherwise
+    if (typeof CA.figureOptions.swLat != 'undefined' && !CA.figureOptions.editing) {
+        var extents =  [
+            {
+                lon: CA.figureOptions.swLon,
+                lat: CA.figureOptions.swLat
+            },
+            {
+                lon: CA.figureOptions.neLon,
+                lat: CA.figureOptions.neLat
+            }
+        ];
+        CA.map.extent(extents);
+    }
+    else {
+        CA.zoomToContainer();
+    }
+    // correct zoom control to reflect new zoom
+    CA.ui.zoomSlider.slider('value', CA.map.zoom());
 
-	// reset initial slider position
-	if (CA.figureOptions.sliderPosition !== undefined) {
-		if (CA.ui.slider) {
-			CA.ui.slider.slider('value', CA.figureOptions.sliderPosition);
-		}
-	}
-	/*
-	 * Reset original layer selection
-	 */
-	var baseLayers;
-	if (CA.figureOptions.baseLayerPreset) {
-		baseLayers = [];
-		for (i=0, count = CA.figureOptions.baseLayerPreset.length; i < count; i++) {
-			baseLayers.push(CA.getLayerById(CA.figureOptions.baseLayerPreset[i]));
-		}
-	}
-	else {
-		baseLayers = CA.baseLayers;
-	}
-	for (i = 0, count = baseLayers.length; i < count && i < 2; i++) {
-		currentLayer = CA.settings['currentLayer' + (i + 1)];
-		// turn off current layer
-		CA.toggleLayer(currentLayer);
-		// turn on new
-		CA.toggleLayer(baseLayers[i]);
-		// upkeep state
-		CA.settings['currentLayer' + (i + 1)] = baseLayers[i];
-		// update layer selector ui
-		if (CA.ui['layerSelector' + (i + 1)]) {
-			CA.ui['layerSelector'+ (i + 1)].find('span').html(baseLayers[i].title);
-		}
-	}
-	// if more than one layer, restore transparency setting
-	if (baseLayers.length > 1 && CA.ui.slider) {
-		$('#'+CA.settings.currentLayer2.id).css('opacity', CA.ui.slider.slider('value') / 100);
-		if (CA.ui.viewfinderLayer2) {
-			CA.ui.viewfinderLayer2.css('opacity', CA.ui.slider.slider('value') / 100);
-		}
-	}
+    // reset initial slider position
+    if (CA.figureOptions.sliderPosition !== undefined) {
+        if (CA.ui.slider) {
+            CA.ui.slider.slider('value', CA.figureOptions.sliderPosition);
+        }
+    }
+    /*
+     * Reset original layer selection
+     */
+    var baseLayers;
+    if (CA.figureOptions.baseLayerPreset) {
+        baseLayers = [];
+        for (i=0, count = CA.figureOptions.baseLayerPreset.length; i < count; i++) {
+            baseLayers.push(CA.getLayerById(CA.figureOptions.baseLayerPreset[i]));
+        }
+    }
+    else {
+        baseLayers = CA.baseLayers;
+    }
+    for (i = 0, count = baseLayers.length; i < count && i < 2; i++) {
+        currentLayer = CA.settings['currentLayer' + (i + 1)];
+        // turn off current layer
+        CA.toggleLayer(currentLayer);
+        // turn on new
+        CA.toggleLayer(baseLayers[i]);
+        // upkeep state
+        CA.settings['currentLayer' + (i + 1)] = baseLayers[i];
+        // update layer selector ui
+        if (CA.ui['layerSelector' + (i + 1)]) {
+            CA.ui['layerSelector'+ (i + 1)].find('span').html(baseLayers[i].title);
+        }
+        //set layer title in ui
+        if (CA.ui['sliderLayerText' + (i + 1)]) {
+            CA.ui['sliderLayerText' + (i + 1)].attr("title", CA.settings['currentLayer' + (i + 1)].title);
+        }
+    }
+    // if more than one layer, restore transparency setting
+    if (baseLayers.length > 1 && CA.ui.slider) {
+        $('#'+CA.settings.currentLayer2.id).css('opacity', CA.ui.slider.slider('value') / 100);
+        if (CA.ui.viewfinderLayer2) {
+            CA.ui.viewfinderLayer2.css('opacity', CA.ui.slider.slider('value') / 100);
+        }
+    }
 
-	// reset annotation layer visibility
-	CA.showAnnotationPresets();
+    // reset annotation layer visibility
+    CA.showAnnotationPresets();
 };
 
 
 LayeredImage.prototype.refreshViewfinder = function() {
-	var $ = this.$;
-	var CA = this;
-	// first clear out any contents
-	this.ui.viewfinder.empty();
-	
-	// get image urls from current layers
-	var thumbUrl1 = this.settings.currentLayer1.thumb;
-	this.ui.viewfinderLayer1 = $('<div class="ca-ui-viewfinderLayer viewfinderLayer1"></div>');
-	$('<img />').attr('src', thumbUrl1).appendTo(this.ui.viewfinderLayer1);
-	this.ui.viewfinder.append(this.ui.viewfinderLayer1);
-	
-	if (this.settings.currentLayer2) {
-		var thumbUrl2 = this.settings.currentLayer2.thumb;
-		this.ui.viewfinderLayer2 = $('<div class="ca-ui-viewfinderLayer viewfinderLayer2"></div>');
-		$('<img />').attr('src', thumbUrl2).appendTo(this.ui.viewfinderLayer2);
-		this.ui.viewfinder.append(this.ui.viewfinderLayer2);
-		// set opacity to match
-		this.ui.viewfinderLayer2.css('opacity', this.ui.slider.slider("value") / 100);
-	}
-	
-	// set height based on width and aspect
-	var vfWidth = this.ui.viewfinder.width();
-	var vfHeight = Math.floor(vfWidth / this.settings.aspect);
-	this.ui.viewfinder.height(vfHeight);
-	
-	// bounds div
-	this.refreshViewfinderViewport();
-	
-	// - hook up drag events so the div can be dragged
-	// - when dragged reflect the change on the map
+    var $ = this.$;
+    var CA = this;
+    // first clear out any contents
+    this.ui.viewfinder.empty();
+
+    // get image urls from current layers
+    var thumbUrl1 = this.settings.currentLayer1.thumb;
+    this.ui.viewfinderLayer1 = $('<div class="ca-ui-viewfinderLayer viewfinderLayer1"></div>');
+    $('<img />').attr('src', thumbUrl1).appendTo(this.ui.viewfinderLayer1);
+    this.ui.viewfinder.append(this.ui.viewfinderLayer1);
+
+    if (this.settings.currentLayer2) {
+        var thumbUrl2 = this.settings.currentLayer2.thumb;
+        this.ui.viewfinderLayer2 = $('<div class="ca-ui-viewfinderLayer viewfinderLayer2"></div>');
+        $('<img />').attr('src', thumbUrl2).appendTo(this.ui.viewfinderLayer2);
+        this.ui.viewfinder.append(this.ui.viewfinderLayer2);
+        // set opacity to match
+        this.ui.viewfinderLayer2.css('opacity', this.ui.slider.slider("value") / 100);
+    }
+
+    // set height based on width and aspect
+    var vfWidth = this.ui.viewfinder.width();
+    var vfHeight = Math.floor(vfWidth / this.settings.aspect);
+    this.ui.viewfinder.height(vfHeight);
+
+    //remove the viewfinderViewport if already added
+    if (this.ui.viewfinderViewport !== undefined) {
+        this.ui.viewfinderViewport.remove();
+    }
+    this.ui.viewfinderViewport = undefined;
+
+    // bounds div
+    this.refreshViewfinderViewport();
+
+    // - hook up drag events so the div can be dragged
+    // - when dragged reflect the change on the map
 };
 
 
 LayeredImage.prototype.refreshViewfinderViewport = function() {
-	
-	if (this.ui.viewfinder.hasClass('viewfinder-open')) {
-		var $ = this.$;
-		var vfWidth = this.ui.viewfinder.width();
-		var vfHeight = Math.floor(vfWidth / this.settings.aspect);
 
-		// - draw the div and position it
-		if (!this.ui.viewfinderViewport) {
-			this.ui.viewfinderViewport = $('<div class="ca-ui-viewfinder-viewport">&nbsp;</div>').appendTo(this.ui.viewfinder);
+    if (this.ui.viewfinder.hasClass('viewfinder-open')) {
+        var $ = this.$;
+        var vfWidth = this.ui.viewfinder.width();
+        var vfHeight = Math.floor(vfWidth / this.settings.aspect);
 
-			if (this.settings.viewPortBorderWidth === undefined) {
-				this.settings.viewPortBorderWidth = parseInt(this.ui.viewfinderViewport.css("border-left-width"), 10);
-			}
-		}
+        // - draw the div and position it
+        if (!this.ui.viewfinderViewport) {
+            this.ui.viewfinderViewport = $('<div class="ca-ui-viewfinder-viewport">&nbsp;</div>').appendTo(this.ui.viewfinder);
 
-		// calculate inset percentage on all sides
-		var pointSW = this.map.locationPoint(this.settings.containerFitSW);
-		var pointNE = this.map.locationPoint(this.settings.containerFitNE);
+            if (this.settings.viewPortBorderWidth === undefined) {
+                this.settings.viewPortBorderWidth = parseInt(this.ui.viewfinderViewport.css("border-left-width"), 10);
+            }
+        }
 
-		//calculate the top left offsets
-		var offsetX = (((pointSW.x * -1.0) / (pointNE.x - pointSW.x)) * vfWidth) - this.settings.viewPortBorderWidth;
-		var offsetY = (((pointNE.y * -1.0) / (pointSW.y - pointNE.y)) * vfHeight) - this.settings.viewPortBorderWidth;
+        // calculate inset percentage on all sides
+        var pointSW = this.map.locationPoint(this.settings.containerFitSW);
+        var pointNE = this.map.locationPoint(this.settings.containerFitNE);
 
-		// calculate the height and width of the viewport
-		var ratioX = this.map.size().x / (pointNE.x - pointSW.x);
-		var ratioY = this.map.size().y / (pointSW.y - pointNE.y);
-		
-		var vpWidth = ratioX * vfWidth;
-		var vpHeight = ratioY * vfHeight;
+        //calculate the top left offsets
+        var offsetX = (((pointSW.x * -1.0) / (pointNE.x - pointSW.x)) * vfWidth) - this.settings.viewPortBorderWidth;
+        var offsetY = (((pointNE.y * -1.0) / (pointSW.y - pointNE.y)) * vfHeight) - this.settings.viewPortBorderWidth;
 
-		this.ui.viewfinderViewport.css({
-			top : offsetY + "px",
-			left : offsetX + "px",
-			width : vpWidth + "px",
-			height : vpHeight + "px"
-		});
-	}
+        // calculate the height and width of the viewport
+        var ratioX = this.map.size().x / (pointNE.x - pointSW.x);
+        var ratioY = this.map.size().y / (pointSW.y - pointNE.y);
+
+        var vpWidth = ratioX * vfWidth;
+        var vpHeight = ratioY * vfHeight;
+
+        this.ui.viewfinderViewport.css({
+            top : offsetY + "px",
+            left : offsetX + "px",
+            width : vpWidth + "px",
+            height : vpHeight + "px"
+        });
+    }
 };
 
 
 LayeredImage.prototype.refreshViewfinderOpacity = function(opacity) {
-	if (this.ui.viewfinderLayer2) {
-		this.ui.viewfinderLayer2.css('opacity', opacity);
-	}
+    if (this.ui.viewfinderLayer2) {
+        this.ui.viewfinderLayer2.css('opacity', opacity);
+    }
 };
 
 
 LayeredImage.prototype.fullscreen = function(reset) {
-	var $ = this.$;
-	var CA = this;
+    var $ = this.$;
+    var CA = this;
 
-	// create a parent container that spans the full screen
-	var modal = $('<div class="ca-ui-fullscreen-modal"></div>').appendTo(document.body);
-	// if the modal background is clicked, close the fullscreen mode
-	modal.bind('click', function(event) {
-		if ($(event.target).hasClass('ca-ui-fullscreen-modal')) {
-			$(this).find('.ca-ui-fullscreen').trigger('click');
-		}
-	});
-	var wrapper = $('<div class="ca-ui-fullscreen-wrap"></div>').appendTo(modal),
-		modalOffset = modal.offset(),
-		modalHeight = modal.height() - modalOffset.top,
-		modalWidth = modal.outerWidth() - modalOffset.left;
+    // create a parent container that spans the full screen
+    var modal = $('<div class="ca-ui-fullscreen-modal"></div>').appendTo(document.body);
+    // if the modal background is clicked, close the fullscreen mode
+    modal.bind('click', function(event) {
+        if ($(event.target).hasClass('ca-ui-fullscreen-modal')) {
+            $(this).find('.ca-ui-fullscreen').trigger('click');
+        }
+    });
+    var wrapper = $('<div class="ca-ui-fullscreen-wrap"></div>').appendTo(modal),
+        modalOffset = modal.offset(),
+        modalHeight = modal.height() - modalOffset.top,
+        modalWidth = modal.outerWidth() - modalOffset.left,
+        wrapHeight = 0,
+        wrapWidth = 0,
+        firstPass = true,
+        scaleFactor = .9,
+        aspect = (CA.figureOptions && CA.figureOptions.aspect) !== undefined ? CA.figureOptions.aspect : CA.settings.aspect;
 
-	wrapper.css({
-		height: Math.round(modalHeight * 0.9) + 'px',
-		top:	Math.round(modalHeight * 0.05) + 'px',
-		width:	Math.round(modalWidth * 0.9) + 'px',
-		left:	Math.round(modalWidth * 0.05) + 'px'
-	});
-	// retrieve the original markup for this LayeredImage and
-	// remap the IDs of the asset and its layers
-	var markup = $(this.settings.originalMarkup);
-	markup.attr('id', markup.attr('id') + '-fullscreen');
-	markup.attr('data-collapsed', 'false');
-	markup.find('li').each(function() {
-		var el = $(this);
-		el.data('id', el.data('id') + '-fullscreen');
-		el.data('parent_asset', el.data('parent_asset') + '-fullscreen');
-	});
-	 
-	// the extents of the current map should be restored on full screen
-	var extents = this.map.extent();
-	this.figureOptions.fullscreenExtents = {
-		swLon: extents[0].lon,
-		swLat: extents[0].lat,
-		neLon: extents[1].lon,
-		neLat: extents[1].lat
-	};
-	
-	var figureWrapper = $('<figure></figure>')
-		.attr('data-options', JSON.stringify(this.figureOptions))
-		.css({
-			height : Math.round(modalHeight * 0.9) + 'px',
-			width : Math.round(modalWidth * 0.9) + 'px'
-		})
-		.appendTo(wrapper);
-	
-	// if a caption is present in the figure options, append it to the fullscreen
-	var captionHeight = 0;
-	if (this.settings.captionMarkup) {
-		figureWrapper.append(this.settings.captionMarkup);
-		captionHeight = this.settings.captionMarkup.outerHeight(true);
-	}
-	
-	$('<div>', {
-		'class' : 'figureContent',
-		css : {
-			'height' : (Math.round(modalHeight * 0.9) - captionHeight) + 'px',
-			'width' : Math.round(modalWidth * 0.9) + 'px'
-		}
-	})
-	.append(markup)
-	.prependTo(figureWrapper);
-	
-	var tempCA = new LayeredImage(markup);
-	
-	if (reset) {
-		tempCA.reset();
-	}
+    if (aspect <= 1) {
+        while (wrapWidth > modalWidth || firstPass) {
+            wrapHeight = Math.floor(modalHeight * scaleFactor);
+            wrapWidth = Math.floor(wrapHeight * aspect);
+            scaleFactor = scaleFactor - .1;
+            firstPass = false;
+        }
+    } else {
+        while (wrapHeight > modalHeight || firstPass) {
+            wrapWidth = Math.floor(modalWidth * scaleFactor);
+            wrapHeight = Math.floor(wrapWidth / aspect);
+            scaleFactor = scaleFactor - .1;
+            firstPass = false;
+        }
+    }
+
+    wrapper.css({
+        height: wrapHeight + 'px',
+        top:    Math.floor((modalHeight - wrapHeight) / 2) + 'px',
+        width:  wrapWidth + 'px',
+        left:   Math.floor((modalWidth - wrapWidth) / 2) + 'px'
+    });
+    // retrieve the original markup for this LayeredImage and
+    // remap the IDs of the asset and its layers
+    var markup = $(this.settings.originalMarkup);
+    markup.attr('id', markup.attr('id') + '-fullscreen');
+    markup.attr('data-collapsed', 'false');
+    markup.find('li').each(function() {
+        var el = $(this);
+        el.data('id', el.data('id') + '-fullscreen');
+        el.data('parent_asset', el.data('parent_asset') + '-fullscreen');
+    });
+
+    // the extents of the current map should be restored on full screen
+    var extents = this.map.extent();
+    if (this.map.zoom() !== 1) {
+        this.figureOptions.fullscreenExtents = {
+            swLon: extents[0].lon,
+            swLat: extents[0].lat,
+            neLon: extents[1].lon,
+            neLat: extents[1].lat
+        };
+    }
+
+    var figureWrapper = $('<figure></figure>')
+        .attr('data-options', JSON.stringify(this.figureOptions))
+        .css({
+            height : wrapHeight + 'px',
+            width : wrapWidth + 'px'
+        })
+        .appendTo(wrapper);
+
+    // if a caption is present in the figure options, append it to the fullscreen
+    var captionHeight = 0;
+    if (this.settings.captionMarkup) {
+        figureWrapper.append(this.settings.captionMarkup);
+        captionHeight = this.settings.captionMarkup.outerHeight(true);
+    }
+
+    $('<div>', {
+        'class' : 'figureContent',
+        css : {
+            'height' : (Math.round(wrapHeight) - captionHeight) + 'px',
+            'width' : wrapWidth + 'px'
+        }
+    })
+    .append(markup)
+    .prependTo(figureWrapper);
+
+    var tempCA = new LayeredImage(markup);
+
+    if (reset) {
+        tempCA.reset();
+    }
 };
 
 //resize the control bar so no wrapping occurs
 LayeredImage.prototype.resizeControlBar = function()
 {
-	var containerWidth = this.container.outerWidth(),
-		controlBarWidth = this.ui.controlbar.outerWidth(),
-		maxWidth = containerWidth - (parseInt(this.ui.controlbar.css('right'), 10) * 2);
-		
-	//if controlbar is wider than asset width resize it
-	if (controlBarWidth > maxWidth) {
-		this.ui.controlbar.css({
-			'max-width' : maxWidth + 'px'
-		});
-		
-		//shrink layer names (only works nicely if a min-width set in css & overflow ellipsis)
-		//this might need redone later depending on browser support and custom styles
-		this.ui.controlbar.find('.ca-ui-layer > span').css({
-			width: '1px'
-		});
-	}
-	
+    var containerWidth = this.container.outerWidth(),
+        controlBarChildren = this.ui.controlbar.children(),
+        controlBarWidth = 0;
+
+    controlBarChildren.each(function() {
+        controlBarWidth += $(this).outerWidth();
+    });
+
+    var maxWidth = containerWidth - (parseInt(this.ui.controlbar.css('right'), 10) * 2);
+
+    //if controlbar is wider than asset width resize it
+    if (controlBarWidth > maxWidth) {
+        this.ui.controlbar.css({
+            'max-width' : maxWidth + 'px'
+        });
+
+        controlBarChildren.each(function() {
+            var item = $(this);
+            maxWidth = maxWidth - item.outerWidth();
+            if (maxWidth < 0) {
+                item.width(item.width() + maxWidth);
+                item.find(".ca-ui-layer-slider").each(function() {
+                    $(this).width($(this).width() + maxWidth);
+                });
+            }
+        });
+    }
+
 };
 
+//resize the zoom controls to fit if small height
+LayeredImage.prototype.resizeZoomControls = function()
+{
+    var containerHeight = this.container.outerHeight(),
+        zoomChildren = this.ui.zoom.children(),
+        zoomControlHeight = 0;
+
+    zoomChildren.each(function() {
+        zoomControlHeight += $(this).outerHeight();
+    });
+
+    var maxHeight = containerHeight - this.ui.controlbar.outerHeight() - 1;
+    if (zoomControlHeight > maxHeight) {
+        this.ui.zoom.css({
+            'max-height': maxHeight + 'px'
+        });
+
+        maxHeight -= this.ui.zoomIn.outerHeight() + this.ui.zoomOut.outerHeight();
+        if (maxHeight < 50) {
+            this.ui.zoomSlider.hide();
+            this.ui.zoom.css({
+                'max-height': (this.ui.zoomIn.outerHeight() + this.ui.zoomOut.outerHeight()) + 'px'
+            })
+        } else {
+            var currentHeight = this.ui.zoomSlider.outerHeight(true) - this.ui.zoomSlider.outerHeight();
+            this.ui.zoomSlider.height((maxHeight - currentHeight) + 'px');
+        }
+    }
+}
+
 LayeredImage.prototype.toggleLayerSelector = function(event) {
-	// set up aliases and build dynamic variable names
-	var $ = jQuery;
-	var CA = event.data.layeredImage;
-	var layerSelector = $(this);
-	// var layerControlNum = event.data.layerControlNum;
-	// var layerControlOther = (layerControlNum == 1) ? 2 : 1;
-	// var layerSelectorPopup = 'layerSelectorPopup';
-	// var currentLayer = CA.settings['currentLayer'+layerControlNum];
-	var currentLayer1 = CA.settings['currentLayer1'];
-	var currentLayer2 = CA.settings['currentLayer2'];
-	// var otherLayer = CA.settings['currentLayer'+layerControlOther];
-	
-	// if visible already, remove and set state
-	if (CA.ui.currentPopup && CA.ui.currentPopup == CA.ui['layerSelectorPopup']) {
-		CA.clearPopups();
-	}
-	else {
-		// check that the other popup is closed
-		CA.clearPopups();
+    // set up aliases and build dynamic variable names
+    var $ = jQuery;
+    var CA = event.data.layeredImage;
+    var layerSelector = $(this);
+    // var layerControlNum = event.data.layerControlNum;
+    // var layerControlOther = (layerControlNum == 1) ? 2 : 1;
+    // var layerSelectorPopup = 'layerSelectorPopup';
+    // var currentLayer = CA.settings['currentLayer'+layerControlNum];
+    var currentLayer1 = CA.settings['currentLayer1'];
+    var currentLayer2 = CA.settings['currentLayer2'];
+    // var otherLayer = CA.settings['currentLayer'+layerControlOther];
 
-		// set an active class on the button to change appearance
-		layerSelector.addClass('active');
+    // if visible already, remove and set state
+    if (CA.ui.currentPopup && CA.ui.currentPopup == CA.ui['layerSelectorPopup']) {
+        CA.clearPopups();
+    }
+    else {
+        // check that the other popup is closed
+        CA.clearPopups();
 
-		// create a button row for each layer
-		rows = $('<div class="ca-ui-layer-selector-rows"></div>');
-		for (var i = 0; i < CA.baseLayers.length; i++) {
-			var baseLayer = CA.baseLayers[i];
-			rowLayerButton1 = $('<div class="ca-ui-layer-selector-row-button1"><div class="ca-ui-layer-selector-button"></div></div>')
-				.attr('data-layer_index', i);
-			rowTitle = $('<div class="ca-ui-layer-selector-row-title"><span>' + baseLayer.title + '</span></div>');
-			rowLayerButton2 = $('<div class="ca-ui-layer-selector-row-button2"><div class="ca-ui-layer-selector-button"></div></div>')
-				.attr('data-layer_index', i);
-			
-			// indicate current layers
-			if (baseLayer == CA.settings.currentLayer1) {
-				rowLayerButton1
-					.find('.ca-ui-layer-selector-button')
-					.first()
-					.addClass('active');
-			}
-			if (baseLayer == CA.settings.currentLayer2) {
-				rowLayerButton2
-					.find('.ca-ui-layer-selector-button')
-					.first()
-					.addClass('active');
-			}
+        // set an active class on the button to change appearance
+        layerSelector.addClass('active');
 
-			// bind button events
-			rowLayerButton1.bind('click', {CA: CA, layerNum: 1}, CA.layerSelect);
-			rowLayerButton2.bind('click', {CA: CA, layerNum: 2}, CA.layerSelect);
+        // create a button row for each layer
+        rows = $('<div class="ca-ui-layer-selector-rows"></div>');
+        for (var i = 0; i < CA.baseLayers.length; i++) {
+            var baseLayer = CA.baseLayers[i];
+            rowLayerButton1 = $('<div class="ca-ui-layer-selector-row-button1"><div class="ca-ui-layer-selector-button"></div></div>')
+                .attr('data-layer_index', i);
+            rowTitle = $('<div class="ca-ui-layer-selector-row-title"><span>' + baseLayer.title + '</span></div>');
+            rowLayerButton2 = $('<div class="ca-ui-layer-selector-row-button2"><div class="ca-ui-layer-selector-button"></div></div>')
+                .attr('data-layer_index', i);
 
-			// assemble
-			row = $('<div class="ca-ui-layer-selector-row"></div>')
-				.append(rowLayerButton1)
-				.append(rowTitle)
-				.append(rowLayerButton2);
-			rows.append(row);
-		}
+            // indicate current layers
+            if (baseLayer == CA.settings.currentLayer1) {
+                rowLayerButton1
+                    .find('.ca-ui-layer-selector-button')
+                    .first()
+                    .addClass('active');
+            }
+            if (baseLayer == CA.settings.currentLayer2) {
+                rowLayerButton2
+                    .find('.ca-ui-layer-selector-button')
+                    .first()
+                    .addClass('active');
+            }
 
-		// figure out where to place the popup
-		var bottom = parseInt(CA.ui.controlbar.css('bottom'), 10) + CA.ui.controlbar.height();
-		var left = CA.ui.controlbar.position().left;
-		var width = CA.ui.sliderContainer.outerWidth() + layerSelector.outerWidth();
-		var cssParams = {
-			bottom : bottom + 'px',
-			left: left + 'px'
-			// width: width + 'px'
-		};
+            // bind button events
+            rowLayerButton1.bind('click', {CA: CA, layerNum: 1}, CA.layerSelect);
+            rowLayerButton2.bind('click', {CA: CA, layerNum: 2}, CA.layerSelect);
 
-		// create the popup
-		CA.ui.layerSelectorPopup = $('<div class="ca-ui-layer-selector-popup"></div>')
-		.css(cssParams)
-		.bind('mouseenter', function() {
-			CA.container.attr('data-controls-lock', 'true');
-		})
-		.bind('mouseleave', function() {
-			CA.container.attr('data-controls-lock', 'false');
-		})
-		.append(rows)
-		.appendTo(CA.container);
-		CA.ui.currentPopup = CA.ui.layerSelectorPopup;
-	}
+            // assemble
+            row = $('<div class="ca-ui-layer-selector-row"></div>')
+                .append(rowLayerButton1)
+                .append(rowTitle)
+                .append(rowLayerButton2);
+            rows.append(row);
+        }
+
+        // figure out where to place the popup
+        var bottom = parseInt(CA.ui.controlbar.css('bottom'), 10) + CA.ui.controlbar.height();
+        var left = CA.ui.controlbar.position().left;
+        var width = CA.ui.sliderContainer.outerWidth() + layerSelector.outerWidth();
+        var cssParams = {
+            bottom : bottom + 'px',
+            left: left + 'px'
+            // width: width + 'px'
+        };
+
+        // create the popup
+        CA.ui.layerSelectorPopup = $('<div class="ca-ui-layer-selector-popup"></div>')
+        .css(cssParams)
+        .bind('mouseenter', function() {
+            CA.container.attr('data-controls-lock', 'true');
+        })
+        .bind('mouseleave', function() {
+            CA.container.attr('data-controls-lock', 'false');
+        })
+        .append(rows)
+        .appendTo(CA.container);
+        CA.ui.currentPopup = CA.ui.layerSelectorPopup;
+    }
 };
 
 
 LayeredImage.prototype.toggleAnnotationSelector = function() {
-	
-	// local aliases
-	var $ = this.$;
-	var CA = this;
 
-	if (this.ui.currentPopup && this.ui.currentPopup == this.ui.annotationSelector) {
-		// remove the control
-		this.clearPopups();
-	}
-	else {
-		this.clearPopups();
+    // local aliases
+    var $ = this.$;
+    var CA = this;
 
-		// set an active class on the button to change appearance
-		this.ui.annotation.addClass('active');
+    if (this.ui.currentPopup && this.ui.currentPopup == this.ui.annotationSelector) {
+        // remove the control
+        this.clearPopups();
+    }
+    else {
+        this.clearPopups();
 
-		// get the position of the button's top right corner - this is where to bind the popup
-		var parentOffset = this.ui.annotation.offsetParent().position();
-		var elOffset = this.ui.annotation.position();
-		var elWidth = this.ui.annotation.outerWidth();
-		var totalWidth = this.ui.annotation.offsetParent().parent().width();
-		var totalHeight = this.ui.annotation.offsetParent().parent().height();
-		var right = totalWidth - parentOffset.left - elOffset.left - elWidth;
-		var bottom = totalHeight - parentOffset.top - elOffset.top;
+        // set an active class on the button to change appearance
+        this.ui.annotation.addClass('active');
 
-		// create the annotation selector box
-		this.settings.annotationSelectorVisible = true;
-		this.ui.annotationSelector = $('<div class="ca-ui-annotation-selector"></div>')
-			.css({
-				right: right,
-				bottom: bottom
-			});
-		$('<div class="title">Annotations</div>').appendTo(this.ui.annotationSelector);
-		this.ui.annotationSelectorList = $('<ul class="ca-ui-annotation-selector-list"></ul>');
-		for (var i=0, count = this.annotationLayers.length; i < count; i++) {
-			var layerData = this.annotationLayers[i];
+        // get the position of the button's top right corner - this is where to bind the popup
+        var parentOffset = this.ui.annotation.offsetParent().position();
+        var elOffset = this.ui.annotation.position();
+        var elWidth = this.ui.annotation.outerWidth();
+        var totalWidth = this.ui.annotation.offsetParent().parent().width();
+        var totalHeight = this.ui.annotation.offsetParent().parent().height();
+        var right = totalWidth - parentOffset.left - elOffset.left - elWidth;
+        var bottom = totalHeight - parentOffset.top - elOffset.top;
 
-			// add list item for annotation layer
-			var layerItem = $('<li></li>')
-			.bind('click', {
-				layerData: layerData,
-				CA: CA
-			}, CA.annotationLayerClick);
-			var layerItemBox = $('<div class="ca-ui-annotation-selector-item-box"></div>')
-			.addClass(layerData.visible ? 'filled' : 'empty');
-			
-			// add the custom layer color if applicable
-			if (layerData.visible && layerData.annotation) {
-				layerItemBox.css('background-color', '#'+layerData.color);
-			}
+        // create the annotation selector box
+        this.settings.annotationSelectorVisible = true;
+        this.ui.annotationSelector = $('<div class="ca-ui-annotation-selector"></div>')
+            .css({
+                right: right,
+                bottom: bottom
+            });
+        $('<div class="title">Annotations</div>').appendTo(this.ui.annotationSelector);
+        this.ui.annotationSelectorList = $('<ul class="ca-ui-annotation-selector-list"></ul>');
+        for (var i=0, count = this.annotationLayers.length; i < count; i++) {
+            var layerData = this.annotationLayers[i];
 
-			// append the layerItem
-			layerItem
-			.append(layerItemBox)
-			.append('<span>'+layerData.title+'</span>')
-			.appendTo(this.ui.annotationSelectorList);
+            // add list item for annotation layer
+            var layerItem = $('<li></li>')
+            .bind('click', {
+                layerData: layerData,
+                CA: CA
+            }, CA.annotationLayerClick);
+            var layerItemBox = $('<div class="ca-ui-annotation-selector-item-box"></div>')
+            .addClass(layerData.visible ? 'filled' : 'empty');
 
-		}
-		// append the finished selector box
-		this.ui.annotationSelector
-		.bind('mouseenter', function() {
-			CA.container.attr('data-controls-lock', 'true');
-		})
-		.bind('mouseleave', function() {
-			CA.container.attr('data-controls-lock', 'false');
-		})
-		.append(this.ui.annotationSelectorList)
-		.appendTo(this.container);
-		this.ui.currentPopup = this.ui.annotationSelector;
-	}
+            // add the custom layer color if applicable
+            if (layerData.visible && layerData.annotation) {
+                layerItemBox.css('background-color', '#'+layerData.color);
+            }
+
+            // append the layerItem
+            layerItem
+            .append(layerItemBox)
+            .append('<span>'+layerData.title+'</span>')
+            .appendTo(this.ui.annotationSelectorList);
+
+        }
+        // append the finished selector box
+        this.ui.annotationSelector
+        .bind('mouseenter', function() {
+            CA.container.attr('data-controls-lock', 'true');
+        })
+        .bind('mouseleave', function() {
+            CA.container.attr('data-controls-lock', 'false');
+        })
+        .append(this.ui.annotationSelectorList)
+        .appendTo(this.container);
+        this.ui.currentPopup = this.ui.annotationSelector;
+    }
 };
 
 LayeredImage.prototype.annotationLayerClick = function(event) {
-	var layerData = event.data.layerData;
-	var CA = event.data.CA;
-	// toggle the layer on
-	CA.toggleLayer(layerData);
-	// fill the status box according to layer's visibility state
-	var layerItemBox = $(this).find('.ca-ui-annotation-selector-item-box');
-	if (layerData.visible) {
-		layerItemBox.removeClass('empty').addClass('filled');
-		// if this is an annotation, use the selected color, and show  layer in legend
-		if (layerData.annotation && layerData.type == 'svg') {
-			var bgColor = layerData.color || '#fff';
-			layerItemBox.css('background-color', '#' + bgColor);
-			CA.addLegendItem(layerData);
-		}
-	}
-	else {
-		layerItemBox.removeClass('filled').addClass('empty');
-		// if annotation, reset the elements background color to fall back to stylesheet
-		// and remove layer from legend
-		if (layerData.annotation && layerData.type == 'svg') {
-			layerItemBox.css('background-color', '');
-			CA.removeLegendItem(layerData);
-		}
-	}
+    var layerData = event.data.layerData;
+    var CA = event.data.CA;
+    // toggle the layer on
+    CA.toggleLayer(layerData);
+    // fill the status box according to layer's visibility state
+    var layerItemBox = $(this).find('.ca-ui-annotation-selector-item-box');
+    if (layerData.visible) {
+        layerItemBox.removeClass('empty').addClass('filled');
+        // if this is an annotation, use the selected color, and show  layer in legend
+        if (layerData.annotation && layerData.type == 'svg') {
+            var bgColor = layerData.color || '#fff';
+            layerItemBox.css('background-color', '#' + bgColor);
+            CA.addLegendItem(layerData);
+        }
+    }
+    else {
+        layerItemBox.removeClass('filled').addClass('empty');
+        // if annotation, reset the elements background color to fall back to stylesheet
+        // and remove layer from legend
+        if (layerData.annotation && layerData.type == 'svg') {
+            layerItemBox.css('background-color', '');
+            CA.removeLegendItem(layerData);
+        }
+    }
 };
 
 LayeredImage.prototype.resetZoomRange = function(zoomMin) {
-	// set the zoom range
-	zoomMin = zoomMin || 0;
-	var zoomMax = 0;
-	for (var i=0, count = this.layers.length; i < count; i++) {
-		if (this.layers[i].type == 'iip') {
-			if (this.layers[i].zoom_levels - 1 > zoomMax) {
-				zoomMax = this.layers[i].zoom_levels - 1;
-			}
-		}
-		else {
-			if (this.layers[i].zoom_levels > zoomMax) {
-				zoomMax = this.layers[i].zoom_levels;
-			}
-		}
-	}
-	this.map.zoomRange([zoomMin, zoomMax]);
+    // set the zoom range
+    zoomMin = zoomMin || 0;
+    var zoomMax = 0;
+    for (var i=0, count = this.layers.length; i < count; i++) {
+        if (this.layers[i].type == 'iip') {
+            if (this.layers[i].zoom_levels - 1 > zoomMax) {
+                zoomMax = this.layers[i].zoom_levels - 1;
+            }
+        }
+        else {
+            if (this.layers[i].zoom_levels > zoomMax) {
+                zoomMax = this.layers[i].zoom_levels;
+            }
+        }
+    }
+    this.map.zoomRange([zoomMin, zoomMax]);
 
-	// set the range of the ui slider to match
-	this.ui.zoomSlider.slider('option', 'min', zoomMin);
-	this.ui.zoomSlider.slider('option', 'max', zoomMax);
+    // set the range of the ui slider to match
+    this.ui.zoomSlider.slider('option', 'min', zoomMin);
+    this.ui.zoomSlider.slider('option', 'max', zoomMax);
 };
 
 
 LayeredImage.prototype.getZoomLevels = function(width, height) {
-	var tileSize = this.map.tileSize().x;
-	// there is always at least one zoom level
-	var zoomLevels = 1;
-	while (width > tileSize || height > tileSize) {
-		zoomLevels++;
-		width = width / 2;
-		height = height / 2;
-	}
-	return zoomLevels;
+    var tileSize = this.map.tileSize().x;
+    // there is always at least one zoom level
+    var zoomLevels = 1;
+    while (width > tileSize || height > tileSize) {
+        zoomLevels++;
+        width = width / 2;
+        height = height / 2;
+    }
+    return zoomLevels;
 };
 
 
 LayeredImage.prototype.getScale = function(zoom_levels, zoom) {
-	return Math.pow(2, zoom_levels - zoom);
+    return Math.pow(2, zoom_levels - zoom);
 };
 
 
 LayeredImage.prototype.realignLayers = function() {
-	var $ = this.$, i, count;
-	
-	// grab the layers out of the dom
-	var map = this.container.find('svg.map');
-	var layers = map.find('g.layer').remove();
-	
-	// sort the layers
-	// find the first layer
-	for (i=0, count = layers.length; i < count; i++) {
-		if ($(layers[i]).attr('id') == this.settings.currentLayer1.id) {
-			map.append(layers[i]);
-			layers.splice(i,1);
-		}
-	}
-	// find the second layer
-	for (i=0, count = layers.length; i < count; i++) {
-		if ($(layers[i]).attr('id') == this.settings.currentLayer2.id) {
-			map.append(layers[i]);
-			layers.splice(i, 1);
-		}
-	}
-	// put the rest of the layers back into the dom
-	map.append(layers);
+    var $ = this.$, i, count;
+
+    // grab the layers out of the dom
+    var map = this.container.find('svg.map');
+    var layers = map.find('g.layer').remove();
+
+    // sort the layers
+    // find the first layer
+    for (i=0, count = layers.length; i < count; i++) {
+        if ($(layers[i]).attr('id') == this.settings.currentLayer1.id) {
+            map.append(layers[i]);
+            layers.splice(i,1);
+        }
+    }
+    // find the second layer
+    for (i=0, count = layers.length; i < count; i++) {
+        if ($(layers[i]).attr('id') == this.settings.currentLayer2.id) {
+            map.append(layers[i]);
+            layers.splice(i, 1);
+        }
+    }
+    // put the rest of the layers back into the dom
+    map.append(layers);
 };
 
 
 LayeredImage.prototype.clearPopups = function() {
-	var CA = this;
+    var CA = this;
 
-	if (this.ui.currentPopup) {
-		this.ui.currentPopup.fadeOut(400, function() {
-			$(this).remove();
-		});
-		this.ui.currentPopup = false;
-	}
-	if (this.ui.controls) {
-		$.each(this.ui.controls, function() {
-			$(this).removeClass('active');
-		});
-	}
+    if (this.ui.currentPopup) {
+        this.ui.currentPopup.fadeOut(400, function() {
+            $(this).remove();
+        });
+        this.ui.currentPopup = false;
+    }
+    if (this.ui.controls) {
+        $.each(this.ui.controls, function() {
+            $(this).removeClass('active');
+        });
+    }
 };
 
 
 LayeredImage.prototype.toggleControls = function(duration) {
-	duration = duration || 400;
-	var $ = this.$;
-	
-	$.each(this.ui.controls, function() {
-		// do this test, this.currentPopup could be false making "this" the window
-		if (this != window) {
-			this.fadeToggle(duration);
-		}
-	});
-   
+    duration = duration || 400;
+    var $ = this.$;
+
+    $.each(this.ui.controls, function() {
+        // do this test, this.currentPopup could be false making "this" the window
+        if (this != window) {
+            this.fadeToggle(duration);
+        }
+    });
+
 };
 
 LayeredImage.prototype.addLegendItem = function(layerData) {
-	var $ = this.$;
-	
-	// only show if there is color data
-	if (!layerData.color || layerData.color === '') {
-		return;
-	}
-	
-	// if the legend does not exist yet, create it here
-	if (!this.ui.legend) {
-		// legend control
-		this.ui.legend = $('<div class="ca-ui-legend"><ul class="legendList"></ul></div>')
-		.appendTo(this.container);
-		if (this.container.attr('data-controls') != 'true') {
-			this.ui.legend.css('display', 'none');
-		}
-		this.ui.controls.push(this.ui.legend);
-	}
-	
-	var legendList = this.ui.legend.find('ul');
-	
-	var legendItem = $('<li data-layer_num="'+layerData.layer_num+'">'+layerData.title+'</li>')
-	.appendTo(legendList);
-	
-	var itemBox = $('<div class="item-box"></div>')
-		.css('background-color', '#'+layerData.color)
-		.prependTo(legendItem);
-	
-	this.ui.legendItemsCount++;
+    var $ = this.$;
+
+    // only show if there is color data
+    if (!layerData.color || layerData.color === '') {
+        return;
+    }
+
+    // if the legend does not exist yet, create it here
+    if (!this.ui.legend) {
+        // legend control
+        this.ui.legend = $('<div class="ca-ui-legend"><ul class="legendList"></ul></div>')
+        .appendTo(this.container);
+        if (this.container.attr('data-controls') != 'true') {
+            this.ui.legend.css('display', 'none');
+        }
+        this.ui.controls.push(this.ui.legend);
+    }
+
+    var legendList = this.ui.legend.find('ul');
+
+    var legendItem = $('<li data-layer_num="'+layerData.layer_num+'">'+layerData.title+'</li>')
+    .appendTo(legendList);
+
+    var itemBox = $('<div class="item-box"></div>')
+        .css('background-color', '#'+layerData.color)
+        .prependTo(legendItem);
+
+    this.ui.legendItemsCount++;
 };
 
 
 LayeredImage.prototype.removeLegendItem = function(layerData) {
-	var $ = this.$;
-	var CA = this;
-	
-	if (this.ui.legend) {
-		var legendItems = this.ui.legend.find('ul').children();
-		// find the item with the matching layer num and remove it
-		legendItems.each(function() {
-			if ($(this).attr('data-layer_num') == layerData.layer_num) {
-				$(this).remove();
-				CA.ui.legendItemsCount--;
-			}
-		});
+    var $ = this.$;
+    var CA = this;
 
-		// if the legend is empty, remove it
-		if (this.ui.legendItemsCount <= 0) {
-			this.ui.legend.remove();
-			delete this.ui.legend;
-			// remove from control array
-			for (var i=0, count = this.ui.controls.length; i < count; i++) {
-				if ($(this.ui.controls[i]).hasClass('ca-ui-legend')) {
-					this.ui.controls.splice(i, 1);
-				}
-			}
-		}
-	}
+    if (this.ui.legend) {
+        var legendItems = this.ui.legend.find('ul').children();
+        // find the item with the matching layer num and remove it
+        legendItems.each(function() {
+            if ($(this).attr('data-layer_num') == layerData.layer_num) {
+                $(this).remove();
+                CA.ui.legendItemsCount--;
+            }
+        });
+
+        // if the legend is empty, remove it
+        if (this.ui.legendItemsCount <= 0) {
+            this.ui.legend.remove();
+            delete this.ui.legend;
+            // remove from control array
+            for (var i=0, count = this.ui.controls.length; i < count; i++) {
+                if ($(this.ui.controls[i]).hasClass('ca-ui-legend')) {
+                    this.ui.controls.splice(i, 1);
+                }
+            }
+        }
+    }
 };
 
 // toggle on any annotation layer that's configured from the figure options
 LayeredImage.prototype.showAnnotationPresets = function() {
-	for (var j=0, layerCount = this.annotationLayers.length; j < layerCount; j++) {
-		this.removeLayer(this.annotationLayers[j]);
-		this.removeLegendItem(this.annotationLayers[j]);
-		
-		if (this.figureOptions.annotationPreset) {
-			// each preset is a layer_id for a layer in this.layers
-			for (var i=0, count = this.figureOptions.annotationPreset.length; i < count; i++) {
-				var presetLayerId = this.figureOptions.annotationPreset[i];
-				if (this.annotationLayers[j].layer_id == presetLayerId) {
-					this.repaintLayer(this.annotationLayers[j]);
-					
-					if (!this.figureOptions.disable_annotation || this.figureOptions.editing) {
-						this.addLegendItem(this.annotationLayers[j]);
-					}
-					break;
-				}
-			}
-		}
-	}
+    for (var j=0, layerCount = this.annotationLayers.length; j < layerCount; j++) {
+        this.removeLayer(this.annotationLayers[j]);
+        this.removeLegendItem(this.annotationLayers[j]);
+
+        if (this.figureOptions.annotationPreset) {
+            // each preset is a layer_id for a layer in this.layers
+            for (var i=0, count = this.figureOptions.annotationPreset.length; i < count; i++) {
+                var presetLayerId = this.figureOptions.annotationPreset[i];
+                if (this.annotationLayers[j].layer_id == presetLayerId) {
+                    this.repaintLayer(this.annotationLayers[j]);
+
+                    if (!this.figureOptions.disable_annotation || this.figureOptions.editing) {
+                        this.addLegendItem(this.annotationLayers[j]);
+                    }
+                    break;
+                }
+            }
+        }
+    }
 };
 
 LayeredImage.prototype.getVisibleBaseLayers = function() {
-	var i, count,
-		layers = [];
-	
-	for (i=0, count = this.baseLayers.length; i< count; i++) {
-		var layerData = this.baseLayers[i];
-		if (layerData.visible) {
-			layers.push(layerData);
-		}
-	}
-	
-	return layers;
+    var i, count,
+        layers = [];
+
+    for (i=0, count = this.baseLayers.length; i< count; i++) {
+        var layerData = this.baseLayers[i];
+        if (layerData.visible) {
+            layers.push(layerData);
+        }
+    }
+
+    return layers;
 };
 
 LayeredImage.prototype.getVisibleBaseLayerIds = function() {
-	var i, count,
-		layers = [];
-	
-	for (i=0, count = this.baseLayers.length; i< count; i++) {
-		var layerData = this.baseLayers[i];
-		if (layerData.visible) {
-			layers.push(layerData.layer_id);
-		}
-	}
-	
-	return layers;
+    var i, count,
+        layers = [];
+
+    for (i=0, count = this.baseLayers.length; i< count; i++) {
+        var layerData = this.baseLayers[i];
+        if (layerData.visible) {
+            layers.push(layerData.layer_id);
+        }
+    }
+
+    return layers;
 };
 
 
 LayeredImage.prototype.getVisibleAnnotationIds = function() {
-	var i, count,
-		annotations = [];
-	
-	for (i=0, count = this.annotationLayers.length; i < count; i++) {
-		var layerData = this.annotationLayers[i];
-		if (layerData.visible) {
-			annotations.push(layerData.layer_id);
-		}
-	}
-	
-	return annotations;
+    var i, count,
+        annotations = [];
+
+    for (i=0, count = this.annotationLayers.length; i < count; i++) {
+        var layerData = this.annotationLayers[i];
+        if (layerData.visible) {
+            annotations.push(layerData.layer_id);
+        }
+    }
+
+    return annotations;
 };
 
 
 LayeredImage.prototype.getExtents = function() {
-	var extents = this.map.extent();
-	return {
-		swLon: extents[0].lon,
-		swLat: extents[0].lat,
-		neLon: extents[1].lon,
-		neLat: extents[1].lat
-	};
+    var extents = this.map.extent();
+    return {
+        swLon: extents[0].lon,
+        swLat: extents[0].lat,
+        neLon: extents[1].lon,
+        neLat: extents[1].lat
+    };
 };
 
 
 LayeredImage.prototype.setExtents = function(extents) {
-	this.map.extent(extents);
-	// update zoom slider
-	if (this.ui.zoomSlider) {
-		this.ui.zoomSlider.slider('value', this.map.zoom());
-	}
+    this.map.extent(extents);
+    // update zoom slider
+    if (this.ui.zoomSlider) {
+        this.ui.zoomSlider.slider('value', this.map.zoom());
+    }
 };
 
 
 LayeredImage.prototype.getSliderPosition = function() {
-	if (typeof this.ui.slider != 'undefined') {
-		return this.ui.slider.slider('value');
-	}
-	else {
-		return 0;
-	}
+    if (typeof this.ui.slider != 'undefined') {
+        return this.ui.slider.slider('value');
+    }
+    else {
+        return 0;
+    }
 };
 
 
 LayeredImage.prototype.getLayerById = function(id) {
-	for (var i=0, count = this.layers.length; i < count; i++) {
-		if (this.layers[i].layer_id && this.layers[i].layer_id == id) {
-			return this.layers[i];
-		}
-	}
-	return false;
+    for (var i=0, count = this.layers.length; i < count; i++) {
+        if (this.layers[i].layer_id && this.layers[i].layer_id == id) {
+            return this.layers[i];
+        }
+    }
+    return false;
 };
 
 LayeredImage.prototype.layerSelect = function(event) {
-	var CA = event.data.CA;
-	var layerNum = event.data.layerNum;
-	var layerIndex = parseInt($(this).attr('data-layer_index'), 10);
+    var CA = event.data.CA;
+    var layerNum = event.data.layerNum;
+    var layerIndex = parseInt($(this).attr('data-layer_index'), 10);
 
-	// if this button is already active do nothing
-	var button = $(this).find('.ca-ui-layer-selector-button');
-	if (button.hasClass('active')) {
-		return;
-	}
+    // if this button is already active do nothing
+    var button = $(this).find('.ca-ui-layer-selector-button');
+    if (button.hasClass('active')) {
+        return;
+    }
 
-	// if this button is already selected on the other side, do nothing
-	var otherNum = (layerNum == 1) ? 2: 1;
-	var otherSideButton = CA.ui.layerSelectorPopup
-		.find('.ca-ui-layer-selector-row-button' + otherNum + '[data-layer_index="' + layerIndex + '"] .ca-ui-layer-selector-button');
-	if (otherSideButton.hasClass('active')) {
-		return;
-	}
+    // if this button is already selected on the other side, do nothing
+    var otherNum = (layerNum == 1) ? 2: 1;
+    var otherSideButton = CA.ui.layerSelectorPopup
+        .find('.ca-ui-layer-selector-row-button' + otherNum + '[data-layer_index="' + layerIndex + '"] .ca-ui-layer-selector-button');
+    if (otherSideButton.hasClass('active')) {
+        return;
+    }
 
-	// switch the old layer with the new
-	CA.removeLayer(CA.settings['currentLayer' + layerNum]);
-	CA.createLayer(CA.baseLayers[layerIndex]);
-	CA.settings['currentLayer' + layerNum] = CA.baseLayers[layerIndex];
-	if (layerNum == 2) {
-		// set the opacity according to slider
-		var sliderVal = CA.ui.slider.slider('value');
-		var opacity = sliderVal / 100;
-		$('#'+ CA.settings.currentLayer2.id).css('opacity', opacity);
-	}
+    // switch the old layer with the new
+    CA.removeLayer(CA.settings['currentLayer' + layerNum]);
+    CA.createLayer(CA.baseLayers[layerIndex]);
+    CA.settings['currentLayer' + layerNum] = CA.baseLayers[layerIndex];
+    if (layerNum == 2) {
+        // set the opacity according to slider
+        var sliderVal = CA.ui.slider.slider('value');
+        var opacity = sliderVal / 100;
+        $('#'+ CA.settings.currentLayer2.id).css('opacity', opacity);
+    }
 
-	// update button display
-	CA.ui.layerSelectorPopup
-		.find('.ca-ui-layer-selector-row-button' + layerNum + ' .ca-ui-layer-selector-button')
-		.removeClass('active');
-	button.addClass('active');
+    // update button display
+    CA.ui.layerSelectorPopup
+        .find('.ca-ui-layer-selector-row-button' + layerNum + ' .ca-ui-layer-selector-button')
+        .removeClass('active');
+    button.addClass('active');
 
-	// update slider layer text
-	CA.ui.sliderLayerText.text(CA.settings.currentLayer1.title + ' - ' + CA.settings.currentLayer2.title);
+    // update slider layer text
+    //CA.ui.sliderLayerText.text(CA.settings.currentLayer1.title + ' - ' + CA.settings.currentLayer2.title);
+    CA.ui.sliderLayerText1.attr("title", CA.settings.currentLayer1.title);
+    CA.ui.sliderLayerText2.attr("title", CA.settings.currentLayer2.title);
 
-	// realign layers
-	CA.realignLayers();
+    // realign layers
+    CA.realignLayers();
+
+    // Update the viewport with new layers
+    CA.refreshViewfinder();
 };
 
 function outerHTML(node){
-	// if IE, Chrome take the internal method otherwise build one
-	return node.outerHTML || (
-		function(n){
-			var div = document.createElement('div'), h;
-			div.appendChild( n.cloneNode(true) );
-			h = div.innerHTML;
-			div = null;
-			return h;
-		})(node);
+    // if IE, Chrome take the internal method otherwise build one
+    return node.outerHTML || (
+        function(n){
+            var div = document.createElement('div'), h;
+            div.appendChild( n.cloneNode(true) );
+            h = div.innerHTML;
+            div = null;
+            return h;
+        })(node);
 }
 
 window.liCollection = new LICollection();
 
 // update the viewfinder if an asset is being dragged
 function liMousemove(e) {
-	if (window.liCollection && liCollection.userIsDraggingAsset) {
-		var asset = liCollection.find(liCollection.userIsDraggingAsset);
+    if (window.liCollection && liCollection.userIsDraggingAsset) {
+        var asset = liCollection.find(liCollection.userIsDraggingAsset);
 
-		if (asset) {
-			if (!asset.settings.dragging) {
-				return;
-			}
+        if (asset) {
+            if (!asset.settings.dragging) {
+                return;
+            }
 
-			asset.refreshViewfinderViewport();
+            asset.refreshViewfinderViewport();
 
-			if (e.conservationDraggingRemove) {
-				asset.settings.dragging = undefined;
-				liCollection.userIsDraggingAsset = false;
-			}
-		}
-	}
+            if (e.conservationDraggingRemove) {
+                asset.settings.dragging = undefined;
+                liCollection.userIsDraggingAsset = false;
+            }
+        }
+    }
 }
 
 // update the viewfinder and remove the dragging flag when done dragging
 function liMouseup(e) {
-	if (window.liCollection && liCollection.userIsDraggingAsset) {
-		e.conservationDraggingRemove = true;
-		liMousemove(e);
-	}
+    if (window.liCollection && liCollection.userIsDraggingAsset) {
+        e.conservationDraggingRemove = true;
+        liMousemove(e);
+    }
 }
 
 // bind the mouse events for asset dragging and viewfinder updating
 window.addEventListener("mousemove", liMousemove, false);
 window.addEventListener("mouseup", liMouseup, false);
+
 app = {
 	router : undefined,
 	config : undefined,
@@ -5376,6 +6002,7 @@ app = {
 		
 		// init main view
 		this.views.app = new OsciTk.views.App();
+		
 	},
 
 	run : function() {

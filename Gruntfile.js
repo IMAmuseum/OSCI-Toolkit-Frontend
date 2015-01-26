@@ -135,16 +135,16 @@ module.exports = function(grunt) {
     });
 
     //MultiTask for Compiling Underscore templates into a single file
-    grunt.registerMultiTask('precompileTemplates', 'Precompile Underscore templates', function() {
-        var files = grunt.file.expandFiles(this.file.src);
+    // grunt.registerMultiTask('precompileTemplates', 'Precompile Underscore templates', function() {
+    //     var files = grunt.file.expandFiles(this.file.src);
 
-        var src = grunt.helper('precompileTemplates', files);
-        grunt.file.write(this.file.dest, src);
+    //     var src = grunt.helper('precompileTemplates', files);
+    //     grunt.file.write(this.file.dest, src);
 
-        if (this.errorCount) { return false; }
+    //     if (this.errorCount) { return false; }
 
-        grunt.log.writeln('File "' + this.file.dest + '" created.');
-    });
+    //     grunt.log.writeln('File "' + this.file.dest + '" created.');
+    // });
 
     //MultiTask for Compiling Underscore templates into a single file
     grunt.registerMultiTask('precompileTemplates', 'Precompile Underscore templates', function() {
