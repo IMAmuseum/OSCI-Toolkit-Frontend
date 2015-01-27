@@ -81,7 +81,7 @@
 	<script src="js/oscitk/themes/MultiColumn/views/ParagraphControlsView.js"></script>
 	<script src="js/oscitk/Router.js"></script>
 	<script src="js/oscitk/helper.js"></script>
-	<script src="js/oscitk/themes/MultiColumn/appBootstrap.js"></script>
+	<script src="js/appBootstrap.js"></script>
 <!-- 	// <script src="js/oscitk/zotero.js"></script> -->
 
 	<script>jQuery(function() {
@@ -106,6 +106,16 @@
 					{view: 'Font', text: 'Font'},
 					{view: 'Account', text: 'Account'}
 				],
+				theme: 'MultiColumn',
+				themeFeatures: {
+					"account": true,
+					"search": true,
+					"notes": true,
+					"citations": true,
+					"glossary": true,
+					"multicolumn": true,
+					"layeredImage": true
+				},
 				sectionView: 'MultiColumnSection',
 				sectionViewOptions: {
 					minColumnWidth : 200,

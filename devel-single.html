@@ -56,7 +56,7 @@
 	<script src="js/oscitk/themes/base/views/ParagraphControlsView.js"></script>
 	<script src="js/oscitk/Router.js"></script>
 	<script src="js/oscitk/helper.js"></script>
-	<script src="js/oscitk/themes/base/appBootstrap.js"></script>
+	<script src="js/appBootstrap.js"></script>
 
 	<script>jQuery(function() {
 			app.bootstrap({
@@ -73,7 +73,16 @@
 					{view: 'Font', text: 'Font'},
 					{view: 'Account', text: 'Account'}
 				],
-				theme: 'basic',
+				theme: 'Base',
+				themeFeatures: {
+					"account": true,
+					"search": false,
+					"notes": false,
+					"citations": false,
+					"glossary": false,
+					"multicolumn": false,
+					"layeredImage": false
+				},
 				paragraphControls: {
 					'toggleNoteDialog': 'note',
 					'toggleCiteDialog': 'cite'
@@ -82,6 +91,7 @@
 			app.run();
 		});
 	</script>
+
 </head>
 <body>
 
