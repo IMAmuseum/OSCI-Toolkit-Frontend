@@ -34,12 +34,12 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		app.views.footnotesView = new OsciTk.views.Footnotes();
 
 		// Add the inline notes view to the AppView
-		// app.views.inlineNotesView = new OsciTk.views.InlineNotes();
+		app.views.inlineNotesView = new OsciTk.views.InlineNotes();
 
 		// Add the citation view to the AppView
-		// app.views.citationView = new OsciTk.views.Citation();
+		app.views.citationView = new OsciTk.views.Citation();
 
 		// setup glossary tooltips
-		// app.views.glossaryTooltipView = new OsciTk.views.GlossaryTooltip();
+		app.views.glossaryTooltipView = new OsciTk.views.GlossaryTooltip();
 	}
 });

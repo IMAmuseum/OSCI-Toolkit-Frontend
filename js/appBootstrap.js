@@ -13,6 +13,9 @@ app = {
 		if (this.features.notes ) {
 			this.collections.notes = new OsciTk.collections.Notes();
 		}
+		if (this.features.account ) {
+			this.account = new OsciTk.models.Account();
+		}
 		this.collections.figures = new OsciTk.collections.Figures();
 		this.collections.footnotes = new OsciTk.collections.Footnotes();
 		this.collections.navigationItems = new OsciTk.collections.NavigationItems();
@@ -34,7 +37,7 @@ app = {
 		};
 
 		// init main view
-		this.views.app = new OsciTk.views.App();
+		this.views.app = new OsciTk.views.App(this.features);
 
 	},
 
