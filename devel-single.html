@@ -4,6 +4,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 	<link rel='apple-touch-icon' href='img/icon-app-57.png' />
+
 	<link type="text/css" rel="stylesheet" href="js/external/jquery-ui/jquery-ui.min.css">
 	<link type="text/css" rel="stylesheet" href="js/external/jquery.qtip.css">
 	<link type="text/css" rel="stylesheet" href="js/external/fancybox/jquery.fancybox.css">
@@ -11,9 +12,9 @@
 	<link type="text/css" rel="stylesheet" href="js/oscitk/themes/Base/css/toolbar.css">
 	<link type="text/css" rel="stylesheet" href="js/oscitk/themes/Base/css/section.css">
 	<link type="text/css" rel="stylesheet" href="js/oscitk/themes/Base/css/navigation.css">
-	<link type="text/css" rel="stylesheet" href="js/oscitk/themes/Base/css/layered_image.css">
 	<link type="text/css" rel="stylesheet" href="js/oscitk/themes/Base/css/themeNight.css">
 	<link type="text/css" rel="stylesheet" href="js/oscitk/themes/Base/css/themeSepia.css">
+
 	<script src="js/external/json2.js"></script>
 	<script src="js/external/jquery.js"></script>
 	<script src="js/external/jquery.qtip.js"></script>
@@ -23,9 +24,16 @@
 	<script src="js/external/fancybox/jquery.fancybox.js"></script>
 	<script src="js/external/polymaps.min.js"></script>
 	<script src="js/external/jquery-ui/jquery-ui.min.js"></script>
-	<script src="js/oscitk/osci_tk_layered_image.js"></script>
+
+
 	<script src="js/oscitk/OsciTk.js"></script>
+	<script src="js/oscitk/Router.js"></script>
+	<script src="js/oscitk/helper.js"></script>
+
+	<!-- template loader uses 'templateUrls' in config below -->
 	<script src="js/oscitk/TemplateManager.js"></script>
+
+	<!-- models -->
 	<script src="js/oscitk/models/BaseModel.js"></script>
 	<script src="js/oscitk/models/ConfigModel.js"></script>
 	<script src="js/oscitk/models/PackageModel.js"></script>
@@ -35,11 +43,15 @@
 	<script src="js/oscitk/models/AccountModel.js"></script>
 	<script src="js/oscitk/models/PageModel.js"></script>
 	<script src="js/oscitk/models/SectionModel.js"></script>
+
+	<!-- collections -->
 	<script src="js/oscitk/collections/BaseCollection.js"></script>
 	<script src="js/oscitk/collections/FiguresCollection.js"></script>
 	<script src="js/oscitk/collections/NavigationItemsCollection.js"></script>
 	<script src="js/oscitk/collections/FootnotesCollection.js"></script>
 	<script src="js/oscitk/collections/PagesCollection.js"></script>
+
+	<!-- theme views -->
 	<script src="js/oscitk/themes/base/views/BaseView.js"></script>
 	<script src="js/oscitk/themes/base/views/AppView.js"></script>
 	<script src="js/oscitk/themes/base/views/SectionView.js"></script>
@@ -53,16 +65,14 @@
 	<script src="js/oscitk/themes/base/views/TocView.js"></script>
 	<script src="js/oscitk/themes/base/views/AccountView.js"></script>
 	<script src="js/oscitk/themes/base/views/FontView.js"></script>
-	<script src="js/oscitk/themes/base/views/ParagraphControlsView.js"></script>
-	<script src="js/oscitk/Router.js"></script>
-	<script src="js/oscitk/helper.js"></script>
+
 	<script src="js/appBootstrap.js"></script>
 
 	<script>jQuery(function() {
 			app.bootstrap({
 				packageUrl: 'http://osci.dev:8000/api/epub/1/package.opf',
 				templateUrls: [
-					'http://osci.dev:8000/osci-themes/js/oscitk/themes/base/templates/'
+					'http://osci.dev:8000/osci-themes/js/oscitk/themes/Base/templates/'
 				],
 				endpoints: {
 					'OsciTkAccount': '/api/users/'
@@ -82,10 +92,6 @@
 					"glossary": false,
 					"multicolumn": false,
 					"layeredImage": false
-				},
-				paragraphControls: {
-					'toggleNoteDialog': 'note',
-					'toggleCiteDialog': 'cite'
 				}
 			});
 			app.run();
