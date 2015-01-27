@@ -41,7 +41,6 @@ app = {
 	run : function() {
 		// load package document
 		this.models.docPackage = new OsciTk.models.Package({url: this.config.get('packageUrl')});
-		console.log(this.config.get('theme'));
 		Backbone.history.start();
 	}
 };
