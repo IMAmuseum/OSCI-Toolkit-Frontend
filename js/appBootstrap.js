@@ -37,7 +37,7 @@ app = {
 		};
 
 		// init main view
-		this.views.app = new OsciTk.views.App(this.features);
+		this.views.app = new OsciTk.views.App();
 
 	},
 
