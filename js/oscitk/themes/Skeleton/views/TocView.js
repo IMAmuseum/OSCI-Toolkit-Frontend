@@ -5,7 +5,7 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 		'click li a': 'itemClick'
 	},
 	initialize: function(options) {
-		this.parent = options.parent;
+		//this.parent = options.parent;
 
 		this.listenTo(Backbone, "currentNavigationItemChanged", function() {
 			this.render();

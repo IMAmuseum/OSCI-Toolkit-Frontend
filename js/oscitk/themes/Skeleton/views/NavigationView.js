@@ -6,7 +6,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		this.numPages = null;
 		this.identifier = null;
 		this.currentNavigationItem = null;
-		this.page = null;
+		this.page = 1;
 
 		// when section is loaded, render the navigation control
 		this.listenTo(Backbone, 'layoutComplete', function(section) {

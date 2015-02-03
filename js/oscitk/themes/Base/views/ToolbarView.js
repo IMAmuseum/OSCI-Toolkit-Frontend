@@ -31,6 +31,7 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	events: {
 		"click #toolbar-close": "contentClose"
 	},
+
 	render: function() {
 		this.$el.html(this.template());
 
@@ -40,6 +41,7 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 			item.render();
 		}, this);
 	},
+
 	setActiveToolbarItemView: function(view) {
 		if ((this.activeToolbarItemView && view.cid !== this.activeToolbarItemView.cid) || this.activeToolbarItemView === undefined) {
 			this.activeToolbarItemViewChanged = true;
@@ -57,6 +59,7 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 
 		return this;
 	},
+
 	toggleContentView: function() {
 		//toolbar closed, open it
 		if (!this.isContentOpen) {
@@ -74,6 +77,7 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 			return this;
 		}
 	},
+
 	contentOpen: function() {
 		this.updateHeight();
 
@@ -81,6 +85,7 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 
 		this.isContentOpen = true;
 	},
+
 	updateHeight: function() {
 		//clear height form content or resize does not work
 		this.$el.find('#toolbar-content').height('');
@@ -100,6 +105,7 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 			top: 0
 		});
 	},
+
 	contentClose: function() {
 		this.$el.css({
 			top: '-' + this.$el.height() + 'px'

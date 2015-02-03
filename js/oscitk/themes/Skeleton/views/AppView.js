@@ -1,12 +1,16 @@
 OsciTk.views.App = OsciTk.views.BaseView.extend({
 	id: 'reader',
+	template: OsciTk.templateManager.get('app'),
 
 	initialize: function() {
-		$('body').append(this.el);
+		this.render();
 
 		// Add the title view to the appView
 		app.views.titleView = new OsciTk.views.Title();
-		this.addView(app.views.titleView);
+		this.addView(app.views.titleView, '#title');
+
+		// app.views.tocView = new OsciTk.views.Toc();
+		// this.addView(app.views.Toc);
 
 		// Add the toolbar to the appView
 		app.views.toolbarView = new OsciTk.views.Toolbar();
@@ -23,5 +27,10 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		// Add the footnotes view to the AppView
 		app.views.footnotesView = new OsciTk.views.Footnotes();
 
+	},
+
+	render: function() {
+		this.$el.html(this.template);
+		$('body').append(this.el);
 	}
 });
