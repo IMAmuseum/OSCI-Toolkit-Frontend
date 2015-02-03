@@ -9,12 +9,12 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		app.views.titleView = new OsciTk.views.Title();
 		this.addView(app.views.titleView, '#title');
 
-		// app.views.tocView = new OsciTk.views.Toc();
-		// this.addView(app.views.Toc);
+		app.views.tocView = new OsciTk.views.Toc();
+		this.addView(app.views.tocView, '#toc');
 
 		// Add the toolbar to the appView
-		app.views.toolbarView = new OsciTk.views.Toolbar();
-		this.addView(app.views.toolbarView);
+		// app.views.toolbarView = new OsciTk.views.Toolbar();
+		// this.addView(app.views.toolbarView);
 
         // Add Section
 		app.views.sectionView = new OsciTk.views.Section;

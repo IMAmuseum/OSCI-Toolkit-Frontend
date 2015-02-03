@@ -4,9 +4,7 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 	events: {
 		'click li a': 'itemClick'
 	},
-	initialize: function(options) {
-		//this.parent = options.parent;
-
+	initialize: function() {
 		this.listenTo(Backbone, "currentNavigationItemChanged", function() {
 			this.render();
 		});
@@ -15,6 +13,7 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 		this.$el.html(this.template({
 			items: app.collections.navigationItems.where({depth: 0})
 		}));
+		return this;
 	},
 	itemClick: function(event) {
 		event.preventDefault();
@@ -23,7 +22,6 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 		// Backbone.trigger('navigateToSection', sectionId);
 		// TODO: don't really want to address the appRouter directly
 		app.router.navigate("section/" + sectionId, {trigger: true});
-		app.views.toolbarView.contentClose();
 	},
 	active: function() {
 		var containerSize = $('#toolbar-content').height();
