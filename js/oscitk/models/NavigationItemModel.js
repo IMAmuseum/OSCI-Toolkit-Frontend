@@ -1,5 +1,6 @@
 OsciTk.models.NavigationItem = OsciTk.models.BaseModel.extend({
-	defaults: {
+	defaults: function() {
+		return {
 			title: null,
 			subtitle: null,
 			uri: null,
@@ -9,5 +10,6 @@ OsciTk.models.NavigationItem = OsciTk.models.BaseModel.extend({
 			depth: 0,
 			thumbnail: null,
 			timestamp: null
-	}
+		};
+	},
 });

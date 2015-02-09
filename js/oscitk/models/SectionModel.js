@@ -1,11 +1,13 @@
 OsciTk.models.Section = OsciTk.models.BaseModel.extend({
-	defaults: {
+	defaults: function() {
+		return {
 			title: null,
 			content: null,
 			uri: null,
 			media_type: 'application/xhtml+xml',
 			contentLoaded: false,
 			pages: null
+		};
 	},
 
 	initialize: function() {
@@ -13,7 +15,7 @@ OsciTk.models.Section = OsciTk.models.BaseModel.extend({
 	},
 
 	loadContent: function() {
-
+		//pages = new OsciTk.collections.Pages();
 		var content = null;
 		if (this.get('contentLoaded') === false) {
 			var data = (loadHTMLDoc(this.get('uri')));

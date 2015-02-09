@@ -1,12 +1,15 @@
 OsciTk.models.Note = OsciTk.models.BaseModel.extend({
-	defaults: {
-		id: null,
-		content_id: null,
-		section_id: null,
-		note: null,
-		tags: [],
-		paragraph_number: null
+	defaults: function() {
+		return {
+			id: null,
+			content_id: null,
+			section_id: null,
+			note: null,
+			tags: [],
+			paragraph_number: null
+		};
 	},
+
 
 	initialize: function(attributes, options) {
 		this.on('error', function(model, error) {

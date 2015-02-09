@@ -1,14 +1,16 @@
 OsciTk.models.Figure = OsciTk.models.BaseModel.extend({
-	defaults: {
-		section_id: null,
-		delta: null,
-		caption: null,
-		position: null,
-		columns: null,
-		aspect: 0,
-		body: null,
-		options: {},
-		plate: false
+	defaults: function() {
+		return {
+			section_id: null,
+			delta: null,
+			caption: null,
+			position: null,
+			columns: null,
+			aspect: 0,
+			body: null,
+			options: {},
+			plate: false
+		};
 	},
 
 	initialize: function() {

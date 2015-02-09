@@ -1,6 +1,8 @@
 OsciTk.models.GlossaryTerm = OsciTk.models.BaseModel.extend({
-	defaults: {
-		term: '',
-		definition: ''
+	defaults: function() {
+		return {
+			term: '',
+			definition: ''
+		};
 	}
 });
