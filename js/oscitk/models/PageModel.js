@@ -1,10 +1,7 @@
 OsciTk.models.Page = OsciTk.models.BaseModel.extend({
-
-	defaults: function() {
-		return {
-			content : {},
-			pageNumber : 0
-		};
+	defaults: {
+		content : {},
+		pageNumber : 0
 	},
 
 	addContent : function(newContent) {

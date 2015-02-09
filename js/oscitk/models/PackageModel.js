@@ -1,6 +1,5 @@
 OsciTk.models.Package = OsciTk.models.BaseModel.extend({
-    defaults: function() {
-        return {
+    defaults: {
             url: null,
             lang: null,
             spine: null,
@@ -9,7 +8,6 @@ OsciTk.models.Package = OsciTk.models.BaseModel.extend({
             id: null,
             version: null,
             xmlns: null
-        };
     },
 
     initialize: function() {
