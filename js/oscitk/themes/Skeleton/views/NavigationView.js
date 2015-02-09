@@ -147,7 +147,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			}
 			// on first page and no previous section, disable interaction
 			else {
-				$('.prev-page', this.$el).addClass('inactive').unbind('click');
+				this.$el.find('.prev-page').addClass('inactive').unbind('click');
+				this.$el.find('.prev-page').hide();
 			}
 		} else if (this.numPages > 1) {
 			var $this = this;
@@ -171,6 +172,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			// on last page and no next section, disable interaction
 			else {
 				this.$el.find('.next-page').addClass('inactive').unbind('click');
+				this.$el.find('.next-page').hide();
 			}
 		} else if (this.numPages > 1) {
 			this.$el.find('.next-page .label').html('Next');
