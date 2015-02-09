@@ -3,6 +3,7 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 	template: null,
 	initialize: function() {
 		this.model = app.account;
+		this.render();
 	},
 	render: function() {
 		// determine if user is logged in.  Show login form or user details
@@ -12,6 +13,7 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 		else {
 			this.showLoginForm();
 		}
+		return this;
 	},
 	events: {
 		'click button.login': 'login',
