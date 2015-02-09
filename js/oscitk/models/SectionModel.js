@@ -1,13 +1,15 @@
 OsciTk.models.Section = OsciTk.models.BaseModel.extend({
-	defaults: function() {
-		return {
+	defaults: {
 			title: null,
 			content: null,
 			uri: null,
 			media_type: 'application/xhtml+xml',
 			contentLoaded: false,
-			pages: new OsciTk.collections.Pages()
-		};
+			pages: null
+	},
+
+	initialize: function() {
+		pages = new OsciTk.collections.Pages();
 	},
 
 	loadContent: function() {
