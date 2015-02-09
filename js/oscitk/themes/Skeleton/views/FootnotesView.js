@@ -1,8 +1,16 @@
 OsciTk.views.Footnotes = OsciTk.views.BaseView.extend({
 	id: 'footnote-view',
+	events: {
+		'click': 'itemClicked',
+		'touch': 'itemClicked'
+	},
 	initialize: function() {
 		// listen to layoutComplete event
 		this.listenTo(Backbone, 'layoutComplete', function(params) {
+			this.render();
+		});
+	},
+	render: function() {
 			// find all footnote links in the section content
 			var fnLinks = app.views.sectionView.$el.find('a.footnote-reference');
 			_.each(fnLinks, function(link) {
@@ -22,6 +30,11 @@ OsciTk.views.Footnotes = OsciTk.views.BaseView.extend({
 					});
 				}
 			});
-		});
+			return this;
+	},
+
+	itemClicked: function(e) {
+		e.preventDefault();
+		e.stopPropagation();
 	}
 });
