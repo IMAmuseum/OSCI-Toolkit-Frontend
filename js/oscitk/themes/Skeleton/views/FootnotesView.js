@@ -1,5 +1,5 @@
 OsciTk.views.Footnotes = OsciTk.views.BaseView.extend({
-	id: 'footnote',
+	id: 'footnote-view',
 	initialize: function() {
 		// listen to layoutComplete event
 		this.listenTo(Backbone, 'layoutComplete', function(params) {

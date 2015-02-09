@@ -1,5 +1,5 @@
 OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
-	id: 'toolbar',
+	id: 'toolbar-view',
 	className: 'toolbar-closed',
 	template: OsciTk.templateManager.get('toolbar'),
 	initialize: function() {

@@ -22,7 +22,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		// app.views.toolbarView = new OsciTk.views.Toolbar();
 		// this.addView(app.views.toolbarView);
 
-        // Add Section
+		// Add Section
 		app.views.sectionView = new OsciTk.views.Section;
 		this.addView(app.views.sectionView, '#section');
 

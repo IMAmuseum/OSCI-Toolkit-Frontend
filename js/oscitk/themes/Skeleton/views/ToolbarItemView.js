@@ -1,5 +1,5 @@
 OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
-	className: 'toolbar-item',
+	className: 'toolbar-item-view',
 	template: OsciTk.templateManager.get('toolbar-item'),
 	initialize: function(options) {
 		this.options = options;
