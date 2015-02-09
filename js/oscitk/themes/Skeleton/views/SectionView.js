@@ -10,7 +10,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // bind sectionChanged
         this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
             var that = this;
-            $('body').append('<div id="loader">Loading...</div>');
+            $('#loader').show();
 
             $('#loader').fadeTo(500, 0.7, function() {
 
@@ -26,7 +26,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                     that.render();
                 }
 
-                $('#loader').remove();
+                $('#loader').hide();
             });
         });
 
