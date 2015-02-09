@@ -24,14 +24,14 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
         // Add Section
 		app.views.sectionView = new OsciTk.views.Section;
-		this.addView(app.views.sectionView);
+		this.addView(app.views.sectionView, '#section');
 
 		// Add the navigation view to the AppView
 		app.views.navigationView = new OsciTk.views.Navigation();
-		this.addView(app.views.navigationView);
+		this.addView(app.views.navigationView, '#navigation');
 
 		// Add the footnotes view to the AppView
-		app.views.footnotesView = new OsciTk.views.Footnotes();
+		// app.views.footnotesView = new OsciTk.views.Footnotes();
 
 	},
 

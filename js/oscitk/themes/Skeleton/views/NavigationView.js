@@ -1,5 +1,5 @@
 OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
-	id: 'navigation',
+	id: 'navigation-view',
 	template: OsciTk.templateManager.get('navigation'),
 	initialize: function() {
 		//set some defaults
