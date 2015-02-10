@@ -38,7 +38,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		this.addView(app.views.navigationView, '#navigation');
 
 		// Add the footnotes view to the AppView
-		// app.views.footnotesView = new OsciTk.views.Footnotes();
+		app.views.footnotesView = new OsciTk.views.Footnotes();
 
 	},
 
