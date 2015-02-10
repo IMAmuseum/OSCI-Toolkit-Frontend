@@ -25,13 +25,12 @@ OsciTk.views.Footnotes = OsciTk.views.BaseView.extend({
 			for (var i = 0; i < fnLinks.length; i++) {
 				var fnRef = $(fnLinks[i]);
 				fnRef.off('click');
-				fnRef.bind('click', {'caller': this}, this.itemClicked);
+				fnRef.bind('click', {'caller': this}, this.footnoteClicked);
 			}
 		});
 	},
 
-	itemClicked: function(e) {
-		console.log('click');
+	footnoteClicked: function(e) {
 		e.preventDefault();
 		e.stopPropagation();
 	}
