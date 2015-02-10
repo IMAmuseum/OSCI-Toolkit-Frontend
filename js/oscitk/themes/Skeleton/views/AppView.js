@@ -10,8 +10,16 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		this.addView(app.views.titleView, '#title');
 
 		// Add Font Reading Settings
-		app.views.fontView = new OsciTk.views.Font();
-		this.addView(app.views.fontView, '#font');
+		// app.views.fontView = new OsciTk.views.Font();
+		// this.addView(app.views.fontView, '#font');
+
+		// Add Font Size View
+		app.views.fontSizeView = new OsciTk.views.FontSize();
+		this.addView(app.views.fontSizeView, '#font-size');
+
+		// Add Font Style View
+		// app.views.fontStyleView = new OsciTk.views.FontStyle();
+		// this.addView(app.views.fontStyleView, '#font-style');
 
 		// Add Table of Contents View
 		app.views.tocView = new OsciTk.views.Toc();
