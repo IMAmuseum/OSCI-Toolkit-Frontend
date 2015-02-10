@@ -30,8 +30,8 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		this.addView(app.views.accountView, '#account');
 
 		// Add the toolbar to the appView
-		// app.views.toolbarView = new OsciTk.views.Toolbar();
-		// this.addView(app.views.toolbarView);
+		app.views.toolbarView = new OsciTk.views.Toolbar();
+		this.addView(app.views.toolbarView, '#toolbar');
 
 		// Add Section
 		app.views.sectionView = new OsciTk.views.Section;

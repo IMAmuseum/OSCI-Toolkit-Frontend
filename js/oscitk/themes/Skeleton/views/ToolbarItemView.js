@@ -1,4 +1,5 @@
 OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
+	tagName: 'li',
 	className: 'toolbar-item-view',
 	template: OsciTk.templateManager.get('toolbar-item'),
 	initialize: function(options) {
@@ -26,16 +27,10 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		e.preventDefault();
 		e.stopPropagation();
 
-		if (!this.contentViewRendered) {
-			this.contentView.render();
-			this.contentViewRendered = true;
-		}
-
-		this.parent.setActiveToolbarItemView(this);
-		this.parent.toggleContentView();
-
-		if (this.contentView.active) {
-			this.contentView.active();
-		}
+		// remove active class
+		app.views.toolbarView.$el.find('.toolbar-item-view').removeClass('active');
+		// add active class
+		var $target = $(e.target);
+		$target.addClass('active');
 	}
 });
