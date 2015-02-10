@@ -18,7 +18,8 @@ OsciTk.views.Title = OsciTk.views.BaseView.extend({
 	events: {
 		"click #publication-title": function(e) {
 			e.preventDefault();
-			Backbone.trigger('navigate', {identifier: "start"});
+			var firstSectionId = app.collections.navigationItems.models[0].id;
+			app.router.navigate("section/" + firstSectionId, {trigger: true});
 		}
 	}
 });
