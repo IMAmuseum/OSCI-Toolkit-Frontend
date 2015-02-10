@@ -1,12 +1,6 @@
 OsciTk.views.Figures = OsciTk.views.BaseView.extend({
 	className: 'figures-view',
 	template: OsciTk.templateManager.get('figures'),
-	initialize: function() {
-		// re-render this view when collection changes
-		this.listenTo(app.collections.figures, 'add remove reset', function() {
-			this.render();
-		});
-	},
 	events: {
 		"click .figure-preview": "onFigurePreviewClicked",
 		"click a.view-fullscreen": "onFigurePreviewClicked",
@@ -15,6 +9,21 @@ OsciTk.views.Figures = OsciTk.views.BaseView.extend({
 		"click .back-to-grid": "backToGridClick",
 		"click .figure-nav.next": "figureNextClick",
 		"click .figure-nav.prev": "figurePrevClick"
+	},
+	initialize: function() {
+		// re-render this view when collection changes
+		this.listenTo(app.collections.figures, 'add remove reset', function() {
+			this.render();
+		});
+	},
+	render: function() {
+		var fig_data = app.collections.figures.toJSON();
+
+		if (! _.isEmpty(fig_data)) {
+			this.$el.html(this.template({figures: fig_data}));
+		}
+
+		return this;
 	},
 	figureNextClick: function(e) {
 		var new_fig = this.$el.find('figure.preview.active').hide().removeClass('active').next('figure.preview');
@@ -70,12 +79,6 @@ OsciTk.views.Figures = OsciTk.views.BaseView.extend({
 			var thumbs = this.$el.find('figure.thumbnail');
 			this.$el.find('.figure-browser .figure-reel').width(thumbs.length * (thumbs.outerWidth(true)));
 		}
-	},
-	render: function() {
-		var fig_data = app.collections.figures.toJSON();
-		this.$el.html(this.template({figures: fig_data}));
-
-		return this;
 	},
 	displayTitle: function() {
 		var id = this.$el.find('figure.preview.active').attr('data-figure-id');
