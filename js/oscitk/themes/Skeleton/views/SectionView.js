@@ -11,6 +11,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
             var that = this;
             $('#section-view').empty();
+            $('.header-view').empty();
             $('#loader').show();
 
             $('#loader').fadeTo(500, 0.7, function() {
@@ -33,10 +34,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
     },
     render: function() {
-        //Allow subclasses to do something before we render
-        if (this.preRender) {
-            this.preRender();
-        }
         //clean up the view incase we have already rendered this before
         this.model.removeAllPages();
         this.removeAllChildViews();
@@ -46,38 +43,38 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         Backbone.trigger("layoutComplete", {numPages : this.model.get('pages').length});
         return this;
     },
-    onClose: function() {
-        this.model.removeAllPages();
-    },
-    getPageForParagraphId: function(pid) {
-        var views = this.getChildViews();
-        var p = _.find(views, function(view) {
-            return view.$el.find("[data-paragraph_identifier='" + pid + "']").length !== 0;
-        });
-        if ((p !== undefined) && (p !== -1)) {
-            return _.indexOf(views, p) + 1;
-        }
-        return null;
-    },
-    getPageNumberForSelector: function(element) {
-        var page = $(element).parents(".page");
-        if (page) {
-            return page.data("page_num");
-        }
+    // onClose: function() {
+    //     this.model.removeAllPages();
+    // },
+    // getPageForParagraphId: function(pid) {
+    //     var views = this.getChildViews();
+    //     var p = _.find(views, function(view) {
+    //         return view.$el.find("[data-paragraph_identifier='" + pid + "']").length !== 0;
+    //     });
+    //     if ((p !== undefined) && (p !== -1)) {
+    //         return _.indexOf(views, p) + 1;
+    //     }
+    //     return null;
+    // },
+    // getPageNumberForSelector: function(element) {
+    //     var page = $(element).parents(".page");
+    //     if (page) {
+    //         return page.data("page_num");
+    //     }
 
-        return null;
-    },
-    getPageNumberForElementId : function(id) {
-        var views = this.getChildViews();
-        var p = _.find(views, function(view) { return view.containsElementId(id); });
-        if ((p !== undefined) && (p !== -1)) {
-            return _.indexOf(views, p) + 1;
-        }
-        return null;
-    },
-    isElementVisible: function(element) {
-        return true;
-    },
+    //     return null;
+    // },
+    // getPageNumberForElementId : function(id) {
+    //     var views = this.getChildViews();
+    //     var p = _.find(views, function(view) { return view.containsElementId(id); });
+    //     if ((p !== undefined) && (p !== -1)) {
+    //         return _.indexOf(views, p) + 1;
+    //     }
+    //     return null;
+    // },
+    // isElementVisible: function(element) {
+    //     return true;
+    // },
     getPageForProcessing : function(id, newTarget) {
         var page;
 
@@ -106,10 +103,10 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         return page;
     },
-    getCurrentPageView: function() {
-        // TODO: so the only possible child view of a section is a page???
-        return this.getChildViewByIndex(app.views.navigationView.page - 1);
-    },
+    // getCurrentPageView: function() {
+    //     // TODO: so the only possible child view of a section is a page???
+    //     return this.getChildViewByIndex(app.views.navigationView.page - 1);
+    // },
     renderContent: function() {
         //basic layout just loads the content into a single page with scrolling
         var pageView = this.getPageForProcessing();

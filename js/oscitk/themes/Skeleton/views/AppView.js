@@ -9,6 +9,9 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		app.views.titleView = new OsciTk.views.Title();
 		this.addView(app.views.titleView, '#title');
 
+		app.views.headerView = new OsciTk.views.Header();
+		this.addView(app.views.headerView, '#header');
+
 		// Add Font Reading Settings
 		// app.views.fontView = new OsciTk.views.Font();
 		// this.addView(app.views.fontView, '#font');
