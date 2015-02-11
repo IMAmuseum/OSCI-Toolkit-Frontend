@@ -31,8 +31,13 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 					this.headerImageCaption = figure.get('caption');
 				}
 			});
+		} else {
+			this.headerImage = null;
+			// console.log(this.headerImage);
+			this.headerImageCaption = null;
 		}
 
+		// TODO: Question why does previous image carry over even if null?
 		this.$el.html(this.template());
 		return this;
 	}
