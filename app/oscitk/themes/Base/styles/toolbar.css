@@ -22,7 +22,7 @@
 /*	bottom: 0;*/
 /*	height: 100%;*/
 	margin-top: 40px;
-	background: #eee url('../img/bg-toolbar.gif') repeat;
+	background: #eee url('../images/bg-toolbar.gif') repeat;
 }
 #toolbar-content {
 /*	position: absolute;*/
@@ -32,7 +32,7 @@
 	padding: 20px 20px;
 	overflow: hidden;
 	position: relative;
-	/*background: url('../img/bg-fold-shadow.png') center 98% no-repeat;*/
+	/*background: url('../images/bg-fold-shadow.png') center 98% no-repeat;*/
 
 }
 #toolbar-content .toolbar-item-view {
@@ -43,7 +43,7 @@
 	content: "";
 	position: relative;
 	bottom:7px;left:0;right:10px;
-	background: url('../img/bg-fold-shadow.png') no-repeat center top transparent;
+	background: url('../images/bg-fold-shadow.png') no-repeat center top transparent;
 	background-size: 100% 6px;
 	height:6px;display:block;
 	border-bottom:1px solid #e3e3e3;
@@ -55,7 +55,7 @@
 	position: absolute;
 	bottom: -40px;
 	right: 40px;
-	background: url('../img/bg-toolbar.gif') repeat;
+	background: url('../images/bg-toolbar.gif') repeat;
 	border-bottom-left-radius:5px;
 	border-bottom-right-radius:5px;
 }
@@ -72,7 +72,7 @@
 	overflow:hidden;
 	text-indent:100%;
 	white-space:nowrap;
-	background: url('../img/bg-btn-close.png') no-repeat left top;
+	background: url('../images/bg-btn-close.png') no-repeat left top;
 	opacity:.2;
 	-webkit-transition: all .5s ease;
 	-moz-transition: all .5s ease;
@@ -91,7 +91,7 @@
 	padding: 0 20px;
 	width: 100%;
 	pointer-events:none;
-	background: #eee url('../img/bg-toolbar.gif') repeat;
+	background: #eee url('../images/bg-toolbar.gif') repeat;
 	-webkit-transition: all .5s ease;
 	-moz-transition: all .5s ease;
 	-o-transition: all .5s ease;
@@ -131,7 +131,7 @@ div.toolbar-item:after {
 	width:2px;height:35px!important;
 	overflow:hidden;display:block;
 	white-space:nowrap;text-indent:100%;
-	background: url('../img/bg-toolbar-divider.png') left center no-repeat;
+	background: url('../images/bg-toolbar-divider.png') left center no-repeat;
 	margin:0;padding:0;
 	vertical-align:middle;
 	position:absolute;top:0;
@@ -142,30 +142,30 @@ div.toolbar-item:first-child:after {
 
 div.Notes-toolbar-item {
 
-	background: url('../img/icon-notes.png') center center no-repeat;
+	background: url('../images/icon-notes.png') center center no-repeat;
 }
 div.Toc-toolbar-item {
 
-	background: url('../img/icon-toc.png') center center no-repeat;
+	background: url('../images/icon-toc.png') center center no-repeat;
 }
 div.Account-toolbar-item {
 
-	background: url('../img/icon-user.png') center center no-repeat;
+	background: url('../images/icon-user.png') center center no-repeat;
 }
 div.Glossary-toolbar-item {
-	background: url('../img/icon-glossary.png') center center no-repeat;	
+	background: url('../images/icon-glossary.png') center center no-repeat;	
 }
 div.Search-toolbar-item {
 
-	background: url('../img/icon-search.png') center center no-repeat;
+	background: url('../images/icon-search.png') center center no-repeat;
 }
 div.Font-toolbar-item {
 
-	background: url('../img/icon-text.png') center center no-repeat;
+	background: url('../images/icon-text.png') center center no-repeat;
 }
 div.Figures-toolbar-item {
 
-	background: url('../img/icon-figure.png') center center no-repeat;
+	background: url('../images/icon-figure.png') center center no-repeat;
 }
 
 div.Notes-toolbar-item,
@@ -428,7 +428,7 @@ div.font-view div.theme-control a:active {
 	-moz-margin-end: 20px;
 	background-position: center;
 	background-size: cover;
-	background-image: url('../img/osci-default-figure.png');
+	background-image: url('../images/osci-default-figure.png');
 }
 
 #toolbar .preview .figure-placeholder,
@@ -440,7 +440,7 @@ div.font-view div.theme-control a:active {
 	cursor: pointer;
 	background-position: center;
 	background-size: cover;
-	background: url('../img/osci-default-figure.png');
+	background: url('../images/osci-default-figure.png');
 }
 
 #toolbar figcaption {
