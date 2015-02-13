@@ -107,7 +107,7 @@ ul.notesList li {
 	content:"";
 	width:180px;height:40px;margin:0;padding:0;
 	display:block;
-	background: url('../img/bg-note-fade.png') repeat-x left bottom;
+	background: url('../images/bg-note-fade.png') repeat-x left bottom;
 }
 
 .note-content {
@@ -145,10 +145,10 @@ a.noteLInk:hover, a.noteEdit:hover {
 	color:#333;
 }
 a.noteLink {
-	background: url('../img/icon-link-16.png') no-repeat left top;
+	background: url('../images/icon-link-16.png') no-repeat left top;
 }
 a.noteEdit {
-	background: url('../img/icon-edit-16.png') no-repeat left top;
+	background: url('../images/icon-edit-16.png') no-repeat left top;
 }
 
 

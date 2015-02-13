@@ -36,7 +36,7 @@ figcaption {
 .title-view {
 	margin:0;padding:0;
 	height:50px;display:block;
-	background: url('../img/logo-osci-1.png') no-repeat 10px center transparent;
+	background: url('../images/logo-osci-1.png') no-repeat 10px center transparent;
 }
 .title-view h1 {
 	line-height:50px;
@@ -152,12 +152,12 @@ table ul.links li {
 }
 .toggleNoteDialog {
 	display:inline-block;
-	background: url('../img/icon-note-mini.png') no-repeat left center;
+	background: url('../images/icon-note-mini.png') no-repeat left center;
 	margin-bottom:8px;
 }
 .toggleCiteDialog {
 	display:inline-block;
-	background: url('../img/icon-cite-mini.png') no-repeat left center;
+	background: url('../images/icon-cite-mini.png') no-repeat left center;
 }
 .ui-tooltip-content {
 	position: relative;
@@ -170,7 +170,7 @@ table ul.links li {
 
 }
 .ui-tooltip .ui-tooltip-tip {
-	background: url('../img/bg-toolbar.gif') repeat!important;
+	background: url('../images/bg-toolbar.gif') repeat!important;
 	display:none!important;
 }
 .ui-tooltip, .qtip {
@@ -189,12 +189,12 @@ table ul.links li {
 	line-height: 12px;
 	border-width: 1px;
 	border-style: solid;
-	background: url('../img/bg-toolbar.gif') repeat;
+	background: url('../images/bg-toolbar.gif') repeat;
 	border-radius:6px;
 	box-shadow: 0 0 10px rgba(0,0,0,.6);
 }
 .ui-tooltip-content {
-	background: url('../img/bg-toolbar.gif') repeat;
+	background: url('../images/bg-toolbar.gif') repeat;
 	border-bottom-right-radius: 6px;
 	border-bottom-left-radius: 6px;
 	padding:10px;

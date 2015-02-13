@@ -38,12 +38,12 @@
 }
 
 #navigation .prev-page.side .indicator {
-	background: url('../img/icon-nav-arrow-left.png') no-repeat center top;
+	background: url('../images/icon-nav-arrow-left.png') no-repeat center top;
 	opacity:.4;
 }
 
 #navigation .next-page.side .indicator {
-	background: url('../img/icon-nav-arrow-right.png') no-repeat center top;
+	background: url('../images/icon-nav-arrow-right.png') no-repeat center top;
 	opacity:.4;
 }
 #navigation .next-page.side:hover .indicator, #navigation .prev-page.side:hover .indicator {
@@ -104,22 +104,22 @@
 }
 
 .prev-page .button {
-	background: url('../img/bg-pager-arrow-prev.png') no-repeat left -6px #A8C0C5;
+	background: url('../images/bg-pager-arrow-prev.png') no-repeat left -6px #A8C0C5;
 }
 .next-page .button {
-	background: url('../img/bg-pager-arrow-next.png') no-repeat right -6px #A8C0C5;
+	background: url('../images/bg-pager-arrow-next.png') no-repeat right -6px #A8C0C5;
 }
 .prev-page:hover .button{
-	background: url('../img/bg-pager-arrow-prev.png') no-repeat left top #52818C;
+	background: url('../images/bg-pager-arrow-prev.png') no-repeat left top #52818C;
 }
 .next-page:hover .button {
-	background: url('../img/bg-pager-arrow-next.png') no-repeat right top #52818C;
+	background: url('../images/bg-pager-arrow-next.png') no-repeat right top #52818C;
 }
 #navigation .corner.inactive.prev-page .button {
-	background: url('../img/bg-pager-arrow-prev.png') no-repeat left -12px #eee !important;
+	background: url('../images/bg-pager-arrow-prev.png') no-repeat left -12px #eee !important;
 }
 #navigation .corner.inactive.next-page .button {
-	background: url('../img/bg-pager-arrow-next.png') no-repeat right -12px #eee !important;
+	background: url('../images/bg-pager-arrow-next.png') no-repeat right -12px #eee !important;
 }
 
 #navigation .pager {

@@ -33,7 +33,7 @@
 	left: 8px;
 	width: 20px;
 	height: 20px;
-	background: url(../img/icon-magnify-gray.png) 0 0 no-repeat;
+	background: url(../images/icon-magnify-gray.png) 0 0 no-repeat;
 	background-size: 18px 18px;
 }
 #glossary-filter-clear {
@@ -44,7 +44,7 @@
 	right: 3px;
 	width: 20px;
 	height: 20px;
-	background: url(../img/close-circle.svg) 0 0 no-repeat;
+	background: url(../images/close-circle.svg) 0 0 no-repeat;
 }
 #glossary-term-listing-mobile {
 	display: none;

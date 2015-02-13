@@ -1,29 +1,40 @@
-OsciTk.templates['account-login'] = function(obj) {
+this["JST"] = this["JST"] || {};
+
+this["JST"]["app/oscitk/themes/MultiColumn/templates/account-login.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
+var __t, __p = '', __e = _.escape;
+with (obj) {
 __p += '<h3>Login</h3>\n<div class="form-error"></div>\n<form id="account-form">\n\t<label for="username">Username:</label>\n\t<input type="text" id="username" placeholder="Username" />\n\t<label for="password">Password:</label>\n\t<input type="password" id="password" placeholder="Password" />\n\t<button type="button" class="login">Log In</button>\n\t<div><a href="#" class="register">Register an account</a></div>\n</form>';
+
+}
 return __p
 };
 
-OsciTk.templates['account-profile'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/account-profile.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
+var __t, __p = '', __e = _.escape;
+with (obj) {
 __p += '<h3>Profile</h3>\n<h4>' +
-((__t = ( obj.username )) == null ? '' : __t) +
+((__t = ( username )) == null ? '' : __t) +
 '</h4>\n<h5>' +
-((__t = ( obj.email )) == null ? '' : __t) +
+((__t = ( email )) == null ? '' : __t) +
 '</h5>\n<div><a href="#" class="logout">Log out</a></div>';
+
+}
 return __p
 };
 
-OsciTk.templates['account-register'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/account-register.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
+var __t, __p = '', __e = _.escape;
+with (obj) {
 __p += '<h2>Register</h2>\n<div class="form-error"></div>\n<form id="account-form">\n\t<label for="username">Username:</label>\n\t<input type="text" id="username" placeholder="Username" />\n\t<label for="password">Password:</label>\n\t<input type="password" id="password" placeholder="Password" />\n\t<label for="email">Email:</label>\n\t<input type="text" id="email" placeholder="Email" />\n\t<button type="button" class="register">Register</button>\n\t<div><a href="#" class="login">Already have an account?</a></div>\n</form>';
+
+}
 return __p
 };
 
-OsciTk.templates['citation'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/citation.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -74,18 +85,21 @@ __p += '"<em>' +
 return __p
 };
 
-OsciTk.templates['figure-reference'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/figure-reference.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
+var __t, __p = '', __e = _.escape;
+with (obj) {
 __p += '<a href="#' +
-((__t = ( obj.id )) == null ? '' : __t) +
+((__t = ( id )) == null ? '' : __t) +
 '" class="figure_reference">' +
-((__t = ( obj.title )) == null ? '' : __t) +
+((__t = ( title )) == null ? '' : __t) +
 '</a>';
+
+}
 return __p
 };
 
-OsciTk.templates['figures'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/figures.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -128,17 +142,19 @@ __p += '\n\t\t</div>\n\t</div>\n</div>';
 return __p
 };
 
-OsciTk.templates['font'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/font.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
+var __t, __p = '', __e = _.escape;
+with (obj) {
 __p += '<h3>Reading Settings</h3>\n<div class="font-control">\n\t<h3>Font Size</h3>\n\t<a href="#font-larger" class="larger font-button">A</a>\n\t<a href="#font-smaller" class="smaller font-button">A</a>\n</div>\n<div class="theme-control">\n\t<h3>Theme</h3>\n\t<a href="#normal" class="theme-button">Normal</a>\n\t<a href="#sepia" class="theme-button">Sepia</a>\n\t<a href="#night" class="theme-button">Night</a>\n</div>';
+
+}
 return __p
 };
 
-OsciTk.templates['glossary-term-mobile'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/glossary-term-mobile.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
+var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<li data-tid="' +
 ((__t = ( item.get('id') )) == null ? '' : __t) +
@@ -152,10 +168,9 @@ __p += '<li data-tid="' +
 return __p
 };
 
-OsciTk.templates['glossary-term'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/glossary-term.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
+var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<li data-tid="' +
 ((__t = ( item.get('id') )) == null ? '' : __t) +
@@ -167,7 +182,7 @@ __p += '<li data-tid="' +
 return __p
 };
 
-OsciTk.templates['glossary'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/glossary.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -184,42 +199,53 @@ __p += '\n\t</div>\n\t<div id="glossary-content">\n\t\t<h4></h4>\n\t\t<p></p>\n\
 return __p
 };
 
-OsciTk.templates['multi-column-column'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/multi-column-column.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
+var __t, __p = '', __e = _.escape;
+with (obj) {
 __p += '<div class="column"></div>';
+
+}
 return __p
 };
 
-OsciTk.templates['multi-column-figure'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/multi-column-figure.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
+var __t, __p = '', __e = _.escape;
+with (obj) {
 __p += '<div class="figure_content"></div>\n<figcaption>' +
-((__t = ( obj.caption )) == null ? '' : __t) +
+((__t = ( caption )) == null ? '' : __t) +
 '</figcaption>';
+
+}
 return __p
 };
 
-OsciTk.templates['multi-column-section'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/multi-column-section.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
+var __t, __p = '', __e = _.escape;
+with (obj) {
 __p += '<div id="pages"></div>';
+
+}
 return __p
 };
 
-OsciTk.templates['navigation'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/navigation.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
+var __t, __p = '', __e = _.escape;
+with (obj) {
 __p += '<div class=\'header\'>' +
-((__t = ( obj.chapter )) == null ? '' : __t) +
+((__t = ( chapter )) == null ? '' : __t) +
 '</div>\n<div class=\'prev-page side\'><div class=\'indicator\'>&lt;</div></div>\n<div class=\'next-page side\'><div class=\'indicator\'>&gt;</div></div>\n<div class=\'prev-page corner\'>\n\t<div class=\'label\'>Previous</div>\n\t<div class=\'button\'>&nbsp;</div>\n</div>\n<div class=\'pager\'><div class=\'head\'>&nbsp;</div></div>\n<div class=\'next-page corner\'>\n\t<div class=\'label\'>Next</div>\n\t<div class=\'button\'>&nbsp;</div>\n</div>';
+
+}
 return __p
 };
 
-OsciTk.templates['note-popup'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/note-popup.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
+var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<div class="note-popup">\n    <h2>Note</h2>\n    <form class="noteForm">\n    \t<textarea>' +
 ((__t = ( note )) == null ? '' : __t) +
@@ -231,7 +257,7 @@ __p += '<div class="note-popup">\n    <h2>Note</h2>\n    <form class="noteForm">
 return __p
 };
 
-OsciTk.templates['notes'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/notes.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -262,15 +288,18 @@ __p += '\n\t</ul>\n</div>';
 return __p
 };
 
-OsciTk.templates['page'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/page.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
+var __t, __p = '', __e = _.escape;
+with (obj) {
 __p +=
-((__t = ( obj.content.content )) == null ? '' : __t);
+((__t = ( content.content )) == null ? '' : __t);
+
+}
 return __p
 };
 
-OsciTk.templates['search-results'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/search-results.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -341,23 +370,29 @@ __p += '\n\t\t\t</ul>\n\t\t</div>\n\t</div>\n</div>\n';
 return __p
 };
 
-OsciTk.templates['search'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/search.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
+var __t, __p = '', __e = _.escape;
+with (obj) {
 __p += '<h3>Search</h3>\n<div id="search-container">\n\t<form id="search-form" name="search-form" method="POST">\n\t\t<div id="search-box">\n\t\t\t<input type="text" name="keyword" id="search-keyword" placeholder="Search" value="' +
-((__t = ( obj.query.keyword )) == null ? '' : __t) +
+((__t = ( query.keyword )) == null ? '' : __t) +
 '"/>\n\t\t\t<div id="search-submit"></div>\n\t\t\t<input type="hidden" name="page" id="search-page" />\n\t\t</div>\n\t\t<div id="search-filters-container">\n\t\t\t<div class="label">Filter |</div>\n\t\t\t<ul class="search-filters">\n\t\t\t\t<li class="filter" data-filter="type:content" id="search-filter-content"><div class="dot">&nbsp;</div><div class="label">Content</div></li>\n\t\t\t\t<li class="filter" data-filter="type:notes" id="search-filter-notes"><div class="dot">&nbsp;</div><div class="label">My Notes</div></li>\n\t\t\t\t<li class="filter" data-filter="type:footnotes" id="search-filter-footnotes"><div class="dot">&nbsp;</div><div class="label">Footnotes</div></li>\n\t\t\t\t<li class="filter" data-filter="type:figures" id="search-filter-figures"><div class="dot">&nbsp;</div><div class="label">Figures</div></li>\n\t\t\t</ul>\n\t\t\t<div class="search-filter-select">\n\t\t\t\t<select class="search-filters">\n\t\t\t\t\t<option>Select a filter</option>\n\t\t\t\t\t<option value="type:content">Content</option>\n\t\t\t\t\t<option value="type:notes">My Notes</option>\n\t\t\t\t\t<option value="type:footnotes">Footnotes</option>\n\t\t\t\t\t<option value="type:figures">Figures</option>\n\t\t\t\t</select>\n\t\t\t</div>\n\t\t</div>\n\t</form>\n\t<div id="search-results-container"></div>\n</div>';
+
+}
 return __p
 };
 
-OsciTk.templates['title'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/title.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
+var __t, __p = '', __e = _.escape;
+with (obj) {
 __p += '<h1 id="publication-title"></h1>';
+
+}
 return __p
 };
 
-OsciTk.templates['toc'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/toc.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -390,17 +425,23 @@ __p += '\n</ul>';
 return __p
 };
 
-OsciTk.templates['toolbar-item'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/toolbar-item.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
+var __t, __p = '', __e = _.escape;
+with (obj) {
 __p +=
-((__t = ( obj.text )) == null ? '' : __t);
+((__t = ( text )) == null ? '' : __t);
+
+}
 return __p
 };
 
-OsciTk.templates['toolbar'] = function(obj) {
+this["JST"]["app/oscitk/themes/MultiColumn/templates/toolbar.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __d = obj.obj || obj;
+var __t, __p = '', __e = _.escape;
+with (obj) {
 __p += '<div id="toolbar-close">Close</div>\n<div id="toolbar-title-container">\n\t<h2 id="toolbar-title"></h2>\n</div>\n<div id="toolbar-content-container">\n\t<div id="toolbar-content"></div>\n</div>\n<div id="toolbar-handle"></div>';
-return __p
+
 }
+return __p
+};

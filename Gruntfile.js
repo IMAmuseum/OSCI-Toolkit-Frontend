@@ -14,10 +14,10 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
 
     // configurable paths
-    var target = grunt.option('target') || 'base';
+    var theme = grunt.option('theme') || 'base';
     var osciConfig = {
-        app: 'app/oscitk/themes/' + target,
-        dist: 'dist/themes/' + target
+        app: 'app/oscitk/themes/' + theme,
+        dist: 'dist/themes/' + theme
     };
 
     grunt.initConfig({
@@ -32,9 +32,6 @@ module.exports = function (grunt) {
                 tasks: ['compass']
             },
             livereload: {
-                // options: {
-                //     livereload: grunt.option('livereloadport') || LIVERELOAD_PORT
-                // },
                 files: [
                     '<%= osci.app %>/*.html',
                     '{.tmp,<%= osci.app %>}/styles/{,*/}*.css',
@@ -52,8 +49,7 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            dist: ['.tmp', '<%= osci.dist %>/*'],
-            server: '.tmp'
+            dist: ['.tmp', '<%= osci.dist %>/*']
         },
         compass: {
             options: {

@@ -47,7 +47,7 @@
 	right: 3px;
 	width: 20px;
 	height: 20px;
-	background: url(../img/icon-magnify-gray.png) 0 0 no-repeat;
+	background: url(../images/icon-magnify-gray.png) 0 0 no-repeat;
 	background-size: 16px;
 }
 .search-view #search-filters-container {
@@ -246,13 +246,12 @@
 @media only screen and (max-width: 960px), only screen and (max-device-width: 480px) {
 	#search-filters-container {
 		width: 100%;
-
 	}
 	#search-filters-container .label,
 	ul.search-filters,
 	ul.search-filters li {
 		display: none;
-	}	
+	}
 	select.search-filters {
 		display: block;
 	}

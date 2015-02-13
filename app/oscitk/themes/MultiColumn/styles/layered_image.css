@@ -32,7 +32,7 @@ div.layered_image-asset .ui-slider-handle {
 	float: right;
 	width: 50px;
 	height: 50px;
-	background: url('../img/icon-annotation.png') center no-repeat;
+	background: url('../images/icon-annotation.png') center no-repeat;
 	border-right: 1px solid #888;
 	display: none;
 }
@@ -45,7 +45,7 @@ div.layered_image-asset .ui-slider-handle {
 	float: right;
 	width: 50px;
 	height: 50px;
-	background: url('../img/icon-reset.png') center no-repeat;
+	background: url('../images/icon-reset.png') center no-repeat;
 	border-right: 1px solid #888;
 }
 
@@ -59,7 +59,7 @@ div.layered_image-asset .ui-slider-handle {
 	float: right;
 	height: 50px;
 	width: 50px;
-	background: url('../img/icon-layers.png') center no-repeat;
+	background: url('../images/icon-layers.png') center no-repeat;
 	border-right: 1px solid #888;
 	display: none;
 }
@@ -91,7 +91,7 @@ div.layered_image-asset .ui-slider-handle {
 }
 
 .ca-ui-down-arrow {
-	background: url('../img/icon-down-arrow.png') center no-repeat;
+	background: url('../images/icon-down-arrow.png') center no-repeat;
 	float: left;
 	width: 16px;
 	height: 16px;
@@ -99,7 +99,7 @@ div.layered_image-asset .ui-slider-handle {
 }
 
 .ca-ui-right-arrow {
-	background: url('../img/icon-right-arrow.png') center no-repeat;
+	background: url('../images/icon-right-arrow.png') center no-repeat;
 	float: left;
 	width: 16px;
 	height: 16px;
@@ -107,11 +107,11 @@ div.layered_image-asset .ui-slider-handle {
 }
 
 .ca-ui-fullscreen.collapsed {
-	background: url('../img/icon-fullscreen.png') center no-repeat;
+	background: url('../images/icon-fullscreen.png') center no-repeat;
 }
 
 .ca-ui-fullscreen.expanded {
-	background: url('../img/icon-collapse.png') center no-repeat;
+	background: url('../images/icon-collapse.png') center no-repeat;
 }
 
 .ca-ui-zoom {
@@ -125,14 +125,14 @@ div.layered_image-asset .ui-slider-handle {
 }
 
 .ca-ui-zoom-in {
-	background: url('../img/icon-zoom-in.png') center no-repeat;
+	background: url('../images/icon-zoom-in.png') center no-repeat;
 	width: 50px;
 	height: 50px;
 	border-bottom: 1px solid #888;
 }
 
 .ca-ui-zoom-out {
-	background: url('../img/icon-zoom-out.png') center no-repeat;
+	background: url('../images/icon-zoom-out.png') center no-repeat;
 	width: 50px;
 	height: 50px;
     border-top: 1px solid #888;
@@ -170,7 +170,7 @@ div.layered_image-asset .ui-slider-handle {
 .ca-ui-viewfinder.viewfinder-open {
 	width: 100px;
 	height: 100px;
-	background: #000 url('../img/icon-viewfinder-small-rev.png') bottom right no-repeat;
+	background: #000 url('../images/icon-viewfinder-small-rev.png') bottom right no-repeat;
     overflow: hidden;
     box-shadow: 0 0 2px #000;
 }
@@ -178,7 +178,7 @@ div.layered_image-asset .ui-slider-handle {
 .ca-ui-viewfinder.viewfinder-closed {
 	width: 50px;
 	height: 50px;
-	background: #000 url('../img/icon-viewfinder-big-rev.png') center no-repeat;
+	background: #000 url('../images/icon-viewfinder-big-rev.png') center no-repeat;
 	opacity: 0.85;
 }
 
@@ -190,7 +190,7 @@ div.layered_image-asset .ui-slider-handle {
 	height: 100%;
 }
 
-.ca-ui-viewfinderLayer img {
+.ca-ui-viewfinderLayer images {
 	width: 100%;
 	height: 100%;
 }
@@ -503,11 +503,11 @@ div[class$="annotation-flag"] {
     float:left;
 }
 
-.thumbContainer img {
+.thumbContainer images {
     padding: 5px 0;
 }
 
-img.image_opaque {
+images.image_opaque {
 	filter: alpha(opacity=50) !important;
     -moz-opacity: 0.50 !important;
     opacity: 0.50 !important;
