@@ -1,8 +1,9 @@
 <div id="section-title"><%= sectionTitle %></div>
+<% if (typeof(sectionSubtitle) !== null) { %>
 <div id="section-subtitle"><%= sectionSubtitle %></div>
+<% } %>
 
 <% if (typeof(headerImage) !== "undefined") { %>
-<%= headerImage %>
 <br>
 	<img src="<%= headerImage %>">
 <% } %>

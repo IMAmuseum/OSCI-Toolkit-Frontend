@@ -1,0 +1,106 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<link rel='apple-touch-icon' href='img/icon-app-57.png' />
+
+	<link type="text/css" rel="stylesheet" href="../../../external/jquery-ui/jquery-ui.min.css">
+	<link type="text/css" rel="stylesheet" href="../../../external/jquery.qtip.css">
+	<link type="text/css" rel="stylesheet" href="../../../external/fancybox/jquery.fancybox.css">
+
+	<link type="text/css" rel="stylesheet" href="css/common.css">
+	<link type="text/css" rel="stylesheet" href="css/toolbar.css">
+	<link type="text/css" rel="stylesheet" href="css/section.css">
+	<link type="text/css" rel="stylesheet" href="css/navigation.css">
+	<link type="text/css" rel="stylesheet" href="css/themeNight.css">
+	<link type="text/css" rel="stylesheet" href="css/themeSepia.css">
+
+	<script src="../../../external/json2.js"></script>
+	<script src="../../../external/jquery.js"></script>
+	<script src="../../../external/jquery.qtip.js"></script>
+	<script src="../../../external/lodash.js"></script>
+	<script src="../../../external/backbone.js"></script>
+	<script src="../../../external/backbone-super.js"></script>
+	<script src="../../../external/fancybox/jquery.fancybox.js"></script>
+	<script src="../../../external/polymaps.min.js"></script>
+	<script src="../../../external/jquery-ui/jquery-ui.min.js"></script>
+
+
+	<script src="../../OsciTk.js"></script>
+	<script src="../../Router.js"></script>
+	<script src="../../helper.js"></script>
+
+	<!-- template loader uses 'templateUrls' in config below -->
+	<script src="../../TemplateManager.js"></script>
+
+	<!-- models -->
+	<script src="../../models/BaseModel.js"></script>
+	<script src="../../models/ConfigModel.js"></script>
+	<script src="../../models/PackageModel.js"></script>
+	<script src="../../models/FigureModel.js"></script>
+	<script src="../../models/FootnoteModel.js"></script>
+	<script src="../../models/NavigationItemModel.js"></script>
+	<script src="../../models/AccountModel.js"></script>
+	<script src="../../models/PageModel.js"></script>
+	<script src="../../models/SectionModel.js"></script>
+
+	<!-- collections -->
+	<script src="../../collections/BaseCollection.js"></script>
+	<script src="../../collections/FiguresCollection.js"></script>
+	<script src="../../collections/NavigationItemsCollection.js"></script>
+	<script src="../../collections/FootnotesCollection.js"></script>
+	<script src="../../collections/PagesCollection.js"></script>
+
+	<!-- theme views -->
+	<script src="views/BaseView.js"></script>
+	<script src="views/AppView.js"></script>
+	<script src="views/SectionView.js"></script>
+	<script src="views/PageView.js"></script>
+	<script src="views/TitleView.js"></script>
+	<script src="views/ToolbarView.js"></script>
+	<script src="views/ToolbarItemView.js"></script>
+	<script src="views/NavigationView.js"></script>
+	<script src="views/FootnotesView.js"></script>
+	<script src="views/FiguresView.js"></script>
+	<script src="views/TocView.js"></script>
+	<script src="views/AccountView.js"></script>
+	<script src="views/FontView.js"></script>
+
+	<script src="../../../appBootstrap.js"></script>
+
+	<script>jQuery(function() {
+			app.bootstrap({
+				packageUrl: 'http://osci.dev:8000/api/epub/1/package.opf',
+				templateUrls: [
+					'http://osci.dev:8000/osci-themes/app/oscitk/themes/Base/templates/'
+				],
+				endpoints: {
+					'OsciTkAccount': '/api/users/'
+				},
+				toolbarItems: [
+					{view: 'Toc', text: 'ToC'},
+					{view: 'Figures', text:' Figures'},
+					{view: 'Font', text: 'Font'},
+					{view: 'Account', text: 'Account'}
+				],
+				theme: 'Base',
+				themeFeatures: {
+					"account": true,
+					"search": false,
+					"notes": false,
+					"citations": false,
+					"glossary": false,
+					"multicolumn": false,
+					"layeredImage": false
+				}
+			});
+			app.run();
+		});
+	</script>
+
+</head>
+<body>
+
+</body>
+</html>
