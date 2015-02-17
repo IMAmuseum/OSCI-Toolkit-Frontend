@@ -54,7 +54,7 @@ module.exports = function (grunt) {
         compass: {
             options: {
                 sassDir: '<%= osci.app %>/styles',
-                cssDir: '<%= osci.dist %>/styles',
+                cssDir: '<%= osci.app %>/styles/css',
                 imagesDir: '<%= osci.app %>/images',
                 javascriptsDir: '<%= osci.app %>/views',
                 fontsDir: '<%= osci.app %>/styles/fonts',
