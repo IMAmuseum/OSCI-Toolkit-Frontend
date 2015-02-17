@@ -1,6 +1,8 @@
 {
   "name": "oscitk",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "qTip2": "~2.2.1"
+  },
   "devDependencies": {}
 }

@@ -58,7 +58,6 @@ module.exports = function (grunt) {
                 imagesDir: '<%= osci.app %>/images',
                 javascriptsDir: '<%= osci.app %>/views',
                 fontsDir: '<%= osci.app %>/styles/fonts',
-                importPath: '<%= osci.app %>/bower_components',
                 relativeAssets: true
             },
             dist: {}
@@ -132,8 +131,7 @@ module.exports = function (grunt) {
                     src: [
                         '*.{ico,txt}',
                         'images/{,*/}*.{webp,gif}',
-                        'styles/fonts/{,*/}*.*',
-                        'bower_components/sass-bootstrap/fonts/*.*'
+                        'styles/fonts/{,*/}*.*'
                     ]
                 }]
             }
@@ -151,9 +149,7 @@ module.exports = function (grunt) {
                     src: [
                         '<%= osci.dist %>/scripts/{,*/}*.js',
                         '<%= osci.dist %>/styles/{,*/}*.css',
-                        '<%= osci.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
-                        '/styles/fonts/{,*/}*.*',
-                        'bower_components/sass-bootstrap/fonts/*.*'
+                        '/styles/fonts/{,*/}*.*'
                     ]
                 }
             }

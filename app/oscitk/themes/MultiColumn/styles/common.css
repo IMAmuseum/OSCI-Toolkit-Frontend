@@ -18,6 +18,10 @@ a {
 	box-sizing: border-box;
 }
 
+h1 {
+	color: yellow;
+}
+
 #reader {
 	position: relative;
 	top: 0;

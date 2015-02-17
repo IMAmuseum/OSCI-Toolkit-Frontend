@@ -4,6 +4,7 @@
 .sass-cache
 .nbproject
 /nbproject/*
+app/oscitk/themes/*/bower_components/
 node_modules
 npm-debug.log
 .tmp
