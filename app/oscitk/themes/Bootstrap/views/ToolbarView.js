@@ -3,7 +3,7 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('toolbar'),
 	initialize: function() {
 		// if toolbar items were provided, store them in the view
-		this.toolbarItems = app.config.get('toolbarItems') ? app.config.get('toolbarItems') : [];
+		// this.toolbarItems = app.toolbarItems;
 
 		// tracks the state of the content area drawer
 		this.activeToolbarItemView = undefined;
@@ -22,7 +22,7 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	render: function() {
 		this.$el.html(this.template());
 
-		_.each(this.toolbarItems, function(toolbarItem) {
+		_.each(app.toolbarItems, function(toolbarItem) {
 			var item = new OsciTk.views.ToolbarItem({toolbarItem: toolbarItem});
 			this.addView(item, '#toolbar-area');
 			item.render();

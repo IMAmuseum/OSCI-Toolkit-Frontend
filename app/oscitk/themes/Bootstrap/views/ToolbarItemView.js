@@ -22,12 +22,25 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		e.preventDefault();
 		e.stopPropagation();
 
-		Backbone.trigger("toolbarItemClicked", {item : this.options.toolbarItem});
+		this.e = e;
+		this.view = app.views.toolbarView;
 
-		// remove active class
-		app.views.toolbarView.$el.find('.toolbar-item-view').removeClass('active');
-		// add active class
-		var $target = $(e.target);
-		$target.addClass('active');
+		// toggle active class
+		this.$target = $(e.target);
+		this.$target.toggleClass('active');
+
+		//get the target li for checking if true in each loop below
+		this.$targetCheck = $(e.currentTarget);
+
+		// step through toolbar items and find non-selected and remove active class
+		_.each(app.toolbarItems, function(toolbarItem) {
+			// if target is not currently selected remove active clasee
+			if (this.$targetCheck.hasClass(toolbarItem.view +'-toolbar-item') == false) {
+				this.view.$el.find('li.'+toolbarItem.view+'-toolbar-item>a').removeClass('active');
+			}
+		}, this);
+
+		// triggered in appView.js
+		Backbone.trigger("toolbarItemClicked", {item : this.options.toolbarItem});
 	}
 });
