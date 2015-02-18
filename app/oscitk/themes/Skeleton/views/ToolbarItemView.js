@@ -6,31 +6,42 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		this.options = options;
 		// add a class to this element based on view button uses
 		this.$el.addClass(this.options.toolbarItem.view + '-toolbar-item');
-		// tracks the view to render in the content area when this view is clicked
-		this.contentView = null;
-		this.contentViewRendered = false;
 	},
 	events: {
 		'click': 'itemClicked',
 		'touch': 'itemClicked'
 	},
-	onClose: function() {
-		this.contentView.close();
-	},
 	render: function() {
-		this.contentView = new OsciTk.views[this.options.toolbarItem.view]({parent: this});
 		this.$el.html(this.template({
-			text: this.options.toolbarItem.text
+			text: '<a href="#">'+this.options.toolbarItem.text+'</a>'
 		}));
+		return this;
 	},
 	itemClicked: function(e) {
 		e.preventDefault();
 		e.stopPropagation();
 
-		// remove active class
-		app.views.toolbarView.$el.find('.toolbar-item-view').removeClass('active');
-		// add active class
-		var $target = $(e.target);
-		$target.addClass('active');
+		this.e = e;
+		this.view = app.views.toolbarView;
+
+		// get the target
+		this.$target = $(e.target);
+		// get true / false target is active
+		this.active = this.$target.hasClass('active');
+		// toggle active class
+		this.$target.toggleClass('active');
+		//get the target li for checking if true in each loop below
+		this.$targetCheck = $(e.currentTarget);
+
+		// step through toolbar items and find non-selected and remove active class
+		_.each(app.toolbarItems, function(toolbarItem) {
+			// if target is not currently selected remove active class
+			if (this.$targetCheck.hasClass(toolbarItem.view +'-toolbar-item') == false) {
+				this.view.$el.find('li.'+toolbarItem.view+'-toolbar-item>a').removeClass('active');
+			}
+		}, this);
+
+		// triggered in appView.js
+		Backbone.trigger("toolbarItemClicked", {item : this.options.toolbarItem, active: this.active});
 	}
 });

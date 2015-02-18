@@ -42,24 +42,6 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			this.toolbarAction(toolbarItem);
 		});
 
-		// Add the title view to the appView
-		// this.addView(app.views.titleView, '#title');
-
-		// Add Font Reading Settings
-		// this.addView(app.views.fontView, '#font');
-
-		// Add Font Size View
-		// this.addView(app.views.fontSizeView, '#font-size');
-
-		// Add Font Style View
-		// this.addView(app.views.fontStyleView, '#font-style');
-
-		// Add Table of Contents View
-		// this.addView(app.views.tocView, '#toc');
-
-		// Add Account Login, Register and Profile Views
-		// this.addView(app.views.accountView, '#account');
-
 	},
 
 	render: function() {

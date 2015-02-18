@@ -12,7 +12,6 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		'touch': 'itemClicked'
 	},
 	render: function() {
-		//this.contentView = new OsciTk.views[this.options.toolbarItem.view]({parent: this});
 		this.$el.html(this.template({
 			text: '<a href="#">'+this.options.toolbarItem.text+'</a>'
 		}));
@@ -25,23 +24,24 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		this.e = e;
 		this.view = app.views.toolbarView;
 
-		// toggle active class
+		// get the target
 		this.$target = $(e.target);
+		// get true / false target is active
 		this.active = this.$target.hasClass('active');
+		// toggle active class
 		this.$target.toggleClass('active');
-
 		//get the target li for checking if true in each loop below
 		this.$targetCheck = $(e.currentTarget);
 
 		// step through toolbar items and find non-selected and remove active class
 		_.each(app.toolbarItems, function(toolbarItem) {
-			// if target is not currently selected remove active clasee
+			// if target is not currently selected remove active class
 			if (this.$targetCheck.hasClass(toolbarItem.view +'-toolbar-item') == false) {
 				this.view.$el.find('li.'+toolbarItem.view+'-toolbar-item>a').removeClass('active');
 			}
 		}, this);
 
 		// triggered in appView.js
-			Backbone.trigger("toolbarItemClicked", {item : this.options.toolbarItem, active: this.active});
+		Backbone.trigger("toolbarItemClicked", {item : this.options.toolbarItem, active: this.active});
 	}
 });

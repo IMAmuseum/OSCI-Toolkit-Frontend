@@ -5,56 +5,68 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 	initialize: function() {
 		this.render();
 
-		// Add the title view to the appView
-		app.views.titleView = new OsciTk.views.Title();
-		this.addView(app.views.titleView, '#title');
+		app.toolbarItems = app.config.get('toolbarItems') ? app.config.get('toolbarItems') : [];
 
-		app.views.headerView = new OsciTk.views.Header();
+		// initialize all possible views
+		app.views = {
+			titleView: new OsciTk.views.Title(),
+			headerView: new OsciTk.views.Header(),
+			fontSizeView: new OsciTk.views.FontSize(),
+			fontStyleView: new OsciTk.views.FontStyle(),
+			tocView: new OsciTk.views.Toc(),
+			accountView: new OsciTk.views.Account(),
+			toolbarView: new OsciTk.views.Toolbar(),
+			sectionView: new OsciTk.views.Section(),
+			figuresView: new OsciTk.views.Figures(),
+			navigationView: new OsciTk.views.Navigation(),
+			footnotesView: new OsciTk.views.Footnotes()
+		};
+
+
+		// Add the header view
 		this.addView(app.views.headerView, '#header');
 
-		// Add Font Reading Settings
-		// app.views.fontView = new OsciTk.views.Font();
-		// this.addView(app.views.fontView, '#font');
-
-		// Add Font Size View
-		app.views.fontSizeView = new OsciTk.views.FontSize();
-		this.addView(app.views.fontSizeView, '#font-size');
-
-		// Add Font Style View
-		// app.views.fontStyleView = new OsciTk.views.FontStyle();
-		// this.addView(app.views.fontStyleView, '#font-style');
-
-		// Add Table of Contents View
-		app.views.tocView = new OsciTk.views.Toc();
-		this.addView(app.views.tocView, '#toc');
-
-		// Add Account Login, Register and Profile Views
-		app.views.accountView = new OsciTk.views.Account();
-		this.addView(app.views.accountView, '#account');
-
-		// Add the toolbar to the appView
-		app.views.toolbarView = new OsciTk.views.Toolbar();
+		// Add the toolbar view
 		this.addView(app.views.toolbarView, '#toolbar');
 
 		// Add Section
-		app.views.sectionView = new OsciTk.views.Section;
 		this.addView(app.views.sectionView, '#section');
 
 		// Add Figures
-		app.views.figuresView = new OsciTk.views.Figures;
 		this.addView(app.views.figuresView, '#figures');
 
 		// Add the navigation view to the AppView
-		app.views.navigationView = new OsciTk.views.Navigation();
 		this.addView(app.views.navigationView, '#navigation');
 
-		// Add the footnotes view to the AppView
-		app.views.footnotesView = new OsciTk.views.Footnotes();
+		this.listenTo(Backbone, "toolbarItemClicked", function(toolbarItem, active) {
+			this.toolbarAction(toolbarItem);
+		});
 
 	},
 
 	render: function() {
 		this.$el.html(this.template);
 		$('body').append(this.el);
+	},
+
+	toolbarAction: function(toolbarItem) {
+
+		this.toolbarToggle(toolbarItem);
+		// if toolbar items is active show it
+		// this toggles the view
+		if (! toolbarItem.active) {
+			var view = _.pick(app.views, toolbarItem.item.view);
+			view = view[toolbarItem.item.view];
+			this.addView(view, '#'+toolbarItem.item.text);
+		}
+	},
+
+	toolbarToggle: function(toolbarItem) {
+
+		_.each(app.toolbarItems, function(item) {
+			var view = _.pick(app.views, item.view);
+			view = view[item.view];
+			this.removeView(view, false);
+		}, this);
 	}
 });
