@@ -1,10 +1,7 @@
 OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	id: 'navigation-view',
 	template: OsciTk.templateManager.get('navigation'),
-	events: {
-		'click .next-page': 'nextPageClicked',
-		'click .prev-page': 'prevPageClicked'
-	},
+
 	initialize: function() {
 		//set some defaults
 		this.identifier = null;
@@ -46,18 +43,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			previousItem: this.currentNavigationItem.get('previous'),
 			nextItem: this.currentNavigationItem.get('next')
 		}));
-
-		this.updateNavigation();
-	},
-
-	nextPageClicked: function(e) {
-		e.preventDefault();
-		e.stopPropagation();
-	},
-
-	prevPageClicked: function(e) {
-		e.preventDefault();
-		e.stopPropagation();
 	},
 
 	setDocumentTitle: function() {
@@ -80,26 +65,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			this.currentNavigationItem = app.collections.navigationItems.first();
 		}
 		Backbone.trigger('currentNavigationItemChanged', this.currentNavigationItem);
-	},
-
-	updateNavigation: function() {
-		// check if we can go to the previous section
-		var previous = this.currentNavigationItem.get('previous');
-		if (previous) {
-			this.$el.find('.prev-page .label').html('Previous Section');
-			this.$el.find('.prev-page').removeClass('inactive').click(function () {
-				app.router.navigate("section/" + previous.id, {trigger: true});
-			});
-		}
-
-		// check if we can go to the next section
-		var next = this.currentNavigationItem.get('next');
-		if (next) {
-			this.$el.find('.next-page .label').html('Next Section');
-			this.$el.find('.next-page').removeClass('inactive').click(function () {
-				app.router.navigate("section/" + next.id, {trigger: true});
-			});
-		}
 	}
 
 });
