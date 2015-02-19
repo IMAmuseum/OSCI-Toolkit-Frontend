@@ -167,8 +167,8 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                 //assign the new height to remove any partial lines of text
                 column.height = newHeight;
                 column.$el.height(newHeight + "px");
-				//get remaining height minus the visible lines
-				heightRemain = (heightRemain - heightDiff);
+				//reclaculate remaining height
+                heightRemain = Math.floor(newHeight - contentPosition.top - contentHeight);
             }
 
             overflow = 'contentOverflow';
