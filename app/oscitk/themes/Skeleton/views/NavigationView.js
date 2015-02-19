@@ -7,10 +7,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	},
 	initialize: function() {
 		//set some defaults
-		this.numPages = null;
 		this.identifier = null;
 		this.currentNavigationItem = null;
-		this.page = 1;
 
 		// when section is loaded, render the navigation control
 		this.listenTo(Backbone, 'layoutComplete', function(section) {
@@ -21,16 +19,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			else {
 				Backbone.trigger("navigate", {page: 1});
 			}
-			this.numPages = section.numPages;
 			this.render();
 		});
-
-		// this.listenTo(Backbone, 'pageChanged', function(info) {
-		// 	// clear old identifier in url
-		// 	// app.router.navigate("section/" + previous.id + "/end");
-		// 	this.page = info.page;
-		// 	this.update(info.page);
-		// });
 
 		// bind routedTo
 		this.listenTo(Backbone, 'routedToSection', function(params) {
@@ -45,35 +35,29 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 				// go to section_id
 				this.setCurrentNavigationItem(params.section_id);
 			}
-
+			// set the document title | section name
 			this.setDocumentTitle();
 		});
-
-		// Respond to keyboard events
-		this.setNavigationKeyboardEvents();
 	},
 
 	render: function() {
 		this.$el.html(this.template({
-			// numPages: this.numPages,
-			chapter: this.currentNavigationItem.get('title')
+			chapter: this.currentNavigationItem.get('title'),
+			previousItem: this.currentNavigationItem.get('previous'),
+			nextItem: this.currentNavigationItem.get('next')
 		}));
 
-		// Do other things that can happen whenever the page changes
-		// this.update(this.page);
-
+		this.updateNavigation();
 	},
 
 	nextPageClicked: function(e) {
 		e.preventDefault();
 		e.stopPropagation();
-		console.log('next');
 	},
 
 	prevPageClicked: function(e) {
 		e.preventDefault();
 		e.stopPropagation();
-		console.log('prev');
 	},
 
 	setDocumentTitle: function() {
@@ -98,92 +82,24 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		Backbone.trigger('currentNavigationItemChanged', this.currentNavigationItem);
 	},
 
-	// update: function(page) {
+	updateNavigation: function() {
+		// check if we can go to the previous section
+		var previous = this.currentNavigationItem.get('previous');
+		if (previous) {
+			this.$el.find('.prev-page .label').html('Previous Section');
+			this.$el.find('.prev-page').removeClass('inactive').click(function () {
+				app.router.navigate("section/" + previous.id, {trigger: true});
+			});
+		}
 
-	// 	// Calculate the position of the pager head
-	// 	var width = (100/this.numPages);
-	// 	$('.pager .head', this.$el).css('left', width * (page-1) + '%');
-
-	// 	// unbind both controls to start
-	// 	this.$el.find('.prev-page').unbind('click');
-	// 	this.$el.find('.next-page').unbind('click');
-
-	// 	// Set previous button state
-	// 	if (page == 1) {
-	// 		// check if we can go to the previous section
-	// 		var previous = this.currentNavigationItem.get('previous');
-	// 		if (previous) {
-	// 			this.$el.find('.prev-page .label').html('Previous Section');
-	// 			this.$el.find('.prev-page').removeClass('inactive').click(function () {
-	// 				app.router.navigate("section/" + previous.id + "/end", {trigger: true});
-	// 			});
-	// 		}
-	// 		// on first page and no previous section, disable interaction
-	// 		else {
-	// 			this.$el.find('.prev-page').addClass('inactive').unbind('click');
-	// 			this.$el.find('.prev-page').hide();
-	// 		}
-	// 	} else if (this.numPages > 1) {
-	// 		var $this = this;
-	// 		this.$el.find('.prev-page .label').html('Previous');
-	// 		this.$el.find('.prev-page').removeClass('inactive').click(function () {
-	// 			app.router.navigate("section/" + $this.currentNavigationItem.id);
-	// 			Backbone.trigger('navigate', {page:(page-1)});
-	// 		});
-	// 	}
-
-	// 	// Set next button state
-	// 	if (page == this.numPages) {
-	// 		// check if we can go to the next section
-	// 		var next = this.currentNavigationItem.get('next');
-	// 		if (next) {
-	// 			this.$el.find('.next-page .label').html('Next Section');
-	// 			this.$el.find('.next-page').removeClass('inactive').click(function () {
-	// 				app.router.navigate("section/" + next.id, {trigger: true});
-	// 			});
-	// 		}
-	// 		// on last page and no next section, disable interaction
-	// 		else {
-	// 			this.$el.find('.next-page').addClass('inactive').unbind('click');
-	// 			this.$el.find('.next-page').hide();
-	// 		}
-	// 	} else if (this.numPages > 1) {
-	// 		this.$el.find('.next-page .label').html('Next');
-	// 		this.$el.find('.next-page').removeClass('inactive').click(function () {
-	// 			Backbone.trigger('navigate', { page: page+1 });
-	// 		});
-	// 	}
-	// },
-
-	setNavigationKeyboardEvents: function() {
-		$(document).keydown(function(event) {
-			var p;
-			switch(event.which) {
-				case 39:
-					// Right arrow navigates to next page
-					p = app.views.navigationView.page + 1;
-					if (p > app.views.navigationView.numPages) {
-						var next = app.views.navigationView.currentNavigationItem.get('next');
-						if (next) {
-							app.router.navigate("section/" + next.id, {trigger: true});
-						}
-					} else {
-						Backbone.trigger('navigate', {page: p});
-					}
-					break;
-				case 37:
-					// Left arrow navigates to previous page
-					p = app.views.navigationView.page - 1;
-					if (p < 1) {
-						var previous = app.views.navigationView.currentNavigationItem.get('previous');
-						if (previous) {
-							app.router.navigate("section/" + previous.id + "/end", {trigger: true});
-						}
-					} else {
-						Backbone.trigger('navigate', {page: p});
-					}
-					break;
-			}
-		});
+		// check if we can go to the next section
+		var next = this.currentNavigationItem.get('next');
+		if (next) {
+			this.$el.find('.next-page .label').html('Next Section');
+			this.$el.find('.next-page').removeClass('inactive').click(function () {
+				app.router.navigate("section/" + next.id, {trigger: true});
+			});
+		}
 	}
+
 });

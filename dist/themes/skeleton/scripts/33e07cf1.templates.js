@@ -142,11 +142,44 @@ return __p
 
 this["JST"]["app/oscitk/themes/Skeleton/templates/navigation.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<div class=\'header\'>' +
 ((__t = ( chapter )) == null ? '' : __t) +
-'</div>\n\n<div class=\'prev-page side\'>\n\t<div class=\'indicator\'>&lt;</div>\n</div>\n\n<div class=\'next-page side\'>\n\t<div class=\'indicator\'>&gt;</div>\n</div>\n\n<div class=\'prev-page corner\'>\n\t<div class=\'label\'>Previous</div>\n\t<div class=\'button\'>&nbsp;</div>\n</div>\n\n<div class=\'next-page corner\'>\n\t<div class=\'label\'>Next</div>\n\t<div class=\'button\'>&nbsp;</div>\n</div>';
+'</div>\n\n';
+ if (previousItem !== null) { ;
+__p += '\n<div class=\'prev-page side\'>\n\t<div class=\'indicator\'>\n\t\t<a href="#section/' +
+((__t = ( previousItem.id )) == null ? '' : __t) +
+'" title="' +
+((__t = ( previousItem.get('title') )) == null ? '' : __t) +
+'">&lt;</a>\n\t</div>\n</div>\n';
+ } ;
+__p += '\n\n';
+ if (nextItem !== null) { ;
+__p += '\n<div class=\'next-page side\'>\n\t<div class=\'indicator\'>\n\t\t<a href="#section/' +
+((__t = ( nextItem.id )) == null ? '' : __t) +
+'" title="' +
+((__t = ( nextItem.get('title') )) == null ? '' : __t) +
+'">&gt;</a>\n\t</div>\n</div>\n';
+ } ;
+__p += '\n\n';
+ if (previousItem !== null) { ;
+__p += '\n<div class=\'prev-page corner\'>\n\t<a href="#section/' +
+((__t = ( previousItem.id )) == null ? '' : __t) +
+'" title="' +
+((__t = ( previousItem.get('title') )) == null ? '' : __t) +
+'">\n\t\t<div class=\'label\'></div>\n\t</a>\n</div>\n';
+ } ;
+__p += '\n\n';
+ if (nextItem !== null) { ;
+__p += '\n<div class=\'next-page corner\'>\n\t<a href="#section/' +
+((__t = ( nextItem.id )) == null ? '' : __t) +
+'" title="' +
+((__t = ( nextItem.get('title') )) == null ? '' : __t) +
+'">\n\t\t<div class=\'label\'></div>\n\t</a>\n</div>\n';
+ } ;
+
 
 }
 return __p
