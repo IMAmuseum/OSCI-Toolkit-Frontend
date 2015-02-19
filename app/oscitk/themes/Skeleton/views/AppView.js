@@ -23,6 +23,9 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		};
 
 
+		// Add the title view
+		this.addView(app.views.titleView, '#title');
+
 		// Add the header view
 		this.addView(app.views.headerView, '#header');
 
@@ -31,9 +34,6 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 		// Add Section
 		this.addView(app.views.sectionView, '#section');
-
-		// Add Figures
-		this.addView(app.views.figuresView, '#figures');
 
 		// Add the navigation view to the AppView
 		this.addView(app.views.navigationView, '#navigation');

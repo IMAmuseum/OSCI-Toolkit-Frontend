@@ -21,12 +21,12 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			this.render();
 		});
 
-		this.listenTo(Backbone, 'pageChanged', function(info) {
-			// clear old identifier in url
-			// app.router.navigate("section/" + previous.id + "/end");
-			this.page = info.page;
-			this.update(info.page);
-		});
+		// this.listenTo(Backbone, 'pageChanged', function(info) {
+		// 	// clear old identifier in url
+		// 	// app.router.navigate("section/" + previous.id + "/end");
+		// 	this.page = info.page;
+		// 	this.update(info.page);
+		// });
 
 		// bind routedTo
 		this.listenTo(Backbone, 'routedToSection', function(params) {
@@ -42,10 +42,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 				this.setCurrentNavigationItem(params.section_id);
 			}
 
-			var title = app.models.docPackage.getTitle();
-			title = (title) ? title + " | ": "";
-			title += this.getCurrentNavigationItem().get('title');
-			document.title = title;
+			this.setDocumentTitle();
 		});
 
 		// Respond to keyboard events
@@ -77,7 +74,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 					}
 					break;
 			}
-
 		});
 
 	},
@@ -109,6 +105,14 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// Do other things that can happen whenever the page changes
 		this.update(this.page);
 
+	},
+
+	setDocumentTitle: function() {
+		//set the document title
+		var title = app.models.docPackage.getTitle();
+		title = (title) ? title + " | ": "";
+		title += this.getCurrentNavigationItem().get('title');
+		document.title = title;
 	},
 
 	getCurrentNavigationItem: function(){
