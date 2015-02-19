@@ -101,7 +101,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
     layoutContent : function(contentId) {
         var overflow = 'none';
         var column = this.getCurrentColumn(contentId);
-		
+
         if (column === null) {
             this.processingComplete();
             overflow = 'contentOverflow';
@@ -112,7 +112,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
         column.$el.append(content);
 
         var lineHeight = parseFloat(content.css("line-height"));
-        var contentPosition = content.position();		
+        var contentPosition = content.position();
 
         //If all of the content is overflowing the column remove it and move to next column
         if ((column.height - contentPosition.top) < lineHeight) {
@@ -137,9 +137,9 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
         if (column.offset < 0) {
 				offset = Math.floor(contentHeight + column.offset);
 				//Set the top margin
-				content.css("margin-top", "-" + offset + "px");			
+				content.css("margin-top", "-" + offset + "px");
 				//remove the offset so that all items are not shifted up
-            	column.offset = 0;     
+            	column.offset = 0;
         }
 
         var contentMargin = {
@@ -167,8 +167,8 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                 //assign the new height to remove any partial lines of text
                 column.height = newHeight;
                 column.$el.height(newHeight + "px");
-				//get remaining height minus the visible lines
-				heightRemain = (heightRemain - heightDiff);
+				//reclaculate remaining height
+                heightRemain = Math.floor(newHeight - contentPosition.top - contentHeight)
             }
 
             overflow = 'contentOverflow';
