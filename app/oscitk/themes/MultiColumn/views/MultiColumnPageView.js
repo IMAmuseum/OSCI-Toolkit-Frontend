@@ -31,7 +31,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
     onParagraphClicked: function(e) {
         if (e.target.tagName === "A") {
-            //window.location = e.target.href; 
+            //window.location = e.target.href;
             return true;
         }
 
@@ -167,8 +167,8 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                 //assign the new height to remove any partial lines of text
                 column.height = newHeight;
                 column.$el.height(newHeight + "px");
-				//reclaculate remaining height
-                heightRemain = Math.floor(newHeight - contentPosition.top - contentHeight)
+                //get remaining height minus the visible lines
+                heightRemain = (heightRemain - heightDiff);
             }
 
             overflow = 'contentOverflow';
@@ -248,7 +248,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                 }
             }
         }
-			
+
 		// if there is a negative heightRemain, if there's content left over, go through this
         if (currentColumn !== null && currentColumn.$el === null) {
             if (this.processingData.currentColumn > 0) {

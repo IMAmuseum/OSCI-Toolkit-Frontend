@@ -146,7 +146,7 @@ var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<div class=\'header\'>' +
 ((__t = ( chapter )) == null ? '' : __t) +
-'</div>\n\n<div class=\'prev-page side\'>\n\t<div class=\'indicator\'>&lt;</div>\n</div>\n\n<div class=\'next-page side\'>\n\t<div class=\'indicator\'>&gt;</div>\n</div>\n\n<div class=\'prev-page corner\'>\n\t<div class=\'label\'>Previous</div>\n\t<div class=\'button\'>&nbsp;</div>\n</div>\n\n<div class=\'pager\'><div class=\'head\'>&nbsp;</div></div>\n\n<div class=\'next-page corner\'>\n\t<div class=\'label\'>Next</div>\n\t<div class=\'button\'>&nbsp;</div>\n</div>';
+'</div>\n\n<div class=\'prev-page side\'>\n\t<div class=\'indicator\'>&lt;</div>\n</div>\n\n<div class=\'next-page side\'>\n\t<div class=\'indicator\'>&gt;</div>\n</div>\n\n<div class=\'prev-page corner\'>\n\t<div class=\'label\'>Previous</div>\n\t<div class=\'button\'>&nbsp;</div>\n</div>\n\n<div class=\'next-page corner\'>\n\t<div class=\'label\'>Next</div>\n\t<div class=\'button\'>&nbsp;</div>\n</div>';
 
 }
 return __p
