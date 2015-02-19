@@ -46,36 +46,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		});
 
 		// Respond to keyboard events
-		$(document).keydown(function(event) {
-			var p;
-			switch(event.which) {
-				case 39:
-					// Right arrow navigates to next page
-					p = app.views.navigationView.page + 1;
-					if (p > app.views.navigationView.numPages) {
-						var next = app.views.navigationView.currentNavigationItem.get('next');
-						if (next) {
-							app.router.navigate("section/" + next.id, {trigger: true});
-						}
-					} else {
-						Backbone.trigger('navigate', {page: p});
-					}
-					break;
-				case 37:
-					// Left arrow navigates to previous page
-					p = app.views.navigationView.page - 1;
-					if (p < 1) {
-						var previous = app.views.navigationView.currentNavigationItem.get('previous');
-						if (previous) {
-							app.router.navigate("section/" + previous.id + "/end", {trigger: true});
-						}
-					} else {
-						Backbone.trigger('navigate', {page: p});
-					}
-					break;
-			}
-		});
-
+		this.setNavigationKeyboardEvents();
 	},
 
 	render: function() {
@@ -184,5 +155,37 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 				Backbone.trigger('navigate', { page: page+1 });
 			});
 		}
+	},
+
+	setNavigationKeyboardEvents: function() {
+		$(document).keydown(function(event) {
+			var p;
+			switch(event.which) {
+				case 39:
+					// Right arrow navigates to next page
+					p = app.views.navigationView.page + 1;
+					if (p > app.views.navigationView.numPages) {
+						var next = app.views.navigationView.currentNavigationItem.get('next');
+						if (next) {
+							app.router.navigate("section/" + next.id, {trigger: true});
+						}
+					} else {
+						Backbone.trigger('navigate', {page: p});
+					}
+					break;
+				case 37:
+					// Left arrow navigates to previous page
+					p = app.views.navigationView.page - 1;
+					if (p < 1) {
+						var previous = app.views.navigationView.currentNavigationItem.get('previous');
+						if (previous) {
+							app.router.navigate("section/" + previous.id + "/end", {trigger: true});
+						}
+					} else {
+						Backbone.trigger('navigate', {page: p});
+					}
+					break;
+			}
+		});
 	}
 });

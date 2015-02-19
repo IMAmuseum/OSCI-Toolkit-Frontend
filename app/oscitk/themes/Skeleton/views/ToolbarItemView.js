@@ -30,7 +30,7 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		this.active = this.$target.hasClass('active');
 		// toggle active class
 		this.$target.toggleClass('active');
-		//get the target li for checking if true in each loop below
+		//get the target li for checking in each loop below
 		this.$targetCheck = $(e.currentTarget);
 
 		// step through toolbar items and find non-selected and remove active class
