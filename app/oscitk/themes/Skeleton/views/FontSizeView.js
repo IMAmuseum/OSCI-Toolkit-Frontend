@@ -27,7 +27,5 @@ OsciTk.views.FontSize = OsciTk.views.BaseView.extend({
 		sectionView.$el.css({
 			"font-size": this.currentFontSize + "%"
 		});
-
-		Backbone.trigger("windowResized");
 	}
 });

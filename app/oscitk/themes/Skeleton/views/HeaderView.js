@@ -33,7 +33,6 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 			});
 		} else {
 			this.headerImage = null;
-			// console.log(this.headerImage);
 			this.headerImageCaption = null;
 		}
 
