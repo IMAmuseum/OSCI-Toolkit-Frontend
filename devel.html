@@ -86,16 +86,16 @@
 
 	<script>jQuery(function() {
 			app.bootstrap({
-				packageUrl: '/frontend/sample/package.opf',
+				packageUrl: 'http://localhost/osci/frontend/sample/package.opf',
 				templateUrls: [
 					'js/oscitk/templates/'
 				],
 				endpoints: {
-					'OsciTkNote': '/api/notes/',
-					'OsciTkSearch': '/api/search/',
-					'OsciTkOpenSearch': '/api/opensearch/',
-					'OsciTkAccount': '/api/users/',
-					'OsciTkCitation': '/api/citations/'
+					'OsciTkNote': '/osci_tk/api/notes/',
+					'OsciTkSearch': '/osci_tk/api/search/',
+					'OsciTkOpenSearch': '/osci_tk/api/opensearch/',
+					'OsciTkAccount': '/osci_tk/api/users/',
+					'OsciTkCitation': '/osci_tk/api/citations/'
 				},
 				toolbarItems: [
 					{view: 'Toc', text: 'ToC'},
