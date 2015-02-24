@@ -32,9 +32,6 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		// Add Section
 		this.addView(app.views.sectionView, '#section');
 
-		// Add Figures
-		this.addView(app.views.figuresView, '#figures');
-
 		// Add the navigation view to the AppView
 		this.addView(app.views.navigationView, '#navigation');
 

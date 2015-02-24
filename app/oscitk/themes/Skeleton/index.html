@@ -38,6 +38,7 @@
 	<script src="../../models/AccountModel.js"></script>
 	<script src="../../models/PageModel.js"></script>
 	<script src="../../models/SectionModel.js"></script>
+	<script src="../../models/NoteModel.js"></script>
 
 	<!-- collections -->
 	<script src="../../collections/BaseCollection.js"></script>
@@ -45,12 +46,12 @@
 	<script src="../../collections/NavigationItemsCollection.js"></script>
 	<script src="../../collections/FootnotesCollection.js"></script>
 	<script src="../../collections/PagesCollection.js"></script>
+	<script src="../../collections/NotesCollection.js"></script>
 
 	<!-- theme views -->
 	<script src="views/BaseView.js"></script>
 	<script src="views/AppView.js"></script>
 	<script src="views/SectionView.js"></script>
-	<script src="views/PageView.js"></script>
 	<script src="views/TitleView.js"></script>
 	<script src="views/ToolbarView.js"></script>
 	<script src="views/ToolbarItemView.js"></script>
@@ -74,6 +75,7 @@
 					'/osci-themes/app/oscitk/themes/Skeleton/templates/'
 				],
 				endpoints: {
+					'OsciTkNote': '/api/notes/',
 					'OsciTkAccount': '/api/users/'
 				},
 				toolbarItems: [
@@ -86,7 +88,7 @@
 				themeFeatures: {
 					"account": true,
 					"search": false,
-					"notes": false,
+					"notes": true,
 					"citations": false,
 					"glossary": false,
 					"multicolumn": false,
