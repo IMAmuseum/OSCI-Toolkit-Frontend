@@ -5,6 +5,7 @@
 .nbproject
 /nbproject/*
 app/oscitk/themes/*/bower_components/
+app/bower_components
 node_modules
 npm-debug.log
 .tmp

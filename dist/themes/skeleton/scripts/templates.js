@@ -38,7 +38,7 @@ this["JST"]["app/oscitk/themes/Skeleton/templates/app.tpl.html"] = function(obj)
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div id="title"></div>\n<div id="toolbar"></div>\n<div id="account"></div>\n<div id="toc"></div>\n<div id="font-size"></div>\n<div id="figures"></div>\n<div id="loader">Loading...</div>\n<div id="navigation"></div>\n<!-- <header>\n\t<div id="header"></div>\n</header> -->\n\n<div id="section"></div>\n\n\n';
+__p += '<div id="title"></div>\n<div id="toolbar"></div>\n<div id="account"></div>\n<div id="toc"></div>\n<div id="font-size"></div>\n<div id="figures"></div>\n<div id="loader">Loading...</div>\n<div id="navigation"></div>\n<!-- <header>\n\t<div id="header"></div>\n</header> -->\n<div id="section"></div>\n\n\n';
 
 }
 return __p
@@ -169,7 +169,7 @@ __p += '\n<div class=\'prev-page corner\'>\n\t<a href="#section/' +
 ((__t = ( previousItem.id )) == null ? '' : __t) +
 '" title="' +
 ((__t = ( previousItem.get('title') )) == null ? '' : __t) +
-'">\n\t\t<div class=\'label\'></div>\n\t</a>\n</div>\n';
+'">\n\t\t<div class=\'label\'>Previous Section</div>\n\t</a>\n</div>\n';
  } ;
 __p += '\n\n';
  if (nextItem !== null) { ;
@@ -177,7 +177,7 @@ __p += '\n<div class=\'next-page corner\'>\n\t<a href="#section/' +
 ((__t = ( nextItem.id )) == null ? '' : __t) +
 '" title="' +
 ((__t = ( nextItem.get('title') )) == null ? '' : __t) +
-'">\n\t\t<div class=\'label\'></div>\n\t</a>\n</div>\n';
+'">\n\t\t<div class=\'label\'>Next Section</div>\n\t</a>\n</div>\n';
  } ;
 
 
@@ -191,6 +191,18 @@ var __t, __p = '', __e = _.escape;
 with (obj) {
 __p +=
 ((__t = ( content.content )) == null ? '' : __t);
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Skeleton/templates/section.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p +=
+((__t = ( content )) == null ? '' : __t) +
+'\n\n';
 
 }
 return __p

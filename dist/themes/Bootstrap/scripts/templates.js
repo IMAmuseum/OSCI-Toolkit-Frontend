@@ -38,7 +38,7 @@ this["JST"]["app/oscitk/themes/Bootstrap/templates/app.tpl.html"] = function(obj
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div id="toolbar"></div>\n<!-- <div id="title"></div> -->\n\n<div id="account"></div>\n<div id="toc"></div>\n<div id="font-size"></div>\n\n<div id="loader">Loading...</div>\n<header>\n<div id="header"></div>\n</header>\n<div id="section"></div>\n<div id="figures"></div>\n<div id="navigation"></div>\n';
+__p += '<div id="toolbar"></div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="font-size"></div>\n\t<div id="figures"></div>\n</div>\n\n<!-- <header>\n\t<div id="header"></div>\n</header> -->\n\n<div class="container">\n\t<div id="loader">Loading...</div>\n\t<div id="section"></div>\n</div>\n\n<footer>\n\t<div id="navigation"></div>\n</footer>\n';
 
 }
 return __p
@@ -142,11 +142,44 @@ return __p
 
 this["JST"]["app/oscitk/themes/Bootstrap/templates/navigation.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<div class=\'header\'>' +
+__p += '<div class=\'header text-center\'>' +
 ((__t = ( chapter )) == null ? '' : __t) +
-'</div>\n<div class=\'prev-page side\'><div class=\'indicator\'>&lt;</div></div>\n<div class=\'next-page side\'><div class=\'indicator\'>&gt;</div></div>\n<div class=\'prev-page corner\'>\n\t<div class=\'label\'>Previous</div>\n\t<div class=\'button\'>&nbsp;</div>\n</div>\n<div class=\'pager\'><div class=\'head\'>&nbsp;</div></div>\n<div class=\'next-page corner\'>\n\t<div class=\'label\'>Next</div>\n\t<div class=\'button\'>&nbsp;</div>\n</div>';
+'</div>\n\n';
+ if (previousItem !== null) { ;
+__p += '\n<div class=\'prev-page side\'>\n\t<div class=\'indicator\'>\n\t\t<a href="#section/' +
+((__t = ( previousItem.id )) == null ? '' : __t) +
+'" title="' +
+((__t = ( previousItem.get('title') )) == null ? '' : __t) +
+'">\n\t\t\t<span class="glyphicon glyphicon-chevron-left"></span>\n\t\t</a>\n\t</div>\n</div>\n';
+ } ;
+__p += '\n\n';
+ if (nextItem !== null) { ;
+__p += '\n<div class=\'next-page side\'>\n\t<div class=\'indicator\'>\n\t\t<a href="#section/' +
+((__t = ( nextItem.id )) == null ? '' : __t) +
+'" title="' +
+((__t = ( nextItem.get('title') )) == null ? '' : __t) +
+'">\n\t\t\t<span class="glyphicon glyphicon-chevron-right"></span>\n\t\t</a>\n\t</div>\n</div>\n';
+ } ;
+__p += '\n\n';
+ if (previousItem !== null) { ;
+__p += '\n<div class=\'prev-page corner\'>\n\t<a href="#section/' +
+((__t = ( previousItem.id )) == null ? '' : __t) +
+'" title="' +
+((__t = ( previousItem.get('title') )) == null ? '' : __t) +
+'">\n\t\t<div class=\'label\'>Previous Section</div>\n\t</a>\n</div>\n';
+ } ;
+__p += '\n\n';
+ if (nextItem !== null) { ;
+__p += '\n<div class=\'next-page corner\'>\n\t<a href="#section/' +
+((__t = ( nextItem.id )) == null ? '' : __t) +
+'" title="' +
+((__t = ( nextItem.get('title') )) == null ? '' : __t) +
+'">\n\t\t<div class=\'label\'>Next Section</div>\n\t</a>\n</div>\n';
+ } ;
+
 
 }
 return __p
@@ -158,6 +191,18 @@ var __t, __p = '', __e = _.escape;
 with (obj) {
 __p +=
 ((__t = ( content.content )) == null ? '' : __t);
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Bootstrap/templates/section.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p +=
+((__t = ( content )) == null ? '' : __t) +
+'\n';
 
 }
 return __p
