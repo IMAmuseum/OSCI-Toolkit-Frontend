@@ -38,7 +38,7 @@ this["JST"]["app/oscitk/themes/Bootstrap/templates/app.tpl.html"] = function(obj
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div id="toolbar"></div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="font-size"></div>\n\t<div id="figures"></div>\n</div>\n\n<!-- <header>\n\t<div id="header"></div>\n</header> -->\n\n<div class="container-fluid">\n\t<div id="loader">Loading...</div>\n\t<div id="section"></div>\n</div>\n\n<footer>\n\t<div id="navigation"></div>\n</footer>\n';
+__p += '<progress value="0" max="0"></progress>\n<div id="toolbar"></div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="font-size"></div>\n\t<div id="figures"></div>\n</div>\n\n<!-- <header>\n\t<div id="header"></div>\n</header> -->\n\n<div class="container-fluid">\n\t<div id="loader">Loading...</div>\n\t<div id="section"></div>\n</div>\n\n<footer>\n\t<div id="navigation"></div>\n</footer>\n';
 
 }
 return __p
@@ -149,19 +149,19 @@ __p += '<div class=\'header text-center\'>' +
 ((__t = ( chapter )) == null ? '' : __t) +
 '</div>\n\n';
  if (previousItem !== null) { ;
-__p += '\n<div class=\'prev-page side\'>\n\t<div class=\'indicator\'>\n<!-- \t\t<a href="#section/' +
+__p += '\n<div class=\'prev-page side\'>\n\t<div class=\'indicator\'>\n\t\t<a href="#section/' +
 ((__t = ( previousItem.id )) == null ? '' : __t) +
 '" title="' +
 ((__t = ( previousItem.get('title') )) == null ? '' : __t) +
-'"> -->\n\t\t\t<span class="glyphicon glyphicon-chevron-left"></span>\n<!-- \t\t</a> -->\n\t</div>\n</div>\n';
+'">\n\t\t\t<span class="glyphicon glyphicon-chevron-left"></span>\n\t\t</a>\n\t</div>\n</div>\n';
  } ;
 __p += '\n\n';
  if (nextItem !== null) { ;
-__p += '\n<div class=\'next-page side\'>\n\t<div class=\'indicator\'>\n\t<!-- <a href="#section/' +
+__p += '\n<div class=\'next-page side\'>\n\t<div class=\'indicator\'>\n\t\t<a href="#section/' +
 ((__t = ( nextItem.id )) == null ? '' : __t) +
 '" title="' +
 ((__t = ( nextItem.get('title') )) == null ? '' : __t) +
-'"> -->\n\t\t\t<span class="glyphicon glyphicon-chevron-right"></span>\n\t<!-- \t</a> -->\n\t</div>\n</div>\n';
+'">\n\t\t\t<span class="glyphicon glyphicon-chevron-right"></span>\n\t\t</a>\n\t</div>\n</div>\n';
  } ;
 __p += '\n\n';
  if (previousItem !== null) { ;

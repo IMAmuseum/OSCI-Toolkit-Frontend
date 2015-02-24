@@ -2,6 +2,7 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
 
 @import "bootstrap/bootstrap";
 @import "navigation";
+@import "progress";
 
 
 .browsehappy {
@@ -10,3 +11,4 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
     color: #000;
     padding: 0.2em 0;
 }
+
