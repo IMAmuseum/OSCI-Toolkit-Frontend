@@ -106,26 +106,5 @@ OsciTk.views.BaseView = Backbone.View.extend({
 		if (!alreadyAdded) {
 			this.childViews.push(view);
 		}
-	},
-	getPrefixedStyle: function(unprefixed) {
-		var vendors = ["Webkit", "Moz", "O", "ms" ],
-			prefixes = ['-Webkit-', '-moz-', '-o-', '-ms-'],
-			upper = unprefixed[0].toUpperCase() + unprefixed.slice(1),
-			length = vendors.length;
-
-		if (typeof(document.body.style[unprefixed]) != 'undefined') {
-			unprefixed = unprefixed.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-			return '-'+unprefixed;
-		}
-
-		for ( var i=0; i < length; i++ ) {
-			if (typeof(document.body.style[vendors[i] + upper]) != 'undefined') {
-				unprefixed = vendors[i] + upper;
-				unprefixed = unprefixed.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-				return '-'+unprefixed;
-			}
-		}
-		unprefixed = unprefixed.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-		return '-'+unprefixed;
 	}
 });

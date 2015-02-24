@@ -1,7 +1,10 @@
 OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	id: 'navigation-view',
 	template: OsciTk.templateManager.get('navigation'),
-
+	events: {
+        'click .next-page': 'nextPageClicked',
+        'click .prev-page': 'prevPageClicked'
+    },
 	initialize: function() {
 		//set some defaults
 		this.identifier = null;
@@ -43,6 +46,14 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			previousItem: this.currentNavigationItem.get('previous'),
 			nextItem: this.currentNavigationItem.get('next')
 		}));
+	},
+
+	nextPageClicked: function() {
+		Backbone.trigger("scrollToPage", 'next');
+	},
+
+	prevPageClicked: function() {
+		Backbone.trigger("scrollToPage", 'prev');
 	},
 
 	setDocumentTitle: function() {
