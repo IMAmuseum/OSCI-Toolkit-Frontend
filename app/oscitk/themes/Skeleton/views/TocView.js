@@ -19,7 +19,8 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 		event.preventDefault();
 
 		var sectionId = $(event.currentTarget).attr('data-section-id');
-		// Backbone.trigger('navigateToSection', sectionId);
+		$('li.tocView-toolbar-item>a').removeClass('active');
+		Backbone.trigger("tocItemClicked");
 		// TODO: don't really want to address the appRouter directly
 		app.router.navigate("section/" + sectionId, {trigger: true});
 	},
