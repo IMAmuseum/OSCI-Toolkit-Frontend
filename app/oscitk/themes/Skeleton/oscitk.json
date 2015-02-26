@@ -1,1 +1,9 @@
-oscitk.json
+{
+	"account": true,
+	"search": false,
+	"notes": false,
+	"citations": false,
+	"glossary": false,
+	"multicolumn": false,
+	"layeredImage": false,
+}

@@ -19,7 +19,8 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			sectionView: new OsciTk.views.Section(),
 			figuresView: new OsciTk.views.Figures(),
 			navigationView: new OsciTk.views.Navigation(),
-			footnotesView: new OsciTk.views.Footnotes()
+			footnotesView: new OsciTk.views.Footnotes(),
+			searchView: new OsciTk.views.Search()
 		};
 
 
@@ -38,6 +39,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		// Add the navigation view to the AppView
 		this.addView(app.views.navigationView, '#navigation');
 
+		// these event listeners exist here because they control views
 		this.listenTo(Backbone, "toolbarItemClicked", function(toolbarItem) {
 			this.toolbarAction(toolbarItem);
 		});
@@ -46,16 +48,15 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			this.toolbarToggle();
 		});
 
-
 	},
 
 	render: function() {
 		this.$el.html(this.template);
 		$('body').append(this.el);
+		return this;
 	},
 
 	toolbarAction: function(toolbarItem) {
-
 		this.toolbarToggle();
 		// if toolbar items is active show it
 		// this toggles the view
@@ -67,7 +68,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 	},
 
 	toolbarToggle: function() {
-
+		// remove all toolbar views
 		_.each(app.toolbarItems, function(item) {
 			var view = _.pick(app.views, item.view);
 			view = view[item.view];

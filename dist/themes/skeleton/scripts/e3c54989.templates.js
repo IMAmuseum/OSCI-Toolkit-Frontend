@@ -38,7 +38,7 @@ this["JST"]["app/oscitk/themes/Skeleton/templates/app.tpl.html"] = function(obj)
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div id="title"></div>\n<div id="toolbar"></div>\n<div id="account"></div>\n<div id="toc"></div>\n<div id="font-size"></div>\n<div id="figures"></div>\n<div id="loader">Loading...</div>\n\n<progress value="0" max="0"></progress>\n\n<div id="navigation"></div>\n<!-- <header>\n\t<div id="header"></div>\n</header> -->\n<div id="section"></div>\n';
+__p += '<progress value="0" max="0"></progress>\n<div id="title"></div>\n<div id="toolbar"></div>\n<div id="account"></div>\n<div id="toc"></div>\n<div id="font-size"></div>\n<div id="figures"></div>\n<div id="loader">Loading...</div>\n\n<div id="navigation"></div>\n<!-- <header>\n\t<div id="header"></div>\n</header> -->\n<div id="section"></div>\n';
 
 }
 return __p
@@ -196,6 +196,16 @@ __p +=
 return __p
 };
 
+this["JST"]["app/oscitk/themes/Skeleton/templates/search.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += 'Search';
+
+}
+return __p
+};
+
 this["JST"]["app/oscitk/themes/Skeleton/templates/section.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -266,7 +276,7 @@ this["JST"]["app/oscitk/themes/Skeleton/templates/toolbar.tpl.html"] = function(
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div id="toolbar-container">\n\t<h2 id="toolbar-title"></h2>\n\t<ul id="toolbar-area"></ul>\n</div>\n';
+__p += '<div id="toolbar-container">\n\t<h2 id="toolbar-title"></h2>\n\t<div id="search"></div>\n\t<ul id="toolbar-area"></ul>\n\n</div>\n';
 
 }
 return __p
