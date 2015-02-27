@@ -19,10 +19,8 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			sectionView: new OsciTk.views.Section(),
 			figuresView: new OsciTk.views.Figures(),
 			navigationView: new OsciTk.views.Navigation(),
-			footnotesView: new OsciTk.views.Footnotes(),
-			searchView: new OsciTk.views.Search()
+			footnotesView: new OsciTk.views.Footnotes()
 		};
-
 
 		// Add the title view
 		this.addView(app.views.titleView, '#title');
@@ -53,6 +51,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 	render: function() {
 		this.$el.html(this.template);
 		$('body').append(this.el);
+
 		return this;
 	},
 

@@ -276,7 +276,7 @@ this["JST"]["app/oscitk/themes/Skeleton/templates/toolbar.tpl.html"] = function(
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div id="toolbar-container">\n\t<h2 id="toolbar-title"></h2>\n\t<div id="search"></div>\n\t<ul id="toolbar-area"></ul>\n\n</div>\n';
+__p += '<div id="toolbar-container">\n\t<h2 id="toolbar-title"></h2>\n\t<div id="search"></div>\n\t<ul id="toolbar-area"></ul>\n</div>\n';
 
 }
 return __p
