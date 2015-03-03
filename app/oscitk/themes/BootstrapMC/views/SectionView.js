@@ -65,7 +65,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     },
 
     nextPage: function() {
-        var x = this.x +60;
+        var x = this.moveWidth;
         console.log(x);
         $('#section').animate({
             left: '-='+x+'px'
@@ -73,7 +73,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     },
 
     prevPage: function() {
-        var x = this.x + 60;
+        var x = this.moveWidth;
         console.log(x);
         $('#section').animate({
             left: '+='+x+'px'
@@ -122,6 +122,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             sx = g.scrollWidth;
         this.sectionWidth = sx;
         this.numPages = Math.floor(this.sectionWidth / this.x);
+        // move width is page width + gap width - padding on container
+        this.moveWidth = this.x + this.spreadGapWidth - 80;
         console.log(this.numPages);
         $('#section').attr("style", 'position:relative; width: 100%; '+this.reflowStyle);
     },
