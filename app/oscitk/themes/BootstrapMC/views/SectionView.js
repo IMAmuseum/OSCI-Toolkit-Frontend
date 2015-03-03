@@ -121,7 +121,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             g = d.getElementsByTagName("body")[0],
             sx = g.scrollWidth;
         this.sectionWidth = sx;
-        this.numPages = Math.floor(this.sectionWidth / this.x);
+        this.numPages = Math.floor(this.sectionWidth / (this.x - 80));
         // move width is page width + gap width - padding on container
         this.moveWidth = this.x + this.spreadGapWidth - 80;
         console.log(this.numPages);
