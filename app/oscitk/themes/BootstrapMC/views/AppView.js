@@ -39,6 +39,10 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			this.toolbarAction(toolbarItem);
 		});
 
+		this.listenTo(Backbone, "tocItemClicked", function(toolbarItem) {
+			this.toolbarToggle();
+		});
+
 	},
 
 	render: function() {

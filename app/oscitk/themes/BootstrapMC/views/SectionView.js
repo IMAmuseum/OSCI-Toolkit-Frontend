@@ -34,6 +34,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         this.listenTo(Backbone, 'windowResized', function() {
             this.maxHeightSet = false;
             this.getViewportSize();
+            this.setFigureStyles();
             this.render();
         });
 
@@ -41,6 +42,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             this.content =  sectionModel.get('content')[0].children.body;
             $('#loader').hide();
             this.getViewportSize();
+            this.setFigureStyles();
             this.render();
         });
 
@@ -55,6 +57,10 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             if (direction == 'prev') {
                 this.prevPage();
             }
+        });
+
+        this.listenTo(Backbone, "figuresAvailable", function(figures) {
+            this.figures = figures;
         });
     },
 
@@ -148,5 +154,11 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         }
         unprefixed = unprefixed.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
         return '-'+unprefixed;
+    },
+
+    setFigureStyles: function() {
+        _.each(this.figures, function(figure) {
+            $(figure).find("div > object > div > img").attr("style", "height:"+(this.y - 20 )+"px; max-width:"+this.spreadColumnWidth+"px;");
+        }, this);
     }
 });
