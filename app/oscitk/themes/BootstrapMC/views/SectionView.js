@@ -130,7 +130,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         this.numPages = Math.floor(this.sectionWidth / (this.x - 80));
         // move width is page width + gap width - padding on container
         this.moveWidth = this.x + this.spreadGapWidth - 80;
-        console.log(this.numPages);
+        console.log(this.numPages + this.numFigures);
         $('#section').attr("style", 'position:relative; width: 100%; '+this.reflowStyle);
     },
 
@@ -158,7 +158,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
     setFigureStyles: function() {
         _.each(this.figures, function(figure) {
-            $(figure).find("div > object > div > img").attr("style", "height:"+(this.y - 20 )+"px; max-width:"+this.spreadColumnWidth+"px;");
+            $(figure).find("div > object > div > img").attr("style", "max-height:"+(this.y - 20 )+"px; max-width:"+this.spreadColumnWidth+"px;");
         }, this);
+        this.numFigures = this.figures.size();
     }
 });

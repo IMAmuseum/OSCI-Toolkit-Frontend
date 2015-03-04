@@ -131,7 +131,8 @@ module.exports = function (grunt) {
                     src: [
                         '*.{ico,txt}',
                         'images/{,*/}*.{webp,gif}',
-                        'styles/fonts/{,*/}*.*'
+                        'styles/fonts/{,*/}*.*',
+                        'oscitk.json'
                     ]
                 }]
             }
