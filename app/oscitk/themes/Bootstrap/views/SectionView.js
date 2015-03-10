@@ -25,8 +25,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                     id : navItem.get('id')
                 });
 
+                this.ContentId = navItem.get('id');
+
                 app.models.section.loadContent();
-                this.changeModel(app.models.section);
             }
         });
 
@@ -69,9 +70,16 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         //var paragraphs = sectionModel.get('content')[0].children.body.children;
         _.each(this.content.children, function(sectionItem) {
             if($(sectionItem).is('p')){
-                $(sectionItem).attr('data-paragraph_number', i).addClass('content-paragraph');
+                $(sectionItem).attr({
+                    'data-paragraph_number': i,
+                    'data-osci_content_id': 'osci-content-'+this.ContentId,
+                    'data-sectionid': 'body',
+                    'id': 'osci-content-'+this.ContentId
+                }).addClass('content-paragraph');
                 $(sectionItem).prepend(
-                    '<span class="paragraph-identifier paragraph-identifier-'+i+'">'+i+'</span>'
+                    '<div class="paragraph-controls" data-paragraph_identifier = "'+i+'" data-osci_content_id = "osci-content-'+this.ContentId+'">'+
+                    '<span class="paragraph-identifier" paragraph-identifier = "'+i+'">'+i+'</span>'+
+                    '</div>'
                 );
             }
             i++;
