@@ -1,6 +1,14 @@
 OsciTk.views.Account = OsciTk.views.BaseView.extend({
 	className: 'account-view',
 	template: null,
+	events: {
+		'click button.login': 'login',
+		'click button.register': 'register',
+		'click a.register': 'showRegistrationForm',
+		'click a.login': 'showLoginForm',
+		'click a.logout': 'logout',
+		'click #dismiss': 'closeOverlay',
+	},
 	initialize: function() {
 		this.model = app.account;
 		this.render();
@@ -14,13 +22,6 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 			this.showLoginForm();
 		}
 		return this;
-	},
-	events: {
-		'click button.login': 'login',
-		'click button.register': 'register',
-		'click a.register': 'showRegistrationForm',
-		'click a.login': 'showLoginForm',
-		'click a.logout': 'logout'
 	},
 	login: function() {
 		// alias this for use in ajax callbacks
@@ -98,5 +99,9 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 	showProfile: function() {
 		this.template = OsciTk.templateManager.get('account-profile');
 		this.$el.html(this.template(this.model.toJSON()));
+	},
+	closeOverlay: function(e) {
+		e.preventDefault();
+		Backbone.trigger("overlayDismiss", e);
 	}
 });

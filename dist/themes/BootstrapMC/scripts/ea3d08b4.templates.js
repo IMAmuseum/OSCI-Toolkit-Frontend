@@ -4,7 +4,7 @@ this["JST"]["app/oscitk/themes/BootstrapMC/templates/account-login.tpl.html"] = 
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h3>Login</h3>\n<div class="form-error"></div>\n<form id="account-form">\n\t<label for="username">Username:</label>\n\t<input type="text" id="username" placeholder="Username" />\n\t<label for="password">Password:</label>\n\t<input type="password" id="password" placeholder="Password" />\n\t<button type="button" class="login">Log In</button>\n\t<div><a href="#" class="register">Register an account</a></div>\n</form>';
+__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<a href="#">\n\t\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</a>\n\t</div>\n\t<div class="container">\n\t\t<h3>Login</h3>\n\t\t<div class="form-error"></div>\n\t\t<form id="account-form">\n\t\t\t<label for="username">Username:</label>\n\t\t\t<input type="text" id="username" placeholder="Username" />\n\t\t\t<label for="password">Password:</label>\n\t\t\t<input type="password" id="password" placeholder="Password" />\n\t\t\t<button type="button" class="login">Log In</button>\n\t\t\t<div><a href="#" class="register">Register an account</a></div>\n\t\t</form>\n\t</div>\n</div>';
 
 }
 return __p
@@ -14,11 +14,11 @@ this["JST"]["app/oscitk/themes/BootstrapMC/templates/account-profile.tpl.html"] 
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h3>Profile</h3>\n<h4>' +
+__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<a href="#">\n\t\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</a>\n\t</div>\n\t<div class="container">\n\t\t<h3>Profile</h3>\n\t\t<h4>' +
 ((__t = ( username )) == null ? '' : __t) +
-'</h4>\n<h5>' +
+'</h4>\n\t\t<h5>' +
 ((__t = ( email )) == null ? '' : __t) +
-'</h5>\n<div><a href="#" class="logout">Log out</a></div>';
+'</h5>\n\t\t<div><a href="#" class="logout">Log out</a></div>\n\t</div>\n</div>';
 
 }
 return __p
@@ -28,7 +28,7 @@ this["JST"]["app/oscitk/themes/BootstrapMC/templates/account-register.tpl.html"]
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h2>Register</h2>\n<div class="form-error"></div>\n<form id="account-form">\n\t<label for="username">Username:</label>\n\t<input type="text" id="username" placeholder="Username" />\n\t<label for="password">Password:</label>\n\t<input type="password" id="password" placeholder="Password" />\n\t<label for="email">Email:</label>\n\t<input type="text" id="email" placeholder="Email" />\n\t<button type="button" class="register">Register</button>\n\t<div><a href="#" class="login">Already have an account?</a></div>\n</form>';
+__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<a href="#">\n\t\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</a>\n\t</div>\n\t<div class="container">\n\t\t<h2>Register</h2>\n\t\t<div class="form-error"></div>\n\t\t<form id="account-form">\n\t\t\t<label for="username">Username:</label>\n\t\t\t<input type="text" id="username" placeholder="Username" />\n\t\t\t<label for="password">Password:</label>\n\t\t\t<input type="password" id="password" placeholder="Password" />\n\t\t\t<label for="email">Email:</label>\n\t\t\t<input type="text" id="email" placeholder="Email" />\n\t\t\t<button type="button" class="register">Register</button>\n\t\t\t<div><a href="#" class="login">Already have an account?</a></div>\n\t\t</form>\n\t</div>\n</div>';
 
 }
 return __p
@@ -223,29 +223,29 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<h3>Table of Contents</h3>\n<ul>\n\t';
+__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<a href="#">\n\t\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</a>\n\t</div>\n\t<div class="container">\n\t\t<h3>Table of Contents</h3>\n\t\t<ul>\n\t\t\t';
  _.each(items, function(item) { ;
-__p += '\n\t\t<li class="toc-item';
+__p += '\n\t\t\t\t<li class="toc-item';
  if (item.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;
-__p += '">\n\t\t\t<a data-section-id="' +
+__p += '">\n\t\t\t\t\t<a data-section-id="' +
 ((__t = ( item.id )) == null ? '' : __t) +
-'" href="#">\n\t\t\t\t<div class="toc-item-thumbnail">\n\t\t\t\t\t';
+'" href="#">\n\t\t\t\t\t\t<div class="toc-item-thumbnail">\n\t\t\t\t\t\t\t';
  if (item.get('thumbnail')) { ;
-__p += '\n\t\t\t\t\t\t<img src="' +
+__p += '\n\t\t\t\t\t\t\t\t<img src="' +
 ((__t = ( item.get('thumbnail') )) == null ? '' : __t) +
-'">\n\t\t\t\t\t';
+'">\n\t\t\t\t\t\t\t';
  } ;
-__p += '\n\t\t\t\t</div>\n\t\t\t\t<div class="toc-item-text">\n\t\t\t\t\t<h4>' +
+__p += '\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class="toc-item-text">\n\t\t\t\t\t\t\t<h4>' +
 ((__t = ( item.get('title') )) == null ? '' : __t) +
-'</h4>\n\t\t\t\t\t';
+'</h4>\n\t\t\t\t\t\t\t';
  if (item.get('subtitle')) { ;
-__p += '\n\t\t\t\t\t\t<h5>' +
+__p += '\n\t\t\t\t\t\t\t\t<h5>' +
 ((__t = ( item.get('subtitle') )) == null ? '' : __t) +
-'</h5>\n\t\t\t\t\t';
+'</h5>\n\t\t\t\t\t\t\t';
  } ;
-__p += '\n\t\t\t\t</div>\n\t\t\t</a>\n\t\t\t<hr>\n\t\t</li>\n\t';
+__p += '\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</a>\n\t\t\t\t\t<hr>\n\t\t\t\t</li>\n\t\t\t';
  }); ;
-__p += '\n</ul>';
+__p += '\n\t\t</ul>\n\t</div>\n</div>';
 
 }
 return __p

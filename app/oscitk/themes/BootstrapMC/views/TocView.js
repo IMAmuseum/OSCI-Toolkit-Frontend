@@ -2,7 +2,8 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 	className: 'toc-view',
 	template: OsciTk.templateManager.get('toc'),
 	events: {
-		'click li a': 'itemClick'
+		'click li a': 'itemClick',
+		'click #dismiss': 'closeOverlay',
 	},
 	initialize: function() {
 		this.listenTo(Backbone, "currentNavigationItemChanged", function() {
@@ -30,5 +31,9 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 
 		var newContainerHeight = containerSize - headerSize;
 		this.$el.find("ul").height(newContainerHeight);
+	},
+	closeOverlay: function(e) {
+		e.preventDefault();
+		Backbone.trigger("overlayDismiss", e);
 	}
 });

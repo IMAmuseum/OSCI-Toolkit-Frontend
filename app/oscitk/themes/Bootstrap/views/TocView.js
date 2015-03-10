@@ -2,7 +2,8 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 	className: 'toc-view',
 	template: OsciTk.templateManager.get('toc'),
 	events: {
-		'click li a': 'itemClick'
+		'click li a': 'itemClick',
+		'click #dismiss': 'closeOverlay',
 	},
 	initialize: function() {
 		this.listenTo(Backbone, "currentNavigationItemChanged", function() {
@@ -23,5 +24,9 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 		Backbone.trigger("tocItemClicked");
 		// TODO: don't really want to address the appRouter directly
 		app.router.navigate("section/" + sectionId, {trigger: true});
+	},
+	closeOverlay: function(e) {
+		e.preventDefault();
+		Backbone.trigger("overlayDismiss", e);
 	}
 });

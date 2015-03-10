@@ -22,6 +22,5 @@ OsciTk.views.Figures = OsciTk.views.BaseView.extend({
 	closeOverlay: function(e) {
 		e.preventDefault();
 		Backbone.trigger("overlayDismiss", e);
-
 	}
 });

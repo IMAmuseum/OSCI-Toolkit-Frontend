@@ -1,21 +1,30 @@
-<h3>Table of Contents</h3>
-<ul>
-	<% _.each(items, function(item) { %>
-		<li class="toc-item<% if (item.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } %>">
-			<a data-section-id="<%= item.id %>" href="#">
-				<div class="toc-item-thumbnail">
-					<% if (item.get('thumbnail')) { %>
-						<img src="<%= item.get('thumbnail') %>">
-					<% } %>
-				</div>
-				<div class="toc-item-text">
-					<h4><%= item.get('title') %></h4>
-					<% if (item.get('subtitle')) { %>
-						<h5><%= item.get('subtitle') %></h5>
-					<% } %>
-				</div>
-			</a>
-			<hr>
-		</li>
-	<% }); %>
-</ul>
+<div class='overlay'>
+	<div id="dismiss">
+		<a href="#">
+			<span class="glyphicon glyphicon-remove"></span>
+		</a>
+	</div>
+	<div class="container">
+		<h3>Table of Contents</h3>
+		<ul>
+			<% _.each(items, function(item) { %>
+				<li class="toc-item<% if (item.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } %>">
+					<a data-section-id="<%= item.id %>" href="#">
+						<div class="toc-item-thumbnail">
+							<% if (item.get('thumbnail')) { %>
+								<img src="<%= item.get('thumbnail') %>">
+							<% } %>
+						</div>
+						<div class="toc-item-text">
+							<h4><%= item.get('title') %></h4>
+							<% if (item.get('subtitle')) { %>
+								<h5><%= item.get('subtitle') %></h5>
+							<% } %>
+						</div>
+					</a>
+					<hr>
+				</li>
+			<% }); %>
+		</ul>
+	</div>
+</div>
