@@ -1,8 +1,18 @@
-<div class='figure-browser'>
-	<h3>Figures</h3>
-	<div class='figure-tray'>
-		<div class='figure-reel'>
+<div class='overlay figure-browser'>
+	<div id="dismiss">
+		<a href="#">
+			<span class="glyphicon glyphicon-remove"></span>
+		</a>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+			<h3>Figures</h3>
+			</div>
+		</div>
+		<div class="row">
 			<% _.each(figures, function(figure) { %>
+			<div class="col-md-3">
 				<figure class='thumbnail' data-figure-id="<%= figure.id %>">
 					<% if (figure.thumbnail_url != undefined) { %>
 						<img class='figure-thumbnail' src='<%= figure.thumbnail_url %>'/>
@@ -11,6 +21,7 @@
 					<% } %>
 					<figcaption><%= figure.title %></figcaption>
 				</figure>
+			</div>
 			<% }); %>
 		</div>
 	</div>

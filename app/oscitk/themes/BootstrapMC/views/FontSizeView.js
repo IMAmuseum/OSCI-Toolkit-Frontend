@@ -1,6 +1,9 @@
 OsciTk.views.FontSize = OsciTk.views.BaseView.extend({
 	className: 'font-size-view',
 	template: OsciTk.templateManager.get('font-size'),
+	events: {
+		"click .font-button": "changeFontSize",
+	},
 	initialize: function() {
 		this.currentFontSize = 100;
 		this.render();
@@ -8,9 +11,6 @@ OsciTk.views.FontSize = OsciTk.views.BaseView.extend({
 	render: function() {
 		this.$el.html(this.template());
 		return this;
-	},
-	events: {
-		"click .font-button": "changeFontSize",
 	},
 	changeFontSize: function(e) {
 		e.preventDefault();

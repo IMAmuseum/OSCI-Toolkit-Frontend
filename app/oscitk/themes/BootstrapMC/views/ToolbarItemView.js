@@ -2,14 +2,18 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 	tagName: 'li',
 	className: 'toolbar-item-view',
 	template: OsciTk.templateManager.get('toolbar-item'),
+	events: {
+		'click': 'itemClicked',
+		'touch': 'itemClicked'
+	},
 	initialize: function(options) {
 		this.options = options;
 		// add a class to this element based on view button uses
 		this.$el.addClass(this.options.toolbarItem.view + '-toolbar-item');
-	},
-	events: {
-		'click': 'itemClicked',
-		'touch': 'itemClicked'
+
+		this.listenTo(Backbone, "overlayDismiss", function(e) {
+			this.setActiveStates(e);
+		});
 	},
 	render: function() {
 		this.$el.html(this.template({
@@ -21,6 +25,10 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		e.preventDefault();
 		e.stopPropagation();
 
+		this.setActiveStates(e);
+	},
+
+	setActiveStates: function(e) {
 		this.e = e;
 		this.view = app.views.toolbarView;
 

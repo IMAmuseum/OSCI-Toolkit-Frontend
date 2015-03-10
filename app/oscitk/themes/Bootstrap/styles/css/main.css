@@ -8077,10 +8077,35 @@ progress[value]::-moz-progress-bar {
   background-color: red;
 }
 
-/* line 8, ../main.scss */
+/* line 7, ../main.scss */
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
   color: #000;
   padding: 0.2em 0;
+}
+
+/* line 14, ../main.scss */
+#section {
+  padding-right: 40px;
+  padding-left: 40px;
+}
+
+/* line 19, ../main.scss */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* line 29, ../main.scss */
+#dismiss {
+  position: fixed;
+  top: 20;
+  left: 20;
+  z-index: 11;
 }

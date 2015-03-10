@@ -158,8 +158,52 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
     setFigureStyles: function() {
         _.each(this.figures, function(figure) {
-            $(figure).find("div > object > div > img").attr("style", "max-height:"+(this.y - 20 )+"px; max-width:"+this.spreadColumnWidth+"px;");
+            var position = $(figure).data('position');
+            var prefixBreak = this.getPrefixedStyle('columnBreakAfter');
+            var prefixSpan = this.getPrefixedStyle('columnSpan');
+            switch(position) {
+                // plate
+                case 'p':
+                case 'plate':
+                    // style applied to the figure image tag
+                    var imgStyle = "max-height:"+(this.y - 20 )+"px; max-width:"+this.spreadColumnWidth+"px;";
+                    // style applied th the figure tag
+                    $(figure).attr("style", prefixBreak+": always;");
+                    break;
+                // bottom
+                case 'b':
+                    var height = this.y / 2;
+                    $(figure).attr("style", prefixBreak+ ": always; position:relative; margin:auto;");
+                    var imgStyle = "max-height:"+(height)+"px; max-width:"+this.spreadColumnWidth+"px;";
+                    break;
+            }
+            $(figure).find("div > object > div > img").attr("style", imgStyle);
         }, this);
         this.numFigures = this.figures.size();
     }
+
+            // //Determine the top offset based on the layout hint
+            // switch (modelData.position.vertical) {
+            //     //top & regular plate image
+            //     case 't':
+            //     case 'p':
+            //         offsetTop = 0;
+            //         break;
+            //     // full page plate
+            //     case 'f':
+            //         offsetTop =  (dimensions.innerSectionHeight - this.calculatedHeight) / 2;
+            //         break;
+            //     //bottom
+            //     case 'b':
+            //         offsetTop = dimensions.innerSectionHeight - this.calculatedHeight;
+            //         break;
+            //     //case inline
+            //     case 'i':
+            //         offsetTop = currentColumn.position.top + currentColumn.height - currentColumn.heightRemain;
+            //         //add figure gutter if not at top of a column
+            //         if (currentColumn.height - currentColumn.heightRemain > 0) {
+            //             offsetTop += dimensions.figureContentGutter;
+            //         }
+            //         break;
+            // }
 });

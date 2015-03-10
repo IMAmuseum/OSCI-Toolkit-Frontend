@@ -127,7 +127,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
             } else {
                 availableWidth = (dimensions.columnWidth * numColumns) + ((numColumns + 1) * dimensions.gutterWidth);
             }
-			
+
             var addLeftPadding = 0;
             if (this.calculatedWidth < availableWidth && availableWidth <= dimensions.outerSectionWidth) {
                 addLeftPadding = Math.floor((availableWidth - this.calculatedWidth) / 2);
