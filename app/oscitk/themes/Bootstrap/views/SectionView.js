@@ -36,13 +36,12 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         });
 
         this.listenTo(Backbone, 'sectionLoaded', function(sectionModel) {
-            this.content =  sectionModel.get('content')[0].children.body;
-            $('#loader').hide();
-            this.render();
+            this.makeIds(sectionModel);
         });
     },
 
     render: function() {
+        $('#loader').hide();
         this.$el.html(this.template({content: $(this.content).html()}));
         Backbone.trigger("layoutComplete");
         return this;
@@ -61,5 +60,22 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             var max = height-cy;
             $('progress').attr('max', max);
         }
+    },
+
+    makeIds: function(sectionModel) {
+        var content =  sectionModel.get('content')[0].children.body;
+        this.content = content;
+        var i = 0;
+        //var paragraphs = sectionModel.get('content')[0].children.body.children;
+        _.each(this.content.children, function(sectionItem) {
+            if($(sectionItem).is('p')){
+                $(sectionItem).attr('data-paragraph_number', i).addClass('content-paragraph');
+                $(sectionItem).prepend(
+                    '<span class="paragraph-identifier paragraph-identifier-'+i+'">'+i+'</span>'
+                );
+            }
+            i++;
+        }, this);
+        this.render();
     }
 });
