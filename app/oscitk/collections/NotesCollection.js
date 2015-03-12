@@ -8,10 +8,10 @@ OsciTk.collections.Notes = OsciTk.collections.BaseCollection.extend({
 			}
 		});
 	},
-	comparator: function(note) {
-		// parse out the content id number and use that for internal sorting
-		return note.get('content_id').match(/.*-(\d+)/)[1];
-	},
+	// comparator: function(note) {
+	// 	// parse out the content id number and use that for internal sorting
+	// 	return note.get('content_id').match(/.*-(\d+)/)[1];
+	// },
 	parse: function(response) {
 		if (response.success) {
 			// return response.notes;

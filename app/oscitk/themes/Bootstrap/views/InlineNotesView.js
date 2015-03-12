@@ -52,11 +52,11 @@ OsciTk.views.InlineNotes = OsciTk.views.BaseView.extend({
                     // if closing the modal for a note with content, mark the paragraph control
                     // to indicate this paragraph has a note
                     var content = $('.note-popup').find('textarea').val();
-                    if (content.length > 0) {
-                        var pageView = app.views.sectionView.getCurrentPageView();
-                        var pc = pageView.$el.find('.paragraph-controls[data-osci_content_id=' + contentId + ']');
-                        pc.addClass('notes-present');
-                    }
+                    // if (content.length > 0) {
+                    //     //var pageView = app.views.sectionView.getCurrentPageView();
+                    //     var pc = pageView.$el.find('.paragraph-controls[data-osci_content_id=' + contentId + ']');
+                    //     pc.addClass('notes-present');
+                    // }
                 }
             });
 

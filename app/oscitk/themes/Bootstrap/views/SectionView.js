@@ -95,7 +95,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         e.preventDefault();
         var evt = $(e.target).data('event');
         var paragraphNumber = $(e.target).data('paragraph');
+        //console.log(this.ContentId);
         //evt is the name of the event 'toggleNoteDialog' or 'toggleCiteDialog'
-        Backbone.trigger(evt, {contentId: this.ContentId, paragraphNumber: paragraphNumber});
+        Backbone.trigger(evt, {contentId: 'osci-content-'+paragraphNumber, paragraphNumber: paragraphNumber});
     },
 });
