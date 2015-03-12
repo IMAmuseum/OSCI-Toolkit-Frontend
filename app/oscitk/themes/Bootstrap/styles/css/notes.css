@@ -1,0 +1,197 @@
+/* line 1, ../notes.scss */
+.note-popup {
+  max-width: 300px;
+  max-height: 400px;
+  width: 300px;
+}
+
+/* line 7, ../notes.scss */
+.note-popup h2 {
+  background-color: #444;
+  color: #FFF;
+  padding: 4px 0 4px 10px;
+  margin: 0;
+  -webkit-border-radius: 4px 4px 0 0;
+  -moz-border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0;
+}
+
+/* line 16, ../notes.scss */
+.note-popup form.noteForm {
+  margin: 10px;
+}
+
+/* line 19, ../notes.scss */
+.note-popup textarea {
+  background-color: #FFFFA3;
+  border: none;
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  margin-bottom: 10px;
+  max-width: 100%;
+  min-height: 100px;
+  font-size: 12px;
+  padding: 5px;
+}
+
+/* line 30, ../notes.scss */
+.note-popup label {
+  display: block;
+}
+
+/* line 33, ../notes.scss */
+.note-popup input {
+  padding: 5px;
+  width: 100%;
+}
+
+/* line 37, ../notes.scss */
+.note-popup textarea:focus {
+  border: none !important;
+  outline: none !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* line 41, ../notes.scss */
+.note-popup .reference-text-content {
+  max-height: 80px;
+  overflow: auto;
+  background: linear-gradient(white 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%, radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 100%;
+  background-repeat: no-repeat;
+  background-color: #ccc;
+  background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+  /* Opera doesn't support this in the shorthand */
+  background-attachment: local, local, scroll, scroll;
+  display: block;
+  margin-bottom: 10px;
+  line-height: 1.2;
+  font-size: 12px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* line 66, ../notes.scss */
+.note-popup .reference-text-label {
+  font-weight: bold;
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  border-bottom: 2px solid #999;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* line 74, ../notes.scss */
+.note-popup .status {
+  text-align: right;
+  opacity: .8;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0 10px 10px 0;
+}
+
+/* line 80, ../notes.scss */
+.notesReel {
+  overflow-y: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  height: 180px;
+}
+
+/* line 86, ../notes.scss */
+ul.notesList {
+  list-style-type: none;
+  height: 180px;
+}
+
+/* line 90, ../notes.scss */
+ul.notesList li {
+  padding-bottom: 10px;
+  display: block;
+  float: left;
+  width: 180px;
+  margin-right: 20px;
+  font-size: 13px;
+}
+
+/* line 98, ../notes.scss */
+.the-note {
+  width: 180px;
+  height: 140px;
+  background: #FAFA9F;
+  /*box-shadow: 0 1px 4px rgba(0,0,0,.4);*/
+  position: relative;
+}
+
+/* line 104, ../notes.scss */
+.the-note:after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  content: "";
+  width: 180px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  display: block;
+  background: url("../images/bg-note-fade.png") repeat-x left bottom;
+}
+
+/* line 113, ../notes.scss */
+.note-content {
+  padding: 5px;
+  overflow: hidden;
+  max-height: 130px;
+  display: block;
+}
+
+/* line 118, ../notes.scss */
+.note-tags {
+  margin-top: 10px;
+  padding: 5px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* line 123, ../notes.scss */
+.note-buttons {
+  padding-top: 10px;
+}
+
+/* line 126, ../notes.scss */
+.note-tags .tags-label {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* line 130, ../notes.scss */
+ul.notesList li a {
+  padding-right: 10px;
+}
+
+/* line 133, ../notes.scss */
+.noteLink.onCurrentPage {
+  background-color: red;
+}
+
+/* line 136, ../notes.scss */
+a.noteLInk, a.noteEdit {
+  font-size: 12px;
+  text-transform: uppercase;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+  line-height: 17px;
+  display: inline-block;
+  color: #666666;
+  padding-left: 22px;
+}
+
+/* line 144, ../notes.scss */
+a.noteLInk:hover, a.noteEdit:hover {
+  color: #333;
+}
+
+/* line 147, ../notes.scss */
+a.noteLink {
+  background: url("../images/icon-link-16.png") no-repeat left top;
+}
+
+/* line 150, ../notes.scss */
+a.noteEdit {
+  background: url("../images/icon-edit-16.png") no-repeat left top;
+}

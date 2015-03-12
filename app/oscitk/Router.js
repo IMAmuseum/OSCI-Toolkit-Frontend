@@ -3,7 +3,7 @@ OsciTk.router = Backbone.Router.extend({
 	routes: {
 		'' : 'routeToSection',
 		'section/:section_id' : 'routeToSection',
-		'section/:section_id/:identifier' : 'routeToSection'
+		'section/:section_id/:identifier' : 'routeToSection',
 	},
 
     initialize: function(options) {

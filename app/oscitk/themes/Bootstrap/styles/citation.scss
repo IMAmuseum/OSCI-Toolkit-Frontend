@@ -1,0 +1,111 @@
+.citation-tooltip {
+	max-width: none;
+}
+
+.citation-wrapper {
+	max-width: 300px;
+	max-height: 400px;
+}
+
+.citation-wrapper h2 {
+	background-color: #444;
+	color: #FFF;
+	padding: 4px 0 4px 10px;
+	margin: 0;
+	-webkit-border-radius: 4px 4px 0 0;
+	-moz-border-radius: 4px 4px 0 0;
+	border-radius: 4px 4px 0 0;
+}
+
+.citation {
+	border: 1px solid #8e8e8e;
+	background: #FFF;
+	border-radius: 4px;
+	padding: 12px;
+	margin: 0 0 16px 0;
+	font-size:14px;
+	line-height: 16px;
+}
+
+.citations {
+	padding: 0 10px;
+}
+
+.citations > span {
+	font-weight:bold;
+	font-size:14px;
+	font-family:Arial, Helvetica, sans-serif;
+	display: inline-block;
+	margin-top: 10px;
+}
+
+.citations .formats {
+	list-style-type: none;
+	padding: 4px 0;
+	margin: -22px 0 0 60px;
+}
+
+.citations li {
+	display: inline;
+}
+
+.citations li a {
+	border-top: 1px solid transparent;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	display: inline;
+	padding: 4px 10px;
+	font-size: 14px;
+}
+
+.citations li.active a {
+	text-decoration: none;
+	color: #6e6e6e;
+	background: #FFF;
+	border-top: 1px solid #8e8e8e;
+	border-left: 1px solid #8e8e8e;
+	border-right: 1px solid #8e8e8e;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
+
+.citation_url {
+	margin: 0 10px 16px 10px;
+}
+
+.citation_url span {
+	font-weight:bold;
+	font-size:14px;
+	font-family:Arial, Helvetica, sans-serif;
+	margin-bottom:5px;
+	display:block;
+}
+
+.citation_url input {
+	width: 100%;
+	border: 1px solid #8e8e8e;
+	border-radius: 4px;
+	padding: 4px;
+}
+
+.reference_text {
+	margin: 0 10px 10px 10px;
+}
+
+.reference_text span {
+	font-weight:bold;
+	font-size:14px;
+	font-family:Arial, Helvetica, sans-serif;
+	margin-bottom:5px;
+	display:block;
+}
+
+.reference_text textarea {
+	background: transparent;
+	width: 100%;
+	height: 100px;
+	overflow: auto;
+	border: 0;
+}

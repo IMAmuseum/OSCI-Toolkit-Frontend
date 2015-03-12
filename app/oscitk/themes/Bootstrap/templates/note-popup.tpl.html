@@ -1,0 +1,9 @@
+<div class="note-popup">
+    <h2>Note</h2>
+    <form class="noteForm">
+    	<textarea><%= note %></textarea>
+        <label for="note-tags">Tags:</label>
+        <input type="text" name="note-tags" id="note-tags" value="<%= tags.join(', ') %>" />
+    </form>
+    <div class="status">Saved</div>
+</div>

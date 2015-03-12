@@ -2,7 +2,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     id: 'section-view',
     template: OsciTk.templateManager.get('section'),
     events: {
-        "scroll" : "updateProgress"
+        "scroll" : "updateProgress",
+        'click .content-paragraph': 'paragraphClicked',
+        'click a' : 'tooltipClicked',
     },
     initialize: function() {
         _.bindAll(this, 'updateProgress');
@@ -70,20 +72,30 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         //var paragraphs = sectionModel.get('content')[0].children.body.children;
         _.each(this.content.children, function(sectionItem) {
             if($(sectionItem).is('p')){
+                // add attr to p and add
                 $(sectionItem).attr({
                     'data-paragraph_number': i,
                     'data-osci_content_id': 'osci-content-'+this.ContentId,
                     'data-sectionid': 'body',
                     'id': 'osci-content-'+this.ContentId
                 }).addClass('content-paragraph');
-                $(sectionItem).prepend(
-                    '<div class="paragraph-controls" data-paragraph_identifier = "'+i+'" data-osci_content_id = "osci-content-'+this.ContentId+'">'+
-                    '<span class="paragraph-identifier" paragraph-identifier = "'+i+'">'+i+'</span>'+
-                    '</div>'
-                );
+                i++;
             }
-            i++;
         }, this);
         this.render();
-    }
+    },
+
+    paragraphClicked: function(e) {
+        var p = $(e.currentTarget);
+        var paragraphNum = p.data("paragraph_number");
+        Backbone.trigger("paragraphClicked", paragraphNum);
+    },
+
+    tooltipClicked: function(e) {
+        e.preventDefault();
+        var evt = $(e.target).data('event');
+        var paragraphNumber = $(e.target).data('paragraph');
+        //evt is the name of the event 'toggleNoteDialog' or 'toggleCiteDialog'
+        Backbone.trigger(evt, {contentId: this.ContentId, paragraphNumber: paragraphNumber});
+    },
 });

@@ -44,6 +44,57 @@ __p += '<progress value="0" max="0"></progress>\n<div id="toolbar"></div>\n\n<di
 return __p
 };
 
+this["JST"]["app/oscitk/themes/Bootstrap/templates/citation.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<div class="citation-wrapper">\n\t<h2>Citation</h2>\n\t<div class="citations">\n\t\t<span>Format</span>\n\t\t<ul class="formats">\n\t\t\t<li class="active"><a href="#citation-format-chicago">Chicago</a></li>\n\t\t\t<li><a href="#citation-format-mla">MLA</a></li>\n\t\t</ul>\n\t\t<div id="citation-format-chicago" class="citation">\n\t\t\t';
+ if (creator.length > 0) { ;
+__p += ' ' +
+((__t = ( creator + ", " )) == null ? '' : __t) +
+' ';
+ } ;
+__p += '"<em>' +
+((__t = ( title )) == null ? '' : __t) +
+'</em>," in <em>' +
+((__t = ( publicationTitle )) == null ? '' : __t) +
+'</em>, ed. ' +
+((__t = ( editor )) == null ? '' : __t) +
+' ' +
+((__t = ( publisher )) == null ? '' : __t) +
+' ' +
+((__t = ( formattedDate )) == null ? '' : __t) +
+', para ' +
+((__t = ( paragraphNumber )) == null ? '' : __t) +
+'.\n\t\t</div>\n\t\t<div id="citation-format-mla" style="display: none;" class="citation">\n\t\t\t';
+ if (creator.length > 0) { ;
+__p += ' ' +
+((__t = ( creator + ", " )) == null ? '' : __t) +
+' ';
+ } ;
+__p += '"<em>' +
+((__t = ( title )) == null ? '' : __t) +
+'</em>," in <span style="text-decoration:underline;">' +
+((__t = ( publicationTitle )) == null ? '' : __t) +
+'</span>, ed. ' +
+((__t = ( editor )) == null ? '' : __t) +
+' (' +
+((__t = ( publisher )) == null ? '' : __t) +
+'), ' +
+((__t = ( formattedDate )) == null ? '' : __t) +
+', ' +
+((__t = ( paragraphNumber )) == null ? '' : __t) +
+'.\n\t\t</div>\n\t</div>\n\t<div class="citation_url">\n\t\t<span>Citation URL</span>\n\t\t<input disabled="disabled" value="' +
+((__t = ( url )) == null ? '' : __t) +
+'" />\n\t</div>\n\t<div class="reference_text">\n\t\t<span>Reference Text</span>\n\t\t<textarea disabled="disabled">' +
+((__t = ( referenceText )) == null ? '' : __t) +
+'</textarea>\n\t</div>\n</div>';
+
+}
+return __p
+};
+
 this["JST"]["app/oscitk/themes/Bootstrap/templates/figure-reference.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -180,6 +231,51 @@ __p += '\n<div class=\'next-page corner\'>\n\t<a href="#section/' +
 '">\n\t\t<div class=\'label\'>Next Section</div>\n\t</a>\n</div>\n';
  } ;
 
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Bootstrap/templates/note-popup.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class="note-popup">\n    <h2>Note</h2>\n    <form class="noteForm">\n    \t<textarea>' +
+((__t = ( note )) == null ? '' : __t) +
+'</textarea>\n        <label for="note-tags">Tags:</label>\n        <input type="text" name="note-tags" id="note-tags" value="' +
+((__t = ( tags.join(', ') )) == null ? '' : __t) +
+'" />\n    </form>\n    <div class="status">Saved</div>\n</div>';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Bootstrap/templates/notes.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<h3>Notes</h3>\n<div class="notesReel">\n\t<ul class="notesList">\n\t\t';
+ _.each(notes, function(note) { ;
+__p += '\n\t\t\t<li class="notesListItem">\n\t\t\t\t<div class="the-note">\n\t\t\t\t\t<span class="note-content">' +
+((__t = ( note.get('note') )) == null ? '' : __t) +
+'</span>\n\t\t\t\t</div>\n\t\t\t\t';
+ if (note.get('tags').length > 0) { ;
+__p += '\n\t\t\t\t\t<div class="note-tags">\n\t                \t<span class="tags-label">tags:</span> ';
+ _.each(note.get('tags'), function(tag) { ;
+__p +=
+((__t = ( tag )) == null ? '' : __t) +
+' ';
+ }); ;
+__p += '\n\t                </div>\n\t\t\t\t';
+ } ;
+__p += '\n\t\t\t\t<div class="note-buttons">\n\t\t\t\t\t<a href="#" class="noteLink" data-content_id="' +
+((__t = ( note.get('content_id') )) == null ? '' : __t) +
+'">Link</a>\n\t\t\t\t\t<!-- <a href="#" class="noteEdit" data-content_id="' +
+((__t = ( note.get('content_id') )) == null ? '' : __t) +
+'">Edit</a> -->\n\t\t\t\t</div>\n\t\t\t</li>\n\t\t';
+ }); ;
+__p += '\n\t</ul>\n</div>';
 
 }
 return __p

@@ -19,9 +19,12 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			sectionView: new OsciTk.views.Section(),
 			figuresView: new OsciTk.views.Figures(),
 			navigationView: new OsciTk.views.Navigation(),
-			footnotesView: new OsciTk.views.Footnotes()
+			footnotesView: new OsciTk.views.Footnotes(),
+			paragraphControlsView: new OsciTk.views.ParagraphControls(),
+			notesView: new OsciTk.views.Notes(),
+			inlineNotesView: new OsciTk.views.InlineNotes(),
+			citationsView: new OsciTk.views.Citation(),
 		};
-
 
 		// Add the header view
 		this.addView(app.views.headerView, '#header');

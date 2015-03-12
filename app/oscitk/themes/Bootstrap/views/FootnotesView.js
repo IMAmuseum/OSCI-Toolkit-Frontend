@@ -17,9 +17,8 @@ OsciTk.views.Footnotes = OsciTk.views.BaseView.extend({
 				fnRef.attr("data-placement","bottom");
 				fnRef.off('click');
 				fnRef.bind('click', {'caller': this}, this.footnoteClicked);
-
-				$('[data-toggle="tooltip"]').tooltip();
 			}
+			$('[data-toggle="tooltip"]').tooltip();
 		});
 	},
 
