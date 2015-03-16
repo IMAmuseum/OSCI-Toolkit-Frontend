@@ -69,18 +69,20 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         var content =  sectionModel.get('content')[0].children.body;
         this.content = content;
         var i = 0;
+        var p = 1;
         //var paragraphs = sectionModel.get('content')[0].children.body.children;
         _.each(this.content.children, function(sectionItem) {
             if($(sectionItem).is('p')){
                 // add attr to p and add
                 $(sectionItem).attr({
-                    'data-paragraph_number': i,
-                    'data-osci_content_id': 'osci-content-'+this.ContentId,
+                    'data-paragraph_number': p,
+                    'data-osci_content_id': 'osci-content-'+i,
                     'data-sectionid': 'body',
-                    'id': 'osci-content-'+this.ContentId
+                    'id': 'osci-content-'+i
                 }).addClass('content-paragraph');
-                i++;
+                p++;
             }
+            i++;
         }, this);
         this.render();
     },

@@ -20,7 +20,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
     addParagraphControls: function() {
         // get all paragraph with id and append controls
         var paragraphs = $('.content-paragraph');
-        var i = 0;
+        var i = 1;
         _.each(paragraphs, function(paragraph) {
 
             var linkItems = app.config.get('paragraphControls');
@@ -31,7 +31,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             }
 
             $(paragraph).prepend(
-                '<div class="paragraph-controls" data-placement= data-paragraph_identifier="'+i+'" data-osci_content_id="osci-content-'+this.contentId+'">'+
+                '<div class="paragraph-controls" data-osci_content_id="osci-content-'+this.contentId+'" data-paragraph_identifier="'+i+'" >'+
                 '<button type="button" id="paragraph-'+i+'" title="'+tipContent+'" data-toggle="tooltip" data-placement="right">'+
                 '<span class="paragraph-identifier" paragraph-identifier="'+i+'">'+i+'</span>'+
                 '</button>'+
