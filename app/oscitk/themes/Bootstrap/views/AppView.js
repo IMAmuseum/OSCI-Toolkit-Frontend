@@ -38,6 +38,10 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		// Add the navigation view to the AppView
 		this.addView(app.views.navigationView, '#navigation');
 
+		this.listenTo(Backbone, "toolbarInline", function(toolbarItem) {
+			this.toolbarInline(toolbarItem);
+		});
+
 		this.listenTo(Backbone, "toolbarItemClicked", function(toolbarItem, active) {
 			this.toolbarAction(toolbarItem);
 		});
@@ -51,6 +55,12 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 	render: function() {
 		this.$el.html(this.template);
 		$('body').append(this.el);
+	},
+
+	toolbarInline: function(toolbarItem) {
+		var view = _.pick(app.views, toolbarItem.item.view);
+		view = view[toolbarItem.item.view];
+		this.addView(view, '#'+toolbarItem.item.text);
 	},
 
 	toolbarAction: function(toolbarItem) {
@@ -68,9 +78,11 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 	toolbarToggle: function(toolbarItem) {
 
 		_.each(app.toolbarItems, function(item) {
-			var view = _.pick(app.views, item.view);
-			view = view[item.view];
-			this.removeView(view, false);
+			if (item.style == 'default') {
+				var view = _.pick(app.views, item.view);
+				view = view[item.view];
+				this.removeView(view, false);
+			}
 		}, this);
 	}
 });

@@ -38,7 +38,7 @@ this["JST"]["app/oscitk/themes/Bootstrap/templates/app.tpl.html"] = function(obj
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<progress value="0" max="0"></progress>\n<div id="toolbar"></div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="font-size"></div>\n\t<div id="figures"></div>\n</div>\n\n<!-- <header>\n\t<div id="header"></div>\n</header> -->\n\n<div class="container-fluid">\n\t<div id="loader">Loading...</div>\n\t<div id="section"></div>\n</div>\n\n<footer>\n\t<div id="navigation"></div>\n</footer>\n';
+__p += '<progress value="0" max="0"></progress>\n<div id="toolbar"></div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<!-- <div id="font-size"></div> -->\n\t<div id="figures"></div>\n</div>\n\n<!-- <header>\n\t<div id="header"></div>\n</header> -->\n\n<div class="container-fluid">\n\t<div id="loader">Loading...</div>\n\t<div id="section"></div>\n</div>\n\n<footer>\n\t<div id="navigation"></div>\n</footer>\n';
 
 }
 return __p
@@ -349,10 +349,20 @@ return __p
 
 this["JST"]["app/oscitk/themes/Bootstrap/templates/toolbar-item.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p +=
-((__t = ( text )) == null ? '' : __t);
+
+ if (style == 'default') { ;
+__p += '\n\t<a href="#">' +
+((__t = ( text )) == null ? '' : __t) +
+'</a>\n';
+ } else { ;
+__p += '\n\t<span id="' +
+((__t = ( text )) == null ? '' : __t) +
+'"></span>\n';
+ } ;
+__p += '\n';
 
 }
 return __p

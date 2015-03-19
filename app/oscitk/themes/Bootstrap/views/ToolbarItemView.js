@@ -17,8 +17,14 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 	},
 	render: function() {
 		this.$el.html(this.template({
-			text: '<a href="#">'+this.options.toolbarItem.text+'</a>'
+			text: this.options.toolbarItem.text,
+			style: this.options.toolbarItem.style
 		}));
+
+		if (this.options.toolbarItem.style != 'default') {
+			Backbone.trigger("toolbarInline", {item : this.options.toolbarItem});
+		}
+
 		return this;
 	},
 	itemClicked: function(e) {

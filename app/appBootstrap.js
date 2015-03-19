@@ -10,20 +10,23 @@ app = {
 		this.config = new OsciTk.models.Config(config);
 		this.router = new OsciTk.router();
 		this.features = this.config.get('themeFeatures');
+
+		this.collections.figures = new OsciTk.collections.Figures();
+		this.collections.footnotes = new OsciTk.collections.Footnotes();
+		this.collections.navigationItems = new OsciTk.collections.NavigationItems();
+
+		// only three features are dependent on theme features configuraton
 		if (this.features.notes ) {
 			this.collections.notes = new OsciTk.collections.Notes();
 		}
 		if (this.features.account ) {
 			this.account = new OsciTk.models.Account();
 		}
-		this.collections.figures = new OsciTk.collections.Figures();
-		this.collections.footnotes = new OsciTk.collections.Footnotes();
-		this.collections.navigationItems = new OsciTk.collections.NavigationItems();
 		if (this.features.glossary) {
 			this.collections.glossaryTerms = new OsciTk.collections.GlossaryTerms();
 		}
 
-		//setup window resizing, to trigger an event
+		// setup window resizing, to trigger an event
 		window.onresize = function() {
 			if (window.resizeTimer) {
 				clearTimeout(window.resizeTimer);
