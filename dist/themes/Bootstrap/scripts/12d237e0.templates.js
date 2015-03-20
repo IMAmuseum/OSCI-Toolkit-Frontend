@@ -4,7 +4,7 @@ this["JST"]["app/oscitk/themes/Bootstrap/templates/account-login.tpl.html"] = fu
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<a href="#">\n\t\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</a>\n\t</div>\n\t<div class="container">\n\t\t<h3>Login</h3>\n\t\t<div class="form-error"></div>\n\t\t<form id="account-form">\n\t\t\t<label for="username">Username:</label>\n\t\t\t<input type="text" id="username" placeholder="Username" />\n\t\t\t<label for="password">Password:</label>\n\t\t\t<input type="password" id="password" placeholder="Password" />\n\t\t\t<button type="button" class="login">Log In</button>\n\t\t\t<div><a href="#" class="register">Register an account</a></div>\n\t\t</form>\n\t</div>\n</div>';
+__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<button class="btn btn-link">\n\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</button>\n\t</div>\n\t<div class="container">\n\t\t<h3>Login</h3>\n\t\t<div class="form-error"></div>\n\t\t<form id="account-form">\n\t\t\t<label for="username">Username:</label>\n\t\t\t<input type="text" id="username" placeholder="Username" />\n\t\t\t<label for="password">Password:</label>\n\t\t\t<input type="password" id="password" placeholder="Password" />\n\t\t\t<button type="button" class="login">Log In</button>\n\t\t\t<div><a href="#" class="register">Register an account</a></div>\n\t\t</form>\n\t</div>\n</div>';
 
 }
 return __p
@@ -14,7 +14,7 @@ this["JST"]["app/oscitk/themes/Bootstrap/templates/account-profile.tpl.html"] = 
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<a href="#">\n\t\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</a>\n\t</div>\n\t<div class="container">\n\t\t<h3>Profile</h3>\n\t\t<h4>' +
+__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<button class="btn btn-link">\n\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</button>\n\t</div>\n\t<div class="container">\n\t\t<h3>Profile</h3>\n\t\t<h4>' +
 ((__t = ( username )) == null ? '' : __t) +
 '</h4>\n\t\t<h5>' +
 ((__t = ( email )) == null ? '' : __t) +
@@ -28,7 +28,7 @@ this["JST"]["app/oscitk/themes/Bootstrap/templates/account-register.tpl.html"] =
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<a href="#">\n\t\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</a>\n\t</div>\n\t<div class="container">\n\t\t<h2>Register</h2>\n\t\t<div class="form-error"></div>\n\t\t<form id="account-form">\n\t\t\t<label for="username">Username:</label>\n\t\t\t<input type="text" id="username" placeholder="Username" />\n\t\t\t<label for="password">Password:</label>\n\t\t\t<input type="password" id="password" placeholder="Password" />\n\t\t\t<label for="email">Email:</label>\n\t\t\t<input type="text" id="email" placeholder="Email" />\n\t\t\t<button type="button" class="register">Register</button>\n\t\t\t<div><a href="#" class="login">Already have an account?</a></div>\n\t\t</form>\n\t</div>\n</div>';
+__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<button class="btn btn-link">\n\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</button>\n\t</div>\n\t<div class="container">\n\t\t<h2>Register</h2>\n\t\t<div class="form-error"></div>\n\t\t<form id="account-form">\n\t\t\t<label for="username">Username:</label>\n\t\t\t<input type="text" id="username" placeholder="Username" />\n\t\t\t<label for="password">Password:</label>\n\t\t\t<input type="password" id="password" placeholder="Password" />\n\t\t\t<label for="email">Email:</label>\n\t\t\t<input type="text" id="email" placeholder="Email" />\n\t\t\t<button type="button" class="register">Register</button>\n\t\t\t<div><a href="#" class="login">Already have an account?</a></div>\n\t\t</form>\n\t</div>\n</div>';
 
 }
 return __p
@@ -38,7 +38,7 @@ this["JST"]["app/oscitk/themes/Bootstrap/templates/app.tpl.html"] = function(obj
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<progress value="0" max="0"></progress>\n<div id="toolbar"></div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<!-- <div id="font-size"></div> -->\n\t<div id="figures"></div>\n</div>\n\n<!-- <header>\n\t<div id="header"></div>\n</header> -->\n\n<div class="container-fluid">\n\t<div id="loader">Loading...</div>\n\t<div id="section"></div>\n</div>\n\n<footer>\n\t<div id="navigation"></div>\n</footer>\n';
+__p += '<progress value="0" max="0"></progress>\n<div id="toolbar"></div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n\n<div class="container-fluid">\n\t<div id="loader">Loading...</div>\n\t<div id="section"></div>\n</div>\n\n<footer>\n\t<div id="navigation"></div>\n</footer>\n';
 
 }
 return __p
@@ -114,7 +114,7 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<div class=\'overlay figure-browser\'>\n\t<div id="dismiss">\n\t\t<a href="#">\n\t\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</a>\n\t</div>\n\t<div class="container">\n\t\t<div class="row">\n\t\t\t<div class="col-md-3">\n\t\t\t<h3>Figures</h3>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class="row">\n\t\t\t';
+__p += '<div class=\'overlay figure-browser\'>\n\t<div id="dismiss">\n\t\t<button class="btn btn-link">\n\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</button>\n\t</div>\n\t<div class="container">\n\t\t<div class="row">\n\t\t\t<div class="col-md-3">\n\t\t\t<h3>Figures</h3>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class="row">\n\t\t\t';
  _.each(figures, function(figure) { ;
 __p += '\n\t\t\t<div class="col-md-3">\n\t\t\t\t<figure class=\'thumbnail\' data-figure-id="' +
 ((__t = ( figure.id )) == null ? '' : __t) +
@@ -140,7 +140,7 @@ this["JST"]["app/oscitk/themes/Bootstrap/templates/font-size.tpl.html"] = functi
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="font-control">\n\t<h3>Font Size</h3>\n\t<a href="#font-larger" class="larger font-button">A</a>\n\t<a href="#font-smaller" class="smaller font-button">A</a>\n</div>';
+__p += '<a href="#font-larger" class="larger font-button">A +</a>\n<a href="#font-smaller" class="smaller font-button">A -</a>\n';
 
 }
 return __p
@@ -171,21 +171,23 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<div id="section-title">' +
-((__t = ( sectionTitle )) == null ? '' : __t) +
-'</div>\n';
- if (typeof(sectionSubtitle) !== null) { ;
-__p += '\n<div id="section-subtitle">' +
-((__t = ( sectionSubtitle )) == null ? '' : __t) +
-'</div>\n';
- } ;
-__p += '\n\n';
- if (typeof(headerImage) !== "undefined") { ;
-__p += '\n<br>\n\t<img src="' +
-((__t = ( headerImage )) == null ? '' : __t) +
-'">\n';
- } ;
 
+ if (typeof(headerImage) !== "undefined") { ;
+__p += '\n<div class="container-header" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url(\'' +
+((__t = ( headerImage )) == null ? '' : __t) +
+'\');">\n';
+ } else { ;
+__p += '\n<div class="container-header">\n';
+ } ;
+__p += '\n\t<div class="container header-title">\n\t\t<h1>' +
+((__t = ( sectionTitle )) == null ? '' : __t) +
+'</h1>\n\t\t';
+ if (typeof(sectionSubtitle) !== null) { ;
+__p += '\n\t\t<h2>' +
+((__t = ( sectionSubtitle )) == null ? '' : __t) +
+'</h2>\n\t\t';
+ } ;
+__p += '\n  \t</div>\n</div>';
 
 }
 return __p
@@ -319,7 +321,7 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<a href="#">\n\t\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</a>\n\t</div>\n\t<div class="container">\n\t\t<h3>Table of Contents</h3>\n\t\t<ul>\n\t\t\t';
+__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<button class="btn btn-link">\n\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</button>\n\t</div>\n\t<div class="container">\n\t\t<h3>Table of Contents</h3>\n\t\t<ul>\n\t\t\t';
  _.each(items, function(item) { ;
 __p += '\n\t\t\t\t<li class="toc-item';
  if (item.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;

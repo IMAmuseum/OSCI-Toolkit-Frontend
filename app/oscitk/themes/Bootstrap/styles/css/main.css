@@ -8041,6 +8041,11 @@ button.close {
   right: 0;
 }
 
+/* line 18, ../navigation.scss */
+.navbar-default {
+  margin: 0;
+}
+
 /* line 1, ../progress.scss */
 progress[value] {
   /* Positioning */
@@ -8434,4 +8439,37 @@ a.noteEdit {
   top: 20;
   left: 20;
   z-index: 11;
+}
+
+/* line 38, ../main.scss */
+.font-size-view {
+  line-height: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+/* line 44, ../main.scss */
+.container-header {
+  width: 100%;
+  height: 60vh;
+  max-width: 100%;
+  background-color: #909090;
+  background-position: center;
+  background-size: cover;
+}
+
+/* line 53, ../main.scss */
+.header-title {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  text-shadow: 0 1px 0 black;
+}
+/* line 61, ../main.scss */
+.header-title h1 {
+  text-transform: uppercase;
+  margin: 0;
 }

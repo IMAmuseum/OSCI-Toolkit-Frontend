@@ -21,12 +21,11 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 
 		var sectionId = $(event.currentTarget).attr('data-section-id');
 		$('li.tocView-toolbar-item>a').removeClass('active');
-		Backbone.trigger("tocItemClicked");
+		Backbone.trigger("toolbarRemoveViews");
 		// TODO: don't really want to address the appRouter directly
 		app.router.navigate("section/" + sectionId, {trigger: true});
 	},
-	closeOverlay: function(e) {
-		e.preventDefault();
-		Backbone.trigger("overlayDismiss", e);
+	closeOverlay: function() {
+		Backbone.trigger("toolbarRemoveViews");
 	}
 });

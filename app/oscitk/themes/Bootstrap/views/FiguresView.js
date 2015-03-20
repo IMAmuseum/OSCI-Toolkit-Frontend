@@ -19,8 +19,7 @@ OsciTk.views.Figures = OsciTk.views.BaseView.extend({
 
 		return this;
 	},
-	closeOverlay: function(e) {
-		e.preventDefault();
-		Backbone.trigger("overlayDismiss", e);
+	closeOverlay: function() {
+		Backbone.trigger("toolbarRemoveViews");
 	}
 });

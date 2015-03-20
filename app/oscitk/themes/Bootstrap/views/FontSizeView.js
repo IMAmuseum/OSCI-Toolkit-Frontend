@@ -3,24 +3,23 @@ OsciTk.views.FontSize = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('font-size'),
 	initialize: function() {
 		this.currentFontSize = 100;
+		// listen for inline toolbar item clicks in ToolbarItemView.js
+		this.listenTo(Backbone, "toolbarInlineClicked", function(href) {
+			this.changeFontSize(href);
+		});
 		this.render();
 	},
 	render: function() {
 		this.$el.html(this.template());
 		return this;
 	},
-	events: {
-		"click .font-button": "changeFontSize",
-	},
-	changeFontSize: function(e) {
-		e.preventDefault();
-
+	changeFontSize: function(href) {
 		var sectionView = app.views.sectionView;
-		var clicked = $(e.target);
 
-		if (clicked.attr("href") === "#font-larger") {
+		if (href === "#font-larger") {
 			this.currentFontSize += 25;
-		} else {
+		}
+		if (href === "#font-smaller")  {
 			this.currentFontSize -= 25;
 		}
 

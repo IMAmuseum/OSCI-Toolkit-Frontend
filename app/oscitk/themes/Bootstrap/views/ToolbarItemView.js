@@ -11,9 +11,9 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		// add a class to this element based on view button uses
 		this.$el.addClass(this.options.toolbarItem.view + '-toolbar-item');
 
-		this.listenTo(Backbone, "overlayDismiss", function(e) {
-			this.setActiveStates(e);
-		});
+		// this.listenTo(Backbone, "overlayDismiss", function(e) {
+		// 	this.setActiveStates(e);
+		// });
 	},
 	render: function() {
 		this.$el.html(this.template({
@@ -22,7 +22,7 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		}));
 
 		if (this.options.toolbarItem.style != 'default') {
-			Backbone.trigger("toolbarInline", {item : this.options.toolbarItem});
+			Backbone.trigger("toolbarInline", this.options.toolbarItem);
 		}
 
 		return this;
@@ -40,6 +40,13 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 
 		// get the target
 		this.$target = $(e.target);
+		this.href = $(e.target).attr("href");
+
+		// default actions only pass a
+		if(this.href != '#') {
+			Backbone.trigger("toolbarInlineClicked", this.href);
+		}
+
 		// get true / false target is active
 		this.active = this.$target.hasClass('active');
 		// toggle active class

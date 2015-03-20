@@ -1,9 +1,12 @@
-<div id="section-title"><%= sectionTitle %></div>
-<% if (typeof(sectionSubtitle) !== null) { %>
-<div id="section-subtitle"><%= sectionSubtitle %></div>
-<% } %>
-
 <% if (typeof(headerImage) !== "undefined") { %>
-<br>
-	<img src="<%= headerImage %>">
+<div class="container-header" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('<%= headerImage %>');">
+<% } else { %>
+<div class="container-header">
 <% } %>
+	<div class="container header-title">
+		<h1><%= sectionTitle %></h1>
+		<% if (typeof(sectionSubtitle) !== null) { %>
+		<h2><%= sectionSubtitle %></h2>
+		<% } %>
+  	</div>
+</div>

@@ -100,8 +100,7 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 		this.template = OsciTk.templateManager.get('account-profile');
 		this.$el.html(this.template(this.model.toJSON()));
 	},
-	closeOverlay: function(e) {
-		e.preventDefault();
-		Backbone.trigger("overlayDismiss", e);
+	closeOverlay: function() {
+		Backbone.trigger("toolbarRemoveViews");
 	}
 });

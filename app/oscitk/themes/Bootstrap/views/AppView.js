@@ -46,7 +46,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			this.toolbarAction(toolbarItem);
 		});
 
-		this.listenTo(Backbone, "tocItemClicked", function(toolbarItem) {
+		this.listenTo(Backbone, "toolbarRemoveViews", function() {
 			this.toolbarToggle();
 		});
 
@@ -58,14 +58,15 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 	},
 
 	toolbarInline: function(toolbarItem) {
-		var view = _.pick(app.views, toolbarItem.item.view);
-		view = view[toolbarItem.item.view];
-		this.addView(view, '#'+toolbarItem.item.text);
+		var view = _.pick(app.views, toolbarItem.view);
+		view = view[toolbarItem.view];
+		this.removeView(view, false);
+		this.addView(view, '#'+toolbarItem.text);
 	},
 
 	toolbarAction: function(toolbarItem) {
 
-		this.toolbarToggle(toolbarItem);
+		this.toolbarToggle();
 		// if toolbar items is active show it
 		// this toggles the view
 		if (! toolbarItem.active) {
@@ -75,8 +76,8 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		}
 	},
 
-	toolbarToggle: function(toolbarItem) {
-
+	toolbarToggle: function() {
+		//console.log(toolbarItem);
 		_.each(app.toolbarItems, function(item) {
 			if (item.style == 'default') {
 				var view = _.pick(app.views, item.view);
