@@ -34,8 +34,21 @@ app = {
 	},
 
 	run : function() {
+		
+		var getUrlPath = this.views.app.$el.prop('baseURI');
+		if (!getUrlPath) { //for I.E., doesn't support baseURI
+			getUrlPath = document.URL;
+		}
+		var pathArray = getUrlPath.split('/');
+		var rootPath = '';
+		
+		for (i=3; i < 6; i++) {
+			rootPath += "/";
+			rootPath += pathArray[i];
+		}
+		
 		// load package document
 		this.models.docPackage = new OsciTk.models.Package({url: this.config.get('packageUrl')});
-		Backbone.history.start();
+		Backbone.history.start({pushState:true, root: rootPath});
 	}
 };
