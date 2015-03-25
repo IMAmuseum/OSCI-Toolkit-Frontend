@@ -4,7 +4,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     events: {
         "scroll" : "updateProgress",
         'click .content-paragraph': 'paragraphClicked',
-        'click a' : 'tooltipClicked',
+        'click .paragraph-button': 'paragraphClicked',
+        'click .toggleNoteDialog' : 'noteTooltipClicked',
+        'click .toggleCiteDialog' : 'citeTooltipClicked',
     },
     initialize: function() {
         _.bindAll(this, 'updateProgress');
@@ -93,12 +95,24 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         Backbone.trigger("paragraphClicked", paragraphNum);
     },
 
-    tooltipClicked: function(e) {
+    noteTooltipClicked: function(e) {
         e.preventDefault();
-        var evt = $(e.target).data('event');
-        var paragraphNumber = $(e.target).data('paragraph');
+        console.log('note');
+        //var evt = $(e.target).data('event');
+        //var paragraphNumber = $(e.target).data('paragraph');
         //console.log(this.ContentId);
         //evt is the name of the event 'toggleNoteDialog' or 'toggleCiteDialog'
-        Backbone.trigger(evt, {contentId: 'osci-content-'+paragraphNumber, paragraphNumber: paragraphNumber});
+        //Backbone.trigger(evt, {contentId: 'osci-content-'+paragraphNumber, paragraphNumber: paragraphNumber});
     },
+
+    citeTooltipClicked: function(e) {
+        e.preventDefault();
+        console.log('cite');
+        //var evt = $(e.target).data('event');
+        //var paragraphNumber = $(e.target).data('paragraph');
+        //console.log(this.ContentId);
+        //evt is the name of the event 'toggleNoteDialog' or 'toggleCiteDialog'
+        //Backbone.trigger(evt, {contentId: 'osci-content-'+paragraphNumber, paragraphNumber: paragraphNumber});
+    },
+
 });

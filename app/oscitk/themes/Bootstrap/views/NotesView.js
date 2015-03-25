@@ -9,28 +9,6 @@ OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 		this.listenTo(app.collections.notes, 'add remove change', function() {
 			this.render();
 		});
-
-		// catch the page changed event and highlight any notes in list that are on current page
-		// this.listenTo(Backbone, 'pageChanged notesLoaded', function(data) {
-		// 	var page;
-		// 	if (typeof(data.page) === 'undefined') {
-		// 		page = app.views.navigationView.page;
-		// 	}
-		// 	else {
-		// 		page = data.page;
-		// 	}
-		// 	pageView = app.views.sectionView.getChildViewByIndex(page - 1);
-		// 	_.each(app.collections.notes.models, function(note) {
-		// 		// reset to false
-		// 		note.set('onCurrentPage', false);
-		// 		// search for note's content id in current page
-		// 		var found = pageView.$el.find('#' + note.get('content_id'));
-		// 		if (found.length > 0) {
-		// 			note.set('onCurrentPage', true);
-		// 		}
-		// 	});
-		// 	this.render();
-		// });
 	},
 
 	render: function() {
@@ -59,7 +37,7 @@ OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 			if (note.id !== null) return true;
 			return false;
 		});
-		console.log(notes);
+
 		return notes;
 	},
 

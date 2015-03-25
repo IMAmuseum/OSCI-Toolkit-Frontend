@@ -2,12 +2,26 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
     initialize: function() {
         // when layut is complete add numbers for paragraph controls
         this.listenTo(Backbone, 'layoutComplete', function() {
-            this.contentId = app.models.section.get('id');
+            this.sectionId = app.models.section.get('id');
+        });
+
+        this.listenTo(Backbone, 'notesLoaded', function(params) {
             this.render();
+            // _.each(app.collections.notes.models, function(n) {
+            //     // place a class on the paragraph identifier to indicate a note is present
+            //     var paragraphControls = app.views.sectionView.$el.find('.paragraph-controls[data-osci_content_id=' + n.get('content_id') + ']');
+            //     if (paragraphControls.length) {
+            //         paragraphControls.addClass('notes-present');
+            //     }
+            // });
         });
 
         this.listenTo(Backbone, 'paragraphClicked', function(data) {
             this.toggleTooltip(data);
+        });
+
+        this.listenTo(Backbone, 'windowResized', function() {
+            this.render();
         });
 
     },
@@ -27,23 +41,46 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             var tipContent = '';
             for(var item in linkItems) {
                 var text = linkItems[item];
-                tipContent += "<a data-paragraph='"+i+"' data-event='"+item+"' class='"+item+"'>"+text+"</a> ";
+                if (text == 'note') {
+                    var note = this.checkForNote({
+                                content_id: 'osci-content-'+i,
+                                section_id: this.sectionId,
+                                paragraph_number: i
+                            });
+                    var noteText = note ? note.get('note') : '';
+                    var notePopoverForm = "<form><textarea>"+ noteText +"</textarea></form>";
+                    //tipContent += "<a data-content='"+notePopoverForm+"' data-paragraph='"+i+"' data-event='"+item+"' class='"+item+"'>"+text+"</a> ";
+                }
+
+                // if (text == 'cite') {
+                //     tipContent += "<a data-paragraph='"+i+"' data-event='"+item+"' class='"+item+"'>"+text+"</a> ";
+                // }
             }
 
-            $(paragraph).prepend(
-                '<div class="paragraph-controls" data-osci_content_id="osci-content-'+this.contentId+'" data-paragraph_identifier="'+i+'" >'+
-                '<button type="button" id="paragraph-'+i+'" title="'+tipContent+'" data-toggle="tooltip" data-placement="right">'+
+            $(paragraph).before(
+                '<div class="paragraph-controls" data-osci_content_id="osci-content-'+i+'" data-paragraph_identifier="'+i+'" >'+
+                '<button class="paragraph-button" type="button" id="paragraph-'+i+'" title="Note" data-content="'+notePopoverForm+'" data-toggle="popover" data-placement="right" data-paragraph_number="'+i+'">'+
                 '<span class="paragraph-identifier" paragraph-identifier="'+i+'">'+i+'</span>'+
                 '</button>'+
                 '</div>'
             );
             i++;
         }, this);
-        $('[data-toggle="tooltip"]').tooltip({html:true, trigger:'manual'});
+        $('[data-toggle="popover"]').popover({html:true, trigger:'manual', placement:'top'});
     },
 
     toggleTooltip: function (data) {
-        $('#paragraph-'+data).tooltip('toggle');
+        console.log(data);
+        $('#paragraph-'+data).popover('toggle');
+    },
+
+    checkForNote: function (data) {
+        var note;
+        var notes = app.collections.notes.where({content_id: data.content_id});
+        if (notes[0]) {
+            note = notes[0];
+        }
+        return note;
     }
 
 });

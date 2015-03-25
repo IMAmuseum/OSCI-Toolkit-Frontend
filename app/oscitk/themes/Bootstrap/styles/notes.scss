@@ -1,152 +1,157 @@
-.note-popup {
-	max-width: 300px;
-	max-height: 400px;
-	width: 300px;
+.paragraph-controls {
+	height: 24px;
 }
 
-.note-popup h2 {
-	background-color: #444;
-	color: #FFF;
-	padding: 4px 0 4px 10px;
-	margin: 0;
-	-webkit-border-radius: 4px 4px 0 0;
-	-moz-border-radius: 4px 4px 0 0;
-	border-radius: 4px 4px 0 0;
-}
-.note-popup form.noteForm {
-	margin: 10px;
-}
-.note-popup textarea {
-	background-color: #FFFFA3;
-	border: none;
-	width:100%;
-	box-shadow: 0 1px 3px rgba(0,0,0,.4);
-	margin-bottom:10px;
-	max-width:100%;
-	min-height:100px;
-	font-size:12px;
-	padding: 5px;
-}
-.note-popup label {
-	display: block;
-}
-.note-popup input {
-	padding: 5px;
-	width: 100%;
-}
-.note-popup textarea:focus {
-	border:none!important;outline:none!important;
-	box-shadow: 0 1px 3px rgba(0,0,0,.8);
-}
-.note-popup .reference-text-content {
-	max-height:80px;
-	overflow:auto;
 
-	background:
-	/* Shadow covers */
-	linear-gradient(white 30%, rgba(255,255,255,0)),
-	linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
+// .note-popup {
+// 	max-width: 300px;
+// 	max-height: 400px;
+// 	width: 300px;
+// }
 
-	/* Shadows */
-	radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
-	radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
-	background-repeat: no-repeat;
-	background-color: #ccc;
-	background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+// .note-popup h2 {
+// 	background-color: #444;
+// 	color: #FFF;
+// 	padding: 4px 0 4px 10px;
+// 	margin: 0;
+// 	-webkit-border-radius: 4px 4px 0 0;
+// 	-moz-border-radius: 4px 4px 0 0;
+// 	border-radius: 4px 4px 0 0;
+// }
+// .note-popup form.noteForm {
+// 	margin: 10px;
+// }
+// .note-popup textarea {
+// 	background-color: #FFFFA3;
+// 	border: none;
+// 	width:100%;
+// 	box-shadow: 0 1px 3px rgba(0,0,0,.4);
+// 	margin-bottom:10px;
+// 	max-width:100%;
+// 	min-height:100px;
+// 	font-size:12px;
+// 	padding: 5px;
+// }
+// .note-popup label {
+// 	display: block;
+// }
+// .note-popup input {
+// 	padding: 5px;
+// 	width: 100%;
+// }
+// .note-popup textarea:focus {
+// 	border:none!important;outline:none!important;
+// 	box-shadow: 0 1px 3px rgba(0,0,0,.8);
+// }
+// .note-popup .reference-text-content {
+// 	max-height:80px;
+// 	overflow:auto;
 
-	/* Opera doesn't support this in the shorthand */
-	background-attachment: local, local, scroll, scroll;
+// 	background:
+// 	/* Shadow covers */
+// 	linear-gradient(white 30%, rgba(255,255,255,0)),
+// 	linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
 
-	display:block;
-	margin-bottom:10px;
-	line-height:1.2;
-	font-size:12px;
-	text-shadow: 0 1px 0 rgba(255,255,255,.6);
-}
-.note-popup .reference-text-label {
-	font-weight:bold;
-	font-size:12px;
-	font-family:Arial, Helvetica, sans-serif;
-	border-bottom:2px solid #999;
-	margin-bottom:5px;
-	display:block;
-}
-.note-popup .status {
-	text-align:right;
-	opacity:.8;
-	font-family:Arial, Helvetica, sans-serif;
-	margin: 0 10px 10px 0;
-}
-.notesReel {
-	overflow-y: hidden;
-	overflow-x: auto;
-	-webkit-overflow-scrolling: touch;
-	height: 180px;
-}
-ul.notesList {
-	list-style-type: none;
-	height: 180px;
-}
-ul.notesList li {
-	padding-bottom: 10px;
-	display:block;
-	float:left;
-	width:180px;
-	margin-right:20px;
-	font-size:13px;
-}
-.the-note {
-	width:180px;height:140px;
-	background:#FAFA9F;
-	/*box-shadow: 0 1px 4px rgba(0,0,0,.4);*/
-	position:relative;
-}
-.the-note:after {
-	position:absolute;
-	left:0;bottom:0;
-	content:"";
-	width:180px;height:40px;margin:0;padding:0;
-	display:block;
-	background: url('../images/bg-note-fade.png') repeat-x left bottom;
-}
+// 	/* Shadows */
+// 	radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
+// 	radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+// 	background-repeat: no-repeat;
+// 	background-color: #ccc;
+// 	background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
 
-.note-content {
-	padding:5px;
-	overflow:hidden;max-height:130px;
-	display:block;
-}
-.note-tags {
-	margin-top:10px;
-	padding:5px;
-	background: rgba(255,255,255,.6);
-}
-.note-buttons {
-	padding-top:10px;
-}
-.note-tags .tags-label {
-	text-transform:uppercase;
-	font-weight:bold;
-}
-ul.notesList li a {
-	padding-right: 10px;
-}
-.noteLink.onCurrentPage {
-	background-color: red;
-}
-a.noteLInk, a.noteEdit {
-	font-size:12px;text-transform:uppercase;
-	text-shadow: 0 1px 1px rgba(255,255,255,.7);
-	line-height:17px;
-	display:inline-block;
-	color:#666666;
-	padding-left:22px;
-}
-a.noteLInk:hover, a.noteEdit:hover {
-	color:#333;
-}
-a.noteLink {
-	background: url('../images/icon-link-16.png') no-repeat left top;
-}
-a.noteEdit {
-	background: url('../images/icon-edit-16.png') no-repeat left top;
-}
+// 	/* Opera doesn't support this in the shorthand */
+// 	background-attachment: local, local, scroll, scroll;
+
+// 	display:block;
+// 	margin-bottom:10px;
+// 	line-height:1.2;
+// 	font-size:12px;
+// 	text-shadow: 0 1px 0 rgba(255,255,255,.6);
+// }
+// .note-popup .reference-text-label {
+// 	font-weight:bold;
+// 	font-size:12px;
+// 	font-family:Arial, Helvetica, sans-serif;
+// 	border-bottom:2px solid #999;
+// 	margin-bottom:5px;
+// 	display:block;
+// }
+// .note-popup .status {
+// 	text-align:right;
+// 	opacity:.8;
+// 	font-family:Arial, Helvetica, sans-serif;
+// 	margin: 0 10px 10px 0;
+// }
+// .notesReel {
+// 	overflow-y: hidden;
+// 	overflow-x: auto;
+// 	-webkit-overflow-scrolling: touch;
+// 	height: 180px;
+// }
+// ul.notesList {
+// 	list-style-type: none;
+// 	height: 180px;
+// }
+// ul.notesList li {
+// 	padding-bottom: 10px;
+// 	display:block;
+// 	float:left;
+// 	width:180px;
+// 	margin-right:20px;
+// 	font-size:13px;
+// }
+// .the-note {
+// 	width:180px;height:140px;
+// 	background:#FAFA9F;
+// 	/*box-shadow: 0 1px 4px rgba(0,0,0,.4);*/
+// 	position:relative;
+// }
+// .the-note:after {
+// 	position:absolute;
+// 	left:0;bottom:0;
+// 	content:"";
+// 	width:180px;height:40px;margin:0;padding:0;
+// 	display:block;
+// 	background: url('../images/bg-note-fade.png') repeat-x left bottom;
+// }
+
+// .note-content {
+// 	padding:5px;
+// 	overflow:hidden;max-height:130px;
+// 	display:block;
+// }
+// .note-tags {
+// 	margin-top:10px;
+// 	padding:5px;
+// 	background: rgba(255,255,255,.6);
+// }
+// .note-buttons {
+// 	padding-top:10px;
+// }
+// .note-tags .tags-label {
+// 	text-transform:uppercase;
+// 	font-weight:bold;
+// }
+// ul.notesList li a {
+// 	padding-right: 10px;
+// }
+// .noteLink.onCurrentPage {
+// 	background-color: red;
+// }
+// a.noteLInk, a.noteEdit {
+// 	font-size:12px;text-transform:uppercase;
+// 	text-shadow: 0 1px 1px rgba(255,255,255,.7);
+// 	line-height:17px;
+// 	display:inline-block;
+// 	color:#666666;
+// 	padding-left:22px;
+// }
+// a.noteLInk:hover, a.noteEdit:hover {
+// 	color:#333;
+// }
+// a.noteLink {
+// 	background: url('../images/icon-link-16.png') no-repeat left top;
+// }
+// a.noteEdit {
+// 	background: url('../images/icon-edit-16.png') no-repeat left top;
+// }

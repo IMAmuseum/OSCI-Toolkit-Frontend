@@ -22,7 +22,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			footnotesView: new OsciTk.views.Footnotes(),
 			paragraphControlsView: new OsciTk.views.ParagraphControls(),
 			notesView: new OsciTk.views.Notes(),
-			inlineNotesView: new OsciTk.views.InlineNotes(),
+			// inlineNotesView: new OsciTk.views.InlineNotes(),
 			citationsView: new OsciTk.views.Citation(),
 		};
 
