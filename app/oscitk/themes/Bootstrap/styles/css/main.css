@@ -8282,6 +8282,14 @@ progress[value]::-moz-progress-bar {
 }
 
 /* line 67, ../main.scss */
+#section-view {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+/* line 72, ../main.scss */
 .paragraph-controls {
-  height: auto;
+  position: relative;
+  right: 32px;
+  top: 26px;
 }

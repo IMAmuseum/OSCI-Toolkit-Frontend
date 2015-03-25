@@ -59,14 +59,18 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
             $(paragraph).before(
                 '<div class="paragraph-controls" data-osci_content_id="osci-content-'+i+'" data-paragraph_identifier="'+i+'" >'+
-                '<button class="paragraph-button" type="button" id="paragraph-'+i+'" title="Note" data-content="'+notePopoverForm+'" data-toggle="popover" data-placement="right" data-paragraph_number="'+i+'">'+
+                '<button class="btn btn-default btn-xs paragraph-button" type="button" id="paragraph-'+i+'" title="Note" data-content="'+notePopoverForm+'" data-toggle="popover" data-placement="right" data-paragraph_number="'+i+'">'+
                 '<span class="paragraph-identifier" paragraph-identifier="'+i+'">'+i+'</span>'+
                 '</button>'+
                 '</div>'
             );
             i++;
         }, this);
-        $('[data-toggle="popover"]').popover({html:true, trigger:'manual', placement:'top'});
+        $('[data-toggle="popover"]').popover({html:true, trigger:'manual', placement:'top', viewport: '#section-view'});
+        // $('[data-toggle=popover]').on('shown.bs.popover', function () {
+        //     $('.arrow').css('left',parseInt($('.popover').css('left')) + 25 + 'px')
+        //     $('.popover').css('left',parseInt($('.popover').css('left')) + 40 + 'px')
+        // });
     },
 
     toggleTooltip: function (data) {

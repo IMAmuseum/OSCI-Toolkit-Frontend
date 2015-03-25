@@ -64,6 +64,13 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
 	}
 }
 
+#section-view {
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
 .paragraph-controls {
-	height: auto;
+	position: relative;
+	right: 32px;
+	top: 26px;
 }
