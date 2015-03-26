@@ -17,7 +17,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         });
 
         this.listenTo(Backbone, 'paragraphClicked', function(data) {
-            this.toggleTooltip(data);
+            this.togglePopover(data);
         });
 
         this.listenTo(Backbone, 'windowResized', function() {
@@ -36,46 +36,30 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         var paragraphs = $('.content-paragraph');
         var i = 1;
         _.each(paragraphs, function(paragraph) {
-
-            var linkItems = app.config.get('paragraphControls');
-            var tipContent = '';
-            for(var item in linkItems) {
-                var text = linkItems[item];
-                if (text == 'note') {
-                    var note = this.checkForNote({
-                                content_id: 'osci-content-'+i,
-                                section_id: this.sectionId,
-                                paragraph_number: i
-                            });
-                    var noteText = note ? note.get('note') : '';
-                    var notePopoverForm = "<form><textarea>"+ noteText +"</textarea></form>";
-                    //tipContent += "<a data-content='"+notePopoverForm+"' data-paragraph='"+i+"' data-event='"+item+"' class='"+item+"'>"+text+"</a> ";
-                }
-
-                // if (text == 'cite') {
-                //     tipContent += "<a data-paragraph='"+i+"' data-event='"+item+"' class='"+item+"'>"+text+"</a> ";
-                // }
-            }
-
             $(paragraph).before(
                 '<div class="paragraph-controls" data-osci_content_id="osci-content-'+i+'" data-paragraph_identifier="'+i+'" >'+
-                '<button class="btn btn-default btn-xs paragraph-button" type="button" id="paragraph-'+i+'" title="Note" data-content="'+notePopoverForm+'" data-toggle="popover" data-placement="right" data-paragraph_number="'+i+'">'+
+                '<button class="btn btn-default btn-xs paragraph-button" type="button" id="paragraph-'+i+'" data-paragraph_number="'+i+'">'+
                 '<span class="paragraph-identifier" paragraph-identifier="'+i+'">'+i+'</span>'+
                 '</button>'+
                 '</div>'
             );
             i++;
         }, this);
-        $('[data-toggle="popover"]').popover({html:true, trigger:'manual', placement:'top', viewport: '#section-view'});
-        // $('[data-toggle=popover]').on('shown.bs.popover', function () {
-        //     $('.arrow').css('left',parseInt($('.popover').css('left')) + 25 + 'px')
-        //     $('.popover').css('left',parseInt($('.popover').css('left')) + 40 + 'px')
-        // });
     },
 
-    toggleTooltip: function (data) {
-        console.log(data);
+    togglePopover: function (data) {
+        var note = this.checkForNote({
+            content_id: 'osci-content-'+data,
+            section_id: this.sectionId,
+            paragraph_number: data
+        });
+        var noteText = note  ? note.get('note') : '';
+        noteText = noteText === null  ? '' : noteText;
+        var notePopoverForm = "<textarea data-paragraph_number='"+ data +"' data-id='"+ note.cid +"'>"+ noteText +"</textarea>'"+
+                              "<button id='note-submit' type='button' class='btn btn-primary btn-block'>Add Note</button>";
+        $('#paragraph-'+data).popover({html:true, trigger:'manual', placement:'top', viewport: '#section-view', title: 'note', content: notePopoverForm});
         $('#paragraph-'+data).popover('toggle');
+
     },
 
     checkForNote: function (data) {
@@ -83,6 +67,13 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         var notes = app.collections.notes.where({content_id: data.content_id});
         if (notes[0]) {
             note = notes[0];
+        } else {
+            note = new OsciTk.models.Note({
+                content_id: data.content_id,
+                section_id: data.section_id,
+                paragraph_number: data.paragraph_number
+            });
+            app.collections.notes.add(note);
         }
         return note;
     }

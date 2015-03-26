@@ -5,8 +5,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         "scroll" : "updateProgress",
         'click .content-paragraph': 'paragraphClicked',
         'click .paragraph-button': 'paragraphClicked',
-        'click .toggleNoteDialog' : 'noteTooltipClicked',
-        'click .toggleCiteDialog' : 'citeTooltipClicked',
+        'click #note-submit': 'noteSubmit',
     },
     initialize: function() {
         _.bindAll(this, 'updateProgress');
@@ -95,24 +94,25 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         Backbone.trigger("paragraphClicked", paragraphNum);
     },
 
-    noteTooltipClicked: function(e) {
-        e.preventDefault();
-        console.log('note');
-        //var evt = $(e.target).data('event');
-        //var paragraphNumber = $(e.target).data('paragraph');
-        //console.log(this.ContentId);
-        //evt is the name of the event 'toggleNoteDialog' or 'toggleCiteDialog'
-        //Backbone.trigger(evt, {contentId: 'osci-content-'+paragraphNumber, paragraphNumber: paragraphNumber});
-    },
-
-    citeTooltipClicked: function(e) {
-        e.preventDefault();
-        console.log('cite');
-        //var evt = $(e.target).data('event');
-        //var paragraphNumber = $(e.target).data('paragraph');
-        //console.log(this.ContentId);
-        //evt is the name of the event 'toggleNoteDialog' or 'toggleCiteDialog'
-        //Backbone.trigger(evt, {contentId: 'osci-content-'+paragraphNumber, paragraphNumber: paragraphNumber});
-    },
+    noteSubmit: function(e) {
+        var $this = this;
+        var textarea = $(e.currentTarget).parent().find('textarea');
+        var noteText = textarea.val();
+        var cid = textarea.data('id');
+        var paragraph_number = textarea.data('paragraph_number');
+        if (noteText != '') {
+            console.log(noteText);
+            var note = app.collections.notes.get(cid);
+            note.set('note', noteText);
+            note.save();
+            textarea.html(noteText);
+        }
+        $('#paragraph-'+paragraph_number).popover({
+            content: function() {
+                return $("#popover-content").html();
+            }
+        });
+        $('#paragraph-'+paragraph_number).popover('destroy');
+    }
 
 });
