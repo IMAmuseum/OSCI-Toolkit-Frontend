@@ -1,4 +1,6 @@
 /* line 1, ../notes.scss */
 .paragraph-controls {
-  height: 24px;
+  position: relative;
+  right: 32px;
+  top: 26px;
 }

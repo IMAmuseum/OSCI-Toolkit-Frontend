@@ -8212,7 +8212,9 @@ progress[value]::-moz-progress-bar {
 
 /* line 1, ../notes.scss */
 .paragraph-controls {
-  height: 24px;
+  position: relative;
+  right: 32px;
+  top: 26px;
 }
 
 /* line 9, ../main.scss */
@@ -8285,11 +8287,4 @@ progress[value]::-moz-progress-bar {
 #section-view {
   padding-left: 40px;
   padding-right: 40px;
-}
-
-/* line 72, ../main.scss */
-.paragraph-controls {
-  position: relative;
-  right: 32px;
-  top: 26px;
 }

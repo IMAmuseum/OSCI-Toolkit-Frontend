@@ -7,13 +7,6 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
         this.listenTo(Backbone, 'notesLoaded', function(params) {
             this.render();
-            // _.each(app.collections.notes.models, function(n) {
-            //     // place a class on the paragraph identifier to indicate a note is present
-            //     var paragraphControls = app.views.sectionView.$el.find('.paragraph-controls[data-osci_content_id=' + n.get('content_id') + ']');
-            //     if (paragraphControls.length) {
-            //         paragraphControls.addClass('notes-present');
-            //     }
-            // });
         });
 
         this.listenTo(Backbone, 'paragraphClicked', function(data) {
@@ -36,9 +29,16 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         var paragraphs = $('.content-paragraph');
         var i = 1;
         _.each(paragraphs, function(paragraph) {
+            var note = this.checkForNote({
+                content_id: 'osci-content-'+i,
+                section_id: this.sectionId,
+                paragraph_number: i
+            });
+            var hasNotes = note.get('note') ? 'btn-warning' : '';
+
             $(paragraph).before(
                 '<div class="paragraph-controls" data-osci_content_id="osci-content-'+i+'" data-paragraph_identifier="'+i+'" >'+
-                '<button class="btn btn-default btn-xs paragraph-button" type="button" id="paragraph-'+i+'" data-paragraph_number="'+i+'">'+
+                '<button class="btn btn-default '+ hasNotes +' btn-xs paragraph-button" type="button" id="paragraph-'+i+'" data-paragraph_number="'+i+'">'+
                 '<span class="paragraph-identifier" paragraph-identifier="'+i+'">'+i+'</span>'+
                 '</button>'+
                 '</div>'
