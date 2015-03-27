@@ -14,7 +14,6 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			fontSizeView: new OsciTk.views.FontSize(),
 			fontStyleView: new OsciTk.views.FontStyle(),
 			tocView: new OsciTk.views.Toc(),
-			accountView: new OsciTk.views.Account(),
 			toolbarView: new OsciTk.views.Toolbar(),
 			sectionView: new OsciTk.views.Section(),
 			figuresView: new OsciTk.views.Figures(),
@@ -23,6 +22,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			paragraphControlsView: new OsciTk.views.ParagraphControls(),
 			notesView: new OsciTk.views.Notes(),
 			citationsView: new OsciTk.views.Citation(),
+			accountView: new OsciTk.views.Account(),
 		};
 
 		// Add the header view
@@ -78,6 +78,8 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 	toolbarToggle: function() {
 		//console.log(toolbarItem);
 		_.each(app.toolbarItems, function(item) {
+			//remove all active classes
+			$('.'+item.view+'-toolbar-item > a').removeClass('active')
 			if (item.style == 'default') {
 				var view = _.pick(app.views, item.view);
 				view = view[item.view];

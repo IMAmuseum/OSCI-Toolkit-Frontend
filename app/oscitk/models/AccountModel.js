@@ -1,6 +1,7 @@
 OsciTk.models.Account = OsciTk.models.BaseModel.extend({
 	defaults: {
 		username: 'anonymous',
+		email: null,
 		id: 0
 	},
 	initialize: function() {
@@ -23,6 +24,9 @@ OsciTk.models.Account = OsciTk.models.BaseModel.extend({
 					account.set(data.user);
 				}
 			}
+		})
+		.done(function() {
+			Backbone.trigger("accountReady");
 		});
 	}
 });

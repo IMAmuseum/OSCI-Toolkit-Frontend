@@ -1,9 +1,19 @@
 OsciTk.views.Account = OsciTk.views.BaseView.extend({
+	events: {
+		'click button.login': 'login',
+		'click button.register': 'register',
+		'click a.register': 'showRegistrationForm',
+		'click a.login': 'showLoginForm',
+		'click a.logout': 'logout',
+		'click #dismiss': 'closeOverlay',
+	},
 	className: 'account-view',
 	template: null,
 	initialize: function() {
-		this.model = app.account;
-		this.render();
+		this.listenTo(Backbone, 'accountReady', function() {
+			this.model = app.account;
+			this.render();
+		});
 	},
 	render: function() {
 		// determine if user is logged in.  Show login form or user details
@@ -14,14 +24,6 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 			this.showLoginForm();
 		}
 		return this;
-	},
-	events: {
-		'click button.login': 'login',
-		'click button.register': 'register',
-		'click a.register': 'showRegistrationForm',
-		'click a.login': 'showLoginForm',
-		'click a.logout': 'logout',
-		'click #dismiss': 'closeOverlay',
 	},
 	login: function() {
 		// alias this for use in ajax callbacks

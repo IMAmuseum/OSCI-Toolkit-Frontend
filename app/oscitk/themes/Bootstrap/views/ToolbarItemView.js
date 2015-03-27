@@ -10,10 +10,6 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		this.options = options;
 		// add a class to this element based on view button uses
 		this.$el.addClass(this.options.toolbarItem.view + '-toolbar-item');
-
-		// this.listenTo(Backbone, "overlayDismiss", function(e) {
-		// 	this.setActiveStates(e);
-		// });
 	},
 	render: function() {
 		this.$el.html(this.template({
