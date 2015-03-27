@@ -133,16 +133,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 case 'f':
                     var imgClass = 'full-plate';
                     break;
-                // top
-                case 't':
-                    var imgClass = 'top';
-                    break;
-                // bottom
-                case 'b':
-                    var imgClass = 'bottom';
-                    break;
                 // left
-                case 'l':
+                case 'tl':
                     var imgClass = 'left';
                     break;
                 // right
@@ -152,6 +144,14 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 //case inline
                 case 'i':
                     var imgClass = 'inline';
+                    break;
+                // top
+                case 't':
+                    var imgClass = 'top';
+                    break;
+                // bottom
+                case 'b':
+                    var imgClass = 'bottom';
                     break;
             }
             $(figure).addClass(imgClass);

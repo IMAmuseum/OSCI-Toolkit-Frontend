@@ -8050,6 +8050,7 @@ button.close {
 progress[value] {
   /* Positioning */
   position: fixed;
+  z-index: 1000;
   left: 0;
   top: 0;
   /* Dimensions */
@@ -8067,17 +8068,17 @@ progress[value] {
   color: red;
 }
 
-/* line 26, ../progress.scss */
+/* line 27, ../progress.scss */
 progress[value]::-webkit-progress-bar {
   background-color: transparent;
 }
 
-/* line 30, ../progress.scss */
+/* line 31, ../progress.scss */
 progress[value]::-webkit-progress-value {
   background-color: red;
 }
 
-/* line 34, ../progress.scss */
+/* line 35, ../progress.scss */
 progress[value]::-moz-progress-bar {
   background-color: red;
 }
@@ -8111,6 +8112,19 @@ progress[value]::-moz-progress-bar {
 /* line 1, ../figures.scss */
 .plate {
   max-width: 100px;
+}
+
+/* line 5, ../figures.scss */
+.right {
+  float: right;
+  width: 25%;
+}
+
+/* line 10, ../figures.scss */
+.left {
+  float: left;
+  margin-top: 20px;
+  margin-right: 40px;
 }
 
 /* line 1, ../notes.scss */

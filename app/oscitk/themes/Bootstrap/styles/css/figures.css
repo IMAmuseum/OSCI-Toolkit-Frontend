@@ -2,3 +2,16 @@
 .plate {
   max-width: 100px;
 }
+
+/* line 5, ../figures.scss */
+.right {
+  float: right;
+  width: 25%;
+}
+
+/* line 10, ../figures.scss */
+.left {
+  float: left;
+  margin-top: 20px;
+  margin-right: 40px;
+}
