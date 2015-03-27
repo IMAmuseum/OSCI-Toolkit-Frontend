@@ -3,7 +3,8 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
 @import "bootstrap/bootstrap";
 @import "navigation";
 @import "progress";
-@import "citation";
+@import "header";
+@import "figures";
 @import "notes";
 
 .browsehappy {
@@ -39,29 +40,6 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
 	line-height: 20px;
 	padding-top: 15px;
 	padding-bottom: 15px;
-}
-
-.container-header {
-	width:100%;
-	height:60vh;
-	max-width:100%;
-	background-color: #909090;
-	background-position:center;
-	background-size:cover;
-}
-
-.header-title {
-	position: absolute;
-	top: 40%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	color: white;
-	text-align: center;
-	text-shadow: 0 1px 0 black;
-	h1 {
-		text-transform: uppercase;
-		margin: 0;
-	}
 }
 
 #section-view {

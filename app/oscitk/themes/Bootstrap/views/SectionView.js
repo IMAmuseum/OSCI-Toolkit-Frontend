@@ -42,6 +42,11 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         this.listenTo(Backbone, 'sectionLoaded', function(sectionModel) {
             this.makeIds(sectionModel);
         });
+
+        this.listenTo(Backbone, "figuresAvailable", function(figures) {
+            this.figures = figures;
+            this.setFigureStyles();
+        });
     },
 
     render: function() {
@@ -113,6 +118,45 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             }
         });
         $('#paragraph-'+paragraph_number).popover('destroy');
+    },
+
+    setFigureStyles: function() {
+        _.each(this.figures, function(figure) {
+            var position = $(figure).data('position');
+            switch(position) {
+                // plate
+                case 'p':
+                case 'plate':
+                    var imgClass = 'plate';
+                    break;
+                // full page plate
+                case 'f':
+                    var imgClass = 'full-plate';
+                    break;
+                // top
+                case 't':
+                    var imgClass = 'top';
+                    break;
+                // bottom
+                case 'b':
+                    var imgClass = 'bottom';
+                    break;
+                // left
+                case 'l':
+                    var imgClass = 'left';
+                    break;
+                // right
+                case 'r':
+                    var imgClass = 'right';
+                    break;
+                //case inline
+                case 'i':
+                    var imgClass = 'inline';
+                    break;
+            }
+            $(figure).addClass(imgClass);
+            $(figure).find("div > object > div > img").addClass(imgClass);
+        }, this);
     }
 
 });

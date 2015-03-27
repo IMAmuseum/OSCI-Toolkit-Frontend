@@ -5,15 +5,19 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 		// tracks the state of the content area drawer
 		this.activeToolbarItemView = undefined;
 
-		this.listenTo(Backbone, "packageLoaded", function(packageModel) {
+		this.listenTo(Backbone, 'packageLoaded', function(packageModel) {
 			//Add the publication title to the Toolbar
 			this.title = packageModel.getTitle();
 		});
 
-		this.listenTo(Backbone, "figuresAvailable", function(figures) {
+		this.listenTo(Backbone, 'figuresAvailable', function(figures) {
 			this.figureSize = figures.size();
 			this.render();
 		});
+
+		// this.listenTo(Backbone, 'accountReady', function() {
+		// 	this.updateAccountItem();
+		// });
 	},
 	render: function() {
 		this.$el.html(this.template({'title': this.title}));
@@ -25,5 +29,12 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 				item.render();
 			}
 		}, this);
-	}
+	},
+
+	// updateAccountItem: function() {
+	// 	if (app.account.get('username') != 'anonymous') {
+	// 		$('.accountView-toolbar-item > a').html(app.account.get('username'));
+	// 	}
+	// }
+
 });
