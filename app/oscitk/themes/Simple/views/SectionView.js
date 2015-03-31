@@ -27,9 +27,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                     uri : navItem.get('uri'),
                     id : navItem.get('id')
                 });
-
                 this.ContentId = navItem.get('id');
-
                 app.models.section.loadContent();
             }
         });
@@ -72,7 +70,14 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
     updateProgress: function() {
         var value = $(window).scrollTop();
-        $('progress').attr('value', value);
+        var offset = 400;
+        if (value >= offset){
+            $('.progress').removeClass('hidden');
+        } else {
+            $('.progress').addClass('hidden');
+        }
+        var sectionValue = value - offset;
+        $('.progress .progress-bar').attr('aria-valuenow', value);
         if(! this.maxHeightSet) {
             var height = $(document).height();
             var w = window,
@@ -80,8 +85,10 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 e = d.documentElement,
                 g = d.getElementsByTagName("body")[0],
                 cy = g.clientHeight;
-            var max = height-cy;
-            $('progress').attr('max', max);
+            var max = (height-cy)-offset;
+            $('.progress .progress-bar').attr('aria-valuemax', max);
+            var percent = Math.floor((sectionValue/max)*100);
+            $('.progress .progress-bar').attr('style', 'height: '+percent+'%');
         }
     },
 

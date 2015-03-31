@@ -38,7 +38,7 @@ this["JST"]["app/oscitk/themes/Simple/templates/app.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<progress value="0" max="0"></progress>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n\n<div id="toolbar" data-spy="affix" data-offset-top="400"></div>\n<div class="container">\n\t<div id="loader">Loading...</div>\n\t<div id="section"></div>\n</div>\n\n<div id="navigation"></div>\n\n';
+__p += '<div class="progress vertical hidden" data-spy="affix" data-offset-top="400">\n\t<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n\n<div id="toolbar" data-spy="affix" data-offset-top="400"></div>\n<div class="container">\n\t<div id="loader">Loading...</div>\n\t<div id="section"></div>\n</div>\n\n<div id="navigation"></div>\n\n';
 
 }
 return __p

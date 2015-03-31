@@ -8047,43 +8047,40 @@ button.close {
 }
 
 /* line 1, ../progress.scss */
-progress[value] {
-  /* Positioning */
+.progress.vertical {
   position: fixed;
-  z-index: 999;
-  left: 0;
-  top: 0;
-  /* Dimensions */
+  top: 70px;
+  right: 40px;
+  width: .25em;
+  height: 90%;
+}
+
+/* line 8, ../progress.scss */
+.progress.vertical.bottom {
+  position: relative;
+}
+
+/* line 11, ../progress.scss */
+.progress.vertical.bottom .progressbar-front-text {
+  position: absolute;
+  bottom: 0;
+}
+
+/* line 15, ../progress.scss */
+.progress.vertical .progress-bar {
   width: 100%;
-  height: .25em;
-  /* Reset the apperance */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  /* Get rid of the default border in Firefox/Opera. */
-  border: none;
-  /* For Firefox/IE10+ */
-  background-color: transparent;
-  /* For IE10+, color of the progress bar */
-  color: red;
-}
-
-/* line 27, ../progress.scss */
-progress[value]::-webkit-progress-bar {
-  background-color: transparent;
-}
-
-/* line 31, ../progress.scss */
-progress[value]::-webkit-progress-value {
-  background-color: red;
-}
-
-/* line 35, ../progress.scss */
-progress[value]::-moz-progress-bar {
-  background-color: red;
+  height: 0;
+  -webkit-transition: height 0.6s ease;
+  -o-transition: height 0.6s ease;
+  transition: height 0.6s ease;
 }
 
 /* line 1, ../header.scss */
+header {
+  z-index: 1000;
+}
+
+/* line 4, ../header.scss */
 .container-header {
   width: 100%;
   height: 400px;
@@ -8093,7 +8090,7 @@ progress[value]::-moz-progress-bar {
   background-size: cover;
 }
 
-/* line 10, ../header.scss */
+/* line 13, ../header.scss */
 .header-title {
   position: absolute;
   top: 200px;
@@ -8103,20 +8100,19 @@ progress[value]::-moz-progress-bar {
   text-align: center;
   text-shadow: 0 1px 0 black;
 }
-/* line 18, ../header.scss */
+/* line 21, ../header.scss */
 .header-title h1 {
-  text-transform: uppercase;
   margin: 0;
 }
 
-/* line 24, ../header.scss */
+/* line 26, ../header.scss */
 #toolbar.affix {
   position: fixed;
   top: 0;
   width: 100%;
 }
 
-/* line 30, ../header.scss */
+/* line 32, ../header.scss */
 #toolbar {
   z-index: 998;
 }
