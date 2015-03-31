@@ -1,0 +1,9 @@
+{
+	"account": true,
+	"search": false,
+	"notes": true,
+	"citations": true,
+	"glossary": false,
+	"multicolumn": false,
+	"layeredImage": false,
+}

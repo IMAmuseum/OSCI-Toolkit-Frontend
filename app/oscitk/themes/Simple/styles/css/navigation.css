@@ -1,0 +1,21 @@
+/* line 2, ../navigation.scss */
+#navigation .side {
+  position: fixed;
+  text-align: center;
+  top: 50%;
+  height: 28px;
+  width: 40px;
+}
+/* line 9, ../navigation.scss */
+#navigation .prev-page {
+  left: 0;
+}
+/* line 13, ../navigation.scss */
+#navigation .next-page {
+  right: 0;
+}
+
+/* line 18, ../navigation.scss */
+.navbar-default {
+  margin: 0;
+}
