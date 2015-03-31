@@ -55,7 +55,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         });
         var noteText = note  ? note.get('note') : '';
         noteText = noteText === null  ? '' : noteText;
-        var notePopoverForm = "<textarea data-paragraph_number='"+ data +"' data-id='"+ note.cid +"'>"+ noteText +"</textarea>'"+
+        var notePopoverForm = "<textarea data-paragraph_number='"+ data +"' data-id='"+ note.cid +"'>"+ noteText +"</textarea>"+
                               "<button id='note-submit' type='button' class='btn btn-primary btn-block'>Add Note</button>";
         $('#paragraph-'+data).popover({html:true, trigger:'manual', placement:'top', viewport: '#section-view', title: 'note', content: notePopoverForm});
         $('#paragraph-'+data).popover('toggle');
