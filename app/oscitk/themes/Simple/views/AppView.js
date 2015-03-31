@@ -23,6 +23,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			notesView: new OsciTk.views.Notes(),
 			citationsView: new OsciTk.views.Citation(),
 			accountView: new OsciTk.views.Account(),
+			navbarView: new OsciTk.views.Navbar(),
 		};
 
 		// Add the header view
@@ -30,6 +31,9 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 		// Add the toolbar view
 		this.addView(app.views.toolbarView, '#toolbar');
+
+		// Add the navbar view
+		this.addView(app.views.navbarView, '#navbar');
 
 		// Add Section
 		this.addView(app.views.sectionView, '#section');
