@@ -1,0 +1,11 @@
+/* line 1, ../section.scss */
+#section {
+  padding-right: 40px;
+  padding-left: 40px;
+}
+
+/* line 6, ../section.scss */
+#section-view {
+  padding-left: 40px;
+  padding-right: 40px;
+}

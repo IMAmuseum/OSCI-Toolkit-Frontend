@@ -1,0 +1,11 @@
+/* line 1, ../navbar.scss */
+#navbar.affix {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+/* line 7, ../navbar.scss */
+#navbar {
+  z-index: 998;
+}

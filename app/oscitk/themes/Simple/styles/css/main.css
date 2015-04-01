@@ -8024,6 +8024,18 @@ button.close {
     display: none !important;
   }
 }
+/* line 1, ../section.scss */
+#section {
+  padding-right: 40px;
+  padding-left: 40px;
+}
+
+/* line 6, ../section.scss */
+#section-view {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
 /* line 2, ../navigation.scss */
 #navigation .side {
   position: fixed;
@@ -8105,28 +8117,39 @@ header {
   margin: 0;
 }
 
-/* line 26, ../header.scss */
+/* line 1, ../toolbar.scss */
+#toolbar.affix {
+  top: 50px;
+}
+/* line 3, ../toolbar.scss */
+#toolbar.affix + .container {
+  padding-top: 50px;
+}
+
+/* line 8, ../toolbar.scss */
+#toolbar {
+  float: left;
+  margin-top: 20px;
+  z-index: 998;
+}
+
+/* line 1, ../navbar.scss */
 #navbar.affix {
   position: fixed;
   top: 0;
   width: 100%;
 }
 
-/* line 32, ../header.scss */
+/* line 7, ../navbar.scss */
 #navbar {
   z-index: 998;
 }
 
-/* line 36, ../header.scss */
-#toolbar.affix {
-  top: 50px;
-}
-
-/* line 40, ../header.scss */
-#toolbar {
-  float: left;
-  margin-top: 20px;
-  z-index: 998;
+/* line 1, ../font-size.scss */
+.font-size-view {
+  line-height: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 /* line 1, ../figures.scss */
@@ -8147,29 +8170,7 @@ header {
   margin-right: 40px;
 }
 
-/* line 1, ../notes.scss */
-.paragraph-controls {
-  position: relative;
-  right: 32px;
-  top: 26px;
-  z-index: 2;
-}
-
-/* line 10, ../main.scss */
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
-
-/* line 17, ../main.scss */
-#section {
-  padding-right: 40px;
-  padding-left: 40px;
-}
-
-/* line 22, ../main.scss */
+/* line 1, ../overlay.scss */
 .overlay {
   position: fixed;
   top: 0;
@@ -8180,7 +8181,7 @@ header {
   background-color: rgba(0, 0, 0, 0.9);
 }
 
-/* line 32, ../main.scss */
+/* line 11, ../overlay.scss */
 #dismiss {
   position: fixed;
   top: 20;
@@ -8188,15 +8189,18 @@ header {
   z-index: 11;
 }
 
-/* line 39, ../main.scss */
-.font-size-view {
-  line-height: 20px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+/* line 1, ../notes.scss */
+.paragraph-controls {
+  position: relative;
+  right: 32px;
+  top: 26px;
+  z-index: 2;
 }
 
-/* line 45, ../main.scss */
-#section-view {
-  padding-left: 40px;
-  padding-right: 40px;
+/* line 15, ../main.scss */
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
 }
