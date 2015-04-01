@@ -23,12 +23,22 @@ header {
 	}
 }
 
-#toolbar.affix {
+#navbar.affix {
     position: fixed;
     top: 0;
     width: 100%
 }
 
+#navbar {
+	z-index: 998;
+}
+
+#toolbar.affix {
+    top: 50px;
+}
+
 #toolbar {
+	float: left;
+	margin-top: 20px;
 	z-index: 998;
 }

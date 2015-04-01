@@ -38,7 +38,7 @@ this["JST"]["app/oscitk/themes/Simple/templates/app.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="progress vertical hidden" data-spy="affix" data-offset-top="400">\n\t<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n<div id="navbar"></div>\n<div id="toolbar" data-spy="affix" data-offset-top="400"></div>\n<div class="container">\n\t<div id="loader">Loading...</div>\n\t<div id="section"></div>\n</div>\n\n<div id="navigation"></div>\n\n';
+__p += '<div class="progress vertical hidden" data-spy="affix" data-offset-top="400">\n\t<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n<div id="navbar" data-spy="affix" data-offset-top="400"></div>\n<div id="toolbar" data-spy="affix" data-offset-top="400"></div>\n<div class="container">\n\t<div class="row">\n\t\t<div class="col-md-10 col-md-offset-1">\n\t\t\t<div id="loader">Loading...</div>\n\t\t\t<div id="section"></div>\n\t\t</div>\n\t</div>\n</div>\n\n<div id="navigation"></div>\n\n';
 
 }
 return __p
@@ -193,7 +193,7 @@ this["JST"]["app/oscitk/themes/Simple/templates/navbar.tpl.html"] = function(obj
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<nav class="navbar navbar-default">\n\t<div class="container-fluid">\n\t   <div class="navbar-header">\n      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">\n        <span class="sr-only">Toggle navigation</span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n      </button>\n      <a id="toolbar-title" class="navbar-brand" href="#">' +
+__p += '<nav class="navbar navbar-default">\n\t<div class="container">\n\t   <div class="navbar-header">\n      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">\n        <span class="sr-only">Toggle navigation</span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n      </button>\n      <a id="toolbar-title" class="navbar-brand" href="#">' +
 ((__t = ( title )) == null ? '' : __t) +
 '</a>\n    </div>\n    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">\n\t\t\t<ul id="toolbar-area" class="nav navbar-nav navbar-right"></ul>\n\t\t</div>\n\t</div>\n</nav>';
 
@@ -391,9 +391,7 @@ this["JST"]["app/oscitk/themes/Simple/templates/toolbar.tpl.html"] = function(ob
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<nav class="navbar navbar-default">\n\t<div class="container-fluid">\n\t   <div class="navbar-header">\n      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">\n        <span class="sr-only">Toggle navigation</span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n      </button>\n      <a id="toolbar-title" class="navbar-brand" href="#">' +
-((__t = ( title )) == null ? '' : __t) +
-'</a>\n    </div>\n    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">\n\t\t\t<ul id="toolbar-area" class="nav navbar-nav navbar-right"></ul>\n\t\t</div>\n\t</div>\n</nav>';
+__p += '<div>\n\t<ul id="toolbar-area" class=""></ul>\n</div>';
 
 }
 return __p
