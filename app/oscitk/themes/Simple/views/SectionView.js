@@ -73,8 +73,10 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         var offset = 400;
         if (value >= offset){
             $('.progress').removeClass('hidden');
+            $('#navigation').removeClass('hidden');
         } else {
             $('.progress').addClass('hidden');
+            $('#navigation').addClass('hidden');
         }
         var sectionValue = value - offset;
         $('.progress .progress-bar').attr('aria-valuenow', value);

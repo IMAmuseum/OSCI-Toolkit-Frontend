@@ -38,7 +38,7 @@ this["JST"]["app/oscitk/themes/Simple/templates/app.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="progress vertical hidden" data-spy="affix" data-offset-top="400">\n\t<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n<div id="navbar" data-spy="affix" data-offset-top="400"></div>\n<div id="toolbar" data-spy="affix" data-offset-top="400"></div>\n<div class="container">\n\t<div class="row">\n\t\t<div class="col-md-10 col-md-offset-1">\n\t\t\t<div id="loader">Loading...</div>\n\t\t\t<div id="section"></div>\n\t\t</div>\n\t</div>\n</div>\n\n<div id="navigation"></div>\n\n';
+__p += '<div class="progress vertical hidden" data-spy="affix" data-offset-top="400">\n\t<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n<div id="navbar" data-spy="affix" data-offset-top="400"></div>\n<div id="toolbar" data-spy="affix" data-offset-top="400"></div>\n<div class="container">\n\t<div class="row">\n\t\t<div class="col-md-8 col-md-offset-2 section-col">\n\t\t\t<div id="loader">Loading...</div>\n\t\t\t<div id="section"></div>\n\t\t</div>\n\t</div>\n</div>\n\n<div id="navigation" class="hidden"></div>';
 
 }
 return __p
@@ -90,47 +90,6 @@ __p += '"<em>' +
 '" />\n\t</div>\n\t<div class="reference_text">\n\t\t<span>Reference Text</span>\n\t\t<textarea disabled="disabled">' +
 ((__t = ( referenceText )) == null ? '' : __t) +
 '</textarea>\n\t</div>\n</div>';
-
-}
-return __p
-};
-
-this["JST"]["app/oscitk/themes/Simple/templates/figure-reference.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<a href="#' +
-((__t = ( id )) == null ? '' : __t) +
-'" class="figure_reference">' +
-((__t = ( title )) == null ? '' : __t) +
-'</a>';
-
-}
-return __p
-};
-
-this["JST"]["app/oscitk/themes/Simple/templates/figures.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
-with (obj) {
-__p += '<div class=\'overlay figure-browser\'>\n\t<div id="dismiss">\n\t\t<button class="btn btn-link">\n\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</button>\n\t</div>\n\t<div class="container">\n\t\t<div class="row">\n\t\t\t<div class="col-md-3">\n\t\t\t<h3>Figures</h3>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class="row">\n\t\t\t';
- _.each(figures, function(figure) { ;
-__p += '\n\t\t\t<div class="col-md-3">\n\t\t\t\t<figure class=\'thumbnail\' data-figure-id="' +
-((__t = ( figure.id )) == null ? '' : __t) +
-'">\n\t\t\t\t\t';
- if (figure.thumbnail_url != undefined) { ;
-__p += '\n\t\t\t\t\t\t<img class=\'figure-thumbnail\' src=\'' +
-((__t = ( figure.thumbnail_url )) == null ? '' : __t) +
-'\'/>\n\t\t\t\t\t';
- } else { ;
-__p += '\n\t\t\t\t\t\t<div class=\'figure-thumbnail\'>&nbsp;</div>\n\t\t\t\t\t';
- } ;
-__p += '\n\t\t\t\t\t<figcaption>' +
-((__t = ( figure.title )) == null ? '' : __t) +
-'</figcaption>\n\t\t\t\t</figure>\n\t\t\t</div>\n\t\t\t';
- }); ;
-__p += '\n\t\t</div>\n\t</div>\n</div>\n';
 
 }
 return __p

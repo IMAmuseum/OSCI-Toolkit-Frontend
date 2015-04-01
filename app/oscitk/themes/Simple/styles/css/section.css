@@ -1,11 +1,22 @@
 /* line 1, ../section.scss */
-#section {
-  padding-right: 40px;
+#section-view {
   padding-left: 40px;
 }
 
-/* line 6, ../section.scss */
-#section-view {
+/* line 5, ../section.scss */
+#section {
   padding-left: 40px;
-  padding-right: 40px;
+}
+
+@media (max-width: 992px) {
+  /* line 10, ../section.scss */
+  #section {
+    padding-left: 0;
+  }
+}
+@media (min-width: 992px) {
+  /* line 16, ../section.scss */
+  .section-col {
+    float: none;
+  }
 }

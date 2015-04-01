@@ -1,9 +1,19 @@
-#section {
-	padding-right: 40px;
+#section-view {
 	padding-left: 40px;
 }
 
-#section-view {
+#section {
 	padding-left: 40px;
-	padding-right: 40px;
+}
+
+@media (max-width: 992px) {
+	#section {
+		padding-left: 0;
+	}
+}
+
+@media (min-width: 992px) {
+	.section-col {
+		float: none;
+	}
 }
