@@ -10,7 +10,16 @@
       <a id="toolbar-title" class="navbar-brand" href="#"><%= title %></a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul id="toolbar-area" class="nav navbar-nav navbar-right"></ul>
+			<ul id="toolbar-area" class="nav navbar-nav navbar-right">
+         <% i = 0 %>
+         <% _.each(sections, function(section) { %>
+          <li class="navbar-item<% if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } %>">
+            <a data-section-id="<%= section.id %>" href="#">
+              <%= ++i %>
+            </a>
+          </li>
+         <% }); %>
+      </ul>
 		</div>
 	</div>
 </nav>

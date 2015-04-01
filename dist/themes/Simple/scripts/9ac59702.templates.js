@@ -191,11 +191,24 @@ return __p
 
 this["JST"]["app/oscitk/themes/Simple/templates/navbar.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<nav class="navbar navbar-default">\n\t<div class="container">\n\t   <div class="navbar-header">\n      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">\n        <span class="sr-only">Toggle navigation</span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n      </button>\n      <a id="toolbar-title" class="navbar-brand" href="#">' +
 ((__t = ( title )) == null ? '' : __t) +
-'</a>\n    </div>\n    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">\n\t\t\t<ul id="toolbar-area" class="nav navbar-nav navbar-right"></ul>\n\t\t</div>\n\t</div>\n</nav>';
+'</a>\n    </div>\n    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">\n\t\t\t<ul id="toolbar-area" class="nav navbar-nav navbar-right">\n         ';
+ i = 0 ;
+__p += '\n         ';
+ _.each(sections, function(section) { ;
+__p += '\n          <li class="navbar-item';
+ if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;
+__p += '">\n            <a data-section-id="' +
+((__t = ( section.id )) == null ? '' : __t) +
+'" href="#">\n              ' +
+((__t = ( ++i )) == null ? '' : __t) +
+'\n            </a>\n          </li>\n         ';
+ }); ;
+__p += '\n      </ul>\n\t\t</div>\n\t</div>\n</nav>';
 
 }
 return __p

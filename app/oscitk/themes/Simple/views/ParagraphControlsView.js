@@ -6,6 +6,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         });
 
         this.listenTo(Backbone, 'notesLoaded', function(params) {
+            this.notesLoaded = true;
             this.render();
         });
 
@@ -14,7 +15,9 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         });
 
         this.listenTo(Backbone, 'windowResized', function() {
-            this.render();
+            if (this.notesLoaded) {
+                this.render();
+            }
         });
 
     },
