@@ -146,34 +146,39 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         _.each(this.figures, function(figure) {
             var position = $(figure).data('position');
             switch(position) {
-                // plate
+                // full page
                 case 'p':
+                    var imgClass = 'fullpage';
+                    break;
+                // plate
                 case 'plate':
                     var imgClass = 'plate';
                     break;
                 // full page plate
-                case 'f':
-                    var imgClass = 'full-plate';
+                case 'platefull':
+                    var imgClass = 'platefull';
                     break;
-                // left
+                // top left
                 case 'tl':
-                    var imgClass = 'left';
+                    var imgClass = 'top left';
                     break;
-                // right
-                case 'r':
-                    var imgClass = 'right';
+                // bottom left
+                case 'bl':
+                    var imgClass = 'bottom left';
                     break;
-                //case inline
+                // top right
+                case 'tr':
+                    var imgClass = 'top right';
+                    break;
+                // bottom right
+                case 'br':
+                    var imgClass = 'bottom right';
+                    break;
+                // inline, top, bottom
                 case 'i':
-                    var imgClass = 'inline';
-                    break;
-                // top
                 case 't':
-                    var imgClass = 'top';
-                    break;
-                // bottom
                 case 'b':
-                    var imgClass = 'bottom';
+                    var imgClass = 'center';
                     break;
             }
             $(figure).addClass(imgClass);
