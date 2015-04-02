@@ -12,7 +12,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			titleView: new OsciTk.views.Title(),
 			headerView: new OsciTk.views.Header(),
 			fontSizeView: new OsciTk.views.FontSize(),
-			fontStyleView: new OsciTk.views.FontStyle(),
+			printView: new OsciTk.views.Print(),
 			tocView: new OsciTk.views.Toc(),
 			toolbarView: new OsciTk.views.Toolbar(),
 			sectionView: new OsciTk.views.Section(),

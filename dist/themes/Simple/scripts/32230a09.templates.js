@@ -38,7 +38,7 @@ this["JST"]["app/oscitk/themes/Simple/templates/app.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="progress vertical hidden" data-spy="affix" data-offset-top="400">\n\t<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n<div id="navbar" data-spy="affix" data-offset-top="400"></div>\n<div id="toolbar" data-spy="affix" data-offset-top="400"></div>\n<div class="container">\n\t<div class="row">\n\t\t<div class="col-md-8 col-md-offset-2 section-col">\n\t\t\t<div id="loader">Loading...</div>\n\t\t\t<div id="section"></div>\n\t\t</div>\n\t</div>\n</div>\n\n<div id="navigation" class="hidden"></div>';
+__p += '<div class="progress vertical hidden hidden-print" data-spy="affix" data-offset-top="400">\n\t<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n<div id="navbar" class="hidden-print" data-spy="affix" data-offset-top="400"></div>\n<div id="toolbar" class="hidden-print" data-spy="affix" data-offset-top="400"></div>\n<div class="container">\n\t<div class="row">\n\t\t<div class="col-md-8 col-md-offset-2 section-col">\n\t\t\t<div id="loader">Loading...</div>\n\t\t\t<div id="section"></div>\n\t\t</div>\n\t</div>\n</div>\n\n<div id="navigation" class="hidden no-print"></div>';
 
 }
 return __p
@@ -100,16 +100,6 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<a href="#font-larger" class="larger font-button">A +</a>\n<a href="#font-smaller" class="smaller font-button">A -</a>\n';
-
-}
-return __p
-};
-
-this["JST"]["app/oscitk/themes/Simple/templates/font-style.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<div class="theme-control">\n\t<h3>Theme</h3>\n\t<a href="#normal" class="theme-button">Normal</a>\n\t<a href="#sepia" class="theme-button">Sepia</a>\n\t<a href="#night" class="theme-button">Night</a>\n</div>';
 
 }
 return __p
@@ -274,6 +264,16 @@ __p +=
 return __p
 };
 
+this["JST"]["app/oscitk/themes/Simple/templates/print.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<a id="print">Print</a>\n';
+
+}
+return __p
+};
+
 this["JST"]["app/oscitk/themes/Simple/templates/section.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
@@ -363,7 +363,7 @@ this["JST"]["app/oscitk/themes/Simple/templates/toolbar.tpl.html"] = function(ob
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div>\n\t<ul id="toolbar-area" class=""></ul>\n</div>';
+__p += '<div class="nav nav-stacked">\n\t<ul id="toolbar-area" class=""></ul>\n</div>';
 
 }
 return __p
