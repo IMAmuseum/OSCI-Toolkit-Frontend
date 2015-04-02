@@ -3,17 +3,16 @@ OsciTk.views.Print = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('print'),
 	initialize: function() {
 		this.render();
+		this.listenTo(Backbone, "toolbarInlineClicked", function() {
+			this.triggerPrint();
+		});
 	},
 	render: function() {
 		this.$el.html(this.template());
 		return this;
 	},
-	events: {
-		"click #print": "triggerPrint"
-	},
 
-	triggerPrint: function(e) {
-		e.preventDefault();
+	triggerPrint: function() {
 		window.print();
 	}
 });

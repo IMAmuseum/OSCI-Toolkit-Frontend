@@ -268,7 +268,7 @@ this["JST"]["app/oscitk/themes/Simple/templates/print.tpl.html"] = function(obj)
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<a id="print">Print</a>\n';
+__p += '<a href="#print" id="print">Print</a>\n';
 
 }
 return __p
