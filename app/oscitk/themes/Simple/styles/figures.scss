@@ -8,7 +8,7 @@
 
 .right {
 	float: right;
-   	height: 30vw;
+   	max-height: 60vh;
    	margin: 10px 0 45px 20px;
    	figcaption {
    		z-index: -2;
@@ -16,7 +16,7 @@
    		position: relative;
    		right: -22px;
    		top: -40px;
-   		background: $gray-lighter;
+   		background: #f1f1f1;
    		margin-top: 47px;
    		margin-right: 18px;
    		margin-left: -6px;
@@ -28,7 +28,7 @@
 
 .left {
 	float: left;
-	height: 30vw;
+	max-height: 60vh;
 	margin: 10px 20px 45px 0;
 	figcaption {
    		z-index: -2;
@@ -36,7 +36,7 @@
    		position: relative;
    		left: -22px;
    		top: -40px;
-   		background: $gray-lighter;
+   		background: #f1f1f1;
    		margin-top: 47px;
    		margin-left: 18px;
    		margin-right: -6px;

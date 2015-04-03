@@ -8205,7 +8205,7 @@ header {
 /* line 9, ../figures.scss */
 .right {
   float: right;
-  height: 30vw;
+  max-height: 60vh;
   margin: 10px 0 45px 20px;
 }
 /* line 13, ../figures.scss */
@@ -8228,7 +8228,7 @@ header {
 /* line 29, ../figures.scss */
 .left {
   float: left;
-  height: 30vw;
+  max-height: 60vh;
   margin: 10px 20px 45px 0;
 }
 /* line 33, ../figures.scss */
