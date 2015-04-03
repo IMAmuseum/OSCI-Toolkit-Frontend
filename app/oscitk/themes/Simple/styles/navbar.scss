@@ -6,4 +6,19 @@
 
 #navbar {
 	z-index: 998;
+	.nav {
+		li {
+			a {
+				font-size: 24px;
+				text-align: center;
+			}
+			width: 55px;
+		}
+
+		li.active {
+			a {
+				color: #333;
+			}
+		}
+	}
 }

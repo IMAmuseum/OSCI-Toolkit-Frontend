@@ -27,3 +27,8 @@ header {
 .header-title h1 {
   margin: 0;
 }
+/* line 24, ../header.scss */
+.header-title p {
+  font-style: italic;
+  font-weight: 300;
+}

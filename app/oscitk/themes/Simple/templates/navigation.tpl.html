@@ -1,37 +1,17 @@
-<div class='header text-center'><%= chapter %></div>
-
-<% if (previousItem !== null) { %>
-<div class='prev-page side'>
-	<div class='indicator'>
-		<a href="#section/<%= previousItem.id %>" title="<%= previousItem.get('title') %>">
-			<span class="glyphicon glyphicon-chevron-left"></span>
-		</a>
-	</div>
-</div>
-<% } %>
-
-<% if (nextItem !== null) { %>
-<div class='next-page side'>
-	<div class='indicator'>
-		<a href="#section/<%= nextItem.id %>" title="<%= nextItem.get('title') %>">
-			<span class="glyphicon glyphicon-chevron-right"></span>
-		</a>
-	</div>
-</div>
-<% } %>
-
 <% if (previousItem !== null) { %>
 <div class='prev-page corner'>
 	<a href="#section/<%= previousItem.id %>" title="<%= previousItem.get('title') %>">
-		<div class='label'>Previous Section</div>
+		Previous
 	</a>
 </div>
 <% } %>
 
+<div class='header text-center'><%= chapter %></div>
+
 <% if (nextItem !== null) { %>
 <div class='next-page corner'>
 	<a href="#section/<%= nextItem.id %>" title="<%= nextItem.get('title') %>">
-		<div class='label'>Next Section</div>
+		Next
 	</a>
 </div>
 <% } %>

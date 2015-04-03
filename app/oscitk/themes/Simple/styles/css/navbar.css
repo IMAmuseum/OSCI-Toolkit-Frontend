@@ -9,3 +9,16 @@
 #navbar {
   z-index: 998;
 }
+/* line 10, ../navbar.scss */
+#navbar .nav li {
+  width: 55px;
+}
+/* line 11, ../navbar.scss */
+#navbar .nav li a {
+  font-size: 24px;
+  text-align: center;
+}
+/* line 19, ../navbar.scss */
+#navbar .nav li.active a {
+  color: #333;
+}

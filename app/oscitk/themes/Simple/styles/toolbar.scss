@@ -1,7 +1,7 @@
 #toolbar.affix {
     top: 50px;
     + .container {
-	    padding-top:50px
+	    padding-top: 50px
 	}
 }
 
@@ -9,5 +9,14 @@
 	float: left;
 	margin-top: 20px;
 	z-index: 998;
+}
+
+#toolbar-title {
+	color: #333;
+	font-size: 24px;
+}
+
+#toolbar-area {
+	list-style-type: none;
 }
 

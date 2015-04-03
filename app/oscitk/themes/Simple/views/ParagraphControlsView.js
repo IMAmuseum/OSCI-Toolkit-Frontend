@@ -40,7 +40,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             var hasNotes = note.get('note') ? 'btn-warning' : '';
 
             $(paragraph).before(
-                '<div class="paragraph-controls" data-osci_content_id="osci-content-'+i+'" data-paragraph_identifier="'+i+'" >'+
+                '<div class="paragraph-controls hidden-print" data-osci_content_id="osci-content-'+i+'" data-paragraph_identifier="'+i+'" >'+
                 '<button class="btn btn-default '+ hasNotes +' btn-xs paragraph-button" type="button" id="paragraph-'+i+'" data-paragraph_number="'+i+'">'+
                 '<span class="paragraph-identifier" paragraph-identifier="'+i+'">'+i+'</span>'+
                 '</button>'+
@@ -60,7 +60,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         noteText = noteText === null  ? '' : noteText;
         var notePopoverForm = "<textarea data-paragraph_number='"+ data +"' data-id='"+ note.cid +"'>"+ noteText +"</textarea>"+
                               "<button id='note-submit' type='button' class='btn btn-primary btn-block'>Add Note</button>";
-        $('#paragraph-'+data).popover({html:true, trigger:'manual', placement:'top', title: 'note', content: notePopoverForm});
+        $('#paragraph-'+data).popover({html:true, trigger:'manual', placement:'top', content: notePopoverForm});
         $('#paragraph-'+data).popover('toggle');
 
     },

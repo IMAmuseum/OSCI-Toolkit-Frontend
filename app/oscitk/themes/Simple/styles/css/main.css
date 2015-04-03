@@ -1406,8 +1406,8 @@ html {
 
 /* line 27, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_scaffolding.scss */
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
   line-height: 1.42857;
   color: #333333;
   background-color: #fff;
@@ -1486,10 +1486,10 @@ img {
 
 /* line 113, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_scaffolding.scss */
 hr {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 22px;
+  margin-bottom: 22px;
   border: 0;
-  border-top: 1px solid #eeeeee;
+  border-top: 1px solid #f1f1f1;
 }
 
 /* line 125, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_scaffolding.scss */
@@ -1546,8 +1546,8 @@ h6 .small,
 h1, .h1,
 h2, .h2,
 h3, .h3 {
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin-top: 22px;
+  margin-bottom: 11px;
 }
 /* line 30, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
 h1 small,
@@ -1566,8 +1566,8 @@ h3 .small, .h3 small,
 h4, .h4,
 h5, .h5,
 h6, .h6 {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 11px;
+  margin-bottom: 11px;
 }
 /* line 41, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
 h4 small,
@@ -1584,57 +1584,57 @@ h6 .small, .h6 small,
 
 /* line 47, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
 h1, .h1 {
-  font-size: 36px;
+  font-size: 41px;
 }
 
 /* line 48, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
 h2, .h2 {
-  font-size: 30px;
+  font-size: 34px;
 }
 
 /* line 49, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
 h3, .h3 {
-  font-size: 24px;
+  font-size: 28px;
 }
 
 /* line 50, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
 h4, .h4 {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 /* line 51, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
 h5, .h5 {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 /* line 52, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
 h6, .h6 {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 /* line 58, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
 p {
-  margin: 0 0 10px;
+  margin: 0 0 11px;
 }
 
 /* line 62, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
 .lead {
-  margin-bottom: 20px;
-  font-size: 16px;
+  margin-bottom: 22px;
+  font-size: 18px;
   font-weight: 300;
   line-height: 1.4;
 }
 @media (min-width: 768px) {
   /* line 62, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
   .lead {
-    font-size: 21px;
+    font-size: 24px;
   }
 }
 
 /* line 78, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
 small,
 .small {
-  font-size: 85%;
+  font-size: 87%;
 }
 
 /* line 84, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
@@ -1801,16 +1801,16 @@ a.bg-danger:hover {
 
 /* line 143, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
 .page-header {
-  padding-bottom: 9px;
-  margin: 40px 0 20px;
-  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 10px;
+  margin: 44px 0 22px;
+  border-bottom: 1px solid #f1f1f1;
 }
 
 /* line 154, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
 ul,
 ol {
   margin-top: 0;
-  margin-bottom: 10px;
+  margin-bottom: 11px;
 }
 /* line 158, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
 ul ul,
@@ -1840,7 +1840,7 @@ ol ol {
 /* line 185, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
 dl {
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 /* line 189, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
@@ -1900,10 +1900,10 @@ abbr[data-original-title] {
 
 /* line 241, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
 blockquote {
-  padding: 10px 20px;
-  margin: 0 0 20px;
-  font-size: 17.5px;
-  border-left: 5px solid #eeeeee;
+  padding: 11px 22px;
+  margin: 0 0 22px;
+  font-size: 20px;
+  border-left: 5px solid #f1f1f1;
 }
 /* line 250, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
 blockquote p:last-child,
@@ -1932,7 +1932,7 @@ blockquote .small:before {
 blockquote.pull-right {
   padding-right: 15px;
   padding-left: 0;
-  border-right: 5px solid #eeeeee;
+  border-right: 5px solid #f1f1f1;
   border-left: 0;
   text-align: right;
 }
@@ -1963,7 +1963,7 @@ blockquote:after {
 
 /* line 300, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_type.scss */
 address {
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   font-style: normal;
   line-height: 1.42857;
 }
@@ -2004,9 +2004,9 @@ kbd kbd {
 /* line 40, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_code.scss */
 pre {
   display: block;
-  padding: 9.5px;
-  margin: 0 0 10px;
-  font-size: 13px;
+  padding: 10.5px;
+  margin: 0 0 11px;
+  font-size: 15px;
   line-height: 1.42857;
   word-break: break-all;
   word-wrap: break-word;
@@ -3163,7 +3163,7 @@ th {
 .table {
   width: 100%;
   max-width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 /* line 25, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_tables.scss */
 .table > thead > tr > th,
@@ -3360,7 +3360,7 @@ table th[class*="col-"] {
   /* line 171, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_tables.scss */
   .table-responsive {
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 16.5px;
     overflow-y: hidden;
     overflow-x: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
@@ -3424,8 +3424,8 @@ legend {
   display: block;
   width: 100%;
   padding: 0;
-  margin-bottom: 20px;
-  font-size: 21px;
+  margin-bottom: 22px;
+  font-size: 24px;
   line-height: inherit;
   color: #333333;
   border: 0;
@@ -3485,7 +3485,7 @@ input[type="checkbox"]:focus {
 output {
   display: block;
   padding-top: 7px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.42857;
   color: #555555;
 }
@@ -3494,9 +3494,9 @@ output {
 .form-control {
   display: block;
   width: 100%;
-  height: 34px;
+  height: 36px;
   padding: 6px 12px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.42857;
   color: #555555;
   background-color: #fff;
@@ -3532,7 +3532,7 @@ output {
 /* line 141, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_forms.scss */
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
   cursor: not-allowed;
-  background-color: #eeeeee;
+  background-color: #f1f1f1;
   opacity: 1;
 }
 
@@ -3551,7 +3551,7 @@ input[type="date"],
 input[type="time"],
 input[type="datetime-local"],
 input[type="month"] {
-  line-height: 34px;
+  line-height: 36px;
   line-height: 1.42857 \0;
 }
 /* line 186, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_forms.scss */
@@ -3573,7 +3573,7 @@ input[type="month"].input-sm,
 .input-group-sm > input[type="month"].form-control,
 .input-group-sm > input[type="month"].input-group-addon,
 .input-group-sm > .input-group-btn > input[type="month"].btn {
-  line-height: 30px;
+  line-height: 33px;
 }
 /* line 189, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_forms.scss */
 input[type="date"].input-lg, .form-horizontal .form-group-lg input[type="date"].form-control, .input-group-lg > input[type="date"].form-control,
@@ -3594,7 +3594,7 @@ input[type="month"].input-lg,
 .input-group-lg > input[type="month"].form-control,
 .input-group-lg > input[type="month"].input-group-addon,
 .input-group-lg > .input-group-btn > input[type="month"].btn {
-  line-height: 46px;
+  line-height: 49px;
 }
 
 /* line 200, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_forms.scss */
@@ -3607,7 +3607,7 @@ input[type="month"].input-lg,
 .checkbox {
   position: relative;
   display: block;
-  min-height: 20px;
+  min-height: 22px;
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -3696,9 +3696,9 @@ input[type="checkbox"] {
 .input-sm, .form-horizontal .form-group-sm .form-control, .input-group-sm > .form-control,
 .input-group-sm > .input-group-addon,
 .input-group-sm > .input-group-btn > .btn {
-  height: 30px;
+  height: 33px;
   padding: 5px 10px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.5;
   border-radius: 0px;
 }
@@ -3707,8 +3707,8 @@ input[type="checkbox"] {
 select.input-sm, .form-horizontal .form-group-sm select.form-control, .input-group-sm > select.form-control,
 .input-group-sm > select.input-group-addon,
 .input-group-sm > .input-group-btn > select.btn {
-  height: 30px;
-  line-height: 30px;
+  height: 33px;
+  line-height: 33px;
 }
 
 /* line 80, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_forms.scss */
@@ -3727,9 +3727,9 @@ select[multiple].input-sm,
 .input-lg, .form-horizontal .form-group-lg .form-control, .input-group-lg > .form-control,
 .input-group-lg > .input-group-addon,
 .input-group-lg > .input-group-btn > .btn {
-  height: 46px;
+  height: 49px;
   padding: 10px 16px;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.33;
   border-radius: 0px;
 }
@@ -3738,8 +3738,8 @@ select[multiple].input-sm,
 select.input-lg, .form-horizontal .form-group-lg select.form-control, .input-group-lg > select.form-control,
 .input-group-lg > select.input-group-addon,
 .input-group-lg > .input-group-btn > select.btn {
-  height: 46px;
-  line-height: 46px;
+  height: 49px;
+  line-height: 49px;
 }
 
 /* line 80, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_forms.scss */
@@ -3760,19 +3760,19 @@ select[multiple].input-lg,
 }
 /* line 325, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_forms.scss */
 .has-feedback .form-control {
-  padding-right: 42.5px;
+  padding-right: 45px;
 }
 
 /* line 330, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_forms.scss */
 .form-control-feedback {
   position: absolute;
-  top: 25px;
+  top: 27px;
   right: 0;
   z-index: 2;
   display: block;
-  width: 34px;
-  height: 34px;
-  line-height: 34px;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
   text-align: center;
 }
 
@@ -3780,18 +3780,18 @@ select[multiple].input-lg,
 .input-lg + .form-control-feedback, .form-horizontal .form-group-lg .form-control + .form-control-feedback, .input-group-lg > .form-control + .form-control-feedback,
 .input-group-lg > .input-group-addon + .form-control-feedback,
 .input-group-lg > .input-group-btn > .btn + .form-control-feedback {
-  width: 46px;
-  height: 46px;
-  line-height: 46px;
+  width: 49px;
+  height: 49px;
+  line-height: 49px;
 }
 
 /* line 346, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_forms.scss */
 .input-sm + .form-control-feedback, .form-horizontal .form-group-sm .form-control + .form-control-feedback, .input-group-sm > .form-control + .form-control-feedback,
 .input-group-sm > .input-group-addon + .form-control-feedback,
 .input-group-sm > .input-group-btn > .btn + .form-control-feedback {
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
+  width: 33px;
+  height: 33px;
+  line-height: 33px;
 }
 
 /* line 8, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_forms.scss */
@@ -3978,7 +3978,7 @@ select[multiple].input-lg,
 /* line 485, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_forms.scss */
 .form-horizontal .radio,
 .form-horizontal .checkbox {
-  min-height: 27px;
+  min-height: 29px;
 }
 /* line 491, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_forms.scss */
 .form-horizontal .form-group {
@@ -4032,7 +4032,7 @@ select[multiple].input-lg,
   border: 1px solid transparent;
   white-space: nowrap;
   padding: 6px 12px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.42857;
   border-radius: 0px;
   -webkit-user-select: none;
@@ -4262,7 +4262,7 @@ select[multiple].input-lg,
 /* line 124, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-lg, .btn-group-lg > .btn {
   padding: 10px 16px;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.33;
   border-radius: 0px;
 }
@@ -4270,7 +4270,7 @@ select[multiple].input-lg,
 /* line 128, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-sm, .btn-group-sm > .btn {
   padding: 5px 10px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.5;
   border-radius: 0px;
 }
@@ -4278,7 +4278,7 @@ select[multiple].input-lg,
 /* line 132, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-xs, .btn-group-xs > .btn {
   padding: 1px 5px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.5;
   border-radius: 0px;
 }
@@ -4376,7 +4376,7 @@ tbody.collapse.in {
   padding: 5px 0;
   margin: 2px 0 0;
   list-style: none;
-  font-size: 14px;
+  font-size: 16px;
   text-align: left;
   background-color: #fff;
   border: 1px solid #ccc;
@@ -4394,7 +4394,7 @@ tbody.collapse.in {
 /* line 58, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_dropdowns.scss */
 .dropdown-menu .divider {
   height: 1px;
-  margin: 9px 0;
+  margin: 10px 0;
   overflow: hidden;
   background-color: #e5e5e5;
 }
@@ -4463,7 +4463,7 @@ tbody.collapse.in {
 .dropdown-header {
   display: block;
   padding: 3px 20px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.42857;
   color: #777777;
   white-space: nowrap;
@@ -4805,12 +4805,12 @@ tbody.collapse.in {
 /* line 73, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_input-groups.scss */
 .input-group-addon {
   padding: 6px 12px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: normal;
   line-height: 1;
   color: #555555;
   text-align: center;
-  background-color: #eeeeee;
+  background-color: #f1f1f1;
   border: 1px solid #ccc;
   border-radius: 0px;
 }
@@ -4819,7 +4819,7 @@ tbody.collapse.in {
 .input-group-sm > .input-group-addon,
 .input-group-sm > .input-group-btn > .input-group-addon.btn {
   padding: 5px 10px;
-  font-size: 12px;
+  font-size: 14px;
   border-radius: 0px;
 }
 /* line 90, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_input-groups.scss */
@@ -4827,7 +4827,7 @@ tbody.collapse.in {
 .input-group-lg > .input-group-addon,
 .input-group-lg > .input-group-btn > .input-group-addon.btn {
   padding: 10px 16px;
-  font-size: 18px;
+  font-size: 20px;
   border-radius: 0px;
 }
 /* line 97, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_input-groups.scss */
@@ -4928,7 +4928,7 @@ tbody.collapse.in {
 /* line 23, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
 .nav > li > a:hover, .nav > li > a:focus {
   text-decoration: none;
-  background-color: #eeeeee;
+  background-color: #f1f1f1;
 }
 /* line 31, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
 .nav > li.disabled > a {
@@ -4943,13 +4943,13 @@ tbody.collapse.in {
 }
 /* line 46, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
-  background-color: #eeeeee;
+  background-color: #f1f1f1;
   border-color: #52818b;
 }
 /* line 59, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
 .nav .nav-divider {
   height: 1px;
-  margin: 9px 0;
+  margin: 10px 0;
   overflow: hidden;
   background-color: #e5e5e5;
 }
@@ -4976,7 +4976,7 @@ tbody.collapse.in {
 }
 /* line 89, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
 .nav-tabs > li > a:hover {
-  border-color: #eeeeee #eeeeee #ddd;
+  border-color: #f1f1f1 #f1f1f1 #ddd;
 }
 /* line 96, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
@@ -5098,7 +5098,7 @@ tbody.collapse.in {
 .navbar {
   position: relative;
   min-height: 50px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   border: 1px solid transparent;
 }
 /* line 14, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_clearfix.scss */
@@ -5258,9 +5258,9 @@ tbody.collapse.in {
 /* line 164, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-brand {
   float: left;
-  padding: 15px 15px;
-  font-size: 18px;
-  line-height: 20px;
+  padding: 14px 15px;
+  font-size: 20px;
+  line-height: 22px;
   height: 50px;
 }
 /* line 171, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
@@ -5311,13 +5311,13 @@ tbody.collapse.in {
 
 /* line 229, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-nav {
-  margin: 7.5px -15px;
+  margin: 7px -15px;
 }
 /* line 232, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-nav > li > a {
   padding-top: 10px;
   padding-bottom: 10px;
-  line-height: 20px;
+  line-height: 22px;
 }
 @media (max-width: 767px) {
   /* line 240, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
@@ -5337,7 +5337,7 @@ tbody.collapse.in {
   }
   /* line 252, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
   .navbar-nav .open .dropdown-menu > li > a {
-    line-height: 20px;
+    line-height: 22px;
   }
   /* line 254, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
   .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-nav .open .dropdown-menu > li > a:focus {
@@ -5356,8 +5356,8 @@ tbody.collapse.in {
   }
   /* line 269, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
   .navbar-nav > li > a {
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 14px;
+    padding-bottom: 14px;
   }
   /* line 275, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
   .navbar-nav.navbar-right:last-child {
@@ -5385,8 +5385,8 @@ tbody.collapse.in {
   border-bottom: 1px solid transparent;
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: 7px;
+  margin-bottom: 7px;
 }
 @media (max-width: 767px) {
   /* line 315, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
@@ -5427,13 +5427,13 @@ tbody.collapse.in {
 
 /* line 359, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-btn {
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: 7px;
+  margin-bottom: 7px;
 }
 /* line 362, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-btn.btn-sm, .btn-group-sm > .navbar-btn.btn {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 8.5px;
+  margin-bottom: 8.5px;
 }
 /* line 365, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-btn.btn-xs, .btn-group-xs > .navbar-btn.btn {
@@ -5443,8 +5443,8 @@ tbody.collapse.in {
 
 /* line 375, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-text {
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 14px;
+  margin-bottom: 14px;
 }
 @media (min-width: 768px) {
   /* line 375, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
@@ -5672,7 +5672,7 @@ tbody.collapse.in {
 /* line 6, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_breadcrumbs.scss */
 .breadcrumb {
   padding: 8px 15px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   list-style: none;
   background-color: #f5f5f5;
   border-radius: 0px;
@@ -5696,7 +5696,7 @@ tbody.collapse.in {
 .pagination {
   display: inline-block;
   padding-left: 0;
-  margin: 20px 0;
+  margin: 22px 0;
   border-radius: 0px;
 }
 /* line 10, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_pagination.scss */
@@ -5734,7 +5734,7 @@ tbody.collapse.in {
 .pagination > li > span:hover,
 .pagination > li > span:focus {
   color: #36545b;
-  background-color: #eeeeee;
+  background-color: #f1f1f1;
   border-color: #ddd;
 }
 /* line 51, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_pagination.scss */
@@ -5765,7 +5765,7 @@ tbody.collapse.in {
 .pagination-lg > li > a,
 .pagination-lg > li > span {
   padding: 10px 16px;
-  font-size: 18px;
+  font-size: 20px;
 }
 /* line 11, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_pagination.scss */
 .pagination-lg > li:first-child > a,
@@ -5784,7 +5784,7 @@ tbody.collapse.in {
 .pagination-sm > li > a,
 .pagination-sm > li > span {
   padding: 5px 10px;
-  font-size: 12px;
+  font-size: 14px;
 }
 /* line 11, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_pagination.scss */
 .pagination-sm > li:first-child > a,
@@ -5802,7 +5802,7 @@ tbody.collapse.in {
 /* line 6, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_pager.scss */
 .pager {
   padding-left: 0;
-  margin: 20px 0;
+  margin: 22px 0;
   list-style: none;
   text-align: center;
 }
@@ -5832,7 +5832,7 @@ tbody.collapse.in {
 .pager li > a:hover,
 .pager li > a:focus {
   text-decoration: none;
-  background-color: #eeeeee;
+  background-color: #f1f1f1;
 }
 /* line 31, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_pager.scss */
 .pager .next > a,
@@ -5943,7 +5943,7 @@ a.label:hover, a.label:focus {
   display: inline-block;
   min-width: 10px;
   padding: 3px 7px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   color: #fff;
   line-height: 1;
@@ -5989,7 +5989,7 @@ a.badge:hover, a.badge:focus {
   padding: 30px;
   margin-bottom: 30px;
   color: inherit;
-  background-color: #eeeeee;
+  background-color: #f1f1f1;
 }
 /* line 12, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_jumbotron.scss */
 .jumbotron h1,
@@ -5999,12 +5999,12 @@ a.badge:hover, a.badge:focus {
 /* line 16, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_jumbotron.scss */
 .jumbotron p {
   margin-bottom: 15px;
-  font-size: 21px;
+  font-size: 24px;
   font-weight: 200;
 }
 /* line 22, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_jumbotron.scss */
 .jumbotron > hr {
-  border-top-color: #d5d5d5;
+  border-top-color: #d7d7d7;
 }
 /* line 26, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_jumbotron.scss */
 .container .jumbotron {
@@ -6028,7 +6028,7 @@ a.badge:hover, a.badge:focus {
   /* line 43, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_jumbotron.scss */
   .jumbotron h1,
   .jumbotron .h1 {
-    font-size: 63px;
+    font-size: 72px;
   }
 }
 
@@ -6036,7 +6036,7 @@ a.badge:hover, a.badge:focus {
 .thumbnail {
   display: block;
   padding: 4px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   line-height: 1.42857;
   background-color: #fff;
   border: 1px solid #ddd;
@@ -6071,7 +6071,7 @@ a.thumbnail.active {
 /* line 9, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_alerts.scss */
 .alert {
   padding: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   border: 1px solid transparent;
   border-radius: 0px;
 }
@@ -6187,8 +6187,8 @@ a.thumbnail.active {
 /* line 27, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_progress-bars.scss */
 .progress {
   overflow: hidden;
-  height: 20px;
-  margin-bottom: 20px;
+  height: 22px;
+  margin-bottom: 22px;
   background-color: #f5f5f5;
   border-radius: 0px;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -6200,8 +6200,8 @@ a.thumbnail.active {
   float: left;
   width: 0%;
   height: 100%;
-  font-size: 12px;
-  line-height: 20px;
+  font-size: 14px;
+  line-height: 22px;
   color: #fff;
   text-align: center;
   background-color: #52818b;
@@ -6381,7 +6381,7 @@ a.list-group-item:hover, a.list-group-item:focus {
 
 /* line 72, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_list-group.scss */
 .list-group-item.disabled, .list-group-item.disabled:hover, .list-group-item.disabled:focus {
-  background-color: #eeeeee;
+  background-color: #f1f1f1;
   color: #777777;
 }
 /* line 79, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_list-group.scss */
@@ -6532,7 +6532,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 
 /* line 7, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel {
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   background-color: #fff;
   border: 1px solid transparent;
   border-radius: 0px;
@@ -6570,7 +6570,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel-title {
   margin-top: 0;
   margin-bottom: 0;
-  font-size: 16px;
+  font-size: 18px;
   color: inherit;
 }
 /* line 39, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
@@ -6756,7 +6756,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 
 /* line 198, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel-group {
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 /* line 202, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel-group .panel {
@@ -6990,7 +6990,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 /* line 6, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_close.scss */
 .close {
   float: right;
-  font-size: 21px;
+  font-size: 24px;
   font-weight: bold;
   line-height: 1;
   color: #000;
@@ -7188,7 +7188,7 @@ button.close {
   z-index: 1070;
   display: block;
   visibility: visible;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.4;
   opacity: 0;
   filter: alpha(opacity=0);
@@ -7310,10 +7310,10 @@ button.close {
   max-width: 276px;
   padding: 1px;
   text-align: left;
-  background-color: #fff;
+  background-color: #f1f1f1;
   background-clip: padding-box;
   border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid #f1f1f1;
   border-radius: 0px;
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
@@ -7340,11 +7340,11 @@ button.close {
 .popover-title {
   margin: 0;
   padding: 8px 14px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: normal;
   line-height: 18px;
-  background-color: #f7f7f7;
-  border-bottom: 1px solid #ebebeb;
+  background-color: #e9e9e9;
+  border-bottom: 1px solid #dddddd;
   border-radius: -1px -1px 0 0;
 }
 
@@ -7380,7 +7380,7 @@ button.close {
   margin-left: -11px;
   border-bottom-width: 0;
   border-top-color: #999999;
-  border-top-color: rgba(0, 0, 0, 0.25);
+  border-top-color: #f1f1f1;
   bottom: -11px;
 }
 /* line 78, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_popovers.scss */
@@ -7389,7 +7389,7 @@ button.close {
   bottom: 1px;
   margin-left: -10px;
   border-bottom-width: 0;
-  border-top-color: #fff;
+  border-top-color: #f1f1f1;
 }
 /* line 86, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_popovers.scss */
 .popover.right > .arrow {
@@ -7398,7 +7398,7 @@ button.close {
   margin-top: -11px;
   border-left-width: 0;
   border-right-color: #999999;
-  border-right-color: rgba(0, 0, 0, 0.25);
+  border-right-color: #f1f1f1;
 }
 /* line 93, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_popovers.scss */
 .popover.right > .arrow:after {
@@ -7406,7 +7406,7 @@ button.close {
   left: 1px;
   bottom: -10px;
   border-left-width: 0;
-  border-right-color: #fff;
+  border-right-color: #f1f1f1;
 }
 /* line 101, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_popovers.scss */
 .popover.bottom > .arrow {
@@ -7414,7 +7414,7 @@ button.close {
   margin-left: -11px;
   border-top-width: 0;
   border-bottom-color: #999999;
-  border-bottom-color: rgba(0, 0, 0, 0.25);
+  border-bottom-color: #f1f1f1;
   top: -11px;
 }
 /* line 108, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_popovers.scss */
@@ -7423,7 +7423,7 @@ button.close {
   top: 1px;
   margin-left: -10px;
   border-top-width: 0;
-  border-bottom-color: #fff;
+  border-bottom-color: #f1f1f1;
 }
 /* line 117, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_popovers.scss */
 .popover.left > .arrow {
@@ -7432,14 +7432,14 @@ button.close {
   margin-top: -11px;
   border-right-width: 0;
   border-left-color: #999999;
-  border-left-color: rgba(0, 0, 0, 0.25);
+  border-left-color: #f1f1f1;
 }
 /* line 124, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_popovers.scss */
 .popover.left > .arrow:after {
   content: " ";
   right: 1px;
   border-right-width: 0;
-  border-left-color: #fff;
+  border-left-color: #f1f1f1;
   bottom: -10px;
 }
 
@@ -8046,24 +8046,32 @@ button.close {
     float: none;
   }
 }
-/* line 2, ../navigation.scss */
-#navigation .side {
-  position: fixed;
+/* line 1, ../navigation.scss */
+#navigation {
+  margin: 0;
+}
+/* line 3, ../navigation.scss */
+#navigation .corner {
   text-align: center;
-  top: 50%;
-  height: 28px;
-  width: 40px;
+  text-transform: uppercase;
+  width: 120px;
+  background-color: #52818b;
 }
 /* line 9, ../navigation.scss */
 #navigation .prev-page {
-  left: 0;
+  float: left;
 }
 /* line 13, ../navigation.scss */
 #navigation .next-page {
-  right: 0;
+  float: right;
+}
+/* line 17, ../navigation.scss */
+#navigation a {
+  padding: 14px;
+  color: #FFF;
 }
 
-/* line 18, ../navigation.scss */
+/* line 23, ../navigation.scss */
 .navbar-default {
   margin: 0;
 }
@@ -8074,7 +8082,7 @@ button.close {
   top: 70px;
   right: 40px;
   width: .25em;
-  height: 90%;
+  height: 85%;
 }
 
 /* line 8, ../progress.scss */
@@ -8126,6 +8134,11 @@ header {
 .header-title h1 {
   margin: 0;
 }
+/* line 24, ../header.scss */
+.header-title p {
+  font-style: italic;
+  font-weight: 300;
+}
 
 /* line 1, ../toolbar.scss */
 #toolbar.affix {
@@ -8143,6 +8156,17 @@ header {
   z-index: 998;
 }
 
+/* line 14, ../toolbar.scss */
+#toolbar-title {
+  color: #333;
+  font-size: 24px;
+}
+
+/* line 19, ../toolbar.scss */
+#toolbar-area {
+  list-style-type: none;
+}
+
 /* line 1, ../navbar.scss */
 #navbar.affix {
   position: fixed;
@@ -8153,6 +8177,19 @@ header {
 /* line 7, ../navbar.scss */
 #navbar {
   z-index: 998;
+}
+/* line 10, ../navbar.scss */
+#navbar .nav li {
+  width: 55px;
+}
+/* line 11, ../navbar.scss */
+#navbar .nav li a {
+  font-size: 24px;
+  text-align: center;
+}
+/* line 19, ../navbar.scss */
+#navbar .nav li.active a {
+  color: #333;
 }
 
 /* line 1, ../font-size.scss */
@@ -8169,14 +8206,46 @@ header {
 .right {
   float: right;
   height: 30vw;
-  margin: 10px 0 40px 20px;
+  margin: 10px 0 45px 20px;
+}
+/* line 13, ../figures.scss */
+.right figcaption {
+  z-index: -2;
+  font-size: 14px;
+  position: relative;
+  right: -22px;
+  top: -40px;
+  background: #f1f1f1;
+  margin-top: 47px;
+  margin-right: 18px;
+  margin-left: -6px;
+}
+/* line 23, ../figures.scss */
+.right figcaption p {
+  padding: 6px;
 }
 
-/* line 15, ../figures.scss */
+/* line 29, ../figures.scss */
 .left {
   float: left;
   height: 30vw;
-  margin: 10px 20px 40px 0;
+  margin: 10px 20px 45px 0;
+}
+/* line 33, ../figures.scss */
+.left figcaption {
+  z-index: -2;
+  font-size: 14px;
+  position: relative;
+  left: -22px;
+  top: -40px;
+  background: #f1f1f1;
+  margin-top: 47px;
+  margin-left: 18px;
+  margin-right: -6px;
+}
+/* line 43, ../figures.scss */
+.left figcaption p {
+  padding: 6px;
 }
 
 /* line 1, ../overlay.scss */
@@ -8202,8 +8271,14 @@ header {
 .paragraph-controls {
   position: relative;
   right: 32px;
-  top: 26px;
+  top: 6px;
   z-index: 2;
+  height: 0;
+}
+
+/* line 8, ../notes.scss */
+.btn {
+  text-transform: uppercase;
 }
 
 /* line 15, ../main.scss */
@@ -8212,4 +8287,9 @@ header {
   background: #ccc;
   color: #000;
   padding: 0.2em 0;
+}
+
+/* line 22, ../main.scss */
+p, textarea {
+  font-family: Merriweather, Georgia, "Times New Roman", Times, serif;
 }

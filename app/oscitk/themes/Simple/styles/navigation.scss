@@ -1,17 +1,22 @@
 #navigation {
-	.side {
-		position: fixed;
+	margin: 0;
+	.corner {
 		text-align:center;
-		top: 50%;
-		height:28px;
-		width:40px;
+		text-transform: uppercase;
+		width: 120px;
+		background-color: $brand-primary;
 	}
 	.prev-page {
-		left: 0;
+		float: left;
 	}
 
 	.next-page {
-		right: 0;
+		float: right;
+	}
+
+	a {
+		padding: 14px;
+		color: #FFF;
 	}
 }
 
