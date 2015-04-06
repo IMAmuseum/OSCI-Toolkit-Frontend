@@ -145,6 +145,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     setFigureStyles: function() {
         _.each(this.figures, function(figure) {
             var position = $(figure).data('position');
+            var fallback_content = $(figure).find('.figure_content > object > .fallback-content').html();
+            $(figure).find('.figure_content').html(fallback_content);
             switch(position) {
                 // full page
                 case 'p':
@@ -182,7 +184,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                     break;
             }
             $(figure).addClass(imgClass);
-            $(figure).find("div > object > div > img").addClass(imgClass);
+            $(figure).find("div > img").addClass(imgClass);
         }, this);
     }
 

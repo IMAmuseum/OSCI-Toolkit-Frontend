@@ -22,10 +22,11 @@
 
 /* line 19, ../toolbar.scss */
 #toolbar-area {
+  z-index: 990;
   list-style-type: none;
 }
 
-/* line 23, ../toolbar.scss */
+/* line 24, ../toolbar.scss */
 .tocView-toolbar-item {
   cursor: hand;
   border: 0;
@@ -33,17 +34,17 @@
   text-shadow: none;
   color: transparent;
   background-image: url(../../images/list-grey.png);
-  background-size: 60px 60px;
+  background-size: 30px 30px;
   background-repeat: no-repeat;
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 30px;
 }
-/* line 34, ../toolbar.scss */
+/* line 35, ../toolbar.scss */
 .tocView-toolbar-item:hover {
   background-image: url(../../images/list-blue.png);
 }
 
-/* line 39, ../toolbar.scss */
+/* line 40, ../toolbar.scss */
 .accountView-toolbar-item {
   cursor: hand;
   border: 0;
@@ -51,17 +52,17 @@
   text-shadow: none;
   color: transparent;
   background-image: url(../../images/login-grey.png);
-  background-size: 60px 60px;
+  background-size: 30px 30px;
   background-repeat: no-repeat;
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 30px;
 }
-/* line 50, ../toolbar.scss */
+/* line 51, ../toolbar.scss */
 .accountView-toolbar-item:hover {
   background-image: url(../../images/login-blue.png);
 }
 
-/* line 55, ../toolbar.scss */
+/* line 56, ../toolbar.scss */
 .printView-toolbar-item {
   cursor: hand;
   border: 0;
@@ -69,18 +70,12 @@
   text-shadow: none;
   color: transparent;
   background-image: url(../../images/print-grey.png);
-  background-size: 60px 60px;
+  background-size: 30px 30px;
   background-repeat: no-repeat;
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 30px;
 }
-/* line 56, ../toolbar.scss */
-.printView-toolbar-item a {
-  width: 60px;
-  height: 60px;
-  z-index: 9999;
-}
-/* line 71, ../toolbar.scss */
+/* line 67, ../toolbar.scss */
 .printView-toolbar-item:hover {
   background-image: url(../../images/print-blue.png);
 }
