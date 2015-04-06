@@ -20,3 +20,55 @@
 	list-style-type: none;
 }
 
+.tocView-toolbar-item {
+	cursor: hand;
+	border: 0;
+	font: 0/0 a;
+	text-shadow: none;
+	color: transparent;
+	background-image: url(../../images/list-grey.png);
+	background-size: 60px 60px;
+	background-repeat: no-repeat;
+	width: 60px;
+	height: 60px;
+	&:hover {
+		background-image: url(../../images/list-blue.png);
+	}
+}
+
+.accountView-toolbar-item {
+	cursor: hand;
+	border: 0;
+	font: 0/0 a;
+	text-shadow: none;
+	color: transparent;
+	background-image: url(../../images/login-grey.png);
+	background-size: 60px 60px;
+	background-repeat: no-repeat;
+	width: 60px;
+	height: 60px;
+	&:hover {
+		background-image: url(../../images/login-blue.png);
+	}
+}
+
+.printView-toolbar-item {
+	a {
+		width: 60px;
+		height: 60px;
+		z-index: 9999;
+	}
+	cursor: hand;
+	border: 0;
+	font: 0/0 a;
+	text-shadow: none;
+	color: transparent;
+	background-image: url(../../images/print-grey.png);
+	background-size: 60px 60px;
+	background-repeat: no-repeat;
+	width: 60px;
+	height: 60px;
+	&:hover {
+		background-image: url(../../images/print-blue.png);
+	}
+}

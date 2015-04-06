@@ -13,7 +13,7 @@ OsciTk.views.Print = OsciTk.views.BaseView.extend({
 	},
 
 	triggerPrint: function(href) {
-		if (href === "#print") {
+		if (href === "print") {
 			window.print();
 		}
 	}

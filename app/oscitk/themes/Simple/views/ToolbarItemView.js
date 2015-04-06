@@ -10,6 +10,8 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		this.options = options;
 		// add a class to this element based on view button uses
 		this.$el.addClass(this.options.toolbarItem.view + '-toolbar-item');
+		this.$el.attr('data-href', this.options.toolbarItem.text);
+		this.$el.attr('data-style', this.options.toolbarItem.style);
 	},
 	render: function() {
 		this.$el.html(this.template({
@@ -36,10 +38,11 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 
 		// get the target
 		this.$target = $(e.target);
-		this.href = $(e.target).attr("href");
+		this.href = $(e.target).data("href");
+		this.style = $(e.target).data("style");
 
 		// default actions only pass a
-		if(this.href != '#') {
+		if(this.style != 'default') {
 			Backbone.trigger("toolbarInlineClicked", this.href);
 		}
 
