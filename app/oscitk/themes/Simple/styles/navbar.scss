@@ -10,14 +10,36 @@
 		li {
 			a {
 				font-size: 24px;
-				text-align: center;
+				@media (max-width: 768px) {
+					font-size: 14px;
+				}
 			}
+			text-align: center;
 			width: 55px;
 		}
 
 		li.active {
 			a {
 				color: #333;
+			}
+		}
+	}
+}
+
+#navbar-title {
+	color: #333;
+	font-size: 24px;
+	@media (max-width: 768px) {
+		font-size: 14px;
+	}
+}
+
+@media (max-width: 768px) {
+	#navbar {
+		.nav {
+			li {
+				width: 100%;
+				text-align: left;
 			}
 		}
 	}

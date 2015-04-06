@@ -146,6 +146,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         _.each(this.figures, function(figure) {
             var position = $(figure).data('position');
             var fallback_content = $(figure).find('.figure_content > object > .fallback-content').html();
+            var figcaption = $(figure).find('figcaption').html();
             $(figure).find('.figure_content').html(fallback_content);
             switch(position) {
                 // full page

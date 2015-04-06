@@ -15,18 +15,12 @@
 }
 
 /* line 14, ../toolbar.scss */
-#toolbar-title {
-  color: #333;
-  font-size: 24px;
-}
-
-/* line 19, ../toolbar.scss */
 #toolbar-area {
   z-index: 990;
   list-style-type: none;
 }
 
-/* line 24, ../toolbar.scss */
+/* line 19, ../toolbar.scss */
 .tocView-toolbar-item {
   cursor: hand;
   border: 0;
@@ -39,12 +33,12 @@
   width: 30px;
   height: 30px;
 }
-/* line 35, ../toolbar.scss */
+/* line 30, ../toolbar.scss */
 .tocView-toolbar-item:hover {
   background-image: url(../../images/list-blue.png);
 }
 
-/* line 40, ../toolbar.scss */
+/* line 35, ../toolbar.scss */
 .accountView-toolbar-item {
   cursor: hand;
   border: 0;
@@ -57,12 +51,12 @@
   width: 30px;
   height: 30px;
 }
-/* line 51, ../toolbar.scss */
+/* line 46, ../toolbar.scss */
 .accountView-toolbar-item:hover {
   background-image: url(../../images/login-blue.png);
 }
 
-/* line 56, ../toolbar.scss */
+/* line 51, ../toolbar.scss */
 .printView-toolbar-item {
   cursor: hand;
   border: 0;
@@ -75,7 +69,7 @@
   width: 30px;
   height: 30px;
 }
-/* line 67, ../toolbar.scss */
+/* line 62, ../toolbar.scss */
 .printView-toolbar-item:hover {
   background-image: url(../../images/print-blue.png);
 }

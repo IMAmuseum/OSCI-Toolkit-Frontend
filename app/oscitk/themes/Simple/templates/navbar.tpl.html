@@ -7,15 +7,18 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a id="toolbar-title" class="navbar-brand" href="#"><%= title %></a>
+      <a id="navbar-title" class="navbar-brand" href="#"><%= title %></a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul id="toolbar-area" class="nav navbar-nav navbar-right">
+			<ul id="navbar-area" class="nav navbar-nav navbar-right">
          <% i = 0 %>
          <% _.each(sections, function(section) { %>
           <li class="navbar-item<% if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } %>">
             <a data-section-id="<%= section.id %>" href="#">
-              <%= ++i %>
+              <% ++i %>
+              <span class="hidden-xs"><%= i %></span>
+              <% subtitle = section.get('subtitle') ? ' - <span class="navbar-subtitle">'+section.get('subtitle')+'</span>' : '' %>
+              <span class="visible-xs"><%= i + ' - ' + section.get('title') + subtitle %></span>
             </a>
           </li>
          <% }); %>

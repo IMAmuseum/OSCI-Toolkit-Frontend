@@ -11,14 +11,40 @@
 }
 /* line 10, ../navbar.scss */
 #navbar .nav li {
+  text-align: center;
   width: 55px;
 }
 /* line 11, ../navbar.scss */
 #navbar .nav li a {
   font-size: 24px;
-  text-align: center;
 }
-/* line 19, ../navbar.scss */
+@media (max-width: 768px) {
+  /* line 11, ../navbar.scss */
+  #navbar .nav li a {
+    font-size: 14px;
+  }
+}
+/* line 22, ../navbar.scss */
 #navbar .nav li.active a {
   color: #333;
+}
+
+/* line 29, ../navbar.scss */
+#navbar-title {
+  color: #333;
+  font-size: 24px;
+}
+@media (max-width: 768px) {
+  /* line 29, ../navbar.scss */
+  #navbar-title {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* line 40, ../navbar.scss */
+  #navbar .nav li {
+    width: 100%;
+    text-align: left;
+  }
 }

@@ -1,50 +1,16 @@
-/* line 1, ../figures.scss */
-.plate {
-  min-width: 100%;
+/* line 2, ../figures.scss */
+.figure_content img {
+  max-width: 90%;
+  border: 4px solid #f1f1f1;
 }
 
-/* line 9, ../figures.scss */
-.right {
-  float: right;
-  max-height: 60vh;
-  margin: 10px 0 45px 20px;
-}
-/* line 13, ../figures.scss */
-.right figcaption {
-  z-index: -2;
-  font-size: 14px;
-  position: relative;
-  right: -22px;
-  top: -40px;
+/* line 8, ../figures.scss */
+figcaption {
+  max-width: 90%;
   background: #f1f1f1;
-  margin-top: 47px;
-  margin-right: 18px;
-  margin-left: -6px;
-}
-/* line 23, ../figures.scss */
-.right figcaption p {
-  padding: 6px;
 }
 
-/* line 29, ../figures.scss */
-.left {
-  float: left;
-  max-height: 60vh;
-  margin: 10px 20px 45px 0;
-}
-/* line 33, ../figures.scss */
-.left figcaption {
-  z-index: -2;
-  font-size: 14px;
-  position: relative;
-  left: -22px;
-  top: -40px;
+/* line 18, ../figures.scss */
+.osci-figure {
   background: #f1f1f1;
-  margin-top: 47px;
-  margin-left: 18px;
-  margin-right: -6px;
-}
-/* line 43, ../figures.scss */
-.left figcaption p {
-  padding: 6px;
 }

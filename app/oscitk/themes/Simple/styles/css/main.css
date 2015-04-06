@@ -8157,18 +8157,12 @@ header {
 }
 
 /* line 14, ../toolbar.scss */
-#toolbar-title {
-  color: #333;
-  font-size: 24px;
-}
-
-/* line 19, ../toolbar.scss */
 #toolbar-area {
   z-index: 990;
   list-style-type: none;
 }
 
-/* line 24, ../toolbar.scss */
+/* line 19, ../toolbar.scss */
 .tocView-toolbar-item {
   cursor: hand;
   border: 0;
@@ -8181,12 +8175,12 @@ header {
   width: 30px;
   height: 30px;
 }
-/* line 35, ../toolbar.scss */
+/* line 30, ../toolbar.scss */
 .tocView-toolbar-item:hover {
   background-image: url(../../images/list-blue.png);
 }
 
-/* line 40, ../toolbar.scss */
+/* line 35, ../toolbar.scss */
 .accountView-toolbar-item {
   cursor: hand;
   border: 0;
@@ -8199,12 +8193,12 @@ header {
   width: 30px;
   height: 30px;
 }
-/* line 51, ../toolbar.scss */
+/* line 46, ../toolbar.scss */
 .accountView-toolbar-item:hover {
   background-image: url(../../images/login-blue.png);
 }
 
-/* line 56, ../toolbar.scss */
+/* line 51, ../toolbar.scss */
 .printView-toolbar-item {
   cursor: hand;
   border: 0;
@@ -8217,7 +8211,7 @@ header {
   width: 30px;
   height: 30px;
 }
-/* line 67, ../toolbar.scss */
+/* line 62, ../toolbar.scss */
 .printView-toolbar-item:hover {
   background-image: url(../../images/print-blue.png);
 }
@@ -8235,72 +8229,63 @@ header {
 }
 /* line 10, ../navbar.scss */
 #navbar .nav li {
+  text-align: center;
   width: 55px;
 }
 /* line 11, ../navbar.scss */
 #navbar .nav li a {
   font-size: 24px;
-  text-align: center;
 }
-/* line 19, ../navbar.scss */
+@media (max-width: 768px) {
+  /* line 11, ../navbar.scss */
+  #navbar .nav li a {
+    font-size: 14px;
+  }
+}
+/* line 22, ../navbar.scss */
 #navbar .nav li.active a {
   color: #333;
 }
 
+/* line 29, ../navbar.scss */
+#navbar-title {
+  color: #333;
+  font-size: 24px;
+}
+@media (max-width: 768px) {
+  /* line 29, ../navbar.scss */
+  #navbar-title {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* line 40, ../navbar.scss */
+  #navbar .nav li {
+    width: 100%;
+    text-align: left;
+  }
+}
 /* line 1, ../font-size.scss */
 .font-size-view {
   line-height: 20px;
 }
 
-/* line 1, ../figures.scss */
-.plate {
-  min-width: 100%;
+/* line 2, ../figures.scss */
+.figure_content img {
+  max-width: 90%;
+  border: 4px solid #f1f1f1;
 }
 
-/* line 9, ../figures.scss */
-.right {
-  float: right;
-  max-height: 60vh;
-  margin: 10px 0 45px 20px;
-}
-/* line 13, ../figures.scss */
-.right figcaption {
-  z-index: -2;
-  font-size: 14px;
-  position: relative;
-  right: -22px;
-  top: -40px;
+/* line 8, ../figures.scss */
+figcaption {
+  max-width: 90%;
   background: #f1f1f1;
-  margin-top: 47px;
-  margin-right: 18px;
-  margin-left: -6px;
-}
-/* line 23, ../figures.scss */
-.right figcaption p {
-  padding: 6px;
 }
 
-/* line 29, ../figures.scss */
-.left {
-  float: left;
-  max-height: 60vh;
-  margin: 10px 20px 45px 0;
-}
-/* line 33, ../figures.scss */
-.left figcaption {
-  z-index: -2;
-  font-size: 14px;
-  position: relative;
-  left: -22px;
-  top: -40px;
+/* line 18, ../figures.scss */
+.osci-figure {
   background: #f1f1f1;
-  margin-top: 47px;
-  margin-left: 18px;
-  margin-right: -6px;
-}
-/* line 43, ../figures.scss */
-.left figcaption p {
-  padding: 6px;
 }
 
 /* line 1, ../overlay.scss */

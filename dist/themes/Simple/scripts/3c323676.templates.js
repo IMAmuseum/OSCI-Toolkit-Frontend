@@ -38,7 +38,7 @@ this["JST"]["app/oscitk/themes/Simple/templates/app.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="progress vertical hidden hidden-print" data-spy="affix" data-offset-top="400">\n\t<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n<div id="navbar" class="hidden-print" data-spy="affix" data-offset-top="400"></div>\n<div id="toolbar" class="hidden-print" data-spy="affix" data-offset-top="400"></div>\n<div class="container">\n\t<div class="row">\n\t\t<div class="col-md-10 col-md-offset-1 section-col">\n\t\t\t<div id="loader">Loading...</div>\n\t\t\t<div id="section"></div>\n\t\t</div>\n\t</div>\n</div>\n\n<div id="navigation" class="hidden no-print"></div>';
+__p += '<div class="progress vertical hidden hidden-print hidden-sm hidden-xs" data-spy="affix" data-offset-top="400">\n\t<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n<div id="navbar" class="hidden-print" data-spy="affix" data-offset-top="400"></div>\n<div id="toolbar" class="hidden-print hidden-sm hidden-xs" data-spy="affix" data-offset-top="400"></div>\n<div class="container">\n\t<div class="row">\n\t\t<div class="col-md-10 col-md-offset-1 section-col">\n\t\t\t<div id="loader">Loading...</div>\n\t\t\t<div id="section"></div>\n\t\t</div>\n\t</div>\n</div>\n\n<div id="navigation" class="hidden no-print"></div>';
 
 }
 return __p
@@ -143,9 +143,9 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<nav class="navbar navbar-default">\n\t<div class="container">\n\t   <div class="navbar-header">\n      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">\n        <span class="sr-only">Toggle navigation</span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n      </button>\n      <a id="toolbar-title" class="navbar-brand" href="#">' +
+__p += '<nav class="navbar navbar-default">\n\t<div class="container">\n\t   <div class="navbar-header">\n      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">\n        <span class="sr-only">Toggle navigation</span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n      </button>\n      <a id="navbar-title" class="navbar-brand" href="#">' +
 ((__t = ( title )) == null ? '' : __t) +
-'</a>\n    </div>\n    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">\n\t\t\t<ul id="toolbar-area" class="nav navbar-nav navbar-right">\n         ';
+'</a>\n    </div>\n    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">\n\t\t\t<ul id="navbar-area" class="nav navbar-nav navbar-right">\n         ';
  i = 0 ;
 __p += '\n         ';
  _.each(sections, function(section) { ;
@@ -153,9 +153,15 @@ __p += '\n          <li class="navbar-item';
  if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;
 __p += '">\n            <a data-section-id="' +
 ((__t = ( section.id )) == null ? '' : __t) +
-'" href="#">\n              ' +
-((__t = ( ++i )) == null ? '' : __t) +
-'\n            </a>\n          </li>\n         ';
+'" href="#">\n              ';
+ ++i ;
+__p += '\n              <span class="hidden-xs">' +
+((__t = ( i )) == null ? '' : __t) +
+'</span>\n              ';
+ subtitle = section.get('subtitle') ? ' - <span class="navbar-subtitle">'+section.get('subtitle')+'</span>' : '' ;
+__p += '\n              <span class="visible-xs">' +
+((__t = ( i + ' - ' + section.get('title') + subtitle )) == null ? '' : __t) +
+'</span>\n            </a>\n          </li>\n         ';
  }); ;
 __p += '\n      </ul>\n\t\t</div>\n\t</div>\n</nav>';
 
