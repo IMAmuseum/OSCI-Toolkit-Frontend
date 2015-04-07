@@ -130,9 +130,19 @@ __p += '\n<div class="container-header">\n';
  } ;
 __p += '\n\t<div class="container header-title">\n\t\t<h1>' +
 ((__t = ( title )) == null ? '' : __t) +
-'</h1>\n\t\t<p>by ' +
-((__t = ( creator )) == null ? '' : __t) +
-'</p>\n  \t</div>\n</div>';
+'</h1>\n\t\t<p>\n\t\t\t';
+ address = 'by ' ;
+__p += '\n\t\t\t';
+ _.each(creator, function(author) { ;
+__p += '\n\t\t\t\t' +
+((__t = ( address )) == null ? '' : __t) +
+'' +
+((__t = ( author.value )) == null ? '' : __t) +
+'\n\t\t\t\t';
+ address = 'and ' ;
+__p += '\n\t\t\t';
+ }); ;
+__p += '\n\t\t</p>\n\n  \t</div>\n</div>';
 
 }
 return __p

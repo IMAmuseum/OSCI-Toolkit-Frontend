@@ -3,7 +3,7 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('header'),
 	initialize: function() {
 		this.listenTo(Backbone, 'packageLoaded', function(packageModel) {
-			this.creator = $(packageModel)[0].attributes['metadata']['dc:creator']['value'];
+			this.creator = $(packageModel)[0].attributes['metadata']['dc:creator'];
 			this.pubTitle = packageModel.getTitle();
 		});
 
@@ -42,7 +42,7 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 			this.headerImageCaption = null;
 		}
 
-		// TODO: Question why does previous image carry over even if null?
+		console.log(this.creator);
 		this.$el.html(this.template({
 			creator: this.creator,
 			title: this.pubTitle,

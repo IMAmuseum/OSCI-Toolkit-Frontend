@@ -5,6 +5,13 @@
 <% } %>
 	<div class="container header-title">
 		<h1><%= title %></h1>
-		<p>by <%= creator %></p>
+		<p>
+			<% address = 'by ' %>
+			<% _.each(creator, function(author) { %>
+				<%= address %><%= author.value %>
+				<% address = 'and ' %>
+			<% }); %>
+		</p>
+
   	</div>
 </div>
