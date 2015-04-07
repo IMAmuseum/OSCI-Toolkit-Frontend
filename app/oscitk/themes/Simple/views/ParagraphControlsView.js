@@ -37,7 +37,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
                 section_id: this.sectionId,
                 paragraph_number: i
             });
-            var hasNotes = note.get('note') ? 'btn-warning' : '';
+            var hasNotes = note.get('note') ? 'withNotes' : '';
 
             $(paragraph).before(
                 '<div class="paragraph-controls hidden-print" data-osci_content_id="osci-content-'+i+'" data-paragraph_identifier="'+i+'" >'+

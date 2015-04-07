@@ -8279,11 +8279,36 @@ header {
 
 /* line 8, ../figures.scss */
 figcaption {
-  max-width: 90%;
   background: #f1f1f1;
 }
 
-/* line 18, ../figures.scss */
+/* line 12, ../figures.scss */
+.left {
+  float: left;
+  max-width: 50vh;
+  max-height: 50vh;
+}
+/* line 16, ../figures.scss */
+.left figcaption {
+  max-width: 100%;
+  margin-right: 45px;
+  padding: 5px;
+}
+
+/* line 24, ../figures.scss */
+.right {
+  float: right;
+  max-width: 50vh;
+  max-height: 50vh;
+}
+/* line 28, ../figures.scss */
+.right figcaption {
+  max-width: 50vh;
+  margin-left: 20px;
+  padding: 5px;
+}
+
+/* line 40, ../figures.scss */
 .osci-figure {
   background: #f1f1f1;
 }
@@ -8316,9 +8341,27 @@ figcaption {
   height: 0;
 }
 
-/* line 8, ../notes.scss */
+/* line 9, ../notes.scss */
 .btn {
   text-transform: uppercase;
+}
+
+/* line 13, ../notes.scss */
+.paragraph-button {
+  border: 0;
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+  background-image: url(../../images/plus-grey.png);
+  background-size: 15px 15px;
+  background-repeat: no-repeat;
+  width: 15px;
+  height: 15px;
+}
+
+/* line 25, ../notes.scss */
+.withNotes {
+  background-image: url(../../images/plus-blue.png);
 }
 
 /* line 15, ../main.scss */

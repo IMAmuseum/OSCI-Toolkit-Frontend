@@ -7,7 +7,25 @@
   height: 0;
 }
 
-/* line 8, ../notes.scss */
+/* line 9, ../notes.scss */
 .btn {
   text-transform: uppercase;
+}
+
+/* line 13, ../notes.scss */
+.paragraph-button {
+  border: 0;
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+  background-image: url(../../images/plus-grey.png);
+  background-size: 15px 15px;
+  background-repeat: no-repeat;
+  width: 15px;
+  height: 15px;
+}
+
+/* line 25, ../notes.scss */
+.withNotes {
+  background-image: url(../../images/plus-blue.png);
 }

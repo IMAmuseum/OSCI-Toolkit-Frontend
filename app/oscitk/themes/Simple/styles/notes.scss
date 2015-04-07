@@ -5,6 +5,23 @@
 	z-index: 2;
 	height: 0;
 }
+
 .btn {
 	text-transform: uppercase;
+}
+
+.paragraph-button {
+	border: 0;
+	font: 0/0 a;
+	text-shadow: none;
+	color: transparent;
+	background-image: url(../../images/plus-grey.png);
+	background-size: 15px 15px;
+	background-repeat: no-repeat;
+	width: 15px;
+	height: 15px;
+}
+
+.withNotes {
+	background-image: url(../../images/plus-blue.png);
 }
