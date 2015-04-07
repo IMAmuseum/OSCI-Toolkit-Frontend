@@ -7195,8 +7195,8 @@ button.close {
 }
 /* line 16, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_tooltip.scss */
 .tooltip.in {
-  opacity: 0.9;
-  filter: alpha(opacity=90);
+  opacity: 1;
+  filter: alpha(opacity=100);
 }
 /* line 17, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_tooltip.scss */
 .tooltip.top {
@@ -7223,10 +7223,10 @@ button.close {
 .tooltip-inner {
   max-width: 200px;
   padding: 3px 8px;
-  color: #fff;
+  color: #333;
   text-align: center;
   text-decoration: none;
-  background-color: #000;
+  background-color: #f1f1f1;
   border-radius: 0px;
 }
 
@@ -7245,21 +7245,21 @@ button.close {
   left: 50%;
   margin-left: -5px;
   border-width: 5px 5px 0;
-  border-top-color: #000;
+  border-top-color: #f1f1f1;
 }
 /* line 50, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_tooltip.scss */
 .tooltip.top-left .tooltip-arrow {
   bottom: 0;
   left: 5px;
   border-width: 5px 5px 0;
-  border-top-color: #000;
+  border-top-color: #f1f1f1;
 }
 /* line 56, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_tooltip.scss */
 .tooltip.top-right .tooltip-arrow {
   bottom: 0;
   right: 5px;
   border-width: 5px 5px 0;
-  border-top-color: #000;
+  border-top-color: #f1f1f1;
 }
 /* line 62, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_tooltip.scss */
 .tooltip.right .tooltip-arrow {
@@ -7267,7 +7267,7 @@ button.close {
   left: 0;
   margin-top: -5px;
   border-width: 5px 5px 5px 0;
-  border-right-color: #000;
+  border-right-color: #f1f1f1;
 }
 /* line 69, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_tooltip.scss */
 .tooltip.left .tooltip-arrow {
@@ -7275,7 +7275,7 @@ button.close {
   right: 0;
   margin-top: -5px;
   border-width: 5px 0 5px 5px;
-  border-left-color: #000;
+  border-left-color: #f1f1f1;
 }
 /* line 76, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_tooltip.scss */
 .tooltip.bottom .tooltip-arrow {
@@ -7283,21 +7283,21 @@ button.close {
   left: 50%;
   margin-left: -5px;
   border-width: 0 5px 5px;
-  border-bottom-color: #000;
+  border-bottom-color: #f1f1f1;
 }
 /* line 83, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_tooltip.scss */
 .tooltip.bottom-left .tooltip-arrow {
   top: 0;
   left: 5px;
   border-width: 0 5px 5px;
-  border-bottom-color: #000;
+  border-bottom-color: #f1f1f1;
 }
 /* line 89, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_tooltip.scss */
 .tooltip.bottom-right .tooltip-arrow {
   top: 0;
   right: 5px;
   border-width: 0 5px 5px;
-  border-bottom-color: #000;
+  border-bottom-color: #f1f1f1;
 }
 
 /* line 6, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_popovers.scss */
@@ -8034,14 +8034,30 @@ button.close {
   padding-left: 40px;
 }
 
+/* line 9, ../section.scss */
+.footnote-reference {
+  margin: 0 5px;
+  display: inline-block;
+  position: relative;
+  top: -5px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  font-size: 12px;
+  color: #fff;
+  line-height: 15px;
+  text-align: center;
+  background: #52818B;
+}
+
 @media (max-width: 992px) {
-  /* line 10, ../section.scss */
+  /* line 25, ../section.scss */
   #section {
     padding-left: 0;
   }
 }
 @media (min-width: 992px) {
-  /* line 16, ../section.scss */
+  /* line 31, ../section.scss */
   .section-col {
     float: none;
   }
@@ -8056,22 +8072,25 @@ button.close {
   text-transform: uppercase;
   width: 120px;
   background-color: #52818b;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
-/* line 9, ../navigation.scss */
+/* line 11, ../navigation.scss */
 #navigation .prev-page {
   float: left;
 }
-/* line 13, ../navigation.scss */
+/* line 15, ../navigation.scss */
 #navigation .next-page {
   float: right;
 }
-/* line 17, ../navigation.scss */
+/* line 19, ../navigation.scss */
 #navigation a {
-  padding: 14px;
+  padding: 8px;
+  font-size: 15px;
   color: #FFF;
 }
 
-/* line 23, ../navigation.scss */
+/* line 26, ../navigation.scss */
 .navbar-default {
   margin: 0;
 }
@@ -8161,59 +8180,63 @@ header {
   z-index: 990;
   list-style-type: none;
 }
+/* line 17, ../toolbar.scss */
+#toolbar-area li {
+  margin-bottom: 10px;
+}
 
-/* line 19, ../toolbar.scss */
+/* line 22, ../toolbar.scss */
 .tocView-toolbar-item {
   cursor: hand;
   border: 0;
   font: 0/0 a;
   text-shadow: none;
   color: transparent;
-  background-image: url(../../images/list-grey.png);
-  background-size: 30px 30px;
+  background-image: url(../../images/list.png);
+  background-size: 50px 50px;
   background-repeat: no-repeat;
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
 }
-/* line 30, ../toolbar.scss */
+/* line 33, ../toolbar.scss */
 .tocView-toolbar-item:hover {
-  background-image: url(../../images/list-blue.png);
+  background-image: url(../../images/list-active.png);
 }
 
-/* line 35, ../toolbar.scss */
+/* line 38, ../toolbar.scss */
 .accountView-toolbar-item {
   cursor: hand;
   border: 0;
   font: 0/0 a;
   text-shadow: none;
   color: transparent;
-  background-image: url(../../images/login-grey.png);
-  background-size: 30px 30px;
+  background-image: url(../../images/login.png);
+  background-size: 50px 50px;
   background-repeat: no-repeat;
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
 }
-/* line 46, ../toolbar.scss */
+/* line 49, ../toolbar.scss */
 .accountView-toolbar-item:hover {
-  background-image: url(../../images/login-blue.png);
+  background-image: url(../../images/login-active.png);
 }
 
-/* line 51, ../toolbar.scss */
+/* line 54, ../toolbar.scss */
 .printView-toolbar-item {
   cursor: hand;
   border: 0;
   font: 0/0 a;
   text-shadow: none;
   color: transparent;
-  background-image: url(../../images/print-grey.png);
-  background-size: 30px 30px;
+  background-image: url(../../images/print.png);
+  background-size: 50px 50px;
   background-repeat: no-repeat;
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
 }
-/* line 62, ../toolbar.scss */
+/* line 65, ../toolbar.scss */
 .printView-toolbar-item:hover {
-  background-image: url(../../images/print-blue.png);
+  background-image: url(../../images/print-active.png);
 }
 
 /* line 1, ../navbar.scss */
@@ -8278,60 +8301,65 @@ figure {
 
 /* line 7, ../figures.scss */
 .figure_content img {
-  border: 4px solid #f1f1f1;
+  border: 2px solid #f1f1f1;
 }
 
 /* line 12, ../figures.scss */
 figcaption {
   background: #f1f1f1;
-  padding: 4px;
+  padding: 4px 4px 2px 6px;
+  font-size: 14px;
 }
 
-/* line 17, ../figures.scss */
+/* line 18, ../figures.scss */
 figure.left {
   float: left;
   margin-right: 50px;
 }
 
-/* line 22, ../figures.scss */
+/* line 23, ../figures.scss */
 img.left {
   float: left;
   max-width: 100%;
   max-height: 50vh;
 }
 
-/* line 28, ../figures.scss */
+/* line 29, ../figures.scss */
 figure.right {
   float: right;
   margin-left: 40px;
 }
 
-/* line 33, ../figures.scss */
+/* line 34, ../figures.scss */
 img.right {
   float: right;
   max-width: 100%;
   max-height: 50vh;
 }
 
-/* line 39, ../figures.scss */
-figure.plate {
+/* line 40, ../figures.scss */
+figure.plate,
+figure.center {
   width: 50%;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
-/* line 44, ../figures.scss */
-figure.plate img, figure.plate figcaption {
+/* line 46, ../figures.scss */
+figure.plate img, figure.plate figcaption,
+figure.center img,
+figure.center figcaption {
   width: 100%;
 }
 @media (max-width: 768px) {
-  /* line 39, ../figures.scss */
-  figure.plate {
+  /* line 40, ../figures.scss */
+  figure.plate,
+  figure.center {
     width: 90%;
   }
 }
 
-/* line 57, ../figures.scss */
+/* line 59, ../figures.scss */
 .osci-figure {
   background: #f1f1f1;
 }
@@ -8387,6 +8415,29 @@ figure.plate img, figure.plate figcaption {
   background-image: url(../../images/plus-blue.png);
 }
 
+/* line 29, ../notes.scss */
+#note-submit {
+  margin-top: 10px;
+}
+
+/* line 33, ../notes.scss */
+.popover-content {
+  padding: 9px;
+}
+/* line 35, ../notes.scss */
+.popover-content textarea {
+  border: none;
+  font-size: 14px;
+  color: #333;
+  padding: 5px;
+  height: 100px;
+}
+/* line 42, ../notes.scss */
+.popover-content button {
+  font-size: 15px;
+  font-weight: 200;
+}
+
 /* line 15, ../main.scss */
 .browsehappy {
   margin: 0.2em 0;
@@ -8398,4 +8449,16 @@ figure.plate img, figure.plate figcaption {
 /* line 22, ../main.scss */
 p, textarea {
   font-family: Merriweather, Georgia, "Times New Roman", Times, serif;
+}
+
+/* line 27, ../main.scss */
+figcaption p {
+  font-size: 14px;
+  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* line 33, ../main.scss */
+.tooltip {
+  font-size: 14px;
+  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

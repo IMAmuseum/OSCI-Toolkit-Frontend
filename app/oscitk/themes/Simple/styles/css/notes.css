@@ -29,3 +29,26 @@
 .withNotes {
   background-image: url(../../images/plus-blue.png);
 }
+
+/* line 29, ../notes.scss */
+#note-submit {
+  margin-top: 10px;
+}
+
+/* line 33, ../notes.scss */
+.popover-content {
+  padding: 9px;
+}
+/* line 35, ../notes.scss */
+.popover-content textarea {
+  border: none;
+  font-size: 14px;
+  color: #333;
+  padding: 5px;
+  height: 100px;
+}
+/* line 42, ../notes.scss */
+.popover-content button {
+  font-size: 15px;
+  font-weight: 200;
+}

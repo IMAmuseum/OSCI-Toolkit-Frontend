@@ -5,13 +5,14 @@ figure {
 
 .figure_content {
    img {
-      border: 4px solid #f1f1f1;
+      border: 2px solid #f1f1f1;
    }
 }
 
 figcaption {
    background: #f1f1f1;
-   padding: 4px;
+   padding: 4px 4px 2px 6px;
+   font-size: 14px;
 }
 
 figure.left {
@@ -36,7 +37,8 @@ img.right {
    max-height: 50vh;
 }
 
-figure.plate {
+figure.plate,
+figure.center {
    width: 50%;
    max-width: 100%;
    margin-left: auto;

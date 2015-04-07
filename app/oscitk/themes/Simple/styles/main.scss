@@ -20,5 +20,17 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
 }
 
 p, textarea {
-	font-family: $font-family-serif;
+	font-family: Merriweather, Georgia, "Times New Roman", Times, serif;
+}
+
+figcaption {
+	p {
+		font-size: 14px;
+		font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
+}
+
+.tooltip {
+	font-size: 14px;
+	font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

@@ -5,6 +5,8 @@
 		text-transform: uppercase;
 		width: 120px;
 		background-color: $brand-primary;
+		padding-top: 8px;
+		padding-bottom: 8px;
 	}
 	.prev-page {
 		float: left;
@@ -15,7 +17,8 @@
 	}
 
 	a {
-		padding: 14px;
+		padding: 8px;
+		font-size: 15px;
 		color: #FFF;
 	}
 }

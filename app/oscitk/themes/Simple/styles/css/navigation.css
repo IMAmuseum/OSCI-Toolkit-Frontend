@@ -8,11 +8,11 @@ Error: Undefined variable: "$brand-primary".
 5: 		text-transform: uppercase;
 6: 		width: 120px;
 7: 		background-color: $brand-primary;
-8: 	}
-9: 	.prev-page {
-10: 		float: left;
-11: 	}
-12: 
+8: 		padding-top: 8px;
+9: 		padding-bottom: 8px;
+10: 	}
+11: 	.prev-page {
+12: 		float: left;
 
 Backtrace:
 /Users/jtubbs/Code/osci/osci/osci-themes/app/oscitk/themes/Simple/styles/navigation.scss:7
@@ -82,4 +82,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$brand-primary\".\A         on line 7 of /Users/jtubbs/Code/osci/osci/osci-themes/app/oscitk/themes/Simple/styles/navigation.scss\A \A 2: 	margin: 0;\A 3: 	.corner {\A 4: 		text-align:center;\A 5: 		text-transform: uppercase;\A 6: 		width: 120px;\A 7: 		background-color: $brand-primary;\A 8: 	}\A 9: 	.prev-page {\A 10: 		float: left;\A 11: 	}\A 12: "; }
+  content: "Error: Undefined variable: \"$brand-primary\".\A         on line 7 of /Users/jtubbs/Code/osci/osci/osci-themes/app/oscitk/themes/Simple/styles/navigation.scss\A \A 2: 	margin: 0;\A 3: 	.corner {\A 4: 		text-align:center;\A 5: 		text-transform: uppercase;\A 6: 		width: 120px;\A 7: 		background-color: $brand-primary;\A 8: 		padding-top: 8px;\A 9: 		padding-bottom: 8px;\A 10: 	}\A 11: 	.prev-page {\A 12: 		float: left;"; }
