@@ -71,13 +71,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     updateProgress: function() {
         var value = $(window).scrollTop();
         var offset = 400;
-        if (value >= offset){
-            $('.progress').removeClass('hidden');
-            $('#navigation').removeClass('hidden');
-        } else {
-            $('.progress').addClass('hidden');
-            $('#navigation').addClass('hidden');
-        }
         var sectionValue = value - offset;
         $('.progress .progress-bar').attr('aria-valuenow', value);
         if(! this.maxHeightSet) {
@@ -91,6 +84,11 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             $('.progress .progress-bar').attr('aria-valuemax', max);
             var percent = Math.floor((sectionValue/max)*100);
             $('.progress .progress-bar').attr('style', 'height: '+percent+'%');
+        }
+        if (value >= offset){
+            $('.progress').removeClass('hidden');
+        } else {
+            $('.progress').addClass('hidden');
         }
     },
 

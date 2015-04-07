@@ -4,7 +4,7 @@ this["JST"]["app/oscitk/themes/Simple/templates/account-login.tpl.html"] = funct
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<button class="btn btn-link">\n\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</button>\n\t</div>\n\t<div class="container">\n\t\t<h3>Login</h3>\n\t\t<div class="form-error"></div>\n\t\t<form id="account-form">\n\t\t\t<label for="username">Username:</label>\n\t\t\t<input type="text" id="username" placeholder="Username" />\n\t\t\t<label for="password">Password:</label>\n\t\t\t<input type="password" id="password" placeholder="Password" />\n\t\t\t<button type="button" class="login">Log In</button>\n\t\t\t<div><a href="#" class="register">Register an account</a></div>\n\t\t</form>\n\t</div>\n</div>';
+__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<button class="btn btn-link">\n\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</button>\n\t</div>\n\t<div class="container">\n\t\t<div class="row" style="margin-top: 30vh;">\n\t\t\t<div class="col-md-8 col-md-offset-2">\n\t\t\t\t<div class="panel panel-default">\n\t\t\t\t\t<div class="panel-heading">\n\t\t\t\t\t\t<h3>Login</h3>\n\t\t\t\t\t</div>\n\t\t  \t\t\t<div class="panel-body">\n\t\t\t\t\t\t<div class="form-error"></div>\n\t\t\t\t\t\t<form id="account-form">\n\t\t\t\t\t\t\t<div class="form-group">\n\t\t\t\t\t\t\t\t<label for="username">Username:</label>\n\t\t\t\t\t\t\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class="form-group">\n\t\t\t\t\t\t\t\t<label for="password">Password:</label>\n\t\t\t\t\t\t\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<button type="button" class="btn login">Log In</button>\n\t\t\t\t\t\t\t<div><a href="#" class="register">Register an account</a></div>\n\t\t\t\t\t\t</form>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>';
 
 }
 return __p
@@ -14,11 +14,11 @@ this["JST"]["app/oscitk/themes/Simple/templates/account-profile.tpl.html"] = fun
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<button class="btn btn-link">\n\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</button>\n\t</div>\n\t<div class="container">\n\t\t<h3>Profile</h3>\n\t\t<h4>' +
+__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<button class="btn btn-link">\n\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</button>\n\t</div>\n\t<div class="container">\n\t\t<div class="row" style="margin-top: 30vh;">\n\t\t\t<div class="col-md-6 col-md-offset-3">\n\t\t\t\t<div class="panel panel-default">\n\t\t\t\t\t<div class="panel-heading">\n\t\t\t\t\t\t<h3>Profile</h3>\n\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class="panel-body">\n\t\t\t\t\t\t<h4>' +
 ((__t = ( username )) == null ? '' : __t) +
-'</h4>\n\t\t<h5>' +
+'</h4>\n\t\t\t\t\t\t<h5>' +
 ((__t = ( email )) == null ? '' : __t) +
-'</h5>\n\t\t<div><a href="#" class="logout">Log out</a></div>\n\t</div>\n</div>';
+'</h5>\n\t\t\t\t\t\t<div><a href="#" class="logout">Log out</a></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>';
 
 }
 return __p
@@ -28,7 +28,7 @@ this["JST"]["app/oscitk/themes/Simple/templates/account-register.tpl.html"] = fu
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<button class="btn btn-link">\n\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</button>\n\t</div>\n\t<div class="container">\n\t\t<h2>Register</h2>\n\t\t<div class="form-error"></div>\n\t\t<form id="account-form">\n\t\t\t<label for="username">Username:</label>\n\t\t\t<input type="text" id="username" placeholder="Username" />\n\t\t\t<label for="password">Password:</label>\n\t\t\t<input type="password" id="password" placeholder="Password" />\n\t\t\t<label for="email">Email:</label>\n\t\t\t<input type="text" id="email" placeholder="Email" />\n\t\t\t<button type="button" class="register">Register</button>\n\t\t\t<div><a href="#" class="login">Already have an account?</a></div>\n\t\t</form>\n\t</div>\n</div>';
+__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<button class="btn btn-link">\n\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</button>\n\t</div>\n\t<div class="container">\n\t\t<div class="row" style="margin-top: 30vh;">\n\t\t\t<div class="col-md-8 col-md-offset-2">\n\t\t\t\t<div class="panel panel-default">\n\t\t\t\t\t<div class="panel-heading">\n\t\t\t\t\t\t<h3>Register</h3>\n\t\t\t\t\t</div>\n\t\t  \t\t\t<div class="panel-body">\n\t\t\t\t\t\t<div class="form-error"></div>\n\t\t\t\t\t\t<form id="account-form">\n\t\t\t\t\t\t\t<div class="form-group">\n\t\t\t\t\t\t\t\t<label for="username">Username:</label>\n\t\t\t\t\t\t\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class="form-group">\n\t\t\t\t\t\t\t\t<label for="password">Password:</label>\n\t\t\t\t\t\t\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class="form-group">\n\t\t\t\t\t\t\t\t<label for="email">Email:</label>\n\t\t\t\t\t\t\t\t<input class="form-control" type="text" id="email" placeholder="Email" />\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<button type="button" class="btn register">Register</button>\n\t\t\t\t\t\t\t<div><a href="#" class="login">Already have an account?</a></div>\n\t\t\t\t\t\t</form>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>';
 
 }
 return __p
@@ -38,7 +38,7 @@ this["JST"]["app/oscitk/themes/Simple/templates/app.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="progress vertical hidden hidden-print hidden-sm hidden-xs" data-spy="affix" data-offset-top="400">\n\t<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n<div id="navbar" class="hidden-print" data-spy="affix" data-offset-top="400"></div>\n<div id="toolbar" class="hidden-print hidden-sm hidden-xs" data-spy="affix" data-offset-top="400"></div>\n<div class="container">\n\t<div class="row">\n\t\t<div class="col-md-10 col-md-offset-1 section-col">\n\t\t\t<div id="loader">Loading...</div>\n\t\t\t<div id="section"></div>\n\t\t</div>\n\t</div>\n</div>\n\n<div id="navigation" class="hidden no-print"></div>';
+__p += '<div class="progress vertical hidden hidden-print hidden-sm hidden-xs" data-spy="affix" data-offset-top="400">\n\t<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n<div id="navbar" class="hidden-print" data-spy="affix" data-offset-top="400"></div>\n<div id="toolbar" class="hidden-print hidden-sm hidden-xs" data-spy="affix" data-offset-top="400"></div>\n<div class="container">\n\t<div class="row">\n\t\t<div class="col-md-10 col-md-offset-1 section-col">\n\t\t\t<div id="loader">Loading...</div>\n\t\t\t<div id="section"></div>\n\t\t</div>\n\t</div>\n</div>\n\n<div id="navigation" class="no-print"></div>';
 
 }
 return __p
@@ -99,7 +99,7 @@ this["JST"]["app/oscitk/themes/Simple/templates/font-size.tpl.html"] = function(
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<a href="#font-larger" class="larger font-button">A +</a>\n<a href="#font-smaller" class="smaller font-button">A -</a>\n';
+__p += '<a href="#font-larger" class="larger font-button">A+</a>&nbsp;\n<a href="#font-smaller" class="smaller font-button">A-</a>\n';
 
 }
 return __p
