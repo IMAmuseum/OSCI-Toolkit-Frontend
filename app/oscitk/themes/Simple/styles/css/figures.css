@@ -1,41 +1,64 @@
-/* line 2, ../figures.scss */
+/* line 1, ../figures.scss */
+figure {
+  margin: 20px;
+}
+
+/* line 7, ../figures.scss */
 .figure_content img {
-  max-width: 90%;
   border: 4px solid #f1f1f1;
 }
 
-/* line 8, ../figures.scss */
+/* line 12, ../figures.scss */
 figcaption {
   background: #f1f1f1;
+  padding: 4px;
 }
 
-/* line 12, ../figures.scss */
-.left {
+/* line 17, ../figures.scss */
+figure.left {
   float: left;
-  max-width: 50vh;
-  max-height: 50vh;
+  margin-right: 50px;
 }
-/* line 16, ../figures.scss */
-.left figcaption {
+
+/* line 22, ../figures.scss */
+img.left {
+  float: left;
   max-width: 100%;
-  margin-right: 45px;
-  padding: 5px;
-}
-
-/* line 24, ../figures.scss */
-.right {
-  float: right;
-  max-width: 50vh;
   max-height: 50vh;
 }
+
 /* line 28, ../figures.scss */
-.right figcaption {
-  max-width: 50vh;
-  margin-left: 20px;
-  padding: 5px;
+figure.right {
+  float: right;
+  margin-left: 40px;
 }
 
-/* line 40, ../figures.scss */
+/* line 33, ../figures.scss */
+img.right {
+  float: right;
+  max-width: 100%;
+  max-height: 50vh;
+}
+
+/* line 39, ../figures.scss */
+figure.plate {
+  width: 50%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* line 44, ../figures.scss */
+figure.plate img, figure.plate figcaption {
+  width: 100%;
+}
+@media (max-width: 768px) {
+  /* line 39, ../figures.scss */
+  figure.plate {
+    width: 90%;
+  }
+}
+
+/* line 57, ../figures.scss */
 .osci-figure {
   background: #f1f1f1;
 }
