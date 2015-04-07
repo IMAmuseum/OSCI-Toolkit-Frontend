@@ -19,6 +19,11 @@
 	line-height:15px;
 	text-align:center;
 	background:#52818B;
+	&:hover {
+		color:#fff;
+		text-decoration: none;
+		background:#3f636b;
+	}
 }
 
 @media (max-width: 992px) {

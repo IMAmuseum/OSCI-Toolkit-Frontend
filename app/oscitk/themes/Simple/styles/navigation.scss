@@ -7,6 +7,9 @@
 		background-color: $brand-primary;
 		padding-top: 8px;
 		padding-bottom: 8px;
+		&:hover {
+			background-color: #3f636b;
+		}
 	}
 	.prev-page {
 		float: left;

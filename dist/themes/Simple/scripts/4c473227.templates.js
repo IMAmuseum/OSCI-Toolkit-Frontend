@@ -149,19 +149,23 @@ __p += '<nav class="navbar navbar-default">\n\t<div class="container">\n\t   <di
  i = 0 ;
 __p += '\n         ';
  _.each(sections, function(section) { ;
-__p += '\n          <li class="navbar-item';
+__p += '\n          ';
+ subtitle = section.get('subtitle') ? ' - <span class="navbar-subtitle">'+section.get('subtitle')+'</span>' : '' ;
+__p += '\n          ';
+ ++i ;
+__p += '\n          <li class="navbar-item hidden-xs ';
+ if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;
+__p += '" data-toggle="tooltip" data-placement="bottom" title="' +
+((__t = ( section.get('title') )) == null ? '' : __t) +
+'">\n            <a>\n              ' +
+((__t = ( i )) == null ? '' : __t) +
+'\n            </a>\n          </li>\n          <li class="navbar-item visible-xs ';
  if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;
 __p += '">\n            <a data-section-id="' +
 ((__t = ( section.id )) == null ? '' : __t) +
-'" href="#">\n              ';
- ++i ;
-__p += '\n              <span class="hidden-xs">' +
-((__t = ( i )) == null ? '' : __t) +
-'</span>\n              ';
- subtitle = section.get('subtitle') ? ' - <span class="navbar-subtitle">'+section.get('subtitle')+'</span>' : '' ;
-__p += '\n              <span class="visible-xs">' +
+'" href="#">\n              ' +
 ((__t = ( i + ' - ' + section.get('title') + subtitle )) == null ? '' : __t) +
-'</span>\n            </a>\n          </li>\n         ';
+'\n            </a>\n          </li>\n         ';
  }); ;
 __p += '\n      </ul>\n\t\t</div>\n\t</div>\n</nav>';
 
