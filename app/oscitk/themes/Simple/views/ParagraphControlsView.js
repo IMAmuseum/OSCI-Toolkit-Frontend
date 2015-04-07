@@ -41,7 +41,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
             $(paragraph).before(
                 '<div class="paragraph-controls hidden-print" data-osci_content_id="osci-content-'+i+'" data-paragraph_identifier="'+i+'" >'+
-                '<button class="btn btn-default '+ hasNotes +' btn-xs paragraph-button" type="button" id="paragraph-'+i+'" data-paragraph_number="'+i+'">'+
+                '<button class="btn btn-link '+ hasNotes +' btn-xs paragraph-button" type="button" id="paragraph-'+i+'" data-paragraph_number="'+i+'">'+
                 '<span class="paragraph-identifier" paragraph-identifier="'+i+'">'+i+'</span>'+
                 '</button>'+
                 '</div>'
