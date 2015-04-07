@@ -99,7 +99,7 @@ this["JST"]["app/oscitk/themes/Simple/templates/font-size.tpl.html"] = function(
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<a href="#font-larger" class="larger font-button">A+</a>&nbsp;\n<a href="#font-smaller" class="smaller font-button">A-</a>\n';
+__p += '<a href="#font-larger" class="larger font-button" data-href="font-larger" data-style="inline">A+</a>&nbsp;\n<a href="#font-smaller" class="smaller font-button" data-href="font-smaller" data-style="inline">A-</a>\n';
 
 }
 return __p
@@ -302,29 +302,29 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<button class="btn btn-link">\n\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</button>\n\t</div>\n\t<div class="container">\n\t\t<h3>Table of Contents</h3>\n\t\t<ul>\n\t\t\t';
+__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<button class="btn btn-link">\n\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</button>\n\t</div>\n\t<div class="container">\n\t\t<div class="row" style="margin-top: 30vh;">\n\t\t\t<div class="col-md-8 col-md-offset-2">\n\t\t\t\t<div class="panel panel-default">\n\t\t\t\t\t<div class="panel-heading">\n\t\t\t\t\t\t<h3>Table of Contents</h3>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="panel-body">\n\t\t\t\t\t\t<ul class="toc">\n\t\t\t\t\t\t\t';
  _.each(items, function(item) { ;
-__p += '\n\t\t\t\t<li class="toc-item';
+__p += '\n\t\t\t\t\t\t\t\t<li class="toc-item';
  if (item.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;
-__p += '">\n\t\t\t\t\t<a data-section-id="' +
+__p += '">\n\t\t\t\t\t\t\t\t\t<a data-section-id="' +
 ((__t = ( item.id )) == null ? '' : __t) +
-'" href="#">\n\t\t\t\t\t\t<div class="toc-item-thumbnail">\n\t\t\t\t\t\t\t';
+'" href="#">\n\t\t\t\t\t\t\t\t\t\t<div class="toc-item-thumbnail">\n\t\t\t\t\t\t\t\t\t\t\t';
  if (item.get('thumbnail')) { ;
-__p += '\n\t\t\t\t\t\t\t\t<img src="' +
+__p += '\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="' +
 ((__t = ( item.get('thumbnail') )) == null ? '' : __t) +
-'">\n\t\t\t\t\t\t\t';
+'">\n\t\t\t\t\t\t\t\t\t\t\t';
  } ;
-__p += '\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class="toc-item-text">\n\t\t\t\t\t\t\t<h4>' +
+__p += '\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t<div class="toc-item-text">\n\t\t\t\t\t\t\t\t\t\t\t<h4>' +
 ((__t = ( item.get('title') )) == null ? '' : __t) +
-'</h4>\n\t\t\t\t\t\t\t';
+'</h4>\n\t\t\t\t\t\t\t\t\t\t\t';
  if (item.get('subtitle')) { ;
-__p += '\n\t\t\t\t\t\t\t\t<h5>' +
+__p += '\n\t\t\t\t\t\t\t\t\t\t\t\t<h5>' +
 ((__t = ( item.get('subtitle') )) == null ? '' : __t) +
-'</h5>\n\t\t\t\t\t\t\t';
+'</h5>\n\t\t\t\t\t\t\t\t\t\t\t';
  } ;
-__p += '\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</a>\n\t\t\t\t\t<hr>\n\t\t\t\t</li>\n\t\t\t';
+__p += '\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t\t<hr>\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t';
  }); ;
-__p += '\n\t\t</ul>\n\t</div>\n</div>';
+__p += '\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>';
 
 }
 return __p

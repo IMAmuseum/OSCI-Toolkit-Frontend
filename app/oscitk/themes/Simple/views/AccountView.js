@@ -14,6 +14,9 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 			this.model = app.account;
 			this.render();
 		});
+		this.listenTo(Backbone, 'sectionLoaded', function(sectionModel) {
+			this.sectionId = sectionModel.get('id');
+		});
 	},
 	render: function() {
 		// determine if user is logged in.  Show login form or user details
@@ -104,5 +107,12 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 	},
 	closeOverlay: function() {
 		Backbone.trigger("toolbarRemoveViews");
+		var section = app.collections.navigationItems.get(this.section_id);
+		if (section) {
+			this.currentNavigationItem = app.collections.navigationItems.get(section_id);
+		} else {
+			this.currentNavigationItem = app.collections.navigationItems.first();
+		}
+		Backbone.trigger('currentNavigationItemChanged', this.currentNavigationItem);
 	}
 });

@@ -16,10 +16,10 @@ OsciTk.views.FontSize = OsciTk.views.BaseView.extend({
 	changeFontSize: function(href) {
 		var sectionView = app.views.sectionView;
 
-		if (href === "#font-larger") {
+		if (href === "font-larger") {
 			this.currentFontSize += 25;
 		}
-		if (href === "#font-smaller")  {
+		if (href === "font-smaller")  {
 			this.currentFontSize -= 25;
 		}
 
