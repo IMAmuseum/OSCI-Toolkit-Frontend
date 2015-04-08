@@ -16,7 +16,7 @@
           <% subtitle = section.get('subtitle') ? ' - <span class="navbar-subtitle">'+section.get('subtitle')+'</span>' : '' %>
           <% ++i %>
           <li class="navbar-item hidden-xs <% if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } %>" data-toggle="tooltip" data-placement="bottom" title="<%= section.get('title') %>">
-            <a>
+            <a data-section-id="<%= section.id %>">
               <%= i %>
             </a>
           </li>

@@ -167,7 +167,9 @@ __p += '\n          <li class="navbar-item hidden-xs ';
  if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;
 __p += '" data-toggle="tooltip" data-placement="bottom" title="' +
 ((__t = ( section.get('title') )) == null ? '' : __t) +
-'">\n            <a>\n              ' +
+'">\n            <a data-section-id="' +
+((__t = ( section.id )) == null ? '' : __t) +
+'">\n              ' +
 ((__t = ( i )) == null ? '' : __t) +
 '\n            </a>\n          </li>\n          <li class="navbar-item visible-xs ';
  if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;
