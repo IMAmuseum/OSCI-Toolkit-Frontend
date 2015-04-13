@@ -41,7 +41,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   /* line 38, ../navbar.scss */
   #navbar .nav li {
     width: 100%;
