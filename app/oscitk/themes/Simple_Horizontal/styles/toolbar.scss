@@ -1,0 +1,72 @@
+#toolbar.affix {
+    top: 50px;
+    + .container {
+	    padding-top: 50px
+	}
+}
+
+#toolbar {
+	float: left;
+	margin-top: 20px;
+	z-index: 998;
+}
+
+ul.toc {
+	list-style-type: none;
+}
+
+#toolbar-area {
+	z-index: 990;
+	list-style-type: none;
+	li{
+		margin-bottom: 10px;
+	}
+}
+
+.tocView-toolbar-item {
+	cursor: hand;
+	border: 0;
+	font: 0/0 a;
+	text-shadow: none;
+	color: transparent;
+	background-image: url(../../images/list.png);
+	background-size: 50px 50px;
+	background-repeat: no-repeat;
+	width: 50px;
+	height: 50px;
+	&:hover {
+		background-image: url(../../images/list-active.png);
+	}
+}
+
+.accountView-toolbar-item {
+	cursor: hand;
+	border: 0;
+	font: 0/0 a;
+	text-shadow: none;
+	color: transparent;
+	background-image: url(../../images/login.png);
+	background-size: 50px 50px;
+	background-repeat: no-repeat;
+	width: 50px;
+	height: 50px;
+	&:hover {
+		background-image: url(../../images/login-active.png);
+	}
+}
+
+.printView-toolbar-item {
+	cursor: hand;
+	border: 0;
+	font: 0/0 a;
+	text-shadow: none;
+	color: transparent;
+	background-image: url(../../images/print.png);
+	background-size: 50px 50px;
+	background-repeat: no-repeat;
+	width: 50px;
+	height: 50px;
+	&:hover {
+		background-image: url(../../images/print-active.png);
+	}
+}
