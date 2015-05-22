@@ -6004,7 +6004,7 @@ a.badge:hover, a.badge:focus {
 }
 /* line 22, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_jumbotron.scss */
 .jumbotron > hr {
-  border-top-color: #d7d7d7;
+  border-top-color: #d8d8d8;
 }
 /* line 26, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_jumbotron.scss */
 .container .jumbotron {
@@ -7343,7 +7343,7 @@ button.close {
   font-size: 16px;
   font-weight: normal;
   line-height: 18px;
-  background-color: #e9e9e9;
+  background-color: #eaeaea;
   border-bottom: 1px solid #dddddd;
   border-radius: -1px -1px 0 0;
 }
@@ -8031,7 +8031,7 @@ button.close {
 
 /* line 5, ../section.scss */
 #section {
-  padding-left: 40px;
+  padding: 20px 0 0 0;
 }
 
 /* line 9, ../section.scss */
@@ -8056,62 +8056,133 @@ button.close {
   background: #3f636b;
 }
 
-@media (max-width: 992px) {
+@media (min-width: 768px) {
   /* line 30, ../section.scss */
   #section {
-    padding-left: 0;
+    padding: 70px 40px 0 0;
+  }
+  /* line 33, ../section.scss */
+  #section:after {
+    padding-left: 40px;
   }
 }
 @media (min-width: 992px) {
-  /* line 36, ../section.scss */
+  /* line 40, ../section.scss */
   .section-col {
     float: none;
   }
 }
 /* line 1, ../navigation.scss */
 #navigation {
+  background: #ffffff;
+  height: 36px;
   margin: 0;
+  position: relative;
+  overflow: hidden;
 }
-/* line 3, ../navigation.scss */
+/* line 8, ../navigation.scss */
 #navigation .corner {
+  background-color: #52818b;
   text-align: center;
   text-transform: uppercase;
   width: 120px;
-  background-color: #52818b;
-  padding-top: 8px;
-  padding-bottom: 8px;
-}
-/* line 10, ../navigation.scss */
-#navigation .corner:hover {
-  background-color: #3f636b;
 }
 /* line 14, ../navigation.scss */
+#navigation .corner a {
+  color: #ffffff;
+  cursor: pointer;
+  display: block;
+  font-size: 15px;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  padding: 8px;
+}
+/* line 23, ../navigation.scss */
+#navigation .corner a:hover {
+  background-color: #3f636b;
+}
+/* line 28, ../navigation.scss */
 #navigation .prev-page {
   float: left;
 }
-/* line 18, ../navigation.scss */
+/* line 32, ../navigation.scss */
 #navigation .next-page {
   float: right;
 }
-/* line 22, ../navigation.scss */
-#navigation a {
-  padding: 8px;
-  font-size: 15px;
-  color: #FFF;
-}
 
-/* line 29, ../navigation.scss */
-.navbar-default {
+/* line 39, ../navigation.scss */
+.navigation-sections {
+  list-style-type: none;
   margin: 0;
+  padding: 0;
+}
+/* line 44, ../navigation.scss */
+.navigation-sections .navigation-item {
+  float: left;
+  position: relative;
+}
+/* line 48, ../navigation.scss */
+.navigation-sections .navigation-item a {
+  color: #222222;
+  cursor: pointer;
+  display: block;
+  padding: 8px;
+  text-align: center;
+  width: 30px;
+}
+/* line 56, ../navigation.scss */
+.navigation-sections .navigation-item a:hover {
+  background: #777777;
+  color: #ffffff;
+}
+/* line 65, ../navigation.scss */
+.navigation-sections .navigation-item.active a {
+  background-color: #222222;
+  color: #ffffff;
+}
+/* line 71, ../navigation.scss */
+.navigation-sections .tooltip {
+  left: 50% !important;
+  top: 100% !important;
+}
+/* line 76, ../navigation.scss */
+.navigation-sections .tooltip > .tooltip-inner {
+  background-color: #52818b;
+  color: #FFF;
+  height: 40px;
+  line-height: 35px;
+  min-width: 150px;
+  position: absolute;
+  right: -27px;
+  text-transform: uppercase;
+  top: -3px;
+  z-index: 9999;
+}
+/* line 88, ../navigation.scss */
+.navigation-sections .tooltip.bottom > .tooltip-arrow {
+  border-bottom-color: #52818b;
+  border-width: 0 15px 15px;
+  left: 50%;
+  margin-left: -15px;
+  top: -16px;
 }
 
+@media (min-width: 768px) {
+  /* line 98, ../navigation.scss */
+  #navigation {
+    background: #f1f1f1;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+  }
+}
 /* line 1, ../progress.scss */
 .progress.vertical {
-  position: fixed;
-  top: 70px;
-  right: 40px;
-  width: .25em;
   height: 85%;
+  position: fixed;
+  right: 40px;
+  top: 70px;
+  width: .25em;
 }
 
 /* line 8, ../progress.scss */
@@ -8121,286 +8192,320 @@ button.close {
 
 /* line 11, ../progress.scss */
 .progress.vertical.bottom .progressbar-front-text {
-  position: absolute;
   bottom: 0;
+  position: absolute;
 }
 
 /* line 15, ../progress.scss */
 .progress.vertical .progress-bar {
-  width: 100%;
   height: 0;
+  width: 100%;
   -webkit-transition: height 0.6s ease;
   -o-transition: height 0.6s ease;
   transition: height 0.6s ease;
 }
 
+/* line 23, ../progress.scss */
+.progress.horizontal {
+  bottom: 36px;
+  height: .25em;
+  margin-bottom: 0;
+  position: fixed;
+  right: 0;
+  width: 100%;
+}
+
+/* line 31, ../progress.scss */
+.progress.horizontal.bottom {
+  position: relative;
+}
+
+/* line 34, ../progress.scss */
+.progress.horizontal.bottom .progressbar-front-text {
+  bottom: 0;
+  position: absolute;
+}
+
+/* line 38, ../progress.scss */
+.progress.horizontal .progress-bar {
+  height: 100%;
+  width: 0;
+  -webkit-transition: width 0.6s ease;
+  -o-transition: width 0.6s ease;
+  transition: width 0.6s ease;
+}
+
 /* line 1, ../header.scss */
 header {
+  padding-top: 50px;
   z-index: 1000;
 }
 
-/* line 4, ../header.scss */
+/* line 5, ../header.scss */
 .container-header {
-  width: 100%;
-  height: 400px;
-  max-width: 100%;
   background-color: #909090;
   background-position: center;
   background-size: cover;
+  height: 80%;
+  max-width: 100%;
+  position: relative;
+  width: 100%;
 }
 
-/* line 13, ../header.scss */
+/* line 15, ../header.scss */
 .header-title {
-  position: absolute;
-  top: 200px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
   color: white;
+  left: 50%;
+  position: absolute;
   text-align: center;
   text-shadow: 0 1px 0 black;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
-/* line 22, ../header.scss */
+/* line 25, ../header.scss */
 .header-title h1 {
   margin: 0;
 }
-/* line 25, ../header.scss */
+/* line 28, ../header.scss */
 .header-title p {
   font-style: italic;
   font-weight: 300;
 }
 
-/* line 1, ../toolbar.scss */
-#toolbar.affix {
-  top: 50px;
-}
-/* line 3, ../toolbar.scss */
-#toolbar.affix + .container {
-  padding-top: 50px;
-}
+@media (min-width: 768px) {
+  /* line 35, ../header.scss */
+  header {
+    padding-top: 0;
+  }
 
-/* line 8, ../toolbar.scss */
+  /* line 38, ../header.scss */
+  .container-header {
+    height: 100%;
+    position: fixed;
+  }
+}
+/* line 1, ../toolbar.scss */
 #toolbar {
-  float: left;
-  margin-top: 20px;
+  float: right;
+  position: relative;
   z-index: 998;
 }
 
-/* line 14, ../toolbar.scss */
+/* line 7, ../toolbar.scss */
 ul.toc {
   list-style-type: none;
 }
 
-/* line 18, ../toolbar.scss */
+/* line 11, ../toolbar.scss */
 #toolbar-area {
-  z-index: 990;
   list-style-type: none;
+  margin: 0;
+  padding: 0;
+  z-index: 990;
 }
-/* line 21, ../toolbar.scss */
+/* line 17, ../toolbar.scss */
 #toolbar-area li {
-  margin-bottom: 10px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  float: left;
+  height: 30px;
+  margin: 5px;
+  width: 30px !important;
 }
 
-/* line 26, ../toolbar.scss */
+/* line 28, ../toolbar.scss */
 .tocView-toolbar-item {
-  cursor: hand;
-  border: 0;
-  font: 0/0 a;
-  text-shadow: none;
-  color: transparent;
   background-image: url(../../images/list.png);
-  background-size: 50px 50px;
-  background-repeat: no-repeat;
-  width: 50px;
-  height: 50px;
 }
-/* line 37, ../toolbar.scss */
+/* line 30, ../toolbar.scss */
 .tocView-toolbar-item:hover {
   background-image: url(../../images/list-active.png);
 }
 
-/* line 42, ../toolbar.scss */
+/* line 35, ../toolbar.scss */
 .accountView-toolbar-item {
-  cursor: hand;
-  border: 0;
-  font: 0/0 a;
-  text-shadow: none;
-  color: transparent;
   background-image: url(../../images/login.png);
-  background-size: 50px 50px;
-  background-repeat: no-repeat;
-  width: 50px;
-  height: 50px;
 }
-/* line 53, ../toolbar.scss */
+/* line 37, ../toolbar.scss */
 .accountView-toolbar-item:hover {
   background-image: url(../../images/login-active.png);
 }
 
-/* line 58, ../toolbar.scss */
+/* line 42, ../toolbar.scss */
 .printView-toolbar-item {
-  cursor: hand;
-  border: 0;
-  font: 0/0 a;
-  text-shadow: none;
-  color: transparent;
   background-image: url(../../images/print.png);
-  background-size: 50px 50px;
-  background-repeat: no-repeat;
-  width: 50px;
-  height: 50px;
 }
-/* line 69, ../toolbar.scss */
+/* line 44, ../toolbar.scss */
 .printView-toolbar-item:hover {
   background-image: url(../../images/print-active.png);
 }
 
-/* line 1, ../navbar.scss */
-#navbar.affix {
-  position: fixed;
-  top: 0;
-  width: 100%;
+/* line 50, ../toolbar.scss */
+#toolbar-area .fontSizeView-toolbar-item {
+  width: 60px !important;
+}
+/* line 53, ../toolbar.scss */
+#toolbar-area .fontSizeView-toolbar-item a {
+  display: inline-block;
+  padding: 7px 5px 7px 0;
 }
 
-/* line 7, ../navbar.scss */
+/* line 1, ../navbar.scss */
 #navbar {
   z-index: 998;
+  top: 0;
+  position: fixed;
+  width: 100%;
 }
-/* line 10, ../navbar.scss */
+/* line 8, ../navbar.scss */
 #navbar .nav li {
   text-align: center;
-  width: 55px;
+  width: 100%;
 }
-/* line 11, ../navbar.scss */
+/* line 12, ../navbar.scss */
 #navbar .nav li a {
-  font-size: 24px;
+  font-size: 14px;
 }
-@media (max-width: 768px) {
-  /* line 11, ../navbar.scss */
-  #navbar .nav li a {
-    font-size: 14px;
-  }
+
+/* line 19, ../navbar.scss */
+.navbar {
+  min-height: initial;
 }
-/* line 21, ../navbar.scss */
-#navbar .nav li.active {
-  background-color: #333;
+
+/* line 23, ../navbar.scss */
+.navbar-default {
+  margin: 0;
 }
 
 /* line 27, ../navbar.scss */
 #navbar-title {
   color: #333;
-  font-size: 24px;
+  font-size: 14px;
 }
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   /* line 27, ../navbar.scss */
   #navbar-title {
-    font-size: 14px;
+    font-size: 18px;
+    float: left;
+    padding: 10px 15px 8px;
+    line-height: 1.2;
+    height: auto;
   }
 }
 
 @media (max-width: 480px) {
-  /* line 38, ../navbar.scss */
+  /* line 43, ../navbar.scss */
   #navbar .nav li {
     width: 100%;
     text-align: left;
   }
 }
-/* line 47, ../navbar.scss */
-#navbar-area .tooltip > .tooltip-inner {
-  background-color: #52818b;
-  height: 40px;
-  position: relative;
-  text-transform: uppercase;
-  right: 50px;
-  top: -8px;
-  min-width: 150px;
-  line-height: 35px;
-  color: #FFF;
-}
-/* line 58, ../navbar.scss */
-#navbar-area .tooltip.bottom > .tooltip-arrow {
-  top: -16px;
-  left: 50%;
-  margin-left: -15px;
-  border-bottom-color: #52818b;
-  border-width: 0 15px 15px;
-}
-
 /* line 1, ../font-size.scss */
 .font-size-view {
-  line-height: 20px;
+  line-height: 1.2;
 }
 
 /* line 1, ../figures.scss */
 figure {
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  -o-column-break-inside: avoid;
+  -ms-column-break-inside: avoid;
+  column-break-inside: avoid;
+  -webkit-break-inside: avoid;
+  -moz-break-inside: avoid;
+  -o-break-inside: avoid;
+  -ms-break-inside: avoid;
+  break-inside: avoid;
   margin: 20px;
+  max-height: auto;
+  position: relative;
+  text-align: center;
 }
 
-/* line 7, ../figures.scss */
+/* line 20, ../figures.scss */
 .figure_content img {
   border: 2px solid #f1f1f1;
+  max-width: 100%;
 }
 
-/* line 12, ../figures.scss */
+/* line 26, ../figures.scss */
 figcaption {
   background: #f1f1f1;
-  padding: 4px 4px 2px 6px;
   font-size: 14px;
+  padding: 4px 4px 2px 6px;
+  text-align: center;
+  width: 100%;
 }
 
-/* line 18, ../figures.scss */
+/* line 34, ../figures.scss */
 figure.left {
   float: left;
   margin-right: 50px;
 }
 
-/* line 23, ../figures.scss */
+/* line 39, ../figures.scss */
 img.left {
   float: left;
-  max-width: 100%;
   max-height: 50vh;
 }
 
-/* line 29, ../figures.scss */
+/* line 44, ../figures.scss */
 figure.right {
   float: right;
   margin-left: 40px;
 }
 
-/* line 34, ../figures.scss */
+/* line 49, ../figures.scss */
 img.right {
   float: right;
-  max-width: 100%;
   max-height: 50vh;
 }
 
-/* line 40, ../figures.scss */
+/* line 54, ../figures.scss */
 figure.plate,
 figure.center {
-  width: 50%;
-  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
+  max-width: 100%;
+  width: 50%;
 }
-/* line 46, ../figures.scss */
+/* line 60, ../figures.scss */
 figure.plate img, figure.plate figcaption,
 figure.center img,
 figure.center figcaption {
   width: 100%;
 }
 @media (max-width: 768px) {
-  /* line 40, ../figures.scss */
+  /* line 54, ../figures.scss */
   figure.plate,
   figure.center {
     width: 90%;
   }
 }
 
-/* line 59, ../figures.scss */
+/* line 73, ../figures.scss */
 .osci-figure {
   background: #f1f1f1;
 }
 
+@media (min-width: 768px) {
+  /* line 78, ../figures.scss */
+  figure {
+    max-height: 100%;
+    overflow: auto;
+    padding-bottom: 36px;
+  }
+
+  /* line 84, ../figures.scss */
+  figcaption {
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+  }
+}
 /* line 1, ../overlay.scss */
 .overlay {
   position: fixed;
@@ -8424,7 +8529,7 @@ figure.center figcaption {
 .paragraph-controls {
   position: relative;
   right: 32px;
-  top: 6px;
+  top: 4px;
   z-index: 2;
   height: 0;
 }
@@ -8458,10 +8563,28 @@ figure.center figcaption {
 }
 
 /* line 33, ../notes.scss */
+.popover {
+  top: -160px !important;
+  left: 0 !important;
+  margin-top: 0 !important;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  -o-column-break-inside: avoid;
+  -ms-column-break-inside: avoid;
+  column-break-inside: avoid;
+  -webkit-break-inside: avoid;
+  -moz-break-inside: avoid;
+  -o-break-inside: avoid;
+  -ms-break-inside: avoid;
+  break-inside: avoid;
+  overflow: auto;
+}
+
+/* line 50, ../notes.scss */
 .popover-content {
   padding: 9px;
 }
-/* line 35, ../notes.scss */
+/* line 52, ../notes.scss */
 .popover-content textarea {
   border: none;
   font-size: 14px;
@@ -8469,13 +8592,54 @@ figure.center figcaption {
   padding: 5px;
   height: 100px;
 }
-/* line 42, ../notes.scss */
+/* line 59, ../notes.scss */
 .popover-content button {
   font-size: 15px;
   font-weight: 200;
 }
 
-/* line 16, ../main.scss */
+/* line 1, ../layout.scss */
+.content {
+  background: #fff;
+  top: 100%;
+  position: relative;
+}
+
+/* line 7, ../layout.scss */
+.hide-text {
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  position: absolute !important;
+}
+
+@media (min-width: 768px) {
+  /* line 16, ../layout.scss */
+  .content {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 100%;
+    min-width: 100%;
+    overflow: scroll;
+    border-right: 20px solid #fff;
+    border-left: 20px solid #fff;
+  }
+
+  /* line 27, ../layout.scss */
+  .container {
+    width: 100% !important;
+  }
+
+  /* line 31, ../layout.scss */
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+  }
+}
+/* line 17, ../main.scss */
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -8483,18 +8647,18 @@ figure.center figcaption {
   padding: 0.2em 0;
 }
 
-/* line 23, ../main.scss */
+/* line 24, ../main.scss */
 p, textarea {
   font-family: Merriweather, Georgia, "Times New Roman", Times, serif;
 }
 
-/* line 28, ../main.scss */
+/* line 29, ../main.scss */
 figcaption p {
   font-size: 14px;
   font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-/* line 34, ../main.scss */
+/* line 35, ../main.scss */
 .tooltip {
   font-size: 14px;
   font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;

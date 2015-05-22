@@ -15,11 +15,6 @@
          <% _.each(sections, function(section) { %>
           <% subtitle = section.get('subtitle') ? ' - <span class="navbar-subtitle">'+section.get('subtitle')+'</span>' : '' %>
           <% ++i %>
-          <li class="navbar-item hidden-xs <% if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } %>" data-toggle="tooltip" data-placement="bottom" title="<%= section.get('title') %>">
-            <a data-section-id="<%= section.id %>">
-              <%= i %>
-            </a>
-          </li>
           <li class="navbar-item visible-xs <% if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } %>">
             <a data-section-id="<%= section.id %>" href="#">
               <%= i + ' - ' + section.get('title') + subtitle %>

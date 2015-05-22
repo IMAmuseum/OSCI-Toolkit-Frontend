@@ -38,7 +38,7 @@ this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/app.tpl.html"] = func
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="progress vertical hidden hidden-print hidden-sm hidden-xs" data-spy="affix" data-offset-top="400">\n\t<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n<div id="navbar" class="hidden-print" data-spy="affix" data-offset-top="400"></div>\n<div id="toolbar" class="hidden-print hidden-sm hidden-xs" data-spy="affix" data-offset-top="400"></div>\n<div class="container">\n\t<div class="row">\n\t\t<div class="col-md-10 col-md-offset-1 section-col">\n\t\t\t<div id="loader">Loading...</div>\n\t\t\t<div id="section"></div>\n\t\t</div>\n\t</div>\n</div>\n\n<div id="navigation" class="no-print"></div>';
+__p += '<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n<div id="navbar" class="hidden-print" data-spy="affix">\n\t<div id="toolbar" class="hidden-print hidden-xs" data-spy="affix"></div>\n</div>\n<div role="content" class="content">\n\t<div class="container">\n\t\t<div id="loader">Loading...</div>\n\t\t<div id="section"></div>\n\t</div>\n</div>\n\n<div class="progress horizontal hidden hidden-print hidden-xs" data-spy="affix">\n\t<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n<div id="navigation" class="no-print"></div>';
 
 }
 return __p
@@ -99,7 +99,7 @@ this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/font-size.tpl.html"] 
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<a href="#font-larger" class="larger font-button" data-href="font-larger" data-style="inline">A+</a>&nbsp;\n<a href="#font-smaller" class="smaller font-button" data-href="font-smaller" data-style="inline">A-</a>\n';
+__p += '<a href="#font-larger" class="larger font-button" data-href="font-larger" data-style="inline">A+</a>\n<a href="#font-smaller" class="smaller font-button" data-href="font-smaller" data-style="inline">A-</a>';
 
 }
 return __p
@@ -163,15 +163,7 @@ __p += '\n          ';
  subtitle = section.get('subtitle') ? ' - <span class="navbar-subtitle">'+section.get('subtitle')+'</span>' : '' ;
 __p += '\n          ';
  ++i ;
-__p += '\n          <li class="navbar-item hidden-xs ';
- if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;
-__p += '" data-toggle="tooltip" data-placement="bottom" title="' +
-((__t = ( section.get('title') )) == null ? '' : __t) +
-'">\n            <a data-section-id="' +
-((__t = ( section.id )) == null ? '' : __t) +
-'">\n              ' +
-((__t = ( i )) == null ? '' : __t) +
-'\n            </a>\n          </li>\n          <li class="navbar-item visible-xs ';
+__p += '\n          <li class="navbar-item visible-xs ';
  if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;
 __p += '">\n            <a data-section-id="' +
 ((__t = ( section.id )) == null ? '' : __t) +
@@ -198,7 +190,25 @@ __p += '\n<div class=\'prev-page corner\'>\n\t<a href="#section/' +
 ((__t = ( previousItem.get('title') )) == null ? '' : __t) +
 '">\n\t\tPrevious\n\t</a>\n</div>\n';
  } ;
-__p += '\n\n';
+__p += '\n\n<ul class="navigation-sections">\n';
+ i = 0 ;
+__p += '\n';
+ _.each(sections, function(section) { ;
+__p += '\n ';
+ subtitle = section.get('subtitle') ? ' - <span class="navigation-subtitle">'+section.get('subtitle')+'</span>' : '' ;
+__p += '\n ';
+ ++i ;
+__p += '\n <li class="navigation-item hidden-xs ';
+ if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;
+__p += '" data-toggle="tooltip" data-placement="bottom" title="' +
+((__t = ( section.get('title') )) == null ? '' : __t) +
+'">\n   <a data-section-id="' +
+((__t = ( section.id )) == null ? '' : __t) +
+'">\n     ' +
+((__t = ( i )) == null ? '' : __t) +
+'\n   </a>\n </li>\n';
+ }); ;
+__p += '\n</ul>\n\n';
  if (nextItem !== null) { ;
 __p += '\n<div class=\'next-page corner\'>\n\t<a href="#section/' +
 ((__t = ( nextItem.id )) == null ? '' : __t) +
@@ -272,7 +282,7 @@ this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/print.tpl.html"] = fu
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<a href="#print" id="print">Print</a>\n';
+__p += '<a href="#print" id="print"><span class="hide-text">Print</span></a>\n';
 
 }
 return __p
@@ -349,9 +359,9 @@ function print() { __p += __j.call(arguments, '') }
 with (obj) {
 
  if (style == 'default') { ;
-__p += '\n\t<a href="#">' +
+__p += '\n\t<a href="#"><span class="hide-text">' +
 ((__t = ( text )) == null ? '' : __t) +
-'</a>\n';
+'</span></a>\n';
  } else { ;
 __p += '\n\t<span id="' +
 ((__t = ( text )) == null ? '' : __t) +
@@ -367,7 +377,7 @@ this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/toolbar.tpl.html"] = 
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="nav nav-stacked">\n\t<ul id="toolbar-area" class=""></ul>\n</div>';
+__p += '<div class="nav">\n\t<ul id="toolbar-area" class=""></ul>\n</div>';
 
 }
 return __p

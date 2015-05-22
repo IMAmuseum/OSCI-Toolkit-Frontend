@@ -3,7 +3,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('navigation'),
 	events: {
         'click .next-page': 'nextPageClicked',
-        'click .prev-page': 'prevPageClicked'
+        'click .prev-page': 'prevPageClicked',
+        'click li a': 'itemClick',
     },
 	initialize: function() {
 		//set some defaults
@@ -38,14 +39,27 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			// set the document title | section name
 			this.setDocumentTitle();
 		});
+
+		this.listenTo(Backbone, 'packageLoaded', function(packageModel) {
+			this.creator = $(packageModel)[0].attributes['metadata']['dc:creator']['value'];
+			this.pubTitle = packageModel.getTitle();
+			this.sections = app.collections.navigationItems.where({depth: 0});
+		});
+
+		this.listenTo(Backbone, "currentNavigationItemChanged", function() {
+			this.render();
+		});
 	},
 
 	render: function() {
 		this.$el.html(this.template({
 			chapter: this.currentNavigationItem.get('title'),
 			previousItem: this.currentNavigationItem.get('previous'),
-			nextItem: this.currentNavigationItem.get('next')
+			nextItem: this.currentNavigationItem.get('next'),
+			sections: this.sections
 		}));
+
+		return this;
 	},
 
 	nextPageClicked: function() {
@@ -76,6 +90,15 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			this.currentNavigationItem = app.collections.navigationItems.first();
 		}
 		Backbone.trigger('currentNavigationItemChanged', this.currentNavigationItem);
-	}
+	},
+	itemClick: function(event) {
+		event.preventDefault();
+
+		var sectionId = $(event.currentTarget).attr('data-section-id');
+		$('li.tocView-toolbar-item>a').removeClass('active');
+		Backbone.trigger("toolbarRemoveViews");
+		// TODO: don't really want to address the appRouter directly
+		app.router.navigate("section/" + sectionId, {trigger: true});
+	},
 
 });

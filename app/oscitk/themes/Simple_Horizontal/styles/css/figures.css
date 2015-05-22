@@ -1,69 +1,99 @@
 /* line 1, ../figures.scss */
 figure {
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  -o-column-break-inside: avoid;
+  -ms-column-break-inside: avoid;
+  column-break-inside: avoid;
+  -webkit-break-inside: avoid;
+  -moz-break-inside: avoid;
+  -o-break-inside: avoid;
+  -ms-break-inside: avoid;
+  break-inside: avoid;
   margin: 20px;
+  max-height: auto;
+  position: relative;
+  text-align: center;
 }
 
-/* line 7, ../figures.scss */
+/* line 20, ../figures.scss */
 .figure_content img {
   border: 2px solid #f1f1f1;
+  max-width: 100%;
 }
 
-/* line 12, ../figures.scss */
+/* line 26, ../figures.scss */
 figcaption {
   background: #f1f1f1;
-  padding: 4px 4px 2px 6px;
   font-size: 14px;
+  padding: 4px 4px 2px 6px;
+  text-align: center;
+  width: 100%;
 }
 
-/* line 18, ../figures.scss */
+/* line 34, ../figures.scss */
 figure.left {
   float: left;
   margin-right: 50px;
 }
 
-/* line 23, ../figures.scss */
+/* line 39, ../figures.scss */
 img.left {
   float: left;
-  max-width: 100%;
   max-height: 50vh;
 }
 
-/* line 29, ../figures.scss */
+/* line 44, ../figures.scss */
 figure.right {
   float: right;
   margin-left: 40px;
 }
 
-/* line 34, ../figures.scss */
+/* line 49, ../figures.scss */
 img.right {
   float: right;
-  max-width: 100%;
   max-height: 50vh;
 }
 
-/* line 40, ../figures.scss */
+/* line 54, ../figures.scss */
 figure.plate,
 figure.center {
-  width: 50%;
-  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
+  max-width: 100%;
+  width: 50%;
 }
-/* line 46, ../figures.scss */
+/* line 60, ../figures.scss */
 figure.plate img, figure.plate figcaption,
 figure.center img,
 figure.center figcaption {
   width: 100%;
 }
 @media (max-width: 768px) {
-  /* line 40, ../figures.scss */
+  /* line 54, ../figures.scss */
   figure.plate,
   figure.center {
     width: 90%;
   }
 }
 
-/* line 59, ../figures.scss */
+/* line 73, ../figures.scss */
 .osci-figure {
   background: #f1f1f1;
+}
+
+@media (min-width: 768px) {
+  /* line 78, ../figures.scss */
+  figure {
+    max-height: 100%;
+    overflow: auto;
+    padding-bottom: 36px;
+  }
+
+  /* line 84, ../figures.scss */
+  figcaption {
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+  }
 }

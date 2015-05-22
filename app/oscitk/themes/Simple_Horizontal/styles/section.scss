@@ -3,7 +3,7 @@
 }
 
 #section {
-	padding-left: 40px;
+	padding: 20px 0 0 0;
 }
 
 .footnote-reference {
@@ -26,9 +26,13 @@
 	}
 }
 
-@media (max-width: 992px) {
+@media (min-width: 768px) {
 	#section {
-		padding-left: 0;
+		padding: 70px 40px 0 0;
+
+		&:after {
+			padding-left: 40px;
+		}
 	}
 }
 

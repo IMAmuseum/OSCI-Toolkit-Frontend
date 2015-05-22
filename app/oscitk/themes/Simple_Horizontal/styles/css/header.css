@@ -1,35 +1,50 @@
 /* line 1, ../header.scss */
 header {
+  padding-top: 50px;
   z-index: 1000;
 }
 
-/* line 4, ../header.scss */
+/* line 5, ../header.scss */
 .container-header {
-  width: 100%;
-  height: 400px;
-  max-width: 100%;
   background-color: #909090;
   background-position: center;
   background-size: cover;
+  height: 80%;
+  max-width: 100%;
+  position: relative;
+  width: 100%;
 }
 
-/* line 13, ../header.scss */
+/* line 15, ../header.scss */
 .header-title {
-  position: absolute;
-  top: 200px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
   color: white;
+  left: 50%;
+  position: absolute;
   text-align: center;
   text-shadow: 0 1px 0 black;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
-/* line 22, ../header.scss */
+/* line 25, ../header.scss */
 .header-title h1 {
   margin: 0;
 }
-/* line 25, ../header.scss */
+/* line 28, ../header.scss */
 .header-title p {
   font-style: italic;
   font-weight: 300;
+}
+
+@media (min-width: 768px) {
+  /* line 35, ../header.scss */
+  header {
+    padding-top: 0;
+  }
+
+  /* line 38, ../header.scss */
+  .container-header {
+    height: 100%;
+    position: fixed;
+  }
 }

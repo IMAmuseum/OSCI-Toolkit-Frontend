@@ -1,10 +1,10 @@
 /* line 1, ../progress.scss */
 .progress.vertical {
-  position: fixed;
-  top: 70px;
-  right: 40px;
-  width: .25em;
   height: 85%;
+  position: fixed;
+  right: 40px;
+  top: 70px;
+  width: .25em;
 }
 
 /* line 8, ../progress.scss */
@@ -14,15 +14,45 @@
 
 /* line 11, ../progress.scss */
 .progress.vertical.bottom .progressbar-front-text {
-  position: absolute;
   bottom: 0;
+  position: absolute;
 }
 
 /* line 15, ../progress.scss */
 .progress.vertical .progress-bar {
-  width: 100%;
   height: 0;
+  width: 100%;
   -webkit-transition: height 0.6s ease;
   -o-transition: height 0.6s ease;
   transition: height 0.6s ease;
+}
+
+/* line 23, ../progress.scss */
+.progress.horizontal {
+  bottom: 36px;
+  height: .25em;
+  margin-bottom: 0;
+  position: fixed;
+  right: 0;
+  width: 100%;
+}
+
+/* line 31, ../progress.scss */
+.progress.horizontal.bottom {
+  position: relative;
+}
+
+/* line 34, ../progress.scss */
+.progress.horizontal.bottom .progressbar-front-text {
+  bottom: 0;
+  position: absolute;
+}
+
+/* line 38, ../progress.scss */
+.progress.horizontal .progress-bar {
+  height: 100%;
+  width: 0;
+  -webkit-transition: width 0.6s ease;
+  -o-transition: width 0.6s ease;
+  transition: width 0.6s ease;
 }

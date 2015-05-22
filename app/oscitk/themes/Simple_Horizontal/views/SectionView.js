@@ -2,7 +2,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     id: 'section-view',
     template: OsciTk.templateManager.get('section'),
     events: {
-        "scroll" : "updateProgress",
+        'scroll' : 'updateProgress',
         'click .content-paragraph': 'paragraphClicked',
         'click .paragraph-button': 'paragraphClicked',
         'click #note-submit': 'noteSubmit',
@@ -10,12 +10,13 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     initialize: function() {
         _.bindAll(this, 'updateProgress');
         // bind to window
-        $(window).scroll(this.updateProgress);
-        this.maxHeightSet = false;
+        var width;
+        $('.content').scroll(this.updateProgress);
 
         // bind sectionChanged
         this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
             var that = this;
+            $('#determineWidth').remove();
             $('#section-view').empty();
             $('.header-view').empty();
             $('#loader').show();
@@ -34,6 +35,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         this.listenTo(Backbone, 'windowResized', function() {
             this.maxHeightSet = false;
+            this.getViewportSize();
+            this.setFigureStyles();
             this.render();
         });
 
@@ -41,6 +44,18 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             this.makeIds(sectionModel);
             this.sectionId = sectionModel.get('id');
             this.getSectionTitles(this.sectionId);
+        });
+
+        this.listenTo(Backbone, 'sectionLoaded', function(sectionModel) {
+            this.content =  sectionModel.get('content')[0].children.body;
+            $('#loader').hide();
+            this.getViewportSize();
+            this.setFigureStyles();
+            this.render();
+        });
+
+        this.listenTo(Backbone, 'layoutComplete', function() {
+            this.getFullSectionWidth();
         });
 
         this.listenTo(Backbone, "figuresAvailable", function(figures) {
@@ -69,27 +84,100 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     },
 
     updateProgress: function() {
-        var value = $(window).scrollTop();
-        var offset = 400;
-        var sectionValue = value - offset;
-        $('.progress .progress-bar').attr('aria-valuenow', value);
-        if(! this.maxHeightSet) {
-            var height = $(document).height();
-            var w = window,
-                d = document,
-                e = d.documentElement,
-                g = d.getElementsByTagName("body")[0],
-                cy = g.clientHeight;
-            var max = (height-cy)-offset;
-            $('.progress .progress-bar').attr('aria-valuemax', max);
-            var percent = Math.floor((sectionValue/max)*100);
-            $('.progress .progress-bar').attr('style', 'height: '+percent+'%');
+        var screenSize = $(window).width();
+        var scrollValue = $(window).scrollLeft();
+        var sectionValue = $('.content').scrollLeft();
+
+        // Check if test element exists or not
+        if( $('#determineWidth').length == 0) {
+
+            // Add element to test the width of the content
+            $('#section').append('<div id="determineWidth" style="float: right;"></div>');
+
+            // Get the wide of the content
+            var dw = $('#determineWidth').position().left;
+
+            // Set the width of the content minus the screen size
+            width = ((+dw) - (+scrollValue));
         }
-        if (value >= offset){
+
+        // Set the percentage of the progress width
+        var percent = Math.floor((sectionValue/width)*100);
+
+        // Set variables as attributes on progress bar
+        $('.progress .progress-bar').attr('aria-valuemax', width)
+            .attr('style', 'width: '+percent+'%')
+            .attr('aria-valuenow', sectionValue);
+
+        if (scrollValue >= screenSize){
             $('.progress').removeClass('hidden');
         } else {
             $('.progress').addClass('hidden');
         }
+    },
+
+    getViewportSize: function() {
+        var w = window,
+            d = document,
+            e = d.documentElement,
+            g = d.getElementsByTagName("body")[0],
+            x = w.innerWidth||e.clientWidth||g.clientWidth,
+            y = w.innerHeight||e.clientHeight||g.clientHeight;
+        this.x = x;
+        this.y = y-60;
+
+        if (this.x > 767){
+            // get reflow column styles
+            this.columnWidthStyle = this.getPrefixedStyle('columnWidth');
+            this.columnGapStyle = this.getPrefixedStyle('columnGap');
+            this.spreadColumnWidth = this.x / 2.5;
+            this.spreadGapWidth = this.spreadColumnWidth / 5;
+            this.reflowStyle = 'height:'+ this.y +'px; ' + this.columnGapStyle + ': '
+                +this.spreadGapWidth+'px; '+this.columnWidthStyle +': '+this.spreadColumnWidth+'px;';
+            $('#section').attr("style", this.reflowStyle);
+        } else {
+            $('#section').attr("style", "");
+        }
+    },
+
+    getFullSectionWidth: function() {
+        var d = document,
+            e = d.documentElement,
+            g = d.getElementsByTagName("body")[0],
+            sx = g.scrollWidth;
+
+            this.sectionWidth = sx;
+            this.numPages = Math.floor(this.sectionWidth / (this.x - 80));
+            // move width is page width + gap width - padding on container
+            this.moveWidth = this.x + this.spreadGapWidth - 80;
+
+        if (this.x > 767){
+            $('#section').attr("style", this.reflowStyle);
+        } else {
+            $('#section').attr("style", "");
+        }
+    },
+
+    getPrefixedStyle: function(unprefixed) {
+        var vendors = ["Webkit", "Moz", "O", "ms" ],
+            prefixes = ['-Webkit-', '-moz-', '-o-', '-ms-'],
+            upper = unprefixed[0].toUpperCase() + unprefixed.slice(1),
+            length = vendors.length;
+
+        if (typeof(document.body.style[unprefixed]) != 'undefined') {
+            unprefixed = unprefixed.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+            return '-'+unprefixed;
+        }
+
+        for ( var i=0; i < length; i++ ) {
+            if (typeof(document.body.style[vendors[i] + upper]) != 'undefined') {
+                unprefixed = vendors[i] + upper;
+                unprefixed = unprefixed.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+                return '-'+unprefixed;
+            }
+        }
+        unprefixed = unprefixed.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+        return '-'+unprefixed;
     },
 
     makeIds: function(sectionModel) {

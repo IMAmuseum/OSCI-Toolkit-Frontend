@@ -1,65 +1,49 @@
-#navbar.affix {
-    position: fixed;
+#navbar {
+    z-index: 998;
     top: 0;
+    position: fixed;
     width: 100%;
+
+    .nav {
+        li {
+            text-align: center;
+            width: 100%;
+
+            a {
+                font-size: 14px;
+            }
+        }
+    }
 }
 
-#navbar {
-	z-index: 998;
-	.nav {
-		li {
-			a {
-				font-size: 24px;
-				@media (max-width: 768px) {
-					font-size: 14px;
-				}
-			}
-			text-align: center;
-			width: 55px;
-		}
+.navbar {
+    min-height: initial;
+}
 
-		li.active {
-			background-color: #333;
-		}
-	}
+.navbar-default {
+    margin: 0;
 }
 
 #navbar-title {
-	color: #333;
-	font-size: 24px;
-	@media (max-width: 768px) {
-		font-size: 14px;
-	}
+    color: #333;
+    font-size: 14px;
+
+    @media (min-width: 768px) {
+        font-size: 18px;
+        float: left;
+        padding: 10px 15px 8px;
+        line-height: 1.2;
+        height: auto;
+    }
 }
 
 @media (max-width: 480px) {
-	#navbar {
-		.nav {
-			li {
-				width: 100%;
-				text-align: left;
-			}
-		}
-	}
-}
-
-#navbar-area {
-	.tooltip > .tooltip-inner {
-    	background-color:#52818b;
-    	height: 40px;
-    	position: relative;
-    	text-transform: uppercase;
-    	right: 50px;
-    	top: -8px;
-    	min-width: 150px;
-    	line-height: 35px;
-    	color: #FFF;
+    #navbar {
+        .nav {
+            li {
+                width: 100%;
+                text-align: left;
+            }
+        }
     }
-    .tooltip.bottom > .tooltip-arrow {
-		top: -16px;
-		left: 50%;
-		margin-left: -15px;
-		border-bottom-color:#52818b;
-		border-width: 0 15px 15px;
-	}
 }
