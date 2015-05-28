@@ -45,6 +45,5 @@ header {
   /* line 38, ../header.scss */
   .container-header {
     height: 100%;
-    position: fixed;
   }
 }

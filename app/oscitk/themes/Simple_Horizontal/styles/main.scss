@@ -1,7 +1,6 @@
 $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 
 @import "bootstrap/bootstrap";
-@import "bootstrap/variables";
 @import "section";
 @import "navigation";
 @import "progress";
@@ -13,6 +12,7 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
 @import "overlay";
 @import "notes";
 @import "layout";
+@import "print";
 
 .browsehappy {
     margin: 0.2em 0;

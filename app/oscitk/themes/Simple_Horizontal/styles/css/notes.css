@@ -2,17 +2,28 @@
 .paragraph-controls {
   position: relative;
   right: 32px;
-  top: 4px;
+  top: 20px;
   z-index: 2;
-  height: 0;
+  height: 15px;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  -o-column-break-inside: avoid;
+  -ms-column-break-inside: avoid;
+  column-break-inside: avoid;
+  -webkit-break-inside: avoid;
+  -moz-break-inside: avoid;
+  -o-break-inside: avoid;
+  -ms-break-inside: avoid;
+  break-inside: avoid;
 }
 
-/* line 9, ../notes.scss */
+/* line 19, ../notes.scss */
 .btn {
   text-transform: uppercase;
+  line-height: 1.2;
 }
 
-/* line 13, ../notes.scss */
+/* line 24, ../notes.scss */
 .paragraph-button {
   border: 0;
   font: 0/0 a;
@@ -25,48 +36,21 @@
   height: 15px;
 }
 
-/* line 25, ../notes.scss */
+/* line 36, ../notes.scss */
 .withNotes {
   background-image: url(../../images/plus-blue.png);
 }
 
-/* line 29, ../notes.scss */
-#note-submit {
+/* line 40, ../notes.scss */
+.note-submit {
   margin-top: 10px;
 }
 
-/* line 33, ../notes.scss */
-.popover {
-  top: -160px !important;
-  left: 0 !important;
-  margin-top: 0 !important;
-  -webkit-column-break-inside: avoid;
-  -moz-column-break-inside: avoid;
-  -o-column-break-inside: avoid;
-  -ms-column-break-inside: avoid;
-  column-break-inside: avoid;
-  -webkit-break-inside: avoid;
-  -moz-break-inside: avoid;
-  -o-break-inside: avoid;
-  -ms-break-inside: avoid;
-  break-inside: avoid;
-  overflow: auto;
-}
-
-/* line 50, ../notes.scss */
-.popover-content {
-  padding: 9px;
-}
-/* line 52, ../notes.scss */
-.popover-content textarea {
-  border: none;
+/* line 45, ../notes.scss */
+.modal-content textarea {
   font-size: 14px;
   color: #333;
   padding: 5px;
   height: 100px;
-}
-/* line 59, ../notes.scss */
-.popover-content button {
-  font-size: 15px;
-  font-weight: 200;
+  width: 100%;
 }

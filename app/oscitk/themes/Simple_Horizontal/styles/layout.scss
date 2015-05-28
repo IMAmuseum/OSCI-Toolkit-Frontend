@@ -1,27 +1,28 @@
 .content {
     background: #fff;
-    top: 100%;
     position: relative;
+    top: 100%;
 }
 
 .hide-text {
     clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
     clip: rect(1px, 1px, 1px, 1px);
-    height: 1px; width: 1px;
+    height: 1px;
     overflow: hidden;
     position: absolute !important;
+    width: 1px;
 }
 
 @media (min-width: 768px) {
     .content {
-        position: absolute;
+        border-left: 20px solid #fff;
+        border-right: 20px solid #fff;
         height: 100%;
-        top: 0;
         left: 100%;
         min-width: 100%;
-        overflow: scroll;
-        border-right: 20px solid #fff;
-        border-left: 20px solid #fff;
+        //overflow: scroll;
+        position: absolute;
+        top: 0;
     }
 
     .container {

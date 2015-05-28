@@ -15,7 +15,6 @@ figure {
    text-align: center;
 }
 
-
 .figure_content {
    img {
       border: 2px solid #f1f1f1;
@@ -34,6 +33,7 @@ figcaption {
 figure.left {
    float: left;
    margin-right: 50px;
+   margin-left: 0;
 }
 
 img.left {
@@ -44,6 +44,7 @@ img.left {
 figure.right {
    float: right;
    margin-left: 40px;
+   margin-right: 0;
 }
 
 img.right {

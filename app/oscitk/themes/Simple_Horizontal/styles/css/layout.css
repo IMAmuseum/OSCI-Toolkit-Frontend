@@ -1,8 +1,8 @@
 /* line 1, ../layout.scss */
 .content {
   background: #fff;
-  top: 100%;
   position: relative;
+  top: 100%;
 }
 
 /* line 7, ../layout.scss */
@@ -11,30 +11,29 @@
   /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
   height: 1px;
-  width: 1px;
   overflow: hidden;
   position: absolute !important;
+  width: 1px;
 }
 
 @media (min-width: 768px) {
-  /* line 16, ../layout.scss */
+  /* line 17, ../layout.scss */
   .content {
-    position: absolute;
+    border-left: 20px solid #fff;
+    border-right: 20px solid #fff;
     height: 100%;
-    top: 0;
     left: 100%;
     min-width: 100%;
-    overflow: scroll;
-    border-right: 20px solid #fff;
-    border-left: 20px solid #fff;
+    position: absolute;
+    top: 0;
   }
 
-  /* line 27, ../layout.scss */
+  /* line 28, ../layout.scss */
   .container {
     width: 100% !important;
   }
 
-  /* line 31, ../layout.scss */
+  /* line 32, ../layout.scss */
   h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
   }

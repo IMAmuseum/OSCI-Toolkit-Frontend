@@ -1,13 +1,24 @@
 .paragraph-controls {
 	position: relative;
 	right: 32px;
-	top: 4px;
+	top: 20px;
 	z-index: 2;
-	height: 0;
+	height: 15px;
+	-webkit-column-break-inside:avoid;
+	-moz-column-break-inside:avoid;
+	-o-column-break-inside:avoid;
+	-ms-column-break-inside:avoid;
+	column-break-inside:avoid;
+	-webkit-break-inside:avoid;
+	-moz-break-inside:avoid;
+	-o-break-inside:avoid;
+	-ms-break-inside:avoid;
+	break-inside:avoid;
 }
 
 .btn {
 	text-transform: uppercase;
+	line-height: 1.2;
 }
 
 .paragraph-button {
@@ -26,38 +37,16 @@
 	background-image: url(../../images/plus-blue.png);
 }
 
-#note-submit {
+.note-submit {
 	margin-top: 10px
 }
 
-.popover {
-	top: -160px !important;
-	left: 0 !important;
-	margin-top: 0 !important;
-	-webkit-column-break-inside:avoid;
-	-moz-column-break-inside:avoid;
-	-o-column-break-inside:avoid;
-	-ms-column-break-inside:avoid;
-	column-break-inside:avoid;
-	-webkit-break-inside:avoid;
-	-moz-break-inside:avoid;
-	-o-break-inside:avoid;
-	-ms-break-inside:avoid;
-	break-inside:avoid;
-	overflow: auto;
-}
-
-.popover-content {
-	padding: 9px;
+.modal-content {
 	textarea {
-		border: none;
 		font-size: 14px;
 		color: #333;
 		padding: 5px;
 		height: 100px;
-	}
-	button {
-		font-size: 15px;
-		font-weight: 200;
+		width: 100%;
 	}
 }

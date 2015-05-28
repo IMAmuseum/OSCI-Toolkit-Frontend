@@ -5,13 +5,15 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         'scroll' : 'updateProgress',
         'click .content-paragraph': 'paragraphClicked',
         'click .paragraph-button': 'paragraphClicked',
-        'click #note-submit': 'noteSubmit',
+        'click .note-submit': 'noteSubmit',
     },
     initialize: function() {
         _.bindAll(this, 'updateProgress');
         // bind to window
         var width;
-        $('.content').scroll(this.updateProgress);
+        //$('.content').scroll(this.updateProgress);
+        $(window).scroll(this.updateProgress);
+        this.maxHeightSet = false;
 
         // bind sectionChanged
         this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
@@ -19,8 +21,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             $('#determineWidth').remove();
             $('#section-view').empty();
             $('.header-view').empty();
-            $('#loader').show();
-            $('#loader').fadeTo(500, 0.7);
+            $('#loader').show().fadeTo(500, 0.7);
 
             if (navItem) {
                 // loading section content
@@ -44,14 +45,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             this.makeIds(sectionModel);
             this.sectionId = sectionModel.get('id');
             this.getSectionTitles(this.sectionId);
-        });
-
-        this.listenTo(Backbone, 'sectionLoaded', function(sectionModel) {
-            this.content =  sectionModel.get('content')[0].children.body;
-            $('#loader').hide();
             this.getViewportSize();
             this.setFigureStyles();
-            this.render();
         });
 
         this.listenTo(Backbone, 'layoutComplete', function() {
@@ -84,36 +79,39 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     },
 
     updateProgress: function() {
-        var screenSize = $(window).width();
         var scrollValue = $(window).scrollLeft();
-        var sectionValue = $('.content').scrollLeft();
+        //var sectionValue = $('.content').scrollLeft();
+        var winWidth = $(window).width();
+        var sectionValue = $('body').scrollLeft() - winWidth;
 
         // Check if test element exists or not
         if( $('#determineWidth').length == 0) {
 
             // Add element to test the width of the content
             $('#section').append('<div id="determineWidth" style="float: right;"></div>');
-
-            // Get the wide of the content
-            var dw = $('#determineWidth').position().left;
-
-            // Set the width of the content minus the screen size
-            width = ((+dw) - (+scrollValue));
         }
 
-        // Set the percentage of the progress width
-        var percent = Math.floor((sectionValue/width)*100);
+        // Get the wide of the content
+        var dw = $('#determineWidth').position().left;
+
+        // Set the width of the content minus the screen size
+        // width = ((+dw) - (+scrollValue);
+        width = dw - winWidth;
+
+
+        if (scrollValue > winWidth){
+            // Set the percentage of the progress width
+            var percent = Math.floor((sectionValue/width)*100);
+        } else {
+            var percent = 0;
+            sectionValue = 0;
+        }
 
         // Set variables as attributes on progress bar
         $('.progress .progress-bar').attr('aria-valuemax', width)
-            .attr('style', 'width: '+percent+'%')
-            .attr('aria-valuenow', sectionValue);
+            .attr('aria-valuenow', sectionValue)
+            .attr('style', 'width: '+percent+'%');
 
-        if (scrollValue >= screenSize){
-            $('.progress').removeClass('hidden');
-        } else {
-            $('.progress').addClass('hidden');
-        }
     },
 
     getViewportSize: function() {
@@ -213,19 +211,16 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         var noteText = textarea.val();
         var cid = textarea.data('id');
         var paragraph_number = textarea.data('paragraph_number');
-        if (noteText != '') {
-            console.log(noteText);
-            var note = app.collections.notes.get(cid);
-            note.set('note', noteText);
+        var note = app.collections.notes.get(cid);
+        note.set('note', noteText);
+
+        if (noteText === ""){
+            note.destroy();
+            $('#paragraph-'+paragraph_number).removeClass('withNotes').click();
+        } else {
             note.save();
-            textarea.html(noteText);
+            $('#paragraph-'+paragraph_number).addClass('withNotes').click();
         }
-        $('#paragraph-'+paragraph_number).popover({
-            content: function() {
-                return $("#popover-content").html();
-            }
-        });
-        $('#paragraph-'+paragraph_number).popover('destroy');
     },
 
     setFigureStyles: function() {

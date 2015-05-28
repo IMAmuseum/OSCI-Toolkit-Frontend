@@ -38,7 +38,7 @@ this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/app.tpl.html"] = func
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n<div id="navbar" class="hidden-print" data-spy="affix">\n\t<div id="toolbar" class="hidden-print hidden-xs" data-spy="affix"></div>\n</div>\n<div role="content" class="content">\n\t<div class="container">\n\t\t<div id="loader">Loading...</div>\n\t\t<div id="section"></div>\n\t</div>\n</div>\n\n<div class="progress horizontal hidden hidden-print hidden-xs" data-spy="affix">\n\t<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n<div id="navigation" class="no-print"></div>';
+__p += '<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n\n<!-- Top Navigation -->\n<div id="navbar" class="hidden-print" data-spy="affix">\n\t<div id="toolbar" class="hidden-print hidden-xs" data-spy="affix"></div>\n</div>\n\n<!-- Progress Bar -->\n<div class="progress horizontal hidden-print hidden-xs" data-spy="affix">\n\t<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n<!-- Main Content -->\n<div role="content" class="content">\n\t<div class="container">\n\t\t<div id="loader">Loading...</div>\n\t\t<div id="section"></div>\n\t</div>\n</div>\n\n<!-- Bottom Navigation -->\n<div id="navigation" class="no-print"></div>';
 
 }
 return __p
@@ -184,13 +184,13 @@ function print() { __p += __j.call(arguments, '') }
 with (obj) {
 
  if (previousItem !== null) { ;
-__p += '\n<div class=\'prev-page corner\'>\n\t<a href="#section/' +
+__p += '\n<div class=\'prev-page corner hidden-print\'>\n\t<a href="#section/' +
 ((__t = ( previousItem.id )) == null ? '' : __t) +
 '" title="' +
 ((__t = ( previousItem.get('title') )) == null ? '' : __t) +
 '">\n\t\tPrevious\n\t</a>\n</div>\n';
  } ;
-__p += '\n\n<ul class="navigation-sections">\n';
+__p += '\n\n<ul class="navigation-sections hidden-print">\n';
  i = 0 ;
 __p += '\n';
  _.each(sections, function(section) { ;
@@ -210,7 +210,7 @@ __p += '" data-toggle="tooltip" data-placement="bottom" title="' +
  }); ;
 __p += '\n</ul>\n\n';
  if (nextItem !== null) { ;
-__p += '\n<div class=\'next-page corner\'>\n\t<a href="#section/' +
+__p += '\n<div class=\'next-page corner hidden-print\'>\n\t<a href="#section/' +
 ((__t = ( nextItem.id )) == null ? '' : __t) +
 '" title="' +
 ((__t = ( nextItem.get('title') )) == null ? '' : __t) +
@@ -226,11 +226,11 @@ this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/note-popup.tpl.html"]
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="note-popup">\n    <h2>Note</h2>\n    <form class="noteForm">\n    \t<textarea>' +
+__p += '<div class=\'overlay\'>\n    <div id="dismiss">\n        <button class="btn btn-link">\n        <span class="glyphicon glyphicon-remove"></span>\n        </button>\n    </div>\n    <div class="container">\n        <div class="row" style="margin-top: 30vh;">\n            <div class="col-md-8 col-md-offset-2">\n                <div class="panel panel-default">\n                    <div class="panel-heading">\n                        <h3>Notes</h3>\n                    </div>\n                    <div class="panel-body">\n\n                        <div class="note-popup">\n                            <form class="noteForm">\n                            \t<textarea>' +
 ((__t = ( note )) == null ? '' : __t) +
-'</textarea>\n        <label for="note-tags">Tags:</label>\n        <input type="text" name="note-tags" id="note-tags" value="' +
+'</textarea>\n                                <label for="note-tags">Tags:</label>\n                                <input type="text" name="note-tags" id="note-tags" value="' +
 ((__t = ( tags.join(', ') )) == null ? '' : __t) +
-'" />\n    </form>\n    <div class="status">Saved</div>\n</div>';
+'" />\n                            </form>\n                            <div class="status">Saved</div>\n                        </div>\n\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>';
 
 }
 return __p

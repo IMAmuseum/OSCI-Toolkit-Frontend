@@ -16,13 +16,13 @@ figure {
   text-align: center;
 }
 
-/* line 20, ../figures.scss */
+/* line 19, ../figures.scss */
 .figure_content img {
   border: 2px solid #f1f1f1;
   max-width: 100%;
 }
 
-/* line 26, ../figures.scss */
+/* line 25, ../figures.scss */
 figcaption {
   background: #f1f1f1;
   font-size: 14px;
@@ -31,10 +31,11 @@ figcaption {
   width: 100%;
 }
 
-/* line 34, ../figures.scss */
+/* line 33, ../figures.scss */
 figure.left {
   float: left;
   margin-right: 50px;
+  margin-left: 0;
 }
 
 /* line 39, ../figures.scss */
@@ -47,15 +48,16 @@ img.left {
 figure.right {
   float: right;
   margin-left: 40px;
+  margin-right: 0;
 }
 
-/* line 49, ../figures.scss */
+/* line 50, ../figures.scss */
 img.right {
   float: right;
   max-height: 50vh;
 }
 
-/* line 54, ../figures.scss */
+/* line 55, ../figures.scss */
 figure.plate,
 figure.center {
   margin-left: auto;
@@ -63,34 +65,34 @@ figure.center {
   max-width: 100%;
   width: 50%;
 }
-/* line 60, ../figures.scss */
+/* line 61, ../figures.scss */
 figure.plate img, figure.plate figcaption,
 figure.center img,
 figure.center figcaption {
   width: 100%;
 }
 @media (max-width: 768px) {
-  /* line 54, ../figures.scss */
+  /* line 55, ../figures.scss */
   figure.plate,
   figure.center {
     width: 90%;
   }
 }
 
-/* line 73, ../figures.scss */
+/* line 74, ../figures.scss */
 .osci-figure {
   background: #f1f1f1;
 }
 
 @media (min-width: 768px) {
-  /* line 78, ../figures.scss */
+  /* line 79, ../figures.scss */
   figure {
     max-height: 100%;
     overflow: auto;
     padding-bottom: 36px;
   }
 
-  /* line 84, ../figures.scss */
+  /* line 85, ../figures.scss */
   figcaption {
     bottom: 0;
     position: absolute;

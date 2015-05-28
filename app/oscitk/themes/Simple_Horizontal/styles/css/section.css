@@ -32,16 +32,21 @@
 
 @media (min-width: 768px) {
   /* line 30, ../section.scss */
+  #section-view {
+    padding: 0 40px;
+  }
+
+  /* line 34, ../section.scss */
   #section {
     padding: 70px 40px 0 0;
   }
-  /* line 33, ../section.scss */
+  /* line 37, ../section.scss */
   #section:after {
     padding-left: 40px;
   }
 }
 @media (min-width: 992px) {
-  /* line 40, ../section.scss */
+  /* line 44, ../section.scss */
   .section-col {
     float: none;
   }

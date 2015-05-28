@@ -8058,16 +8058,21 @@ button.close {
 
 @media (min-width: 768px) {
   /* line 30, ../section.scss */
+  #section-view {
+    padding: 0 40px;
+  }
+
+  /* line 34, ../section.scss */
   #section {
     padding: 70px 40px 0 0;
   }
-  /* line 33, ../section.scss */
+  /* line 37, ../section.scss */
   #section:after {
     padding-left: 40px;
   }
 }
 @media (min-width: 992px) {
-  /* line 40, ../section.scss */
+  /* line 44, ../section.scss */
   .section-col {
     float: none;
   }
@@ -8207,32 +8212,38 @@ button.close {
 
 /* line 23, ../progress.scss */
 .progress.horizontal {
-  bottom: 36px;
+  top: 40px;
   height: .25em;
   margin-bottom: 0;
   position: fixed;
   right: 0;
   width: 100%;
+  z-index: 999;
 }
 
-/* line 31, ../progress.scss */
+/* line 32, ../progress.scss */
 .progress.horizontal.bottom {
   position: relative;
 }
 
-/* line 34, ../progress.scss */
+/* line 35, ../progress.scss */
 .progress.horizontal.bottom .progressbar-front-text {
   bottom: 0;
   position: absolute;
 }
 
-/* line 38, ../progress.scss */
+/* line 39, ../progress.scss */
 .progress.horizontal .progress-bar {
   height: 100%;
   width: 0;
   -webkit-transition: width 0.6s ease;
   -o-transition: width 0.6s ease;
   transition: width 0.6s ease;
+}
+
+/* line 47, ../progress.scss */
+.progress-bar[aria-valuenow] {
+  min-width: 0 !important;
 }
 
 /* line 1, ../header.scss */
@@ -8282,7 +8293,6 @@ header {
   /* line 38, ../header.scss */
   .container-header {
     height: 100%;
-    position: fixed;
   }
 }
 /* line 1, ../toolbar.scss */
@@ -8425,13 +8435,13 @@ figure {
   text-align: center;
 }
 
-/* line 20, ../figures.scss */
+/* line 19, ../figures.scss */
 .figure_content img {
   border: 2px solid #f1f1f1;
   max-width: 100%;
 }
 
-/* line 26, ../figures.scss */
+/* line 25, ../figures.scss */
 figcaption {
   background: #f1f1f1;
   font-size: 14px;
@@ -8440,10 +8450,11 @@ figcaption {
   width: 100%;
 }
 
-/* line 34, ../figures.scss */
+/* line 33, ../figures.scss */
 figure.left {
   float: left;
   margin-right: 50px;
+  margin-left: 0;
 }
 
 /* line 39, ../figures.scss */
@@ -8456,15 +8467,16 @@ img.left {
 figure.right {
   float: right;
   margin-left: 40px;
+  margin-right: 0;
 }
 
-/* line 49, ../figures.scss */
+/* line 50, ../figures.scss */
 img.right {
   float: right;
   max-height: 50vh;
 }
 
-/* line 54, ../figures.scss */
+/* line 55, ../figures.scss */
 figure.plate,
 figure.center {
   margin-left: auto;
@@ -8472,34 +8484,34 @@ figure.center {
   max-width: 100%;
   width: 50%;
 }
-/* line 60, ../figures.scss */
+/* line 61, ../figures.scss */
 figure.plate img, figure.plate figcaption,
 figure.center img,
 figure.center figcaption {
   width: 100%;
 }
 @media (max-width: 768px) {
-  /* line 54, ../figures.scss */
+  /* line 55, ../figures.scss */
   figure.plate,
   figure.center {
     width: 90%;
   }
 }
 
-/* line 73, ../figures.scss */
+/* line 74, ../figures.scss */
 .osci-figure {
   background: #f1f1f1;
 }
 
 @media (min-width: 768px) {
-  /* line 78, ../figures.scss */
+  /* line 79, ../figures.scss */
   figure {
     max-height: 100%;
     overflow: auto;
     padding-bottom: 36px;
   }
 
-  /* line 84, ../figures.scss */
+  /* line 85, ../figures.scss */
   figcaption {
     bottom: 0;
     position: absolute;
@@ -8529,17 +8541,28 @@ figure.center figcaption {
 .paragraph-controls {
   position: relative;
   right: 32px;
-  top: 4px;
+  top: 20px;
   z-index: 2;
-  height: 0;
+  height: 15px;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  -o-column-break-inside: avoid;
+  -ms-column-break-inside: avoid;
+  column-break-inside: avoid;
+  -webkit-break-inside: avoid;
+  -moz-break-inside: avoid;
+  -o-break-inside: avoid;
+  -ms-break-inside: avoid;
+  break-inside: avoid;
 }
 
-/* line 9, ../notes.scss */
+/* line 19, ../notes.scss */
 .btn {
   text-transform: uppercase;
+  line-height: 1.2;
 }
 
-/* line 13, ../notes.scss */
+/* line 24, ../notes.scss */
 .paragraph-button {
   border: 0;
   font: 0/0 a;
@@ -8552,57 +8575,30 @@ figure.center figcaption {
   height: 15px;
 }
 
-/* line 25, ../notes.scss */
+/* line 36, ../notes.scss */
 .withNotes {
   background-image: url(../../images/plus-blue.png);
 }
 
-/* line 29, ../notes.scss */
-#note-submit {
+/* line 40, ../notes.scss */
+.note-submit {
   margin-top: 10px;
 }
 
-/* line 33, ../notes.scss */
-.popover {
-  top: -160px !important;
-  left: 0 !important;
-  margin-top: 0 !important;
-  -webkit-column-break-inside: avoid;
-  -moz-column-break-inside: avoid;
-  -o-column-break-inside: avoid;
-  -ms-column-break-inside: avoid;
-  column-break-inside: avoid;
-  -webkit-break-inside: avoid;
-  -moz-break-inside: avoid;
-  -o-break-inside: avoid;
-  -ms-break-inside: avoid;
-  break-inside: avoid;
-  overflow: auto;
-}
-
-/* line 50, ../notes.scss */
-.popover-content {
-  padding: 9px;
-}
-/* line 52, ../notes.scss */
-.popover-content textarea {
-  border: none;
+/* line 45, ../notes.scss */
+.modal-content textarea {
   font-size: 14px;
   color: #333;
   padding: 5px;
   height: 100px;
-}
-/* line 59, ../notes.scss */
-.popover-content button {
-  font-size: 15px;
-  font-weight: 200;
+  width: 100%;
 }
 
 /* line 1, ../layout.scss */
 .content {
   background: #fff;
-  top: 100%;
   position: relative;
+  top: 100%;
 }
 
 /* line 7, ../layout.scss */
@@ -8611,32 +8607,64 @@ figure.center figcaption {
   /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
   height: 1px;
-  width: 1px;
   overflow: hidden;
   position: absolute !important;
+  width: 1px;
 }
 
 @media (min-width: 768px) {
-  /* line 16, ../layout.scss */
+  /* line 17, ../layout.scss */
   .content {
-    position: absolute;
+    border-left: 20px solid #fff;
+    border-right: 20px solid #fff;
     height: 100%;
-    top: 0;
     left: 100%;
     min-width: 100%;
-    overflow: scroll;
-    border-right: 20px solid #fff;
-    border-left: 20px solid #fff;
+    position: absolute;
+    top: 0;
   }
 
-  /* line 27, ../layout.scss */
+  /* line 28, ../layout.scss */
   .container {
     width: 100% !important;
   }
 
-  /* line 31, ../layout.scss */
+  /* line 32, ../layout.scss */
   h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
+  }
+}
+@media print {
+  /* line 2, ../print.scss */
+  .content {
+    position: relative;
+  }
+
+  /* line 6, ../print.scss */
+  #section {
+    page-break-before: always;
+    height: auto !important;
+    display: table;
+  }
+
+  /* line 12, ../print.scss */
+  figure {
+    page-break-inside: avoid;
+    width: 100% !important;
+    float: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  /* line 18, ../print.scss */
+  figure img {
+    max-width: 40% !important;
+    max-height: inherit !important;
+    float: none !important;
+  }
+
+  /* line 25, ../print.scss */
+  div, p, ul, ol {
+    page-break-inside: avoid;
   }
 }
 /* line 17, ../main.scss */
