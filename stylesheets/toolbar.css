@@ -1,0 +1,66 @@
+/* line 1, ../app/oscitk/themes/Simple_Horizontal/styles/toolbar.scss */
+#toolbar {
+  float: right;
+  position: relative;
+  z-index: 998;
+}
+
+/* line 7, ../app/oscitk/themes/Simple_Horizontal/styles/toolbar.scss */
+ul.toc {
+  list-style-type: none;
+}
+
+/* line 11, ../app/oscitk/themes/Simple_Horizontal/styles/toolbar.scss */
+#toolbar-area {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  z-index: 990;
+}
+/* line 17, ../app/oscitk/themes/Simple_Horizontal/styles/toolbar.scss */
+#toolbar-area li {
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  float: left;
+  height: 30px;
+  margin: 5px;
+  width: 30px !important;
+}
+
+/* line 28, ../app/oscitk/themes/Simple_Horizontal/styles/toolbar.scss */
+.tocView-toolbar-item {
+  background-image: url(../../images/list.png);
+}
+/* line 30, ../app/oscitk/themes/Simple_Horizontal/styles/toolbar.scss */
+.tocView-toolbar-item:hover {
+  background-image: url(../../images/list-active.png);
+}
+
+/* line 35, ../app/oscitk/themes/Simple_Horizontal/styles/toolbar.scss */
+.accountView-toolbar-item {
+  background-image: url(../../images/login.png);
+}
+/* line 37, ../app/oscitk/themes/Simple_Horizontal/styles/toolbar.scss */
+.accountView-toolbar-item:hover {
+  background-image: url(../../images/login-active.png);
+}
+
+/* line 42, ../app/oscitk/themes/Simple_Horizontal/styles/toolbar.scss */
+.printView-toolbar-item {
+  background-image: url(../../images/print.png);
+}
+/* line 44, ../app/oscitk/themes/Simple_Horizontal/styles/toolbar.scss */
+.printView-toolbar-item:hover {
+  background-image: url(../../images/print-active.png);
+}
+
+/* line 50, ../app/oscitk/themes/Simple_Horizontal/styles/toolbar.scss */
+#toolbar-area .fontSizeView-toolbar-item {
+  width: 60px !important;
+}
+/* line 53, ../app/oscitk/themes/Simple_Horizontal/styles/toolbar.scss */
+#toolbar-area .fontSizeView-toolbar-item a {
+  display: inline-block;
+  padding: 7px 5px 7px 0;
+}

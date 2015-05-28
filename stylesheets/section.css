@@ -1,0 +1,53 @@
+/* line 1, ../app/oscitk/themes/Simple_Horizontal/styles/section.scss */
+#section-view {
+  padding-left: 40px;
+}
+
+/* line 5, ../app/oscitk/themes/Simple_Horizontal/styles/section.scss */
+#section {
+  padding: 20px 0 0 0;
+}
+
+/* line 9, ../app/oscitk/themes/Simple_Horizontal/styles/section.scss */
+.footnote-reference {
+  margin: 0 5px;
+  display: inline-block;
+  position: relative;
+  top: -5px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  font-size: 12px;
+  color: #fff;
+  line-height: 15px;
+  text-align: center;
+  background: #52818B;
+}
+/* line 22, ../app/oscitk/themes/Simple_Horizontal/styles/section.scss */
+.footnote-reference:hover {
+  color: #fff;
+  text-decoration: none;
+  background: #3f636b;
+}
+
+@media (min-width: 768px) {
+  /* line 30, ../app/oscitk/themes/Simple_Horizontal/styles/section.scss */
+  #section-view {
+    padding: 0 40px;
+  }
+
+  /* line 34, ../app/oscitk/themes/Simple_Horizontal/styles/section.scss */
+  #section {
+    padding: 70px 40px 0 0;
+  }
+  /* line 37, ../app/oscitk/themes/Simple_Horizontal/styles/section.scss */
+  #section:after {
+    padding-left: 40px;
+  }
+}
+@media (min-width: 992px) {
+  /* line 44, ../app/oscitk/themes/Simple_Horizontal/styles/section.scss */
+  .section-col {
+    float: none;
+  }
+}

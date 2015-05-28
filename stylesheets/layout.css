@@ -1,0 +1,46 @@
+/* line 1, ../app/oscitk/themes/Simple_Horizontal/styles/layout.scss */
+.content {
+  background: #fff;
+  position: relative;
+  top: 100%;
+}
+
+/* line 7, ../app/oscitk/themes/Simple_Horizontal/styles/layout.scss */
+.hide-text {
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute !important;
+  width: 1px;
+}
+
+@media (min-width: 768px) {
+  /* line 17, ../app/oscitk/themes/Simple_Horizontal/styles/layout.scss */
+  .content {
+    border-left: 20px solid #fff;
+    border-right: 20px solid #fff;
+    height: 100%;
+    left: 100%;
+    min-width: 100%;
+    position: absolute;
+    top: 0;
+  }
+
+  /* line 28, ../app/oscitk/themes/Simple_Horizontal/styles/layout.scss */
+  .container {
+    width: 100% !important;
+  }
+
+  /* line 32, ../app/oscitk/themes/Simple_Horizontal/styles/layout.scss */
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+  }
+}
+@media print {
+  /* line 38, ../app/oscitk/themes/Simple_Horizontal/styles/layout.scss */
+  .content {
+    position: relative;
+  }
+}
