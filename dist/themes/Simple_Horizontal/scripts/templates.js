@@ -128,7 +128,7 @@ __p += '\n<div class="container-header" style="background-image: linear-gradient
  } else { ;
 __p += '\n<div class="container-header">\n';
  } ;
-__p += '\n\t<div class="container header-title">\n\t\t<h1>' +
+__p += '\n\t<div class="container header-title">\n\t\t<a href="#left" id="skip-header" class="header-scroll-icon"><span class="glyphicon glyphicon-chevron-right"></span></a>\n\t\t<h1>' +
 ((__t = ( title )) == null ? '' : __t) +
 '</h1>\n\t\t<p>\n\t\t\t';
  address = 'by ' ;

@@ -36,14 +36,70 @@ header {
   font-weight: 300;
 }
 
+/* line 34, ../header.scss */
+.header-scroll-icon {
+  display: none;
+}
+
 @media (min-width: 768px) {
-  /* line 35, ../header.scss */
+  /* line 39, ../header.scss */
   header {
     padding-top: 0;
   }
 
-  /* line 38, ../header.scss */
+  /* line 42, ../header.scss */
   .container-header {
     height: 100%;
+  }
+
+  @-moz-keyframes bounce {
+    0%, 40%, 80%, 100% {
+      right: 10px;
+    }
+    50% {
+      right: 30px;
+    }
+  }
+  @-webkit-keyframes bounce {
+    0%, 40%, 80%, 100% {
+      right: 10px;
+    }
+    50% {
+      right: 30px;
+    }
+  }
+  @keyframes bounce {
+    0%, 40%, 80%, 100% {
+      right: 10px;
+    }
+    50% {
+      right: 30px;
+    }
+  }
+  /* line 72, ../header.scss */
+  .header-scroll-icon {
+    color: #fff;
+    display: inline-block;
+    font-size: 32px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    -moz-animation: bounce 2s infinite;
+    -webkit-animation: bounce 2s infinite;
+    animation: bounce 2s infinite;
+  }
+  /* line 87, ../header.scss */
+  .header-scroll-icon:hover {
+    -moz-animation-play-state: paused;
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+  }
+  /* line 93, ../header.scss */
+  .header-scroll-icon:link, .header-scroll-icon:visited, .header-scroll-icon:hover, .header-scroll-icon:active {
+    color: #fff;
   }
 }

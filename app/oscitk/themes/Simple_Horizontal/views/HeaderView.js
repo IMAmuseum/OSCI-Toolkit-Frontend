@@ -1,6 +1,9 @@
 OsciTk.views.Header = OsciTk.views.BaseView.extend({
 	className: 'header-view',
 	template: OsciTk.templateManager.get('header'),
+	events: {
+		"click #skip-header": "skipHeader"
+	},
 	initialize: function() {
 		this.listenTo(Backbone, 'packageLoaded', function(packageModel) {
 			this.creator = $(packageModel)[0].attributes['metadata']['dc:creator'];
@@ -48,5 +51,13 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 			sectionSubtitle: this.sectionSubtitle
 		}));
 		return this;
+	},
+
+	skipHeader: function(e){
+		e.preventDefault();
+
+		var winWidth = $(window).width();
+
+		$('body').animate({scrollLeft: winWidth}, 800);
 	}
 });
