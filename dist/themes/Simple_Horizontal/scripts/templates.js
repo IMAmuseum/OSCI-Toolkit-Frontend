@@ -148,6 +148,16 @@ __p += '\n\t\t</p>\n\n  \t</div>\n</div>';
 return __p
 };
 
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/modal.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="" id="">\n    <div class="modal-dialog modal-sm">\n        <div class="modal-content">\n            <div class="modal-header">\n                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>\n                <h4 class="modal-title" id="myModalLabel">Notes</h4>\n            </div>\n            <div class="modal-body">\n            </div>\n        </div>\n    </div>\n</div>';
+
+}
+return __p
+};
+
 this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/navbar.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
