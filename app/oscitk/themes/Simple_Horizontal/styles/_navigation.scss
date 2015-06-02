@@ -1,5 +1,5 @@
 #navigation {
-    background: $white;
+    background: #fff;
     height: 36px;
     margin: 0;
     position: relative;
@@ -12,7 +12,7 @@
         width: 120px;
 
         a {
-            color: $white;
+            color: #fff;
             cursor: pointer;
             display: block;
             font-size: 15px;
@@ -55,7 +55,7 @@
 
             &:hover {
                 background: $gray-light;
-                color: $white;
+                color: #fff;
             }
 
         }
@@ -64,7 +64,7 @@
 
             a{
                 background-color: $gray-darker;
-                color: $white;
+                color: #fff;
             }
         }
     }
