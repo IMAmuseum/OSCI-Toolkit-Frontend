@@ -11,21 +11,20 @@ $bootstrap-sass-asset-helper: (twbs-font-path("") != unquote('twbs-font-path("")
 //== Colors
 //
 //## Gray and brand colors for use across Bootstrap.
+$white:                 #ffffff;
+$black:                 #000000;
 
-$gray-darker:            lighten(#000, 13.5%) !default; // #222
-$gray-dark:              lighten(#000, 20%) !default;   // #333
-$gray:                   lighten(#000, 33.5%) !default; // #555
-$gray-light:             lighten(#000, 46.7%) !default; // #777
-$gray-lighter:           lighten(#000, 94.7%) !default; // #f1f1f1
+$gray-darker:            lighten($black, 13.5%) !default; // #222
+$gray-dark:              lighten($black, 20%) !default;   // #333
+$gray:                   lighten($black, 33.5%) !default; // #555
+$gray-light:             lighten($black, 46.7%) !default; // #777
+$gray-lighter:           lighten($black, 94.7%) !default; // #f1f1f1
 
 $brand-primary:         #52818b !default;
 $brand-success:         #e3e1ba !default;
 $brand-info:            #bdb232 !default;
 $brand-warning:         #f0ad4e !default;
 $brand-danger:          #999865 !default;
-
-$white: #ffffff;
-$black: #000000;
 
 
 //== Scaffolding

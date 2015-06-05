@@ -1,26 +1,26 @@
 .paragraph-controls {
-	position: absolute;
+	height: 15px;
 	left: -24px;
+	position: absolute;
 	top: 3px;
 	z-index: 2;
-	height: 15px;
 }
 
 .btn {
-	text-transform: uppercase;
 	line-height: 1.2;
+	text-transform: uppercase;
 }
 
 .paragraph-button {
-	border: 0;
-	font: 0/0 a;
-	text-shadow: none;
-	color: transparent;
 	background-image: url(../../images/plus-grey.png);
-	background-size: 15px 15px;
 	background-repeat: no-repeat;
-	width: 15px;
+	background-size: 15px 15px;
+	border: 0;
+	color: transparent;
+	font: 0/0 a;
 	height: 15px;
+	text-shadow: none;
+	width: 15px;
 }
 
 .withNotes {
@@ -33,10 +33,10 @@
 
 .modal-content {
 	textarea {
+		color: $text-color;
 		font-size: 14px;
-		color: #333;
-		padding: 5px;
 		height: 100px;
+		padding: 5px;
 		width: 100%;
 	}
 }

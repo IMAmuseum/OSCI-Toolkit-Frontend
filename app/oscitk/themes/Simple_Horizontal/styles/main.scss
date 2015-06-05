@@ -1,39 +1,18 @@
 $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 
 @import "bootstrap/bootstrap";
+@import "typography";
+@import "browsehappy";
 @import "section";
 @import "navigation";
 @import "progress";
 @import "header";
 @import "toolbar";
 @import "navbar";
-@import "font-size";
 @import "figures";
+@import "footnotes";
 @import "overlay";
 @import "notes";
 @import "layout";
 @import "citations";
 @import "print";
-
-.browsehappy {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
-}
-
-p, textarea {
-	font-family: Merriweather, Georgia, "Times New Roman", Times, serif;
-}
-
-figcaption {
-	p {
-		font-size: 14px;
-		font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-	}
-}
-
-.tooltip {
-	font-size: 14px;
-	font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-}

@@ -30,7 +30,7 @@
 	}
 }
 
-@media (min-width: 768px) {
+@media (min-width: $screen-sm) {
 	#section-view {
 		padding: 0 40px;
 	}
@@ -44,7 +44,7 @@
 	}
 }
 
-@media (min-width: 992px) {
+@media (min-width: $screen-md) {
 	.section-col {
 		float: none;
 	}
