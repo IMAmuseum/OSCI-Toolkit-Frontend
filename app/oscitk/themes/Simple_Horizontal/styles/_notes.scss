@@ -1,19 +1,9 @@
 .paragraph-controls {
-	position: relative;
-	right: 32px;
-	top: 20px;
+	position: absolute;
+	left: -24px;
+	top: 3px;
 	z-index: 2;
 	height: 15px;
-	-webkit-column-break-inside:avoid;
-	-moz-column-break-inside:avoid;
-	-o-column-break-inside:avoid;
-	-ms-column-break-inside:avoid;
-	column-break-inside:avoid;
-	-webkit-break-inside:avoid;
-	-moz-break-inside:avoid;
-	-o-break-inside:avoid;
-	-ms-break-inside:avoid;
-	break-inside:avoid;
 }
 
 .btn {

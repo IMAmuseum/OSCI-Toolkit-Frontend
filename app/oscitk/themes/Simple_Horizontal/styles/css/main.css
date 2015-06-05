@@ -8033,8 +8033,12 @@ button.close {
 #section {
   padding: 20px 0 0 0;
 }
+/* line 8, ../_section.scss */
+#section p {
+  position: relative;
+}
 
-/* line 9, ../_section.scss */
+/* line 13, ../_section.scss */
 .footnote-reference {
   margin: 0 5px;
   display: inline-block;
@@ -8049,7 +8053,7 @@ button.close {
   text-align: center;
   background: #52818B;
 }
-/* line 22, ../_section.scss */
+/* line 26, ../_section.scss */
 .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
@@ -8057,22 +8061,22 @@ button.close {
 }
 
 @media (min-width: 768px) {
-  /* line 30, ../_section.scss */
+  /* line 34, ../_section.scss */
   #section-view {
     padding: 0 40px;
   }
 
-  /* line 34, ../_section.scss */
+  /* line 38, ../_section.scss */
   #section {
     padding: 70px 40px 0 0;
   }
-  /* line 37, ../_section.scss */
+  /* line 41, ../_section.scss */
   #section:after {
     padding-left: 40px;
   }
 }
 @media (min-width: 992px) {
-  /* line 44, ../_section.scss */
+  /* line 48, ../_section.scss */
   .section-col {
     float: none;
   }
@@ -8595,30 +8599,20 @@ figure.center figcaption {
 
 /* line 1, ../_notes.scss */
 .paragraph-controls {
-  position: relative;
-  right: 32px;
-  top: 20px;
+  position: absolute;
+  left: -24px;
+  top: 3px;
   z-index: 2;
   height: 15px;
-  -webkit-column-break-inside: avoid;
-  -moz-column-break-inside: avoid;
-  -o-column-break-inside: avoid;
-  -ms-column-break-inside: avoid;
-  column-break-inside: avoid;
-  -webkit-break-inside: avoid;
-  -moz-break-inside: avoid;
-  -o-break-inside: avoid;
-  -ms-break-inside: avoid;
-  break-inside: avoid;
 }
 
-/* line 19, ../_notes.scss */
+/* line 9, ../_notes.scss */
 .btn {
   text-transform: uppercase;
   line-height: 1.2;
 }
 
-/* line 24, ../_notes.scss */
+/* line 14, ../_notes.scss */
 .paragraph-button {
   border: 0;
   font: 0/0 a;
@@ -8631,17 +8625,17 @@ figure.center figcaption {
   height: 15px;
 }
 
-/* line 36, ../_notes.scss */
+/* line 26, ../_notes.scss */
 .withNotes {
   background-image: url(../../images/plus-blue.png);
 }
 
-/* line 40, ../_notes.scss */
+/* line 30, ../_notes.scss */
 .note-submit {
   margin-top: 10px;
 }
 
-/* line 45, ../_notes.scss */
+/* line 35, ../_notes.scss */
 .modal-content textarea {
   font-size: 14px;
   color: #333;
@@ -8690,6 +8684,31 @@ figure.center figcaption {
     margin-top: 0;
   }
 }
+/* line 1, ../_citations.scss */
+.tab-content {
+  padding-top: 10px;
+}
+
+/* line 6, ../_citations.scss */
+.citation-wrapper h4 {
+  font-size: 14px;
+  margin-top: 3px;
+}
+/* line 11, ../_citations.scss */
+.citation-wrapper p {
+  font-size: 12px;
+}
+/* line 15, ../_citations.scss */
+.citation-wrapper input {
+  font-size: 12px;
+  width: 100%;
+}
+
+/* line 21, ../_citations.scss */
+.citation-url {
+  padding-bottom: 10px;
+}
+
 @media print {
   /* line 2, ../_print.scss */
   .content {
@@ -8723,7 +8742,7 @@ figure.center figcaption {
     page-break-inside: avoid;
   }
 }
-/* line 17, ../main.scss */
+/* line 18, ../main.scss */
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -8731,18 +8750,18 @@ figure.center figcaption {
   padding: 0.2em 0;
 }
 
-/* line 24, ../main.scss */
+/* line 25, ../main.scss */
 p, textarea {
   font-family: Merriweather, Georgia, "Times New Roman", Times, serif;
 }
 
-/* line 29, ../main.scss */
+/* line 30, ../main.scss */
 figcaption p {
   font-size: 14px;
   font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-/* line 35, ../main.scss */
+/* line 36, ../main.scss */
 .tooltip {
   font-size: 14px;
   font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;

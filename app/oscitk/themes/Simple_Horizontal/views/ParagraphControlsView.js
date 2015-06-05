@@ -11,7 +11,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         });
 
         this.listenTo(Backbone, 'paragraphClicked', function(data) {
-            this.togglePopover(data);
+            this.toggleModal(data);
         });
 
         this.listenTo(Backbone, 'windowResized', function() {
@@ -39,10 +39,10 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             });
             var hasNotes = note.get('note') ? 'withNotes' : '';
 
-            $(paragraph).before(
+            $("[data-osci_content_id=osci-content-"+i+"]").prepend(
                 '<div class="paragraph-controls hidden-print" data-osci_content_id="osci-content-'+i+'" data-paragraph_identifier="'+i+'" >'+
                 '<button class="btn btn-link '+ hasNotes +' btn-xs paragraph-button" type="button" id="paragraph-'+i+'" data-paragraph_number="'+i+'" data-toggle="modal" data-target="#note-' + i + '">'+
-                '<span class="paragraph-identifier" paragraph-identifier="'+i+'">'+i+'</span>'+
+                '<span class="paragraph-identifier" paragraph-identifier="'+i+'"></span>'+
                 '</button>'+
                 '</div>'
             );
@@ -50,7 +50,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         }, this);
     },
 
-    togglePopover: function (data) {
+    toggleModal: function (data) {
         var note = this.checkForNote({
             content_id: 'osci-content-'+data,
             section_id: this.sectionId,
@@ -58,24 +58,17 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         });
         var noteText = note  ? note.get('note') : '';
         noteText = noteText === null  ? '' : noteText;
-        var notePopoverForm = '<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="note-' + data + '" id="note-' + data + '">' +
-                                '<div class="modal-dialog modal-sm">' +
-                                '<div class="modal-content">' +
-                                '<div class="modal-header">' +
-                                '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-                                '<h4 class="modal-title" id="myModalLabel">Notes</h4>' +
-                                '</div>' +
-                                '<div class="modal-body">' +
-                                '<textarea data-paragraph_number="'+ data +'" data-id="'+ note.cid +'">'+ noteText +'</textarea>'+
-                                '<button type="button" class="btn btn-primary btn-block note-submit">Add Note</button>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>';
 
-        if ( $('#note-' + data).length === 0 ) {
-            $('#section-view').append(notePopoverForm);
+        data = {
+            id: data,
+            cid: note.cid,
+            noteText: noteText,
+            sectionId: this.sectionId,
+            contentId: 'osci-content-'+data,
+            paragraph_number: data
         }
+
+        var modal = new OsciTk.views.Modal(data);
     },
 
     checkForNote: function (data) {

@@ -183,15 +183,16 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         this.content = content;
         var i = 0;
         var p = 1;
+
         //var paragraphs = sectionModel.get('content')[0].children.body.children;
         _.each(this.content.children, function(sectionItem) {
             if($(sectionItem).is('p')){
                 // add attr to p and add
                 $(sectionItem).attr({
                     'data-paragraph_number': p,
-                    'data-osci_content_id': 'osci-content-'+i,
+                    'data-osci_content_id': 'osci-content-'+p,
                     'data-sectionid': 'body',
-                    'id': 'osci-content-'+i
+                    'id': 'osci-content-'+p
                 }).addClass('content-paragraph');
                 p++;
             }
