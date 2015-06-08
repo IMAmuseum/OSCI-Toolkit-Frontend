@@ -8058,45 +8058,23 @@ p, textarea {
   position: relative;
 }
 
-/* line 13, ../_section.scss */
-.footnote-reference {
-  margin: 0 5px;
-  display: inline-block;
-  position: relative;
-  top: -5px;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  font-size: 12px;
-  color: #fff;
-  line-height: 15px;
-  text-align: center;
-  background: #52818B;
-}
-/* line 26, ../_section.scss */
-.footnote-reference:hover {
-  color: #fff;
-  text-decoration: none;
-  background: #3f636b;
-}
-
 @media (min-width: 768px) {
-  /* line 34, ../_section.scss */
+  /* line 14, ../_section.scss */
   #section-view {
     padding: 0 40px;
   }
 
-  /* line 38, ../_section.scss */
+  /* line 18, ../_section.scss */
   #section {
     padding: 70px 40px 0 0;
   }
-  /* line 41, ../_section.scss */
+  /* line 21, ../_section.scss */
   #section:after {
     padding-left: 40px;
   }
 }
 @media (min-width: 992px) {
-  /* line 48, ../_section.scss */
+  /* line 28, ../_section.scss */
   .section-col {
     float: none;
   }
@@ -8352,7 +8330,7 @@ header {
   }
   /* line 73, ../_header.scss */
   .header-scroll-icon {
-    color: #000000;
+    color: #ffffff;
     display: inline-block;
     font-size: 32px;
     position: absolute;
@@ -8374,7 +8352,7 @@ header {
   }
   /* line 94, ../_header.scss */
   .header-scroll-icon:link, .header-scroll-icon:visited, .header-scroll-icon:hover, .header-scroll-icon:active {
-    color: #000000;
+    color: #ffffff;
   }
 }
 /* line 1, ../_toolbar.scss */
@@ -8530,32 +8508,6 @@ figcaption {
 figcaption p {
   font-size: 14px;
   font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-/* line 38, ../_figures.scss */
-figure.left {
-  float: left;
-  margin-right: 50px;
-  margin-left: 0;
-}
-
-/* line 44, ../_figures.scss */
-img.left {
-  float: left;
-  max-height: 50vh;
-}
-
-/* line 49, ../_figures.scss */
-figure.right {
-  float: right;
-  margin-left: 40px;
-  margin-right: 0;
-}
-
-/* line 55, ../_figures.scss */
-img.right {
-  float: right;
-  max-height: 50vh;
 }
 
 /* line 60, ../_figures.scss */
