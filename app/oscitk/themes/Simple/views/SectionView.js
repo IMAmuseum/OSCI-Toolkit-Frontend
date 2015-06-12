@@ -125,13 +125,20 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         var noteText = textarea.val();
         var cid = textarea.data('id');
         var paragraph_number = textarea.data('paragraph_number');
+        var note = app.collections.notes.get(cid);
+        note.set('note', noteText);
+
         if (noteText != '') {
-            console.log(noteText);
-            var note = app.collections.notes.get(cid);
-            note.set('note', noteText);
             note.save();
             textarea.html(noteText);
+            $('#paragraph-'+paragraph_number).addClass('withNotes');
         }
+
+        if (noteText === '') {
+            note.destroy();
+            $('#paragraph-'+paragraph_number).removeClass('withNotes');
+        }
+
         $('#paragraph-'+paragraph_number).popover({
             content: function() {
                 return $("#popover-content").html();

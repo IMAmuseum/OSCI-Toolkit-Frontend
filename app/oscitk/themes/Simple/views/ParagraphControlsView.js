@@ -52,7 +52,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
     togglePopover: function (data) {
         this.data = data;
-        console.log(this.data)
+
         var note = this.checkForNote({
             content_id: 'osci-content-'+ data,
             section_id: this.sectionId,

@@ -17,15 +17,17 @@ OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 				page = data.page;
 			}
 			pageView = app.views.sectionView.getChildViewByIndex(page - 1);
-			_.each(app.collections.notes.models, function(note) {
-				// reset to false
-				note.set('onCurrentPage', false);
-				// search for note's content id in current page
-				var found = pageView.$el.find('#' + note.get('content_id'));
-				if (found.length > 0) {
-					note.set('onCurrentPage', true);
-				}
-			});
+			if (pageView) {
+				_.each(app.collections.notes.models, function(note) {
+					// reset to false
+					note.set('onCurrentPage', false);
+					// search for note's content id in current page
+					var found = pageView.$el.find('#' + note.get('content_id'));
+					if (found.length > 0) {
+						note.set('onCurrentPage', true);
+					}
+				});
+			}
 			this.render();
 		});
 	},
