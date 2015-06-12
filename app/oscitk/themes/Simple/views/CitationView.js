@@ -1,7 +1,6 @@
 OsciTk.views.Citation = OsciTk.views.BaseView.extend({
     template: OsciTk.templateManager.get('citation'),
     initialize: function() {
-
         this.listenTo(Backbone, "toggleCiteDialog", function(data) {
             this.render(data);
         });
