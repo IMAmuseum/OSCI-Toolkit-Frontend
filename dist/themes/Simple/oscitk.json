@@ -3,7 +3,7 @@
 	"search": false,
 	"notes": true,
 	"citations": true,
-	"glossary": false,
+	"glossary": true,
 	"multicolumn": false,
 	"layeredImage": false,
 }
