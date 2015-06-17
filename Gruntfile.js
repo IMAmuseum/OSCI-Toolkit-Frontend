@@ -76,7 +76,7 @@ module.exports = function (grunt) {
         },
         usemin: {
             html: ['<%= osci.dist %>/{,*/}*.html'],
-            css: ['<%= osci.dist %>/styles/{,*/}*.css'],
+            css: ['<%= osci.dist %>/styles/css/{,*/}*.css'],
             options: {
                 dirs: ['<%= osci.dist %>']
             }
@@ -94,7 +94,7 @@ module.exports = function (grunt) {
         cssmin: {
             dist: {
                 files: {
-                    '<%= osci.dist %>/styles/main.css': [
+                    '<%= osci.dist %>/styles/css/main.css': [
                         '<%= osci.app %>/styles/{,*/}*.css'
                     ]
                 }
@@ -149,7 +149,7 @@ module.exports = function (grunt) {
                 files: {
                     src: [
                         '<%= osci.dist %>/scripts/{,*/}*.js',
-                        '<%= osci.dist %>/styles/{,*/}*.css',
+                        '<%= osci.dist %>/styles/css/{,*/}*.css',
                         '/styles/fonts/{,*/}*.*'
                     ]
                 }

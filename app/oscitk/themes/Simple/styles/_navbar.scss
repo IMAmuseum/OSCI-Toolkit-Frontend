@@ -5,21 +5,27 @@
 }
 
 #navbar {
-	z-index: 998;
 	.nav {
 		li {
 			a {
 				font-size: 24px;
+				z-index: 10000;
 				@media (max-width: 768px) {
 					font-size: 14px;
 				}
 			}
 			text-align: center;
 			width: 55px;
+			&:hover {
+				cursor: hand;
+			}
 		}
 
 		li.active {
-			background-color: #333;
+			a {
+				z-index: 1000;
+				background-color: #e7e7e7;
+			}
 		}
 	}
 }

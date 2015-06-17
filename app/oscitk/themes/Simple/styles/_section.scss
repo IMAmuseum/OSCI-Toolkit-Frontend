@@ -26,6 +26,12 @@
 	}
 }
 
+.glossary-term {
+	&:hover {
+		cursor: hand;
+	}
+}
+
 @media (max-width: 992px) {
 	#section {
 		padding-left: 0;
