@@ -16,10 +16,10 @@ app = {
         this.collections.navigationItems = new OsciTk.collections.NavigationItems();
 
         // only three features are dependent on theme features configuraton
-        if (this.features.notes ) {
+        if (this.features.notes) {
             this.collections.notes = new OsciTk.collections.Notes();
         }
-        if (this.features.account ) {
+        if (this.features.account) {
             this.account = new OsciTk.models.Account();
         }
         if (this.features.glossary) {
@@ -41,7 +41,6 @@ app = {
 
         // init main view
         this.views.app = new OsciTk.views.App();
-
     },
 
     run : function() {

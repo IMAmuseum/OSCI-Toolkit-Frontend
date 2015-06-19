@@ -212,6 +212,22 @@ __p += '\n<div class=\'next-page corner\'>\n\t<a href="#section/' +
 return __p
 };
 
+this["JST"]["app/oscitk/themes/Simple/templates/note-form.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<textarea data-paragraph_number="' +
+((__t = ( paragraph_number )) == null ? '' : __t) +
+'" data-id="' +
+((__t = ( cid )) == null ? '' : __t) +
+'">' +
+((__t = ( note )) == null ? '' : __t) +
+'</textarea>\n<button id=\'note-submit\' type=\'button\' class=\'btn btn-primary btn-block\'>Add Note</button>';
+
+}
+return __p
+};
+
 this["JST"]["app/oscitk/themes/Simple/templates/note-popup.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;

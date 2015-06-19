@@ -8293,52 +8293,56 @@ ul.toc {
   width: 100%;
 }
 
-/* line 9, ../_navbar.scss */
+/* line 7, ../_navbar.scss */
+#navbar {
+  z-index: 998;
+}
+/* line 10, ../_navbar.scss */
 #navbar .nav li {
   text-align: center;
   width: 55px;
 }
-/* line 10, ../_navbar.scss */
+/* line 11, ../_navbar.scss */
 #navbar .nav li a {
   font-size: 24px;
-  z-index: 10000;
+  z-index: 999;
 }
 @media (max-width: 768px) {
-  /* line 10, ../_navbar.scss */
+  /* line 11, ../_navbar.scss */
   #navbar .nav li a {
     font-size: 14px;
   }
 }
-/* line 19, ../_navbar.scss */
+/* line 20, ../_navbar.scss */
 #navbar .nav li:hover {
   cursor: hand;
 }
-/* line 25, ../_navbar.scss */
+/* line 26, ../_navbar.scss */
 #navbar .nav li.active a {
-  z-index: 1000;
+  z-index: 999;
   background-color: #e7e7e7;
 }
 
-/* line 33, ../_navbar.scss */
+/* line 34, ../_navbar.scss */
 #navbar-title {
   color: #333;
   font-size: 24px;
 }
 @media (max-width: 768px) {
-  /* line 33, ../_navbar.scss */
+  /* line 34, ../_navbar.scss */
   #navbar-title {
     font-size: 14px;
   }
 }
 
 @media (max-width: 480px) {
-  /* line 44, ../_navbar.scss */
+  /* line 45, ../_navbar.scss */
   #navbar .nav li {
     width: 100%;
     text-align: left;
   }
 }
-/* line 53, ../_navbar.scss */
+/* line 54, ../_navbar.scss */
 #navbar-area .tooltip > .tooltip-inner {
   background-color: #52818b;
   height: 40px;
@@ -8350,7 +8354,7 @@ ul.toc {
   line-height: 35px;
   color: #FFF;
 }
-/* line 64, ../_navbar.scss */
+/* line 65, ../_navbar.scss */
 #navbar-area .tooltip.bottom > .tooltip-arrow {
   top: -16px;
   left: 50%;
@@ -8470,7 +8474,7 @@ figure.center figcaption {
 
 /* line 13, ../_notes.scss */
 .paragraph-button {
-  background-image: url(/images/plus-grey.png);
+  background-image: url(../../images/plus-grey.png);
   background-size: 15px 15px;
   background-repeat: no-repeat;
   border: 0;
@@ -8483,7 +8487,7 @@ figure.center figcaption {
 
 /* line 25, ../_notes.scss */
 .withNotes {
-  background-image: url(/images/plus-blue.png);
+  background-image: url(../../images/plus-blue.png);
 }
 
 /* line 29, ../_notes.scss */

@@ -1,13 +1,16 @@
 OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
+    templateNotes: OsciTk.templateManager.get('note-form'),
+    templateCites: OsciTk.templateManager.get('citation'),
     initialize: function() {
         // when layut is complete add numbers for paragraph controls
+
         this.listenTo(Backbone, 'layoutComplete', function() {
             this.sectionId = app.models.section.get('id');
+            this.render();
         });
 
         this.listenTo(Backbone, 'notesLoaded', function(params) {
             this.notesLoaded = true;
-            this.render();
         });
 
         this.listenTo(Backbone, 'paragraphClicked', function(data) {
@@ -61,8 +64,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
         var noteText = note  ? note.get('note') : '';
         noteText = noteText === null  ? '' : noteText;
-        var notePopoverForm = "<textarea data-paragraph_number='"+ data +"' data-id='"+ note.cid +"'>"+ noteText +"</textarea>"+
-                              "<button id='note-submit' type='button' class='btn btn-primary btn-block'>Add Note</button>";
+        var notePopoverForm = this.templateNotes({paragraph_number: note.get('paragraph_number'), note: noteText, cid: note.get('cid')});
         $('#paragraph-'+data).popover({html:true, trigger:'manual', placement:'top', content: notePopoverForm});
         $('#paragraph-'+data).popover('toggle');
 

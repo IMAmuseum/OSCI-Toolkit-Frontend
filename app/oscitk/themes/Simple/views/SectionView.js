@@ -114,9 +114,11 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     },
 
     paragraphClicked: function(e) {
-        var p = $(e.currentTarget);
-        var paragraphNum = p.data("paragraph_number");
-        Backbone.trigger("paragraphClicked", paragraphNum);
+        if ( app.account.get('email') != null) {
+            var p = $(e.currentTarget);
+            var paragraphNum = p.data("paragraph_number");
+            Backbone.trigger("paragraphClicked", paragraphNum);
+        }
     },
 
     noteSubmit: function(e) {

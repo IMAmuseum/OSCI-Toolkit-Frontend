@@ -5,11 +5,12 @@
 }
 
 #navbar {
+	z-index: 998;
 	.nav {
 		li {
 			a {
 				font-size: 24px;
-				z-index: 10000;
+				z-index: 999;
 				@media (max-width: 768px) {
 					font-size: 14px;
 				}
@@ -23,7 +24,7 @@
 
 		li.active {
 			a {
-				z-index: 1000;
+				z-index: 999;
 				background-color: #e7e7e7;
 			}
 		}
