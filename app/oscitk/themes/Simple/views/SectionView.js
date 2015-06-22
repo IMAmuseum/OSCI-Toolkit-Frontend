@@ -17,6 +17,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // bind sectionChanged
         this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
             var that = this;
+            $("html, body").animate({
+                scrollTop: 0
+            }, 0);
             $('#section-view').empty();
             $('.header-view').empty();
             $('#loader').show();
