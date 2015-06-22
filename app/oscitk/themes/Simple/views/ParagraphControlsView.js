@@ -1,6 +1,8 @@
 OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
+    template: OsciTk.templateManager.get('paragraph-popover'),
     templateNotes: OsciTk.templateManager.get('note-form'),
     templateCites: OsciTk.templateManager.get('citation'),
+
     initialize: function() {
         // when layut is complete add numbers for paragraph controls
 
@@ -15,6 +17,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
         this.listenTo(Backbone, 'paragraphClicked', function(data) {
             this.togglePopover(data);
+            this.getCitation(data);
         });
 
         this.listenTo(Backbone, 'windowResized', function() {
@@ -62,10 +65,22 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             paragraph_number: data
         });
 
+        var popoverData = {
+            id: data,
+            cid: note.cid,
+            noteText: noteText,
+            sectionId: this.sectionId,
+            contentId: 'osci-content-'+data,
+            paragraph_number: data
+        }
+
         var noteText = note  ? note.get('note') : '';
         noteText = noteText === null  ? '' : noteText;
-        var notePopoverForm = this.templateNotes({paragraph_number: note.get('paragraph_number'), note: noteText, cid: note.get('cid')});
-        $('#paragraph-'+data).popover({html:true, trigger:'manual', placement:'top', content: notePopoverForm});
+
+        var noteForm = this.templateNotes({paragraph_number: note.get('paragraph_number'), note: noteText, cid: note.cid});
+
+        var popover = this.template({noteForm: noteForm, citation: this.citation});
+        $('#paragraph-'+data).popover({html:true, trigger:'manual', placement:'top', content: popover});
         $('#paragraph-'+data).popover('toggle');
 
         //step through paragraphs and destroy existing open popovers
@@ -93,6 +108,45 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             app.collections.notes.add(note);
         }
         return note;
+    },
+
+    getCitation: function(data) {
+        var citationView = this;
+        var contentId = 'osci-content-'+data;
+        var content = $('#' + contentId);
+
+        var citationRequestParams = {
+            'section_id': app.models.section.get('id'),
+            'publication_id': app.models.docPackage.get('id'),
+            'element_id': contentId,
+            'field': 'body'
+        };
+
+        $.ajax({
+            url: app.config.get('endpoints').OsciTkCitation,
+            data: citationRequestParams,
+            success: function(data, status) {
+                if (data.success) {
+                    //add reference text to the response
+                    data.citation.referenceText = content.text();
+                    data.citation.url = document.URL + "/p-" + app.models.section.get('id') + "-" + content.data('paragraph_number');
+                    data.citation.paragraphNumber = content.data('paragraph_number');
+                    data.citation.date = new Date(data.citation.date);
+                    data.citation.formattedDate = (data.citation.date.getMonth() + 1) + "/" + data.citation.date.getDate() + "/" + data.citation.date.getFullYear();
+
+                    //make sure data exists for all variables in templates
+                    data.citation.creator = data.citation.creator ? data.citation.creator : '';
+                    data.citation.description = data.citation.description ? data.citation.description : '';
+                    data.citation.editor = data.citation.editor ? data.citation.editor : '';
+                    data.citation.publicationTitle = data.citation.publicationTitle ? data.citation.publicationTitle : '';
+                    data.citation.publisher = data.citation.publisher ? data.citation.publisher : '';
+                    data.citation.rights = data.citation.rights ? data.citation.rights : '';
+                    data.citation.title = data.citation.title ? data.citation.title : '';
+
+                    $('#cite').html(citationView.templateCites(data.citation));
+                }
+            }
+        });
     }
 
 });

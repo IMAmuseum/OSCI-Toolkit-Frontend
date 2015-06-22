@@ -1,0 +1,23 @@
+$popover-height: 160px;
+
+.popover-content {
+	padding: 9px;
+	max-width: 200px;
+	max-height: 240px;
+	textarea {
+		border: none;
+		font-size: 14px;
+		color: #333;
+		padding: 5px;
+		height: 115px;
+		width: 100%;
+	}
+	button {
+		font-size: 15px;
+		font-weight: 200;
+	}
+}
+
+.tab-content {
+	height: $popover-height;
+}

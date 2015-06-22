@@ -19,8 +19,8 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			navigationView: new OsciTk.views.Navigation(),
 			footnotesView: new OsciTk.views.Footnotes(),
 			paragraphControlsView: new OsciTk.views.ParagraphControls(),
-			notesView: new OsciTk.views.Notes(),
 			glossaryTooltipView: new OsciTk.views.GlossaryTooltip(),
+			notesView: new OsciTk.views.Notes(),
 			accountView: new OsciTk.views.Account(),
 			navbarView: new OsciTk.views.Navbar(),
 		};

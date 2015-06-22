@@ -6,6 +6,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         'click .content-paragraph': 'paragraphClicked',
         'click .paragraph-button': 'paragraphClicked',
         'click #note-submit': 'noteSubmit',
+        'click #cite': 'getCitation',
     },
     initialize: function() {
         _.bindAll(this, 'updateProgress');
@@ -195,5 +196,4 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             $(figure).find("div > img").addClass(imgClass);
         }, this);
     }
-
 });

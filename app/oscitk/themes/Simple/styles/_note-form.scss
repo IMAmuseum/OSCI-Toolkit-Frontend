@@ -1,3 +1,7 @@
+.note-form-wrapper {
+	height: $popover-height;
+}
+
 .paragraph-controls {
 	height: 0;
 	right: 32px;
@@ -28,19 +32,4 @@
 
 #note-submit {
 	margin-top: 10px;
-}
-
-.popover-content {
-	padding: 9px;
-	textarea {
-		border: none;
-		font-size: 14px;
-		color: #333;
-		padding: 5px;
-		height: 100px;
-	}
-	button {
-		font-size: 15px;
-		font-weight: 200;
-	}
 }

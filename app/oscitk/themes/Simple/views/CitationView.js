@@ -1,9 +1,7 @@
 OsciTk.views.Citation = OsciTk.views.BaseView.extend({
     template: OsciTk.templateManager.get('citation'),
-    initialize: function() {
-        this.listenTo(Backbone, "toggleCiteDialog", function(data) {
-            this.render(data);
-        });
+    initialize: function(data) {
+        this.render(data);
     },
     render: function(data) {
         var citationView = this;
@@ -16,7 +14,6 @@ OsciTk.views.Citation = OsciTk.views.BaseView.extend({
             'element_id': data.contentId,
             'field': content.attr('data-sectionId')
         };
-        // console.log(citationRequestParams);
 
         $.ajax({
             url: app.config.get('endpoints').OsciTkCitation,
@@ -39,24 +36,8 @@ OsciTk.views.Citation = OsciTk.views.BaseView.extend({
                     data.citation.rights = data.citation.rights ? data.citation.rights : '';
                     data.citation.title = data.citation.title ? data.citation.title : '';
 
-                    $.fancybox({
-                        'padding'       : 0,
-                        'content'       : citationView.template(data.citation),
-                        'type'          : 'inline',
-                        'titleShow'     : false
-                    });
-
-                    $(".citation-wrapper").on('click', 'a', function(e) {
-                        e.preventDefault();
-                        var $this = $(this);
-
-                        var container = $this.parents(".citations");
-                        container.find('.citation').hide();
-                        container.find($this.attr('href')).show();
-
-                        container.find('li').removeClass('active');
-                        $this.parent().addClass('active');
-                    });
+                    // $('.citation').html(citationView.template(data.citation));
+                    return data.citation;
                 }
             }
         });

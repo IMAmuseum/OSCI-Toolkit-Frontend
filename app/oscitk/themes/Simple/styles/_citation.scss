@@ -1,0 +1,17 @@
+.citation-wrapper {
+	background: #FFF;
+	overflow: scroll;
+	height: $popover-height;
+	.citations {
+		padding: 0 10px 5px 10px;
+		.citation {
+			h4 {
+				font-size: 14px;
+				margin-bottom: 5px;
+			}
+			p {
+				font-size: 10px;
+			}
+		}
+	}
+}

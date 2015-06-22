@@ -12,5 +12,7 @@ $image-path : "/images";
 @import "navbar";
 @import "figures";
 @import "overlay";
-@import "notes";
+@import "paragraph-popover";
+@import "note-form";
+@import "citation";
 @import "print";

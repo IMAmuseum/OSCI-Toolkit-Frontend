@@ -8458,7 +8458,38 @@ figure.center figcaption {
   z-index: 11;
 }
 
-/* line 1, ../_notes.scss */
+/* line 3, ../_paragraph-popover.scss */
+.popover-content {
+  padding: 9px;
+  max-width: 200px;
+  max-height: 240px;
+}
+/* line 7, ../_paragraph-popover.scss */
+.popover-content textarea {
+  border: none;
+  font-size: 14px;
+  color: #333;
+  padding: 5px;
+  height: 115px;
+  width: 100%;
+}
+/* line 15, ../_paragraph-popover.scss */
+.popover-content button {
+  font-size: 15px;
+  font-weight: 200;
+}
+
+/* line 21, ../_paragraph-popover.scss */
+.tab-content {
+  height: 160px;
+}
+
+/* line 1, ../_note-form.scss */
+.note-form-wrapper {
+  height: 160px;
+}
+
+/* line 5, ../_note-form.scss */
 .paragraph-controls {
   height: 0;
   right: 32px;
@@ -8467,12 +8498,12 @@ figure.center figcaption {
   z-index: 2;
 }
 
-/* line 9, ../_notes.scss */
+/* line 13, ../_note-form.scss */
 .btn {
   text-transform: uppercase;
 }
 
-/* line 13, ../_notes.scss */
+/* line 17, ../_note-form.scss */
 .paragraph-button {
   background-image: url(../../images/plus-grey.png);
   background-size: 15px 15px;
@@ -8485,32 +8516,34 @@ figure.center figcaption {
   height: 15px;
 }
 
-/* line 25, ../_notes.scss */
+/* line 29, ../_note-form.scss */
 .withNotes {
   background-image: url(../../images/plus-blue.png);
 }
 
-/* line 29, ../_notes.scss */
+/* line 33, ../_note-form.scss */
 #note-submit {
   margin-top: 10px;
 }
 
-/* line 33, ../_notes.scss */
-.popover-content {
-  padding: 9px;
+/* line 1, ../_citation.scss */
+.citation-wrapper {
+  background: #FFF;
+  overflow: scroll;
+  height: 160px;
 }
-/* line 35, ../_notes.scss */
-.popover-content textarea {
-  border: none;
+/* line 5, ../_citation.scss */
+.citation-wrapper .citations {
+  padding: 0 10px 5px 10px;
+}
+/* line 8, ../_citation.scss */
+.citation-wrapper .citations .citation h4 {
   font-size: 14px;
-  color: #333;
-  padding: 5px;
-  height: 100px;
+  margin-bottom: 5px;
 }
-/* line 42, ../_notes.scss */
-.popover-content button {
-  font-size: 15px;
-  font-weight: 200;
+/* line 12, ../_citation.scss */
+.citation-wrapper .citations .citation p {
+  font-size: 10px;
 }
 
 @media print {

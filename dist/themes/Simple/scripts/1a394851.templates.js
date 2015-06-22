@@ -49,15 +49,15 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<div class="citation-wrapper">\n\t<h2>Citation</h2>\n\t<div class="citations">\n\t\t<span>Format</span>\n\t\t<ul class="formats">\n\t\t\t<li class="active"><a href="#citation-format-chicago">Chicago</a></li>\n\t\t\t<li><a href="#citation-format-mla">MLA</a></li>\n\t\t</ul>\n\t\t<div id="citation-format-chicago" class="citation">\n\t\t\t';
+__p += '<div class="citation-wrapper">\n\t<div class="citations">\n\t\t<div id="citation-format-chicago" class="citation">\n\t\t\t<h4>Chicago</h4>\n\t\t\t<p>';
  if (creator.length > 0) { ;
 __p += ' ' +
 ((__t = ( creator + ", " )) == null ? '' : __t) +
 ' ';
  } ;
-__p += '"<em>' +
+__p += '&ldquo;<em>' +
 ((__t = ( title )) == null ? '' : __t) +
-'</em>," in <em>' +
+'</em>,&rdquo; in <em>' +
 ((__t = ( publicationTitle )) == null ? '' : __t) +
 '</em>, ed. ' +
 ((__t = ( editor )) == null ? '' : __t) +
@@ -67,15 +67,15 @@ __p += '"<em>' +
 ((__t = ( formattedDate )) == null ? '' : __t) +
 ', para ' +
 ((__t = ( paragraphNumber )) == null ? '' : __t) +
-'.\n\t\t</div>\n\t\t<div id="citation-format-mla" style="display: none;" class="citation">\n\t\t\t';
+'.</p>\n\t\t</div>\n\t\t<div id="citation-format-mla" class="citation">\n\t\t\t<h4>MLA</h4>\n\t\t\t<p>';
  if (creator.length > 0) { ;
 __p += ' ' +
 ((__t = ( creator + ", " )) == null ? '' : __t) +
 ' ';
  } ;
-__p += '"<em>' +
+__p += '&ldquo;<em>' +
 ((__t = ( title )) == null ? '' : __t) +
-'</em>," in <span style="text-decoration:underline;">' +
+'</em>,&rdquo; in <span style="text-decoration:underline;">' +
 ((__t = ( publicationTitle )) == null ? '' : __t) +
 '</span>, ed. ' +
 ((__t = ( editor )) == null ? '' : __t) +
@@ -85,11 +85,9 @@ __p += '"<em>' +
 ((__t = ( formattedDate )) == null ? '' : __t) +
 ', ' +
 ((__t = ( paragraphNumber )) == null ? '' : __t) +
-'.\n\t\t</div>\n\t</div>\n\t<div class="citation_url">\n\t\t<span>Citation URL</span>\n\t\t<input disabled="disabled" value="' +
+'.</p>\n\t\t</div>\n\t\t<div id="citation-url" class="citation">\n\t\t\t<h4>Citation URL</h4>\n\t\t\t<p>' +
 ((__t = ( url )) == null ? '' : __t) +
-'" />\n\t</div>\n\t<div class="reference_text">\n\t\t<span>Reference Text</span>\n\t\t<textarea disabled="disabled">' +
-((__t = ( referenceText )) == null ? '' : __t) +
-'</textarea>\n\t</div>\n</div>';
+'</p>\n\t\t</div>\n\t</div>\n</div>';
 
 }
 return __p
@@ -216,27 +214,13 @@ this["JST"]["app/oscitk/themes/Simple/templates/note-form.tpl.html"] = function(
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<textarea data-paragraph_number="' +
+__p += '<textarea class="note-form-wrapper" data-paragraph_number="' +
 ((__t = ( paragraph_number )) == null ? '' : __t) +
 '" data-id="' +
 ((__t = ( cid )) == null ? '' : __t) +
 '">' +
 ((__t = ( note )) == null ? '' : __t) +
 '</textarea>\n<button id=\'note-submit\' type=\'button\' class=\'btn btn-primary btn-block\'>Add Note</button>';
-
-}
-return __p
-};
-
-this["JST"]["app/oscitk/themes/Simple/templates/note-popup.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<div class="note-popup">\n    <h2>Note</h2>\n    <form class="noteForm">\n    \t<textarea>' +
-((__t = ( note )) == null ? '' : __t) +
-'</textarea>\n        <label for="note-tags">Tags:</label>\n        <input type="text" name="note-tags" id="note-tags" value="' +
-((__t = ( tags.join(', ') )) == null ? '' : __t) +
-'" />\n    </form>\n    <div class="status">Saved</div>\n</div>';
 
 }
 return __p
@@ -279,6 +263,20 @@ var __t, __p = '', __e = _.escape;
 with (obj) {
 __p +=
 ((__t = ( content.content )) == null ? '' : __t);
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Simple/templates/paragraph-popover.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class="popover-wrapper">\n\t<ul class="nav nav-tabs" role="tablist">\n\t<li role="presentation" class="active">\n\t\t<a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Notes</a>\n\t</li>\n\t<li role="presentation">\n\t\t<a href="#cite" aria-controls="cite" role="tab" data-toggle="tab">Cite</a>\n\t</li>\n\t</ul>\n\n\t<div class="tab-content">\n    \t<div role="tabpanel" class="tab-pane active" id="notes">\n    \t\t' +
+((__t = ( noteForm )) == null ? '' : __t) +
+'\n    \t</div>\n    \t<div role="tabpanel" class="tab-pane" id="cite">\n    \t\t' +
+((__t = ( citation )) == null ? '' : __t) +
+'\n    \t</div>\n    </div>\n</div>\n';
 
 }
 return __p

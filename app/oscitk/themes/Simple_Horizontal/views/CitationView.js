@@ -15,6 +15,8 @@ OsciTk.views.Citation = OsciTk.views.BaseView.extend({
             'field': content.attr('data-sectionId')
         };
 
+        console.log(citationRequestParams);
+
         $.ajax({
             url: app.config.get('endpoints').OsciTkCitation,
             data: citationRequestParams,
