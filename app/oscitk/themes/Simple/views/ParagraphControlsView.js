@@ -4,15 +4,17 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
     templateCites: OsciTk.templateManager.get('citation'),
 
     initialize: function() {
-        // when layut is complete add numbers for paragraph controls
-
+        // when layout is complete add numbers for paragraph controls
         this.listenTo(Backbone, 'layoutComplete', function() {
             this.sectionId = app.models.section.get('id');
-            this.render();
         });
 
         this.listenTo(Backbone, 'notesLoaded', function(params) {
-            this.notesLoaded = true;
+            this.notesLoaded = false;
+            if (params.length > 0) {
+                this.notesLoaded = true;
+            }
+            this.render();
         });
 
         this.listenTo(Backbone, 'paragraphClicked', function(data) {
@@ -20,17 +22,13 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             this.getCitation(data);
         });
 
-        this.listenTo(Backbone, 'windowResized', function() {
-            if (this.notesLoaded) {
-                this.render();
-            }
-        });
-
     },
 
     render: function() {
-        this.paragraphs = $('.content-paragraph');
-        this.addParagraphControls();
+        if ( app.account.get('email') != null && this.notesLoaded) {
+            this.paragraphs = $('.content-paragraph');
+            this.addParagraphControls();
+        }
         return this;
     },
 

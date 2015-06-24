@@ -10,6 +10,9 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 	className: 'account-view',
 	template: null,
 	initialize: function() {
+		// this.listenTo(Backbone, 'accountReady', function() {
+
+		// });
 		this.model = app.account;
 		this.render();
 		this.listenTo(Backbone, 'sectionLoaded', function(sectionModel) {

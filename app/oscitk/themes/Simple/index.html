@@ -88,13 +88,40 @@
     <!-- endbuild -->
 
     <script>jQuery(function() {
-            $.ajaxSetup({
-                async: false
-            });
-            var oscitkJson = $.getJSON('oscitk.json');
-            oscitkJson = JSON.parse(oscitkJson.responseText);
+            // $.ajaxSetup({
+            //     async: false
+            // });
+            // var oscitkJson = $.getJSON('oscitk.json');
+            // oscitkJson = JSON.parse(oscitkJson.responseText);
 
-            app.bootstrap(oscitkJson);
+            // app.bootstrap(oscitkJson);
+            app.bootstrap({
+                packageUrl: '/api/epub/1/package.opf',
+                templateUrls: [
+                    '/osci-themes/app/oscitk/themes/Simple/templates/'
+                ],
+                endpoints: {
+                    'OsciTkAccount': '/api/users/',
+                    'OsciTkCitation': '/api/citations/',
+                    'OsciTkNote': '/api/notes/'
+                },
+                toolbarItems: [
+                    {view: 'accountView', text: 'account', style: 'default'},
+                    {view: 'tocView', text: 'toc', style: 'default'},
+                    {view: 'printView', text: 'print', style: 'inline'},
+                    {view: 'fontSizeView', text: 'font-size', style: 'inline'}
+                ],
+                theme: 'Simple',
+                themeFeatures: {
+                    "account": true,
+                    "search": false,
+                    "notes": true,
+                    "citations": true,
+                    "glossary": true,
+                    "multicolumn": false,
+                    "layeredImage": false,
+                }
+            });
             app.run();
         });
     </script>
