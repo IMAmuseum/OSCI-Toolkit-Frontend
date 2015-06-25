@@ -11,9 +11,10 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
         this.listenTo(Backbone, 'notesLoaded', function(params) {
             this.notesLoaded = false;
-            if (params.length > 0) {
-                console.log(params.length);
-                this.notesLoaded = true;
+            if (params.length > 0 || params == 'resized') {
+                if (app.account.get('email') != null) {
+                    this.notesLoaded = true;
+                }
             }
             this.render();
         });
@@ -23,12 +24,14 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             this.getCitation(data);
         });
 
+        this.listenTo(Backbone, 'windowResized', function() {
+            Backbone.trigger('notesLoaded', 'resized');
+        });
+
     },
 
     render: function() {
         if ( app.account.get('email') != null && this.notesLoaded) {
-            console.log('render para controls');
-            console.log(app.account.get('email'));
             this.paragraphs = $('.content-paragraph');
             this.addParagraphControls();
         }

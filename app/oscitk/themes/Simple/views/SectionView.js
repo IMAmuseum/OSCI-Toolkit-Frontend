@@ -45,7 +45,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             this.makeIds(sectionModel);
             this.sectionId = sectionModel.get('id');
             this.getSectionTitles(this.sectionId);
-            this.render();
         });
 
         this.listenTo(Backbone, "figuresAvailable", function(figures) {
