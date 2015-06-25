@@ -65,6 +65,7 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 			success: function(data) {
 				accountView.model.set(data.user);
 				accountView.showLoginForm();
+				app.account.set({'email': null});
 			}
 		});
 	},
