@@ -39,6 +39,11 @@ app = {
 		if (!getUrlPath) { //for I.E., doesn't support baseURI
 			getUrlPath = document.URL;
 		}
+		
+		if (window.location.hash) {
+			//if there's a # in the url replace with /
+			getUrlPath = getUrlPath.replace("#", "/");
+		}
 		var pathArray = getUrlPath.split('/');
 		var rootPath = '';
 		

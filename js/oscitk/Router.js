@@ -1,3 +1,8 @@
+if (window.location.hash) {
+	//reroute #! urls
+	window.location.hash = window.location.hash.replace(/#!/, '/');
+}
+
 OsciTk.router = Backbone.Router.extend({
 
 	routes: {
