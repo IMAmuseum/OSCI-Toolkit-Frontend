@@ -1,5 +1,6 @@
 OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	id: 'toolbar',
+	className: 'toolbar-closed',
 	template: OsciTk.templateManager.get('toolbar'),
 	initialize: function() {
 		// if toolbar items were provided, store them in the view
@@ -76,6 +77,8 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	contentOpen: function() {
 		this.updateHeight();
 
+		this.$el.removeClass('toolbar-closed').addClass('toolbar-open');
+
 		this.isContentOpen = true;
 	},
 	updateHeight: function() {
@@ -101,6 +104,8 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 		this.$el.css({
 			top: '-' + this.$el.height() + 'px'
 		});
+
+		this.$el.removeClass('toolbar-open').addClass('toolbar-closed');
 
 		this.isContentOpen = false;
 	}
