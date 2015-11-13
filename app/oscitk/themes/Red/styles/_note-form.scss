@@ -1,0 +1,35 @@
+.note-form-wrapper {
+	height: $popover-height;
+}
+
+.paragraph-controls {
+	height: 0;
+	right: 32px;
+	position: relative;
+	top: 6px;
+	z-index: 2;
+}
+
+.btn {
+	text-transform: uppercase;
+}
+
+.paragraph-button {
+	background-image: url(../../images/plus-grey.png);
+	background-size: 15px 15px;
+	background-repeat: no-repeat;
+	border: 0;
+	font: 0/0 a;
+	text-shadow: none;
+	color: transparent;
+	width: 15px;
+	height: 15px;
+}
+
+.withNotes {
+	background-image: url(../../images/plus-blue.png);
+}
+
+#note-submit {
+	margin-top: 10px;
+}

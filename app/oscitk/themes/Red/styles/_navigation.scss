@@ -1,0 +1,31 @@
+#navigation {
+	margin: 0;
+	.corner {
+		text-align:center;
+		text-transform: uppercase;
+		width: 120px;
+		background-color: $brand-primary;
+		padding-top: 8px;
+		padding-bottom: 8px;
+		&:hover {
+			background-color: #3f636b;
+		}
+	}
+	.prev-page {
+		float: left;
+	}
+
+	.next-page {
+		float: right;
+	}
+
+	a {
+		padding: 8px;
+		font-size: 15px;
+		color: #FFF;
+	}
+}
+
+.navbar-default {
+	margin: 0;
+}

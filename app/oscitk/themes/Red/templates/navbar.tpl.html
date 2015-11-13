@@ -1,0 +1,32 @@
+<nav class="navbar navbar-default">
+	<div class="container">
+	   <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a id="navbar-title" class="navbar-brand" href="#"><%= title %></a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul id="navbar-area" class="nav navbar-nav navbar-right">
+         <% i = 0 %>
+         <% _.each(sections, function(section) { %>
+          <% subtitle = section.get('subtitle') ? ' - <span class="navbar-subtitle">'+section.get('subtitle')+'</span>' : '' %>
+          <% ++i %>
+          <li class="navbar-item hidden-xs <% if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } %>" data-toggle="tooltip" data-placement="bottom" title="<%= section.get('title') %>">
+            <a data-section-id="<%= section.id %>">
+              <%= i %>
+            </a>
+          </li>
+          <li class="navbar-item visible-xs <% if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } %>">
+            <a data-section-id="<%= section.id %>" href="#">
+              <%= i + ' - ' + section.get('title') + subtitle %>
+            </a>
+          </li>
+         <% }); %>
+      </ul>
+		</div>
+	</div>
+</nav>

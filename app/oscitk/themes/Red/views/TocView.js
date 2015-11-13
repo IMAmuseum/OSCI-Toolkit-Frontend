@@ -1,24 +1,19 @@
-OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
-	className: 'navbar-view',
-	template: OsciTk.templateManager.get('navbar'),
+OsciTk.views.Toc = OsciTk.views.BaseView.extend({
+	className: 'toc-view',
+	template: OsciTk.templateManager.get('toc'),
 	events: {
 		'click li a': 'itemClick',
+		'click #dismiss': 'closeOverlay',
 	},
 	initialize: function() {
-		this.listenTo(Backbone, 'packageLoaded', function(packageModel) {
-			this.creator = $(packageModel)[0].attributes['metadata']['dc:creator'];
-			this.pubTitle = packageModel.getTitle();
-			this.sections = app.collections.navigationItems.where({depth: 0});
-		});
-
 		this.listenTo(Backbone, "currentNavigationItemChanged", function() {
 			this.render();
 		});
-
 	},
 	render: function() {
-		this.$el.html(this.template({title: this.pubTitle, sections: this.sections}));
-		$('.navbar-item[data-toggle="tooltip"]').tooltip({left:'150px'});
+		this.$el.html(this.template({
+			items: app.collections.navigationItems.where({depth: 0})
+		}));
 		return this;
 	},
 	itemClick: function(event) {
@@ -30,4 +25,7 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 		// TODO: don't really want to address the appRouter directly
 		app.router.navigate("section/" + sectionId, {trigger: true});
 	},
+	closeOverlay: function() {
+		Backbone.trigger("toolbarRemoveViews");
+	}
 });
