@@ -6004,7 +6004,7 @@ a.badge:hover, a.badge:focus {
 }
 /* line 22, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_jumbotron.scss */
 .jumbotron > hr {
-  border-top-color: #d7d7d7;
+  border-top-color: #d8d8d8;
 }
 /* line 26, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_jumbotron.scss */
 .container .jumbotron {
@@ -8167,38 +8167,22 @@ p, textarea {
 
 /* line 1, ../_header.scss */
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: 1000;
-}
-
-/* line 4, ../_header.scss */
-.container-header {
   width: 100%;
-  height: 400px;
   max-width: 100%;
-  background-color: #909090;
-  background-position: center;
-  background-size: cover;
+  border-bottom: 2px solid #ccc;
+  padding: 15px 0px 10px 0px;
+  background: white;
 }
 
-/* line 13, ../_header.scss */
-.header-title {
-  position: absolute;
-  top: 200px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  color: white;
-  text-align: center;
-  text-shadow: 0 1px 0 black;
-}
-/* line 22, ../_header.scss */
-.header-title h1 {
+/* line 18, ../_header.scss */
+.header-title * {
   margin: 0;
-}
-/* line 25, ../_header.scss */
-.header-title p {
-  font-style: italic;
-  font-weight: 300;
+  padding: 0;
+  vertical-align: middle;
 }
 
 /* line 1, ../_toolbar.scss */
@@ -8239,7 +8223,7 @@ ul.toc {
   font: 0/0 a;
   text-shadow: none;
   color: transparent;
-  background-image: url(../../images/list.png);
+  background-image: url(../../images/contents-icon.svg);
   background-size: 50px 50px;
   background-repeat: no-repeat;
   width: 50px;
@@ -8247,7 +8231,7 @@ ul.toc {
 }
 /* line 37, ../_toolbar.scss */
 .tocView-toolbar-item:hover {
-  background-image: url(../../images/list-active.png);
+  background-image: url(../../images/contents-icon.svg);
 }
 
 /* line 42, ../_toolbar.scss */
@@ -8257,7 +8241,7 @@ ul.toc {
   font: 0/0 a;
   text-shadow: none;
   color: transparent;
-  background-image: url(../../images/login.png);
+  background-image: url(../../images/user-icon.svg);
   background-size: 50px 50px;
   background-repeat: no-repeat;
   width: 50px;
@@ -8265,7 +8249,7 @@ ul.toc {
 }
 /* line 53, ../_toolbar.scss */
 .accountView-toolbar-item:hover {
-  background-image: url(../../images/login-active.png);
+  background-image: url(../../images/user-icon.svg);
 }
 
 /* line 58, ../_toolbar.scss */
@@ -8287,14 +8271,10 @@ ul.toc {
 }
 
 /* line 1, ../_navbar.scss */
-#navbar.affix {
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-
-/* line 7, ../_navbar.scss */
 #navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   z-index: 998;
 }
 /* line 10, ../_navbar.scss */
@@ -8323,26 +8303,14 @@ ul.toc {
   background-color: #e7e7e7;
 }
 
-/* line 34, ../_navbar.scss */
-#navbar-title {
-  color: #333;
-  font-size: 24px;
-}
-@media (max-width: 768px) {
-  /* line 34, ../_navbar.scss */
-  #navbar-title {
-    font-size: 14px;
-  }
-}
-
 @media (max-width: 480px) {
-  /* line 45, ../_navbar.scss */
+  /* line 39, ../_navbar.scss */
   #navbar .nav li {
     width: 100%;
     text-align: left;
   }
 }
-/* line 54, ../_navbar.scss */
+/* line 48, ../_navbar.scss */
 #navbar-area .tooltip > .tooltip-inner {
   background-color: #52818b;
   height: 40px;
@@ -8354,7 +8322,7 @@ ul.toc {
   line-height: 35px;
   color: #FFF;
 }
-/* line 65, ../_navbar.scss */
+/* line 59, ../_navbar.scss */
 #navbar-area .tooltip.bottom > .tooltip-arrow {
   top: -16px;
   left: 50%;

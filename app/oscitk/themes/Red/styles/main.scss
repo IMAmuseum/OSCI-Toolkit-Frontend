@@ -1,6 +1,11 @@
 $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 $image-path : "/images";
 
+$color-light-grey: #ccc;
+$color-text: #3c3c3c;
+$color-light-red: #b82927;
+$color-dark-red: #810c0b;
+
 @import "bootstrap/bootstrap";
 @import "typography";
 @import "browsehappy";

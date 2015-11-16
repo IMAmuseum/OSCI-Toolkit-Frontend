@@ -1,11 +1,11 @@
-#navbar.affix {
-    position: fixed;
-    top: 0;
-    width: 100%;
-}
-
 #navbar {
+	position: fixed;
+	bottom: 0;
+
+	width: 100%;
+
 	z-index: 998;
+
 	.nav {
 		li {
 			a {
@@ -29,15 +29,9 @@
 			}
 		}
 	}
+
 }
 
-#navbar-title {
-	color: #333;
-	font-size: 24px;
-	@media (max-width: 768px) {
-		font-size: 14px;
-	}
-}
 
 @media (max-width: 480px) {
 	#navbar {
