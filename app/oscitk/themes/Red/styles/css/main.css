@@ -8173,16 +8173,36 @@ header {
   z-index: 1000;
   width: 100%;
   max-width: 100%;
-  border-bottom: 2px solid #ccc;
-  padding: 15px 0px 10px 0px;
   background: white;
+  border-bottom: 2px solid #ccc;
 }
-
-/* line 18, ../_header.scss */
-.header-title * {
+/* line 15, ../_header.scss */
+header .header-title {
+  margin: 0px -10px;
+}
+/* line 19, ../_header.scss */
+header .header-title .container {
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+/* line 23, ../_header.scss */
+header .header-title .container h1, header .header-title .container p {
   margin: 0;
-  padding: 0;
+  padding: 0px 10px;
   vertical-align: middle;
+  font-size: 18px;
+  line-height: 1.5;
+  font-family: 'Lato', sans-serif;
+}
+/* line 34, ../_header.scss */
+header .header-title .container h1 {
+  font-weight: 700;
+}
+/* line 39, ../_header.scss */
+header .header-title .container .btn-menu {
+  padding-left: 40px;
+  background-image: url("../../images/contents_icon.svg");
+  background-repeat: no-repeat;
 }
 
 /* line 1, ../_toolbar.scss */

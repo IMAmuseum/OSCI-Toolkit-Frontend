@@ -117,11 +117,13 @@ this["JST"]["app/oscitk/themes/Red/templates/header.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="container header-title">\n\t<div class="pull-left">\n\t\t<p>' +
+__p += '<div class="header-title">\n\t<div class="container">\n\t\t<div class="pull-left">\n\t\t\t<h1>' +
 ((__t = ( title )) == null ? '' : __t) +
-'</p>\n\t</div>\n\t<div class="pull-left">\n\t\t<p>' +
+'</h1>\n\t\t</div>\n\t\t<div class="pull-left">\n\t\t\t<p>' +
+((__t = ( sectionTitle )) == null ? '' : __t) +
+': ' +
 ((__t = ( sectionSubtitle )) == null ? '' : __t) +
-'</p>\n\t</div>\n\t<div class="pull-right">\n\t\t<p>Login</p>\n\t</div>\n\t<div class="pull-right">\n\t\t<p>Menu</p>\n\t</div>\n</div>\n';
+'</p>\n\t\t</div>\n\t\t<div class="pull-right">\n\t\t\t<p class="btn-menu">Menu</p>\n\t\t</div>\n\t\t<div class="pull-right">\n\t\t\t<p>Login</p>\n\t\t</div>\n\t</div>\n</div>';
 
 }
 return __p

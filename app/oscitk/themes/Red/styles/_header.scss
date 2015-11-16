@@ -7,18 +7,45 @@ header {
 	width: 100%;
 	max-width: 100%;
 
-	border-bottom: 2px solid $color-light-grey;
-	padding: 15px 0px 10px 0px;
-
 	background: white;
 
+	border-bottom: 2px solid $color-light-grey;
+
+
+	.header-title {
+		
+		margin: 0px -10px;
+
+		.container {
+			padding-top: 15px;
+			padding-bottom: 10px;
+
+			h1, p {
+				margin: 0;
+				padding: 0px 10px;
+				vertical-align: middle;
+
+				font-size: 18px;
+				line-height: 1.5;
+				font-family: 'Lato', sans-serif;
+
+			}
+
+			h1 {
+				font-weight: 700;
+			}
+
+
+			.btn-menu {
+				padding-left: 40px;
+				background-image: url("../../images/contents_icon.svg");
+				background-repeat: no-repeat;
+			}
+		}
+	}
+
+
 }
 
-.header-title {
-	* {
-		margin: 0;
-		padding: 0;
-		vertical-align: middle;
-	}
-}
+
 
