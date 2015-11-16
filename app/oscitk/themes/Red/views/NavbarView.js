@@ -25,6 +25,7 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 		event.preventDefault();
 
 		var sectionId = $(event.currentTarget).attr('data-section-id');
+		console.log( sectionId );
 		$('li.tocView-toolbar-item>a').removeClass('active');
 		Backbone.trigger("toolbarRemoveViews");
 		// TODO: don't really want to address the appRouter directly

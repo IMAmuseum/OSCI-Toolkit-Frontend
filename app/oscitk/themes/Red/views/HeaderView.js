@@ -19,12 +19,19 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 	},
 	render: function(sectionId) {
 
+		// Save context - otherwise the section stuff gets set to Window!
+		// It actually does get inherited down to the view, I think, but that's bad.
+		var $this = this;
+
 		// get section sectionTitle, subtitle, and thumbnail for use in template
 		_.each(app.collections.navigationItems.models, function(item) {
+
 			if (item.get('id') == sectionId ) {
-				this.sectionTitle = item.get('title');
-				this.sectionSubtitle = item.get('subtitle');
-				this.sectionThumbnail = item.get('thumbnail');
+				$this.sectionTitle = item.get('title');
+				//console.log( this.sectionTitle );
+				$this.sectionSubtitle = item.get('subtitle');
+				//console.log( this.sectionSubtitle );
+				$this.sectionThumbnail = item.get('thumbnail');
 			}
 		});
 
@@ -32,6 +39,7 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 		if (! _.isEmpty(app.collections.figures.models)) {
 			_.each(app.collections.figures.models, function(figure) {
 				if (figure.get('plate') == true) {
+					console.log( this );
 					this.headerImage = figure.get('preview_url');
 					this.headerImageCaption = figure.get('caption');
 				}
@@ -47,6 +55,10 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 			sectionTitle: this.sectionTitle,
 			sectionSubtitle: this.sectionSubtitle
 		}));
+
+		console.log( this );
+
+
 		return this;
 	}
 });

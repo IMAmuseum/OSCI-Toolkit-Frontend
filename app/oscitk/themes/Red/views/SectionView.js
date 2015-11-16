@@ -55,18 +55,31 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
     render: function() {
         $('#loader').hide();
-        this.$el.html(this.template({sectionTitle: this.sectionTitle, content: $(this.content).html()}));
+        this.$el.html(
+            this.template( {
+                sectionTitle: this.sectionTitle,
+                sectionSubtitle: this.sectionSubtitle,
+                sectionThumbnail: this.sectionThumbnail,
+                content: $(this.content).html()
+            } )
+        );
         Backbone.trigger("layoutComplete");
         return this;
     },
 
     getSectionTitles: function(sectionId) {
+
+
+        // Save context to avoid setting window variables
+        var $this = this;
+
+
         // get section sectionTitle, subtitle, and thumbnail for use in template
         _.each(app.collections.navigationItems.models, function(item) {
             if (item.get('id') == sectionId ) {
-                this.sectionTitle = item.get('title');
-                this.sectionSubtitle = item.get('subtitle');
-                this.sectionThumbnail = item.get('thumbnail');
+                $this.sectionTitle = item.get('title');
+                $this.sectionSubtitle = item.get('subtitle');
+                $this.sectionThumbnail = item.get('thumbnail');
             }
         }, this);
         this.render();
