@@ -43,7 +43,7 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 		if (! _.isEmpty(app.collections.figures.models)) {
 			_.each(app.collections.figures.models, function(figure) {
 				if (figure.get('plate') == true) {
-					console.log( this );
+					//console.log( this );
 					this.headerImage = figure.get('preview_url');
 					this.headerImageCaption = figure.get('caption');
 				}
@@ -60,7 +60,7 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 			sectionSubtitle: this.sectionSubtitle
 		}));
 
-		console.log( this );
+		//console.log( this );
 
 
 		return this;

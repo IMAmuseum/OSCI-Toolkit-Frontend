@@ -2,6 +2,7 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	id: 'toolbar-view',
 	template: OsciTk.templateManager.get('toolbar'),
 	initialize: function() {
+		
 		// tracks the state of the content area drawer
 		this.activeToolbarItemView = undefined;
 
@@ -11,14 +12,17 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 		});
 
 		this.listenTo(Backbone, 'figuresAvailable', function(figures) {
+
 			this.figureSize = figures.size();
 			this.render();
+
 		});
+
 	},
 	render: function() {
+
 		this.$el.html(this.template({'title': this.title}));
 
-		console.log(app.toolbarItems);
 		_.each(app.toolbarItems, function(toolbarItem) {
 			if(toolbarItem.text != 'figures' || this.figureSize != 0) {
 				var item = new OsciTk.views.ToolbarItem({toolbarItem: toolbarItem});
@@ -26,6 +30,7 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 				item.render();
 			}
 		}, this);
+
 	}
 
 });

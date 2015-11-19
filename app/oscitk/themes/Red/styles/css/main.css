@@ -8367,6 +8367,115 @@ ul.toc {
   border-width: 0 15px 15px;
 }
 
+/* line 16, ../_navbar-slider.scss */
+input[type=range] {
+  /*removes default webkit styles*/
+  -webkit-appearance: none;
+  /*fix for FF unable to apply focus style bug */
+  border: 1px solid white;
+  /*required for proper track sizing in FF*/
+  width: 300px;
+}
+
+/* line 26, ../_navbar-slider.scss */
+input[type=range]::-webkit-slider-runnable-track {
+  width: 300px;
+  height: 2px;
+  background: #ccc;
+  border: none;
+  border-radius: 3px;
+}
+
+/* line 33, ../_navbar-slider.scss */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #810c0b;
+  margin-top: -7px;
+}
+
+/* line 42, ../_navbar-slider.scss */
+input[type=range]:focus {
+  outline: none;
+}
+
+/* line 45, ../_navbar-slider.scss */
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #ccc;
+}
+
+/* line 49, ../_navbar-slider.scss */
+input[type=range]::-moz-range-track {
+  width: 300px;
+  height: 2px;
+  background: #ccc;
+  border: none;
+  border-radius: 3px;
+}
+
+/* line 56, ../_navbar-slider.scss */
+input[type=range]::-moz-range-thumb {
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #810c0b;
+}
+
+/*hide the outline behind the border*/
+/* line 65, ../_navbar-slider.scss */
+input[type=range]:-moz-focusring {
+  outline: 1px solid white;
+  outline-offset: -1px;
+}
+
+/* line 70, ../_navbar-slider.scss */
+input[type=range]::-ms-track {
+  width: 300px;
+  height: 2px;
+  /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+  background: transparent;
+  /*leave room for the larger thumb to overflow with a transparent border */
+  border-color: transparent;
+  border-width: 6px 0;
+  /*remove default tick marks*/
+  color: transparent;
+}
+
+/* line 84, ../_navbar-slider.scss */
+input[type=range]::-ms-fill-lower {
+  background: #777;
+  border-radius: 10px;
+}
+
+/* line 88, ../_navbar-slider.scss */
+input[type=range]::-ms-fill-upper {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+/* line 92, ../_navbar-slider.scss */
+input[type=range]::-ms-thumb {
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #810c0b;
+}
+
+/* line 99, ../_navbar-slider.scss */
+input[type=range]:focus::-ms-fill-lower {
+  background: #888;
+}
+
+/* line 102, ../_navbar-slider.scss */
+input[type=range]:focus::-ms-fill-upper {
+  background: #ccc;
+}
+
 /* line 1, ../_figures.scss */
 figure {
   margin: 20px;

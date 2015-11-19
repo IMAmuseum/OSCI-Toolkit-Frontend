@@ -131,34 +131,9 @@ return __p
 
 this["JST"]["app/oscitk/themes/Red/templates/navbar.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
+var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<!--\n\npage / total\nprogress slider\nfont size selector\n1 or 2 col selector\n\n-->\n<nav class="navbar navbar-default">\n\t<div class="container">\n    <ul id="font-size-area"></ul>\n\t\t<ul id="navbar-area" class="nav navbar-nav navbar-right">\n       ';
- i = 0 ;
-__p += '\n       ';
- _.each(sections, function(section) { ;
-__p += '\n        ';
- subtitle = section.get('subtitle') ? ' - <span class="navbar-subtitle">'+section.get('subtitle')+'</span>' : '' ;
-__p += '\n        ';
- ++i ;
-__p += '\n        <li class="navbar-item hidden-xs ';
- if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;
-__p += '" data-toggle="tooltip" data-placement="bottom" title="' +
-((__t = ( section.get('title') )) == null ? '' : __t) +
-'">\n          <a data-section-id="' +
-((__t = ( section.id )) == null ? '' : __t) +
-'">\n            ' +
-((__t = ( i )) == null ? '' : __t) +
-'\n          </a>\n        </li>\n        <li class="navbar-item visible-xs ';
- if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;
-__p += '">\n          <a data-section-id="' +
-((__t = ( section.id )) == null ? '' : __t) +
-'" href="#">\n            ' +
-((__t = ( i + ' - ' + section.get('title') + subtitle )) == null ? '' : __t) +
-'\n          </a>\n        </li>\n       ';
- }); ;
-__p += '\n    </ul>\n\t</div>\n</nav>';
+__p += '<!--\n\npage / total\nprogress slider\nfont size selector\n1 or 2 col selector\n\n-->\n<nav class="navbar navbar-default">\n\t<div class="container">\n\n    <!-- Page range slider -->\n    <div class="pull-left">\n      <input type="range" name="points" min="0" max="10" />\n    </div>\n\n\n\n      <!-- Spread vs. column -->\n      <div  class="pull-right">\n        <img src="images/one_column_icon.png" />\n        <img src="images/two_column_icon.png" />\n      </div>\n\n      <!-- Font size area selector -->\n      <ul id="font-size-area"  class="pull-right"></ul>\n\n\n\n\t\t\n\t</div>\n</nav>';
 
 }
 return __p
