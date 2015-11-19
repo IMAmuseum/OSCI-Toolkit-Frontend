@@ -8166,6 +8166,11 @@ p, textarea {
 }
 
 /* line 1, ../_header.scss */
+body {
+  margin-top: 52px;
+}
+
+/* line 5, ../_header.scss */
 header {
   position: fixed;
   top: 0;
@@ -8176,16 +8181,16 @@ header {
   background: white;
   border-bottom: 2px solid #ccc;
 }
-/* line 15, ../_header.scss */
+/* line 19, ../_header.scss */
 header .header-title {
   margin: 0px -10px;
 }
-/* line 19, ../_header.scss */
+/* line 23, ../_header.scss */
 header .header-title .container {
   padding-top: 15px;
   padding-bottom: 10px;
 }
-/* line 23, ../_header.scss */
+/* line 27, ../_header.scss */
 header .header-title .container h1, header .header-title .container p {
   margin: 0;
   padding: 0px 10px;
@@ -8194,14 +8199,24 @@ header .header-title .container h1, header .header-title .container p {
   line-height: 1.5;
   font-family: 'Lato', sans-serif;
 }
-/* line 34, ../_header.scss */
+/* line 38, ../_header.scss */
 header .header-title .container h1 {
   font-weight: 700;
 }
-/* line 39, ../_header.scss */
+/* line 44, ../_header.scss */
+header .header-title .container .section-title:before {
+  content: "<";
+  margin-right: 10px;
+}
+/* line 49, ../_header.scss */
+header .header-title .container .section-title:after {
+  content: ">";
+  margin-left: 10px;
+}
+/* line 55, ../_header.scss */
 header .header-title .container .btn-menu {
   padding-left: 40px;
-  background-image: url("../../images/contents_icon.svg");
+  background-image: url("../../images/menu_icon.png");
   background-repeat: no-repeat;
 }
 
@@ -8243,7 +8258,7 @@ ul.toc {
   font: 0/0 a;
   text-shadow: none;
   color: transparent;
-  background-image: url(../../images/contents-icon.svg);
+  background-image: url(../../images/contents_icon.png);
   background-size: 50px 50px;
   background-repeat: no-repeat;
   width: 50px;
@@ -8251,7 +8266,7 @@ ul.toc {
 }
 /* line 37, ../_toolbar.scss */
 .tocView-toolbar-item:hover {
-  background-image: url(../../images/contents-icon.svg);
+  background-image: url(../../images/contents_icon.png);
 }
 
 /* line 42, ../_toolbar.scss */
@@ -8261,7 +8276,7 @@ ul.toc {
   font: 0/0 a;
   text-shadow: none;
   color: transparent;
-  background-image: url(../../images/user-icon.svg);
+  background-image: url(../../images/user_icon.png);
   background-size: 50px 50px;
   background-repeat: no-repeat;
   width: 50px;
@@ -8269,7 +8284,7 @@ ul.toc {
 }
 /* line 53, ../_toolbar.scss */
 .accountView-toolbar-item:hover {
-  background-image: url(../../images/user-icon.svg);
+  background-image: url(../../images/user_icon.png);
 }
 
 /* line 58, ../_toolbar.scss */
@@ -8295,42 +8310,43 @@ ul.toc {
   position: fixed;
   bottom: 0;
   width: 100%;
+  background: white;
   z-index: 998;
 }
-/* line 10, ../_navbar.scss */
+/* line 12, ../_navbar.scss */
 #navbar .nav li {
   text-align: center;
   width: 55px;
 }
-/* line 11, ../_navbar.scss */
+/* line 13, ../_navbar.scss */
 #navbar .nav li a {
   font-size: 24px;
   z-index: 999;
 }
 @media (max-width: 768px) {
-  /* line 11, ../_navbar.scss */
+  /* line 13, ../_navbar.scss */
   #navbar .nav li a {
     font-size: 14px;
   }
 }
-/* line 20, ../_navbar.scss */
+/* line 22, ../_navbar.scss */
 #navbar .nav li:hover {
   cursor: hand;
 }
-/* line 26, ../_navbar.scss */
+/* line 28, ../_navbar.scss */
 #navbar .nav li.active a {
   z-index: 999;
   background-color: #e7e7e7;
 }
 
 @media (max-width: 480px) {
-  /* line 39, ../_navbar.scss */
+  /* line 41, ../_navbar.scss */
   #navbar .nav li {
     width: 100%;
     text-align: left;
   }
 }
-/* line 48, ../_navbar.scss */
+/* line 50, ../_navbar.scss */
 #navbar-area .tooltip > .tooltip-inner {
   background-color: #52818b;
   height: 40px;
@@ -8342,7 +8358,7 @@ ul.toc {
   line-height: 35px;
   color: #FFF;
 }
-/* line 59, ../_navbar.scss */
+/* line 61, ../_navbar.scss */
 #navbar-area .tooltip.bottom > .tooltip-arrow {
   top: -16px;
   left: 50%;
@@ -8493,7 +8509,7 @@ figure.center figcaption {
 
 /* line 17, ../_note-form.scss */
 .paragraph-button {
-  background-image: url(../../images/plus-grey.png);
+  background-image: url(../../images/disk-grey.png);
   background-size: 15px 15px;
   background-repeat: no-repeat;
   border: 0;
@@ -8506,7 +8522,7 @@ figure.center figcaption {
 
 /* line 29, ../_note-form.scss */
 .withNotes {
-  background-image: url(../../images/plus-blue.png);
+  background-image: url(../../images/disk-red.png);
 }
 
 /* line 33, ../_note-form.scss */

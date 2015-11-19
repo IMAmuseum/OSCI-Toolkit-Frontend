@@ -18,6 +18,7 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	render: function() {
 		this.$el.html(this.template({'title': this.title}));
 
+		console.log(app.toolbarItems);
 		_.each(app.toolbarItems, function(toolbarItem) {
 			if(toolbarItem.text != 'figures' || this.figureSize != 0) {
 				var item = new OsciTk.views.ToolbarItem({toolbarItem: toolbarItem});
@@ -28,3 +29,4 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	}
 
 });
+

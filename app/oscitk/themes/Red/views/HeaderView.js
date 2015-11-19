@@ -1,3 +1,7 @@
+// Clickable back-forward buttons to cycle b/w sections
+// Make clicking on login / menu cause actions
+// Adjust the menu icon background-size
+
 OsciTk.views.Header = OsciTk.views.BaseView.extend({
 	className: 'header-view',
 	template: OsciTk.templateManager.get('header'),

@@ -117,9 +117,9 @@ this["JST"]["app/oscitk/themes/Red/templates/header.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="header-title">\n\t<div class="container">\n\t\t<div class="pull-left">\n\t\t\t<h1>' +
+__p += '<div class="header-title">\n\t<div class="container">\n\t\t<div class="pull-left">\n\t\t\t<h1 class="publication-title">' +
 ((__t = ( title )) == null ? '' : __t) +
-'</h1>\n\t\t</div>\n\t\t<div class="pull-left">\n\t\t\t<p>' +
+'</h1>\n\t\t</div>\n\t\t<div class="pull-left">\n\t\t\t<p class="section-title">' +
 ((__t = ( sectionTitle )) == null ? '' : __t) +
 ': ' +
 ((__t = ( sectionSubtitle )) == null ? '' : __t) +
@@ -134,33 +134,31 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<nav class="navbar navbar-default">\n\t<div class="container">\n\t   <div class="navbar-header">\n      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">\n        <span class="sr-only">Toggle navigation</span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n        <span class="icon-bar"></span>\n      </button>\n      <a id="navbar-title" class="navbar-brand" href="#">' +
-((__t = ( title )) == null ? '' : __t) +
-'</a>\n    </div>\n    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">\n\t\t\t<ul id="navbar-area" class="nav navbar-nav navbar-right">\n         ';
+__p += '<!--\n\npage / total\nprogress slider\nfont size selector\n1 or 2 col selector\n\n-->\n<nav class="navbar navbar-default">\n\t<div class="container">\n    <ul id="font-size-area"></ul>\n\t\t<ul id="navbar-area" class="nav navbar-nav navbar-right">\n       ';
  i = 0 ;
-__p += '\n         ';
+__p += '\n       ';
  _.each(sections, function(section) { ;
-__p += '\n          ';
+__p += '\n        ';
  subtitle = section.get('subtitle') ? ' - <span class="navbar-subtitle">'+section.get('subtitle')+'</span>' : '' ;
-__p += '\n          ';
+__p += '\n        ';
  ++i ;
-__p += '\n          <li class="navbar-item hidden-xs ';
+__p += '\n        <li class="navbar-item hidden-xs ';
  if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;
 __p += '" data-toggle="tooltip" data-placement="bottom" title="' +
 ((__t = ( section.get('title') )) == null ? '' : __t) +
-'">\n            <a data-section-id="' +
+'">\n          <a data-section-id="' +
 ((__t = ( section.id )) == null ? '' : __t) +
-'">\n              ' +
+'">\n            ' +
 ((__t = ( i )) == null ? '' : __t) +
-'\n            </a>\n          </li>\n          <li class="navbar-item visible-xs ';
+'\n          </a>\n        </li>\n        <li class="navbar-item visible-xs ';
  if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;
-__p += '">\n            <a data-section-id="' +
+__p += '">\n          <a data-section-id="' +
 ((__t = ( section.id )) == null ? '' : __t) +
-'" href="#">\n              ' +
+'" href="#">\n            ' +
 ((__t = ( i + ' - ' + section.get('title') + subtitle )) == null ? '' : __t) +
-'\n            </a>\n          </li>\n         ';
+'\n          </a>\n        </li>\n       ';
  }); ;
-__p += '\n      </ul>\n\t\t</div>\n\t</div>\n</nav>';
+__p += '\n    </ul>\n\t</div>\n</nav>';
 
 }
 return __p

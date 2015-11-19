@@ -5,10 +5,19 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 		'click li a': 'itemClick',
 	},
 	initialize: function() {
+		
 		this.listenTo(Backbone, 'packageLoaded', function(packageModel) {
+
+			// Get total number of pages
+
 			this.creator = $(packageModel)[0].attributes['metadata']['dc:creator'];
 			this.pubTitle = packageModel.getTitle();
 			this.sections = app.collections.navigationItems.where({depth: 0});
+
+
+
+			console.log( app.collections );
+
 		});
 
 		this.listenTo(Backbone, "currentNavigationItemChanged", function() {
@@ -17,8 +26,16 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 
 	},
 	render: function() {
-		this.$el.html(this.template({title: this.pubTitle, sections: this.sections}));
+
+		this.$el.html( this.template( { title: this.pubTitle, sections: this.sections } ) );
+
 		$('.navbar-item[data-toggle="tooltip"]').tooltip({left:'150px'});
+
+		// Render the font size selector
+		var item = new OsciTk.views.ToolbarItem({toolbarItem: {view: 'fontSizeView', text: 'font-size', style: 'inline'} });
+		this.addView(item, '#font-size-area');
+		item.render();
+
 		return this;
 	},
 	itemClick: function(event) {

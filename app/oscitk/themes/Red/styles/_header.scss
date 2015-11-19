@@ -1,3 +1,7 @@
+body {
+	margin-top: 52px;
+}
+
 header {
 	position: fixed;
 	top: 0; left: 0;
@@ -35,10 +39,22 @@ header {
 				font-weight: 700;
 			}
 
+			.section-title {
+
+				&:before {
+					content: "<";
+					margin-right: 10px;
+				}
+
+				&:after {
+					content: ">";
+					margin-left: 10px;
+				}
+			}
 
 			.btn-menu {
 				padding-left: 40px;
-				background-image: url("../../images/contents_icon.svg");
+				background-image: url("../../images/menu_icon.png");
 				background-repeat: no-repeat;
 			}
 		}
