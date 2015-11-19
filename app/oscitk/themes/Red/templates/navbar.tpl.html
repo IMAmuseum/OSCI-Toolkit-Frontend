@@ -9,24 +9,22 @@ font size selector
 <nav class="navbar navbar-default">
 	<div class="container">
 
-    <!-- Page range slider -->
+    <!-- Page number readout -->
+    <div>
+
+    <!-- Page progress slider -->
     <div class="pull-left">
-      <input type="range" name="points" min="0" max="10" />
+      <input type="range" min="0" max="10" />
     </div>
 
+    <!-- Two-page spread vs. single column -->
+    <div class="pull-right">
+      <img src="images/one_column_icon.png" />
+      <img src="images/two_column_icon.png" />
+    </div>
 
+    <!-- Font size area selector -->
+    <ul id="font-size-area"  class="pull-right"></ul>
 
-      <!-- Spread vs. column -->
-      <div  class="pull-right">
-        <img src="images/one_column_icon.png" />
-        <img src="images/two_column_icon.png" />
-      </div>
-
-      <!-- Font size area selector -->
-      <ul id="font-size-area"  class="pull-right"></ul>
-
-
-
-		
 	</div>
 </nav>

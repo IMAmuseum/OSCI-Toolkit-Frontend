@@ -133,7 +133,7 @@ this["JST"]["app/oscitk/themes/Red/templates/navbar.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<!--\n\npage / total\nprogress slider\nfont size selector\n1 or 2 col selector\n\n-->\n<nav class="navbar navbar-default">\n\t<div class="container">\n\n    <!-- Page range slider -->\n    <div class="pull-left">\n      <input type="range" name="points" min="0" max="10" />\n    </div>\n\n\n\n      <!-- Spread vs. column -->\n      <div  class="pull-right">\n        <img src="images/one_column_icon.png" />\n        <img src="images/two_column_icon.png" />\n      </div>\n\n      <!-- Font size area selector -->\n      <ul id="font-size-area"  class="pull-right"></ul>\n\n\n\n\t\t\n\t</div>\n</nav>';
+__p += '<!--\n\npage / total\nprogress slider\nfont size selector\n1 or 2 col selector\n\n-->\n<nav class="navbar navbar-default">\n\t<div class="container">\n\n    <!-- Page number readout -->\n    <div>\n\n    <!-- Page progress slider -->\n    <div class="pull-left">\n      <input type="range" min="0" max="10" />\n    </div>\n\n    <!-- Two-page spread vs. single column -->\n    <div class="pull-right">\n      <img src="images/one_column_icon.png" />\n      <img src="images/two_column_icon.png" />\n    </div>\n\n    <!-- Font size area selector -->\n    <ul id="font-size-area"  class="pull-right"></ul>\n\n\t</div>\n</nav>';
 
 }
 return __p
