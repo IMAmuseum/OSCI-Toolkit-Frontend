@@ -6,25 +6,25 @@ font size selector
 1 or 2 col selector
 
 -->
+
 <nav class="navbar navbar-default">
 	<div class="container">
 
-    <!-- Page number readout -->
-    <div>
+        <!-- Page number readout -->
+        <div class="pull-left" id="osci-navbar-text">10/250</div>
 
-    <!-- Page progress slider -->
-    <div class="pull-left">
-      <input type="range" min="0" max="10" />
-    </div>
 
-    <!-- Two-page spread vs. single column -->
-    <div class="pull-right">
-      <img src="images/one_column_icon.png" />
-      <img src="images/two_column_icon.png" />
-    </div>
+        <!-- Page progress slider -->
+        <input class="pull-left" id="osci-page-slider" type="range" min="0" max="250" />
 
-    <!-- Font size area selector -->
-    <ul id="font-size-area"  class="pull-right"></ul>
+        <!-- Two-page spread vs. single column -->
+        <div class="pull-right hidden-xs" id="osci-spread-selector">
+          <img src="images/one_column_icon.png" />
+          <img src="images/two_column_icon.png" /> 
+        </div>
+
+        <!-- Font size area selector -->
+        <ul class="pull-right" id="font-size-area"></ul>
 
 	</div>
 </nav>

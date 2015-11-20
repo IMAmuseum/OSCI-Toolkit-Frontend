@@ -41,9 +41,6 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 		this.addView(item, '#font-size-area');
 		item.render();
 
-		console.log( $('input[type="range"]') );
-
-
 		return this;
 
 	},
@@ -60,4 +57,23 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 		app.router.navigate("section/" + sectionId, {trigger: true});
 
 	},
+});
+
+
+
+$(window).resize( function() {
+
+	// Figure out the correct width for the slider
+	var $slider = $('#osci-page-slider');
+	var width   = $slider.parent().width();
+		width  -= $('#osci-navbar-text').outerWidth() + 1;
+		width  -= $('#osci-spread-selector').outerWidth() + 1;
+		width  -= $('#font-size-area').outerWidth() + 1;
+
+	$slider.innerWidth( width );
+
+});
+
+$(window).load( function() {
+	$(window).resize();
 });

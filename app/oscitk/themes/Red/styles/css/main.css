@@ -8179,11 +8179,11 @@ header {
   width: 100%;
   max-width: 100%;
   background: white;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 1px solid #ccc;
 }
 /* line 19, ../_header.scss */
 header .header-title {
-  margin: 0px -10px;
+  margin: 0px -15px;
 }
 /* line 23, ../_header.scss */
 header .header-title .container {
@@ -8193,7 +8193,7 @@ header .header-title .container {
 /* line 27, ../_header.scss */
 header .header-title .container h1, header .header-title .container p {
   margin: 0;
-  padding: 0px 10px;
+  padding: 0px 15px;
   vertical-align: middle;
   font-size: 18px;
   line-height: 1.5;
@@ -8306,65 +8306,37 @@ ul.toc {
 }
 
 /* line 1, ../_navbar.scss */
+body {
+  margin-bottom: 50px;
+}
+
+/* line 5, ../_navbar.scss */
 #navbar {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background: white;
   z-index: 998;
 }
-/* line 12, ../_navbar.scss */
-#navbar .nav li {
-  text-align: center;
-  width: 55px;
+/* line 14, ../_navbar.scss */
+#navbar nav {
+  background-color: white;
+  border-top: 1px solid #ccc;
+  margin: 0px -15px;
 }
-/* line 13, ../_navbar.scss */
-#navbar .nav li a {
-  font-size: 24px;
-  z-index: 999;
+/* line 21, ../_navbar.scss */
+#navbar nav #osci-page-slider {
+  padding: 18px 15px;
 }
-@media (max-width: 768px) {
-  /* line 13, ../_navbar.scss */
-  #navbar .nav li a {
-    font-size: 14px;
-  }
+/* line 25, ../_navbar.scss */
+#navbar nav #osci-navbar-text {
+  padding: 9px 15px;
 }
-/* line 22, ../_navbar.scss */
-#navbar .nav li:hover {
-  cursor: hand;
-}
-/* line 28, ../_navbar.scss */
-#navbar .nav li.active a {
-  z-index: 999;
-  background-color: #e7e7e7;
-}
-
-@media (max-width: 480px) {
-  /* line 41, ../_navbar.scss */
-  #navbar .nav li {
-    width: 100%;
-    text-align: left;
-  }
-}
-/* line 50, ../_navbar.scss */
-#navbar-area .tooltip > .tooltip-inner {
-  background-color: #52818b;
-  height: 40px;
-  position: relative;
-  text-transform: uppercase;
-  right: 50px;
-  top: -8px;
-  min-width: 150px;
-  line-height: 35px;
-  color: #FFF;
-}
-/* line 61, ../_navbar.scss */
-#navbar-area .tooltip.bottom > .tooltip-arrow {
-  top: -16px;
-  left: 50%;
-  margin-left: -15px;
-  border-bottom-color: #52818b;
-  border-width: 0 15px 15px;
+/* line 29, ../_navbar.scss */
+#navbar nav #font-size-area {
+  list-style-type: none;
+  margin: 0;
+  font-size: 18px;
+  padding: 10px 15px;
 }
 
 /* line 16, ../_navbar-slider.scss */

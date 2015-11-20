@@ -133,7 +133,7 @@ this["JST"]["app/oscitk/themes/Red/templates/navbar.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<!--\n\npage / total\nprogress slider\nfont size selector\n1 or 2 col selector\n\n-->\n<nav class="navbar navbar-default">\n\t<div class="container">\n\n    <!-- Page number readout -->\n    <div>\n\n    <!-- Page progress slider -->\n    <div class="pull-left">\n      <input type="range" min="0" max="10" />\n    </div>\n\n    <!-- Two-page spread vs. single column -->\n    <div class="pull-right">\n      <img src="images/one_column_icon.png" />\n      <img src="images/two_column_icon.png" />\n    </div>\n\n    <!-- Font size area selector -->\n    <ul id="font-size-area"  class="pull-right"></ul>\n\n\t</div>\n</nav>';
+__p += '<!--\n\npage / total\nprogress slider\nfont size selector\n1 or 2 col selector\n\n-->\n\n<nav class="navbar navbar-default">\n\t<div class="container">\n\n        <!-- Page number readout -->\n        <div class="pull-left" id="osci-navbar-text">10/250</div>\n\n\n        <!-- Page progress slider -->\n        <input class="pull-left" id="osci-page-slider" type="range" min="0" max="250" />\n\n        <!-- Two-page spread vs. single column -->\n        <div class="pull-right hidden-xs" id="osci-spread-selector">\n          <img src="images/one_column_icon.png" />\n          <img src="images/two_column_icon.png" /> \n        </div>\n\n        <!-- Font size area selector -->\n        <ul class="pull-right" id="font-size-area"></ul>\n\n\t</div>\n</nav>';
 
 }
 return __p
