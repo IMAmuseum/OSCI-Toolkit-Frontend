@@ -60,7 +60,7 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 });
 
 
-
+// TODO: Use this.listenTo(Backbone, 'windowResized', function() ) ..?a
 $(window).resize( function() {
 
 	// Figure out the correct width for the slider

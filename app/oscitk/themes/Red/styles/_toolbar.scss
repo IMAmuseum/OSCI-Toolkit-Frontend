@@ -1,14 +1,11 @@
-#toolbar.affix {
-    top: 50px;
-    + .container {
-	    padding-top: 50px
-	}
-}
-
 #toolbar {
+
 	float: left;
 	margin-top: 20px;
 	z-index: 998;
+
+	
+
 }
 
 ul.toc {

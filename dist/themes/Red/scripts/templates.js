@@ -38,7 +38,7 @@ this["JST"]["app/oscitk/themes/Red/templates/app.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="progress hidden hidden-print hidden-sm hidden-xs" data-spy="affix" data-offset-top="400">\n\t<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<!-- TOP -->\n<header>\n\t<div id="header"></div>\n</header>\n\n<!-- BOTTOM -->\n<div id="navbar" class="hidden-print"></div>\n\n<!-- RIGHT -->\n<div id="toolbar" class="hidden-print hidden-sm hidden-xs"></div>\n<div class="container">\n\t<div class="row">\n\t\t<div class="col-md-10 col-md-offset-1 section-col">\n\t\t\t<div id="loader">Loading...</div>\n\t\t\t<div id="section"></div>\n\t\t</div>\n\t</div>\n</div>\n\n<div id="navigation" class="hidden-print"></div>';
+__p += '<div class="progress hidden hidden-print hidden-sm hidden-xs" data-spy="affix" data-offset-top="400">\n\t<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<!-- TOP -->\n<header>\n\t<div id="header"></div>\n</header>\n\n<!-- BOTTOM -->\n<div id="navbar" class="hidden-print"></div>\n\n<!-- RIGHT -->\n<div id="toolbar" class="hidden-print"></div>\n\n<!-- CENTER -->\n<div class="container">\n\t<div class="row">\n\t\t<div class="col-md-10 col-md-offset-1 section-col">\n\t\t\t<div id="loader">Loading...</div>\n\t\t\t<div id="section"></div>\n\t\t</div>\n\t</div>\n</div>\n\n<!--\n<div id="navigation" class="hidden-print"></div>\n-->';
 
 }
 return __p
@@ -119,11 +119,11 @@ var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<div class="header-title">\n\t<div class="container">\n\t\t<div class="pull-left">\n\t\t\t<h1 class="publication-title">' +
 ((__t = ( title )) == null ? '' : __t) +
-'</h1>\n\t\t</div>\n\t\t<div class="pull-left">\n\t\t\t<p class="section-title">' +
+'</h1>\n\t\t</div>\n\t\t<div class="pull-left hidden-sm">\n\t\t\t<p class="section-title">' +
 ((__t = ( sectionTitle )) == null ? '' : __t) +
 ': ' +
 ((__t = ( sectionSubtitle )) == null ? '' : __t) +
-'</p>\n\t\t</div>\n\t\t<div class="pull-right">\n\t\t\t<p class="btn-menu">Menu</p>\n\t\t</div>\n\t\t<div class="pull-right">\n\t\t\t<p>Login</p>\n\t\t</div>\n\t</div>\n</div>';
+'</p>\n\t\t</div>\n\t\t<div class="pull-right">\n\t\t\t<p class="btn-menu">Menu</p>\n\t\t</div>\n\t\t<div class="pull-right hidden-xs">\n\t\t\t<p>Login</p>\n\t\t</div>\n\t</div>\n</div>';
 
 }
 return __p
@@ -133,7 +133,7 @@ this["JST"]["app/oscitk/themes/Red/templates/navbar.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<!--\n\npage / total\nprogress slider\nfont size selector\n1 or 2 col selector\n\n-->\n\n<nav class="navbar navbar-default">\n\t<div class="container">\n\n        <!-- Page number readout -->\n        <div class="pull-left" id="osci-navbar-text">10/250</div>\n\n\n        <!-- Page progress slider -->\n        <input class="pull-left" id="osci-page-slider" type="range" min="0" max="250" />\n\n        <!-- Two-page spread vs. single column -->\n        <div class="pull-right hidden-xs" id="osci-spread-selector">\n          <img src="images/one_column_icon.png" />\n          <img src="images/two_column_icon.png" /> \n        </div>\n\n        <!-- Font size area selector -->\n        <ul class="pull-right" id="font-size-area"></ul>\n\n\t</div>\n</nav>';
+__p += '<!--\n\npage / total\nprogress slider\nfont size selector\n1 or 2 col selector\n\n-->\n\n<nav class="navbar navbar-default">\n\t<div class="container">\n\n        <!-- Page number readout -->\n        <div class="pull-left" id="osci-navbar-text">10/250</div>\n\n        <!-- Page progress slider -->\n        <input class="pull-left" id="osci-page-slider" type="range" min="0" max="250" />\n\n        <!-- Two-page spread vs. single column -->\n        <div class="pull-right hidden-xs" id="osci-spread-selector">\n          <img src="images/one_column_icon.png" />\n          <img src="images/two_column_icon.png" /> \n        </div>\n\n        <!-- Font size area selector -->\n        <ul class="pull-right" id="font-size-area"></ul>\n\n\t</div>\n</nav>';
 
 }
 return __p
@@ -337,7 +337,7 @@ this["JST"]["app/oscitk/themes/Red/templates/toolbar.tpl.html"] = function(obj) 
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="nav nav-stacked">\n\t<ul id="toolbar-area" class=""></ul>\n</div>';
+__p += '<nav class="nav nav-stacked">\n\t<ul id="toolbar-area" class=""></ul>\n</nav>';
 
 }
 return __p

@@ -8221,37 +8221,28 @@ header .header-title .container .btn-menu {
 }
 
 /* line 1, ../_toolbar.scss */
-#toolbar.affix {
-  top: 50px;
-}
-/* line 3, ../_toolbar.scss */
-#toolbar.affix + .container {
-  padding-top: 50px;
-}
-
-/* line 8, ../_toolbar.scss */
 #toolbar {
   float: left;
   margin-top: 20px;
   z-index: 998;
 }
 
-/* line 14, ../_toolbar.scss */
+/* line 11, ../_toolbar.scss */
 ul.toc {
   list-style-type: none;
 }
 
-/* line 18, ../_toolbar.scss */
+/* line 15, ../_toolbar.scss */
 #toolbar-area {
   z-index: 990;
   list-style-type: none;
 }
-/* line 21, ../_toolbar.scss */
+/* line 18, ../_toolbar.scss */
 #toolbar-area li {
   margin-bottom: 10px;
 }
 
-/* line 26, ../_toolbar.scss */
+/* line 23, ../_toolbar.scss */
 .tocView-toolbar-item {
   cursor: hand;
   border: 0;
@@ -8264,12 +8255,12 @@ ul.toc {
   width: 50px;
   height: 50px;
 }
-/* line 37, ../_toolbar.scss */
+/* line 34, ../_toolbar.scss */
 .tocView-toolbar-item:hover {
   background-image: url(../../images/contents_icon.png);
 }
 
-/* line 42, ../_toolbar.scss */
+/* line 39, ../_toolbar.scss */
 .accountView-toolbar-item {
   cursor: hand;
   border: 0;
@@ -8282,12 +8273,12 @@ ul.toc {
   width: 50px;
   height: 50px;
 }
-/* line 53, ../_toolbar.scss */
+/* line 50, ../_toolbar.scss */
 .accountView-toolbar-item:hover {
   background-image: url(../../images/user_icon.png);
 }
 
-/* line 58, ../_toolbar.scss */
+/* line 55, ../_toolbar.scss */
 .printView-toolbar-item {
   cursor: hand;
   border: 0;
@@ -8300,7 +8291,7 @@ ul.toc {
   width: 50px;
   height: 50px;
 }
-/* line 69, ../_toolbar.scss */
+/* line 66, ../_toolbar.scss */
 .printView-toolbar-item:hover {
   background-image: url(../../images/print-active.png);
 }
