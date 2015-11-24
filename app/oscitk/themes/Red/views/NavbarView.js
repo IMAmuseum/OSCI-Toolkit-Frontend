@@ -6,6 +6,8 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 	},
 	initialize: function() {
 		
+		
+
 		this.listenTo(Backbone, 'packageLoaded', function(packageModel) {
 
 			// Get total number of pages
@@ -27,11 +29,17 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 			this.render();
 		});
 
+		this.listenTo(Backbone, "sectionLoaded", function() {
+			this.sliderResize();
+		});
+
+		// We must wait for the images and fonts to download to trigger this event
+		$(window).load( this.sliderResize );
+		$(window).resize( this.sliderResize );
+
 	},
 	render: function() {
 
-		// sections: this.sections
-		
 		this.$el.html( this.template( {  } ) );
 
 		$('.navbar-item[data-toggle="tooltip"]').tooltip({left:'150px'});
@@ -50,30 +58,34 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 
 		var sectionId = $(event.currentTarget).attr('data-section-id');
 
-		$('li.tocView-toolbar-item>a').removeClass('active');
+		$('li.tocView-toolbar-item').removeClass('active');
 		Backbone.trigger("toolbarRemoveViews");
 
 		// TODO: don't really want to address the appRouter directly
 		app.router.navigate("section/" + sectionId, {trigger: true});
 
 	},
-});
+	sliderResize: function() {
 
+		/*
+		var $slider = $('#osci-page-slider');
+		var width   = $slider.parent().width();
+			width  -= $('#osci-navbar-text').outerWidth() + 1;
+			width  -= $('#osci-spread-selector').outerWidth() + 1;
+			width  -= $('#font-size-area').outerWidth() + 1;
 
-// TODO: Use this.listenTo(Backbone, 'windowResized', function() ) ..?a
-$(window).resize( function() {
+		$slider.innerWidth( width );
 
-	// Figure out the correct width for the slider
-	var $slider = $('#osci-page-slider');
-	var width   = $slider.parent().width();
-		width  -= $('#osci-navbar-text').outerWidth() + 1;
-		width  -= $('#osci-spread-selector').outerWidth() + 1;
-		width  -= $('#font-size-area').outerWidth() + 1;
+		/*
+		console.log( 
+			$('#osci-page-slider').parent().width(), 
+			$('#osci-navbar-text').outerWidth(),
+			$('#font-size-area').outerWidth(),
+			$('#osci-spread-selector').outerWidth()
+		);
+		
 
-	$slider.innerWidth( width );
-
-});
-
-$(window).load( function() {
-	$(window).resize();
+		*/
+		
+	}
 });

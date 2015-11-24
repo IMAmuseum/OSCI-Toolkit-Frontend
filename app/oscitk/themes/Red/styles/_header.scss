@@ -20,7 +20,7 @@ header {
 		
 		margin: 0px -15px;
 
-		.container {
+		.container, .container-fluid {
 			padding-top: 15px;
 			padding-bottom: 10px;
 
@@ -54,7 +54,7 @@ header {
 
 			.btn-menu {
 				padding-left: 40px;
-				background-image: url("../../images/menu_icon.png");
+				background-image: url("../../images/dark/menu_icon.png");
 				background-repeat: no-repeat;
 			}
 		}

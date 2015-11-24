@@ -3,7 +3,7 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('toc'),
 	events: {
 		'click li a': 'itemClick',
-		'click #dismiss': 'closeOverlay',
+		//'click #dismiss': 'closeOverlay',
 	},
 	initialize: function() {
 		this.listenTo(Backbone, "currentNavigationItemChanged", function() {
@@ -19,13 +19,26 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 	itemClick: function(event) {
 		event.preventDefault();
 
+		console.log( 'section clicked' );
+
 		var sectionId = $(event.currentTarget).attr('data-section-id');
-		$('li.tocView-toolbar-item>a').removeClass('active');
-		Backbone.trigger("toolbarRemoveViews");
+
+		//$('li.tocView-toolbar-item').removeClass('active');
+		
+		//Backbone.trigger("toolbarRemoveViews");
+
 		// TODO: don't really want to address the appRouter directly
 		app.router.navigate("section/" + sectionId, {trigger: true});
+
+		//app.views.toolbarView.$el.find('li.tocView-toolbar-item').click();
+
+
 	},
+
+	/*
 	closeOverlay: function() {
 		Backbone.trigger("toolbarRemoveViews");
 	}
+	*/
+
 });

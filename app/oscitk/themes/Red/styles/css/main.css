@@ -8186,12 +8186,12 @@ header .header-title {
   margin: 0px -15px;
 }
 /* line 23, ../_header.scss */
-header .header-title .container {
+header .header-title .container, header .header-title .container-fluid {
   padding-top: 15px;
   padding-bottom: 10px;
 }
 /* line 27, ../_header.scss */
-header .header-title .container h1, header .header-title .container p {
+header .header-title .container h1, header .header-title .container p, header .header-title .container-fluid h1, header .header-title .container-fluid p {
   margin: 0;
   padding: 0px 15px;
   vertical-align: middle;
@@ -8200,100 +8200,149 @@ header .header-title .container h1, header .header-title .container p {
   font-family: 'Lato', sans-serif;
 }
 /* line 38, ../_header.scss */
-header .header-title .container h1 {
+header .header-title .container h1, header .header-title .container-fluid h1 {
   font-weight: 700;
 }
 /* line 44, ../_header.scss */
-header .header-title .container .section-title:before {
+header .header-title .container .section-title:before, header .header-title .container-fluid .section-title:before {
   content: "<";
   margin-right: 10px;
 }
 /* line 49, ../_header.scss */
-header .header-title .container .section-title:after {
+header .header-title .container .section-title:after, header .header-title .container-fluid .section-title:after {
   content: ">";
   margin-left: 10px;
 }
 /* line 55, ../_header.scss */
-header .header-title .container .btn-menu {
+header .header-title .container .btn-menu, header .header-title .container-fluid .btn-menu {
   padding-left: 40px;
-  background-image: url("../../images/menu_icon.png");
+  background-image: url("../../images/dark/menu_icon.png");
   background-repeat: no-repeat;
 }
 
 /* line 1, ../_toolbar.scss */
 #toolbar {
   float: left;
-  margin-top: 20px;
-  z-index: 998;
+  position: fixed;
+  right: 0px;
+  top: 52px;
+  bottom: 50px;
+  z-index: 10001;
+  background: #810c0b;
 }
-
-/* line 11, ../_toolbar.scss */
-ul.toc {
-  list-style-type: none;
-}
-
-/* line 15, ../_toolbar.scss */
-#toolbar-area {
+/* line 14, ../_toolbar.scss */
+#toolbar #toolbar-area {
+  float: left;
+  height: 100%;
+  background: #b82927;
   z-index: 990;
   list-style-type: none;
+  padding: 0;
 }
-/* line 18, ../_toolbar.scss */
-#toolbar-area li {
+/* line 27, ../_toolbar.scss */
+#toolbar #toolbar-area li {
   margin-bottom: 10px;
 }
-
-/* line 23, ../_toolbar.scss */
-.tocView-toolbar-item {
+/* line 31, ../_toolbar.scss */
+#toolbar #toolbar-area li.toolbar-item-view {
   cursor: hand;
   border: 0;
   font: 0/0 a;
   text-shadow: none;
   color: transparent;
-  background-image: url(../../images/contents_icon.png);
   background-size: 50px 50px;
   background-repeat: no-repeat;
   width: 50px;
   height: 50px;
+  /*
+  &.printView-toolbar-item {
+  	background-image: url(../../images/light/print.png);
+  	&:hover {
+  		background-image: url(../../images/light/print.png);
+  	}
+  }
+  */
 }
-/* line 34, ../_toolbar.scss */
-.tocView-toolbar-item:hover {
-  background-image: url(../../images/contents_icon.png);
+/* line 44, ../_toolbar.scss */
+#toolbar #toolbar-area li.toolbar-item-view.active {
+  background-color: #810c0b;
 }
-
-/* line 39, ../_toolbar.scss */
-.accountView-toolbar-item {
-  cursor: hand;
-  border: 0;
-  font: 0/0 a;
-  text-shadow: none;
-  color: transparent;
-  background-image: url(../../images/user_icon.png);
-  background-size: 50px 50px;
-  background-repeat: no-repeat;
-  width: 50px;
-  height: 50px;
+/* line 49, ../_toolbar.scss */
+#toolbar #toolbar-area li.toolbar-item-view.tocView-toolbar-item {
+  background-image: url(../../images/light/contents_icon.png);
 }
-/* line 50, ../_toolbar.scss */
-.accountView-toolbar-item:hover {
-  background-image: url(../../images/user_icon.png);
+/* line 51, ../_toolbar.scss */
+#toolbar #toolbar-area li.toolbar-item-view.tocView-toolbar-item:hover {
+  background-image: url(../../images/light/contents_icon.png);
 }
-
-/* line 55, ../_toolbar.scss */
-.printView-toolbar-item {
-  cursor: hand;
-  border: 0;
-  font: 0/0 a;
-  text-shadow: none;
-  color: transparent;
-  background-image: url(../../images/print.png);
-  background-size: 50px 50px;
-  background-repeat: no-repeat;
-  width: 50px;
-  height: 50px;
+/* line 56, ../_toolbar.scss */
+#toolbar #toolbar-area li.toolbar-item-view.accountView-toolbar-item {
+  background-image: url(../../images/light/user_icon.png);
 }
-/* line 66, ../_toolbar.scss */
-.printView-toolbar-item:hover {
-  background-image: url(../../images/print-active.png);
+/* line 58, ../_toolbar.scss */
+#toolbar #toolbar-area li.toolbar-item-view.accountView-toolbar-item:hover {
+  background-image: url(../../images/light/user_icon.png);
+}
+/* line 72, ../_toolbar.scss */
+#toolbar #toolbar-area li.toolbar-item-view.footnotesView-toolbar-item {
+  background-image: url(../../images/light/footnotes_icon.png);
+}
+/* line 76, ../_toolbar.scss */
+#toolbar #toolbar-area li.toolbar-item-view.footnotesView-toolbar-item {
+  background-image: url(../../images/light/footnotes_icon.png);
+}
+/* line 80, ../_toolbar.scss */
+#toolbar #toolbar-area li.toolbar-item-view.footnotesView-toolbar-item {
+  background-image: url(../../images/light/footnotes_icon.png);
+}
+/* line 84, ../_toolbar.scss */
+#toolbar #toolbar-area li.toolbar-item-view.footnotesView-toolbar-item {
+  background-image: url(../../images/light/footnotes_icon.png);
+}
+/* line 93, ../_toolbar.scss */
+#toolbar #toolbar-readout {
+  float: left;
+  height: 100%;
+  width: 270px;
+  padding: 15px 30px 30px 30px;
+  background: #810c0b;
+  color: white;
+}
+/* line 104, ../_toolbar.scss */
+#toolbar #toolbar-readout h3 {
+  margin: 0;
+  margin-right: -30px;
+  padding-right: 30px;
+  border-bottom: 1px white solid;
+  padding-bottom: 8px;
+  margin-bottom: 5px;
+}
+/* line 113, ../_toolbar.scss */
+#toolbar #toolbar-readout a {
+  color: white;
+}
+/* line 116, ../_toolbar.scss */
+#toolbar #toolbar-readout a:hover {
+  color: #b82927;
+  text-decoration: none;
+}
+/* line 124, ../_toolbar.scss */
+#toolbar #toolbar-readout #toc ul.toc {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+/* line 130, ../_toolbar.scss */
+#toolbar #toolbar-readout #toc ul.toc li.toc-item {
+  margin: 10px 0px;
+}
+/* line 134, ../_toolbar.scss */
+#toolbar #toolbar-readout #toc ul.toc li.toc-item h4, #toolbar #toolbar-readout #toc ul.toc li.toc-item h5 {
+  margin: 0px;
+}
+/* line 144, ../_toolbar.scss */
+#toolbar #toolbar-readout #account .account-footer {
+  margin-top: 10px;
 }
 
 /* line 1, ../_navbar.scss */
@@ -8306,23 +8355,31 @@ body {
   position: fixed;
   bottom: 0;
   width: 100%;
+  height: 50px;
   z-index: 998;
 }
-/* line 14, ../_navbar.scss */
+/* line 15, ../_navbar.scss */
 #navbar nav {
   background-color: white;
   border-top: 1px solid #ccc;
   margin: 0px -15px;
 }
-/* line 21, ../_navbar.scss */
+/* line 22, ../_navbar.scss */
 #navbar nav #osci-page-slider {
   padding: 18px 15px;
+  width: calc( 100% - 86px - 119px - 87px );
 }
-/* line 25, ../_navbar.scss */
+@media (max-width: 767px) {
+  /* line 22, ../_navbar.scss */
+  #navbar nav #osci-page-slider {
+    width: calc( 100% - 86px - 87px );
+  }
+}
+/* line 32, ../_navbar.scss */
 #navbar nav #osci-navbar-text {
   padding: 9px 15px;
 }
-/* line 29, ../_navbar.scss */
+/* line 36, ../_navbar.scss */
 #navbar nav #font-size-area {
   list-style-type: none;
   margin: 0;

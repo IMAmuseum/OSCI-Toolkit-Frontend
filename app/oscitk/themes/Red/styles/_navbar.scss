@@ -8,6 +8,7 @@ body {
 	bottom: 0;
 
 	width: 100%;
+	height: 50px;
 
 	z-index: 998;
 
@@ -20,6 +21,12 @@ body {
 
 		#osci-page-slider {
 			padding: 18px 15px;
+			width: calc( 100% - 86px - 119px - 87px );
+
+			@media ( max-width: 767px ) {
+				width: calc( 100% - 86px - 87px );
+			}
+
 		}
 
 		#osci-navbar-text {

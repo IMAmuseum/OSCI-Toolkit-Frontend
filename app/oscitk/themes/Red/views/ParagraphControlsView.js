@@ -47,6 +47,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
                 section_id: this.sectionId,
                 paragraph_number: i
             });
+
             var hasNotes = note.get('note') ? 'withNotes' : '';
 
             $(paragraph).before(
@@ -115,6 +116,10 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
     },
 
     getCitation: function(data) {
+
+        // data is paragraph index
+        
+
         var citationView = this;
         var contentId = 'osci-content-'+data;
         var content = $('#' + contentId);

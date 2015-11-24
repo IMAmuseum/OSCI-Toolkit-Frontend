@@ -54,7 +54,11 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     },
 
     render: function() {
+
+        // console.log( "Rendering section..." );
+        
         $('#loader').hide();
+
         this.$el.html(
             this.template( {
                 sectionTitle: this.sectionTitle,
@@ -63,7 +67,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 content: $(this.content).html()
             } )
         );
+
         Backbone.trigger("layoutComplete");
+
         return this;
     },
 

@@ -95,8 +95,22 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 			}
 		});
 	},
+
+	showRegistrationClicked: function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		this.showRegistrationForm();
+	},
+
+	showLoginClicked: function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		this.showLoginForm();
+	},
+
 	showRegistrationForm: function() {
 		this.template = OsciTk.templateManager.get('account-register');
+		//console.log( this.$el );
 		this.$el.html(this.template());
 	},
 	showLoginForm: function() {
@@ -109,12 +123,16 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 	},
 	closeOverlay: function() {
 		Backbone.trigger("toolbarRemoveViews");
+
 		var section = app.collections.navigationItems.get(this.section_id);
+
 		if (section) {
 			this.currentNavigationItem = app.collections.navigationItems.get(section_id);
 		} else {
 			this.currentNavigationItem = app.collections.navigationItems.first();
 		}
+
 		Backbone.trigger('currentNavigationItemChanged', this.currentNavigationItem);
+		
 	}
 });
