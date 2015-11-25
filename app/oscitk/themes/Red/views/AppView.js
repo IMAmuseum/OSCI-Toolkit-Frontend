@@ -18,6 +18,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			sectionView: new OsciTk.views.Section(),
 			navigationView: new OsciTk.views.Navigation(),
 			footnotesView: new OsciTk.views.Footnotes(),
+			footnotesToolbarView: new OsciTk.views.FootnotesToolbar(),
 			paragraphControlsView: new OsciTk.views.ParagraphControls(),
 			//glossaryTooltipView: new OsciTk.views.GlossaryTooltip(),
 			notesView: new OsciTk.views.Notes(),
@@ -46,7 +47,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			this.toolbarInline(toolbarItem);
 		});
 
-		this.listenTo(Backbone, "toolbarItemClicked", function(toolbarItem, active) {
+		this.listenTo(Backbone, "toolbarItemClicked", function(toolbarItem) {
 			this.toolbarAction(toolbarItem);
 		});
 
@@ -86,7 +87,8 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 		// if toolbar items is active show it
 		// this toggles the view
-		if (! toolbarItem.active) {
+
+		if (toolbarItem.active) {
 			var view = _.pick(app.views, toolbarItem.item.view);
 			view = view[toolbarItem.item.view];
 

@@ -8220,7 +8220,7 @@ header .header-title .container .btn-menu, header .header-title .container-fluid
   background-repeat: no-repeat;
 }
 
-/* line 1, ../_toolbar.scss */
+/* line 3, ../_toolbar.scss */
 #toolbar {
   float: left;
   position: fixed;
@@ -8230,7 +8230,7 @@ header .header-title .container .btn-menu, header .header-title .container-fluid
   z-index: 10001;
   background: #810c0b;
 }
-/* line 14, ../_toolbar.scss */
+/* line 16, ../_toolbar.scss */
 #toolbar #toolbar-area {
   float: left;
   height: 100%;
@@ -8239,11 +8239,11 @@ header .header-title .container .btn-menu, header .header-title .container-fluid
   list-style-type: none;
   padding: 0;
 }
-/* line 27, ../_toolbar.scss */
+/* line 29, ../_toolbar.scss */
 #toolbar #toolbar-area li {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
-/* line 31, ../_toolbar.scss */
+/* line 33, ../_toolbar.scss */
 #toolbar #toolbar-area li.toolbar-item-view {
   cursor: hand;
   border: 0;
@@ -8263,60 +8263,77 @@ header .header-title .container .btn-menu, header .header-title .container-fluid
   }
   */
 }
-/* line 44, ../_toolbar.scss */
+/* line 46, ../_toolbar.scss */
 #toolbar #toolbar-area li.toolbar-item-view.active {
   background-color: #810c0b;
 }
-/* line 49, ../_toolbar.scss */
+/* line 51, ../_toolbar.scss */
 #toolbar #toolbar-area li.toolbar-item-view.tocView-toolbar-item {
   background-image: url(../../images/light/contents_icon.png);
 }
-/* line 51, ../_toolbar.scss */
+/* line 53, ../_toolbar.scss */
 #toolbar #toolbar-area li.toolbar-item-view.tocView-toolbar-item:hover {
   background-image: url(../../images/light/contents_icon.png);
 }
-/* line 65, ../_toolbar.scss */
+/* line 67, ../_toolbar.scss */
 #toolbar #toolbar-area li.toolbar-item-view.searchView-toolbar-item {
   background-image: url(../../images/light/search_icon.png);
 }
-/* line 69, ../_toolbar.scss */
+/* line 71, ../_toolbar.scss */
 #toolbar #toolbar-area li.toolbar-item-view.glossaryView-toolbar-item {
   background-image: url(../../images/light/glossary_icon.png);
 }
-/* line 73, ../_toolbar.scss */
-#toolbar #toolbar-area li.toolbar-item-view.footnotesView-toolbar-item {
+/* line 75, ../_toolbar.scss */
+#toolbar #toolbar-area li.toolbar-item-view.footnotesToolbarView-toolbar-item {
   background-image: url(../../images/light/footnotes_icon.png);
 }
-/* line 77, ../_toolbar.scss */
+/* line 79, ../_toolbar.scss */
 #toolbar #toolbar-area li.toolbar-item-view.figuresView-toolbar-item {
   background-image: url(../../images/light/figures_icon.png);
 }
-/* line 81, ../_toolbar.scss */
+/* line 83, ../_toolbar.scss */
 #toolbar #toolbar-area li.toolbar-item-view.notesView-toolbar-item {
   background-image: url(../../images/light/notes_icon.png);
 }
-/* line 85, ../_toolbar.scss */
+/* line 87, ../_toolbar.scss */
 #toolbar #toolbar-area li.toolbar-item-view.citationsView-toolbar-item {
   background-image: url(../../images/light/cite_icon.png);
 }
-/* line 89, ../_toolbar.scss */
+/* line 91, ../_toolbar.scss */
 #toolbar #toolbar-area li.toolbar-item-view.accountView-toolbar-item {
   background-image: url(../../images/light/user_icon.png);
 }
-/* line 91, ../_toolbar.scss */
+/* line 93, ../_toolbar.scss */
 #toolbar #toolbar-area li.toolbar-item-view.accountView-toolbar-item:hover {
   background-image: url(../../images/light/user_icon.png);
 }
-/* line 99, ../_toolbar.scss */
+/* line 101, ../_toolbar.scss */
+#toolbar #toolbar-filler,
 #toolbar #toolbar-readout {
   float: left;
   height: 100%;
   width: 270px;
-  padding: 15px 30px 30px 30px;
-  background: #810c0b;
+  max-width: calc( 100% - 50px );
   color: white;
 }
-/* line 110, ../_toolbar.scss */
+/* line 112, ../_toolbar.scss */
+#toolbar #toolbar-filler {
+  background: #b82927;
+}
+/* line 115, ../_toolbar.scss */
+#toolbar #toolbar-filler p {
+  font-family: 'Lato', sans-serif;
+  line-height: 50px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+}
+/* line 123, ../_toolbar.scss */
+#toolbar #toolbar-readout {
+  display: none;
+  background: #810c0b;
+  padding: 15px 30px 30px 30px;
+}
+/* line 131, ../_toolbar.scss */
 #toolbar #toolbar-readout h3 {
   margin: 0;
   margin-right: -30px;
@@ -8325,30 +8342,30 @@ header .header-title .container .btn-menu, header .header-title .container-fluid
   padding-bottom: 8px;
   margin-bottom: 5px;
 }
-/* line 119, ../_toolbar.scss */
+/* line 140, ../_toolbar.scss */
 #toolbar #toolbar-readout a {
   color: white;
 }
-/* line 122, ../_toolbar.scss */
+/* line 143, ../_toolbar.scss */
 #toolbar #toolbar-readout a:hover {
   color: #b82927;
   text-decoration: none;
 }
-/* line 130, ../_toolbar.scss */
-#toolbar #toolbar-readout #toc ul.toc {
+/* line 150, ../_toolbar.scss */
+#toolbar #toolbar-readout ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 136, ../_toolbar.scss */
-#toolbar #toolbar-readout #toc ul.toc li.toc-item {
+/* line 156, ../_toolbar.scss */
+#toolbar #toolbar-readout ul li {
   margin: 10px 0px;
 }
-/* line 140, ../_toolbar.scss */
-#toolbar #toolbar-readout #toc ul.toc li.toc-item h4, #toolbar #toolbar-readout #toc ul.toc li.toc-item h5 {
+/* line 160, ../_toolbar.scss */
+#toolbar #toolbar-readout ul li h4, #toolbar #toolbar-readout ul li h5 {
   margin: 0px;
 }
-/* line 150, ../_toolbar.scss */
+/* line 169, ../_toolbar.scss */
 #toolbar #toolbar-readout #account .account-footer {
   margin-top: 10px;
 }

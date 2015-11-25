@@ -40,6 +40,7 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 		*/
 
 	},
+
 	render: function() {
 
 		this.$el.html( this.template( {  } ) );
@@ -54,6 +55,7 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 		return this;
 
 	},
+
 	itemClick: function(event) {
 
 		event.preventDefault();

@@ -4,7 +4,7 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	initialize: function() {
 		
 		// tracks the state of the content area drawer
-		this.activeToolbarItemView = undefined;
+		// this.activeToolbarItemView = undefined;
 
 		/*
 		this.listenTo(Backbone, 'packageLoaded', function(packageModel) {
@@ -17,6 +17,19 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 
 			this.figureSize = figures.size();
 			this.render();
+
+		});
+
+		// Switch filler and readout when items are toggled
+		this.listenTo(Backbone, 'toolbarItemClicked', function(data) {
+			
+			if( data.active ) {
+				$('#toolbar-filler').hide();
+				$('#toolbar-readout').show();
+			}else{
+				$('#toolbar-filler').show();
+				$('#toolbar-readout').hide();
+			}
 
 		});
 

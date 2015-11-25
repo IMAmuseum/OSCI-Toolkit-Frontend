@@ -49,18 +49,23 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		this.href = $(e.target).data("href");
 		this.style = $(e.target).data("style");
 
+
+
+		// toggle active class
+		this.$target.toggleClass('active');
+
+		// get true / false target is active
+		this.active = this.$target.hasClass('active');
+
+		// triggered in ToolbarItemView.js
+		//Backbone.trigger("toolbarItemPreClick", {item : this.options.toolbarItem, active: this.active} );
+
 		// default actions only pass a
 		if(this.style != 'default') {
 			Backbone.trigger("toolbarInlineClicked", this.href);
 		}
 
-		// get true / false target is active
-		this.active = this.$target.hasClass('active');
-
-		// toggle active class
-		this.$target.toggleClass('active');
-
-		//get the target li for checking if true in each loop below
+		// get the target li for checking if true in each loop below
 		this.$targetCheck = $(e.currentTarget);
 
 		// step through toolbar items and find non-selected and remove active class
@@ -74,8 +79,8 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 
 		}, this);
 
-		// triggered in appView.js
-		Backbone.trigger("toolbarItemClicked", {item : this.options.toolbarItem, active: this.active});
+		// triggered in AppView.js
+		Backbone.trigger("toolbarItemClicked", {item : this.options.toolbarItem, active: this.active} );
 
 	}
 

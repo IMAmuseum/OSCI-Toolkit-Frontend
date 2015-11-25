@@ -9,6 +9,7 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 	},
 	initialize: function() {
 		this.listenTo(Backbone, "currentNavigationItemChanged", function() {
+			console.log( "currentNavigationItemChanged" );
 			this.render();
 		});
 	},

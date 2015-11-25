@@ -1,9 +1,13 @@
+// TODO: Notes should be cleared when the user logs out
+// TODO: Notes should be retrieved for all sections, not just the currently displayed section
+
 OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 	className: 'notes-view',
 	template: OsciTk.templateManager.get('notes'),
 	events: {
 		"click .noteLink": "noteLinkClick"
 	},
+
 	initialize: function() {
 		// re-render this view when collection changes
 		this.listenTo(app.collections.notes, 'add remove change', function() {
@@ -30,7 +34,7 @@ OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 			$('#'+content_id).click();
 			app.views.toolbarView.contentClose();
 		}
-		
+
 	},
 
 	getSavedNotes: function() {
@@ -46,10 +50,17 @@ OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 	},
 
 	active: function() {
+
+		/*
+
 		// Set the width of the notes reel if there is more than one note
 		if (app.collections.notes.length > 1) {
 			var notes = this.$el.find('.notesListItem');
 			this.$el.find('.notesList').width(notes.length * (notes.first().outerWidth(true)));
 		}
+
+		*/
+
 	}
+
 });

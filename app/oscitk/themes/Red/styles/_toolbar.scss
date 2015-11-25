@@ -1,3 +1,5 @@
+$toolbar-margin-bottom: 5px;
+
 #toolbar {
 
 	float: left;
@@ -26,7 +28,7 @@
 
 		li {
 
-			margin-bottom: 10px;
+			margin-bottom: $toolbar-margin-bottom;
 
 			&.toolbar-item-view {
 
@@ -70,7 +72,7 @@
 					background-image: url(../../images/light/glossary_icon.png);
 				}
 
-				&.footnotesView-toolbar-item {
+				&.footnotesToolbarView-toolbar-item {
 					background-image: url(../../images/light/footnotes_icon.png);
 				}
 
@@ -96,16 +98,35 @@
 		}
 	}
 
+	#toolbar-filler,
 	#toolbar-readout {
-
 		float: left;
 		height: 100%;
 		width: 270px;
 
-		padding: 15px 30px 30px 30px;
+		max-width: calc( 100% - 50px );
+
+		color: white;
+	}
+
+	#toolbar-filler {
+		background: $color-light-red;
+
+		p {
+			font-family: 'Lato', sans-serif;
+			line-height: 50px;
+			margin-bottom: $toolbar-margin-bottom;
+			margin-left: 10px;
+		}
+	}
+
+	#toolbar-readout {
+
+		display: none;
 
 		background: $color-dark-red;
-		color: white;
+
+		padding: 15px 30px 30px 30px;
 
 		h3 {
 			margin: 0;
@@ -125,25 +146,23 @@
 			}
 		}
 
-		#toc {
 
-			ul.toc {
+		ul {
 
-				list-style: none;
-				padding: 0;
-				margin: 0;
+			list-style: none;
+			padding: 0;
+			margin: 0;
 
-				li.toc-item {
+			li {
 
-					margin: 10px 0px;
+				margin: 10px 0px;
 
-					h4, h5 {
-						margin: 0px;
-					}
-
+				h4, h5 {
+					margin: 0px;
 				}
 
 			}
+
 		}
 
 		#account {

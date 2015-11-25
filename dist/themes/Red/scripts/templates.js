@@ -133,6 +133,16 @@ __p += '<h3>Reading Settings</h3>\n<div class="font-control">\n\t<h3>Font Size</
 return __p
 };
 
+this["JST"]["app/oscitk/themes/Red/templates/footnotes-toolbar.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<h3>Footnotes</h3>\n\n';
+
+}
+return __p
+};
+
 this["JST"]["app/oscitk/themes/Red/templates/header.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -248,11 +258,11 @@ this["JST"]["app/oscitk/themes/Red/templates/paragraph-popover.tpl.html"] = func
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="popover-wrapper">\n\t<ul class="nav nav-tabs" role="tablist">\n\t<li role="presentation" class="active">\n\t\t<a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Notes</a>\n\t</li>\n\t<li role="presentation">\n\t\t<a href="#cite" aria-controls="cite" role="tab" data-toggle="tab">Cite</a>\n\t</li>\n\t</ul>\n\n\t<div class="tab-content">\n    \t<div role="tabpanel" class="tab-pane active" id="notes">\n    \t\t<!--' +
+__p += '<div class="popover-wrapper">\n\t<ul class="nav nav-tabs" role="tablist">\n\t<li role="presentation" class="active">\n\t\t<a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Notes</a>\n\t</li>\n\t<li role="presentation">\n\t\t<a href="#cite" aria-controls="cite" role="tab" data-toggle="tab">Cite</a>\n\t</li>\n\t</ul>\n\n\t<div class="tab-content">\n    \t<div role="tabpanel" class="tab-pane active" id="notes">\n    \t\t' +
 ((__t = ( noteForm )) == null ? '' : __t) +
-'-->\n    \t</div>\n    \t<div role="tabpanel" class="tab-pane" id="cite">\n    \t\t<!--' +
+'\n    \t</div>\n    \t<div role="tabpanel" class="tab-pane" id="cite">\n    \t\t' +
 ((__t = ( citation )) == null ? '' : __t) +
-'-->\n    \t</div>\n    </div>\n</div>\n';
+'\n    \t</div>\n    </div>\n</div>\n';
 
 }
 return __p
@@ -337,7 +347,7 @@ this["JST"]["app/oscitk/themes/Red/templates/toolbar.tpl.html"] = function(obj) 
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<nav class="nav nav-stacked">\n\t<ul id="toolbar-area" class=""></ul>\n\t<div id="toolbar-readout">\n\t\t<div id="toc"></div>\n\t\t<div id="notes"></div>\n\t\t<div id="figures"></div>\n\t\t<div id="account"></div>\n\t</div>\n</nav>';
+__p += '<nav class="nav nav-stacked">\n\t<ul id="toolbar-area" class=""></ul>\n\t<div id="toolbar-filler">\n\n<!--\n\t\t<p>&nbsp;</p>\n-->\n\t\t<p>Contents</p>\n<!--\n\t\t<p>Search</p>\n\t\t<p>Glossary</p>\n-->\n\t\t<p>Footnotes</p>\n<!--\t\t\n\t\t<p>Figures</p>\n-->\n\t\t<p>Notes</p>\n<!--\n\t\t<p>Citations</p>\n-->\n\t\t<p>User Profile</p>\n\n\t</div>\n\t<div id="toolbar-readout">\n\t\t<div id="toc"></div>\n\t\t<div id="search"></div>\n\t\t<div id="glossary"></div>\n\t\t<div id="footnotes-toolbar"></div>\n\t\t<div id="figures"></div>\n\t\t<div id="notes"></div>\n\t\t<div id="citations"></div>\n\t\t<div id="account"></div>\n\t</div>\n</nav>\n';
 
 }
 return __p

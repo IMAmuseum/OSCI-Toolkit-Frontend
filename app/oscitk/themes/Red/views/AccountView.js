@@ -1,3 +1,6 @@
+// TODO: Check if user is logged in immediately
+// Don't show the Login screen if there's a cookie / session in place
+
 OsciTk.views.Account = OsciTk.views.BaseView.extend({
 	events: {
 		'click button.login': 'login',
@@ -30,11 +33,14 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 		return this;
 	},
 	login: function() {
+
 		// alias this for use in ajax callbacks
 		var accountView = this;
+
 		// get user/pass from form
 		var username = this.$el.find('#username').val();
 		var password = this.$el.find('#password').val();
+
 		// send login request
 		$.ajax({
 			url: app.config.get('endpoints').OsciTkAccount,
@@ -53,6 +59,7 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 				}
 			}
 		});
+		
 	},
 	logout: function() {
 		// alias this for use in ajax callback
