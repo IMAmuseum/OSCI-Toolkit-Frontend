@@ -9,7 +9,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 		// initialize all possible views
 		app.views = {
-			titleView: new OsciTk.views.Title(),
+			//titleView: new OsciTk.views.Title(),
 			headerView: new OsciTk.views.Header(),
 			fontSizeView: new OsciTk.views.FontSize(),
 			//printView: new OsciTk.views.Print(),

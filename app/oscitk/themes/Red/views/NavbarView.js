@@ -29,6 +29,7 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 			this.render();
 		});
 
+		/*
 		this.listenTo(Backbone, "sectionLoaded", function() {
 			this.sliderResize();
 		});
@@ -36,6 +37,7 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 		// We must wait for the images and fonts to download to trigger this event
 		$(window).load( this.sliderResize );
 		$(window).resize( this.sliderResize );
+		*/
 
 	},
 	render: function() {
@@ -65,9 +67,11 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 		app.router.navigate("section/" + sectionId, {trigger: true});
 
 	},
+
+	/*
 	sliderResize: function() {
 
-		/*
+		
 		var $slider = $('#osci-page-slider');
 		var width   = $slider.parent().width();
 			width  -= $('#osci-navbar-text').outerWidth() + 1;
@@ -76,7 +80,7 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 
 		$slider.innerWidth( width );
 
-		/*
+		
 		console.log( 
 			$('#osci-page-slider').parent().width(), 
 			$('#osci-navbar-text').outerWidth(),
@@ -85,7 +89,8 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 		);
 		
 
-		*/
 		
+
 	}
+	*/
 });

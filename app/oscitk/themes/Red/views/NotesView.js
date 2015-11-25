@@ -20,6 +20,7 @@ OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 	},
 
 	noteLinkClick: function(e) {
+
 		e.preventDefault();
 		var target = $(e.target);
 		var content_id = target.attr('data-content_id');
@@ -29,9 +30,11 @@ OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 			$('#'+content_id).click();
 			app.views.toolbarView.contentClose();
 		}
+		
 	},
 
 	getSavedNotes: function() {
+
 		// filter notes - only return notes with ids (saved to server)
 		var notes = _.filter(app.collections.notes.models, function(note) {
 			if (note.id !== null) return true;
@@ -39,6 +42,7 @@ OsciTk.views.Notes = OsciTk.views.BaseView.extend({
 		});
 
 		return notes;
+
 	},
 
 	active: function() {

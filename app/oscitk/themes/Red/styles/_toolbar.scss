@@ -53,13 +53,6 @@
 					}
 				}
 
-				&.accountView-toolbar-item {
-					background-image: url(../../images/light/user_icon.png);
-					&:hover {
-						background-image: url(../../images/light/user_icon.png);
-					}
-				}
-
 				/*
 				&.printView-toolbar-item {
 					background-image: url(../../images/light/print.png);
@@ -67,25 +60,38 @@
 						background-image: url(../../images/light/print.png);
 					}
 				}
-				*/				
+				*/	
 
-				&.footnotesView-toolbar-item {
-					background-image: url(../../images/light/footnotes_icon.png);
+				&.searchView-toolbar-item {
+					background-image: url(../../images/light/search_icon.png);
+				}
+
+				&.glossaryView-toolbar-item {
+					background-image: url(../../images/light/glossary_icon.png);
 				}
 
 				&.footnotesView-toolbar-item {
 					background-image: url(../../images/light/footnotes_icon.png);
 				}
 
-				&.footnotesView-toolbar-item {
-					background-image: url(../../images/light/footnotes_icon.png);
+				&.figuresView-toolbar-item {
+					background-image: url(../../images/light/figures_icon.png);
 				}
 
-				&.footnotesView-toolbar-item {
-					background-image: url(../../images/light/footnotes_icon.png);
+				&.notesView-toolbar-item {
+					background-image: url(../../images/light/notes_icon.png);
 				}
 
-				
+				&.citationsView-toolbar-item {
+					background-image: url(../../images/light/cite_icon.png);
+				}
+
+				&.accountView-toolbar-item {
+					background-image: url(../../images/light/user_icon.png);
+					&:hover {
+						background-image: url(../../images/light/user_icon.png);
+					}
+				}
 			}
 		}
 	}

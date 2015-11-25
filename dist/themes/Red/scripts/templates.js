@@ -1,5 +1,25 @@
 this["JST"] = this["JST"] || {};
 
+this["JST"]["app/oscitk/themes/Red/templates/_print.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<a href="#print" id="print">Print</a>\n';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Red/templates/_title.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<h1 id="publication-title"></h1>';
+
+}
+return __p
+};
+
 this["JST"]["app/oscitk/themes/Red/templates/account-login.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -238,16 +258,6 @@ __p += '<div class="popover-wrapper">\n\t<ul class="nav nav-tabs" role="tablist"
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Red/templates/print.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<a href="#print" id="print">Print</a>\n';
-
-}
-return __p
-};
-
 this["JST"]["app/oscitk/themes/Red/templates/section.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
@@ -264,16 +274,6 @@ __p += '\n<h3>' +
 __p += '\n<hr>\n' +
 ((__t = ( content )) == null ? '' : __t) +
 '\n';
-
-}
-return __p
-};
-
-this["JST"]["app/oscitk/themes/Red/templates/title.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<h1 id="publication-title"></h1>';
 
 }
 return __p
@@ -337,7 +337,7 @@ this["JST"]["app/oscitk/themes/Red/templates/toolbar.tpl.html"] = function(obj) 
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<nav class="nav nav-stacked">\n\t<ul id="toolbar-area" class=""></ul>\n\t<div id="toolbar-readout">\n\t\t<div id="account"></div>\n\t\t<div id="toc"></div>\n\t\t<div id="figures"></div>\n\t</div>\n</nav>';
+__p += '<nav class="nav nav-stacked">\n\t<ul id="toolbar-area" class=""></ul>\n\t<div id="toolbar-readout">\n\t\t<div id="toc"></div>\n\t\t<div id="notes"></div>\n\t\t<div id="figures"></div>\n\t\t<div id="account"></div>\n\t</div>\n</nav>';
 
 }
 return __p

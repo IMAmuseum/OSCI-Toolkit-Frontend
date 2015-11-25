@@ -34,7 +34,7 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		e.preventDefault();
 		e.stopPropagation();
 
-		console.log( 'clicked!' );
+		// console.log( 'clicked!' );
 
 		this.setActiveStates(e);
 		
