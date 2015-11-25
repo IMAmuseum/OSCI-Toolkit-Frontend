@@ -8687,21 +8687,38 @@ figure.center figcaption {
 /* line 1, ../_citation.scss */
 .citation-wrapper {
   background: #FFF;
-  overflow: scroll;
+  overflow-y: scroll;
   height: 160px;
 }
-/* line 5, ../_citation.scss */
+/* line 7, ../_citation.scss */
 .citation-wrapper .citations {
   padding: 0 10px 5px 10px;
 }
-/* line 8, ../_citation.scss */
+/* line 13, ../_citation.scss */
 .citation-wrapper .citations .citation h4 {
   font-size: 14px;
   margin-bottom: 5px;
 }
-/* line 12, ../_citation.scss */
+/* line 18, ../_citation.scss */
 .citation-wrapper .citations .citation p {
   font-size: 10px;
+  /* Breaking long URLs */
+  white-space: pre !important;
+  /* CSS 2.0 */
+  white-space: pre-wrap !important;
+  /* CSS 2.1 */
+  white-space: pre-line !important;
+  /* CSS 3.0 */
+  white-space: -pre-wrap !important;
+  /* Opera 4-6 */
+  white-space: -o-pre-wrap !important;
+  /* Opera 7 */
+  white-space: -moz-pre-wrap !important;
+  /* Mozilla */
+  white-space: -hp-pre-wrap !important;
+  /* HP Printers */
+  word-wrap: break-word !important;
+  /* IE 5+ */
 }
 
 @media print {
