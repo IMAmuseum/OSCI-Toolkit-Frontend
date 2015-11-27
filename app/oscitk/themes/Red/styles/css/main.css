@@ -8073,28 +8073,28 @@ p, textarea {
   color: #fff;
   line-height: 15px;
   text-align: center;
-  background: #52818B;
+  background: #b82927;
 }
-/* line 22, ../_section.scss */
+/* line 31, ../_section.scss */
 .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
-  background: #3f636b;
+  background: #b82927;
 }
 
-/* line 30, ../_section.scss */
+/* line 39, ../_section.scss */
 .glossary-term:hover {
   cursor: hand;
 }
 
 @media (max-width: 992px) {
-  /* line 36, ../_section.scss */
+  /* line 45, ../_section.scss */
   #section {
     padding-left: 0;
   }
 }
 @media (min-width: 992px) {
-  /* line 42, ../_section.scss */
+  /* line 51, ../_section.scss */
   .section-col {
     float: none;
   }
