@@ -1,2 +1,9 @@
 <h3>Footnotes</h3>
 
+<ul>
+	<% _.each(items, function(item) { %>
+		<li>
+			<b><%= item.id %></b><br/><%= item.title %>
+		</li>
+	<% }); %>
+</ul>

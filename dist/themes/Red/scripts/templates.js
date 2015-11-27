@@ -135,9 +135,18 @@ return __p
 
 this["JST"]["app/oscitk/themes/Red/templates/footnotes-toolbar.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<h3>Footnotes</h3>\n\n';
+__p += '<h3>Footnotes</h3>\n\n<ul>\n\t';
+ _.each(items, function(item) { ;
+__p += '\n\t\t<li>\n\t\t\t<b>' +
+((__t = ( item.id )) == null ? '' : __t) +
+'</b><br/>' +
+((__t = ( item.title )) == null ? '' : __t) +
+'\n\t\t</li>\n\t';
+ }); ;
+__p += '\n</ul>';
 
 }
 return __p
