@@ -1,4 +1,3 @@
-
 OsciTk.views.Section = OsciTk.views.BaseView.extend({
     id: 'section-view',
     template: OsciTk.templateManager.get('section'),
@@ -9,20 +8,11 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         'click #note-submit': 'noteSubmit',
         'click #cite': 'getCitation',
     },
-    initialize: function(options) {
-        
+    initialize: function() {
         _.bindAll(this, 'updateProgress');
-        console.log( this );
         // bind to window
         $(window).scroll(this.updateProgress);
         this.maxHeightSet = false;
-
-        // from MultiColumn
-        this.options = options ? options : {};
-
-        _.defaults(this.options, {
-            pageView : 'Page'
-        });
 
         // bind sectionChanged
         this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
@@ -41,15 +31,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                     uri : navItem.get('uri'),
                     id : navItem.get('id')
                 });
-
-                //console.log( 'SectionView caught cNIC' );
-
+                this.ContentId = navItem.get('id');
                 app.models.section.loadContent();
-                that.changeModel(app.models.section);
-                that.render();
-
             }
-
         });
 
         this.listenTo(Backbone, 'windowResized', function() {
@@ -75,26 +59,18 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         
         $('#loader').hide();
 
+        this.$el.html(
+            this.template( {
+                sectionTitle: this.sectionTitle,
+                sectionSubtitle: this.sectionSubtitle,
+                sectionThumbnail: this.sectionThumbnail,
+                content: $(this.content).html()
+            } )
+        );
 
-        //Allow subclasses to do something before we render
-        if (this.preRender) {
-            this.preRender();
-        }
-
-        //clean up the view incase we have already rendered this before
-        //this.model.removeAllPages();
-        //this.removeAllChildViews();
-
-        Backbone.trigger("layoutStart");
-
-        this.renderContent();
-        
-        Backbone.trigger("layoutComplete", {numPages : this.model.get('pages').length});
-        
-
+        Backbone.trigger("layoutComplete");
 
         return this;
-
     },
 
     getSectionTitles: function(sectionId) {
@@ -112,7 +88,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 $this.sectionThumbnail = item.get('thumbnail');
             }
         }, this);
-
         this.render();
     },
 
@@ -242,124 +217,5 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             $(figure).addClass(imgClass);
             $(figure).find("div > img").addClass(imgClass);
         }, this);
-    },
-    onClose: function() {
-        this.model.removeAllPages();
-    },
-    getPageForParagraphId: function(pid) {
-        var views = this.getChildViews();
-        var p = _.find(views, function(view) {
-            return view.$el.find("[data-paragraph_identifier='" + pid + "']").length !== 0;
-        });
-        if ((p !== undefined) && (p !== -1)) {
-            return _.indexOf(views, p) + 1;
-        }
-        return null;
-    },
-    getPageNumberForSelector: function(element) {
-        var page = $(element).parents(".page");
-        if (page) {
-            return page.data("page_num");
-        }
-
-        return null;
-    },
-    getPageNumberForElementId : function(id) {
-        var views = this.getChildViews();
-        var p = _.find(views, function(view) { return view.containsElementId(id); });
-        if ((p !== undefined) && (p !== -1)) {
-            return _.indexOf(views, p) + 1;
-        }
-        return null;
-    },
-    isElementVisible: function(element) {
-        return true;
-    },
-    getPageForProcessing : function(id, newTarget) {
-        var page;
-
-        //console.log( id );
-
-        if (id !== undefined) {
-            page = this.getChildViewById(id);
-        } else {
-
-            page = _.filter(this.getChildViews(), function(page){
-                return page.isPageComplete() === false;
-            });
-
-            //console.log( page );
-
-/*
-
-            if (page.length === 0) {
-                var pagesCollection = app.models.section.attributes.pages;
-
-                if( pagesCollection === null ) {
-                    pagesCollection = [{ pageNumber: 1}];
-                }else{
-                    pagesCollection.add({
-                        pageNumber: app.models.section.attributes.pages.length + 1
-                    });
-                }
-*/
-
-
-
-            if (page.length < 1) {
-
-                var pagesCollection = app.models.section.attributes.pages;
-
-                if( pagesCollection === null ) {
-                    //console.log( app.collections );
-                    pagesCollection = new OsciTk.collections.Pages();
-                }
-
-
-                //console.log( pagesCollection );
-
-                pagesCollection.add({
-                    pageNumber: pagesCollection.length + 1
-                });
-
-                page = new OsciTk.views[this.options.pageView]({
-                    model : pagesCollection.last(),
-                    pageNumber : pagesCollection.length
-                });
-
-                console.log( page );
-
-                this.addView(page, newTarget);
-
-            } else {
-                page = page.pop();
-            }
-
-
-
-        }
-
-        return page;
-    },
-    getCurrentPageView: function() {
-        // TODO: so the only possible child view of a section is a page???
-        return this.getChildViewByIndex(app.views.navigationView.page - 1);
-    },
-
-    renderContent: function() {
-        //basic layout just loads the content into a single page with scrolling
-        var pageView = this.getPageForProcessing();
-
-        //add the content to the view/model
-        pageView.addContent($(this.model.get('content')));
-
-        //render the view
-        pageView.render();
-
-        //mark processing complete (not necessary, but here for example)
-        pageView.processingComplete();
     }
-
 });
-
-
