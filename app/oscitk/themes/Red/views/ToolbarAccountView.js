@@ -1,7 +1,7 @@
 // TODO: Check if user is logged in immediately
 // Don't show the Login screen if there's a cookie / session in place
 
-OsciTk.views.Account = OsciTk.views.BaseView.extend({
+OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 	events: {
 		'click button.login': 'login',
 		'click button.register': 'register',
@@ -10,7 +10,7 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 		'click a.logout': 'logout',
 		'click #dismiss': 'closeOverlay',
 	},
-	className: 'account-view',
+	className: 'toolbar-account-view',
 	template: null,
 	initialize: function() {
 		// this.listenTo(Backbone, 'accountReady', function() {
@@ -116,16 +116,16 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 	},
 
 	showRegistrationForm: function() {
-		this.template = OsciTk.templateManager.get('account-register');
+		this.template = OsciTk.templateManager.get('toolbar-account-register');
 		//console.log( this.$el );
 		this.$el.html(this.template());
 	},
 	showLoginForm: function() {
-		this.template = OsciTk.templateManager.get('account-login');
+		this.template = OsciTk.templateManager.get('toolbar-account-login');
 		this.$el.html(this.template());
 	},
 	showProfile: function() {
-		this.template = OsciTk.templateManager.get('account-profile');
+		this.template = OsciTk.templateManager.get('toolbar-account-profile');
 		this.$el.html(this.template(this.model.toJSON()));
 	},
 	closeOverlay: function() {

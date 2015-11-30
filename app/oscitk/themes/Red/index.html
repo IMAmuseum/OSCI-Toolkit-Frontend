@@ -50,10 +50,11 @@
     <script src="../../models/FigureModel.js"></script>
     <script src="../../models/FootnoteModel.js"></script>
     <script src="../../models/NavigationItemModel.js"></script>
-    <script src="../../models/PageModel.js"></script>
     <script src="../../models/NoteModel.js"></script>
-    <script src="../../models/SectionModel.js"></script>
+    <script src="../../models/SearchResultModel.js"></script>
     <script src="../../models/AccountModel.js"></script>
+    <script src="../../models/PageModel.js"></script>
+    <script src="../../models/SectionModel.js"></script>
     <script src="../../models/GlossaryTermModel.js"></script>
 
     <!-- collections -->
@@ -63,32 +64,43 @@
     <script src="../../collections/FootnotesCollection.js"></script>
     <script src="../../collections/NotesCollection.js"></script>
     <script src="../../collections/PagesCollection.js"></script>
+    <script src="../../collections/SearchResultsCollection.js"></script>
     <script src="../../collections/GlossaryTermsCollection.js"></script>
 
     <!-- theme views -->
     <script src="views/BaseView.js"></script>
     <script src="views/AppView.js"></script>
 
+    <script src="views/HeaderView.js"></script>
+
     <script src="views/SectionView.js"></script>
+    <script src="views/PageView.js"></script>
+
+    <script src="views/MultiColumnSectionView.js"></script>
+    <script src="views/MultiColumnPageView.js"></script>
+    <script src="views/MultiColumnFigureView.js"></script>
+    <script src="views/MultiColumnFigureImageView.js"></script>
+    <script src="views/MultiColumnFigureLayeredImageView.js"></script>
+
     <script src="views/ParagraphControlsView.js"></script>
-    <script src="views/NavigationView.js"></script>
-    
     <script src="views/FootnotesView.js"></script>
 
-    <!--<script src="views/TitleView.js"></script>-->
+    <script src="views/NavigationView.js"></script>
 
-    <script src="views/HeaderView.js"></script>
     <script src="views/NavbarView.js"></script>
     <script src="views/FontSizeView.js"></script>
 
     <script src="views/ToolbarView.js"></script>
     <script src="views/ToolbarItemView.js"></script>
     
-    <script src="views/FootnotesToolbarView.js"></script>
-
-    <script src="views/TocView.js"></script>
-    <script src="views/NotesView.js"></script>
-    <script src="views/AccountView.js"></script>
+    <script src="views/ToolbarTocView.js"></script>
+    <script src="views/ToolbarSearchView.js"></script>
+    <script src="views/ToolbarGlossaryView.js"></script>
+    <script src="views/ToolbarFootnotesView.js"></script>
+    <script src="views/ToolbarFiguresView.js"></script>
+    <script src="views/ToolbarNotesView.js"></script>
+    <script src="views/ToolbarCitationsView.js"></script>
+    <script src="views/ToolbarAccountView.js"></script>
     
 
     <!--<script src="views/PrintView.js"></script>-->
@@ -118,23 +130,23 @@
                     'OsciTkNote': '/api/notes/'
                 },
                 toolbarItems: [
-                    //{view: 'closeView', text: 'close', style: 'default'},
-                    {view: 'tocView', text: 'toc', style: 'default'},
-                    /*{view: 'printView', text: 'print', style: 'inline'},*/
-                    //{view: 'searchView', text: 'search', style: 'inline'},
-                    //{view: 'glossaryView', text: 'glossary', style: 'inline'},
-                    {view: 'footnotesToolbarView', text: 'footnotes-toolbar', style: 'default'},
-                    //{view: 'figuresView', text: 'figures', style: 'inline'},
-                    {view: 'notesView', text: 'notes', style: 'default'},
-                    //{view: 'citationsView', text: 'citations', style: 'inline'},
-                    {view: 'accountView', text: 'account', style: 'default'},
+                    //{view: 'closeToolbarView', text: 'toolbar-close', style: 'default'},
+                    {view: 'tocToolbarView', text: 'toolbar-toc', style: 'default'},
+                    /*{view: 'printToolbarView', text: 'toolbar-print', style: 'default'},*/
+                    {view: 'searchToolbarView', text: 'toolbar-search', style: 'default'},
+                    {view: 'glossaryToolbarView', text: 'toolbar-glossary', style: 'default'},
+                    {view: 'footnotesToolbarView', text: 'toolbar-footnotes', style: 'default'},
+                    {view: 'figuresToolbarView', text: 'toolbar-figures', style: 'default'},
+                    {view: 'notesToolbarView', text: 'toolbar-notes', style: 'default'},
+                    //{view: 'citationsToolbarView', text: 'toolbar-citations', style: 'default'},
+                    {view: 'accountToolbarView', text: 'toolbar-account', style: 'default'},
 
 
-                    //{view: 'fontSizeView', text: 'font-size', style: 'inline'}
+                    //{view: 'fontSizeView', text: 'font-size', style: 'default'}
 
 
                 ],
-                theme: 'Simple',
+                theme: 'Red',
                 themeFeatures: {
                     "account": true,
                     "search": false,
@@ -143,7 +155,17 @@
                     "glossary": true,
                     "multicolumn": false,
                     "layeredImage": false,
-                }
+                },
+                /*
+                sectionView: 'MultiColumnSection',
+                sectionViewOptions: {
+                    minColumnWidth : 200,
+                    maxColumnWidth : 300,
+                    gutterWidth : 40,
+                    minLinesPerColumn : 5,
+                    defaultLineHeight: 16
+                },
+                */
             });
             app.run();
         });

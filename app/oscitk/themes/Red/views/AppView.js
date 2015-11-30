@@ -5,25 +5,37 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 	initialize: function() {
 		this.render();
 
+
 		app.toolbarItems = app.config.get('toolbarItems') ? app.config.get('toolbarItems') : [];
 
 		// initialize all possible views
 		app.views = {
 			//titleView: new OsciTk.views.Title(),
 			headerView: new OsciTk.views.Header(),
-			fontSizeView: new OsciTk.views.FontSize(),
+			
 			//printView: new OsciTk.views.Print(),
-			tocView: new OsciTk.views.Toc(),
-			toolbarView: new OsciTk.views.Toolbar(),
-			sectionView: new OsciTk.views.Section(),
-			navigationView: new OsciTk.views.Navigation(),
+
+			
+			//sectionView: new OsciTk.views.Section(),
 			footnotesView: new OsciTk.views.Footnotes(),
-			footnotesToolbarView: new OsciTk.views.FootnotesToolbar(),
 			paragraphControlsView: new OsciTk.views.ParagraphControls(),
-			//glossaryTooltipView: new OsciTk.views.GlossaryTooltip(),
-			notesView: new OsciTk.views.Notes(),
-			accountView: new OsciTk.views.Account(),
-			navbarView: new OsciTk.views.Navbar()
+
+			navigationView: new OsciTk.views.Navigation(),
+
+			navbarView: new OsciTk.views.Navbar(),
+			fontSizeView: new OsciTk.views.FontSize(),
+
+			toolbarView: new OsciTk.views.Toolbar(),
+			tocToolbarView: new OsciTk.views.TocToolbar(),
+			searchToolbarView: new OsciTk.views.SearchToolbar(),
+			glossaryToolbarView: new OsciTk.views.GlossaryToolbar(),
+			footnotesToolbarView: new OsciTk.views.FootnotesToolbar(),
+			figuresToolbarView: new OsciTk.views.FiguresToolbar(),
+			notesToolbarView: new OsciTk.views.NotesToolbar(),
+			citationsToolbarView: new OsciTk.views.CitationsToolbar(),
+			accountToolbarView: new OsciTk.views.AccountToolbar(),
+			
+
 		};
 
 		// Add the header view
@@ -35,8 +47,38 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		// Add the navbar view
 		this.addView(app.views.navbarView, '#navbar');
 
-		// Add Section
+
+		// Add the header view
+		app.views.sectionView = new OsciTk.views.Section(),
 		this.addView(app.views.sectionView, '#section');
+
+
+		/*
+
+		//set the default section view
+		var sectionViewClass = OsciTk.views.Section;
+
+		//allow a custom section view to be used
+		if (app.config.get('sectionView') && OsciTk.views[app.config.get('sectionView')]) {
+			sectionViewClass = OsciTk.views[app.config.get('sectionView')];
+			//console.log( sectionViewClass );
+		}
+
+		var sectionViewOptions = {};
+		if (app.config.get('sectionViewOptions')) {
+			sectionViewOptions = app.config.get('sectionViewOptions');
+		}
+
+		app.views.sectionView = new sectionViewClass(sectionViewOptions);
+		this.addView(app.views.sectionView, '#section');
+
+
+		*/
+
+
+
+
+
 
 		// Add the navigation view to the AppView
 		this.addView(app.views.navigationView, '#navigation');

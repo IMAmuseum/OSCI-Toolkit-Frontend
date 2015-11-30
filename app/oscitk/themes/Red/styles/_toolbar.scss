@@ -48,7 +48,7 @@ $toolbar-margin-bottom: 5px;
 				}
 
 
-				&.tocView-toolbar-item {
+				&.tocToolbarView-toolbar-item {
 					background-image: url(../../images/light/contents_icon.png);
 					&:hover {
 						background-image: url(../../images/light/contents_icon.png);
@@ -56,7 +56,7 @@ $toolbar-margin-bottom: 5px;
 				}
 
 				/*
-				&.printView-toolbar-item {
+				&.printToolbarView-toolbar-item {
 					background-image: url(../../images/light/print.png);
 					&:hover {
 						background-image: url(../../images/light/print.png);
@@ -64,11 +64,11 @@ $toolbar-margin-bottom: 5px;
 				}
 				*/	
 
-				&.searchView-toolbar-item {
+				&.searchToolbarView-toolbar-item {
 					background-image: url(../../images/light/search_icon.png);
 				}
 
-				&.glossaryView-toolbar-item {
+				&.glossaryToolbarView-toolbar-item {
 					background-image: url(../../images/light/glossary_icon.png);
 				}
 
@@ -76,19 +76,19 @@ $toolbar-margin-bottom: 5px;
 					background-image: url(../../images/light/footnotes_icon.png);
 				}
 
-				&.figuresView-toolbar-item {
+				&.figuresToolbarView-toolbar-item {
 					background-image: url(../../images/light/figures_icon.png);
 				}
 
-				&.notesView-toolbar-item {
+				&.notesToolbarView-toolbar-item {
 					background-image: url(../../images/light/notes_icon.png);
 				}
 
-				&.citationsView-toolbar-item {
+				&.citationsToolbarView-toolbar-item {
 					background-image: url(../../images/light/cite_icon.png);
 				}
 
-				&.accountView-toolbar-item {
+				&.accountToolbarView-toolbar-item {
 					background-image: url(../../images/light/user_icon.png);
 					&:hover {
 						background-image: url(../../images/light/user_icon.png);
@@ -165,7 +165,89 @@ $toolbar-margin-bottom: 5px;
 
 		}
 
-		#account {
+
+		#toolbar-glossary {
+
+			#glossary-filter-box {
+				color: black;
+			}
+
+			#glossary-term-listing-mobile {
+				display: none;
+			}
+
+			#glossary-content {
+
+				border-top: 1px solid white;
+				
+				p {
+					p {
+
+						span {
+
+							color: white !important;
+
+						}
+
+					}
+				}
+
+			}
+
+			@media ( max-width: 767px ) {
+
+				#glossary-term-listing {
+					display: none;
+				}
+
+				#glossary-content {
+					display: none;
+				}
+
+				#glossary-term-listing-mobile {
+					display: block;
+
+					> li {
+
+						cursor: pointer;
+						border-bottom: 1px solid white;
+						ul {
+							display: none;
+
+							p {
+								span {
+									color: white !important;
+								}
+							}
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+
+		#toolbar-figures {
+
+			position: relative;
+
+			.figure-reel {
+				overflow-y: scroll;
+				max-height: calc(100% - 54px);
+
+				figure {
+					img {
+						max-width: 75%
+					}
+				}
+
+			}
+
+		}
+
+		#toolbar-account {
 			.account-footer {
 				margin-top: 10px;
 			}

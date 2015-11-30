@@ -87,6 +87,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 return page.isPageComplete() === false;
             });
 
+            console.log( page );
+            
             if (page.length === 0) {
                 var pagesCollection = this.model.get('pages');
                 pagesCollection.add({

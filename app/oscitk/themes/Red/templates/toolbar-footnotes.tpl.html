@@ -1,5 +1,9 @@
 <h3>Footnotes</h3>
 
+<% if( items.length < 1 ) { %>
+	<p>No footnotes in this section.</p>
+<% } %>
+
 <ul>
 	<% _.each(items, function(item) { %>
 		<li>

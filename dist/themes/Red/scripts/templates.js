@@ -20,40 +20,6 @@ __p += '<h1 id="publication-title"></h1>';
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Red/templates/account-login.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<h3>Login</h3>\n\n<div class="form-error"></div>\n<form id="account-form">\n\t<div class="form-group">\n\t\t<label for="username">Username:</label>\n\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t</div>\n\t<div class="form-group">\n\t\t<label for="password">Password:</label>\n\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t</div>\n\t<button type="button" class="btn login">Log In</button>\n\t<div class="account-footer"><a href="javascript:;" class="register">Register an account</a></div>\n</form>';
-
-}
-return __p
-};
-
-this["JST"]["app/oscitk/themes/Red/templates/account-profile.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<h3>Profile</h3>\n\n\n<h4>' +
-((__t = ( username )) == null ? '' : __t) +
-'</h4>\n<h5>' +
-((__t = ( email )) == null ? '' : __t) +
-'</h5>\n<div class="account-footer"><a href="javascript:;" class="logout">Log out</a></div>\n\t\t\t\t';
-
-}
-return __p
-};
-
-this["JST"]["app/oscitk/themes/Red/templates/account-register.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<h3>Register</h3>\n\n<div class="form-error"></div>\n<form id="account-form">\n\t<div class="form-group">\n\t\t<label for="username">Username:</label>\n\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t</div>\n\t<div class="form-group">\n\t\t<label for="password">Password:</label>\n\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t</div>\n\t<div class="form-group">\n\t\t<label for="email">Email:</label>\n\t\t<input class="form-control" type="text" id="email" placeholder="Email" />\n\t</div>\n\t<button type="button" class="btn register">Register</button>\n\t<div class="account-footer"><a href="javascript:;" class="login">Already have an account?</a></div>\n</form>';
-
-}
-return __p
-};
-
 this["JST"]["app/oscitk/themes/Red/templates/app.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -133,25 +99,6 @@ __p += '<h3>Reading Settings</h3>\n<div class="font-control">\n\t<h3>Font Size</
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Red/templates/footnotes-toolbar.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
-with (obj) {
-__p += '<h3>Footnotes</h3>\n\n<ul>\n\t';
- _.each(items, function(item) { ;
-__p += '\n\t\t<li>\n\t\t\t<b>' +
-((__t = ( item.id )) == null ? '' : __t) +
-'</b><br/>' +
-((__t = ( item.title )) == null ? '' : __t) +
-'\n\t\t</li>\n\t';
- }); ;
-__p += '\n</ul>';
-
-}
-return __p
-};
-
 this["JST"]["app/oscitk/themes/Red/templates/header.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -163,6 +110,38 @@ __p += '<div class="header-title">\n\t<div class="container-fluid">\n\t\t<div cl
 ': ' +
 ((__t = ( sectionSubtitle )) == null ? '' : __t) +
 '</p>\n\t\t</div>\n\t\t<div class="pull-right">\n\t\t\t<p class="btn-menu">Menu</p>\n\t\t</div>\n\t\t<div class="pull-right hidden-xs hidden-sm">\n\t\t\t<p>Login</p>\n\t\t</div>\n\t</div>\n</div>';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Red/templates/multi-column-column.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class="column"></div>';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Red/templates/multi-column-figure.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class="figure_content"></div>\n<figcaption>' +
+((__t = ( caption )) == null ? '' : __t) +
+'</figcaption>';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Red/templates/multi-column-section.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div id="pages"></div>';
 
 }
 return __p
@@ -221,37 +200,6 @@ __p += '<textarea class="note-form-wrapper" data-paragraph_number="' +
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Red/templates/notes.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
-with (obj) {
-__p += '<h3>Notes</h3>\n<div class="notesReel">\n\t<ul class="notesList">\n\t\t';
- _.each(notes, function(note) { ;
-__p += '\n\t\t\t<li class="notesListItem">\n\t\t\t\t<div class="the-note">\n\t\t\t\t\t<span class="note-content">' +
-((__t = ( note.get('note') )) == null ? '' : __t) +
-'</span>\n\t\t\t\t</div>\n\t\t\t\t';
- if (note.get('tags').length > 0) { ;
-__p += '\n\t\t\t\t\t<div class="note-tags">\n\t                \t<span class="tags-label">tags:</span> ';
- _.each(note.get('tags'), function(tag) { ;
-__p +=
-((__t = ( tag )) == null ? '' : __t) +
-' ';
- }); ;
-__p += '\n\t                </div>\n\t\t\t\t';
- } ;
-__p += '\n\t\t\t\t<div class="note-buttons">\n\t\t\t\t\t<a href="#" class="noteLink" data-content_id="' +
-((__t = ( note.get('content_id') )) == null ? '' : __t) +
-'">Link</a>\n\t\t\t\t\t<!-- <a href="#" class="noteEdit" data-content_id="' +
-((__t = ( note.get('content_id') )) == null ? '' : __t) +
-'">Edit</a> -->\n\t\t\t\t</div>\n\t\t\t</li>\n\t\t';
- }); ;
-__p += '\n\t</ul>\n</div>';
-
-}
-return __p
-};
-
 this["JST"]["app/oscitk/themes/Red/templates/page.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -298,7 +246,210 @@ __p += '\n<hr>\n' +
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Red/templates/toc.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Red/templates/toolbar-account-login.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<h3>Login</h3>\n\n<div class="form-error"></div>\n<form id="account-form">\n\t<div class="form-group">\n\t\t<label for="username">Username:</label>\n\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t</div>\n\t<div class="form-group">\n\t\t<label for="password">Password:</label>\n\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t</div>\n\t<button type="button" class="btn login">Log In</button>\n\t<div class="account-footer"><a href="javascript:;" class="register">Register an account</a></div>\n</form>';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Red/templates/toolbar-account-profile.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<h3>Profile</h3>\n\n\n<h4>' +
+((__t = ( username )) == null ? '' : __t) +
+'</h4>\n<h5>' +
+((__t = ( email )) == null ? '' : __t) +
+'</h5>\n<div class="account-footer"><a href="javascript:;" class="logout">Log out</a></div>\n\t\t\t\t';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Red/templates/toolbar-account-register.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<h3>Register</h3>\n\n<div class="form-error"></div>\n<form id="account-form">\n\t<div class="form-group">\n\t\t<label for="username">Username:</label>\n\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t</div>\n\t<div class="form-group">\n\t\t<label for="password">Password:</label>\n\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t</div>\n\t<div class="form-group">\n\t\t<label for="email">Email:</label>\n\t\t<input class="form-control" type="text" id="email" placeholder="Email" />\n\t</div>\n\t<button type="button" class="btn register">Register</button>\n\t<div class="account-footer"><a href="javascript:;" class="login">Already have an account?</a></div>\n</form>';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Red/templates/toolbar-citations.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<h3>Citations</h3>\n';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Red/templates/toolbar-figures.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<h3>Figures</h3>\n\n<div class="figure-reel">\n\t';
+ _.each(figures, function(figure) { ;
+__p += '\n\t\t<figure data-figure-id="' +
+((__t = ( figure.id )) == null ? '' : __t) +
+'">\n\t\t\t';
+ if (figure.thumbnail_url != undefined) { ;
+__p += '\n\t\t\t\t<img class=\'figure-thumbnail\' src=\'' +
+((__t = ( figure.thumbnail_url )) == null ? '' : __t) +
+'\'/>\n\t\t\t';
+ } else { ;
+__p += '\n\t\t\t\t<div class=\'figure-thumbnail\'>&nbsp;</div>\n\t\t\t';
+ } ;
+__p += '\n\t\t\t<figcaption>' +
+((__t = ( figure.caption )) == null ? '' : __t) +
+'</figcaption>\n\t\t</figure>\n\t';
+ }); ;
+__p += '\n</div>';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Red/templates/toolbar-footnotes.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<h3>Footnotes</h3>\n\n';
+ if( items.length < 1 ) { ;
+__p += '\n\t<p>No footnotes in this section.</p>\n';
+ } ;
+__p += '\n\n<ul>\n\t';
+ _.each(items, function(item) { ;
+__p += '\n\t\t<li>\n\t\t\t<b>' +
+((__t = ( item.id )) == null ? '' : __t) +
+'</b><br/>' +
+((__t = ( item.title )) == null ? '' : __t) +
+'\n\t\t</li>\n\t';
+ }); ;
+__p += '\n</ul>';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Red/templates/toolbar-glossary-term-mobile.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<li data-tid="' +
+((__t = ( item.get('id') )) == null ? '' : __t) +
+'">\n\t' +
+((__t = ( item.get('term') )) == null ? '' : __t) +
+'\n\t<ul>\n\t\t<li class="term-description">' +
+((__t = ( item.get('definition') )) == null ? '' : __t) +
+'</li>\n\t</ul>\n</li>';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Red/templates/toolbar-glossary-term.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<li data-tid="' +
+((__t = ( item.get('id') )) == null ? '' : __t) +
+'">' +
+((__t = ( item.get('term') )) == null ? '' : __t) +
+'</li>';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Red/templates/toolbar-glossary.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<h3>Glossary</h3>\n<div id="glossary-container">\n\t<div id="glossary-sidebar">\n\t\t<div id="glossary-filter-box">\n\t\t\t<input type="text" id="glossary-filter" placeholder="Search Glossary" />\n\t\t\t<div id="glossary-filter-search-icon"></div>\n\t\t\t<div id="glossary-filter-clear"></div>\n\t\t</div>\n\t\t';
+ if (!hasResults) { ;
+__p += '\n\t\t\tNo terms found.\n\t\t';
+ } else { ;
+__p += '\n\t\t<ul id="glossary-term-listing"></ul>\n\t\t<ul id="glossary-term-listing-mobile"></ul>\n\t\t';
+ } ;
+__p += '\n\t</div>\n\t<div id="glossary-content">\n\t\t<h4></h4>\n\t\t<p></p>\n\t</div>\n</div>';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Red/templates/toolbar-item.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+
+ if (style == 'default') { ;
+__p += '\n\t<a href="javascript:;">' +
+((__t = ( text )) == null ? '' : __t) +
+'</a>\n';
+ } else { ;
+__p += '\n\t<span id="' +
+((__t = ( text )) == null ? '' : __t) +
+'"></span>\n';
+ } ;
+__p += '\n';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Red/templates/toolbar-notes.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<h3>Notes</h3>\n<div class="notesReel">\n\t<ul class="notesList">\n\t\t';
+ _.each(notes, function(note) { ;
+__p += '\n\t\t\t<li class="notesListItem">\n\t\t\t\t<div class="the-note">\n\t\t\t\t\t<span class="note-content">' +
+((__t = ( note.get('note') )) == null ? '' : __t) +
+'</span>\n\t\t\t\t</div>\n\t\t\t\t';
+ if (note.get('tags').length > 0) { ;
+__p += '\n\t\t\t\t\t<div class="note-tags">\n\t                \t<span class="tags-label">tags:</span> ';
+ _.each(note.get('tags'), function(tag) { ;
+__p +=
+((__t = ( tag )) == null ? '' : __t) +
+' ';
+ }); ;
+__p += '\n\t                </div>\n\t\t\t\t';
+ } ;
+__p += '\n\t\t\t\t<div class="note-buttons">\n\t\t\t\t\t<a href="#" class="noteLink" data-content_id="' +
+((__t = ( note.get('content_id') )) == null ? '' : __t) +
+'">Link</a>\n\t\t\t\t\t<!-- <a href="#" class="noteEdit" data-content_id="' +
+((__t = ( note.get('content_id') )) == null ? '' : __t) +
+'">Edit</a> -->\n\t\t\t\t</div>\n\t\t\t</li>\n\t\t';
+ }); ;
+__p += '\n\t</ul>\n</div>';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Red/templates/toolbar-search.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<h3>Search</h3>\n';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Red/templates/toolbar-toc.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -331,32 +482,11 @@ __p += '\n</ul>';
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Red/templates/toolbar-item.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
-with (obj) {
-
- if (style == 'default') { ;
-__p += '\n\t<a href="javascript:;">' +
-((__t = ( text )) == null ? '' : __t) +
-'</a>\n';
- } else { ;
-__p += '\n\t<span id="' +
-((__t = ( text )) == null ? '' : __t) +
-'"></span>\n';
- } ;
-__p += '\n';
-
-}
-return __p
-};
-
 this["JST"]["app/oscitk/themes/Red/templates/toolbar.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<nav class="nav nav-stacked">\n\t<ul id="toolbar-area" class=""></ul>\n\t<div id="toolbar-filler">\n\n<!--\n\t\t<p>&nbsp;</p>\n-->\n\t\t<p>Contents</p>\n<!--\n\t\t<p>Search</p>\n\t\t<p>Glossary</p>\n-->\n\t\t<p>Footnotes</p>\n<!--\t\t\n\t\t<p>Figures</p>\n-->\n\t\t<p>Notes</p>\n<!--\n\t\t<p>Citations</p>\n-->\n\t\t<p>User Profile</p>\n\n\t</div>\n\t<div id="toolbar-readout">\n\t\t<div id="toc"></div>\n\t\t<div id="search"></div>\n\t\t<div id="glossary"></div>\n\t\t<div id="footnotes-toolbar"></div>\n\t\t<div id="figures"></div>\n\t\t<div id="notes"></div>\n\t\t<div id="citations"></div>\n\t\t<div id="account"></div>\n\t</div>\n</nav>\n';
+__p += '<nav class="nav nav-stacked">\n\t<ul id="toolbar-area" class=""></ul>\n\t<div id="toolbar-filler">\n\n<!--\n\t\t<p>&nbsp;</p>\n-->\n\n\t\t<p>Contents</p>\n\t\t<p>Search</p>\n\t\t<p>Glossary</p>\n\t\t<p>Footnotes</p>\n\t\t<p>Figures</p>\n\t\t<p>Notes</p>\n\t\t<!--<p>Citations</p>-->\n\t\t<p>User Profile</p>\n\n\t</div>\n\t<div id="toolbar-readout">\n\t\t<div id="toolbar-toc"></div>\n\t\t<div id="toolbar-search"></div>\n\t\t<div id="toolbar-glossary"></div>\n\t\t<div id="toolbar-footnotes"></div>\n\t\t<div id="toolbar-figures"></div>\n\t\t<div id="toolbar-notes"></div>\n\t\t<!--<div id="toolbar-citations"></div>-->\n\t\t<div id="toolbar-account"></div>\n\t</div>\n</nav>\n';
 
 }
 return __p

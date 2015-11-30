@@ -1,10 +1,8 @@
-OsciTk.views.Toc = OsciTk.views.BaseView.extend({
-	className: 'toc-view',
-	template: OsciTk.templateManager.get('toc'),
+OsciTk.views.TocToolbar = OsciTk.views.BaseView.extend({
+	className: 'toolbar-toc-view',
+	template: OsciTk.templateManager.get('toolbar-toc'),
 	events: {
 		'click li a': 'itemClick',
-
-		//'click #dismiss': 'closeOverlay',
 
 	},
 	initialize: function() {
@@ -38,10 +36,5 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 
 	},
 
-	/*
-	closeOverlay: function() {
-		Backbone.trigger("toolbarRemoveViews");
-	}
-	*/
 
 });

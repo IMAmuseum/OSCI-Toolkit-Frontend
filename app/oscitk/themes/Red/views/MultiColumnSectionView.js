@@ -3,11 +3,17 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
     template: OsciTk.templateManager.get('multi-column-section'),
 
     initialize: function(options) {
-        this._super('initialize');
+        
+        // http://stackoverflow.com/questions/8596861/super-in-backbone
+        //console.log( OsciTk.views.Section.prototype.initialize.call() ); 
+        OsciTk.views.Section.prototype.initialize.call(this);
+
+        this.model = app.models.section;
         this.options = options;
         this.options.pageView = 'MultiColumnPage';
 
         this.listenTo(Backbone, "windowResized", function() {
+            
             //get the identifier of the first element on the page to try and keep the reader in the same location
             var identifier;
             var page = this.getChildViewByIndex(app.views.navigationView.page - 1);
@@ -22,15 +28,20 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
             }
 
             this.render();
+
         });
 
         this.listenTo(Backbone, "navigate", function(data) {
+
             var matches, refs, occurrenceCount, j;
+
             var gotoPage = 1;
             if (data.page) {
                 gotoPage = data.page;
             }
+
             else if (data.identifier) {
+
                 switch (data.identifier) {
                     case 'end':
                         gotoPage = this.model.get('pages').length;
@@ -175,8 +186,9 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
         this.calculateDimensions();
 
         //setup location to store layout housekeeping information
+        console.log( app.models.section.attributes.content );
         this.layoutData = {
-            data : this.model.get('content'),
+            data : app.models.section.attributes.content,
             items : null
         };
 

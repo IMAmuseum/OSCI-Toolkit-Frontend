@@ -1,6 +1,6 @@
 OsciTk.views.FootnotesToolbar = OsciTk.views.BaseView.extend({
-	className: 'footnotes-toolbar',
-	template: OsciTk.templateManager.get('footnotes-toolbar'),
+	className: 'toolbar-footnotes-view',
+	template: OsciTk.templateManager.get('toolbar-footnotes'),
 	events: {
 	},
 	initialize: function() {
@@ -22,14 +22,16 @@ OsciTk.views.FootnotesToolbar = OsciTk.views.BaseView.extend({
 
 			});
 
+
 			this.footnotes = fns;
+
 			this.render();
 			
 		}, this);
 
 	},
 	render: function() {
-		
+
 		this.$el.html(this.template({
 			items: this.footnotes
 		}));

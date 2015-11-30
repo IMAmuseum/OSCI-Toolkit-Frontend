@@ -1,9 +1,9 @@
 // TODO: Notes should be cleared when the user logs out
 // TODO: Notes should be retrieved for all sections, not just the currently displayed section
 
-OsciTk.views.Notes = OsciTk.views.BaseView.extend({
-	className: 'notes-view',
-	template: OsciTk.templateManager.get('notes'),
+OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
+	className: 'toolbar-notes-view',
+	template: OsciTk.templateManager.get('toolbar-notes'),
 	events: {
 		"click .noteLink": "noteLinkClick"
 	},

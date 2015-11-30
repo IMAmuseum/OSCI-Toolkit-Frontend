@@ -1,0 +1,14 @@
+<h3>Figures</h3>
+
+<div class="figure-reel">
+	<% _.each(figures, function(figure) { %>
+		<figure data-figure-id="<%= figure.id %>">
+			<% if (figure.thumbnail_url != undefined) { %>
+				<img class='figure-thumbnail' src='<%= figure.thumbnail_url %>'/>
+			<% } else { %>
+				<div class='figure-thumbnail'>&nbsp;</div>
+			<% } %>
+			<figcaption><%= figure.caption %></figcaption>
+		</figure>
+	<% }); %>
+</div>

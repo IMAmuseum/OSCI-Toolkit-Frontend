@@ -8079,22 +8079,22 @@ p, textarea {
 .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
-  background: #b82927;
+  background: #810c0b;
 }
 
-/* line 39, ../_section.scss */
+/* line 40, ../_section.scss */
 .glossary-term:hover {
   cursor: hand;
 }
 
 @media (max-width: 992px) {
-  /* line 45, ../_section.scss */
+  /* line 46, ../_section.scss */
   #section {
     padding-left: 0;
   }
 }
 @media (min-width: 992px) {
-  /* line 51, ../_section.scss */
+  /* line 52, ../_section.scss */
   .section-col {
     float: none;
   }
@@ -8255,7 +8255,7 @@ header .header-title .container .btn-menu, header .header-title .container-fluid
   width: 50px;
   height: 50px;
   /*
-  &.printView-toolbar-item {
+  &.printToolbarView-toolbar-item {
   	background-image: url(../../images/light/print.png);
   	&:hover {
   		background-image: url(../../images/light/print.png);
@@ -8268,19 +8268,19 @@ header .header-title .container .btn-menu, header .header-title .container-fluid
   background-color: #810c0b;
 }
 /* line 51, ../_toolbar.scss */
-#toolbar #toolbar-area li.toolbar-item-view.tocView-toolbar-item {
+#toolbar #toolbar-area li.toolbar-item-view.tocToolbarView-toolbar-item {
   background-image: url(../../images/light/contents_icon.png);
 }
 /* line 53, ../_toolbar.scss */
-#toolbar #toolbar-area li.toolbar-item-view.tocView-toolbar-item:hover {
+#toolbar #toolbar-area li.toolbar-item-view.tocToolbarView-toolbar-item:hover {
   background-image: url(../../images/light/contents_icon.png);
 }
 /* line 67, ../_toolbar.scss */
-#toolbar #toolbar-area li.toolbar-item-view.searchView-toolbar-item {
+#toolbar #toolbar-area li.toolbar-item-view.searchToolbarView-toolbar-item {
   background-image: url(../../images/light/search_icon.png);
 }
 /* line 71, ../_toolbar.scss */
-#toolbar #toolbar-area li.toolbar-item-view.glossaryView-toolbar-item {
+#toolbar #toolbar-area li.toolbar-item-view.glossaryToolbarView-toolbar-item {
   background-image: url(../../images/light/glossary_icon.png);
 }
 /* line 75, ../_toolbar.scss */
@@ -8288,23 +8288,23 @@ header .header-title .container .btn-menu, header .header-title .container-fluid
   background-image: url(../../images/light/footnotes_icon.png);
 }
 /* line 79, ../_toolbar.scss */
-#toolbar #toolbar-area li.toolbar-item-view.figuresView-toolbar-item {
+#toolbar #toolbar-area li.toolbar-item-view.figuresToolbarView-toolbar-item {
   background-image: url(../../images/light/figures_icon.png);
 }
 /* line 83, ../_toolbar.scss */
-#toolbar #toolbar-area li.toolbar-item-view.notesView-toolbar-item {
+#toolbar #toolbar-area li.toolbar-item-view.notesToolbarView-toolbar-item {
   background-image: url(../../images/light/notes_icon.png);
 }
 /* line 87, ../_toolbar.scss */
-#toolbar #toolbar-area li.toolbar-item-view.citationsView-toolbar-item {
+#toolbar #toolbar-area li.toolbar-item-view.citationsToolbarView-toolbar-item {
   background-image: url(../../images/light/cite_icon.png);
 }
 /* line 91, ../_toolbar.scss */
-#toolbar #toolbar-area li.toolbar-item-view.accountView-toolbar-item {
+#toolbar #toolbar-area li.toolbar-item-view.accountToolbarView-toolbar-item {
   background-image: url(../../images/light/user_icon.png);
 }
 /* line 93, ../_toolbar.scss */
-#toolbar #toolbar-area li.toolbar-item-view.accountView-toolbar-item:hover {
+#toolbar #toolbar-area li.toolbar-item-view.accountToolbarView-toolbar-item:hover {
   background-image: url(../../images/light/user_icon.png);
 }
 /* line 101, ../_toolbar.scss */
@@ -8365,8 +8365,64 @@ header .header-title .container .btn-menu, header .header-title .container-fluid
 #toolbar #toolbar-readout ul li h4, #toolbar #toolbar-readout ul li h5 {
   margin: 0px;
 }
-/* line 169, ../_toolbar.scss */
-#toolbar #toolbar-readout #account .account-footer {
+/* line 171, ../_toolbar.scss */
+#toolbar #toolbar-readout #toolbar-glossary #glossary-filter-box {
+  color: black;
+}
+/* line 175, ../_toolbar.scss */
+#toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile {
+  display: none;
+}
+/* line 179, ../_toolbar.scss */
+#toolbar #toolbar-readout #toolbar-glossary #glossary-content {
+  border-top: 1px solid white;
+}
+/* line 186, ../_toolbar.scss */
+#toolbar #toolbar-readout #toolbar-glossary #glossary-content p p span {
+  color: white !important;
+}
+@media (max-width: 767px) {
+  /* line 199, ../_toolbar.scss */
+  #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing {
+    display: none;
+  }
+  /* line 203, ../_toolbar.scss */
+  #toolbar #toolbar-readout #toolbar-glossary #glossary-content {
+    display: none;
+  }
+  /* line 207, ../_toolbar.scss */
+  #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile {
+    display: block;
+  }
+  /* line 210, ../_toolbar.scss */
+  #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile > li {
+    cursor: pointer;
+    border-bottom: 1px solid white;
+  }
+  /* line 214, ../_toolbar.scss */
+  #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile > li ul {
+    display: none;
+  }
+  /* line 218, ../_toolbar.scss */
+  #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile > li ul p span {
+    color: white !important;
+  }
+}
+/* line 232, ../_toolbar.scss */
+#toolbar #toolbar-readout #toolbar-figures {
+  position: relative;
+}
+/* line 236, ../_toolbar.scss */
+#toolbar #toolbar-readout #toolbar-figures .figure-reel {
+  overflow-y: scroll;
+  max-height: calc(100% - 54px);
+}
+/* line 241, ../_toolbar.scss */
+#toolbar #toolbar-readout #toolbar-figures .figure-reel figure img {
+  max-width: 75%;
+}
+/* line 251, ../_toolbar.scss */
+#toolbar #toolbar-readout #toolbar-account .account-footer {
   margin-top: 10px;
 }
 
@@ -8521,79 +8577,70 @@ input[type=range]:focus::-ms-fill-upper {
   background: #ccc;
 }
 
-/* line 1, ../_figures.scss */
-figure {
+/* line 3, ../_figures.scss */
+#section figure {
   margin: 20px;
 }
-
-/* line 7, ../_figures.scss */
-.figure_content img {
+/* line 9, ../_figures.scss */
+#section .figure_content img {
   border: 2px solid #f1f1f1;
 }
-
-/* line 12, ../_figures.scss */
-figcaption {
+/* line 14, ../_figures.scss */
+#section figcaption {
   background: #f1f1f1;
   padding: 4px 4px 2px 6px;
   font-size: 14px;
 }
-
-/* line 19, ../_figures.scss */
-figcaption p {
+/* line 21, ../_figures.scss */
+#section figcaption p {
   font-size: 14px;
   font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
-/* line 25, ../_figures.scss */
-figure.left {
+/* line 27, ../_figures.scss */
+#section figure.left {
   float: left;
   margin-right: 50px;
 }
-
-/* line 30, ../_figures.scss */
-img.left {
+/* line 32, ../_figures.scss */
+#section img.left {
   float: left;
   max-width: 100%;
   max-height: 50vh;
 }
-
-/* line 36, ../_figures.scss */
-figure.right {
+/* line 38, ../_figures.scss */
+#section figure.right {
   float: right;
   margin-left: 40px;
 }
-
-/* line 41, ../_figures.scss */
-img.right {
+/* line 43, ../_figures.scss */
+#section img.right {
   float: right;
   max-width: 100%;
   max-height: 50vh;
 }
-
-/* line 47, ../_figures.scss */
-figure.plate,
-figure.center {
+/* line 49, ../_figures.scss */
+#section figure.plate,
+#section figure.center {
   width: 50%;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
-/* line 53, ../_figures.scss */
-figure.plate img, figure.plate figcaption,
-figure.center img,
-figure.center figcaption {
+/* line 55, ../_figures.scss */
+#section figure.plate img, #section figure.plate figcaption,
+#section figure.center img,
+#section figure.center figcaption {
   width: 100%;
 }
 @media (max-width: 768px) {
-  /* line 47, ../_figures.scss */
-  figure.plate,
-  figure.center {
+  /* line 49, ../_figures.scss */
+  #section figure.plate,
+  #section figure.center {
     width: 90%;
   }
 }
-
-/* line 61, ../_figures.scss */
-.osci-figure {
+/* line 63, ../_figures.scss */
+#section .osci-figure {
   background: #f1f1f1;
 }
 
@@ -8622,7 +8669,7 @@ figure.center figcaption {
   max-width: 200px;
   max-height: 240px;
 }
-/* line 7, ../_paragraph-popover.scss */
+/* line 9, ../_paragraph-popover.scss */
 .popover-content textarea {
   border: none;
   font-size: 14px;
@@ -8631,13 +8678,13 @@ figure.center figcaption {
   height: 115px;
   width: 100%;
 }
-/* line 15, ../_paragraph-popover.scss */
+/* line 18, ../_paragraph-popover.scss */
 .popover-content button {
   font-size: 15px;
   font-weight: 200;
 }
 
-/* line 21, ../_paragraph-popover.scss */
+/* line 25, ../_paragraph-popover.scss */
 .tab-content {
   height: 160px;
 }
