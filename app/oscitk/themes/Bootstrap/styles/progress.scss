@@ -1,0 +1,37 @@
+progress[value] {
+  /* Positioning */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+
+  /* Dimensions */
+  width: 100%;
+  height: .25em;
+
+  /* Reset the apperance */
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+
+  /* Get rid of the default border in Firefox/Opera. */
+  border: none;
+
+  /* For Firefox/IE10+ */
+  background-color: transparent;
+
+  /* For IE10+, color of the progress bar */
+  color: red;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: transparent;
+}
+
+progress[value]::-webkit-progress-value {
+  background-color: red;
+}
+
+progress[value]::-moz-progress-bar {
+  background-color: red;
+}

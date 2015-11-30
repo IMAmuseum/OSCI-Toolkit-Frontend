@@ -1,0 +1,49 @@
+#navbar {
+    z-index: 998;
+    top: 0;
+    position: fixed;
+    width: 100%;
+
+    .nav {
+        li {
+            text-align: center;
+            width: 100%;
+
+            a {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+.navbar {
+    min-height: initial;
+}
+
+.navbar-default {
+    margin: 0;
+}
+
+#navbar-title {
+    color: #333;
+    font-size: 14px;
+
+    @media (min-width: $screen-sm) {
+        font-size: 18px;
+        float: left;
+        padding: 10px 15px 8px;
+        line-height: 1.2;
+        height: auto;
+    }
+}
+
+@media (max-width: $screen-xs) {
+    #navbar {
+        .nav {
+            li {
+                width: 100%;
+                text-align: left;
+            }
+        }
+    }
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<link rel="apple-touch-icon" href="images/icon-app-57.png">
+
+	<link rel="stylesheet" href="styles/vendor/94dbf07e.vendor.css">
+
+	<link rel="stylesheet" href="styles/3c33bbbc.main.css">
+
+	<script src="scripts/43b7e77f.vendor.js"></script>
+
+	<script src="scripts/52050e2f.main.js"></script>
+
+	<script>jQuery(function() {
+			app.bootstrap({
+				packageUrl: '/api/epub/1/package.opf',
+				templateUrls: [
+					'/osci-themes/app/oscitk/themes/MultiColumn/templates/'
+				],
+				endpoints: {
+					'OsciTkNote': '/api/notes/',
+					'OsciTkSearch': '/api/search/',
+					'OsciTkOpenSearch': '/api/opensearch/',
+					'OsciTkAccount': '/api/users/',
+					'OsciTkCitation': '/api/citations/'
+				},
+				toolbarItems: [
+					{view: 'Toc', text: 'ToC'},
+					{view: 'Notes', text: 'Notes'},
+					{view: 'Figures', text:' Figures'},
+					{view: 'Glossary', text: 'Glossary'},
+					{view: 'Search', text: 'Search'},
+					{view: 'Font', text: 'Font'},
+					{view: 'Account', text: 'Account'}
+				],
+				theme: 'MultiColumn',
+				themeFeatures: {
+					"account": true,
+					"search": true,
+					"notes": true,
+					"citations": true,
+					"glossary": true,
+					"multicolumn": true,
+					"layeredImage": true
+				},
+				sectionView: 'MultiColumnSection',
+				sectionViewOptions: {
+					minColumnWidth : 200,
+					maxColumnWidth : 300,
+					gutterWidth : 40,
+					minLinesPerColumn : 5,
+					defaultLineHeight: 16
+				},
+				paragraphControls: {
+					'toggleNoteDialog': 'note',
+					'toggleCiteDialog': 'cite'
+				}
+			});
+
+            // app.zotero.init();
+			app.run();
+		});
+	</script>
+</head>
+<body>
+
+</body>
+</html>

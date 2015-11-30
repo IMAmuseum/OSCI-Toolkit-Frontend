@@ -1,0 +1,49 @@
+.progress.vertical {
+  height: 85%;
+  position: fixed;
+  right: 40px;
+  top: 70px;
+  width: .25em;
+}
+.progress.vertical.bottom {
+  position: relative;
+}
+.progress.vertical.bottom .progressbar-front-text {
+  bottom: 0;
+  position: absolute;
+}
+.progress.vertical .progress-bar {
+  height: 0;
+  width: 100%;
+  -webkit-transition: height 0.6s ease;
+  -o-transition: height 0.6s ease;
+  transition: height 0.6s ease;
+}
+
+.progress.horizontal {
+  top: 40px;
+  height: .25em;
+  margin-bottom: 0;
+  position: fixed;
+  right: 0;
+  width: 100%;
+  z-index: 999;
+}
+.progress.horizontal.bottom {
+  position: relative;
+}
+.progress.horizontal.bottom .progressbar-front-text {
+  bottom: 0;
+  position: absolute;
+}
+.progress.horizontal .progress-bar {
+  height: 100%;
+  width: 0;
+  -webkit-transition: width 0.6s ease;
+  -o-transition: width 0.6s ease;
+  transition: width 0.6s ease;
+}
+
+.progress-bar[aria-valuenow] {
+  min-width: 0 !important;
+}

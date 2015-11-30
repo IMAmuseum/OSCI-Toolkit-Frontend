@@ -1,0 +1,31 @@
+#section-view {
+	padding-left: 40px;
+}
+
+#section {
+	padding: 20px 0 0 0;
+
+	p {
+		position: relative;
+	}
+}
+
+@media (min-width: $screen-sm) {
+	#section-view {
+		padding: 0 40px;
+	}
+
+	#section {
+		padding: 70px 40px 0 0;
+
+		&:after {
+			padding-left: 40px;
+		}
+	}
+}
+
+@media (min-width: $screen-md) {
+	.section-col {
+		float: none;
+	}
+}

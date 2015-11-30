@@ -1,0 +1,91 @@
+figure {
+   -webkit-column-break-inside:avoid;
+   -moz-column-break-inside:avoid;
+   -o-column-break-inside:avoid;
+   -ms-column-break-inside:avoid;
+   column-break-inside:avoid;
+   -webkit-break-inside:avoid;
+   -moz-break-inside:avoid;
+   -o-break-inside:avoid;
+   -ms-break-inside:avoid;
+   break-inside:avoid;
+   margin: 20px;
+   max-height: auto;
+   position: relative;
+   text-align: center;
+}
+
+.figure_content {
+   img {
+      border: 2px solid $gray-lighter;
+      max-width: 100%;
+   }
+}
+
+figcaption {
+   background: $gray-lighter;
+   font-size: 14px;
+   padding: 4px 4px 2px 6px;
+   text-align: center;
+   width: 100%;
+
+   p {
+      font-size: 14px;
+      font-family: $font-family-sans-serif;
+   }
+}
+
+// figure.left {
+//    float: left;
+//    margin-right: 50px;
+//    margin-left: 0;
+// }
+
+// img.left {
+//    float: left;
+//    max-height: 50vh;
+// }
+
+// figure.right {
+//    float: right;
+//    margin-left: 40px;
+//    margin-right: 0;
+// }
+
+// img.right {
+//    float: right;
+//    max-height: 50vh;
+// }
+
+figure.plate,
+figure.center {
+   margin-left: auto;
+   margin-right: auto;
+   max-width: 100%;
+   width: 50%;
+   img, figcaption {
+      width: 100%;
+   }
+   @media (max-width: $screen-sm) {
+      width: 90%;
+   }
+}
+
+.osci-figure {
+   background: $gray-lighter;
+}
+
+@media (min-width: $screen-sm) {
+   figure {
+      max-height: 100%;
+      overflow: auto;
+      padding-bottom: 36px;
+   }
+
+   figcaption {
+      bottom: 0;
+      position: absolute;
+      width: 100%;
+   }
+}
+

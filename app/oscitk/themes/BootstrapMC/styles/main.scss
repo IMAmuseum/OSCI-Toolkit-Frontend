@@ -1,0 +1,65 @@
+$icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+
+@import "bootstrap/bootstrap";
+@import "navigation";
+@import "progress";
+
+
+html {
+	width: 100%;
+	height: 100%;
+	clip: auto;
+	position: absolute;
+	overflow: hidden;
+}
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+footer {
+	display: block;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+	background-color: #f5f5f5;
+}
+
+#navigation {
+	margin-top: 15px;
+}
+
+#section {
+	padding-right: 40px;
+	padding-left: 40px;
+}
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+  	height: 100%;
+  	z-index: 10;
+  	background-color: rgba(0,0,0,0.9);
+}
+
+#dismiss {
+	position: fixed;
+	top: 20;
+	left: 20;
+  	z-index: 11;
+}
+
+figure,
+img {
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside:avoid;
+    column-break-inside: avoid;
+    break-inside: avoid-column;
+    display:table;
+}

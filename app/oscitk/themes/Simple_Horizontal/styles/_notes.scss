@@ -1,0 +1,42 @@
+.paragraph-controls {
+	height: 15px;
+	left: -24px;
+	position: absolute;
+	top: 3px;
+	z-index: 2;
+}
+
+.btn {
+	line-height: 1.2;
+	text-transform: uppercase;
+}
+
+.paragraph-button {
+	background-image: url(../../images/plus-grey.png);
+	background-repeat: no-repeat;
+	background-size: 15px 15px;
+	border: 0;
+	color: transparent;
+	font: 0/0 a;
+	height: 15px;
+	text-shadow: none;
+	width: 15px;
+}
+
+.withNotes {
+	background-image: url(../../images/plus-blue.png);
+}
+
+.note-submit {
+	margin-top: 10px
+}
+
+.modal-content {
+	textarea {
+		color: $text-color;
+		font-size: 14px;
+		height: 100px;
+		padding: 5px;
+		width: 100%;
+	}
+}

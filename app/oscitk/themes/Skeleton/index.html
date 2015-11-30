@@ -1,0 +1,111 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<!-- build:css(.tmp) styles/main.css -->
+	<link rel="stylesheet" href="styles/css/main.css">
+	<!-- endbuild -->
+
+    <!-- build:css styles/vendor/vendor.css -->
+    <link rel="stylesheet" href="../../../external/jquery.qtip.css">
+    <!-- endbuild -->
+
+	<!-- build:js scripts/vendor.js -->
+	<script src="../../../external/json2.js"></script>
+	<script src="../../../external/jquery.js"></script>
+	<script src="../../../external/jquery.qtip.js"></script>
+	<script src="../../../external/lodash.js"></script>
+	<script src="../../../external/backbone.js"></script>
+	<!-- endbuild -->
+
+	<!-- build:js scripts/main.js -->
+	<script src="../../OsciTk.js"></script>
+	<script src="../../Router.js"></script>
+	<script src="../../helper.js"></script>
+
+	<!-- template loader uses 'templateUrls' in config below -->
+	<script src="../../TemplateManager.js"></script>
+
+	<!-- models -->
+	<script src="../../models/BaseModel.js"></script>
+	<script src="../../models/ConfigModel.js"></script>
+	<script src="../../models/PackageModel.js"></script>
+	<script src="../../models/FigureModel.js"></script>
+	<script src="../../models/FootnoteModel.js"></script>
+	<script src="../../models/NavigationItemModel.js"></script>
+	<script src="../../models/AccountModel.js"></script>
+	<script src="../../models/PageModel.js"></script>
+	<script src="../../models/SectionModel.js"></script>
+	<script src="../../models/NoteModel.js"></script>
+
+	<!-- collections -->
+	<script src="../../collections/BaseCollection.js"></script>
+	<script src="../../collections/FiguresCollection.js"></script>
+	<script src="../../collections/NavigationItemsCollection.js"></script>
+	<script src="../../collections/FootnotesCollection.js"></script>
+	<script src="../../collections/PagesCollection.js"></script>
+	<script src="../../collections/NotesCollection.js"></script>
+
+	<!-- theme views -->
+	<script src="views/BaseView.js"></script>
+	<script src="views/AppView.js"></script>
+	<script src="views/SectionView.js"></script>
+	<script src="views/TitleView.js"></script>
+	<script src="views/ToolbarView.js"></script>
+	<script src="views/ToolbarItemView.js"></script>
+	<script src="views/FootnotesView.js"></script>
+	<script src="views/HeaderView.js"></script>
+	<script src="views/NavigationView.js"></script>
+	<script src="views/FiguresView.js"></script>
+	<script src="views/TocView.js"></script>
+	<script src="views/AccountView.js"></script>
+	<script src="views/FontView.js"></script>
+	<script src="views/FontSizeView.js"></script>
+	<script src="views/FontStyleView.js"></script>
+	<script src="views/SearchView.js"></script>
+
+	<script src="../../../appBootstrap.js"></script>
+	<!-- endbuild -->
+
+	<script>jQuery(function() {
+			app.bootstrap({
+				packageUrl: '/api/epub/1/package.opf',
+				templateUrls: [
+					'/osci-themes/app/oscitk/themes/Skeleton/templates/'
+				],
+				endpoints: {
+					'OsciTkNote': '/api/notes/',
+					'OsciTkAccount': '/api/users/'
+				},
+				toolbarItems: [
+					{view: 'tocView', text: 'toc'},
+					{view: 'figuresView', text: 'figures'},
+					{view: 'fontSizeView', text: 'font-size'},
+					{view: 'accountView', text: 'account'},
+					{view: 'searchView', text: 'search'}
+				],
+				theme: 'Skeleton',
+				themeFeatures: {
+					"account": true,
+					"search": false,
+					"notes": false,
+					"citations": false,
+					"glossary": false,
+					"multicolumn": false,
+					"layeredImage": false,
+				}
+			});
+			app.run();
+		});
+	</script>
+
+</head>
+<body>
+    <!--[if lt IE 10]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+</body>
+</html>
