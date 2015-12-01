@@ -7,7 +7,7 @@ OsciTk.views.TocToolbar = OsciTk.views.BaseView.extend({
 	},
 	initialize: function() {
 		this.listenTo(Backbone, "currentNavigationItemChanged", function() {
-			console.log( "currentNavigationItemChanged" );
+			// console.log( "currentNavigationItemChanged" );
 			this.render();
 		});
 	},

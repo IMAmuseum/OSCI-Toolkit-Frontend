@@ -35,23 +35,23 @@
                     'OsciTkNote': '/api/notes/'
                 },
                 toolbarItems: [
-                    //{view: 'closeView', text: 'close', style: 'default'},
-                    {view: 'tocView', text: 'toc', style: 'default'},
-                    /*{view: 'printView', text: 'print', style: 'inline'},*/
-                    //{view: 'searchView', text: 'search', style: 'inline'},
-                    //{view: 'glossaryView', text: 'glossary', style: 'inline'},
-                    {view: 'footnotesView', text: 'footnotes', style: 'default'},
-                    //{view: 'figuresView', text: 'figures', style: 'inline'},
-                    {view: 'notesView', text: 'notes', style: 'default'},
-                    //{view: 'citationsView', text: 'citations', style: 'inline'},
-                    {view: 'accountView', text: 'account', style: 'default'},
+                    //{view: 'closeToolbarView', text: 'toolbar-close', style: 'default'},
+                    {view: 'tocToolbarView', text: 'toolbar-toc', style: 'default'},
+                    /*{view: 'printToolbarView', text: 'toolbar-print', style: 'default'},*/
+                    {view: 'searchToolbarView', text: 'toolbar-search', style: 'default'},
+                    {view: 'glossaryToolbarView', text: 'toolbar-glossary', style: 'default'},
+                    {view: 'footnotesToolbarView', text: 'toolbar-footnotes', style: 'default'},
+                    {view: 'figuresToolbarView', text: 'toolbar-figures', style: 'default'},
+                    {view: 'notesToolbarView', text: 'toolbar-notes', style: 'default'},
+                    //{view: 'citationsToolbarView', text: 'toolbar-citations', style: 'default'},
+                    {view: 'accountToolbarView', text: 'toolbar-account', style: 'default'},
 
 
-                    //{view: 'fontSizeView', text: 'font-size', style: 'inline'}
+                    //{view: 'fontSizeView', text: 'font-size', style: 'default'}
 
 
                 ],
-                theme: 'Simple',
+                theme: 'Red',
                 themeFeatures: {
                     "account": true,
                     "search": false,
@@ -60,7 +60,17 @@
                     "glossary": true,
                     "multicolumn": false,
                     "layeredImage": false,
-                }
+                },
+                /*
+                sectionView: 'MultiColumnSection',
+                sectionViewOptions: {
+                    minColumnWidth : 200,
+                    maxColumnWidth : 300,
+                    gutterWidth : 40,
+                    minLinesPerColumn : 5,
+                    defaultLineHeight: 16
+                },
+                */
             });
             app.run();
         });

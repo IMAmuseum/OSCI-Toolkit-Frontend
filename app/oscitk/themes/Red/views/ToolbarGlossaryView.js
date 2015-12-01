@@ -10,6 +10,7 @@ OsciTk.views.GlossaryToolbar = OsciTk.views.BaseView.extend({
 	initialize: function() {
 
 		this.listenTo(Backbone, 'layoutComplete', function(params) {
+			
 			/*
 			var termLinks = app.views.sectionView.$el.find('a.glossary-term');
 
@@ -38,8 +39,11 @@ OsciTk.views.GlossaryToolbar = OsciTk.views.BaseView.extend({
 		}, this);
 	},
 	render: function() {
+
 		var that = this;
-		console.log( !_.isEmpty(app.collections.glossaryTerms.models) );
+
+		// console.log( !_.isEmpty(app.collections.glossaryTerms.models) );
+
 		this.$el.html(this.template({hasResults: !_.isEmpty(app.collections.glossaryTerms.models)}));
 
 		_.each(app.collections.glossaryTerms.models, function(item) {
