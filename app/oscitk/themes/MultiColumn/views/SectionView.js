@@ -59,6 +59,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         
         // Wrapper for render()
         this.renderContent();
+        
         Backbone.trigger("layoutComplete", {numPages : this.model.get('pages').length});
 
         return this;
@@ -145,5 +146,5 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         pageView.processingComplete();
 
     }
-    
+
 });

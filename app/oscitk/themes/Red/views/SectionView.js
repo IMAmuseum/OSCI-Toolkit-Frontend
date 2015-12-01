@@ -8,7 +8,13 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         'click #note-submit': 'noteSubmit',
         'click #cite': 'getCitation',
     },
-    initialize: function() {
+    initialize: function(options) {
+
+        this.options = options ? options : {};
+
+        _.defaults(this.options, {
+            pageView : 'Page'
+        });
 
         // bind sectionChanged
         this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
@@ -36,6 +42,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
                 // this.model is undefined unless you call this function!
                 this.changeModel(app.models.section);
+
+                // console.log( this.model );
 
                 app.models.section.loadContent();
 
@@ -88,6 +96,17 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         Backbone.trigger("layoutStart");
 
+        // Essentially a wrapper for render()
+        this.renderContent();
+
+        Backbone.trigger("layoutComplete", { numPages : this.model.get('pages').length } );
+
+        return this;
+    },
+
+   renderContent: function() {
+
+        /*
         this.$el.html(
             this.template( {
                 sectionTitle: this.sectionTitle,
@@ -96,10 +115,20 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 content: $(this.content).html()
             } )
         );
+        */
 
-        Backbone.trigger("layoutComplete", { numPages : this.model.get('pages').length } );
+        //basic layout just loads the content into a single page with scrolling
+        var pageView = this.getPageForProcessing();
 
-        return this;
+        //add the content to the view/model
+        pageView.addContent( $(this.model.get('content') ) );
+
+        //render the view
+        pageView.render();
+
+        //mark processing complete (not necessary, but here for example)
+        pageView.processingComplete();
+
     },
 
     // Garbage collection
@@ -272,7 +301,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
     },
 
-    // TODO: OVERRIDE BY MULTI-COLUMN
+     // TODO: OVERRIDE BY MULTI-COLUMN
     setFigureStyles: function() {
 
         _.each(this.figures, function(figure) {
