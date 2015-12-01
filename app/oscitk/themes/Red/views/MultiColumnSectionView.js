@@ -5,10 +5,11 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
     initialize: function(options) {
         
         // http://stackoverflow.com/questions/8596861/super-in-backbone
-        //console.log( OsciTk.views.Section.prototype.initialize.call() ); 
         OsciTk.views.Section.prototype.initialize.call(this);
 
-        this.model = app.models.section;
+
+        console.log( OsciTk.views.Section.prototype.initialize.call(this) );
+
         this.options = options;
         this.options.pageView = 'MultiColumnPage';
 

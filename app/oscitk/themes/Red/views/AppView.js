@@ -48,20 +48,15 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		this.addView(app.views.navbarView, '#navbar');
 
 
-		// Add the header view
-		app.views.sectionView = new OsciTk.views.Section(),
-		this.addView(app.views.sectionView, '#section');
 
 
-		/*
-
-		//set the default section view
+		// Set the default section view
 		var sectionViewClass = OsciTk.views.Section;
 
-		//allow a custom section view to be used
+		// Allow a custom section view to be used
+		// This is where we would define MultiColumnSectionView in config
 		if (app.config.get('sectionView') && OsciTk.views[app.config.get('sectionView')]) {
 			sectionViewClass = OsciTk.views[app.config.get('sectionView')];
-			//console.log( sectionViewClass );
 		}
 
 		var sectionViewOptions = {};
@@ -70,11 +65,16 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		}
 
 		app.views.sectionView = new sectionViewClass(sectionViewOptions);
+
+		// Add the section view
 		this.addView(app.views.sectionView, '#section');
 
-
+		/*
+		// Add the section view
+		app.views.sectionView = new OsciTk.views.Section(),
+		this.addView(app.views.sectionView, '#section');
 		*/
-
+		
 
 
 

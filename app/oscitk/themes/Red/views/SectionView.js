@@ -10,12 +10,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     },
     initialize: function() {
 
-        _.bindAll(this, 'updateProgress');
-
-        // bind to window
-        $(window).scroll(this.updateProgress);
-        this.maxHeightSet = false;
-
         // bind sectionChanged
         this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
 
@@ -54,7 +48,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // TODO: BIND THE PAGE SPLITTING INTO THIS
         this.listenTo(Backbone, 'windowResized', function() {
 
-            this.maxHeightSet = false;
             this.render();
 
         });
@@ -204,32 +197,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         return page;
     },
-
-    // TODO: DELETE ME ?
-    updateProgress: function() {
-        var value = $(window).scrollTop();
-        var offset = 400;
-        var sectionValue = value - offset;
-        $('.progress .progress-bar').attr('aria-valuenow', value);
-        if(! this.maxHeightSet) {
-            var height = $(document).height();
-            var w = window,
-                d = document,
-                e = d.documentElement,
-                g = d.getElementsByTagName("body")[0],
-                cy = g.clientHeight;
-            var max = (height-cy)-offset;
-            $('.progress .progress-bar').attr('aria-valuemax', max);
-            var percent = Math.floor((sectionValue/max)*100);
-            $('.progress .progress-bar').attr('style', 'height: '+percent+'%');
-        }
-        if (value >= offset){
-            $('.progress').removeClass('hidden');
-        } else {
-            $('.progress').addClass('hidden');
-        }
-    },
-
 
     // Add data attributes to paragraphs; used for paragraph tooltips
     makeIds: function(sectionModel) {
