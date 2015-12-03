@@ -3,16 +3,12 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     initialize: function(options) {
         this.options = options ? options : {};
 
-
-
         _.defaults(this.options, {
             pageView : 'Page'
         });
 
         // bind sectionChanged
         this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
-
-        
 
             var that = this;
 
@@ -59,8 +55,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         
         // Wrapper for render()
         this.renderContent();
-        
-        Backbone.trigger("layoutComplete", {numPages : this.model.get('pages').length});
+
+        Backbone.trigger("layoutComplete", { numPages : this.model.get('pages').length } );
 
         return this;
     },

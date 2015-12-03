@@ -34,25 +34,19 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		e.preventDefault();
 		e.stopPropagation();
 
-		// console.log( 'clicked!' );
+		this.$target = $(e.target);
+
+		// toggle active class
+		this.$target.addClass('active');
 
 		this.setActiveStates(e);
 		
 	},
-
 	setActiveStates: function(e) {
-		this.e = e;
+
+		// Shorthand
 		this.view = app.views.toolbarView;
 
-		// get the target
-		this.$target = $(e.target);
-		this.href = $(e.target).data("href");
-		this.style = $(e.target).data("style");
-
-
-
-		// toggle active class
-		this.$target.toggleClass('active');
 
 		// get true / false target is active
 		this.active = this.$target.hasClass('active');
@@ -61,8 +55,8 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		//Backbone.trigger("toolbarItemPreClick", {item : this.options.toolbarItem, active: this.active} );
 
 		// default actions only pass a
-		if(this.style != 'default') {
-			Backbone.trigger("toolbarInlineClicked", this.href);
+		if(this.$target.data("style") != 'default') {
+			Backbone.trigger("toolbarInlineClicked", this.$target.data("href") );
 		}
 
 		// get the target li for checking if true in each loop below

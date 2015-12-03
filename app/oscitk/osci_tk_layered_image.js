@@ -59,7 +59,7 @@ var LayeredImage = function(container) { // container should be a html element
     else {
         return false;
     }
-    if (org.polymaps !== undefined) {
+    if (org !== undefined && org.polymaps !== undefined) {
         this.polymaps = org.polymaps;
     }
     else {

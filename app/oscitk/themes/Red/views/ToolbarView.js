@@ -20,6 +20,20 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 
 		});
 
+		this.listenTo(Backbone, 'menuClicked', function(data) {
+
+			this.$el.parent().toggle("slide", { direction: "right" }, 350);
+			//this.$el.slideToggle();
+
+		});
+
+		this.listenTo(Backbone, 'loginClicked', function(data) {
+
+			this.$el.parent().show("slide", { direction: "right" }, 350);
+			$('.accountToolbarView-toolbar-item').click();
+
+		});
+
 		// Switch filler and readout when items are toggled
 		this.listenTo(Backbone, 'toolbarItemClicked', function(data) {
 			
@@ -58,4 +72,5 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	}
 
 });
+
 

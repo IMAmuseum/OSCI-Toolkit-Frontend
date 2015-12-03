@@ -1,9 +1,8 @@
-
-
 var storeContentId; //variable to store content id
 OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
     initialize: function(options) {
+
         // http://stackoverflow.com/questions/8596861/super-in-backbone
         OsciTk.views.Page.prototype.initialize.call(this);
 
@@ -36,6 +35,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
     onParagraphClicked: function(e) {
         if (e.target.tagName === "A") {
+
             //window.location = e.target.href;
             return true;
         }
@@ -89,6 +89,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
         this.hide();
 
+
         //size the page to fit the view window
         this.$el.css({
             width: this.parent.dimensions.innerSectionWidth,
@@ -96,6 +97,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
         });
 
         this.initializeColumns();
+
 
         //set rendered flag so that render does not get called more than once while iterating over content
         this.processingData.rendered = true;
@@ -119,6 +121,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
         var lineHeight = parseFloat(content.css("line-height"));
         var contentPosition = content.position();
 
+
         //If all of the content is overflowing the column remove it and move to next column
         if ((column.height - contentPosition.top) < lineHeight) {
             content.remove();
@@ -129,6 +132,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
         var contentHeight = content.outerHeight(true);
 
+
         //if content is a header make sure there is room for content afterwards
         if (content.is("H1, H2, H3, H4, H5, H6, H7, H8") && ((column.heightRemain - contentHeight) <= (lineHeight * 2))) {
             content.remove();
@@ -137,12 +141,15 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             return overflow;
         }
 
+
         //If offset defined (should always be negative) add it to the height of the content to get the correct top margin
         var offset = 0;
         if (column.offset < 0) {
 				offset = Math.floor(contentHeight + column.offset);
+
 				//Set the top margin
 				content.css("margin-top", "-" + offset + "px");
+
 				//remove the offset so that all items are not shifted up
             	column.offset = 0;
         }
@@ -152,6 +159,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             bottom : parseInt(content.css("margin-bottom"), 10)
         };
 
+
         //Update how much vertical height remains in the column
         var heightRemain = column.heightRemain - content.outerHeight(true);
         if (heightRemain > 0 && heightRemain < lineHeight) {
@@ -160,18 +168,23 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             heightRemain = 0;
         }
 
+
         //If we have negative height remaining, the content must be repeated in the next column
         if (heightRemain < 0) {
+
 			//figure out how many lines of the current content to show
             var visibleLines = Math.floor((column.height - contentPosition.top) / lineHeight);
+
 			// calculate new column height based on visible lines
             var newHeight = (visibleLines * lineHeight) + contentPosition.top;
             var heightDiff = column.height - newHeight;
 
             if (heightDiff > 0) {
+
                 //assign the new height to remove any partial lines of text
                 column.height = newHeight;
                 column.$el.height(newHeight + "px");
+
                 //get remaining height minus the visible lines
                 heightRemain = (heightRemain - heightDiff);
             }
@@ -181,6 +194,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             if (this.processingData.currentColumn === (this.processingData.numberOfColumns - 1)) {
                 this.processingComplete();
             }
+
 
             //If all of the content is overflowing the column remove it and move to next column
             if ((column.height - contentPosition.top) < lineHeight) {
@@ -198,11 +212,13 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
         column.heightRemain = heightRemain;
 
+
         //place a paragraph number
         if (content.is("p")) {
             var paragraphNumber = content.data("paragraph_number");
             var contentIdentifier = content.data("osci_content_id");
             var pidIsOnPage = this.$el.find(".paragraph-identifier-" + paragraphNumber);
+
 
             //add a class so we can attach global events
             content.addClass("content-paragraph");
@@ -227,11 +243,14 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
     getCurrentColumn : function(contentId) {
 		if (contentId !== undefined) {
+
 			storeContentId = contentId; //value of storeContentId should be last contentId
 		} else if (contentId === undefined) {
+
 			contentId = storeContentId; //use storeContentId if value of contentId is undefined, to avoid repetition of paragraphs
 		}
 		var previousColumnHeightRemain = null;
+
 		previousColumnHeightRemain = this.processingData.columns[this.processingData.currentColumn].heightRemain; //store previous column's remaining height
         var currentColumn = null;
         var lineHeight = parseInt(this.$el.css("line-height"), 10);
@@ -254,17 +273,22 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             }
         }
 
+
 		// if there is a negative heightRemain, if there's content left over, go through this
         if (currentColumn !== null && currentColumn.$el === null) {
             if (this.processingData.currentColumn > 0) {
+
 				//the previous column is on the same page
+
                 //currentColumn.offset =  this.processingData.columns[(this.processingData.currentColumn - 1)].heightRemain; //can't use since sometimes the previous column only contains an image, giving the wrong heightRemain value
 				currentColumn.offset = previousColumnHeightRemain;
             } else {
+
 				//the previous column is on the previous page
                 var pageNum = this.parent.getPageNumberForSelector("[data-osci_content_id='" + contentId + "']");
                 var previousPage = this.parent.getChildViewByIndex(pageNum - 1);
                 if (previousPage) {
+
 					//start with last column, and keep moving to the left until the last negative or 0 heightRemain is found or you run out of columns
 					for (var i=previousPage.processingData.columns.length - 1; i >= 0; i--) {
 						currentColumn.offset = previousPage.processingData.columns[i].heightRemain;
@@ -297,6 +321,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
         var pageFigures = this.getChildViewsByType('figure');
         var numPageFigures = pageFigures.length;
         if (numPageFigures) {
+
             //sort page figures into vertical order
             if (numPageFigures > 1) {
                 pageFigures = _.sortBy(pageFigures, function(fig) {
@@ -340,6 +365,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                         var checkHeight = elemY[0] - currentTop;
                         var adjustHeight = 0;
                         if (checkHeight === 0) {
+
                             //adjust top and height
                             adjustHeight = currentVertColumn.height - pageFigures[j].calculatedHeight - this.parent.dimensions.figureContentGutter;
                             currentTop = pageFigures[j].position.y[1] + this.parent.dimensions.figureContentGutter;
@@ -347,6 +373,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                             vertColumns[currentVertColumnIndex].height = adjustHeight;
                             heightRemain = heightRemain - pageFigures[j].calculatedHeight - this.parent.dimensions.figureContentGutter;
                         } else {
+
                             //create new vert col
                             adjustHeight = elemY[0] - currentTop;
                             vertColumns[currentVertColumnIndex].position.y = [currentTop, currentTop + adjustHeight];
@@ -367,34 +394,59 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                 }
             }
 
+
             // if (numPageFigures) {
+
             //     for (var j = 0; j < numPageFigures; j++) {
 
+
             //         var elemX = pageFigures[j].position.x;
+
             //         var elemY = pageFigures[j].position.y;
 
+
             //         if (columnPosition.x[0] < elemX[1] && columnPosition.x[1] > elemX[0] &&
+
             //             columnPosition.y[0] < elemY[1] && columnPosition.y[1] > elemY[0]
+
             //         ) {
+
             //             height = height - pageFigures[j].calculatedHeight - this.parent.dimensions.figureContentGutter;
 
+
             //             //Adjust column top offset based on vertical location of the figure
+
             //             switch (pageFigures[j].model.get("position").vertical) {
+
             //                 //top
+
             //                 case 't':
+
             //                 //fullpage
+
             //                 case 'p':
+
             //                     topPosition = topPosition + pageFigures[j].calculatedHeight + this.parent.dimensions.figureContentGutter;
+
             //                     break;
+
             //                 //bottom
+
             //                 case 'b':
+
             //                     topPosition = topPosition;
+
             //                     break;
+
             //             }
 
+
             //             columnPosition.y = [topPosition, topPosition + height];
+
             //         }
+
             //     }
+
             // }
 
             for (var k = 0, numVertCols = vertColumns.length; k < numVertCols; k++) {
@@ -430,13 +482,16 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             figureViewInstance.render();
 
             if (figureViewInstance.layoutComplete) {
+
                 //end the page if full page plate
                 if (figureViewInstance.model.get('position').horizontal === "f") {
                 	this.processingComplete();
                 }
+
                 //figure was placed
                 figurePlaced = true;
             } else {
+
                 //figure was not placed... carryover to next page
                 figurePlaced = false;
                 this.removeView(figureViewInstance, false);

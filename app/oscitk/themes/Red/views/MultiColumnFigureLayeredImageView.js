@@ -7,6 +7,7 @@ OsciTk.views.MultiColumnFigureLayeredImage = OsciTk.views.MultiColumnFigure.exte
 	// override MultiColumnFigure's events - polymaps handles events for this class
 	events: {},
 	renderContent: function(callback) {
+
 		this.figContent = this.figContent || null;
 		var container = this.$el.find(".figure_content");
 		var containerHeight = container.height();
@@ -41,6 +42,7 @@ OsciTk.views.MultiColumnFigureLayeredImage = OsciTk.views.MultiColumnFigure.exte
 				});
 			}
 		}
+		
 	},
 	renderFromContentDoc: function() {
 		var contentDiv = this.$el.find('.figure_content');

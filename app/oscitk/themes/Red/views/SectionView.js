@@ -1,8 +1,8 @@
 OsciTk.views.Section = OsciTk.views.BaseView.extend({
-    id: 'section-view',
-    template: OsciTk.templateManager.get('section'),
+    id: 'default-section-view',
+    //template: OsciTk.templateManager.get('section'),
     events: {
-        "scroll" : "updateProgress",
+        //"scroll" : "updateProgress",
         'click .content-paragraph': 'paragraphClicked',
         'click .paragraph-button': 'paragraphClicked',
         'click #note-submit': 'noteSubmit',
@@ -18,6 +18,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         // bind sectionChanged
         this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
+
+            // DEBUGGING
+            console.log( "SectionView caught currentNavigationItemChanged" );
 
             $("html, body").animate({
                 scrollTop: 0
@@ -76,14 +79,20 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         this.listenTo(Backbone, "figuresAvailable", function(figures) {
 
+            console.log( "SectionView caught figures available..." );
+
             this.figures = figures;
             this.setFigureStyles();
 
         });
 
+        return true;
     },
 
     render: function() {
+
+        // DEBUGGING
+        console.log( "SectionView rendering..." );
 
         //Allow subclasses to do something before we render
         if (this.preRender) {
@@ -116,6 +125,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             } )
         );
         */
+
+        // DEBUGGING
+        console.log( "SectionView rendering content..." );
 
         //basic layout just loads the content into a single page with scrolling
         var pageView = this.getPageForProcessing();
@@ -199,9 +211,13 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     getPageForProcessing : function(id, newTarget) {
         var page;
 
+        // Are we looking for an existing page?
         if (id !== undefined) {
+
             page = this.getChildViewById(id);
+
         } else {
+
             page = _.filter(this.getChildViews(), function(page){
                 return page.isPageComplete() === false;
             });
@@ -209,6 +225,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             //console.log( page );
             
             if (page.length === 0) {
+
                 var pagesCollection = this.model.get('pages');
                 pagesCollection.add({
                     pageNumber: this.model.get('pages').length + 1
@@ -218,9 +235,13 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                     model : pagesCollection.last(),
                     pageNumber : this.model.get('pages').length
                 });
+
                 this.addView(page, newTarget);
+
             } else {
+
                 page = page.pop();
+
             }
         }
 
@@ -301,7 +322,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
     },
 
-     // TODO: OVERRIDE BY MULTI-COLUMN
+    // TODO: OVERRIDE BY MULTI-COLUMN
     setFigureStyles: function() {
 
         _.each(this.figures, function(figure) {

@@ -82,7 +82,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             return this;
         }
 
-        this.hide();
+        //this.hide();
 
         //size the page to fit the view window
         this.$el.css({

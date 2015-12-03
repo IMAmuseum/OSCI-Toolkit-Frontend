@@ -18,6 +18,9 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 				Backbone.trigger("navigate", {page: 1});
 			}
 			this.numPages = section.numPages;
+
+			console.log( this.numPages );
+			
 			this.render();
 		});
 

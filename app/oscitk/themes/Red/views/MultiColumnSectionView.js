@@ -1,5 +1,5 @@
 OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
-
+    id: 'multi-column-section-view',
     template: OsciTk.templateManager.get('multi-column-section'),
 
     initialize: function(options) {
@@ -7,14 +7,17 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
         // http://stackoverflow.com/questions/8596861/super-in-backbone
         OsciTk.views.Section.prototype.initialize.call(this);
 
-
-        console.log( OsciTk.views.Section.prototype.initialize.call(this) );
+        // //console.log( OsciTk.views.Section.prototype.initialize.call(this) );
+        // //console.log( this.options );
 
         this.options = options;
         this.options.pageView = 'MultiColumnPage';
 
         this.listenTo(Backbone, "windowResized", function() {
             
+            // DEBUGGING
+            //console.log( "MultiColumnSectionView caught windowResize..." );
+
             //get the identifier of the first element on the page to try and keep the reader in the same location
             var identifier;
             var page = this.getChildViewByIndex(app.views.navigationView.page - 1);
@@ -34,7 +37,14 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
         this.listenTo(Backbone, "navigate", function(data) {
 
+            // DEBUGGING
+            //console.log( "MultiColumnSectionView caught navigate" );
+
             var matches, refs, occurrenceCount, j;
+
+            console.log( data );
+
+            // triggering 'navigate' can pass either page or identifier
 
             var gotoPage = 1;
             if (data.page) {
@@ -110,17 +120,25 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
             }
 
             //make the view visible
-            this.getChildViewByIndex(gotoPage - 1).show();
+            //fails when gotoPage is undefined
+
+            console.trace();
+            this.getChildViewByIndex(gotoPage).show();
+
+            //console.log( this.getChildViewByIndex(gotoPage - 1) );
 
             //calculate the page offset to move the page into view
             var offset = (gotoPage - 1) * (this.dimensions.innerSectionHeight) * -1;
 
             //TODO: add step to hide all other pages
+            // THIS IS IT!
+            console.log( pages );
             var pages = this.getChildViews();
             var numPages = pages.length;
             for(var i = 0; i < numPages; i++) {
                 if (i !== (gotoPage - 1)) {
-                    pages[i].hide();
+                    console.log( pages[i] );
+                    //pages[i].hide();
                 }
             }
 
@@ -154,6 +172,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
     },
 
     isElementVisible: function(elem) {
+
         //determine if it is visible
         var $elem = $(elem);
         var inColumn = $elem.parents(".column");
@@ -177,21 +196,29 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
     },
 
     preRender: function() {
+
+        // Undefined...?
+        // //console.log( app.views.figures );
+
         //make sure no figure views are hanging around
         app.views.figures = {};
+
     },
 
     renderContent: function() {
+
         this.$el.html(this.template());
 
         this.calculateDimensions();
+        //console.log( this.dimensions );
 
         //setup location to store layout housekeeping information
-        console.log( app.models.section.attributes.content );
         this.layoutData = {
             data : app.models.section.attributes.content,
             items : null
         };
+
+        //console.log( app.models.section.attributes.content );
 
         //remove unwanted sections & parse sections
         this.cleanData();
@@ -200,11 +227,16 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
         this.unplacedFigures = [];
 
         //if there is a plate image, make sure it gets moved to the front
-        var plateFigures = app.collections.figures.where({plate: true});
+        var plateFigures = app.collections.figures.where( { plate: true } );
+        
+        //console.log( 'plateFigures', plateFigures );
+
         if (plateFigures.length) {
+
             _.each(plateFigures, function(fig) {
                 this.unplacedFigures.push(fig.id);
             }, this);
+
         }
 
         this.layoutData.items = this.layoutData.data.length;
@@ -214,21 +246,54 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
         var paragraphNumber = 1;
         var paragraphsOnPage = 0;
         var itemsOnPage = 0;
+
+        //console.log( this.layoutData, this.unplacedFigures );
+
+        var error = 500;
+
+        //console.log( $('#pages') );
+        //console.log( this.layoutData);
+
+        //*
         while(this.layoutData.items > 0 || this.unplacedFigures.length > 0) {
-            var pageView = this.getPageForProcessing(undefined, "#pages");
+
+            // The first unplaced figure is the plate image
+            // I think the figures aren't being removed from this.layoutData
+            //console.log( this.layoutData.items, this.unplacedFigures.length );
+
+            // Exit if the loop's too big
+            error--;
+            if( error < 0 ) {
+                break;
+            }
+
+            
+            var pageView = this.getPageForProcessing( undefined, "#pages" );
+
+            // console.log( pageView );
+
             var layoutResults = null;
             var figureIds = [];
 
+            // Render page if the data has been rendered..?
             if (!pageView.processingData.rendered) {
+
                 itemsOnPage = 0;
                 paragraphsOnPage = 0;
                 pageView.render();
 
                 //load any unplaced figures
                 figureIds = figureIds.concat(this.unplacedFigures);
+
+                //console.log( 'figureIds',figureIds );
+
             }
 
             var content = $(this.layoutData.data[i]).clone();
+
+            //console.log( 'content',content );
+
+            //console.log( 'figureIds',figureIds );
 
             if (figureIds.length === 0 && content.length === 0) {
                 if (this.unplacedFigures.length) {
@@ -238,11 +303,19 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
                 }
             }
 
+            //console.log( 'figureIds',figureIds );
+
             //Process any figures in the content
             var figureLinks = content.find("a.figure_reference");
             var numFigureLinks = figureLinks.length;
             var inlineFigures = content.find("figure");
             var numinlineFigures = inlineFigures.length;
+
+            //console.log( 'figureLinks',figureLinks );
+            //console.log( 'inlineFigures',inlineFigures );
+
+            //console.log( content.is("figure") );
+
             if (content.is("figure") || numFigureLinks || numinlineFigures || figureIds.length) {
                 var j;
 
@@ -250,26 +323,49 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
                     figureIds.push(content.attr("id"));
                 }
 
+                //console.log( 'figureIds',figureIds );
                 if (numFigureLinks) {
+                    //console.log( numFigureLinks );
                     for (j = 0; j < numFigureLinks; j++) {
                         figureIds.push($(figureLinks[j]).attr("href").substring(1));
                     }
                 }
 
+                //console.log( 'figureIds',figureIds );
+
                 if (numinlineFigures) {
+                    //console.log( numinlineFigures );
                     for (j = 0; j < numinlineFigures; j++) {
                         var tempFigure = $(inlineFigures[j]).remove();
                         figureIds.push(tempFigure.attr("id"));
                     }
                 }
 
+                //console.log( 'figureIds',figureIds );
+
                 var numFigureIds = figureIds.length;
                 for (j = 0; j < numFigureIds; j++) {
+
+                    //if( this.layoutData.items == 24 )
+                    
+
                     var figure = app.collections.figures.get(figureIds[j]);
+
+
+
+                    // console.log( figure );
+
                     var figureType = figure.get('type');
                     var figureViewType = OsciTk.views.figureTypeRegistry[figureType] ? OsciTk.views.figureTypeRegistry[figureType] : OsciTk.views.figureTypeRegistry['default'];
+
+                    // MultiColumnFigureLayeredImage
+                    // console.log( figureViewType );
+
                     var figureViewInstance = this.getFigureView(figure.get('id'));
 
+                    // console.log( figureViewInstance );
+
+                    // Check if this figure has an undefined view...?
                     if (!figureViewInstance) {
                         //create instance and add it to app.views for ease of access
                         app.views.figures[figureIds[j]] = figureViewInstance = new OsciTk.views[figureViewType]({
@@ -278,17 +374,23 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
                         });
                     }
 
+                    // layout is not complete
                     if (!figureViewInstance.layoutComplete) {
+
+                        // not added
                         if (pageView.addFigure(figureViewInstance)) {
                             //figure was added to the page... restart page processing
                             layoutResults = 'figurePlaced';
+
                             var inUnplaced = _.indexOf(this.unplacedFigures, figureIds[j]);
                             if (inUnplaced > -1) {
+                                //debugger;
                                 this.unplacedFigures.splice(inUnplaced, 1);
                             }
                             break;
                         } else {
                             if (_.indexOf(this.unplacedFigures, figureIds[j]) === -1) {
+                                //debugger;
                                 this.unplacedFigures.push(figureIds[j]);
                             }
                             if (content.is("figure")) {
@@ -296,10 +398,12 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
                             }
                         }
                     } else {
+                        // content is not figure...?
                         if (content.is("figure")) {
                             layoutResults = 'next';
                         }
                     }
+
                 }
             }
 
@@ -351,6 +455,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
                     }
             }
         }
+        //*/
     },
 
     calculateDimensions: function() {
@@ -456,6 +561,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
     },
 
     cleanData: function() {
+
         //remove the figure section
         this.layoutData.data.find("#figures").remove();
 

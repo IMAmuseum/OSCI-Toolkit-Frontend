@@ -4,6 +4,10 @@
 
 OsciTk.views.Header = OsciTk.views.BaseView.extend({
 	className: 'header-view',
+	events: {
+		'click #header-menu-button': 'menuClick',
+		'click #header-login-button': 'loginClick'
+	},
 	template: OsciTk.templateManager.get('header'),
 	initialize: function() {
 		this.listenTo(Backbone, 'packageLoaded', function(packageModel) {
@@ -64,5 +68,11 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 
 
 		return this;
+	},
+	menuClick: function(){
+		Backbone.trigger('menuClicked');
+	},
+	loginClick: function() {
+		Backbone.trigger('loginClicked');
 	}
 });
