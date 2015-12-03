@@ -36,7 +36,7 @@ $toolbar-margin-bottom: 5px;
 
 				margin-bottom: $toolbar-margin-bottom;
 
-				&.toolbar-item-view {
+				
 
 					cursor: hand;
 					border: 0;
@@ -51,6 +51,10 @@ $toolbar-margin-bottom: 5px;
 
 					&.active {
 						background-color: $color-dark-red;
+					}
+
+					&.close-toolbar-item {
+						background-image: url(../../images/light/x_icon.png);
 					}
 
 
@@ -100,7 +104,7 @@ $toolbar-margin-bottom: 5px;
 							background-image: url(../../images/light/user_icon.png);
 						}
 					}
-				}
+				
 			}
 		}
 	}

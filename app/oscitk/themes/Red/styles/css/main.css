@@ -8503,9 +8503,6 @@ header .header-title .container .btn-menu, header .header-title .container-fluid
 /* line 35, ../_toolbar.scss */
 #toolbar #toolbar-view #toolbar-area li {
   margin-bottom: 5px;
-}
-/* line 39, ../_toolbar.scss */
-#toolbar #toolbar-view #toolbar-area li.toolbar-item-view {
   cursor: hand;
   border: 0;
   font: 0/0 a;
@@ -8525,50 +8522,54 @@ header .header-title .container .btn-menu, header .header-title .container-fluid
   */
 }
 /* line 52, ../_toolbar.scss */
-#toolbar #toolbar-view #toolbar-area li.toolbar-item-view.active {
+#toolbar #toolbar-view #toolbar-area li.active {
   background-color: #810c0b;
 }
-/* line 57, ../_toolbar.scss */
-#toolbar #toolbar-view #toolbar-area li.toolbar-item-view.tocToolbarView-toolbar-item {
+/* line 56, ../_toolbar.scss */
+#toolbar #toolbar-view #toolbar-area li.close-toolbar-item {
+  background-image: url(../../images/light/x_icon.png);
+}
+/* line 61, ../_toolbar.scss */
+#toolbar #toolbar-view #toolbar-area li.tocToolbarView-toolbar-item {
   background-image: url(../../images/light/contents_icon.png);
 }
-/* line 59, ../_toolbar.scss */
-#toolbar #toolbar-view #toolbar-area li.toolbar-item-view.tocToolbarView-toolbar-item:hover {
+/* line 63, ../_toolbar.scss */
+#toolbar #toolbar-view #toolbar-area li.tocToolbarView-toolbar-item:hover {
   background-image: url(../../images/light/contents_icon.png);
-}
-/* line 73, ../_toolbar.scss */
-#toolbar #toolbar-view #toolbar-area li.toolbar-item-view.searchToolbarView-toolbar-item {
-  background-image: url(../../images/light/search_icon.png);
 }
 /* line 77, ../_toolbar.scss */
-#toolbar #toolbar-view #toolbar-area li.toolbar-item-view.glossaryToolbarView-toolbar-item {
-  background-image: url(../../images/light/glossary_icon.png);
+#toolbar #toolbar-view #toolbar-area li.searchToolbarView-toolbar-item {
+  background-image: url(../../images/light/search_icon.png);
 }
 /* line 81, ../_toolbar.scss */
-#toolbar #toolbar-view #toolbar-area li.toolbar-item-view.footnotesToolbarView-toolbar-item {
-  background-image: url(../../images/light/footnotes_icon.png);
+#toolbar #toolbar-view #toolbar-area li.glossaryToolbarView-toolbar-item {
+  background-image: url(../../images/light/glossary_icon.png);
 }
 /* line 85, ../_toolbar.scss */
-#toolbar #toolbar-view #toolbar-area li.toolbar-item-view.figuresToolbarView-toolbar-item {
-  background-image: url(../../images/light/figures_icon.png);
+#toolbar #toolbar-view #toolbar-area li.footnotesToolbarView-toolbar-item {
+  background-image: url(../../images/light/footnotes_icon.png);
 }
 /* line 89, ../_toolbar.scss */
-#toolbar #toolbar-view #toolbar-area li.toolbar-item-view.notesToolbarView-toolbar-item {
-  background-image: url(../../images/light/notes_icon.png);
+#toolbar #toolbar-view #toolbar-area li.figuresToolbarView-toolbar-item {
+  background-image: url(../../images/light/figures_icon.png);
 }
 /* line 93, ../_toolbar.scss */
-#toolbar #toolbar-view #toolbar-area li.toolbar-item-view.citationsToolbarView-toolbar-item {
-  background-image: url(../../images/light/cite_icon.png);
+#toolbar #toolbar-view #toolbar-area li.notesToolbarView-toolbar-item {
+  background-image: url(../../images/light/notes_icon.png);
 }
 /* line 97, ../_toolbar.scss */
-#toolbar #toolbar-view #toolbar-area li.toolbar-item-view.accountToolbarView-toolbar-item {
+#toolbar #toolbar-view #toolbar-area li.citationsToolbarView-toolbar-item {
+  background-image: url(../../images/light/cite_icon.png);
+}
+/* line 101, ../_toolbar.scss */
+#toolbar #toolbar-view #toolbar-area li.accountToolbarView-toolbar-item {
   background-image: url(../../images/light/user_icon.png);
 }
-/* line 99, ../_toolbar.scss */
-#toolbar #toolbar-view #toolbar-area li.toolbar-item-view.accountToolbarView-toolbar-item:hover {
+/* line 103, ../_toolbar.scss */
+#toolbar #toolbar-view #toolbar-area li.accountToolbarView-toolbar-item:hover {
   background-image: url(../../images/light/user_icon.png);
 }
-/* line 108, ../_toolbar.scss */
+/* line 112, ../_toolbar.scss */
 #toolbar #toolbar-filler,
 #toolbar #toolbar-readout {
   float: left;
@@ -8577,24 +8578,24 @@ header .header-title .container .btn-menu, header .header-title .container-fluid
   max-width: calc( 100% - 50px );
   color: white;
 }
-/* line 119, ../_toolbar.scss */
+/* line 123, ../_toolbar.scss */
 #toolbar #toolbar-filler {
   background: #b82927;
 }
-/* line 122, ../_toolbar.scss */
+/* line 126, ../_toolbar.scss */
 #toolbar #toolbar-filler p {
   font-family: 'Lato', sans-serif;
   line-height: 50px;
   margin-bottom: 5px;
   margin-left: 10px;
 }
-/* line 130, ../_toolbar.scss */
+/* line 134, ../_toolbar.scss */
 #toolbar #toolbar-readout {
   display: none;
   background: #810c0b;
   padding: 15px 30px 30px 30px;
 }
-/* line 138, ../_toolbar.scss */
+/* line 142, ../_toolbar.scss */
 #toolbar #toolbar-readout h3 {
   margin: 0;
   margin-right: -30px;
@@ -8603,86 +8604,86 @@ header .header-title .container .btn-menu, header .header-title .container-fluid
   padding-bottom: 8px;
   margin-bottom: 5px;
 }
-/* line 147, ../_toolbar.scss */
+/* line 151, ../_toolbar.scss */
 #toolbar #toolbar-readout a {
   color: white;
 }
-/* line 150, ../_toolbar.scss */
+/* line 154, ../_toolbar.scss */
 #toolbar #toolbar-readout a:hover {
   color: #b82927;
   text-decoration: none;
 }
-/* line 157, ../_toolbar.scss */
+/* line 161, ../_toolbar.scss */
 #toolbar #toolbar-readout ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 163, ../_toolbar.scss */
+/* line 167, ../_toolbar.scss */
 #toolbar #toolbar-readout ul li {
   margin: 10px 0px;
 }
-/* line 167, ../_toolbar.scss */
+/* line 171, ../_toolbar.scss */
 #toolbar #toolbar-readout ul li h4, #toolbar #toolbar-readout ul li h5 {
   margin: 0px;
 }
-/* line 178, ../_toolbar.scss */
+/* line 182, ../_toolbar.scss */
 #toolbar #toolbar-readout #toolbar-glossary #glossary-filter-box {
   color: black;
 }
-/* line 182, ../_toolbar.scss */
+/* line 186, ../_toolbar.scss */
 #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile {
   display: none;
 }
-/* line 186, ../_toolbar.scss */
+/* line 190, ../_toolbar.scss */
 #toolbar #toolbar-readout #toolbar-glossary #glossary-content {
   border-top: 1px solid white;
 }
-/* line 193, ../_toolbar.scss */
+/* line 197, ../_toolbar.scss */
 #toolbar #toolbar-readout #toolbar-glossary #glossary-content p p span {
   color: white !important;
 }
 @media (max-width: 767px) {
-  /* line 206, ../_toolbar.scss */
+  /* line 210, ../_toolbar.scss */
   #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing {
     display: none;
   }
-  /* line 210, ../_toolbar.scss */
+  /* line 214, ../_toolbar.scss */
   #toolbar #toolbar-readout #toolbar-glossary #glossary-content {
     display: none;
   }
-  /* line 214, ../_toolbar.scss */
+  /* line 218, ../_toolbar.scss */
   #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile {
     display: block;
   }
-  /* line 217, ../_toolbar.scss */
+  /* line 221, ../_toolbar.scss */
   #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile > li {
     cursor: pointer;
     border-bottom: 1px solid white;
   }
-  /* line 221, ../_toolbar.scss */
+  /* line 225, ../_toolbar.scss */
   #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile > li ul {
     display: none;
   }
-  /* line 225, ../_toolbar.scss */
+  /* line 229, ../_toolbar.scss */
   #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile > li ul p span {
     color: white !important;
   }
 }
-/* line 239, ../_toolbar.scss */
+/* line 243, ../_toolbar.scss */
 #toolbar #toolbar-readout #toolbar-figures {
   position: relative;
 }
-/* line 243, ../_toolbar.scss */
+/* line 247, ../_toolbar.scss */
 #toolbar #toolbar-readout #toolbar-figures .figure-reel {
   overflow-y: scroll;
   max-height: calc(100% - 54px);
 }
-/* line 248, ../_toolbar.scss */
+/* line 252, ../_toolbar.scss */
 #toolbar #toolbar-readout #toolbar-figures .figure-reel figure img {
   max-width: 75%;
 }
-/* line 258, ../_toolbar.scss */
+/* line 262, ../_toolbar.scss */
 #toolbar #toolbar-readout #toolbar-account .account-footer {
   margin-top: 10px;
 }

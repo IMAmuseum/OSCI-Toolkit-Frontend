@@ -1,6 +1,9 @@
 OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	id: 'toolbar-view',
 	template: OsciTk.templateManager.get('toolbar'),
+	events: {
+		'click .close-toolbar-item': 'closeToolbar'
+	},
 	initialize: function() {
 		
 		// tracks the state of the content area drawer
@@ -69,6 +72,10 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 
 		}, this);
 
+	},
+	closeToolbar: function(e) {
+		console.log( this.$el.parent() );
+		this.$el.parent().hide("slide", {direction: "right"}, 350 );
 	}
 
 });
