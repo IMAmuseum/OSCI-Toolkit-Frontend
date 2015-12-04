@@ -213,7 +213,7 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += 'w<h2>' +
+__p += '<h2>' +
 ((__t = ( sectionTitle )) == null ? '' : __t) +
 '</h2>\n';
  if (typeof(sectionSubtitle) !== null) { ;
