@@ -1,0 +1,28 @@
+<% if (previousItem !== null) { %>
+<div class='prev-page corner hidden-print'>
+	<a href="#section/<%= previousItem.id %>" title="<%= previousItem.get('title') %>">
+		Previous
+	</a>
+</div>
+<% } %>
+
+<ul class="navigation-sections hidden-print">
+<% i = 0 %>
+<% _.each(sections, function(section) { %>
+ <% subtitle = section.get('subtitle') ? ' - <span class="navigation-subtitle">'+section.get('subtitle')+'</span>' : '' %>
+ <% ++i %>
+ <li class="navigation-item hidden-xs <% if (section.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } %>" data-toggle="tooltip" data-placement="bottom" title="<%= section.get('title') %>">
+   <a data-section-id="<%= section.id %>">
+     <%= i %>
+   </a>
+ </li>
+<% }); %>
+</ul>
+
+<% if (nextItem !== null) { %>
+<div class='next-page corner hidden-print'>
+	<a href="#section/<%= nextItem.id %>" title="<%= nextItem.get('title') %>">
+		Next
+	</a>
+</div>
+<% } %>

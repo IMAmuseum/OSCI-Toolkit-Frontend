@@ -132,7 +132,8 @@ module.exports = function (grunt) {
                         '*.{ico,txt}',
                         'images/{,*/}*.{webp,gif}',
                         'styles/fonts/{,*/}*.*',
-                        'oscitk.json'
+                        'oscitk.json',
+                        'templates/{,*/}*.*',
                     ]
                 }]
             }
@@ -143,18 +144,18 @@ module.exports = function (grunt) {
                     '<%= osci.dist %>/scripts/templates.js': ['<%= osci.app %>/templates/*.html']
                 }
             }
-        },
-        rev: {
-            dist: {
-                files: {
-                    src: [
-                        '<%= osci.dist %>/scripts/{,*/}*.js',
-                        '<%= osci.dist %>/styles/css/{,*/}*.css',
-                        '/styles/fonts/{,*/}*.*'
-                    ]
-                }
-            }
-        }
+        }//,
+        // rev: {
+        //     dist: {
+        //         files: {
+        //             src: [
+        //                 '<%= osci.dist %>/scripts/{,*/}*.js',
+        //                 '<%= osci.dist %>/styles/css/{,*/}*.css',
+        //                 '/styles/fonts/{,*/}*.*'
+        //             ]
+        //         }
+        //     }
+        // }
     });
 
     grunt.registerTask('build', [
@@ -182,7 +183,7 @@ module.exports = function (grunt) {
         'cssmin',
         'uglify',
         'copy',
-        'rev',
+        //'rev',
         'usemin'
     ]);
 
