@@ -469,7 +469,7 @@ this["JST"]["app/oscitk/themes/red/templates/toolbar.tpl.html"] = function(obj) 
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<nav class="nav nav-stacked">\n\t<ul id="toolbar-area" class="">\n\t\t<li class="close-toolbar-item"></li>\n\t</ul>\n\n\t<div id="toolbar-filler">\n\n\n\t\t<p>&nbsp;</p>\n\n\t\t<p>Contents</p>\n\t\t<!--<p>Search</p>-->1\n\t\t<p>Glossary</p>\n\t\t<p>Footnotes</p>\n\t\t<p>Figures</p>\n\t\t<p>Notes</p>\n\t\t<!--<p>Citations</p>-->\n\t\t<p>User Profile</p>\n\n\t</div>\n\t<div id="toolbar-readout">\n\t\t<div id="toolbar-toc"></div>\n\t\t<!--<div id="toolbar-search"></div>-->\n\t\t<div id="toolbar-glossary"></div>\n\t\t<div id="toolbar-footnotes"></div>\n\t\t<div id="toolbar-figures"></div>\n\t\t<div id="toolbar-notes"></div>\n\t\t<!--<div id="toolbar-citations"></div>-->\n\t\t<div id="toolbar-account"></div>\n\t</div>\n</nav>\n';
+__p += '<nav class="nav nav-stacked">\n\t<ul id="toolbar-area" class="">\n\t\t<li class="close-toolbar-item"></li>\n\t</ul>\n\n\t<div id="toolbar-filler">\n\n\n\t\t<p>&nbsp;</p>\n\n\t\t<p>Contents</p>\n\t\t<!--<p>Search</p>-->\n\t\t<p>Glossary</p>\n\t\t<p>Footnotes</p>\n\t\t<p>Figures</p>\n\t\t<p>Notes</p>\n\t\t<!--<p>Citations</p>-->\n\t\t<p>User Profile</p>\n\n\t</div>\n\t<div id="toolbar-readout">\n\t\t<div id="toolbar-toc"></div>\n\t\t<!--<div id="toolbar-search"></div>-->\n\t\t<div id="toolbar-glossary"></div>\n\t\t<div id="toolbar-footnotes"></div>\n\t\t<div id="toolbar-figures"></div>\n\t\t<div id="toolbar-notes"></div>\n\t\t<!--<div id="toolbar-citations"></div>-->\n\t\t<div id="toolbar-account"></div>\n\t</div>\n</nav>\n';
 
 }
 return __p

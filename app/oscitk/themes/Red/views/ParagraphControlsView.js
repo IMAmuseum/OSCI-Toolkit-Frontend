@@ -29,7 +29,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         });
 
         this.listenTo(Backbone, 'windowResized', function() {
-            Backbone.trigger('notesLoaded', 'resized');
+            //Backbone.trigger('notesLoaded', 'resized');
         });
 
     },

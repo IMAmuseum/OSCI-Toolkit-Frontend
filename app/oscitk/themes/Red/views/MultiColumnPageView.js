@@ -87,7 +87,8 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             return this;
         }
 
-        this.hide();
+        // No reason to hide the page if it's hidden by the overflow
+        //this.hide();
 
 
         //size the page to fit the view window
@@ -95,6 +96,9 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
             width: this.parent.dimensions.innerSectionWidth,
             height: this.parent.dimensions.innerSectionHeight
         });
+
+        //console.log( this.$el.css('height') );
+        //console.log( this.parent );
 
         this.initializeColumns();
 
@@ -118,9 +122,9 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
         var content = $(this.getContentById(contentId));
         column.$el.append(content);
 
+
         var lineHeight = parseFloat(content.css("line-height"));
         var contentPosition = content.position();
-
 
         //If all of the content is overflowing the column remove it and move to next column
         if ((column.height - contentPosition.top) < lineHeight) {
@@ -173,7 +177,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
         if (heightRemain < 0) {
 
 			//figure out how many lines of the current content to show
-            var visibleLines = Math.floor((column.height - contentPosition.top) / lineHeight);
+            var visibleLines = Math.max( 1, Math.floor((column.height - contentPosition.top) / lineHeight) - 3 );
 
 			// calculate new column height based on visible lines
             var newHeight = (visibleLines * lineHeight) + contentPosition.top;
@@ -187,6 +191,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
                 //get remaining height minus the visible lines
                 heightRemain = (heightRemain - heightDiff);
+
             }
 
             overflow = 'contentOverflow';
@@ -214,7 +219,9 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
 
         //place a paragraph number
+        /*
         if (content.is("p")) {
+
             var paragraphNumber = content.data("paragraph_number");
             var contentIdentifier = content.data("osci_content_id");
             var pidIsOnPage = this.$el.find(".paragraph-identifier-" + paragraphNumber);
@@ -237,6 +244,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                 this.paragraphControlsViews.push(pcv);
             }
         }
+        */
 
         return overflow;
     },
@@ -250,11 +258,14 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 			contentId = storeContentId; //use storeContentId if value of contentId is undefined, to avoid repetition of paragraphs
 		}
 		var previousColumnHeightRemain = null;
-
-		previousColumnHeightRemain = this.processingData.columns[this.processingData.currentColumn].heightRemain; //store previous column's remaining height
+        
+        //store previous column's remaining height
         var currentColumn = null;
+
+		previousColumnHeightRemain = this.processingData.columns[this.processingData.currentColumn].heightRemain;
+
         var lineHeight = parseInt(this.$el.css("line-height"), 10);
-        lineHeight = lineHeight ? lineHeight : this.parent.options.defaultLineHeight;
+            lineHeight = lineHeight ? lineHeight : this.parent.options.defaultLineHeight;
         var minColHeight =  lineHeight * this.parent.dimensions.minLinesPerColumn;
         if (this.processingData.columns[this.processingData.currentColumn] &&
             this.processingData.columns[this.processingData.currentColumn].heightRemain > 0 &&
@@ -301,7 +312,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
 
             var columnCss = {
                 width : this.parent.dimensions.columnWidth + "px",
-                height : currentColumn.height + "px",
+                height : Math.floor(currentColumn.height) + "px",
                 left : this.processingData.columns[this.processingData.currentColumn].position.left,
                 top : this.processingData.columns[this.processingData.currentColumn].position.top
             };
@@ -372,6 +383,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                             vertColumns[currentVertColumnIndex].position.y = [currentTop, currentTop + adjustHeight];
                             vertColumns[currentVertColumnIndex].height = adjustHeight;
                             heightRemain = heightRemain - pageFigures[j].calculatedHeight - this.parent.dimensions.figureContentGutter;
+
                         } else {
 
                             //create new vert col
@@ -389,6 +401,7 @@ OsciTk.views.MultiColumnPage = OsciTk.views.Page.extend({
                                 },
                                 height: heightRemain
                             });
+
                         }
                     }
                 }

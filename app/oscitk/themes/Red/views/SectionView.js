@@ -59,7 +59,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // TODO: BIND THE PAGE SPLITTING INTO THIS
         this.listenTo(Backbone, 'windowResized', function() {
 
-            this.render();
+            //this.render();
 
         });
 

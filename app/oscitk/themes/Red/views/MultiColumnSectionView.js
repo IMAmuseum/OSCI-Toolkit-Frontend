@@ -17,7 +17,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
             
             // DEBUGGING
             //console.log( "MultiColumnSectionView caught windowResize..." );
-
+            /*
             //get the identifier of the first element on the page to try and keep the reader in the same location
             var identifier;
             var page = this.getChildViewByIndex(app.views.navigationView.page - 1);
@@ -32,6 +32,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
             }
 
             this.render();
+            */
 
         });
 
@@ -123,7 +124,8 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
             //fails when gotoPage is undefined
 
             console.trace();
-            this.getChildViewByIndex(gotoPage).show();
+            console.log( gotoPage );
+            //this.getChildViewByIndex(gotoPage).show();
 
             //console.log( this.getChildViewByIndex(gotoPage - 1) );
 
@@ -132,11 +134,14 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
             //TODO: add step to hide all other pages
             // THIS IS IT!
+
             console.log( pages );
+
             var pages = this.getChildViews();
             var numPages = pages.length;
             for(var i = 0; i < numPages; i++) {
                 if (i !== (gotoPage - 1)) {
+
                     console.log( pages[i] );
                     //pages[i].hide();
                 }
@@ -510,7 +515,8 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
         };
 
         //determine the correct height for the section container to eliminate scrolling
-        dimensions.outerSectionHeight = windowHeight - dimensions.sectionMargin.top - dimensions.sectionMargin.bottom;
+        //dimensions.outerSectionHeight = windowHeight - dimensions.sectionMargin.top - dimensions.sectionMargin.bottom;
+        dimensions.outerSectionHeight = this.$el.parent().outerWidth();
         dimensions.innerSectionHeight = dimensions.outerSectionHeight - dimensions.sectionPadding.top - dimensions.sectionPadding.bottom;
 
         //determine the correct width for the section container
@@ -584,6 +590,7 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
         //chunk the data into managable parts
         this.layoutData.data = finalItems;
+
     },
 
     getFigureView: function(figureId) {

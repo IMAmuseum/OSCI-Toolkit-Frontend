@@ -33,7 +33,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 				this.$el.css("visibility", "visible");
 			}
         } else {
-            this.$el.css("visibility", "hidden");
+            //this.$el.css("visibility", "hidden");
         }
     },
     render: function() {
@@ -68,7 +68,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
 
         //if element shouold not be visible on the page, hide it and return
         if (modelData.position.vertical === "n") {
-          	this.$el.css("visibility", "hidden");
+          	//this.$el.css("visibility", "hidden");
             return true;
         }
 

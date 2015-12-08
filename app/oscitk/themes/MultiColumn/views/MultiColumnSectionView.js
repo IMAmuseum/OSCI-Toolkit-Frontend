@@ -422,8 +422,6 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
             dimensions.columnsPerPage = dimensions.columnsPerPage - 1;
         }
 
-        dimensions.columnsPerPage = 2;
-
         //If we ended up with no columns, force it to one column
         if (dimensions.columnsPerPage === 0) {
             dimensions.columnsPerPage = 1;
@@ -446,9 +444,11 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
 
         this.dimensions = dimensions;
+
         //set the height of the container
         //dont need this if styled correctly I think
         //this.$el.height(dimensions.pageHeight);
+
     },
 
     cleanData: function() {
