@@ -59,6 +59,17 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // TODO: BIND THE PAGE SPLITTING INTO THIS
         this.listenTo(Backbone, 'windowResized', function() {
 
+            // Set maximum height on figures to make sure they don't overflow their columns
+            var sh = $('#section').height();
+            $('figure').each( function( i, e ) {
+                var $e = $(e);
+                    $e.css('max-height', sh );
+
+                var ch = $e.find('figcaption').height();
+                    $e.find('.figure_content,object,img').css('max-height',sh - ch);
+            });
+
+
             //this.render();
 
         });

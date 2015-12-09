@@ -2,7 +2,7 @@
 
 .container {
 
-	overflow: hidden;
+	//overflow: hidden;
 	margin-top: 15px;
 	margin-bottom: 15px;
 
@@ -16,6 +16,7 @@
 	-webkit-columns: 2 300px;
 	   -moz-columns: 2 300px;
 	        columns: 2 300px;
+
 	-webkit-column-gap: 40px;
 	   -moz-column-gap: 40px;
 	        column-gap: 40px;
@@ -29,26 +30,39 @@
 
 	}
 
+	figure,
+	figure .figure_content,
+	figure .figure_content object,
+	figure .figure_content object img {
+
+		-webkit-column-break-inside: avoid;		/* Chrome, Safari */
+	    page-break-inside: avoid;				/* Theoretically FF 20+ */
+	    break-inside: avoid-column;				/* IE 11 */
+	    //display:table;						/* Actually FF 20+ */
+
+	    float: none !important;
+	    display: block;
+
+	    max-width: 100%;
+
+	}
+
     figure {
-    	
-	    -webkit-column-break-inside: avoid; /* Chrome, Safari */
-	    page-break-inside: avoid;           /* Theoretically FF 20+ */
-	    break-inside: avoid-column;         /* IE 11 */
-	    display:table;                      /* Actually FF 20+ */
+    	max-height: 741px;
 
-		&, .figure_content {
-		    max-height: 100%;
-		    position: relative;
+		.figure_content {
+			max-height: 711px;
+
+		    object {
+    			max-height: 711px;
+
+			    img {
+			    	max-height: 711px;
+			    }
+			}
+
 		}
-
-	    img {
-	    	max-height: 100%;
-	    }
-
-    	width: 100%;
-    	display: block;
-    	float: none;
-    	
+    	    	
     }
 
 }
@@ -61,17 +75,15 @@
 	
 	top: -5px;
 	
-	width:15px;
-	height:15px;
+	width: 15px;
+	height: 15px;
 	
-	border-radius:50%;
+	border-radius: 50%;
 	
-	font-size:12px;
-	
-	color:#fff;
-	
-	line-height:15px;
-	text-align:center;
+	color: #fff;
+	font-size: 12px;
+	line-height: 15px;
+	text-align: center;
 	
 	background: $color-light-red;
 	

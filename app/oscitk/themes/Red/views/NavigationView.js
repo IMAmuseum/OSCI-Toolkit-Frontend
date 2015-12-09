@@ -12,18 +12,23 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		// when section is loaded, render the navigation control
 		this.listenTo(Backbone, 'layoutComplete', function(section) {
+
 			if (this.identifier) {
+
 				Backbone.trigger("navigate", {identifier: this.identifier});
 				this.identifier = null;
-			}
-			else {
+
+			} else {
+
 				Backbone.trigger("navigate", {page: 1});
+
 			}
 
 			// VERIFY THIS
 			this.numPages = section.numPages;
 
 			this.render();
+
 		});
 
 		// bind routedTo

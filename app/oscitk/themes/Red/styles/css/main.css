@@ -8052,7 +8052,6 @@ p, textarea {
 
 /* line 3, ../_section.scss */
 .container {
-  overflow: hidden;
   margin-top: 15px;
   margin-bottom: 15px;
 }
@@ -8068,38 +8067,46 @@ p, textarea {
   -moz-column-gap: 40px;
   column-gap: 40px;
 }
-/* line 23, ../_section.scss */
+/* line 24, ../_section.scss */
 #section #section-view {
   padding-left: 40px;
   padding-right: 40px;
   padding-top: 30px;
   padding-bottom: 30px;
 }
-/* line 32, ../_section.scss */
-#section figure {
+/* line 33, ../_section.scss */
+#section figure,
+#section figure .figure_content,
+#section figure .figure_content object,
+#section figure .figure_content object img {
   -webkit-column-break-inside: avoid;
   /* Chrome, Safari */
   page-break-inside: avoid;
   /* Theoretically FF 20+ */
   break-inside: avoid-column;
   /* IE 11 */
-  display: table;
-  /* Actually FF 20+ */
-  width: 100%;
+  float: none !important;
   display: block;
-  float: none;
+  max-width: 100%;
 }
-/* line 39, ../_section.scss */
-#section figure, #section figure .figure_content {
-  max-height: 100%;
-  position: relative;
+/* line 50, ../_section.scss */
+#section figure {
+  max-height: 741px;
 }
-/* line 44, ../_section.scss */
-#section figure img {
-  max-height: 100%;
+/* line 53, ../_section.scss */
+#section figure .figure_content {
+  max-height: 711px;
+}
+/* line 56, ../_section.scss */
+#section figure .figure_content object {
+  max-height: 711px;
+}
+/* line 59, ../_section.scss */
+#section figure .figure_content object img {
+  max-height: 711px;
 }
 
-/* line 56, ../_section.scss */
+/* line 70, ../_section.scss */
 .footnote-reference {
   margin: 0 5px;
   display: inline-block;
@@ -8108,32 +8115,32 @@ p, textarea {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  font-size: 12px;
   color: #fff;
+  font-size: 12px;
   line-height: 15px;
   text-align: center;
   background: #b82927;
 }
-/* line 78, ../_section.scss */
+/* line 90, ../_section.scss */
 .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
   background: #810c0b;
 }
 
-/* line 87, ../_section.scss */
+/* line 99, ../_section.scss */
 .glossary-term:hover {
   cursor: hand;
 }
 
 @media (max-width: 992px) {
-  /* line 93, ../_section.scss */
+  /* line 105, ../_section.scss */
   #section {
     padding-left: 0;
   }
 }
 @media (min-width: 992px) {
-  /* line 99, ../_section.scss */
+  /* line 111, ../_section.scss */
   .section-col {
     float: none;
   }
@@ -8394,18 +8401,27 @@ header .header-title .container h1, header .header-title .container p, header .h
 /* line 38, ../_header.scss */
 header .header-title .container h1, header .header-title .container-fluid h1 {
   font-weight: 700;
+  height: 27px;
 }
-/* line 44, ../_header.scss */
+@media (max-width: 991px) {
+  /* line 38, ../_header.scss */
+  header .header-title .container h1, header .header-title .container-fluid h1 {
+    width: calc(100% - 102px );
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+/* line 52, ../_header.scss */
 header .header-title .container .section-title:before, header .header-title .container-fluid .section-title:before {
   content: "<";
   margin-right: 10px;
 }
-/* line 49, ../_header.scss */
+/* line 57, ../_header.scss */
 header .header-title .container .section-title:after, header .header-title .container-fluid .section-title:after {
   content: ">";
   margin-left: 10px;
 }
-/* line 55, ../_header.scss */
+/* line 63, ../_header.scss */
 header .header-title .container .btn-menu, header .header-title .container-fluid .btn-menu {
   padding-left: 40px;
   background-image: url("../../images/dark/menu_icon.png");

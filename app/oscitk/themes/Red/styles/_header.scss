@@ -37,6 +37,14 @@ header {
 
 			h1 {
 				font-weight: 700;
+				height: 27px;
+
+				@media( max-width: 991px ) {
+					width: calc(100% - 102px );
+					text-overflow: ellipsis;
+					overflow: hidden;
+				}
+
 			}
 
 			.section-title {
