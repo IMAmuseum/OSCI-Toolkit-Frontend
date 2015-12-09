@@ -1406,7 +1406,7 @@ html {
 
 /* line 27, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_scaffolding.scss */
 body {
-  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.42857;
   color: #333333;
@@ -8026,7 +8026,7 @@ button.close {
 }
 /* line 1, ../_typography.scss */
 p, textarea {
-  font-family: Merriweather, Georgia, "Times New Roman", Times, serif;
+  font-family: "Lora", Georgia, "Times New Roman", Times, serif;
 }
 
 /* line 5, ../_typography.scss */
@@ -8037,7 +8037,7 @@ p, textarea {
 /* line 9, ../_typography.scss */
 .tooltip {
   font-size: 14px;
-  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /* line 1, ../_browsehappy.scss */
@@ -8067,11 +8067,38 @@ p, textarea {
   -moz-column-gap: 40px;
   column-gap: 40px;
 }
-/* line 25, ../_section.scss */
+/* line 15, ../_section.scss */
+#section h1 {
+  font-family: 'Lora', serif;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #3c3c3c;
+}
+/* line 29, ../_section.scss */
+#section h3 {
+  font-family: 'Lora', serif;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 40px;
+  text-align: center;
+  margin-bottom: 16px;
+  color: #3c3c3c;
+}
+/* line 43, ../_section.scss */
+#section p {
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  line-height: 29px;
+  margin-bottom: 16px;
+  color: #3c3c3c;
+}
+/* line 64, ../_section.scss */
 #section #section-view {
   padding: 30px 40px;
 }
-/* line 29, ../_section.scss */
+/* line 68, ../_section.scss */
 #section figure,
 #section figure .figure_content,
 #section figure .figure_content object,
@@ -8086,25 +8113,25 @@ p, textarea {
   display: block;
   max-width: 100%;
 }
-/* line 46, ../_section.scss */
+/* line 85, ../_section.scss */
 #section figure {
   max-height: 741px;
   margin: auto auto;
 }
-/* line 49, ../_section.scss */
+/* line 88, ../_section.scss */
 #section figure .figure_content {
   max-height: 711px;
 }
-/* line 52, ../_section.scss */
+/* line 91, ../_section.scss */
 #section figure .figure_content object {
   max-height: 711px;
 }
-/* line 55, ../_section.scss */
+/* line 94, ../_section.scss */
 #section figure .figure_content object img {
   max-height: 711px;
 }
 
-/* line 66, ../_section.scss */
+/* line 105, ../_section.scss */
 .footnote-reference {
   margin: 0 5px;
   display: inline-block;
@@ -8119,26 +8146,26 @@ p, textarea {
   text-align: center;
   background: #b82927;
 }
-/* line 86, ../_section.scss */
+/* line 125, ../_section.scss */
 .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
   background: #810c0b;
 }
 
-/* line 95, ../_section.scss */
+/* line 134, ../_section.scss */
 .glossary-term:hover {
   cursor: hand;
 }
 
 @media (max-width: 992px) {
-  /* line 101, ../_section.scss */
+  /* line 140, ../_section.scss */
   #section {
     padding-left: 0;
   }
 }
 @media (min-width: 992px) {
-  /* line 107, ../_section.scss */
+  /* line 146, ../_section.scss */
   .section-col {
     float: none;
   }
@@ -8704,7 +8731,7 @@ input[type=range]:focus::-ms-fill-upper {
 /* line 22, ../_figures.scss */
 #section #default-section-view figcaption p {
   font-size: 14px;
-  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 /* line 28, ../_figures.scss */
 #section #default-section-view figure.left {

@@ -8,8 +8,47 @@
 
 }
 
-// TODO: Move this to _figures.scss
+// TODO: Move some of this to _figures.scss
 #section {
+
+	// Chapter #
+	h1 {
+
+		font-family: 'Lora', serif;
+
+		font-size: 14px;
+		line-height: 16px;
+
+		text-align: center;
+		text-transform: uppercase;
+
+		color: #3c3c3c;
+	}
+
+	// Chapter Title
+	h3 {
+		font-family: 'Lora', serif;
+		font-weight: 700;
+
+		font-size: 36px;
+		line-height: 40px;
+
+		text-align: center;
+		
+		margin-bottom: 16px;
+		color: #3c3c3c;
+	}
+
+	// Body copy
+	p {
+		font-family: 'Lora', serif;
+
+		font-size: 16px;
+		line-height: 29px;
+		
+		margin-bottom: 16px;
+		color: #3c3c3c;
+	}
 
 	width: 100%;
 	height: calc(100% - 30px);
