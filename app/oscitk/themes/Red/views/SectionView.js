@@ -62,13 +62,22 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             // Set maximum height on figures to make sure they don't overflow their columns
             var sh = $('#section').height();
             $('figure').each( function( i, e ) {
+
+                // set max-height of figure equal to #section height
                 var $e = $(e);
                     $e.css('max-height', sh );
 
-                var ch = $e.find('figcaption').height();
-                    $e.find('.figure_content,object,img').css('max-height',sh - ch);
-            });
+                var $c = $e.find('figcaption');
 
+                // account for the figcaption when setting max height of inner elements
+                var ch = $c.outerHeight();
+                    $e.find('.figure_content,object,img').css('max-height', sh - ch);
+
+                // now, constrain the width of the figure caption
+                var iw = $e.find('img').outerWidth();
+                    $c.css('max-width', iw );
+
+            });
 
             //this.render();
 

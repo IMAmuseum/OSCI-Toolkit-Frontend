@@ -103,7 +103,7 @@ this["JST"]["app/oscitk/themes/red/templates/header.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="header-title">\n\t<div class="container-fluid">\n\t\t<div class="pull-left">\n\t\t\t<h1 class="publication-title">' +
+__p += '<div class="header-title">\n\t<div class="container-fluid">\n\t\t<div class="pull-left" id="publication-title-container">\n\t\t\t<h1 class="publication-title">' +
 ((__t = ( title )) == null ? '' : __t) +
 '</h1>\n\t\t</div>\n\t\t<div class="pull-left hidden-xs hidden-sm">\n\t\t\t<p class="section-title">' +
 ((__t = ( sectionTitle )) == null ? '' : __t) +

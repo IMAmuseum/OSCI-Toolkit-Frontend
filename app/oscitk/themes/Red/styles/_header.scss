@@ -23,6 +23,8 @@ header {
 		.container, .container-fluid {
 			padding-top: 15px;
 			padding-bottom: 10px;
+			height: 52px;
+
 
 			h1, p {
 				margin: 0;
@@ -34,19 +36,9 @@ header {
 				font-family: 'Lato', sans-serif;
 
 			}
-
+			
 			h1 {
 				font-weight: 700;
-
-				/*
-				height: 27px;
-				@media( max-width: 991px ) {
-					width: calc(100% - 102px );
-					text-overflow: ellipsis;
-					overflow: hidden;
-				}
-				*/
-
 			}
 
 			.section-title {
@@ -67,6 +59,17 @@ header {
 				background-image: url("../../images/dark/menu_icon.png");
 				background-repeat: no-repeat;
 			}
+
+			@media( max-width: 991px ) {
+
+				#publication-title-container, h1 {
+					width: calc(100% - 102px);
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+				}
+			}
+
 		}
 	}
 

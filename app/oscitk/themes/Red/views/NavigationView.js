@@ -6,7 +6,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// console.log( this.id );
 		// returns navigation-view
 
-		//set some defaults
+		// set some defaults
 		this.identifier = null;
 		this.currentNavigationItem = null;
 
@@ -40,10 +40,11 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		this.listenTo(Backbone, 'routedToSection', function(params) {
 
 			console.log('NavigationView caught routedToSection');
+			console.log( params ); // Object {section_id: "2", identifier: "end"}
 
 			this.identifier = params.identifier;
 
-			if (!params.section_id) {
+			if( !params.section_id ) {
 
 				// go to first section
 				var sectionId = app.collections.navigationItems.at(0).id;

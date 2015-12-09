@@ -8052,7 +8052,6 @@ p, textarea {
 
 /* line 3, ../_section.scss */
 .container {
-  overflow: hidden;
   margin-top: 15px;
   margin-bottom: 15px;
 }
@@ -8090,6 +8089,7 @@ p, textarea {
 /* line 46, ../_section.scss */
 #section figure {
   max-height: 741px;
+  margin: auto auto;
 }
 /* line 49, ../_section.scss */
 #section figure .figure_content {
@@ -8153,7 +8153,7 @@ p, textarea {
   right: 40px;
   height: 30px;
 }
-/* line 10, ../_navigation.scss */
+/* line 11, ../_navigation.scss */
 #navigation .header {
   width: 100%;
   text-align: center;
@@ -8161,174 +8161,71 @@ p, textarea {
   top: 10px;
   color: #666;
 }
-/* line 17, ../_navigation.scss */
+/* line 18, ../_navigation.scss */
 #navigation .header:hover {
   color: #333;
 }
-/* line 22, ../_navigation.scss */
+/* line 23, ../_navigation.scss */
 #navigation .prev-page.side {
   left: 0;
-  text-align: center;
 }
-/* line 27, ../_navigation.scss */
-#navigation .next-page.side {
-  right: 0;
-  text-align: center;
-}
-/* line 32, ../_navigation.scss */
-#navigation .side .indicator {
-  position: absolute;
-  top: 50%;
-  /*text-align: center;*/
-  text-indent: 100%;
-  overflow: hidden;
-  height: 28px;
-  width: 40px;
-}
-/* line 42, ../_navigation.scss */
+/* line 26, ../_navigation.scss */
 #navigation .prev-page.side .indicator {
   background: url("../../images/icon-nav-arrow-left.png") no-repeat center top;
-  opacity: .4;
 }
-/* line 47, ../_navigation.scss */
+/* line 32, ../_navigation.scss */
+#navigation .next-page.side {
+  right: 0;
+}
+/* line 35, ../_navigation.scss */
 #navigation .next-page.side .indicator {
   background: url("../../images/icon-nav-arrow-right.png") no-repeat center top;
-  opacity: .4;
 }
-/* line 51, ../_navigation.scss */
-#navigation .next-page.side:hover .indicator,
-#navigation .prev-page.side:hover .indicator {
-  opacity: 1;
-}
-/* line 56, ../_navigation.scss */
+/* line 41, ../_navigation.scss */
 #navigation .side {
   position: fixed;
   top: 0;
   height: 100%;
-  color: #ccc;
-  cursor: pointer;
   width: 40px;
+  cursor: pointer;
+  background-color: white;
+  color: #ccc;
+  text-align: center;
 }
-/* line 64, ../_navigation.scss */
+/* line 55, ../_navigation.scss */
 #navigation .side:hover {
   color: #888;
 }
-/* line 68, ../_navigation.scss */
+/* line 58, ../_navigation.scss */
+#navigation .side:hover .indicator {
+  opacity: 1;
+}
+/* line 63, ../_navigation.scss */
 #navigation .side.inactive {
   display: none;
 }
-/* line 75, ../_navigation.scss */
-#navigation #navigation .side.inactive {
-  display: none;
-}
-/* line 79, ../_navigation.scss */
-#navigation #navigation .prev-page.corner {
+/* line 67, ../_navigation.scss */
+#navigation .side .indicator {
   position: absolute;
   top: 50%;
-  left: 0;
+  text-indent: 100%;
+  overflow: hidden;
+  height: 28px;
+  width: 40px;
+  opacity: 0.4;
 }
-/* line 85, ../_navigation.scss */
-#navigation #navigation .next-page.corner {
-  position: absolute;
-  top: 50%;
-  right: 0;
-}
-/* line 91, ../_navigation.scss */
-#navigation #navigation .corner {
-  cursor: pointer;
-}
-/* line 95, ../_navigation.scss */
-#navigation #navigation .label {
-  text-align: center;
-  text-transform: uppercase;
-  color: #52808C;
-  font-size: 10px;
-  line-height: 15px;
-  opacity: .4;
-}
-/* line 104, ../_navigation.scss */
-#navigation #navigation .corner:hover label {
-  opacity: 1;
-}
-/* line 106, ../_navigation.scss */
-#navigation #navigation .button {
-  height: 6px;
-  width: 100px;
-}
-/* line 111, ../_navigation.scss */
-#navigation #navigation .corner.inactive {
-  display: none;
-}
-/* line 115, ../_navigation.scss */
-#navigation .prev-page .button {
-  background: url("../../images/bg-pager-arrow-prev.png") no-repeat left -6px #A8C0C5;
-}
-/* line 118, ../_navigation.scss */
-#navigation .next-page .button {
-  background: url("../../images/bg-pager-arrow-next.png") no-repeat right -6px #A8C0C5;
-}
-/* line 121, ../_navigation.scss */
-#navigation .prev-page:hover .button {
-  background: url("../../images/bg-pager-arrow-prev.png") no-repeat left top #52818C;
-}
-/* line 124, ../_navigation.scss */
-#navigation .next-page:hover .button {
-  background: url("../../images/bg-pager-arrow-next.png") no-repeat right top #52818C;
-}
-/* line 127, ../_navigation.scss */
-#navigation .corner.inactive.prev-page .button {
-  background: url("../../images/bg-pager-arrow-prev.png") no-repeat left -12px #eee !important;
-}
-/* line 130, ../_navigation.scss */
-#navigation .corner.inactive.next-page .button {
-  background: url("../../images/bg-pager-arrow-next.png") no-repeat right -12px #eee !important;
-}
-/* line 134, ../_navigation.scss */
-#navigation .pager {
-  position: absolute;
-  bottom: -6px;
-  right: 100px;
-  left: 100px;
-  height: 6px;
-  background-color: #ddd;
-  /*border-radius: 5px;	*/
-  margin: 0 20px;
-}
-/* line 147, ../_navigation.scss */
-#navigation .head {
-  position: absolute;
-  left: 33%;
-  width: 33%;
-  height: 6px;
-  top: 0;
-  background-color: #333;
-  /*border: 1px solid black;*/
-}
-@media (max-width: 600px) {
-  /* line 158, ../_navigation.scss */
-  #navigation .next-page.corner {
+@media (max-width: 800px) {
+  /* line 41, ../_navigation.scss */
+  #navigation .side {
     display: none;
-  }
-  /* line 161, ../_navigation.scss */
-  #navigation .prev-page.corner {
-    display: none;
-  }
-  /* line 164, ../_navigation.scss */
-  #navigation .pager {
-    left: 0;
-    right: 0;
   }
 }
 
-/* line 173, ../_navigation.scss */
+/* line 92, ../_navigation.scss */
 *.unselectable {
   -moz-user-select: none;
   -khtml-user-select: none;
   -webkit-user-select: none;
-  /*
-    Introduced in IE 10.
-    See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
-  */
   -ms-user-select: none;
   user-select: none;
 }
@@ -8386,8 +8283,9 @@ header .header-title {
 header .header-title .container, header .header-title .container-fluid {
   padding-top: 15px;
   padding-bottom: 10px;
+  height: 52px;
 }
-/* line 27, ../_header.scss */
+/* line 29, ../_header.scss */
 header .header-title .container h1, header .header-title .container p, header .header-title .container-fluid h1, header .header-title .container-fluid p {
   margin: 0;
   padding: 0px 15px;
@@ -8396,33 +8294,34 @@ header .header-title .container h1, header .header-title .container p, header .h
   line-height: 1.5;
   font-family: 'Lato', sans-serif;
 }
-/* line 38, ../_header.scss */
+/* line 40, ../_header.scss */
 header .header-title .container h1, header .header-title .container-fluid h1 {
   font-weight: 700;
-  /*
-  height: 27px;
-  @media( max-width: 991px ) {
-  	width: calc(100% - 102px );
-  	text-overflow: ellipsis;
-  	overflow: hidden;
-  }
-  */
 }
-/* line 54, ../_header.scss */
+/* line 46, ../_header.scss */
 header .header-title .container .section-title:before, header .header-title .container-fluid .section-title:before {
   content: "<";
   margin-right: 10px;
 }
-/* line 59, ../_header.scss */
+/* line 51, ../_header.scss */
 header .header-title .container .section-title:after, header .header-title .container-fluid .section-title:after {
   content: ">";
   margin-left: 10px;
 }
-/* line 65, ../_header.scss */
+/* line 57, ../_header.scss */
 header .header-title .container .btn-menu, header .header-title .container-fluid .btn-menu {
   padding-left: 40px;
   background-image: url("../../images/dark/menu_icon.png");
   background-repeat: no-repeat;
+}
+@media (max-width: 991px) {
+  /* line 65, ../_header.scss */
+  header .header-title .container #publication-title-container, header .header-title .container h1, header .header-title .container-fluid #publication-title-container, header .header-title .container-fluid h1 {
+    width: calc(100% - 102px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 
 /* line 3, ../_toolbar.scss */

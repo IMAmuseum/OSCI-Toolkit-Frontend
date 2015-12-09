@@ -2,7 +2,7 @@
 
 .container {
 
-	overflow: hidden;
+	//overflow: hidden;
 	margin-top: 15px;
 	margin-bottom: 15px;
 
@@ -45,7 +45,7 @@
 
     figure {
     	max-height: 741px;
-
+    	margin: auto auto;  // ensures that the figure takes up the entire page
 		.figure_content {
 			max-height: 711px;
 
