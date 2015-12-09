@@ -8052,11 +8052,12 @@ p, textarea {
 
 /* line 3, ../_section.scss */
 .container {
+  overflow: hidden;
   margin-top: 15px;
   margin-bottom: 15px;
 }
 
-/* line 11, ../_section.scss */
+/* line 12, ../_section.scss */
 #section {
   width: 100%;
   height: calc(100% - 30px);
@@ -8067,14 +8068,11 @@ p, textarea {
   -moz-column-gap: 40px;
   column-gap: 40px;
 }
-/* line 24, ../_section.scss */
+/* line 25, ../_section.scss */
 #section #section-view {
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding: 30px 40px;
 }
-/* line 33, ../_section.scss */
+/* line 29, ../_section.scss */
 #section figure,
 #section figure .figure_content,
 #section figure .figure_content object,
@@ -8089,24 +8087,24 @@ p, textarea {
   display: block;
   max-width: 100%;
 }
-/* line 50, ../_section.scss */
+/* line 46, ../_section.scss */
 #section figure {
   max-height: 741px;
 }
-/* line 53, ../_section.scss */
+/* line 49, ../_section.scss */
 #section figure .figure_content {
   max-height: 711px;
 }
-/* line 56, ../_section.scss */
+/* line 52, ../_section.scss */
 #section figure .figure_content object {
   max-height: 711px;
 }
-/* line 59, ../_section.scss */
+/* line 55, ../_section.scss */
 #section figure .figure_content object img {
   max-height: 711px;
 }
 
-/* line 70, ../_section.scss */
+/* line 66, ../_section.scss */
 .footnote-reference {
   margin: 0 5px;
   display: inline-block;
@@ -8121,26 +8119,26 @@ p, textarea {
   text-align: center;
   background: #b82927;
 }
-/* line 90, ../_section.scss */
+/* line 86, ../_section.scss */
 .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
   background: #810c0b;
 }
 
-/* line 99, ../_section.scss */
+/* line 95, ../_section.scss */
 .glossary-term:hover {
   cursor: hand;
 }
 
 @media (max-width: 992px) {
-  /* line 105, ../_section.scss */
+  /* line 101, ../_section.scss */
   #section {
     padding-left: 0;
   }
 }
 @media (min-width: 992px) {
-  /* line 111, ../_section.scss */
+  /* line 107, ../_section.scss */
   .section-col {
     float: none;
   }
@@ -8401,27 +8399,26 @@ header .header-title .container h1, header .header-title .container p, header .h
 /* line 38, ../_header.scss */
 header .header-title .container h1, header .header-title .container-fluid h1 {
   font-weight: 700;
+  /*
   height: 27px;
-}
-@media (max-width: 991px) {
-  /* line 38, ../_header.scss */
-  header .header-title .container h1, header .header-title .container-fluid h1 {
-    width: calc(100% - 102px );
-    text-overflow: ellipsis;
-    overflow: hidden;
+  @media( max-width: 991px ) {
+  	width: calc(100% - 102px );
+  	text-overflow: ellipsis;
+  	overflow: hidden;
   }
+  */
 }
-/* line 52, ../_header.scss */
+/* line 54, ../_header.scss */
 header .header-title .container .section-title:before, header .header-title .container-fluid .section-title:before {
   content: "<";
   margin-right: 10px;
 }
-/* line 57, ../_header.scss */
+/* line 59, ../_header.scss */
 header .header-title .container .section-title:after, header .header-title .container-fluid .section-title:after {
   content: ">";
   margin-left: 10px;
 }
-/* line 63, ../_header.scss */
+/* line 65, ../_header.scss */
 header .header-title .container .btn-menu, header .header-title .container-fluid .btn-menu {
   padding-left: 40px;
   background-image: url("../../images/dark/menu_icon.png");

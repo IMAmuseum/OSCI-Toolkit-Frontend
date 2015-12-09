@@ -2,12 +2,13 @@
 
 .container {
 
-	//overflow: hidden;
+	overflow: hidden;
 	margin-top: 15px;
 	margin-bottom: 15px;
 
 }
 
+// TODO: Move this to _figures.scss
 #section {
 
 	width: 100%;
@@ -22,12 +23,7 @@
 	        column-gap: 40px;
 
 	#section-view {
-
-		padding-left: 40px;
-		padding-right: 40px;
-		padding-top: 30px;
-		padding-bottom: 30px;
-
+		padding: 30px 40px;
 	}
 
 	figure,

@@ -3,6 +3,9 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('navigation'),
 	initialize: function() {
 
+		// console.log( this.id );
+		// returns navigation-view
+
 		//set some defaults
 		this.identifier = null;
 		this.currentNavigationItem = null;
@@ -12,6 +15,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		// when section is loaded, render the navigation control
 		this.listenTo(Backbone, 'layoutComplete', function(section) {
+
+			console.log('NavigationView caught layoutComplete');
 
 			if (this.identifier) {
 
@@ -33,38 +38,51 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		// bind routedTo
 		this.listenTo(Backbone, 'routedToSection', function(params) {
+
+			console.log('NavigationView caught routedToSection');
+
 			this.identifier = params.identifier;
+
 			if (!params.section_id) {
+
 				// go to first section
 				var sectionId = app.collections.navigationItems.at(0).id;
 				this.setCurrentNavigationItem(sectionId);
 				app.router.navigate("section/" + sectionId, {trigger: false});
-			}
-			else {
+
+			} else {
+
 				// go to section_id
 				this.setCurrentNavigationItem(params.section_id);
+
 			}
 
 			// set the document title | section name
 			this.setDocumentTitle();
 
-
-
 		});
 
 		this.listenTo(Backbone, 'pageChanged', function(info) {
+
+			console.log('NavigationView caught pageChanged');
+
 			// clear old identifier in url
 			// app.router.navigate("section/" + previous.id + "/end");
 			this.page = info.page;
 			this.update(info.page);
+
 		});
 
 
 		// Respond to keyboard events
 		$(document).keydown(function(event) {
-			var p;
+
+			var p; // temp var used to determine target page
+
 			switch(event.which) {
+
 				case 39:
+
 					// Right arrow navigates to next page
 					p = app.views.navigationView.page + 1;
 					if (p > app.views.navigationView.numPages) {
@@ -75,8 +93,11 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 					} else {
 						Backbone.trigger('navigate', {page: p});
 					}
+
 				break;
+
 				case 37:
+
 					// Left arrow navigates to previous page
 					p = app.views.navigationView.page - 1;
 					if (p < 1) {
@@ -87,7 +108,9 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 					} else {
 						Backbone.trigger('navigate', {page: p});
 					}
+
 				break;
+
 			}
 
 		});
