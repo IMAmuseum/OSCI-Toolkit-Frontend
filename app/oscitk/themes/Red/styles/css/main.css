@@ -8077,10 +8077,12 @@ p, textarea {
 }
 /* line 32, ../_section.scss */
 #section img {
+  -webkit-column-break-inside: avoid;
+  break-inside: avoid-column;
   width: 100%;
 }
 
-/* line 38, ../_section.scss */
+/* line 42, ../_section.scss */
 .footnote-reference {
   margin: 0 5px;
   display: inline-block;
@@ -8095,26 +8097,26 @@ p, textarea {
   text-align: center;
   background: #b82927;
 }
-/* line 60, ../_section.scss */
+/* line 64, ../_section.scss */
 .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
   background: #810c0b;
 }
 
-/* line 69, ../_section.scss */
+/* line 73, ../_section.scss */
 .glossary-term:hover {
   cursor: hand;
 }
 
 @media (max-width: 992px) {
-  /* line 75, ../_section.scss */
+  /* line 79, ../_section.scss */
   #section {
     padding-left: 0;
   }
 }
 @media (min-width: 992px) {
-  /* line 81, ../_section.scss */
+  /* line 85, ../_section.scss */
   .section-col {
     float: none;
   }
