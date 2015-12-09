@@ -29,12 +29,26 @@
 
 	}
 
-    img {
+    figure {
     	
-    	 -webkit-column-break-inside: avoid;
-    					break-inside: avoid-column;
+	    -webkit-column-break-inside: avoid; /* Chrome, Safari */
+	    page-break-inside: avoid;           /* Theoretically FF 20+ */
+	    break-inside: avoid-column;         /* IE 11 */
+	    display:table;                      /* Actually FF 20+ */
+
+		&, .figure_content {
+		    max-height: 100%;
+		    position: relative;
+		}
+
+	    img {
+	    	max-height: 100%;
+	    }
 
     	width: 100%;
+    	display: block;
+    	float: none;
+    	
     }
 
 }
