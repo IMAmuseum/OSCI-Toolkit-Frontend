@@ -8050,18 +8050,37 @@ p, textarea {
   text-align: center;
 }
 
-/* line 1, ../_section.scss */
-#section-view {
-  padding-left: 40px;
+/* line 3, ../_section.scss */
+.container {
+  overflow: hidden;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
-/* line 5, ../_section.scss */
+/* line 11, ../_section.scss */
 #section {
+  width: 100%;
+  height: calc(100% - 30px);
+  -webkit-columns: 2 300px;
+  -moz-columns: 2 300px;
+  columns: 2 300px;
+  -webkit-column-gap: 40px;
+  -moz-column-gap: 40px;
+  column-gap: 40px;
+}
+/* line 23, ../_section.scss */
+#section #section-view {
   padding-left: 40px;
-  font-size: 14px;
+  padding-right: 40px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+/* line 32, ../_section.scss */
+#section img {
+  width: 100%;
 }
 
-/* line 10, ../_section.scss */
+/* line 38, ../_section.scss */
 .footnote-reference {
   margin: 0 5px;
   display: inline-block;
@@ -8076,114 +8095,30 @@ p, textarea {
   text-align: center;
   background: #b82927;
 }
-/* line 32, ../_section.scss */
+/* line 60, ../_section.scss */
 .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
   background: #810c0b;
 }
 
-/* line 41, ../_section.scss */
+/* line 69, ../_section.scss */
 .glossary-term:hover {
   cursor: hand;
 }
 
 @media (max-width: 992px) {
-  /* line 47, ../_section.scss */
+  /* line 75, ../_section.scss */
   #section {
     padding-left: 0;
   }
 }
 @media (min-width: 992px) {
-  /* line 53, ../_section.scss */
+  /* line 81, ../_section.scss */
   .section-col {
     float: none;
   }
 }
-/* line 1, ../_section-multi-column.scss */
-#section {
-  width: 100%;
-  height: 100%;
-}
-/* line 6, ../_section-multi-column.scss */
-#section #multi-column-section-view {
-  margin: 60px 40px;
-  overflow: hidden;
-  padding: 20px 20px 20px 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: block;
-}
-/* line 18, ../_section-multi-column.scss */
-#section #multi-column-section-view img {
-  max-width: none;
-}
-/* line 22, ../_section-multi-column.scss */
-#section #multi-column-section-view #pages {
-  line-height: 1.5em !important;
-}
-/* line 26, ../_section-multi-column.scss */
-#section #multi-column-section-view #pages .page {
-  margin: 0;
-  position: relative;
-  overflow: hidden;
-}
-/* line 31, ../_section-multi-column.scss */
-#section #multi-column-section-view #pages .page figure {
-  position: absolute;
-}
-/* line 34, ../_section-multi-column.scss */
-#section #multi-column-section-view #pages .page figure .figure_content {
-  overflow: hidden;
-}
-/* line 38, ../_section-multi-column.scss */
-#section #multi-column-section-view #pages .page figure figcaption {
-  padding-top: 10px;
-  color: #999;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
-}
-/* line 44, ../_section-multi-column.scss */
-#section #multi-column-section-view #pages .page figure figcaption p {
-  display: inline;
-}
-/* line 52, ../_section-multi-column.scss */
-#section #multi-column-section-view #pages .page .column {
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-}
-/* line 60, ../_section-multi-column.scss */
-#section #multi-column-section-view #pages .page .column h1, #section #multi-column-section-view #pages .page .column h2, #section #multi-column-section-view #pages .page .column h3, #section #multi-column-section-view #pages .page .column h4, #section #multi-column-section-view #pages .page .column h5 {
-  margin-bottom: 1em;
-}
-/* line 64, ../_section-multi-column.scss */
-#section #multi-column-section-view #pages .page .column p {
-  text-align: justify;
-  margin: 0 0 1.5em 0;
-}
-
-/*
-.paragraph-controls {
-	position: absolute;
-	width: 40px;
-	height: 40px;
-	padding: 5px 10px 0 0;
-	text-align: right;
-	font-size: 80%;
-}
-*/
-/* line 91, ../_section-multi-column.scss */
-.figure_reference {
-  white-space: nowrap;
-}
-
 /* line 1, ../_navigation.scss */
 #navigation {
   font-family: sans-serif;
@@ -8194,8 +8129,7 @@ p, textarea {
   right: 40px;
   height: 30px;
 }
-
-/* line 11, ../_navigation.scss */
+/* line 10, ../_navigation.scss */
 #navigation .header {
   width: 100%;
   text-align: center;
@@ -8203,25 +8137,21 @@ p, textarea {
   top: 10px;
   color: #666;
 }
-
-/* line 18, ../_navigation.scss */
+/* line 17, ../_navigation.scss */
 #navigation .header:hover {
   color: #333;
 }
-
-/* line 20, ../_navigation.scss */
+/* line 22, ../_navigation.scss */
 #navigation .prev-page.side {
   left: 0;
   text-align: center;
 }
-
-/* line 25, ../_navigation.scss */
+/* line 27, ../_navigation.scss */
 #navigation .next-page.side {
   right: 0;
   text-align: center;
 }
-
-/* line 31, ../_navigation.scss */
+/* line 32, ../_navigation.scss */
 #navigation .side .indicator {
   position: absolute;
   top: 50%;
@@ -8231,25 +8161,22 @@ p, textarea {
   height: 28px;
   width: 40px;
 }
-
-/* line 40, ../_navigation.scss */
+/* line 42, ../_navigation.scss */
 #navigation .prev-page.side .indicator {
   background: url("../../images/icon-nav-arrow-left.png") no-repeat center top;
   opacity: .4;
 }
-
-/* line 45, ../_navigation.scss */
+/* line 47, ../_navigation.scss */
 #navigation .next-page.side .indicator {
   background: url("../../images/icon-nav-arrow-right.png") no-repeat center top;
   opacity: .4;
 }
-
-/* line 49, ../_navigation.scss */
-#navigation .next-page.side:hover .indicator, #navigation .prev-page.side:hover .indicator {
+/* line 51, ../_navigation.scss */
+#navigation .next-page.side:hover .indicator,
+#navigation .prev-page.side:hover .indicator {
   opacity: 1;
 }
-
-/* line 53, ../_navigation.scss */
+/* line 56, ../_navigation.scss */
 #navigation .side {
   position: fixed;
   top: 0;
@@ -8258,38 +8185,36 @@ p, textarea {
   cursor: pointer;
   width: 40px;
 }
-
-/* line 62, ../_navigation.scss */
+/* line 64, ../_navigation.scss */
 #navigation .side:hover {
   color: #888;
 }
-
-/* line 66, ../_navigation.scss */
+/* line 68, ../_navigation.scss */
 #navigation .side.inactive {
   display: none;
 }
-
-/* line 70, ../_navigation.scss */
-#navigation .prev-page.corner {
+/* line 75, ../_navigation.scss */
+#navigation #navigation .side.inactive {
+  display: none;
+}
+/* line 79, ../_navigation.scss */
+#navigation #navigation .prev-page.corner {
   position: absolute;
   top: 50%;
   left: 0;
 }
-
-/* line 76, ../_navigation.scss */
-#navigation .next-page.corner {
+/* line 85, ../_navigation.scss */
+#navigation #navigation .next-page.corner {
   position: absolute;
   top: 50%;
   right: 0;
 }
-
-/* line 82, ../_navigation.scss */
-#navigation .corner {
+/* line 91, ../_navigation.scss */
+#navigation #navigation .corner {
   cursor: pointer;
 }
-
-/* line 86, ../_navigation.scss */
-#navigation .label {
+/* line 95, ../_navigation.scss */
+#navigation #navigation .label {
   text-align: center;
   text-transform: uppercase;
   color: #52808C;
@@ -8297,54 +8222,44 @@ p, textarea {
   line-height: 15px;
   opacity: .4;
 }
-
-/* line 95, ../_navigation.scss */
-#navigation .corner:hover label {
+/* line 104, ../_navigation.scss */
+#navigation #navigation .corner:hover label {
   opacity: 1;
 }
-
-/* line 97, ../_navigation.scss */
-#navigation .button {
+/* line 106, ../_navigation.scss */
+#navigation #navigation .button {
   height: 6px;
   width: 100px;
 }
-
-/* line 102, ../_navigation.scss */
-#navigation .corner.inactive {
+/* line 111, ../_navigation.scss */
+#navigation #navigation .corner.inactive {
   display: none;
 }
-
-/* line 106, ../_navigation.scss */
-.prev-page .button {
+/* line 115, ../_navigation.scss */
+#navigation .prev-page .button {
   background: url("../../images/bg-pager-arrow-prev.png") no-repeat left -6px #A8C0C5;
 }
-
-/* line 109, ../_navigation.scss */
-.next-page .button {
+/* line 118, ../_navigation.scss */
+#navigation .next-page .button {
   background: url("../../images/bg-pager-arrow-next.png") no-repeat right -6px #A8C0C5;
 }
-
-/* line 112, ../_navigation.scss */
-.prev-page:hover .button {
+/* line 121, ../_navigation.scss */
+#navigation .prev-page:hover .button {
   background: url("../../images/bg-pager-arrow-prev.png") no-repeat left top #52818C;
 }
-
-/* line 115, ../_navigation.scss */
-.next-page:hover .button {
+/* line 124, ../_navigation.scss */
+#navigation .next-page:hover .button {
   background: url("../../images/bg-pager-arrow-next.png") no-repeat right top #52818C;
 }
-
-/* line 118, ../_navigation.scss */
+/* line 127, ../_navigation.scss */
 #navigation .corner.inactive.prev-page .button {
   background: url("../../images/bg-pager-arrow-prev.png") no-repeat left -12px #eee !important;
 }
-
-/* line 121, ../_navigation.scss */
+/* line 130, ../_navigation.scss */
 #navigation .corner.inactive.next-page .button {
   background: url("../../images/bg-pager-arrow-next.png") no-repeat right -12px #eee !important;
 }
-
-/* line 125, ../_navigation.scss */
+/* line 134, ../_navigation.scss */
 #navigation .pager {
   position: absolute;
   bottom: -6px;
@@ -8355,9 +8270,8 @@ p, textarea {
   /*border-radius: 5px;	*/
   margin: 0 20px;
 }
-
-/* line 136, ../_navigation.scss */
-#navigation .pager .head {
+/* line 147, ../_navigation.scss */
+#navigation .head {
   position: absolute;
   left: 33%;
   width: 33%;
@@ -8366,25 +8280,23 @@ p, textarea {
   background-color: #333;
   /*border: 1px solid black;*/
 }
-
 @media (max-width: 600px) {
-  /* line 147, ../_navigation.scss */
+  /* line 158, ../_navigation.scss */
   #navigation .next-page.corner {
     display: none;
   }
-
-  /* line 150, ../_navigation.scss */
+  /* line 161, ../_navigation.scss */
   #navigation .prev-page.corner {
     display: none;
   }
-
-  /* line 153, ../_navigation.scss */
+  /* line 164, ../_navigation.scss */
   #navigation .pager {
     left: 0;
     right: 0;
   }
 }
-/* line 159, ../_navigation.scss */
+
+/* line 173, ../_navigation.scss */
 *.unselectable {
   -moz-user-select: none;
   -khtml-user-select: none;

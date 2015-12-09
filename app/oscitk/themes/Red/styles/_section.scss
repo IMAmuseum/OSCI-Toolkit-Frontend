@@ -1,10 +1,38 @@
-#section-view {
-	padding-left: 40px;
+
+
+.container {
+
+	overflow: hidden;
+	margin-top: 15px;
+	margin-bottom: 15px;
+
 }
 
 #section {
-	padding-left: 40px;
-	font-size: 14px;
+
+	width: 100%;
+	height: calc(100% - 30px);
+
+	-webkit-columns: 2 300px;
+	   -moz-columns: 2 300px;
+	        columns: 2 300px;
+	-webkit-column-gap: 40px;
+	   -moz-column-gap: 40px;
+	        column-gap: 40px;
+
+	#section-view {
+
+		padding-left: 40px;
+		padding-right: 40px;
+		padding-top: 30px;
+		padding-bottom: 30px;
+
+	}
+
+    img {
+    	width: 100%;
+    }
+
 }
 
 .footnote-reference {
