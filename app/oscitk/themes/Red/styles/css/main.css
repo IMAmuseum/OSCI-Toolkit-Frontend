@@ -8476,58 +8476,62 @@ header .header-title .container .btn-menu, header .header-title .container-fluid
   color: black;
 }
 /* line 186, ../_toolbar.scss */
+#toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing li {
+  cursor: pointer;
+}
+/* line 190, ../_toolbar.scss */
 #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile {
   display: none;
 }
-/* line 190, ../_toolbar.scss */
+/* line 194, ../_toolbar.scss */
 #toolbar #toolbar-readout #toolbar-glossary #glossary-content {
   border-top: 1px solid white;
 }
-/* line 197, ../_toolbar.scss */
+/* line 201, ../_toolbar.scss */
 #toolbar #toolbar-readout #toolbar-glossary #glossary-content p p span {
   color: white !important;
 }
 @media (max-width: 767px) {
-  /* line 210, ../_toolbar.scss */
+  /* line 214, ../_toolbar.scss */
   #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing {
     display: none;
   }
-  /* line 214, ../_toolbar.scss */
+  /* line 218, ../_toolbar.scss */
   #toolbar #toolbar-readout #toolbar-glossary #glossary-content {
     display: none;
   }
-  /* line 218, ../_toolbar.scss */
+  /* line 222, ../_toolbar.scss */
   #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile {
     display: block;
   }
-  /* line 221, ../_toolbar.scss */
+  /* line 225, ../_toolbar.scss */
   #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile > li {
     cursor: pointer;
     border-bottom: 1px solid white;
   }
-  /* line 225, ../_toolbar.scss */
+  /* line 229, ../_toolbar.scss */
   #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile > li ul {
     display: none;
   }
-  /* line 229, ../_toolbar.scss */
+  /* line 233, ../_toolbar.scss */
   #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile > li ul p span {
     color: white !important;
   }
 }
-/* line 243, ../_toolbar.scss */
+/* line 247, ../_toolbar.scss */
 #toolbar #toolbar-readout #toolbar-figures {
   position: relative;
 }
-/* line 247, ../_toolbar.scss */
+/* line 251, ../_toolbar.scss */
 #toolbar #toolbar-readout #toolbar-figures .figure-reel {
   overflow-y: scroll;
   max-height: calc(100% - 54px);
 }
-/* line 252, ../_toolbar.scss */
+/* line 256, ../_toolbar.scss */
 #toolbar #toolbar-readout #toolbar-figures .figure-reel figure img {
   max-width: 75%;
 }
-/* line 262, ../_toolbar.scss */
+/* line 266, ../_toolbar.scss */
 #toolbar #toolbar-readout #toolbar-account .account-footer {
   margin-top: 10px;
 }

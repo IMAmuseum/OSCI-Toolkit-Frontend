@@ -183,6 +183,10 @@ $toolbar-margin-bottom: 5px;
 				color: black;
 			}
 
+			#glossary-term-listing li {
+				cursor: pointer;
+			}
+
 			#glossary-term-listing-mobile {
 				display: none;
 			}
