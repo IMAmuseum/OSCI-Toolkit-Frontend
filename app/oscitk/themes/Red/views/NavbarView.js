@@ -14,11 +14,10 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 
 	render: function() {
 
+		// Render basic template
 		this.$el.html( this.template( {  } ) );
 
-		$('.navbar-item[data-toggle="tooltip"]').tooltip({left:'150px'});
-
-		// Render the font size selector
+		// Initialize and render the font size selector
 		var item = new OsciTk.views.ToolbarItem( { toolbarItem: { view: 'fontSizeView', text: 'font-size', style: 'inline' } } );
 		this.addView(item, '#font-size-area');
 		item.render();
@@ -27,18 +26,9 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 
 	},
 
+	// Could be used to trigger FontSizeView
 	itemClick: function(event) {
-
 		event.preventDefault();
-
-		var sectionId = $(event.currentTarget).attr('data-section-id');
-
-		$('li.tocView-toolbar-item').removeClass('active');
-		Backbone.trigger("toolbarRemoveViews");
-
-		// TODO: don't really want to address the appRouter directly
-		app.router.navigate("section/" + sectionId, {trigger: true});
-
 	},
 
 });

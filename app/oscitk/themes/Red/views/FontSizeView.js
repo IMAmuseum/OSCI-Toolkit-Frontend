@@ -2,12 +2,16 @@ OsciTk.views.FontSize = OsciTk.views.BaseView.extend({
 	className: 'font-size-view',
 	template: OsciTk.templateManager.get('font-size'),
 	initialize: function() {
+
 		this.currentFontSize = 100;
+		
 		// listen for inline toolbar item clicks in ToolbarItemView.js
 		this.listenTo(Backbone, "toolbarInlineClicked", function(href) {
 			this.changeFontSize(href);
 		});
+
 		this.render();
+
 	},
 	render: function() {
 		this.$el.html(this.template());

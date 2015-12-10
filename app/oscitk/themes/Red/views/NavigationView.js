@@ -3,8 +3,13 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('navigation'),
 	initialize: function() {
 
-		// console.log( this.id );
-		// returns navigation-view
+		// Pages here have nothing to do with the MultiColumn theme's Pages
+		// They are simply a way to keep track of how far to scroll the screen
+		// They are NOT distinct <div> elements and have no associated model or collection 
+		// They exist only within the context of the NavigationView.js
+		// They are just numbers!
+
+
 
 		// set some defaults
 		this.identifier = null;
@@ -17,21 +22,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		this.listenTo(Backbone, 'layoutComplete', function(section) {
 
 			console.log('NavigationView caught layoutComplete');
-
-			// Used to navigate to specific elements, e.g. notes
-			if (this.identifier) {
-
-				Backbone.trigger("navigate", {identifier: this.identifier});
-				this.identifier = null;
-
-			} else {
-
-				Backbone.trigger("navigate", {page: 1});
-
-			}
-
-			// VERIFY THIS
-			this.numPages = 2;
 
 			this.render();
 
@@ -75,17 +65,31 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		});
 
+		//var i = 0;
 
 		// Respond to keyboard events
 		$(document).keydown(function(event) {
 
 			var p; // temp var used to determine target page
+			event.preventDefault();
+
+			var $target = $('#section');
+			var scroll_old = $target.scrollLeft(); //css({transform: 'translateX(' + '100px)'} );
+			var scroll_new = $target.outerWidth();
+
+			// add one gutter
+				scroll_new += 40;
+
+			console.log( scroll_old, scroll_new );
 
 			switch(event.which) {
 
 				case 39:
 
+					$target.scrollLeft( scroll_old + scroll_new );
+
 					// Right arrow navigates to next page
+					/*
 					p = app.views.navigationView.page + 1;
 					if (p > app.views.navigationView.numPages) {
 						var next = app.views.navigationView.currentNavigationItem.get('next');
@@ -93,14 +97,21 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 							app.router.navigate("section/" + next.id, {trigger: true});
 						}
 					} else {
-						Backbone.trigger('navigate', {page: p});
+						//Backbone.trigger('navigate', {page: p});
 					}
+					*/
 
 				break;
 
 				case 37:
+					//*
 
+
+					$target.scrollLeft( scroll_old - scroll_new );
+
+					//*/
 					// Left arrow navigates to previous page
+					/*
 					p = app.views.navigationView.page - 1;
 					if (p < 1) {
 						var previous = app.views.navigationView.currentNavigationItem.get('previous');
@@ -108,8 +119,9 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 							app.router.navigate("section/" + previous.id + "/end", {trigger: true});
 						}
 					} else {
-						Backbone.trigger('navigate', {page: p});
+						//Backbone.trigger('navigate', {page: p});
 					}
+					*/
 
 				break;
 
