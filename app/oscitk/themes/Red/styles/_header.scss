@@ -46,11 +46,13 @@ header {
 				&:before {
 					content: "<";
 					margin-right: 10px;
+					color: #ccc;
 				}
 
 				&:after {
 					content: ">";
 					margin-left: 10px;
+					color: #ccc;
 				}
 			}
 

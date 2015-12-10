@@ -130,6 +130,11 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         Backbone.trigger("layoutComplete", { numPages : this.model.get('pages').length } );
 
+        // Used to ensure that all figures are of a conistent width
+        $(window).load( function() {
+            Backbone.trigger("windowResized");
+        });
+
         return this;
     },
 

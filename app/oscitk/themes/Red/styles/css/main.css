@@ -8329,20 +8329,22 @@ header .header-title .container h1, header .header-title .container-fluid h1 {
 header .header-title .container .section-title:before, header .header-title .container-fluid .section-title:before {
   content: "<";
   margin-right: 10px;
+  color: #ccc;
 }
-/* line 51, ../_header.scss */
+/* line 52, ../_header.scss */
 header .header-title .container .section-title:after, header .header-title .container-fluid .section-title:after {
   content: ">";
   margin-left: 10px;
+  color: #ccc;
 }
-/* line 57, ../_header.scss */
+/* line 59, ../_header.scss */
 header .header-title .container .btn-menu, header .header-title .container-fluid .btn-menu {
   padding-left: 40px;
   background-image: url("../../images/dark/menu_icon.png");
   background-repeat: no-repeat;
 }
 @media (max-width: 991px) {
-  /* line 65, ../_header.scss */
+  /* line 67, ../_header.scss */
   header .header-title .container #publication-title-container, header .header-title .container h1, header .header-title .container-fluid #publication-title-container, header .header-title .container-fluid h1 {
     width: calc(100% - 102px);
     overflow: hidden;
