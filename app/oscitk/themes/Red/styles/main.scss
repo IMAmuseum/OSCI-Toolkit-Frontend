@@ -9,18 +9,17 @@ $color-dark-red: #810c0b;
 @import "bootstrap/bootstrap";
 @import "typography";
 @import "browsehappy";
+
 @import "section";
-//@import "section-multi-column";
 @import "navigation";
-@import "progress";
 @import "header";
 @import "toolbar";
 @import "navbar";
 @import "navbar-slider";
+
 @import "figures";
 @import "overlay";
 @import "paragraph-popover";
 @import "note-form";
 @import "citation";
 @import "print";
-@import "layered-image";
