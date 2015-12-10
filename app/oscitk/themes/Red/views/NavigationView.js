@@ -65,12 +65,9 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		});
 
-		//var i = 0;
-
 		// Respond to keyboard events
 		$(document).keydown(function(event) {
 
-			var p; // temp var used to determine target page
 			event.preventDefault();
 
 			var $target = $('#section');
@@ -80,52 +77,34 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			// add one gutter
 				scroll_new += 40;
 
-			console.log( scroll_old, scroll_new );
+			//console.log( scroll_old, scroll_new );
 
 			switch(event.which) {
 
 				case 39:
-
 					$target.scrollLeft( scroll_old + scroll_new );
-
-					// Right arrow navigates to next page
-					/*
-					p = app.views.navigationView.page + 1;
-					if (p > app.views.navigationView.numPages) {
-						var next = app.views.navigationView.currentNavigationItem.get('next');
-						if (next) {
-							app.router.navigate("section/" + next.id, {trigger: true});
-						}
-					} else {
-						//Backbone.trigger('navigate', {page: p});
-					}
-					*/
-
 				break;
 
 				case 37:
-					//*
-
-
 					$target.scrollLeft( scroll_old - scroll_new );
-
-					//*/
-					// Left arrow navigates to previous page
-					/*
-					p = app.views.navigationView.page - 1;
-					if (p < 1) {
-						var previous = app.views.navigationView.currentNavigationItem.get('previous');
-						if (previous) {
-							app.router.navigate("section/" + previous.id + "/end", {trigger: true});
-						}
-					} else {
-						//Backbone.trigger('navigate', {page: p});
-					}
-					*/
-
 				break;
 
 			}
+
+			// UPDATE SLIDER
+			// TODO: FIX ME
+			var $slider = $('#osci-page-slider');
+			var max = Math.ceil( $('#default-section-view').outerHeight() / ( $('#section').outerWidth() + 40 ) / 2 );
+			var val = Math.ceil( $('#section').scrollLeft() / $('#default-section-view').outerHeight() * max );
+
+			//console.log( max, val );
+
+				$slider.attr('max', max );
+				$slider.val( val );
+
+
+
+
 
 		});
 	},
