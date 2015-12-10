@@ -1,71 +1,81 @@
 #section {
 
-   #default-section-view {
-      figure {
-         margin: 20px;
-      }
+	#default-section-view {
 
 
-      .figure_content {
-         img {
-            border: 2px solid $gray-lighter;
-         }
-      }
+		figure {
+			margin: 20px;
 
-      figcaption {
-         background: $gray-lighter;
-         padding: 4px 4px 2px 6px;
-         font-size: 14px;
-      }
+			border: thin $gray-lighter solid;
+			padding: 6px;
 
-      figcaption {
-         p {
-            font-size: 14px;
-            font-family: $font-family-sans-serif;
-         }
-      }
+			.figure_content {
+				img {
+					border: 0;
+				}
+			}
 
-      figure.left {
-         float: left;
-         margin-right: 50px;
-      }
+			figcaption {
+				background: white;
 
-      img.left {
-         float: left;
-         max-width: 100%;
-         max-height: 50vh;
-      }
 
-      figure.right {
-         float: right;
-         margin-left: 40px;
-      }
+				p {
+					font-family: 'Lora', serif;
+					font-style: italic;
+					font-size: 14px;
+					color: #3c3c3c;
+					
+					padding-top: 4px;
+					margin: 0;
+				}
 
-      img.right {
-         float: right;
-         max-width: 100%;
-         max-height: 50vh;
-      }
+			}
 
-      figure.plate,
-      figure.center {
-         width: 50%;
-         max-width: 100%;
-         margin-left: auto;
-         margin-right: auto;
-         img, figcaption {
-            width: 100%;
-         }
-         @media (max-width: 768px) {
-            width: 90%;
-         }
-      }
+			&.left {
+				float: left;
+				margin-right: 50px;
+			}
 
-      .osci-figure {
-         background: $gray-lighter;
-      }
-   }
+			img.left {
+				float: left;
+				max-width: 100%;
+				max-height: 50vh;
+			}
 
-   
+			&.right {
+				float: right;
+				margin-left: 40px;
+			}
+
+			img.right {
+				float: right;
+				max-width: 100%;
+				max-height: 50vh;
+			}
+
+			&.plate,
+			&.center {
+
+				width: 50%;
+				max-width: 100%;
+				margin-left: auto;
+				margin-right: auto;
+
+				img, figcaption {
+					width: 100%;
+				}
+
+				@media (max-width: 768px) {
+					width: 90%;
+				}
+			}
+
+			.osci-figure {
+				
+			}
+
+		}
+
+	}
 
 }
