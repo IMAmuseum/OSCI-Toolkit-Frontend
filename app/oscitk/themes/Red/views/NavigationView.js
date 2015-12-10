@@ -31,7 +31,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			}
 
 			// VERIFY THIS
-			this.numPages = section.numPages;
+			this.numPages = 2;
 
 			this.render();
 

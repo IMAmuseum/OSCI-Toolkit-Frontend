@@ -8060,6 +8060,7 @@ p, textarea {
 #section {
   width: 100%;
   height: calc(100% - 30px);
+  margin-top: 15px;
   -webkit-columns: 2 300px;
   -moz-columns: 2 300px;
   columns: 2 300px;
@@ -8094,11 +8095,11 @@ p, textarea {
   margin-bottom: 16px;
   color: #3c3c3c;
 }
-/* line 55, ../_section.scss */
+/* line 56, ../_section.scss */
 #section #section-view {
   padding: 30px 40px;
 }
-/* line 68, ../_section.scss */
+/* line 69, ../_section.scss */
 #section figure,
 #section figure .figure_content,
 #section figure .figure_content object,
@@ -8113,25 +8114,25 @@ p, textarea {
   display: block;
   max-width: 100%;
 }
-/* line 85, ../_section.scss */
+/* line 86, ../_section.scss */
 #section figure {
   max-height: 741px;
   margin: auto auto;
 }
-/* line 89, ../_section.scss */
+/* line 90, ../_section.scss */
 #section figure .figure_content {
   max-height: 711px;
 }
-/* line 92, ../_section.scss */
+/* line 93, ../_section.scss */
 #section figure .figure_content object {
   max-height: 711px;
 }
-/* line 95, ../_section.scss */
+/* line 96, ../_section.scss */
 #section figure .figure_content object img {
   max-height: 711px;
 }
 
-/* line 107, ../_section.scss */
+/* line 108, ../_section.scss */
 .footnote-reference {
   margin: 0 5px;
   display: inline-block;
@@ -8146,14 +8147,14 @@ p, textarea {
   text-align: center;
   background: #b82927;
 }
-/* line 127, ../_section.scss */
+/* line 128, ../_section.scss */
 .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
   background: #810c0b;
 }
 
-/* line 137, ../_section.scss */
+/* line 138, ../_section.scss */
 .glossary-term:hover {
   cursor: hand;
 }

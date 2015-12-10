@@ -151,17 +151,6 @@ __p += '<textarea class="note-form-wrapper" data-paragraph_number="' +
 return __p
 };
 
-this["JST"]["app/oscitk/themes/red/templates/page.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p +=
-((__t = ( content.content )) == null ? '' : __t);
-
-}
-return __p
-};
-
 this["JST"]["app/oscitk/themes/red/templates/paragraph-popover.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;

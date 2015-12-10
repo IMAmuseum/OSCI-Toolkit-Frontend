@@ -1,20 +1,13 @@
 OsciTk.views.Section = OsciTk.views.BaseView.extend({
     id: 'default-section-view',
-    //template: OsciTk.templateManager.get('section'),
+    template: OsciTk.templateManager.get('section'),
     events: {
-        //"scroll" : "updateProgress",
         'click .content-paragraph': 'paragraphClicked',
         'click .paragraph-button': 'paragraphClicked',
         'click #note-submit': 'noteSubmit',
         'click #cite': 'getCitation',
     },
     initialize: function(options) {
-
-        this.options = options ? options : {};
-
-        _.defaults(this.options, {
-            pageView : 'Page'
-        });
 
         // bind sectionChanged
         this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
@@ -56,10 +49,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         });
 
-        // TODO: BIND THE PAGE SPLITTING INTO THIS
+        // Set maximum height on figures to make sure they don't overflow their columns
         this.listenTo(Backbone, 'windowResized', function() {
 
-            // Set maximum height on figures to make sure they don't overflow their columns
             var sh = $('#section').height();
             $('figure').each( function( i, e ) {
 
@@ -83,6 +75,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         });
 
+        // Proceed to render after the section is ready
         this.listenTo(Backbone, 'sectionLoaded', function(sectionModel) {
 
             // We will modify this and pass it to our template via this.render
@@ -109,26 +102,44 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         return true;
     },
 
+
+    // Get section sectionTitle, subtitle, and thumbnail for use in template
+    getSectionTitles: function(sectionId) {
+
+        // Save context to avoid setting window variables
+        var that = this;
+
+        _.each(app.collections.navigationItems.models, function(item) {
+            if (item.get('id') == sectionId ) {
+                that.sectionTitle = item.get('title');
+                that.sectionSubtitle = item.get('subtitle');
+                that.sectionThumbnail = item.get('thumbnail');
+            }
+        }, this);
+    },
+
     render: function() {
 
         // DEBUGGING
         console.log( "SectionView rendering..." );
 
-        //Allow subclasses to do something before we render
-        if (this.preRender) {
-            this.preRender();
-        }
-
         //clean up the view incase we have already rendered this before
         this.model.removeAllPages();
         this.removeAllChildViews();
 
-        Backbone.trigger("layoutStart");
+        // Apply template set above + render the html
+        this.$el.html(
+            this.template( {
+                sectionTitle: this.sectionTitle,
+                sectionSubtitle: this.sectionSubtitle,
+                sectionThumbnail: this.sectionThumbnail,
+                content: $(this.content).html()
+            } )
+        );
 
-        // Essentially a wrapper for render()
-        this.renderContent();
-
-        Backbone.trigger("layoutComplete", { numPages : this.model.get('pages').length } );
+        // numPages is for NavigationView.js -- remove if it's not used
+        // Backbone.trigger("layoutComplete", { numPages : this.model.get('pages').length } );
+        Backbone.trigger("layoutComplete");
 
         // Used to ensure that all figures are of a conistent width
         $(window).load( function() {
@@ -138,42 +149,13 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         return this;
     },
 
-   renderContent: function() {
-
-        /*
-        this.$el.html(
-            this.template( {
-                sectionTitle: this.sectionTitle,
-                sectionSubtitle: this.sectionSubtitle,
-                sectionThumbnail: this.sectionThumbnail,
-                content: $(this.content).html()
-            } )
-        );
-        */
-
-        // DEBUGGING
-        console.log( "SectionView rendering content..." );
-
-        //basic layout just loads the content into a single page with scrolling
-        var pageView = this.getPageForProcessing();
-
-        //add the content to the view/model
-        pageView.addContent( $(this.model.get('content') ) );
-
-        //render the view
-        pageView.render();
-
-        //mark processing complete (not necessary, but here for example)
-        pageView.processingComplete();
-
-    },
-
     // Garbage collection
     onClose: function() {
         this.model.removeAllPages();
     },
 
     // Given a paragraph id, get parent page
+    /*
     getPageForParagraphId: function(pid) {
 
         var views = this.getChildViews();
@@ -187,8 +169,10 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         return null;
     },
+    */
 
     // Given an element, get parent page
+    /*
     getPageNumberForSelector: function(element) {
         var page = $(element).parents(".page");
         if (page) {
@@ -197,8 +181,10 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         return null;
     },
+    */
 
     // Given an #id, get parent page
+    /*
     getPageNumberForElementId : function(id) {
         var views = this.getChildViews();
         var p = _.find(views, function(view) { return view.containsElementId(id); });
@@ -207,32 +193,17 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         }
         return null;
     },
-
-    // TODO: Determine if this is still necessary
-    getSectionTitles: function(sectionId) {
-
-        // Save context to avoid setting window variables
-        var that = this;
-
-        // Get section sectionTitle, subtitle, and thumbnail for use in template
-        _.each(app.collections.navigationItems.models, function(item) {
-
-            if (item.get('id') == sectionId ) {
-                that.sectionTitle = item.get('title');
-                that.sectionSubtitle = item.get('subtitle');
-                that.sectionThumbnail = item.get('thumbnail');
-            }
-
-        }, this);
-
-    },
+    */
 
     // MultiColumn: used by InlineNotesView
+    /*
     getCurrentPageView: function() {
         // TODO: so the only possible child view of a section is a page???
         return this.getChildViewByIndex(app.views.navigationView.page - 1);
     },
+    */
 
+    /*
     getPageForProcessing : function(id, newTarget) {
         var page;
 
@@ -272,6 +243,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         return page;
     },
+    */
 
     // Add data attributes to paragraphs; used for paragraph tooltips
     makeIds: function(sectionModel) {
@@ -347,7 +319,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
     },
 
-    // TODO: OVERRIDE BY MULTI-COLUMN
+    // TODO: Delete me?
     setFigureStyles: function() {
 
         _.each(this.figures, function(figure) {
