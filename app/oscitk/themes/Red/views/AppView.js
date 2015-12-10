@@ -10,13 +10,13 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 		// initialize all possible views
 		app.views = {
-			//titleView: new OsciTk.views.Title(),
+			
 			headerView: new OsciTk.views.Header(),
 			
 			//printView: new OsciTk.views.Print(),
 
 			
-			//sectionView: new OsciTk.views.Section(),
+			sectionView: new OsciTk.views.Section(),
 			footnotesView: new OsciTk.views.Footnotes(),
 			paragraphControlsView: new OsciTk.views.ParagraphControls(),
 
@@ -47,34 +47,9 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		// Add the navbar view
 		this.addView(app.views.navbarView, '#navbar');
 
-
-
-
-		// Set the default section view
-		var sectionViewClass = OsciTk.views.Section;
-
-		// Allow a custom section view to be used
-		// This is where we would define MultiColumnSectionView in config
-		if (app.config.get('sectionView') && OsciTk.views[app.config.get('sectionView')]) {
-			sectionViewClass = OsciTk.views[app.config.get('sectionView')];
-		}
-
-		var sectionViewOptions = {};
-		if (app.config.get('sectionViewOptions')) {
-			sectionViewOptions = app.config.get('sectionViewOptions');
-		}
-
-		app.views.sectionView = new sectionViewClass(sectionViewOptions);
-
 		// Add the section view
 		this.addView(app.views.sectionView, '#section');
 
-		/*
-		// Add the section view
-		app.views.sectionView = new OsciTk.views.Section(),
-		this.addView(app.views.sectionView, '#section');
-		*/
-		
 
 
 
@@ -84,7 +59,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		this.addView(app.views.navigationView, '#navigation');
 
 
-
+		// TODO: Move these functions to ToolbarView.js?
 		this.listenTo(Backbone, "toolbarInline", function(toolbarItem) {
 			this.toolbarInline(toolbarItem);
 		});

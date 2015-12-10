@@ -115,38 +115,6 @@ __p += '<div class="header-title">\n\t<div class="container-fluid">\n\t\t<div cl
 return __p
 };
 
-this["JST"]["app/oscitk/themes/red/templates/multi-column-column.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<div class="column"></div>';
-
-}
-return __p
-};
-
-this["JST"]["app/oscitk/themes/red/templates/multi-column-figure.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<div class="figure_content"></div>\n<figcaption>' +
-((__t = ( caption )) == null ? '' : __t) +
-'</figcaption>';
-
-}
-return __p
-};
-
-this["JST"]["app/oscitk/themes/red/templates/multi-column-section.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<div id="pages"></div>';
-
-}
-return __p
-};
-
 this["JST"]["app/oscitk/themes/red/templates/navbar.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
