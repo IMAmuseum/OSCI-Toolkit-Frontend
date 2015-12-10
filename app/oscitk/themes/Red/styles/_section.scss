@@ -1,8 +1,6 @@
-
-
 .container {
 
-	//overflow: hidden;
+	//overflow: hidden; // comment me out for debug
 	margin-top: 15px;
 	margin-bottom: 15px;
 
@@ -45,14 +43,20 @@
 
 		font-size: 16px;
 		line-height: 29px;
-		
+
 		margin-bottom: 16px;
 		color: #3c3c3c;
 	}
 
+	// This constrains #section b/w the #header and #navbar
 	width: 100%;
 	height: calc(100% - 30px);
 
+	#section-view {
+		padding: 30px 40px;
+	}
+
+	// Consider manipulating these with javascript
 	-webkit-columns: 2 300px;
 	   -moz-columns: 2 300px;
 	        columns: 2 300px;
@@ -60,10 +64,6 @@
 	-webkit-column-gap: 40px;
 	   -moz-column-gap: 40px;
 	        column-gap: 40px;
-
-	#section-view {
-		padding: 30px 40px;
-	}
 
 	figure,
 	figure .figure_content,
@@ -85,6 +85,7 @@
     figure {
     	max-height: 741px;
     	margin: auto auto;  // ensures that the figure takes up the entire page
+
 		.figure_content {
 			max-height: 711px;
 
@@ -102,6 +103,7 @@
 
 }
 
+// TODO: Edit me!
 .footnote-reference {
 	margin: 0 5px;
 
@@ -130,20 +132,9 @@
 	
 }
 
+// TODO: Remove me? Hide me?
 .glossary-term {
 	&:hover {
 		cursor: hand;
-	}
-}
-
-@media (max-width: 992px) {
-	#section {
-		padding-left: 0;
-	}
-}
-
-@media (min-width: 992px) {
-	.section-col {
-		float: none;
 	}
 }

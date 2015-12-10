@@ -8050,13 +8050,13 @@ p, textarea {
   text-align: center;
 }
 
-/* line 3, ../_section.scss */
+/* line 1, ../_section.scss */
 .container {
   margin-top: 15px;
   margin-bottom: 15px;
 }
 
-/* line 12, ../_section.scss */
+/* line 10, ../_section.scss */
 #section {
   width: 100%;
   height: calc(100% - 30px);
@@ -8067,7 +8067,7 @@ p, textarea {
   -moz-column-gap: 40px;
   column-gap: 40px;
 }
-/* line 15, ../_section.scss */
+/* line 13, ../_section.scss */
 #section h1 {
   font-family: 'Lora', serif;
   font-size: 14px;
@@ -8076,7 +8076,7 @@ p, textarea {
   text-transform: uppercase;
   color: #3c3c3c;
 }
-/* line 29, ../_section.scss */
+/* line 27, ../_section.scss */
 #section h3 {
   font-family: 'Lora', serif;
   font-weight: 700;
@@ -8086,7 +8086,7 @@ p, textarea {
   margin-bottom: 16px;
   color: #3c3c3c;
 }
-/* line 43, ../_section.scss */
+/* line 41, ../_section.scss */
 #section p {
   font-family: 'Lora', serif;
   font-size: 16px;
@@ -8094,7 +8094,7 @@ p, textarea {
   margin-bottom: 16px;
   color: #3c3c3c;
 }
-/* line 64, ../_section.scss */
+/* line 55, ../_section.scss */
 #section #section-view {
   padding: 30px 40px;
 }
@@ -8118,20 +8118,20 @@ p, textarea {
   max-height: 741px;
   margin: auto auto;
 }
-/* line 88, ../_section.scss */
+/* line 89, ../_section.scss */
 #section figure .figure_content {
   max-height: 711px;
 }
-/* line 91, ../_section.scss */
+/* line 92, ../_section.scss */
 #section figure .figure_content object {
   max-height: 711px;
 }
-/* line 94, ../_section.scss */
+/* line 95, ../_section.scss */
 #section figure .figure_content object img {
   max-height: 711px;
 }
 
-/* line 105, ../_section.scss */
+/* line 107, ../_section.scss */
 .footnote-reference {
   margin: 0 5px;
   display: inline-block;
@@ -8146,30 +8146,18 @@ p, textarea {
   text-align: center;
   background: #b82927;
 }
-/* line 125, ../_section.scss */
+/* line 127, ../_section.scss */
 .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
   background: #810c0b;
 }
 
-/* line 134, ../_section.scss */
+/* line 137, ../_section.scss */
 .glossary-term:hover {
   cursor: hand;
 }
 
-@media (max-width: 992px) {
-  /* line 140, ../_section.scss */
-  #section {
-    padding-left: 0;
-  }
-}
-@media (min-width: 992px) {
-  /* line 146, ../_section.scss */
-  .section-col {
-    float: none;
-  }
-}
 /* line 1, ../_navigation.scss */
 #navigation {
   font-family: sans-serif;
