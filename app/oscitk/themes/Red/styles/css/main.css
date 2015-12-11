@@ -8064,6 +8064,7 @@ body, .container {
 /* line 11, ../_section.scss */
 #section {
   overflow: auto;
+  overflow-y: hidden;
   /*
   #default-section-view {
   	-webkit-transform: translateX(0);
@@ -8073,11 +8074,13 @@ body, .container {
   margin-top: 15px;
   height: 100%;
 }
-/* line 14, ../_section.scss */
+/* line 15, ../_section.scss */
 #section #default-section-view {
   overflow: auto;
+  overflow-y: hidden;
+  text-align: justify;
 }
-/* line 27, ../_section.scss */
+/* line 30, ../_section.scss */
 #section h2 {
   font-family: 'Lora', serif;
   font-size: 14px;
@@ -8086,7 +8089,7 @@ body, .container {
   text-transform: uppercase;
   color: #3c3c3c;
 }
-/* line 41, ../_section.scss */
+/* line 44, ../_section.scss */
 #section h3 {
   font-family: 'Lora', serif;
   font-weight: 700;
@@ -8096,7 +8099,7 @@ body, .container {
   margin-bottom: 16px;
   color: #3c3c3c;
 }
-/* line 55, ../_section.scss */
+/* line 58, ../_section.scss */
 #section p {
   font-family: 'Lora', serif;
   font-size: 16px;
@@ -8104,11 +8107,11 @@ body, .container {
   margin-bottom: 16px;
   color: #3c3c3c;
 }
-/* line 73, ../_section.scss */
+/* line 76, ../_section.scss */
 #section #section-view {
   padding: 30px 40px;
 }
-/* line 77, ../_section.scss */
+/* line 80, ../_section.scss */
 #section #default-section-view {
   -webkit-columns: 2 300px;
   -moz-columns: 2 300px;
@@ -8117,7 +8120,7 @@ body, .container {
   -moz-column-gap: 40px;
   column-gap: 40px;
 }
-/* line 90, ../_section.scss */
+/* line 93, ../_section.scss */
 #section figure,
 #section figure .figure_content,
 #section figure .figure_content object,
@@ -8132,25 +8135,25 @@ body, .container {
   display: block;
   max-width: 100%;
 }
-/* line 107, ../_section.scss */
+/* line 110, ../_section.scss */
 #section figure {
   max-height: 741px;
   margin: auto auto;
 }
-/* line 111, ../_section.scss */
+/* line 114, ../_section.scss */
 #section figure .figure_content {
   max-height: 711px;
 }
-/* line 114, ../_section.scss */
+/* line 117, ../_section.scss */
 #section figure .figure_content object {
   max-height: 711px;
 }
-/* line 117, ../_section.scss */
+/* line 120, ../_section.scss */
 #section figure .figure_content object img {
   max-height: 711px;
 }
 
-/* line 129, ../_section.scss */
+/* line 132, ../_section.scss */
 .footnote-reference {
   margin: 0 5px;
   display: inline-block;
@@ -8165,19 +8168,19 @@ body, .container {
   text-align: center;
   background: #b82927;
 }
-/* line 149, ../_section.scss */
+/* line 152, ../_section.scss */
 .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
   background: #810c0b;
 }
 
-/* line 159, ../_section.scss */
+/* line 162, ../_section.scss */
 .glossary-term:hover {
   cursor: hand;
 }
 
-/* line 165, ../_section.scss */
+/* line 168, ../_section.scss */
 .loader {
   margin: 80px auto;
   font-size: 10px;
@@ -8193,7 +8196,7 @@ body, .container {
   -webkit-animation: load8 1.1s infinite linear;
   animation: load8 1.1s infinite linear;
 }
-/* line 184, ../_section.scss */
+/* line 187, ../_section.scss */
 .loader, .loader:after {
   border-radius: 50%;
   width: 10em;

@@ -10,9 +10,12 @@ body, .container {
 // TODO: Move some of this to _figures.scss
 #section {
 	overflow: auto;
+	overflow-y: hidden;
 
 	#default-section-view {
 		overflow: auto;
+		overflow-y: hidden;
+		text-align: justify;
 	}
 	//scroll-snap-points-x: repeat(100%);
 	//scroll-snap-type: mandatory;

@@ -67,8 +67,48 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 var iw = $e.find('img').outerWidth();
                     $c.css('max-width', iw );
 
+                
+                // set column gap here so that it's readily accessible
+                var cg = 40;
+                $('#default-section-view').css({
+                    '-webkit-column-gap': cg,
+                       '-moz-column-gap': cg,
+                            'column-gap': cg
+                });
+
 
                 // set the width of the columns in #section to equal 1/2 of #section width
+                
+                var sw = $('#section').width();
+                    console.log( $('#section').width(), $('#section').outerWidth(), $('#section').innerWidth() );
+                    cw = (sw/2) - cg/2; // account for one gap
+                    
+                    console.log( cw );
+
+                $('#default-section-view').css({
+                    '-webkit-column-width': cw,
+                       '-moz-column-width': cw,
+                            'column-width': cw
+                }); 
+
+
+                var ch = 0; var i = 2;
+                do {
+
+                    $('#default-section-view').css({
+                        '-webkit-column-count': i.toString(),
+                           '-moz-column-count': i.toString(),
+                                'column-count': i.toString()
+                    }); 
+
+
+                         $('#default-section-view').width( i * cw + (i - 1) * cg);
+
+                    ch = $('#default-section-view').height();
+                    i+=1;
+
+                } while( ch > $('#section').height() );
+              
 
             });
 

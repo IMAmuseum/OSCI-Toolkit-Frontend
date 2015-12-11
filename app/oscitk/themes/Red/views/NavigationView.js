@@ -94,7 +94,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			// UPDATE SLIDER
 			// TODO: FIX ME
 			var $slider = $('#osci-page-slider');
-			var max = Math.ceil( $('#default-section-view').outerHeight() / ( $('#section').outerWidth() + 40 ) / 2 );
+			var max = Math.ceil( $('#default-section-view').outerHeight() / ( $('#section').outerWidth() / 2 + 3/4*40 ) );
 			var val = Math.ceil( $('#section').scrollLeft() / $('#default-section-view').outerHeight() * max );
 
 			//console.log( max, val );
