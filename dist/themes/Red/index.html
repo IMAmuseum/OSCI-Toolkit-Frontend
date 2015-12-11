@@ -5,8 +5,9 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700|Merriweather:400,300italic,400italic,700italic,900italic,900,700,300" rel="stylesheet" type="text/css">
+    <!-- see styles/bootstrap/_variables.scss -->
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic" rel="stylesheet" type="text/css">
 
     <link rel="stylesheet" href="styles/css/main.css">
 
@@ -38,7 +39,7 @@
                     //{view: 'closeToolbarView', text: 'toolbar-close', style: 'default'},
                     {view: 'tocToolbarView', text: 'toolbar-toc', style: 'default'},
                     /*{view: 'printToolbarView', text: 'toolbar-print', style: 'default'},*/
-                    {view: 'searchToolbarView', text: 'toolbar-search', style: 'default'},
+                    //{view: 'searchToolbarView', text: 'toolbar-search', style: 'default'},
                     {view: 'glossaryToolbarView', text: 'toolbar-glossary', style: 'default'},
                     {view: 'footnotesToolbarView', text: 'toolbar-footnotes', style: 'default'},
                     {view: 'figuresToolbarView', text: 'toolbar-figures', style: 'default'},
@@ -61,16 +62,6 @@
                     "multicolumn": false,
                     "layeredImage": false,
                 },
-                //*
-                sectionView: 'MultiColumnSection',
-                sectionViewOptions: {
-                    minColumnWidth : 200,
-                    maxColumnWidth : 300,
-                    gutterWidth : 40,
-                    minLinesPerColumn : 5,
-                    defaultLineHeight: 16
-                },
-                //*/
             });
             app.run();
         });

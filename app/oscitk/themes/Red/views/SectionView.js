@@ -67,6 +67,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 var iw = $e.find('img').outerWidth();
                     $c.css('max-width', iw );
 
+
+                // set the width of the columns in #section to equal 1/2 of #section width
+
             });
 
             //this.render();
@@ -114,6 +117,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 that.sectionThumbnail = item.get('thumbnail');
             }
         }, this);
+
     },
 
     render: function() {
