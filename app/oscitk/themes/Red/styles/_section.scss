@@ -5,11 +5,6 @@
 
 }
 
-#section-container.container,
-body {
-	overflow: hidden;
-}
-
 #reader {
 	position: absolute;
 	top: 0;
@@ -18,18 +13,20 @@ body {
 	left: 0;
 }
 
+// Scrolling tricks
+#section-container.container,
+body {
+	overflow: hidden;
+}
+
 // TODO: Move some of this to _figures.scss
 #section {
 	overflow: auto;
 	overflow-y: hidden;
 
-	#default-section-view {
-		overflow: hidden;
-		text-align: justify;
-	}
-
-	
-
+	// Baseline font-size
+	font-size: 16px;
+	line-height: 24px;
 
 	// This constrains #section b/w the #header and #navbar
 	width: 100%;
@@ -40,61 +37,17 @@ body {
 	margin-bottom: -15px;
 	padding: 15px;
 
+	// Unsupported CSS3
 	//scroll-snap-points-x: repeat(100%);
 	//scroll-snap-type: mandatory;
 
-	/*
-	#default-section-view {
-		-webkit-transform: translateX(0);
-	}
-	*/
-
-	// Chapter #
-	h2 {
-
-		font-family: 'Lora', serif;
-
-		font-size: 14px;
-		line-height: 16px;
-
-		text-align: center;
-		text-transform: uppercase;
-
-		color: #3c3c3c;
-	}
-
-	// Chapter Title
-	h3 {
-		font-family: 'Lora', serif;
-		font-weight: 700;
-
-		font-size: 36px;
-		line-height: 40px;
-
-		text-align: center;
-		
-		margin-bottom: 16px;
-		color: #3c3c3c;
-	}
-
-	// Body copy
-	p {
-		font-family: 'Lora', serif;
-
-		font-size: 16px;
-		line-height: 29px;
-
-		margin-bottom: 16px;
-		color: #3c3c3c;
-
-
-		margin-left: 16px;
-	}
-
-
 	#default-section-view {
 
-		// Consider manipulating these with javascript
+		overflow: hidden;
+		text-align: justify;
+
+		// These are defined through javascript
+		/*
 		-webkit-columns: 2 300px;
 		   -moz-columns: 2 300px;
 		        columns: 2 300px;
@@ -102,87 +55,154 @@ body {
 		-webkit-column-gap: 40px;
 		   -moz-column-gap: 40px;
 		        column-gap: 40px;
+		*/
+
+		font-size: 100%; // 16px
+		line-height: 100%; // 24px
 
 		padding-right: 15px;
 
-	}
+		// Chapter #
+		h2 {
 
-	figure,
-	figure .figure_content,
-	figure .figure_content object,
-	figure .figure_content object img {
+			font-family: 'Lora', serif;
 
-		-webkit-column-break-inside: avoid;		/* Chrome, Safari */
-	    page-break-inside: avoid;				/* Theoretically FF 20+ */
-	    break-inside: avoid-column;				/* IE 11 */
-	    //display:table;						/* Actually FF 20+ */
+			//*
+			font-size: 0.875em;
+			line-height: 1em;
+			//*/
 
-	    float: none !important;
-	    display: block;
+			/*
+			font-size: 14px;
+			line-height: 16px;
+			//*/
 
-	    //text-align: center;
+			text-align: center;
+			text-transform: uppercase;
 
-	    max-width: 100%;
-	    line-height: 29px;
+			color: #3c3c3c;
+		}
 
-	}
+		// Chapter Title
+		h3 {
+			font-family: 'Lora', serif;
+			font-weight: 700;
 
-    figure {
-    	max-height: 741px;
-    	margin: auto;  // ensures that the figure takes up the entire page
-    	//display: block;
+			/*
+			font-size: 36px;
+			line-height: 40px;
+			//*/
 
-		.figure_content {
-			max-height: 711px;
+			//*
+			font-size: 2.25em;
+			line-height: 2.5em;
+			//*/
 
-		    object {
-    			max-height: 711px;
+			text-align: center;
+			
+			margin-bottom: 16px;
+			color: #3c3c3c;
+		}
 
-			    img {
-			    	max-height: 711px;
-			    }
+		// Body copy
+		p {
+			font-family: 'Lora', serif;
+
+			/*
+			font-size: 16px;
+			line-height: 29px;
+			//*/
+
+			//*
+			font-size: 1em;
+			line-height: 1.8125em;
+			//*/
+
+			margin-bottom: 16px;
+			color: #3c3c3c;
+
+			// Offset for p > .paragraph-controls
+			margin-left: 16px;
+
+			.footnote-reference {
+				margin: 0 5px;
+
+				display: inline-block;
+				position: relative;
+				
+				top: -5px;
+				
+				width: 15px;
+				height: 15px;
+				
+				border-radius: 50%;
+				
+				color: #fff;
+				font-size: 12px;
+				line-height: 15px;
+				text-align: center;
+				
+				background: $color-light-red;
+				
+				&:hover {
+					color:#fff;
+					text-decoration: none;
+					background: $color-dark-red;
+				}
+				
+			}
+
+			// TODO: Remove me? Hide me?
+			.glossary-term {
+				&:hover {
+					cursor: hand;
+				}
 			}
 
 		}
-    	    	
-    }
 
-}
+		figure,
+		figure .figure_content,
+		figure .figure_content object,
+		figure .figure_content object img {
 
-// TODO: Edit me!
-.footnote-reference {
-	margin: 0 5px;
+			-webkit-column-break-inside: avoid;		/* Chrome, Safari */
+		    page-break-inside: avoid;				/* Theoretically FF 20+ */
+		    break-inside: avoid-column;				/* IE 11 */
+		    //display:table;						/* Actually FF 20+ */
 
-	display: inline-block;
-	position: relative;
-	
-	top: -5px;
-	
-	width: 15px;
-	height: 15px;
-	
-	border-radius: 50%;
-	
-	color: #fff;
-	font-size: 12px;
-	line-height: 15px;
-	text-align: center;
-	
-	background: $color-light-red;
-	
-	&:hover {
-		color:#fff;
-		text-decoration: none;
-		background: $color-dark-red;
+		    float: none !important;
+		    display: block;
+
+		    //text-align: center;
+
+		    max-width: 100%;
+		    line-height: 29px;
+
+		}
+
+	    figure {
+	    	max-height: 741px;
+	    	margin: auto;  // ensures that the figure takes up the entire page
+	    	//display: block;
+
+			.figure_content {
+				max-height: 711px;
+
+			    object {
+	    			max-height: 711px;
+
+				    img {
+				    	max-height: 711px;
+				    }
+				}
+
+			}
+	    	    	
+	    }
+
 	}
-	
-}
 
-// TODO: Remove me? Hide me?
-.glossary-term {
-	&:hover {
-		cursor: hand;
-	}
 }
 
 
