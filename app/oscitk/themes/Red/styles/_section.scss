@@ -1,10 +1,21 @@
-.container {
-	margin-top: 15px;
-	margin-bottom: 15px;
+#section-container.container {
+
+	margin-top: calc(53px + 15px);
+    height: calc(100% - 50px - 53px - 30px );
+
 }
 
-body, .container {
+#section-container.container,
+body {
 	overflow: hidden;
+}
+
+#reader {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 }
 
 // TODO: Move some of this to _figures.scss
@@ -13,10 +24,22 @@ body, .container {
 	overflow-y: hidden;
 
 	#default-section-view {
-		overflow: auto;
-		overflow-y: hidden;
+		overflow: hidden;
 		text-align: justify;
 	}
+
+	
+
+
+	// This constrains #section b/w the #header and #navbar
+	width: 100%;
+
+	// hide scrollbar
+	height: calc(100% + 30px); 
+	margin-top: -15px;
+	margin-bottom: -15px;
+	padding: 15px;
+
 	//scroll-snap-points-x: repeat(100%);
 	//scroll-snap-type: mandatory;
 
@@ -63,19 +86,11 @@ body, .container {
 
 		margin-bottom: 16px;
 		color: #3c3c3c;
+
+
+		margin-left: 16px;
 	}
 
-	// This constrains #section b/w the #header and #navbar
-	width: 100%;
-	margin-top: 15px;
-
-	//height: calc(100% - 30px);
-	height: 100%; // hide scrollbar
-	
-
-	#section-view {
-		padding: 30px 40px;
-	}
 
 	#default-section-view {
 
@@ -87,6 +102,8 @@ body, .container {
 		-webkit-column-gap: 40px;
 		   -moz-column-gap: 40px;
 		        column-gap: 40px;
+
+		padding-right: 15px;
 
 	}
 
@@ -103,13 +120,17 @@ body, .container {
 	    float: none !important;
 	    display: block;
 
+	    //text-align: center;
+
 	    max-width: 100%;
+	    line-height: 29px;
 
 	}
 
     figure {
     	max-height: 741px;
-    	margin: auto auto;  // ensures that the figure takes up the entire page
+    	margin: auto;  // ensures that the figure takes up the entire page
+    	//display: block;
 
 		.figure_content {
 			max-height: 711px;

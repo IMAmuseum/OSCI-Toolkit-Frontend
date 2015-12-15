@@ -22,7 +22,14 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		this.listenTo(Backbone, 'layoutComplete', function(section) {
 
 			console.log('NavigationView caught layoutComplete');
+			this.render();
 
+		});
+
+		this.listenTo(Backbone, 'windowResized', function(section) {
+
+			
+			this.calculatePages();
 			this.render();
 
 		});
@@ -54,59 +61,68 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		});
 
-		this.listenTo(Backbone, 'pageChanged', function(info) {
 
-			console.log('NavigationView caught pageChanged');
 
-			// clear old identifier in url
-			// app.router.navigate("section/" + previous.id + "/end");
-			this.page = info.page;
-			this.update(info.page);
-
-		});
 
 		// Respond to keyboard events
+		var that = this;
 		$(document).keydown(function(event) {
 
 			event.preventDefault();
 
-			var $target = $('#section');
-			var scroll_old = $target.scrollLeft(); //css({transform: 'translateX(' + '100px)'} );
-			var scroll_new = $target.outerWidth();
-
-			// add one gutter
-				scroll_new += 40;
-
-			//console.log( scroll_old, scroll_new );
-
 			switch(event.which) {
-
 				case 39:
-					$target.scrollLeft( scroll_old + scroll_new );
+					that.page += 1;
 				break;
-
 				case 37:
-					$target.scrollLeft( scroll_old - scroll_new );
+					that.page -= 1;
 				break;
-
 			}
 
-			// UPDATE SLIDER
-			// TODO: FIX ME
-			var $slider = $('#osci-page-slider');
-			var max = Math.ceil( $('#default-section-view').outerHeight() / ( $('#section').outerWidth() / 2 + 3/4*40 ) );
-			var val = Math.ceil( $('#section').scrollLeft() / $('#default-section-view').outerHeight() * max );
-
-			//console.log( max, val );
-
-				$slider.attr('max', max );
-				$slider.val( val );
-
-
-
-
+			Backbone.trigger('navigate', { page: that.page } );
 
 		});
+
+		// the section resets to first page when columns re-render
+		this.listenTo(Backbone, 'columnsComplete', function() {
+
+			console.log('NavigationView caught columnsComplete');
+			Backbone.trigger('navigate', { page: this.page } );
+
+		});
+
+		this.listenTo(Backbone, 'navigate', function(params) {
+
+			console.log('NavigationView caught navigate');
+
+			var page = params.page;
+
+			var $target = $('#section');
+			var page_width = $target.outerWidth();
+
+			// add one gutter
+			if( $target.attr('data-columns-rendered') == 1 ) {
+				page_width -= 10;
+			}else{
+				page_width += 10;
+			}
+
+			$target.scrollLeft( page_width * (page - 1) );
+
+			this.calculatePages();
+			this.update(this.page);
+
+		});
+
+	},
+
+	calculatePages: function() {
+
+		this.numPages = Math.ceil( $('#default-section-view').width() / ( $('#section').outerWidth() + 10 ) );
+		this.page = Math.ceil( $('#section').scrollLeft() / ( $('#section').outerWidth() + 10 ) ) + 1;
+
+		Backbone.trigger('pagesCalculated', this.numPages, this.page);
+
 	},
 
 	render: function() {
@@ -118,6 +134,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		// Do other things that can happen whenever the page changes
 		this.update(this.page);
+
 	},
 
 	update: function(page) {
@@ -129,30 +146,42 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// Set previous button state
 		if (page == 1) {
 
+			/*
 			// check if we can go to the previous section
 			var previous = this.currentNavigationItem.get('previous');
 
+			console.log( previous );
+
 			if (previous) {
-				this.$el.find('.prev-page .label').html('Previous Section');
+
+				// this.$el.find('.prev-page .label').html('Previous Section');
+
 				this.$el.find('.prev-page').removeClass('inactive').click(function () {
 					app.router.navigate("section/" + previous.id + "/end", {trigger: true});
 				});
+
+			} else {
+
+				// on first page and no previous section, disable interaction
+				$('.prev-page', this.$el).addClass('inactive').unbind('click');
+
 			}
 
-			// on first page and no previous section, disable interaction
-			else {
-				$('.prev-page', this.$el).addClass('inactive').unbind('click');
-			}
+			//*/
+
+			$('.prev-page', this.$el).addClass('inactive').unbind('click');
 
 		} else if (this.numPages > 1) {
 
-			var $this = this;
+			var that = this;
 			//this.$el.find('.prev-page .label').html('Previous');
 
 			// TODO: UPDATE PREV BUTTON TO ENABLE PROPERLY
 			this.$el.find('.prev-page').removeClass('inactive').click(function () {
-				app.router.navigate("section/" + $this.currentNavigationItem.id);
-				Backbone.trigger('navigate', {page:(page-1)});
+
+				//app.router.navigate("section/" + that.currentNavigationItem.id);
+				Backbone.trigger('navigate', { page: page-1 } );
+
 			});
 
 		}
@@ -160,38 +189,53 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// Set next button state
 		if (page == this.numPages) {
 
+			/*
 			// check if we can go to the next section
 			var next = this.currentNavigationItem.get('next');
 
 			// TODO: UPDATE NEXT BUTTON TO ACTIVATE PROPERLIKE
 			if (next) {
+
 				//this.$el.find('.next-page .label').html('Next Section');
 				this.$el.find('.next-page').removeClass('inactive').click(function () {
 					app.router.navigate("section/" + next.id, {trigger: true});
 				});
+
 			}
 
-			// on last page and no next section, disable interaction
+			
 			else {
+
+				// on last page and no next section, disable interaction
 				this.$el.find('.next-page').addClass('inactive').unbind('click');
+
 			}
+
+			*/
+
+			this.$el.find('.next-page').addClass('inactive').unbind('click');
 
 		} else if (this.numPages > 1) {
-			this.$el.find('.next-page .label').html('Next');
+
+			// this.$el.find('.next-page .label').html('Next');
+
 			this.$el.find('.next-page').removeClass('inactive').click(function () {
-				Backbone.trigger('navigate', { page: page+1 });
+				Backbone.trigger('navigate', { page: page + 1 } );
 			});
+
 		}
 
 	},
 
 	// Book Title | Section Title
 	setDocumentTitle: function() {
+
 		//set the document title
 		var title = app.models.docPackage.getTitle();
 		title = (title) ? title + " | ": "";
 		title += this.getCurrentNavigationItem().get('title');
 		document.title = title;
+
 	},
 
 	getCurrentNavigationItem: function(){

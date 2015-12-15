@@ -24,7 +24,7 @@ this["JST"]["app/oscitk/themes/Red/templates/app.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<!-- TOP -->\n<header class="hidden-print">\n\t<div id="header"></div>\n</header>\n\n<!-- BOTTOM -->\n<div id="navbar" class="hidden-print unselectable"></div>\n\n<!-- RIGHT -->\n<div id="toolbar" class="hidden-print"></div>\n\n<!-- CENTER -->\n<div id="loader" class="loader hidden-print">Loading...</div>\n\n<div class="container">\n\t<div id="section"></div>\n</div>\n\n<div id="navigation" class="hidden-print unselectable"></div>\n';
+__p += '<!-- TOP -->\n<header class="hidden-print">\n\t<div id="header"></div>\n</header>\n\n<!-- BOTTOM -->\n<div id="navbar" class="hidden-print unselectable"></div>\n\n<!-- RIGHT -->\n<div id="toolbar" class="hidden-print"></div>\n\n<!-- CENTER -->\n<div id="loader" class="loader hidden-print">Loading...</div>\n\n<div id="section-container" class="container">\n\t<div id="section"></div>\n</div>\n\n<div id="navigation" class="hidden-print unselectable"></div>\n';
 
 }
 return __p
@@ -119,7 +119,15 @@ this["JST"]["app/oscitk/themes/Red/templates/navbar.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<!--\n\npage / total\nprogress slider\nfont size selector\n1 or 2 col selector\n\n-->\n\n<nav class="navbar navbar-default">\n\t<div class="container-fluid">\n\n        <!-- Page number readout -->\n        <div class="pull-left" id="osci-navbar-text">10/250</div>\n\n        <!-- Page progress slider -->\n        <input class="pull-left" id="osci-page-slider" type="range" min="0" max="250" />\n\n        <!-- Two-page spread vs. single column -->\n        <div class="pull-right hidden-xs" id="osci-spread-selector">\n          <img src="images/one_column_icon.png" />\n          <img src="images/two_column_icon.png" /> \n        </div>\n\n        <!-- Font size area selector -->\n        <ul class="pull-right" id="font-size-area"></ul>\n\n\t</div>\n</nav>';
+__p += '<!--\n\npage / total\nprogress slider\nfont size selector\n1 or 2 col selector\n\n-->\n\n<nav class="navbar navbar-default">\n\t<div class="container-fluid">\n\n        <!-- Page number readout -->\n        <div class="pull-left" id="osci-navbar-text">' +
+((__t = ( curPage )) == null ? '' : __t) +
+'/' +
+((__t = ( numPages )) == null ? '' : __t) +
+'</div>\n\n        <!-- Page progress slider -->\n        <input class="pull-left" id="osci-page-slider" type="range" min="1" max="' +
+((__t = ( numPages )) == null ? '' : __t) +
+'" value="' +
+((__t = ( curPage )) == null ? '' : __t) +
+'" />\n\n        <!-- Two-page spread vs. single column -->\n        <div class="pull-right hidden-xs" id="osci-spread-selector">\n          <a href="javascript:;" id="osci-spread-single"><img src="images/one_column_icon.png" /></a>\n          <a href="javascript:;" id="osci-spread-double"><img src="images/two_column_icon.png" /></a>\n        </div>\n\n        <!-- Font size area selector -->\n        <ul class="pull-right" id="font-size-area"></ul>\n\n\t</div>\n</nav>';
 
 }
 return __p

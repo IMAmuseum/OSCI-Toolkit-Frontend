@@ -8051,36 +8051,47 @@ p, textarea {
 }
 
 /* line 1, ../_section.scss */
-.container {
-  margin-top: 15px;
-  margin-bottom: 15px;
+#section-container.container {
+  margin-top: calc(53px + 15px);
+  height: calc(100% - 50px - 53px - 30px );
 }
 
-/* line 6, ../_section.scss */
-body, .container {
+/* line 8, ../_section.scss */
+#section-container.container,
+body {
   overflow: hidden;
 }
 
-/* line 11, ../_section.scss */
+/* line 13, ../_section.scss */
+#reader {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* line 22, ../_section.scss */
 #section {
   overflow: auto;
   overflow-y: hidden;
+  width: 100%;
+  height: calc(100% + 30px);
+  margin-top: -15px;
+  margin-bottom: -15px;
+  padding: 15px;
   /*
   #default-section-view {
   	-webkit-transform: translateX(0);
   }
   */
-  width: 100%;
-  margin-top: 15px;
-  height: 100%;
 }
-/* line 15, ../_section.scss */
+/* line 26, ../_section.scss */
 #section #default-section-view {
-  overflow: auto;
-  overflow-y: hidden;
+  overflow: hidden;
   text-align: justify;
 }
-/* line 30, ../_section.scss */
+/* line 53, ../_section.scss */
 #section h2 {
   font-family: 'Lora', serif;
   font-size: 14px;
@@ -8089,7 +8100,7 @@ body, .container {
   text-transform: uppercase;
   color: #3c3c3c;
 }
-/* line 44, ../_section.scss */
+/* line 67, ../_section.scss */
 #section h3 {
   font-family: 'Lora', serif;
   font-weight: 700;
@@ -8099,19 +8110,16 @@ body, .container {
   margin-bottom: 16px;
   color: #3c3c3c;
 }
-/* line 58, ../_section.scss */
+/* line 81, ../_section.scss */
 #section p {
   font-family: 'Lora', serif;
   font-size: 16px;
   line-height: 29px;
   margin-bottom: 16px;
   color: #3c3c3c;
+  margin-left: 16px;
 }
-/* line 76, ../_section.scss */
-#section #section-view {
-  padding: 30px 40px;
-}
-/* line 80, ../_section.scss */
+/* line 95, ../_section.scss */
 #section #default-section-view {
   -webkit-columns: 2 300px;
   -moz-columns: 2 300px;
@@ -8119,8 +8127,9 @@ body, .container {
   -webkit-column-gap: 40px;
   -moz-column-gap: 40px;
   column-gap: 40px;
+  padding-right: 15px;
 }
-/* line 93, ../_section.scss */
+/* line 110, ../_section.scss */
 #section figure,
 #section figure .figure_content,
 #section figure .figure_content object,
@@ -8134,26 +8143,27 @@ body, .container {
   float: none !important;
   display: block;
   max-width: 100%;
+  line-height: 29px;
 }
-/* line 110, ../_section.scss */
+/* line 130, ../_section.scss */
 #section figure {
   max-height: 741px;
-  margin: auto auto;
+  margin: auto;
 }
-/* line 114, ../_section.scss */
+/* line 135, ../_section.scss */
 #section figure .figure_content {
   max-height: 711px;
 }
-/* line 117, ../_section.scss */
+/* line 138, ../_section.scss */
 #section figure .figure_content object {
   max-height: 711px;
 }
-/* line 120, ../_section.scss */
+/* line 141, ../_section.scss */
 #section figure .figure_content object img {
   max-height: 711px;
 }
 
-/* line 132, ../_section.scss */
+/* line 153, ../_section.scss */
 .footnote-reference {
   margin: 0 5px;
   display: inline-block;
@@ -8168,19 +8178,19 @@ body, .container {
   text-align: center;
   background: #b82927;
 }
-/* line 152, ../_section.scss */
+/* line 173, ../_section.scss */
 .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
   background: #810c0b;
 }
 
-/* line 162, ../_section.scss */
+/* line 183, ../_section.scss */
 .glossary-term:hover {
   cursor: hand;
 }
 
-/* line 168, ../_section.scss */
+/* line 189, ../_section.scss */
 .loader {
   margin: 80px auto;
   font-size: 10px;
@@ -8196,7 +8206,7 @@ body, .container {
   -webkit-animation: load8 1.1s infinite linear;
   animation: load8 1.1s infinite linear;
 }
-/* line 187, ../_section.scss */
+/* line 208, ../_section.scss */
 .loader, .loader:after {
   border-radius: 50%;
   width: 10em;
@@ -8741,19 +8751,59 @@ input[type=range]:focus::-ms-fill-upper {
 
 /* line 6, ../_figures.scss */
 #section #default-section-view figure {
-  margin: 20px;
   border: thin #f1f1f1 solid;
   padding: 6px;
+  			/*
+  
+  			&.left {
+  				float: left;
+  				margin-right: 50px;
+  			}
+  
+  			img.left {
+  				float: left;
+  				max-width: 100%;
+  				max-height: 50vh;
+  			}
+  
+  			&.right {
+  				float: right;
+  				margin-left: 40px;
+  			}
+  
+  			img.right {
+  				float: right;
+  				max-width: 100%;
+  				max-height: 50vh;
+  			}
+  
+  			&.plate,
+  			&.center {
+  
+  				width: 50%;
+  				max-width: 100%;
+  				margin-left: auto;
+  				margin-right: auto;
+  
+  				img, figcaption {
+  					width: 100%;
+  				}
+  
+  				@media (max-width: 768px) {
+  					width: 90%;
+  				}
+  			}
+  			*/
 }
-/* line 13, ../_figures.scss */
+/* line 11, ../_figures.scss */
 #section #default-section-view figure .figure_content img {
   border: 0;
 }
-/* line 18, ../_figures.scss */
+/* line 16, ../_figures.scss */
 #section #default-section-view figure figcaption {
   background: white;
 }
-/* line 22, ../_figures.scss */
+/* line 20, ../_figures.scss */
 #section #default-section-view figure figcaption p {
   font-family: 'Lora', serif;
   font-style: italic;
@@ -8761,45 +8811,6 @@ input[type=range]:focus::-ms-fill-upper {
   color: #3c3c3c;
   padding-top: 4px;
   margin: 0;
-}
-/* line 34, ../_figures.scss */
-#section #default-section-view figure.left {
-  float: left;
-  margin-right: 50px;
-}
-/* line 39, ../_figures.scss */
-#section #default-section-view figure img.left {
-  float: left;
-  max-width: 100%;
-  max-height: 50vh;
-}
-/* line 45, ../_figures.scss */
-#section #default-section-view figure.right {
-  float: right;
-  margin-left: 40px;
-}
-/* line 50, ../_figures.scss */
-#section #default-section-view figure img.right {
-  float: right;
-  max-width: 100%;
-  max-height: 50vh;
-}
-/* line 56, ../_figures.scss */
-#section #default-section-view figure.plate, #section #default-section-view figure.center {
-  width: 50%;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-/* line 64, ../_figures.scss */
-#section #default-section-view figure.plate img, #section #default-section-view figure.plate figcaption, #section #default-section-view figure.center img, #section #default-section-view figure.center figcaption {
-  width: 100%;
-}
-@media (max-width: 768px) {
-  /* line 56, ../_figures.scss */
-  #section #default-section-view figure.plate, #section #default-section-view figure.center {
-    width: 90%;
-  }
 }
 
 /* line 1, ../_overlay.scss */
@@ -8854,37 +8865,34 @@ input[type=range]:focus::-ms-fill-upper {
 
 /* line 5, ../_note-form.scss */
 .paragraph-controls {
-  height: 0;
-  right: 32px;
   position: relative;
-  top: 6px;
+  right: 0px;
+  top: 19px;
   z-index: 2;
 }
-
-/* line 13, ../_note-form.scss */
-.btn {
+/* line 15, ../_note-form.scss */
+.paragraph-controls .btn {
   text-transform: uppercase;
 }
-
-/* line 17, ../_note-form.scss */
-.paragraph-button {
+/* line 21, ../_note-form.scss */
+.paragraph-controls .paragraph-button {
   background-image: url(../../images/disk-grey.png);
-  background-size: 15px 15px;
   background-repeat: no-repeat;
+  background-size: 10px 10px;
+  width: 10px;
+  height: 10px;
   border: 0;
   font: 0/0 a;
   text-shadow: none;
   color: transparent;
-  width: 15px;
-  height: 15px;
 }
 
-/* line 29, ../_note-form.scss */
+/* line 43, ../_note-form.scss */
 .withNotes {
   background-image: url(../../images/disk-red.png);
 }
 
-/* line 33, ../_note-form.scss */
+/* line 47, ../_note-form.scss */
 #note-submit {
   margin-top: 10px;
 }
@@ -8933,13 +8941,33 @@ input[type=range]:focus::-ms-fill-upper {
   }
 
   /* line 6, ../_print.scss */
-  #section {
+  #section-container {
+    overflow: visible;
+    height: auto;
+    margin: auto;
+  }
+  /* line 12, ../_print.scss */
+  #section-container #section {
     page-break-before: always;
     height: auto !important;
+    width: auto;
+    margin: auto;
+    padding: auto;
+    overflow: visible;
     display: table;
   }
+  /* line 23, ../_print.scss */
+  #section-container #section #default-section-view {
+    -webkit-column-width: auto !important;
+    -moz-column-width: auto !important;
+    column-width: auto !important;
+    -webkit-column-count: auto !important;
+    -moz-column-count: auto !important;
+    column-count: auto !important;
+    width: auto !important;
+  }
 
-  /* line 12, ../_print.scss */
+  /* line 40, ../_print.scss */
   figure {
     page-break-inside: avoid;
     width: 100% !important;
@@ -8947,14 +8975,14 @@ input[type=range]:focus::-ms-fill-upper {
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
-  /* line 18, ../_print.scss */
+  /* line 48, ../_print.scss */
   figure img {
     max-width: 40% !important;
     max-height: inherit !important;
     float: none !important;
   }
 
-  /* line 25, ../_print.scss */
+  /* line 58, ../_print.scss */
   div, p, ul, ol {
     page-break-inside: avoid;
   }

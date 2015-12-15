@@ -11,15 +11,15 @@ font size selector
 	<div class="container-fluid">
 
         <!-- Page number readout -->
-        <div class="pull-left" id="osci-navbar-text">10/250</div>
+        <div class="pull-left" id="osci-navbar-text"><%= curPage %>/<%= numPages %></div>
 
         <!-- Page progress slider -->
-        <input class="pull-left" id="osci-page-slider" type="range" min="0" max="250" />
+        <input class="pull-left" id="osci-page-slider" type="range" min="1" max="<%= numPages %>" value="<%= curPage %>" />
 
         <!-- Two-page spread vs. single column -->
         <div class="pull-right hidden-xs" id="osci-spread-selector">
-          <img src="images/one_column_icon.png" />
-          <img src="images/two_column_icon.png" /> 
+          <a href="javascript:;" id="osci-spread-single"><img src="images/one_column_icon.png" /></a>
+          <a href="javascript:;" id="osci-spread-double"><img src="images/two_column_icon.png" /></a>
         </div>
 
         <!-- Font size area selector -->

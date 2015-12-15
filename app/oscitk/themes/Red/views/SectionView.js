@@ -47,71 +47,17 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         });
 
+        this.listenTo(Backbone, 'setSectionColumns', function( columnCount ) {
+
+            $('#section').attr('data-columns-setting', columnCount );
+            this.renderColumns();
+
+        });
+
         // Set maximum height on figures to make sure they don't overflow their columns
         this.listenTo(Backbone, 'windowResized', function() {
 
-            var sh = $('#section').height();
-            $('figure').each( function( i, e ) {
-
-                // set max-height of figure equal to #section height
-                var $e = $(e);
-                    $e.css('max-height', sh );
-
-                var $c = $e.find('figcaption');
-
-                // account for the figcaption when setting max height of inner elements
-                var ch = $c.outerHeight();
-                    $e.find('.figure_content,object,img').css('max-height', sh - ch);
-
-                // now, constrain the width of the figure caption
-                var iw = $e.find('img').outerWidth();
-                    $c.css('max-width', iw );
-
-                
-                // set column gap here so that it's readily accessible
-                var cg = 40;
-                $('#default-section-view').css({
-                    '-webkit-column-gap': cg,
-                       '-moz-column-gap': cg,
-                            'column-gap': cg
-                });
-
-
-                // set the width of the columns in #section to equal 1/2 of #section width
-                
-                var sw = $('#section').width();
-                    console.log( $('#section').width(), $('#section').outerWidth(), $('#section').innerWidth() );
-                    cw = (sw/2) - cg/2; // account for one gap
-                    
-                    console.log( cw );
-
-                $('#default-section-view').css({
-                    '-webkit-column-width': cw,
-                       '-moz-column-width': cw,
-                            'column-width': cw
-                }); 
-
-
-                var ch = 0; var i = 2;
-                do {
-
-                    $('#default-section-view').css({
-                        '-webkit-column-count': i.toString(),
-                           '-moz-column-count': i.toString(),
-                                'column-count': i.toString()
-                    }); 
-
-
-                         $('#default-section-view').width( i * cw + (i - 1) * cg);
-
-                    ch = $('#default-section-view').height();
-                    i+=1;
-
-                } while( ch > $('#section').height() );
-              
-
-            });
-
+            this.renderColumns();
             //this.render();
 
         });
@@ -143,6 +89,103 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         return true;
     },
 
+    renderColumns: function(  ) {
+
+        var sh = $('#section').height();
+
+        $('figure').each( function( i, e ) {
+
+            // set max-height of figure equal to #section height
+            var $e = $(e);
+                $e.css('max-height', sh );
+
+            var $c = $e.find('figcaption');
+
+            // account for the figcaption when setting max height of inner elements
+            var ch = $c.outerHeight();
+                $e.find('.figure_content,object,img').css('max-height', sh - ch - 10);
+
+            // now, constrain the width of the figure caption
+            $e.css('max-width', 'none' );            
+
+            var iw = $e.find('img').outerWidth();
+                $c.css('max-width', iw );
+
+            $e.css('max-width', iw );
+
+        }); 
+            
+        // set column gap here so that it's readily accessible
+        var cg = 40;
+        $('#default-section-view').css({
+            '-webkit-column-gap': cg,
+               '-moz-column-gap': cg,
+                    'column-gap': cg
+        });
+
+
+        // Determine column count
+        var cc = $('#section').attr('data-columns-setting');
+
+        if( typeof cc === 'undefined' ) {
+            cc = 2;
+        }else{
+            cc = parseInt( cc );
+        }
+
+        if( $(window).width() < 768 ) {
+            cc = 1;
+        }
+
+        $('#section').attr('data-columns-rendered', cc );
+
+
+        // Reset the stats of #default-section-view
+        $('#default-section-view').css({
+            '-webkit-column-width': 'auto',
+               '-moz-column-width': 'auto',
+                    'column-width': 'auto',
+            '-webkit-column-count': 'auto',
+               '-moz-column-count': 'auto',
+                    'column-count': 'auto',
+                           'width': 'auto'
+        });
+
+        // set the width of the columns in #section to equal 1/2 of #section width
+        var sw = $('#section').width();
+        var cw = (sw/cc) - cg/2; // account for one gap
+        
+
+        //console.log( cw );
+
+        $('#default-section-view').css({
+            '-webkit-column-width': cw,
+               '-moz-column-width': cw,
+                    'column-width': cw
+        }); 
+
+        // ENSURE THIS NEVER FAILS
+        var ch = 0; var i = cc;
+        do {
+
+            $('#default-section-view').css({
+                '-webkit-column-count': i.toString(),
+                   '-moz-column-count': i.toString(),
+                        'column-count': i.toString()
+            }); 
+
+            //console.log( i );
+            $('#default-section-view').width( i * cw + (i - 1) * cg);
+
+            ch = $('#default-section-view').height();
+            i+=1;
+
+        } while( ch > $('#section').height() );
+
+        // see NavigationView.js
+        Backbone.trigger("columnsComplete");
+
+    },
 
     // Get section sectionTitle, subtitle, and thumbnail for use in template
     getSectionTitles: function(sectionId) {
@@ -181,10 +224,11 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         // numPages is for NavigationView.js -- remove if it's not used
         // Backbone.trigger("layoutComplete", { numPages : this.model.get('pages').length } );
+
         Backbone.trigger("layoutComplete");
 
         // Used to ensure that all figures are of a conistent width
-        $(window).load( function() {
+        $('img').load( function() {
             Backbone.trigger("windowResized");
         });
 
