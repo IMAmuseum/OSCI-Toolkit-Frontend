@@ -12,12 +12,17 @@ OsciTk.views.TocToolbar = OsciTk.views.BaseView.extend({
 		});
 	},
 	render: function() {
+
 		this.$el.html(this.template({
 			items: app.collections.navigationItems.where({depth: 0})
 		}));
+
 		return this;
+
 	},
+
 	itemClick: function(event) {
+
 		event.preventDefault();
 
 		// console.log( 'section clicked' );
@@ -29,10 +34,10 @@ OsciTk.views.TocToolbar = OsciTk.views.BaseView.extend({
 		Backbone.trigger("toolbarRemoveViews");
 
 		// TODO: don't really want to address the appRouter directly
-		app.router.navigate("section/" + sectionId, {trigger: true});
+		app.router.navigate("section/" + sectionId, { trigger: true } );
 
 		// This opens the menu again so that the user can pick another chapter
-		app.views.toolbarView.$el.find('li.tocView-toolbar-item').click();
+		app.views.toolbarView.$el.find('li.tocToolbarView-toolbar-item').click();
 
 	},
 

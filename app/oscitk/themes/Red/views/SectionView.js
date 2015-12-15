@@ -86,6 +86,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         });
 
+
+
         return true;
     },
 

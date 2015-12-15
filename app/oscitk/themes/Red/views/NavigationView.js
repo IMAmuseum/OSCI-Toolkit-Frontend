@@ -61,8 +61,20 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		});
 
+		/*
+		// #section ==
+        var lastScrollLeft = $('#section').scrollLeft();
+        $('#section').scroll(function() {
+
+            var sectionScrollLeft = $('#section').scrollLeft();
+            if( lastScrollLeft != sectionScrollLeft ) {
+                lastScrollLeft  = sectionScrollLeft;
+            }
 
 
+
+        });
+		*/
 
 		// Respond to keyboard events
 		var that = this;
@@ -77,12 +89,15 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
     		event.preventDefault();
 
 			switch(event.which) {
+
 				case 39:
 					that.page += 1;
 				break;
+
 				case 37:
 					that.page -= 1;
 				break;
+
 			}
 
 			Backbone.trigger('navigate', { page: that.page } );
