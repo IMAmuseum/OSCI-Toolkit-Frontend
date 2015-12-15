@@ -62,6 +62,13 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             //Backbone.trigger('notesLoaded', 'resized');
         });
 
+        this.listenTo(Backbone, 'navigate', function() {
+
+            console.log( "ParagraphControlsView caught navigate" );
+            $('[id^="paragraph-"]').popover('destroy');
+
+        });
+
     },
 
     render: function() {
@@ -136,8 +143,16 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
         var popover = this.template({noteForm: noteForm, citation: this.citation});
         $('#paragraph-'+data).popover({html:true, trigger:'manual', placement:'right', content: popover});
+
+        // Set focus on the Notes textarea once the popover has toggled
+        $('#paragraph-'+data).on('shown.bs.popover', function() {
+            $('#' + $(this).attr('aria-describedby') ).find('textarea').focus();
+        });
+
         $('#paragraph-'+data).popover('toggle');
 
+
+        
         //step through paragraphs and destroy existing open popovers
         var i = 1;
         _.each(this.paragraphs, function(paragraph) {
