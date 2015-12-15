@@ -8833,13 +8833,40 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 /* line 3, ../_paragraph-popover.scss */
-.popover-content {
+.popover {
+  border-radius: 10px;
+  border: thin solid transparent;
+  background-color: #b82927;
+}
+/* line 11, ../_paragraph-popover.scss */
+.popover.right > .arrow, .popover.right > .arrow:after {
+  border-right-color: #b82927;
+}
+/* line 16, ../_paragraph-popover.scss */
+.popover .popover-content {
+  padding: 0;
+}
+/* line 21, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper {
   padding: 9px;
   max-width: 200px;
   max-height: 240px;
+  font-family: 'Lato', sans-serif;
 }
-/* line 9, ../_paragraph-popover.scss */
-.popover-content textarea {
+/* line 31, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper .nav li a {
+  color: white;
+}
+/* line 33, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper .nav li a:hover {
+  color: #3c3c3c;
+}
+/* line 39, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper .nav li.active a {
+  color: #3c3c3c;
+}
+/* line 47, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper textarea {
   border: none;
   font-size: 14px;
   color: #333;
@@ -8847,13 +8874,15 @@ input[type=range]:focus::-ms-fill-upper {
   height: 115px;
   width: 100%;
 }
-/* line 18, ../_paragraph-popover.scss */
-.popover-content button {
+/* line 57, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper button {
   font-size: 15px;
   font-weight: 200;
+  background-color: #810c0b;
+  border: thin solid transparent;
 }
 
-/* line 25, ../_paragraph-popover.scss */
+/* line 68, ../_paragraph-popover.scss */
 .tab-content {
   height: 160px;
 }
@@ -8912,8 +8941,10 @@ input[type=range]:focus::-ms-fill-upper {
   margin-bottom: 5px;
 }
 /* line 18, ../_citation.scss */
-.citation-wrapper .citations .citation p {
-  font-size: 10px;
+.citation-wrapper .citations .citation > p {
+  font-size: 12px !important;
+  line-height: 14px !important;
+  font-family: 'Lato', sans-serif !important;
   /* Breaking long URLs */
   white-space: pre !important;
   /* CSS 2.0 */

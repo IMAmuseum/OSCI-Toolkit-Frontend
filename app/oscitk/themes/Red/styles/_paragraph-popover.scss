@@ -1,25 +1,68 @@
 $popover-height: 160px;
 
-.popover-content {
+.popover {
 
-	padding: 9px;
-	max-width: 200px;
-	max-height: 240px;
+	border-radius: 10px;
+	border: thin solid transparent;
 
-	textarea {
-		border: none;
-		font-size: 14px;
-		color: #333;
-		padding: 5px;
-		height: 115px;
-		width: 100%;
+	background-color: $color-light-red;
+
+	&.right > .arrow {
+		&, &:after {
+			border-right-color: $color-light-red;
+		}
 	}
 
-	button {
-		font-size: 15px;
-		font-weight: 200;
-	}
+	.popover-content {
 
+		padding: 0;
+
+
+		.popover-wrapper {
+
+			padding: 9px;
+			max-width: 200px;
+			max-height: 240px;
+
+			font-family: 'Lato', sans-serif;
+
+			.nav {
+				li {
+					a {
+						color: white;
+						&:hover {
+							color: #3c3c3c;
+						}
+					}
+
+					&.active {
+						a {
+							color: #3c3c3c;
+						}
+					}
+
+				}
+			}
+
+			textarea {
+				border: none;
+				font-size: 14px;
+				color: #333;
+				padding: 5px;
+				height: 115px;
+				width: 100%;
+
+			}
+
+			button {
+				font-size: 15px;
+				font-weight: 200;
+				background-color: $color-dark-red;
+				border: thin solid transparent;
+			}
+
+		}
+	}
 }
 
 .tab-content {

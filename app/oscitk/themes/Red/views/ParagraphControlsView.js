@@ -135,7 +135,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         var noteForm = this.templateNotes({paragraph_number: note.get('paragraph_number'), note: noteText, cid: note.cid});
 
         var popover = this.template({noteForm: noteForm, citation: this.citation});
-        $('#paragraph-'+data).popover({html:true, trigger:'manual', placement:'top', content: popover});
+        $('#paragraph-'+data).popover({html:true, trigger:'manual', placement:'right', content: popover});
         $('#paragraph-'+data).popover('toggle');
 
         //step through paragraphs and destroy existing open popovers
