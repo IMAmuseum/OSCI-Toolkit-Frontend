@@ -25,4 +25,5 @@ OsciTk.views.ParagraphPopover = OsciTk.views.BaseView.extend({
     getCitation: function() {
         console.log('getCite');
     }
+    
 });

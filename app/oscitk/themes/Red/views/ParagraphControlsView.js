@@ -7,28 +7,58 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
         // when layout is complete add numbers for paragraph controls
         this.listenTo(Backbone, 'layoutComplete', function() {
+
+            console.log( "ParagraphControlsView caught layoutComplete" );
+
             //console.log('layout complete caught');
             this.sectionId = app.models.section.get('id');
+
         });
 
         this.listenTo(Backbone, 'notesLoaded', function(params) {
+
+            console.log( "ParagraphControlsView caught notesLoaded" );
+            
             //console.log('notesLoaded caught');
             this.notesLoaded = false;
-            if (params.length > 0 || params == 'resized') {
+
+            //console.log( params );
+
+            // if (params.length > 0 || params == 'resized') {
                 if (app.account.get('email') != null) {
                     this.notesLoaded = true;
                 }
-            }
+            //}
+
             //console.log( this.notesLoaded );
             this.render();
+
         });
 
+        /*
         this.listenTo(Backbone, 'paragraphClicked', function(data) {
+
+            console.log( "ParagraphControlsView caught paragraphClicked" );
+            
             this.togglePopover(data);
             this.getCitation(data);
-        });
 
+        });
+        */
+
+        this.listenTo(Backbone, 'paragraphButtonClicked', function(data) {
+
+            console.log( "ParagraphControlsView caught paragraphButtonClicked" );
+
+            this.togglePopover(data);
+            this.getCitation(data);           
+
+        });
+        
         this.listenTo(Backbone, 'windowResized', function() {
+
+            console.log( "ParagraphControlsView caught windowResized" );
+
             //Backbone.trigger('notesLoaded', 'resized');
         });
 
@@ -36,18 +66,28 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
     render: function() {
 
+        console.log( "ParagraphControlsView rendering..." );
+
+        //console.log( app.account.get('email'), this.notesLoaded );
+
         if ( app.account.get('email') != null && this.notesLoaded) {
             this.paragraphs = $('.content-paragraph');
             this.addParagraphControls();
         }
 
         return this;
+
     },
 
     addParagraphControls: function() {
+
+        console.log( "ParagraphControlsView calls addParagraphControls" );
+
         // get all paragraph with id and append controls
         var i = 1;
+
         _.each(this.paragraphs, function(paragraph) {
+
             var note = this.checkForNote({
                 content_id: 'osci-content-'+i,
                 section_id: this.sectionId,
@@ -63,11 +103,15 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
                 '</button>'+
                 '</div>'
             );
+
             i++;
+
         }, this);
+
     },
 
     togglePopover: function (data) {
+
         this.data = data;
 
         var note = this.checkForNote({
@@ -106,8 +150,10 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
     },
 
     checkForNote: function (data) {
+
         var note;
         var notes = app.collections.notes.where({content_id: data.content_id});
+
         if (notes[0]) {
             note = notes[0];
         } else {
@@ -118,7 +164,9 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             });
             app.collections.notes.add(note);
         }
+
         return note;
+
     },
 
     getCitation: function(data) {
@@ -142,6 +190,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             data: citationRequestParams,
             success: function(data, status) {
                 if (data.success) {
+
                     //add reference text to the response
                     data.citation.referenceText = content.text();
                     data.citation.url = document.URL + "/p-" + app.models.section.get('id') + "-" + content.data('paragraph_number');
@@ -159,6 +208,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
                     data.citation.title = data.citation.title ? data.citation.title : '';
 
                     $('#cite').html(citationView.templateCites(data.citation));
+
                 }
             }
         });

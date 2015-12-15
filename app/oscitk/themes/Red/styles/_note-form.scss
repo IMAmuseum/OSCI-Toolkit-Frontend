@@ -4,11 +4,12 @@
 
 .paragraph-controls {
 
-	position: relative;
+	//position: relative;
+	//right: 0px;
+	//top: 19px;
 
-
-	right: 0px;
-	top: 19px;
+	float: left;
+	margin-top: 9px;
 
 	z-index: 2;
 

@@ -74,7 +74,7 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 
 	},
 	closeToolbar: function(e) {
-		console.log( this.$el.parent() );
+		// console.log( this.$el.parent() );
 		this.$el.parent().hide("slide", {direction: "right"}, 350 );
 	}
 

@@ -8865,16 +8865,15 @@ input[type=range]:focus::-ms-fill-upper {
 
 /* line 5, ../_note-form.scss */
 .paragraph-controls {
-  position: relative;
-  right: 0px;
-  top: 19px;
+  float: left;
+  margin-top: 9px;
   z-index: 2;
 }
-/* line 15, ../_note-form.scss */
+/* line 16, ../_note-form.scss */
 .paragraph-controls .btn {
   text-transform: uppercase;
 }
-/* line 21, ../_note-form.scss */
+/* line 22, ../_note-form.scss */
 .paragraph-controls .paragraph-button {
   background-image: url(../../images/disk-grey.png);
   background-repeat: no-repeat;
@@ -8887,12 +8886,12 @@ input[type=range]:focus::-ms-fill-upper {
   color: transparent;
 }
 
-/* line 43, ../_note-form.scss */
+/* line 44, ../_note-form.scss */
 .withNotes {
   background-image: url(../../images/disk-red.png);
 }
 
-/* line 47, ../_note-form.scss */
+/* line 48, ../_note-form.scss */
 #note-submit {
   margin-top: 10px;
 }

@@ -3,7 +3,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     template: OsciTk.templateManager.get('section'),
     events: {
         'click .content-paragraph': 'paragraphClicked',
-        'click .paragraph-button': 'paragraphClicked',
+        'click .paragraph-button': 'paragraphButtonClicked',
         'click #note-submit': 'noteSubmit',
         'click #cite': 'getCitation',
     },
@@ -458,6 +458,19 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
             var id = $(e.currentTarget).data('paragraph_number');
             Backbone.trigger('paragraphClicked', id);
+
+        }
+
+    },
+
+    // Trigger a paragraph clicked event (pops up a cite / note box)
+    paragraphButtonClicked: function(e) {
+
+        // Checks if the user is logged in
+        if ( app.account.get('email') != null) {
+
+            var id = $(e.currentTarget).data('paragraph_number');
+            Backbone.trigger('paragraphButtonClicked', id);
 
         }
 
