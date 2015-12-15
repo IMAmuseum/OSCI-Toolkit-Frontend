@@ -8867,13 +8867,14 @@ input[type=range]:focus::-ms-fill-upper {
 .paragraph-controls {
   float: left;
   margin-top: 9px;
+  margin-left: -16px;
   z-index: 2;
 }
-/* line 16, ../_note-form.scss */
+/* line 17, ../_note-form.scss */
 .paragraph-controls .btn {
   text-transform: uppercase;
 }
-/* line 22, ../_note-form.scss */
+/* line 23, ../_note-form.scss */
 .paragraph-controls .paragraph-button {
   background-image: url(../../images/disk-grey.png);
   background-repeat: no-repeat;
@@ -8885,13 +8886,12 @@ input[type=range]:focus::-ms-fill-upper {
   text-shadow: none;
   color: transparent;
 }
-
-/* line 44, ../_note-form.scss */
-.withNotes {
+/* line 37, ../_note-form.scss */
+.paragraph-controls .paragraph-button.withNotes {
   background-image: url(../../images/disk-red.png);
 }
 
-/* line 48, ../_note-form.scss */
+/* line 47, ../_note-form.scss */
 #note-submit {
   margin-top: 10px;
 }

@@ -54,7 +54,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             this.getCitation(data);           
 
         });
-        
+
         this.listenTo(Backbone, 'windowResized', function() {
 
             console.log( "ParagraphControlsView caught windowResized" );
@@ -96,7 +96,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
             var hasNotes = note.get('note') ? 'withNotes' : '';
 
-            $(paragraph).before(
+            $(paragraph).prepend(
                 '<div class="paragraph-controls hidden-print" data-osci_content_id="osci-content-'+i+'" data-paragraph_identifier="'+i+'" >'+
                 '<button class="btn btn-link '+ hasNotes +' btn-xs paragraph-button" type="button" id="paragraph-'+i+'" data-paragraph_number="'+i+'">'+
                 '<span class="paragraph-identifier" paragraph-identifier="'+i+'">'+i+'</span>'+

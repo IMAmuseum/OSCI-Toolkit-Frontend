@@ -10,6 +10,7 @@
 
 	float: left;
 	margin-top: 9px;
+	margin-left: -16px;
 
 	z-index: 2;
 
@@ -33,17 +34,15 @@
 		text-shadow: none;
 		color: transparent;
 
+		&.withNotes {
+			background-image: url(../../images/disk-red.png);
+		}
+
 	}
 
 }
 
 
-
-
-
-.withNotes {
-	background-image: url(../../images/disk-red.png);
-}
 
 #note-submit {
 	margin-top: 10px;

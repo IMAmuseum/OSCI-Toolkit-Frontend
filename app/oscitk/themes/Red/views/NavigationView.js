@@ -68,7 +68,13 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		var that = this;
 		$(document).keydown(function(event) {
 
-			event.preventDefault();
+			// Don't trigger this if the cursor is in an input field
+			var em = event.target.nodeName.toLowerCase();
+			if( em === 'input' || em === 'textarea' ){
+       			 return;
+    		}
+
+    		event.preventDefault();
 
 			switch(event.which) {
 				case 39:
