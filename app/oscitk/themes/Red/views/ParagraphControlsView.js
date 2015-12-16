@@ -5,78 +5,79 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
     initialize: function() {
 
+
+        // Just some shorthands
+        this.notesLoaded = false;
+        this.userLogged = false;
+
         // when layout is complete add numbers for paragraph controls
         this.listenTo(Backbone, 'layoutComplete', function() {
-
             console.log( "ParagraphControlsView caught layoutComplete" );
-
             this.sectionId = app.models.section.get('id');
-
         });
 
         this.listenTo(Backbone, 'notesLoaded', function(params) {
-
             console.log( "ParagraphControlsView caught notesLoaded" );
-            
-            this.notesLoaded = false;
+            this.notesLoaded = true;
+            this.render();
+        });
 
-            //console.log( params );
+        this.listenTo(Backbone, 'accountReady accountStateChanged', function() {
+            console.log( "ParagraphControlsView caught account actions" );
 
-            // if (params.length > 0 || params == 'resized') {
-                if (app.account.get('email') != null) {
-                    this.notesLoaded = true;
-                }
-            //}
+            this.userLogged = app.account.get('id') > 0;
+
+            // Force re-load of Notes, see ../../../collections/NotesCollection.js
+            if( this.userLogged ) {
+
+                var section_id = app.models.section.id;
+                app.collections.notes.getNotesForSection( section_id );
+
+            }
 
             this.render();
-
         });
+
 
         /*
         this.listenTo(Backbone, 'paragraphClicked', function(data) {
-
             console.log( "ParagraphControlsView caught paragraphClicked" );
-            
             this.togglePopover(data);
             this.getCitation(data);
-
         });
         */
 
         this.listenTo(Backbone, 'paragraphButtonClicked', function(data) {
-
             console.log( "ParagraphControlsView caught paragraphButtonClicked" );
-
             this.togglePopover(data);
             this.getCitation(data);           
-
-        });
-
-        this.listenTo(Backbone, 'windowResized', function() {
-
-            console.log( "ParagraphControlsView caught windowResized" );
-
-            //Backbone.trigger('notesLoaded', 'resized');
         });
 
         this.listenTo(Backbone, 'navigate', function() {
-
             console.log( "ParagraphControlsView caught navigate" );
             $('[id^="paragraph-"]').popover('destroy');
-
         });
 
     },
+
 
     render: function() {
 
         console.log( "ParagraphControlsView rendering..." );
 
-        //console.log( app.account.get('email'), this.notesLoaded );
 
-        if ( app.account.get('email') != null && this.notesLoaded) {
+        console.log( this.userLogged, this.notesLoaded );
+
+        if ( this.userLogged && this.notesLoaded) {
+
             this.paragraphs = $('.content-paragraph');
             this.addParagraphControls();
+
+        }else{
+
+            $('[id^="paragraph-"]').popover('destroy');
+            $('.paragraph-controls').remove();
+
         }
 
         return this;

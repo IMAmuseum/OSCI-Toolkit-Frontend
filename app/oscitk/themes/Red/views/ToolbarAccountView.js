@@ -59,16 +59,29 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 			success: function(data) {
 
 				if (data.success === true) {
+
 					// user was logged in, set the returned user data
-					accountView.model.set(data.user);
+					
+					accountView.model.set( {
+						username: data.user.username,
+						email: data.user.email,
+						id: parseInt(data.user.id)
+					});
+
 					accountView.showProfile();
+
+					Backbone.trigger("accountStateChanged");
+
 				}
 				else {
+
 					// user was not logged in, show error
 					accountView.$el.find('div.form-error').html(data.error);
+
 				}
 
 			}
+
 		});
 		
 	},
@@ -78,17 +91,23 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 		// alias this for use in ajax callback
 		var accountView = this;
 		$.ajax({
+
 			url: app.config.get('endpoints').OsciTkAccount,
 			data: {action: 'logout'},
 			type: 'POST',
 			dataType: 'json',
 			success: function(data) {
 
-				accountView.model.set(data.user);
+				// The data returned doesn't quite match the js model
+				// { email: null, id: "1", uid: 0, username: "anonymous" }
+
+				accountView.model.set( accountView.model.defaults );
 				accountView.showLoginForm();
-				app.account.set({'email': null});
+
+				Backbone.trigger("accountStateChanged");
 
 			}
+
 		});
 
 	},
@@ -112,13 +131,21 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 			success: function(data) {
 
 				if (data.success === true) {
+
+
+
 					// user was logged in, set the returned user data
 					accountView.model.set(data.user);
 					accountView.showProfile();
+
+					Backbone.trigger("accountStateChanged");
+
 				}
 				else {
+
 					// user was not logged in, show error
 					accountView.$el.find('div.form-error').html(data.error);
+
 				}
 
 			}
