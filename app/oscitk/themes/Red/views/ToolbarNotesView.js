@@ -10,31 +10,33 @@ OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
 
 	initialize: function() {
 
+
 		// re-render this view when collection changes
 		this.listenTo(app.collections.notes, 'add remove change', function() {
 			console.log('ToolbarNotesView caught change in app.collecions.notes');
 			this.render();
 		});
 
-
+		// remove all notes when the user logs out
 		this.listenTo( Backbone, 'accountStateChanged', function() {
-
-			// This removes all notes when the user logs out
+			
 			if( app.account.get('id') < 1 ) {
 				app.collections.notes.reset();
 			}
 
 			this.render();
 
-
 		});
+
+		// This just tells the user to login 
+		this.render();
 		
 	},
 
 	render: function() {
+
 		var notes = this.getSavedNotes();
-		this.$el.html(this.template({notes: notes}));
-		this.active();
+		this.$el.html( this.template( { notes: notes } ) );
 
 		return this;
 	},
@@ -61,21 +63,9 @@ OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
 			return false;
 		});
 
+		console.log( app.collections.notes );
+
 		return notes;
-
-	},
-
-	active: function() {
-
-		/*
-
-		// Set the width of the notes reel if there is more than one note
-		if (app.collections.notes.length > 1) {
-			var notes = this.$el.find('.notesListItem');
-			this.$el.find('.notesList').width(notes.length * (notes.first().outerWidth(true)));
-		}
-
-		*/
 
 	}
 

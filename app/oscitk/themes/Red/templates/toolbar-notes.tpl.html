@@ -1,5 +1,6 @@
 <h3>Notes</h3>
 <div class="notesReel">
+	<% if (notes.length > 0) { %>
 	<ul class="notesList">
 		<% _.each(notes, function(note) { %>
 			<li class="notesListItem">
@@ -18,4 +19,11 @@
 			</li>
 		<% }); %>
 	</ul>
+	<% } else { %>
+		<% if (app.account.get('id') > 0 ) { %>
+			<p>No notes found for this section.</p>
+		<% } else { %>
+			<p>Login to see your notes for this section.</p>
+		<% } %>
+	<% } %>
 </div>

@@ -370,7 +370,9 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<h3>Notes</h3>\n<div class="notesReel">\n\t<ul class="notesList">\n\t\t';
+__p += '<h3>Notes</h3>\n<div class="notesReel">\n\t';
+ if (notes.length > 0) { ;
+__p += '\n\t<ul class="notesList">\n\t\t';
  _.each(notes, function(note) { ;
 __p += '\n\t\t\t<li class="notesListItem">\n\t\t\t\t<div class="the-note">\n\t\t\t\t\t<span class="note-content">' +
 ((__t = ( note.get('note') )) == null ? '' : __t) +
@@ -390,7 +392,17 @@ __p += '\n\t\t\t\t<div class="note-buttons">\n\t\t\t\t\t<a href="#" class="noteL
 ((__t = ( note.get('content_id') )) == null ? '' : __t) +
 '">Edit</a> -->\n\t\t\t\t</div>\n\t\t\t</li>\n\t\t';
  }); ;
-__p += '\n\t</ul>\n</div>';
+__p += '\n\t</ul>\n\t';
+ } else { ;
+__p += '\n\t\t';
+ if (app.account.get('id') > 0 ) { ;
+__p += '\n\t\t\t<p>No notes found for this section.</p>\n\t\t';
+ } else { ;
+__p += '\n\t\t\t<p>Login to see your notes for this section.</p>\n\t\t';
+ } ;
+__p += '\n\t';
+ } ;
+__p += '\n</div>';
 
 }
 return __p
