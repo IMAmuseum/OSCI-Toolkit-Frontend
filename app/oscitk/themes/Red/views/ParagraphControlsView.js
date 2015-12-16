@@ -22,6 +22,9 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             this.render();
         });
 
+
+        // Whenever something happens to the account, try to reload the notes
+        // See ToolbarAccountView.js for more info
         this.listenTo(Backbone, 'accountReady accountStateChanged', function() {
             console.log( "ParagraphControlsView caught account actions" );
 
@@ -36,8 +39,11 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             }
 
             this.render();
+
         });
 
+
+        // Clicking on the paragraph does nothing
 
         /*
         this.listenTo(Backbone, 'paragraphClicked', function(data) {
@@ -47,12 +53,15 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         });
         */
 
+        
+        // Clicking on the disc enables the popover
         this.listenTo(Backbone, 'paragraphButtonClicked', function(data) {
             console.log( "ParagraphControlsView caught paragraphButtonClicked" );
             this.togglePopover(data);
             this.getCitation(data);           
         });
 
+        // When the user scrolls, destroy the popover
         this.listenTo(Backbone, 'navigate', function() {
             console.log( "ParagraphControlsView caught navigate" );
             $('[id^="paragraph-"]').popover('destroy');
@@ -66,8 +75,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         console.log( "ParagraphControlsView rendering..." );
 
 
-        console.log( this.userLogged, this.notesLoaded );
-
+        // This is the final check; based on log-in status, this toggles the notes
         if ( this.userLogged && this.notesLoaded) {
 
             this.paragraphs = $('.content-paragraph');

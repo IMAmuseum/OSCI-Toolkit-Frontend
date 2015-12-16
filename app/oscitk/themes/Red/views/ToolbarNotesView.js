@@ -9,10 +9,26 @@ OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
 	},
 
 	initialize: function() {
+
 		// re-render this view when collection changes
 		this.listenTo(app.collections.notes, 'add remove change', function() {
+			console.log('ToolbarNotesView caught change in app.collecions.notes');
 			this.render();
 		});
+
+
+		this.listenTo( Backbone, 'accountStateChanged', function() {
+
+			// This removes all notes when the user logs out
+			if( app.account.get('id') < 1 ) {
+				app.collections.notes.reset();
+			}
+
+			this.render();
+
+
+		});
+		
 	},
 
 	render: function() {
