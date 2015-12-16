@@ -10,7 +10,6 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
             console.log( "ParagraphControlsView caught layoutComplete" );
 
-            //console.log('layout complete caught');
             this.sectionId = app.models.section.get('id');
 
         });
@@ -19,7 +18,6 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
             console.log( "ParagraphControlsView caught notesLoaded" );
             
-            //console.log('notesLoaded caught');
             this.notesLoaded = false;
 
             //console.log( params );
@@ -30,7 +28,6 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
                 }
             //}
 
-            //console.log( this.notesLoaded );
             this.render();
 
         });

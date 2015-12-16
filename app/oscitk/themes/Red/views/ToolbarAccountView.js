@@ -12,17 +12,23 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 	},
 	className: 'toolbar-account-view',
 	template: null,
-	initialize: function() {
-		// this.listenTo(Backbone, 'accountReady', function() {
 
-		// });
-		this.model = app.account;
-		this.render();
+	initialize: function() {
+
+		// see ../../../models/AccountModel.js
+		this.listenTo(Backbone, 'accountReady', function(sectionModel) {
+			this.model = app.account;
+			this.render();
+		});
+
 		this.listenTo(Backbone, 'sectionLoaded', function(sectionModel) {
 			this.sectionId = sectionModel.get('id');
 		});
+
 	},
+
 	render: function() {
+
 		// determine if user is logged in.  Show login form or user details
 		if (this.model.get('id') > 0) {
 			this.showProfile();
@@ -30,8 +36,11 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 		else {
 			this.showLoginForm();
 		}
+
 		return this;
+
 	},
+
 	login: function() {
 
 		// alias this for use in ajax callbacks
@@ -48,6 +57,7 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 			type: 'POST',
 			dataType: 'json',
 			success: function(data) {
+
 				if (data.success === true) {
 					// user was logged in, set the returned user data
 					accountView.model.set(data.user);
@@ -57,11 +67,14 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 					// user was not logged in, show error
 					accountView.$el.find('div.form-error').html(data.error);
 				}
+
 			}
 		});
 		
 	},
+
 	logout: function() {
+
 		// alias this for use in ajax callback
 		var accountView = this;
 		$.ajax({
@@ -70,19 +83,26 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 			type: 'POST',
 			dataType: 'json',
 			success: function(data) {
+
 				accountView.model.set(data.user);
 				accountView.showLoginForm();
 				app.account.set({'email': null});
+
 			}
 		});
+
 	},
+
 	register: function() {
+
 		// alias for callbacks
 		var accountView = this;
+
 		// get user/pass from form
 		var username = this.$el.find('#username').val();
 		var password = this.$el.find('#password').val();
 		var email = this.$el.find('#email').val();
+
 		// send registration request
 		$.ajax({
 			url: app.config.get('endpoints').OsciTkAccount,
@@ -90,6 +110,7 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 			type: 'POST',
 			dataType: 'json',
 			success: function(data) {
+
 				if (data.success === true) {
 					// user was logged in, set the returned user data
 					accountView.model.set(data.user);
@@ -99,36 +120,51 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 					// user was not logged in, show error
 					accountView.$el.find('div.form-error').html(data.error);
 				}
+
 			}
 		});
+
 	},
 
 	showRegistrationClicked: function(e) {
+
 		e.preventDefault();
 		e.stopPropagation();
 		this.showRegistrationForm();
+
 	},
 
 	showLoginClicked: function(e) {
+
 		e.preventDefault();
 		e.stopPropagation();
 		this.showLoginForm();
+
 	},
 
 	showRegistrationForm: function() {
+
 		this.template = OsciTk.templateManager.get('toolbar-account-register');
-		//console.log( this.$el );
 		this.$el.html(this.template());
+
 	},
+
 	showLoginForm: function() {
+
 		this.template = OsciTk.templateManager.get('toolbar-account-login');
 		this.$el.html(this.template());
+
 	},
+
 	showProfile: function() {
+
 		this.template = OsciTk.templateManager.get('toolbar-account-profile');
 		this.$el.html(this.template(this.model.toJSON()));
+
 	},
+
 	closeOverlay: function() {
+
 		Backbone.trigger("toolbarRemoveViews");
 
 		var section = app.collections.navigationItems.get(this.section_id);
@@ -142,4 +178,5 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 		Backbone.trigger('currentNavigationItemChanged', this.currentNavigationItem);
 		
 	}
+
 });

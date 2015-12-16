@@ -181,9 +181,12 @@ body {
 
 		}
 
+		// Max heights overriden by JavaScript
 	    figure {
 	    	max-height: 741px;
+
 	    	margin: auto;  // ensures that the figure takes up the entire page
+	    	margin-bottom: 15px;
 	    	//display: block;
 
 			.figure_content {
