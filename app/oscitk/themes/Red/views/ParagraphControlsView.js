@@ -13,8 +13,10 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
         // when layout is complete add numbers for paragraph controls
         this.listenTo(Backbone, 'layoutComplete', function() {
+
             //console.log( "ParagraphControlsView caught layoutComplete" );
             this.sectionId = app.models.section.get('id');
+
         });
 
         this.listenTo(Backbone, 'notesLoaded', function(params) {
@@ -105,9 +107,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             // note that there is an off by one error b/c paragraph #id and other fields
 
             /// Make sure that there no redundant paragraphControls if this is called twice
-            if( $('.paragraph-controls[data-osci_content_id="osci-content-' + i + '"]' ).length > 0 ) {
-                return false;
-            }
+            $('.paragraph-controls[data-osci_content_id="osci-content-' + i + '"]' ).remove();
 
             var note = this.checkForNote({
                 content_id: 'osci-content-'+i,
