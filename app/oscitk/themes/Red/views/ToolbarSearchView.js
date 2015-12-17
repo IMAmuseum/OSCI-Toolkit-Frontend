@@ -7,7 +7,6 @@ OsciTk.views.SearchToolbar = OsciTk.views.BaseView.extend({
 
 		this.listenTo(Backbone, 'layoutComplete', function(params) {
 
-
 			this.render();
 		
 		}, this);

@@ -7,7 +7,6 @@ OsciTk.views.CitationsToolbar = OsciTk.views.BaseView.extend({
 
 		this.listenTo(Backbone, 'layoutComplete', function(params) {
 
-
 			this.render();
 		
 		}, this);

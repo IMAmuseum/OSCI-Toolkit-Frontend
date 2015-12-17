@@ -13,7 +13,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
 
             // DEBUGGING
-            console.log( "SectionView caught currentNavigationItemChanged" );
+            //console.log( "SectionView caught currentNavigationItemChanged" );
 
             $("html, body").animate({
                 scrollTop: 0
@@ -79,7 +79,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         this.listenTo(Backbone, "figuresAvailable", function(figures) {
 
-            console.log( "SectionView caught figures available..." );
+            //console.log( "SectionView caught figures available..." );
 
             this.figures = figures;
             this.setFigureStyles();
@@ -208,7 +208,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     render: function() {
 
         // DEBUGGING
-        console.log( "SectionView rendering..." );
+        //console.log( "SectionView rendering..." );
 
         //clean up the view incase we have already rendered this before
         this.model.removeAllPages();

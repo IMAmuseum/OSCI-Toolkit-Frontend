@@ -21,14 +21,13 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// when section is loaded, render the navigation control
 		this.listenTo(Backbone, 'layoutComplete', function(section) {
 
-			console.log('NavigationView caught layoutComplete');
+			//console.log('NavigationView caught layoutComplete');
 			this.render();
 
 		});
 
 		this.listenTo(Backbone, 'windowResized', function(section) {
 
-			
 			this.calculatePages();
 			this.render();
 
@@ -37,8 +36,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// bind routedTo
 		this.listenTo(Backbone, 'routedToSection', function(params) {
 
-			console.log('NavigationView caught routedToSection');
-			console.log( params ); // Object {section_id: "2", identifier: "end"}
+			//console.log('NavigationView caught routedToSection');
+			//console.log( params ); // Object {section_id: "2", identifier: "end"}
 
 			this.identifier = params.identifier;
 
@@ -70,8 +69,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
             if( lastScrollLeft != sectionScrollLeft ) {
                 lastScrollLeft  = sectionScrollLeft;
             }
-
-
 
         });
 		*/
@@ -107,14 +104,14 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// the section resets to first page when columns re-render
 		this.listenTo(Backbone, 'columnsComplete', function() {
 
-			console.log('NavigationView caught columnsComplete');
+			//console.log('NavigationView caught columnsComplete');
 			Backbone.trigger('navigate', { page: this.page } );
 
 		});
 
 		this.listenTo(Backbone, 'navigate', function(params) {
 
-			console.log('NavigationView caught navigate');
+			//console.log('NavigationView caught navigate');
 
 			var page = params.page;
 
@@ -266,7 +263,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	// Change section
 	setCurrentNavigationItem: function(section_id) {
 
-		console.log( 'NavigationView calls setCurrentNavigationItem(' + section_id + ')' );
+		//console.log( 'NavigationView calls setCurrentNavigationItem(' + section_id + ')' );
 
 		var section = app.collections.navigationItems.get(section_id);
 

@@ -13,7 +13,7 @@ OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
 
 		// re-render this view when collection changes
 		this.listenTo(app.collections.notes, 'add remove change', function() {
-			console.log('ToolbarNotesView caught change in app.collecions.notes');
+			//console.log('ToolbarNotesView caught change in app.collecions.notes');
 			this.render();
 		});
 
@@ -62,8 +62,6 @@ OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
 			if (note.id !== null) return true;
 			return false;
 		});
-
-		console.log( app.collections.notes );
 
 		return notes;
 
