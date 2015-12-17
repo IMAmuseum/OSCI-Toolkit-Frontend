@@ -8025,7 +8025,7 @@ button.close {
   }
 }
 /* line 1, ../_typography.scss */
-p, textarea {
+p {
   font-family: "Lora", Georgia, "Times New Roman", Times, serif;
 }
 
@@ -8878,13 +8878,15 @@ input[type=range]:focus::-ms-fill-upper {
 /* line 47, ../_paragraph-popover.scss */
 .popover .popover-content .popover-wrapper textarea {
   border: none;
+  outline: none;
   font-size: 14px;
-  color: #333;
-  padding: 5px;
+  line-height: 16px;
   height: 115px;
   width: 100%;
+  padding: 5px;
+  color: #333;
 }
-/* line 57, ../_paragraph-popover.scss */
+/* line 63, ../_paragraph-popover.scss */
 .popover .popover-content .popover-wrapper button {
   font-size: 15px;
   font-weight: 200;
@@ -8892,7 +8894,7 @@ input[type=range]:focus::-ms-fill-upper {
   border: thin solid transparent;
 }
 
-/* line 68, ../_paragraph-popover.scss */
+/* line 74, ../_paragraph-popover.scss */
 .tab-content {
   height: 160px;
 }

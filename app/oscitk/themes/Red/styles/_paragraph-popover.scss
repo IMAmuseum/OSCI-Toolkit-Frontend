@@ -45,12 +45,18 @@ $popover-height: 160px;
 			}
 
 			textarea {
+
 				border: none;
+				outline: none;
+
 				font-size: 14px;
-				color: #333;
-				padding: 5px;
+				line-height: 16px;
+
 				height: 115px;
 				width: 100%;
+				padding: 5px;
+
+				color: #333;
 
 			}
 

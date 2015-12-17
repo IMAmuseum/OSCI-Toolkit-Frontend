@@ -85,19 +85,19 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
     		event.preventDefault();
 
+    		var page = 0;
 			switch(event.which) {
-
 				case 39:
-					that.page += 1;
+					page = that.page + 1;
 				break;
-
 				case 37:
-					that.page -= 1;
+					page = that.page - 1;
 				break;
-
 			}
 
-			Backbone.trigger('navigate', { page: that.page } );
+			if (page) {
+				Backbone.trigger('navigate', { page: page } );
+			}
 
 		});
 
@@ -109,31 +109,152 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		});
 
-		this.listenTo(Backbone, 'navigate', function(params) {
+		this.listenTo(Backbone, 'navigate', function(data) {
 
 			//console.log('NavigationView caught navigate');
 
-			var page = params.page;
+			var refs, occurrenceCount, j;
+            var gotoPage = this.page;
 
+
+
+            if (data.page) {
+                gotoPage = data.page;
+            }
+            else if (data.identifier) {
+
+                switch (data.identifier) {
+
+                    case 'end':
+                        gotoPage = this.numPages;
+                    break;
+
+                    case 'start':
+                        gotoPage = 1;
+                    break;
+
+                    default:
+
+
+                        // Route to a paragraph /p-[id]
+                        if(data.identifier.search(/^p-[0-9]+/) > -1) {
+                            var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
+                            gotoPage = this.getPageForSelector('[data-paragraph_number='+pid+']');
+                        	break;
+                        }
+
+                        /*
+                        // Route to a figure /fig-[section_id]-[figure_index]
+                        if (data.identifier.search(/^fig-[0-9]+-[0-9]+-[0-9]+/) > -1) {
+
+                            // Route for figure references
+                            var matches = data.identifier.match(/^(fig-[0-9]+-[0-9]+)-([0-9])+?/);
+
+                            var figureId = matches[1];
+                            var occurrence = matches[2] ? parseInt(matches[2],10) : 1;
+
+                            refs = $(".figure_reference").filter("[href='#" + figureId + "']");
+
+                            if (refs.length) {
+
+                                if (refs.length === 1) {
+
+                                    page_for_id = this.getPageForSelector(refs[0]);
+                                } else {
+
+                                    //find visible occurence
+                                    occurrenceCount = 0;
+
+                                    for (j = 0, l = refs.length; j < l; j++) {
+
+                                        if (this.isElementVisible(refs[j])) {
+
+                                            occurrenceCount++;
+
+                                            if (occurrenceCount === occurrence) {
+
+                                                page_for_id = this.getPageForSelector(refs[j]);
+
+                                                break;
+
+                                            }
+
+                                        }
+
+                                    }
+
+                                }
+
+                            }
+						*/
+
+						/*
+						// Route for footnote references
+                        if (data.identifier.search(/^fn-[0-9]+-[0-9]+/) > -1) {
+                            
+                            matches = data.identifier.match(/^fn-[0-9]+-[0-9]+/);
+                            refs = $('a[href="#' + matches[0] + '"]');
+                            if (refs.length === 1) {
+                                page_for_id = this.getPageNumberForSelector(refs[0]);
+                            }
+                            else {
+                                // find visible occurence
+                                for (j = 0; j < refs.length; j++) {
+                                    if (this.isElementVisible(refs[j])) {
+                                        page_for_id = this.getPageNumberForSelector(refs[j]);
+                                        break;
+                                    }
+                                }
+                            }
+                            break;
+                        
+                        }
+                        */
+
+                        /*
+                        // Route to specific element
+                        gotoPage = this.getPageNumberForElementId(data.identifier);
+	                    break;
+	                    */
+
+
+                }
+            }
+
+
+            // page width is used for determining how far to scroll
 			var $target = $('#section');
 			var page_width = $target.outerWidth();
 
-			// add one gutter
+			// account for column gutter
 			if( $target.attr('data-columns-rendered') == 1 ) {
 				page_width -= 10;
 			}else{
 				page_width += 10;
 			}
 
-			$target.scrollLeft( page_width * (page - 1) );
+
+			$target.scrollLeft( page_width * ( gotoPage - 1 ) );
 
 			this.calculatePages();
 			this.update(this.page);
+
+            
+
 
 		});
 
 	},
 
+	// Given a selector, find first element, its offset, and the corresponding page
+	getPageForElement: function() {
+
+	},
+
+	// Get element by id, find its offset, determine corresponding page
+
+
+	// Sets current page and total # of pages for reference
 	calculatePages: function() {
 
 		this.numPages = Math.ceil( $('#default-section-view').width() / ( $('#section').outerWidth() + 10 ) );
@@ -155,6 +276,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 	},
 
+	// Mostly updates the arrow button links to navigate to the right page
 	update: function(page) {
 
 		// unbind both controls to start

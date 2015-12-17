@@ -162,7 +162,7 @@ __p += '<textarea class="note-form-wrapper" data-paragraph_number="' +
 ((__t = ( cid )) == null ? '' : __t) +
 '">' +
 ((__t = ( note )) == null ? '' : __t) +
-'</textarea>\n<button id=\'note-submit\' type=\'button\' class=\'btn btn-primary btn-block\'>Add Note</button>';
+'</textarea>\n<button id=\'note-submit\' type=\'button\' class=\'btn btn-primary btn-block\'>Save Note</button>';
 
 }
 return __p
