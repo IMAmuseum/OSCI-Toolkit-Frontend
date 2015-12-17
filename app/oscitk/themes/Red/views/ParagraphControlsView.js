@@ -185,6 +185,15 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
         if (notes[0]) {
             note = notes[0];
+
+            // Clean-up: destroy note if it's blank
+            // See also noteSubmit in SectionView.js
+            // This might throw an error; not sure why
+            // See Error in NotesCollection.js
+            if( note.get('note') === '' ) {
+                note.destroy();
+            }
+
         } else {
             note = new OsciTk.models.Note({
                 content_id: data.content_id,
