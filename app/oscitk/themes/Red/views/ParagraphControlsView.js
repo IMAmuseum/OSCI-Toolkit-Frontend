@@ -101,6 +101,13 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         var i = 1;
 
         _.each(this.paragraphs, function(paragraph) {
+            
+            // note that there is an off by one error b/c paragraph #id and other fields
+
+            /// Make sure that there no redundant paragraphControls if this is called twice
+            if( $('.paragraph-controls[data-osci_content_id="osci-content-' + i + '"]' ).length > 0 ) {
+                return false;
+            }
 
             var note = this.checkForNote({
                 content_id: 'osci-content-'+i,
@@ -126,7 +133,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
     togglePopover: function (data) {
 
-        this.data = data;
+        this.data = data; // id
 
         var note = this.checkForNote({
             content_id: 'osci-content-'+ data,
@@ -141,10 +148,10 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             sectionId: this.sectionId,
             contentId: 'osci-content-'+data,
             paragraph_number: data
-        }
+        };
 
         var noteText = note  ? note.get('note') : '';
-        noteText = noteText === null  ? '' : noteText;
+            noteText = noteText === null  ? '' : noteText;
 
         var noteForm = this.templateNotes({paragraph_number: note.get('paragraph_number'), note: noteText, cid: note.cid});
 

@@ -486,7 +486,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     // CALLED WHEN THE USER HITS THE SUBMIT NOTES BUTTON
     noteSubmit: function(e) {
 
-        var $this = this;
         var textarea = $(e.currentTarget).parent().find('textarea');
         var noteText = textarea.val();
 
@@ -511,9 +510,11 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         }
 
         $('#paragraph-'+paragraph_number).popover({
+
             content: function() {
                 return $("#popover-content").html();
             }
+            
         });
 
         $('#paragraph-'+paragraph_number).popover('destroy');
