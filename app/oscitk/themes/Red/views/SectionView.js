@@ -496,7 +496,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             note.set('note', noteText);
 
         // Check to see if the red dot needs to be toggled
-        if (noteText !== '') {
+        if ( $.trim(noteText) !== '') {
 
             note.save();
             textarea.html(noteText);
