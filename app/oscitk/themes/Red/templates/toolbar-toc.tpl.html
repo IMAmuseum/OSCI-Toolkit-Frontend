@@ -1,26 +1,28 @@
 <h3>Table of Contents</h3>
 
-<ul class="toc">
-	<% _.each(items, function(item) { %>
-		<li class="toc-item<% if (item.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } %>">
-			<a data-section-id="<%= item.id %>" href="javascript:;">
+<div class="toolbar-scroll">
+	<ul class="toc">
+		<% _.each(items, function(item) { %>
+			<li class="toc-item<% if (item.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } %>">
+				<a data-section-id="<%= item.id %>" href="javascript:;">
 
-				<!--
-				<div class="toc-item-thumbnail">
-					<% if (item.get('thumbnail')) { %>
-						<img src="<%= item.get('thumbnail') %>">
-					<% } %>
-				</div>
-				-->
+					<!--
+					<div class="toc-item-thumbnail">
+						<% if (item.get('thumbnail')) { %>
+							<img src="<%= item.get('thumbnail') %>">
+						<% } %>
+					</div>
+					-->
 
-				<div class="toc-item-text">
-					<h4><%= item.get('title') %></h4>
-					<% if (item.get('subtitle')) { %>
-						<h5><%= item.get('subtitle') %></h5>
-					<% } %>
-				</div>
-				
-			</a>
-		</li>
-	<% }); %>
-</ul>
+					<div class="toc-item-text">
+						<h4><%= item.get('title') %></h4>
+						<% if (item.get('subtitle')) { %>
+							<h5><%= item.get('subtitle') %></h5>
+						<% } %>
+					</div>
+					
+				</a>
+			</li>
+		<% }); %>
+	</ul>
+</div>

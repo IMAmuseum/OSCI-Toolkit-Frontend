@@ -1,20 +1,27 @@
 <h3>Glossary</h3>
-<div id="glossary-container">
+
+<div class="toolbar-scroll">
+
 	<div id="glossary-sidebar">
+
 		<div id="glossary-filter-box">
 			<input type="text" id="glossary-filter" placeholder="Search Glossary" />
 			<div id="glossary-filter-search-icon"></div>
 			<div id="glossary-filter-clear"></div>
 		</div>
+
 		<% if (!hasResults) { %>
 			No terms found.
 		<% } else { %>
 		<ul id="glossary-term-listing"></ul>
 		<ul id="glossary-term-listing-mobile"></ul>
 		<% } %>
+		
 	</div>
+
 	<div id="glossary-content">
 		<h4></h4>
 		<p></p>
 	</div>
+
 </div>

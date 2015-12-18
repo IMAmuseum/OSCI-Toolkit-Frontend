@@ -1,13 +1,15 @@
 <h3>Footnotes</h3>
 
-<% if( items.length < 1 ) { %>
-	<p>No footnotes in this section.</p>
-<% } %>
+<div class="toolbar-scroll">
+	<% if( items.length < 1 ) { %>
+		<p>No footnotes in this section.</p>
+	<% } %>
 
-<ul>
-	<% _.each(items, function(item) { %>
-		<li>
-			<b><%= item.id %></b><br/><%= item.title %>
-		</li>
-	<% }); %>
-</ul>
+	<ul>
+		<% _.each(items, function(item) { %>
+			<li>
+				<b><%= item.id %></b><br/><%= item.title %>
+			</li>
+		<% }); %>
+	</ul>
+</div>

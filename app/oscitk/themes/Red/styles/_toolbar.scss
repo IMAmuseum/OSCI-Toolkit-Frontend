@@ -137,7 +137,7 @@ $toolbar-margin-bottom: 5px;
 
 		background: $color-dark-red;
 
-		padding: 15px 0px 30px 30px;
+		padding: 15px 0px 0px 30px;
 
 		h3 {
 			margin: 0;
@@ -145,144 +145,139 @@ $toolbar-margin-bottom: 5px;
 			padding-right: 30px;
 			border-bottom: 1px white solid;
 			padding-bottom: 8px;
-			margin-bottom: 5px;
 		}
 
-		a {
-			color: white;
+		.toolbar-scroll {
 
-			&:hover {
-				color: $color-light-red;
-				text-decoration: none;
+			overflow-y: scroll;
+			height: calc(100% - 39px);
+
+			padding: 5px 5px 10px 0px;
+
+			a {
+				color: white;
+
+				&:hover {
+					color: $color-light-red;
+					text-decoration: none;
+				}
 			}
-		}
 
-		p {
-			font-family: 'Lato', sans-serif;
-		}
+			p {
+				font-family: 'Lato', sans-serif;
+			}
 
-		ul {
+			ul {
 
-			list-style: none;
-			padding: 0;
-			margin: 0;
+				list-style: none;
+				padding: 0;
+				margin: 0;
 
-			li {
+				li {
 
-				margin: 10px 0px;
+					margin: 10px 0px;
 
-				h4, h5 {
-					margin: 0px;
+					h4, h5 {
+						margin: 0px;
+					}
+
 				}
 
 			}
 
 		}
+	}
+}
 
 
-		#toolbar-glossary {
 
-			#glossary-filter-box {
-				color: black;
+#toolbar-glossary {
+
+	#glossary-filter-box {
+		color: black;
+	}
+
+	#glossary-term-listing li {
+		cursor: pointer;
+	}
+
+	#glossary-term-listing-mobile {
+		display: none;
+	}
+
+	#glossary-content {
+
+		border-top: 1px solid white;
+		
+		p {
+			p {
+				span {
+					color: white !important;
+				}
 			}
+		}
+	}
 
-			#glossary-term-listing li {
+	@media ( max-width: 767px ) {
+
+		#glossary-term-listing {
+			display: none;
+		}
+
+		#glossary-content {
+			display: none;
+		}
+
+		#glossary-term-listing-mobile {
+			display: block;
+
+			> li {
+
 				cursor: pointer;
-			}
+				border-bottom: 1px solid white;
+				ul {
+					display: none;
 
-			#glossary-term-listing-mobile {
-				display: none;
-			}
-
-			#glossary-content {
-
-				border-top: 1px solid white;
-				
-				p {
 					p {
 						span {
 							color: white !important;
 						}
 					}
 				}
-			}
-
-			@media ( max-width: 767px ) {
-
-				#glossary-term-listing {
-					display: none;
-				}
-
-				#glossary-content {
-					display: none;
-				}
-
-				#glossary-term-listing-mobile {
-					display: block;
-
-					> li {
-
-						cursor: pointer;
-						border-bottom: 1px solid white;
-						ul {
-							display: none;
-
-							p {
-								span {
-									color: white !important;
-								}
-							}
-						}
-
-					}
-
-				}
 
 			}
 
 		}
-
-		#toolbar-figures {
-
-			position: relative;
-
-			.figure-reel {
-				overflow-y: scroll;
-				max-height: calc(100% - 54px);
-
-				figure {
-
-					img, figcaption {
-						max-width: 75%
-					}
-
-					a {
-						display: block;
-						height: 22px;
-						width: 22px;
-						padding: 3px 1px;
-						text-align: center;
-						cursor: pointer;
-					}
-
-				}
-
-			}
-
-		}
-
-		#toolbar-account {
-			.account-footer {
-				margin-top: 10px;
-			}
-		}
-
-
-		
-
-
 
 	}
+
 }
 
+#toolbar-figures {
 
+	position: relative;
+
+	figure {
+
+		img, figcaption {
+			max-width: 75%
+		}
+
+		a {
+			display: block;
+			height: 22px;
+			min-width: 22px;
+			padding: 3px 1px;
+			text-align: center;
+			cursor: pointer;
+		}
+
+	}
+
+}
+
+#toolbar-account {
+	.account-footer {
+		margin-top: 10px;
+	}
+}

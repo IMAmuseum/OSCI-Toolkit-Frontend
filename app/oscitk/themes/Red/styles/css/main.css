@@ -8509,7 +8509,7 @@ header .header-title .container .btn-menu, header .header-title .container-fluid
 #toolbar #toolbar-readout {
   display: none;
   background: #810c0b;
-  padding: 15px 0px 30px 30px;
+  padding: 15px 0px 0px 30px;
 }
 /* line 142, ../_toolbar.scss */
 #toolbar #toolbar-readout h3 {
@@ -8518,106 +8518,109 @@ header .header-title .container .btn-menu, header .header-title .container-fluid
   padding-right: 30px;
   border-bottom: 1px white solid;
   padding-bottom: 8px;
-  margin-bottom: 5px;
 }
-/* line 151, ../_toolbar.scss */
-#toolbar #toolbar-readout a {
+/* line 150, ../_toolbar.scss */
+#toolbar #toolbar-readout .toolbar-scroll {
+  overflow-y: scroll;
+  height: calc(100% - 39px);
+  padding: 5px 5px 10px 0px;
+}
+/* line 157, ../_toolbar.scss */
+#toolbar #toolbar-readout .toolbar-scroll a {
   color: white;
 }
-/* line 154, ../_toolbar.scss */
-#toolbar #toolbar-readout a:hover {
+/* line 160, ../_toolbar.scss */
+#toolbar #toolbar-readout .toolbar-scroll a:hover {
   color: #b82927;
   text-decoration: none;
 }
-/* line 160, ../_toolbar.scss */
-#toolbar #toolbar-readout p {
+/* line 166, ../_toolbar.scss */
+#toolbar #toolbar-readout .toolbar-scroll p {
   font-family: 'Lato', sans-serif;
 }
-/* line 164, ../_toolbar.scss */
-#toolbar #toolbar-readout ul {
+/* line 170, ../_toolbar.scss */
+#toolbar #toolbar-readout .toolbar-scroll ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 170, ../_toolbar.scss */
-#toolbar #toolbar-readout ul li {
+/* line 176, ../_toolbar.scss */
+#toolbar #toolbar-readout .toolbar-scroll ul li {
   margin: 10px 0px;
 }
-/* line 174, ../_toolbar.scss */
-#toolbar #toolbar-readout ul li h4, #toolbar #toolbar-readout ul li h5 {
+/* line 180, ../_toolbar.scss */
+#toolbar #toolbar-readout .toolbar-scroll ul li h4, #toolbar #toolbar-readout .toolbar-scroll ul li h5 {
   margin: 0px;
 }
-/* line 185, ../_toolbar.scss */
-#toolbar #toolbar-readout #toolbar-glossary #glossary-filter-box {
+
+/* line 196, ../_toolbar.scss */
+#toolbar-glossary #glossary-filter-box {
   color: black;
 }
-/* line 189, ../_toolbar.scss */
-#toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing li {
+/* line 200, ../_toolbar.scss */
+#toolbar-glossary #glossary-term-listing li {
   cursor: pointer;
 }
-/* line 193, ../_toolbar.scss */
-#toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile {
+/* line 204, ../_toolbar.scss */
+#toolbar-glossary #glossary-term-listing-mobile {
   display: none;
 }
-/* line 197, ../_toolbar.scss */
-#toolbar #toolbar-readout #toolbar-glossary #glossary-content {
+/* line 208, ../_toolbar.scss */
+#toolbar-glossary #glossary-content {
   border-top: 1px solid white;
 }
-/* line 203, ../_toolbar.scss */
-#toolbar #toolbar-readout #toolbar-glossary #glossary-content p p span {
+/* line 214, ../_toolbar.scss */
+#toolbar-glossary #glossary-content p p span {
   color: white !important;
 }
 @media (max-width: 767px) {
-  /* line 212, ../_toolbar.scss */
-  #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing {
-    display: none;
-  }
-  /* line 216, ../_toolbar.scss */
-  #toolbar #toolbar-readout #toolbar-glossary #glossary-content {
-    display: none;
-  }
-  /* line 220, ../_toolbar.scss */
-  #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile {
-    display: block;
-  }
   /* line 223, ../_toolbar.scss */
-  #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile > li {
-    cursor: pointer;
-    border-bottom: 1px solid white;
+  #toolbar-glossary #glossary-term-listing {
+    display: none;
   }
   /* line 227, ../_toolbar.scss */
-  #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile > li ul {
+  #toolbar-glossary #glossary-content {
     display: none;
   }
   /* line 231, ../_toolbar.scss */
-  #toolbar #toolbar-readout #toolbar-glossary #glossary-term-listing-mobile > li ul p span {
+  #toolbar-glossary #glossary-term-listing-mobile {
+    display: block;
+  }
+  /* line 234, ../_toolbar.scss */
+  #toolbar-glossary #glossary-term-listing-mobile > li {
+    cursor: pointer;
+    border-bottom: 1px solid white;
+  }
+  /* line 238, ../_toolbar.scss */
+  #toolbar-glossary #glossary-term-listing-mobile > li ul {
+    display: none;
+  }
+  /* line 242, ../_toolbar.scss */
+  #toolbar-glossary #glossary-term-listing-mobile > li ul p span {
     color: white !important;
   }
 }
-/* line 245, ../_toolbar.scss */
-#toolbar #toolbar-readout #toolbar-figures {
+
+/* line 256, ../_toolbar.scss */
+#toolbar-figures {
   position: relative;
 }
-/* line 249, ../_toolbar.scss */
-#toolbar #toolbar-readout #toolbar-figures .figure-reel {
-  overflow-y: scroll;
-  max-height: calc(100% - 54px);
-}
-/* line 255, ../_toolbar.scss */
-#toolbar #toolbar-readout #toolbar-figures .figure-reel figure img, #toolbar #toolbar-readout #toolbar-figures .figure-reel figure figcaption {
+/* line 262, ../_toolbar.scss */
+#toolbar-figures figure img, #toolbar-figures figure figcaption {
   max-width: 75%;
 }
-/* line 259, ../_toolbar.scss */
-#toolbar #toolbar-readout #toolbar-figures .figure-reel figure a {
+/* line 266, ../_toolbar.scss */
+#toolbar-figures figure a {
   display: block;
   height: 22px;
-  width: 22px;
+  min-width: 22px;
   padding: 3px 1px;
   text-align: center;
   cursor: pointer;
 }
-/* line 275, ../_toolbar.scss */
-#toolbar #toolbar-readout #toolbar-account .account-footer {
+
+/* line 280, ../_toolbar.scss */
+#toolbar-account .account-footer {
   margin-top: 10px;
 }
 

@@ -207,7 +207,7 @@ this["JST"]["app/oscitk/themes/Red/templates/toolbar-account-login.tpl.html"] = 
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h3>Login</h3>\n\n<div class="form-error"></div>\n<form id="account-form">\n\t<div class="form-group">\n\t\t<label for="username">Username:</label>\n\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t</div>\n\t<div class="form-group">\n\t\t<label for="password">Password:</label>\n\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t</div>\n\t<button type="button" class="btn login">Log In</button>\n\t<div class="account-footer"><a href="javascript:;" class="register">Register an account</a></div>\n</form>';
+__p += '<h3>Login</h3>\n\n<div class="toolbar-scroll">\n\t<div class="form-error"></div>\n\t<form id="account-form">\n\t\t<div class="form-group">\n\t\t\t<label for="username">Username:</label>\n\t\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t\t</div>\n\t\t<div class="form-group">\n\t\t\t<label for="password">Password:</label>\n\t\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t\t</div>\n\t\t<button type="button" class="btn login">Log In</button>\n\t\t<div class="account-footer"><a href="javascript:;" class="register">Register an account</a></div>\n\t</form>\n</div>';
 
 }
 return __p
@@ -217,11 +217,11 @@ this["JST"]["app/oscitk/themes/Red/templates/toolbar-account-profile.tpl.html"] 
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h3>Profile</h3>\n\n\n<h4>' +
+__p += '<h3>Profile</h3>\n\n<div class="toolbar-scroll">\n\t<h4>' +
 ((__t = ( username )) == null ? '' : __t) +
-'</h4>\n<h5>' +
+'</h4>\n\t<h5>' +
 ((__t = ( email )) == null ? '' : __t) +
-'</h5>\n<div class="account-footer"><a href="javascript:;" class="logout">Log out</a></div>\n\t\t\t\t';
+'</h5>\n\t<div class="account-footer"><a href="javascript:;" class="logout">Log out</a></div>\n</div>';
 
 }
 return __p
@@ -231,7 +231,7 @@ this["JST"]["app/oscitk/themes/Red/templates/toolbar-account-register.tpl.html"]
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h3>Register</h3>\n\n<div class="form-error"></div>\n<form id="account-form">\n\t<div class="form-group">\n\t\t<label for="username">Username:</label>\n\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t</div>\n\t<div class="form-group">\n\t\t<label for="password">Password:</label>\n\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t</div>\n\t<div class="form-group">\n\t\t<label for="email">Email:</label>\n\t\t<input class="form-control" type="text" id="email" placeholder="Email" />\n\t</div>\n\t<button type="button" class="btn register">Register</button>\n\t<div class="account-footer"><a href="javascript:;" class="login">Already have an account?</a></div>\n</form>';
+__p += '<h3>Register</h3>\n\n<div class="toolbar-scroll">\n\t<div class="form-error"></div>\n\t<form id="account-form">\n\t\t<div class="form-group">\n\t\t\t<label for="username">Username:</label>\n\t\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t\t</div>\n\t\t<div class="form-group">\n\t\t\t<label for="password">Password:</label>\n\t\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t\t</div>\n\t\t<div class="form-group">\n\t\t\t<label for="email">Email:</label>\n\t\t\t<input class="form-control" type="text" id="email" placeholder="Email" />\n\t\t</div>\n\t\t<button type="button" class="btn register">Register</button>\n\t\t<div class="account-footer"><a href="javascript:;" class="login">Already have an account?</a></div>\n\t</form>\n</div>';
 
 }
 return __p
@@ -241,7 +241,7 @@ this["JST"]["app/oscitk/themes/Red/templates/toolbar-citations.tpl.html"] = func
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h3>Citations</h3>\n';
+__p += '<h3>Citations</h3>\n\n<div class="toolbar-scroll">\n\t<!-- I think we won\'t be using this one... -->\n</div>';
 
 }
 return __p
@@ -252,7 +252,7 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<h3>Figures</h3>\n\n<div class="figure-reel">\n\t';
+__p += '<h3>Figures</h3>\n\n<div class="toolbar-scroll">\n\t';
  _.each(figures, function(figure) { ;
 __p += '\n\t\t<figure>\n\t\t\t<div class="clearfix">\n\t\t\t\t';
  if (figure.thumbnail_url != undefined) { ;
@@ -279,19 +279,19 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<h3>Footnotes</h3>\n\n';
+__p += '<h3>Footnotes</h3>\n\n<div class="toolbar-scroll">\n\t';
  if( items.length < 1 ) { ;
-__p += '\n\t<p>No footnotes in this section.</p>\n';
+__p += '\n\t\t<p>No footnotes in this section.</p>\n\t';
  } ;
-__p += '\n\n<ul>\n\t';
+__p += '\n\n\t<ul>\n\t\t';
  _.each(items, function(item) { ;
-__p += '\n\t\t<li>\n\t\t\t<b>' +
+__p += '\n\t\t\t<li>\n\t\t\t\t<b>' +
 ((__t = ( item.id )) == null ? '' : __t) +
 '</b><br/>' +
 ((__t = ( item.title )) == null ? '' : __t) +
-'\n\t\t</li>\n\t';
+'\n\t\t\t</li>\n\t\t';
  }); ;
-__p += '\n</ul>';
+__p += '\n\t</ul>\n</div>';
 
 }
 return __p
@@ -332,13 +332,13 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<h3>Glossary</h3>\n<div id="glossary-container">\n\t<div id="glossary-sidebar">\n\t\t<div id="glossary-filter-box">\n\t\t\t<input type="text" id="glossary-filter" placeholder="Search Glossary" />\n\t\t\t<div id="glossary-filter-search-icon"></div>\n\t\t\t<div id="glossary-filter-clear"></div>\n\t\t</div>\n\t\t';
+__p += '<h3>Glossary</h3>\n\n<div class="toolbar-scroll">\n\n\t<div id="glossary-sidebar">\n\n\t\t<div id="glossary-filter-box">\n\t\t\t<input type="text" id="glossary-filter" placeholder="Search Glossary" />\n\t\t\t<div id="glossary-filter-search-icon"></div>\n\t\t\t<div id="glossary-filter-clear"></div>\n\t\t</div>\n\n\t\t';
  if (!hasResults) { ;
 __p += '\n\t\t\tNo terms found.\n\t\t';
  } else { ;
 __p += '\n\t\t<ul id="glossary-term-listing"></ul>\n\t\t<ul id="glossary-term-listing-mobile"></ul>\n\t\t';
  } ;
-__p += '\n\t</div>\n\t<div id="glossary-content">\n\t\t<h4></h4>\n\t\t<p></p>\n\t</div>\n</div>';
+__p += '\n\t\t\n\t</div>\n\n\t<div id="glossary-content">\n\t\t<h4></h4>\n\t\t<p></p>\n\t</div>\n\n</div>';
 
 }
 return __p
@@ -370,39 +370,39 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<h3>Notes</h3>\n<div class="notesReel">\n\t';
+__p += '<h3>Notes</h3>\n\n<div class="toolbar-scroll">\n\t<div class="notesReel">\n\t\t';
  if (notes.length > 0) { ;
-__p += '\n\t<ul class="notesList">\n\t\t';
+__p += '\n\t\t<ul class="notesList">\n\t\t\t';
  _.each(notes, function(note) { ;
-__p += '\n\t\t\t<li class="notesListItem">\n\t\t\t\t<div class="the-note">\n\t\t\t\t\t<span class="note-content">' +
+__p += '\n\t\t\t\t<li class="notesListItem">\n\t\t\t\t\t<div class="the-note">\n\t\t\t\t\t\t<span class="note-content">' +
 ((__t = ( note.get('note') )) == null ? '' : __t) +
-'</span>\n\t\t\t\t</div>\n\t\t\t\t';
+'</span>\n\t\t\t\t\t</div>\n\t\t\t\t\t';
  if (note.get('tags').length > 0) { ;
-__p += '\n\t\t\t\t\t<div class="note-tags">\n\t                \t<span class="tags-label">tags:</span> ';
+__p += '\n\t\t\t\t\t\t<div class="note-tags">\n\t\t                \t<span class="tags-label">tags:</span> ';
  _.each(note.get('tags'), function(tag) { ;
 __p +=
 ((__t = ( tag )) == null ? '' : __t) +
 ' ';
  }); ;
-__p += '\n\t                </div>\n\t\t\t\t';
+__p += '\n\t\t                </div>\n\t\t\t\t\t';
  } ;
-__p += '\n\t\t\t\t<div class="note-buttons">\n\t\t\t\t\t<a href="#" class="noteLink" data-content_id="' +
+__p += '\n\t\t\t\t\t<div class="note-buttons">\n\t\t\t\t\t\t<a href="#" class="noteLink" data-content_id="' +
 ((__t = ( note.get('content_id') )) == null ? '' : __t) +
-'">Link</a>\n\t\t\t\t\t<!-- <a href="#" class="noteEdit" data-content_id="' +
+'">Link</a>\n\t\t\t\t\t\t<!-- <a href="#" class="noteEdit" data-content_id="' +
 ((__t = ( note.get('content_id') )) == null ? '' : __t) +
-'">Edit</a> -->\n\t\t\t\t</div>\n\t\t\t</li>\n\t\t';
+'">Edit</a> -->\n\t\t\t\t\t</div>\n\t\t\t\t</li>\n\t\t\t';
  }); ;
-__p += '\n\t</ul>\n\t';
+__p += '\n\t\t</ul>\n\t\t';
  } else { ;
-__p += '\n\t\t';
+__p += '\n\t\t\t';
  if (app.account.get('id') > 0 ) { ;
-__p += '\n\t\t\t<p>No notes found for this section.</p>\n\t\t';
+__p += '\n\t\t\t\t<p>No notes found for this section.</p>\n\t\t\t';
  } else { ;
-__p += '\n\t\t\t<p>Login to see your notes for this section.</p>\n\t\t';
+__p += '\n\t\t\t\t<p>Login to see your notes for this section.</p>\n\t\t\t';
  } ;
-__p += '\n\t';
+__p += '\n\t\t';
  } ;
-__p += '\n</div>';
+__p += '\n\t</div>\n</div>';
 
 }
 return __p
@@ -412,7 +412,7 @@ this["JST"]["app/oscitk/themes/Red/templates/toolbar-search.tpl.html"] = functio
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h3>Search</h3>\n';
+__p += '<h3>Search</h3>\n\n<div class="toolbar-scroll">\n\t<!-- TODO: Implement me! -->\n</div>';
 
 }
 return __p
@@ -423,29 +423,29 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<h3>Table of Contents</h3>\n\n<ul class="toc">\n\t';
+__p += '<h3>Table of Contents</h3>\n\n<div class="toolbar-scroll">\n\t<ul class="toc">\n\t\t';
  _.each(items, function(item) { ;
-__p += '\n\t\t<li class="toc-item';
+__p += '\n\t\t\t<li class="toc-item';
  if (item.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;
-__p += '">\n\t\t\t<a data-section-id="' +
+__p += '">\n\t\t\t\t<a data-section-id="' +
 ((__t = ( item.id )) == null ? '' : __t) +
-'" href="javascript:;">\n\n\t\t\t\t<!--\n\t\t\t\t<div class="toc-item-thumbnail">\n\t\t\t\t\t';
+'" href="javascript:;">\n\n\t\t\t\t\t<!--\n\t\t\t\t\t<div class="toc-item-thumbnail">\n\t\t\t\t\t\t';
  if (item.get('thumbnail')) { ;
-__p += '\n\t\t\t\t\t\t<img src="' +
+__p += '\n\t\t\t\t\t\t\t<img src="' +
 ((__t = ( item.get('thumbnail') )) == null ? '' : __t) +
-'">\n\t\t\t\t\t';
+'">\n\t\t\t\t\t\t';
  } ;
-__p += '\n\t\t\t\t</div>\n\t\t\t\t-->\n\n\t\t\t\t<div class="toc-item-text">\n\t\t\t\t\t<h4>' +
+__p += '\n\t\t\t\t\t</div>\n\t\t\t\t\t-->\n\n\t\t\t\t\t<div class="toc-item-text">\n\t\t\t\t\t\t<h4>' +
 ((__t = ( item.get('title') )) == null ? '' : __t) +
-'</h4>\n\t\t\t\t\t';
+'</h4>\n\t\t\t\t\t\t';
  if (item.get('subtitle')) { ;
-__p += '\n\t\t\t\t\t\t<h5>' +
+__p += '\n\t\t\t\t\t\t\t<h5>' +
 ((__t = ( item.get('subtitle') )) == null ? '' : __t) +
-'</h5>\n\t\t\t\t\t';
+'</h5>\n\t\t\t\t\t\t';
  } ;
-__p += '\n\t\t\t\t</div>\n\t\t\t\t\n\t\t\t</a>\n\t\t</li>\n\t';
+__p += '\n\t\t\t\t\t</div>\n\t\t\t\t\t\n\t\t\t\t</a>\n\t\t\t</li>\n\t\t';
  }); ;
-__p += '\n</ul>';
+__p += '\n\t</ul>\n</div>';
 
 }
 return __p
