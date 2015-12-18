@@ -137,7 +137,7 @@ $toolbar-margin-bottom: 5px;
 
 		background: $color-dark-red;
 
-		padding: 15px 30px 30px 30px;
+		padding: 15px 0px 30px 30px;
 
 		h3 {
 			margin: 0;
@@ -157,6 +157,9 @@ $toolbar-margin-bottom: 5px;
 			}
 		}
 
+		p {
+			font-family: 'Lato', sans-serif;
+		}
 
 		ul {
 
@@ -248,9 +251,20 @@ $toolbar-margin-bottom: 5px;
 				max-height: calc(100% - 54px);
 
 				figure {
-					img {
+
+					img, figcaption {
 						max-width: 75%
 					}
+
+					a {
+						display: block;
+						height: 22px;
+						width: 22px;
+						padding: 3px 1px;
+						text-align: center;
+						cursor: pointer;
+					}
+
 				}
 
 			}

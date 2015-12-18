@@ -254,19 +254,19 @@ function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<h3>Figures</h3>\n\n<div class="figure-reel">\n\t';
  _.each(figures, function(figure) { ;
-__p += '\n\t\t<figure data-figure-id="' +
-((__t = ( figure.id )) == null ? '' : __t) +
-'">\n\t\t\t';
+__p += '\n\t\t<figure>\n\t\t\t<div class="clearfix">\n\t\t\t\t';
  if (figure.thumbnail_url != undefined) { ;
-__p += '\n\t\t\t\t<img class=\'figure-thumbnail\' src=\'' +
+__p += '\n\t\t\t\t\t<img class=\'figure-thumbnail\' src=\'' +
 ((__t = ( figure.thumbnail_url )) == null ? '' : __t) +
-'\'/>\n\t\t\t';
+'\'/>\n\t\t\t\t';
  } else { ;
-__p += '\n\t\t\t\t<div class=\'figure-thumbnail\'>&nbsp;</div>\n\t\t\t';
+__p += '\n\t\t\t\t\t<div class=\'figure-thumbnail\'>&nbsp;</div>\n\t\t\t\t';
  } ;
-__p += '\n\t\t\t<figcaption>' +
+__p += '\n\t\t\t</div>\n\t\t\t<figcaption>\n\t\t\t\t<a data-figure-id="' +
+((__t = ( figure.id )) == null ? '' : __t) +
+'" class="pull-right">\n\t\t\t\t\t<img src="images/light/link_icon.png"/>\n\t\t\t\t</a>\n\t\t\t\t' +
 ((__t = ( figure.caption )) == null ? '' : __t) +
-'</figcaption>\n\t\t</figure>\n\t';
+'\n\t\t\t</figcaption>\n\t\t</figure>\n\t';
  }); ;
 __p += '\n</div>';
 

@@ -28,9 +28,7 @@ OsciTk.views.FiguresToolbar = OsciTk.views.BaseView.extend({
 	render: function() {
 
 		var fig_data = app.collections.figures.toJSON();
-		this.$el.html(this.template({figures: fig_data}));
-		
-		//console.log( fig_data );
+		this.$el.html( this.template( { figures: fig_data } ) );
 		
 		return this;
 

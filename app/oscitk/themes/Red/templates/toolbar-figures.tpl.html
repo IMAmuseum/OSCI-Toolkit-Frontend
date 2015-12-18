@@ -2,13 +2,20 @@
 
 <div class="figure-reel">
 	<% _.each(figures, function(figure) { %>
-		<figure data-figure-id="<%= figure.id %>">
-			<% if (figure.thumbnail_url != undefined) { %>
-				<img class='figure-thumbnail' src='<%= figure.thumbnail_url %>'/>
-			<% } else { %>
-				<div class='figure-thumbnail'>&nbsp;</div>
-			<% } %>
-			<figcaption><%= figure.caption %></figcaption>
+		<figure>
+			<div class="clearfix">
+				<% if (figure.thumbnail_url != undefined) { %>
+					<img class='figure-thumbnail' src='<%= figure.thumbnail_url %>'/>
+				<% } else { %>
+					<div class='figure-thumbnail'>&nbsp;</div>
+				<% } %>
+			</div>
+			<figcaption>
+				<a data-figure-id="<%= figure.id %>" class="pull-right">
+					<img src="images/light/link_icon.png"/>
+				</a>
+				<%= figure.caption %>
+			</figcaption>
 		</figure>
 	<% }); %>
 </div>
