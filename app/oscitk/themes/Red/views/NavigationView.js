@@ -36,8 +36,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			// Used to delay triggering of navigate with an identifier
 			var waitForSection = true;
 
-			
-
 			// First, determine if we need to navigate to a different section
 			// Assuming that section_id is almost always defined!
 			// It should be undefined only on initial load with no hash
@@ -67,6 +65,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 				}
 
 			}
+
+            
 
 			// if there is a secondary route (e.g. to a paragraph),
 			// pass the ball on to the navigate listener
@@ -125,7 +125,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		this.listenTo(Backbone, 'navigate', function(data) {
 
-            var gotoPage = this.page;
+			// Stay on current page by default
+            var gotoPage = this.page ? this.page : 1;
 
             if (data.page) {
                 gotoPage = data.page;
@@ -145,9 +146,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
                     default:
 
-                    console.log( data.identifier );
-
-
                         // Route to a paragraph /p-[section_id]-[id]
                         if(data.identifier.search(/^p-[0-9]+/) > -1) {
 
@@ -158,50 +156,19 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
                         }
 
-                        /*
-                        // Route to a figure /fig-[section_id]-[figure_index]
-                        if (data.identifier.search(/^fig-[0-9]+-[0-9]+-[0-9]+/) > -1) {
 
-                            // Route for figure references
-                            var matches = data.identifier.match(/^(fig-[0-9]+-[0-9]+)-([0-9])+?/);
+                        // Route to a figure /fig-[section_id]-[figure_index]-[occurance]
+                        // [occurance] is meant to be used when the same figure is placed multiple times
+                        // We'll ignore it for now and just link to the first one...
+                        if (data.identifier.search(/^fig-[0-9]+-[0-9]+$/) > -1) {
 
-                            var figureId = matches[1];
-                            var occurrence = matches[2] ? parseInt(matches[2],10) : 1;
+                        	var fid = data.identifier;
+                        	gotoPage = this.getPageForSelector("#" + fid);
 
-                            refs = $(".figure_reference").filter("[href='#" + figureId + "']");
+                        	break;
 
-                            if (refs.length) {
-
-                                if (refs.length === 1) {
-
-                                    page_for_id = this.getPageForSelector(refs[0]);
-                                } else {
-
-                                    //find visible occurence
-                                    occurrenceCount = 0;
-
-                                    for (j = 0, l = refs.length; j < l; j++) {
-
-                                        if (this.isElementVisible(refs[j])) {
-
-                                            occurrenceCount++;
-
-                                            if (occurrenceCount === occurrence) {
-
-                                                page_for_id = this.getPageForSelector(refs[j]);
-
-                                                break;
-
-                                            }
-
-                                        }
-
-                                    }
-
-                                }
-
-                            }
-						*/
+                        }
+						
 
 						/*
 						// Route for footnote references
@@ -226,16 +193,22 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
                         }
                         */
 
-                        /*
                         // Route to specific element
-                        gotoPage = this.getPageNumberForElementId(data.identifier);
+                        gotoPage = this.getPageForSelector( data.identifier );
 	                    break;
-	                    */
 
 
                 }
             }
 
+
+            // this.getPageForSelector() will return false (0) when the selector matches nothing
+            // we should fix the URL and remain where we are when that happens
+            // TODO: maybe alert the user that they had an invalid link?
+            if(!gotoPage) {
+            	gotoPage = this.page;
+            	app.router.navigate("section/" + this.getCurrentNavigationItem().get('id'), { trigger: false } );
+            }
 
             // page width is used for determining how far to scroll
 			var $target = $('#section');
@@ -254,17 +227,20 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			this.calculatePages();
 			this.update(this.page);
 
-            
-
-
 		});
 
 	},
 
 	// Given a selector, find first element, its offset, and the corresponding page
 	getPageForSelector: function( selector ) {
-		console.log( $(selector) );
-		var offset = $(selector).offset().left - $('#default-section-view').offset().left
+		var $selector = $(selector);
+
+
+		if( $selector.length < 1 ) {
+			return false;
+		}
+
+		var offset = $selector.offset().left - $('#default-section-view').offset().left
 			return Math.floor( offset / ( $('#section').outerWidth() + 10 ) ) + 1;
 	},
 
