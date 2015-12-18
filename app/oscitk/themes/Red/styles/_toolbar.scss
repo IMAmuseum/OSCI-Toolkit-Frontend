@@ -11,13 +11,16 @@ $toolbar-margin-bottom: 5px;
 	top: 52px;
 	bottom: 50px;
 
+	// Constrains toolbar; see #toolbar-readout
+	min-width: 320px;
+	width: 25%;
+
+	// TODO: Make the navbar have higher z-index
 	z-index: 10001;
 
 	background: $color-dark-red;
 
 	#toolbar-view {
-
-		
 
 		#toolbar-area {
 
@@ -113,9 +116,9 @@ $toolbar-margin-bottom: 5px;
 	#toolbar-readout {
 		float: left;
 		height: 100%;
-		width: 270px;
 
-		max-width: calc( 100% - 50px );
+		// Relative to position:fixed #toolbar
+		width: calc( 100% - 50px );
 
 		color: white;
 	}
