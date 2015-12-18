@@ -9,10 +9,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// They exist only within the context of the NavigationView.js
 		// They are just numbers!
 
-
-
 		// set some defaults
-		this.identifier = null;
 		this.currentNavigationItem = null;
 
 		this.numPages = null;
@@ -33,26 +30,54 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		});
 
-		// bind routedTo
-		this.listenTo(Backbone, 'routedToSection', function(params) {
+		// See ../../../Router.js
+		this.listenTo(Backbone, 'routedToSection', function( data ) {
 
-			//console.log('NavigationView caught routedToSection');
-			//console.log( params ); // Object {section_id: "2", identifier: "end"}
+			// Used to delay triggering of navigate with an identifier
+			var waitForSection = true;
 
-			this.identifier = params.identifier;
+			
 
-			if( !params.section_id ) {
+			// First, determine if we need to navigate to a different section
+			// Assuming that section_id is almost always defined!
+			// It should be undefined only on initial load with no hash
+
+			if( !data.section_id ) {
 
 				// go to first section
 				var sectionId = app.collections.navigationItems.at(0).id;
-				this.setCurrentNavigationItem(sectionId);
-				app.router.navigate("section/" + sectionId, {trigger: false});
+				app.router.navigate("section/" + sectionId, { trigger: false } );
+				this.setCurrentNavigationItem( sectionId );
 
 			} else {
 
-				// go to section_id
-				this.setCurrentNavigationItem(params.section_id);
+				// if the first load is via #section/[id]
+				if( this.getCurrentNavigationItem() === null ) {
+					this.setCurrentNavigationItem( data.section_id );
+				}else{
 
+					// trigger a nav item change *only* if it's a new section
+					// no need to re-render everything if we're staying put...
+					if( data.section_id !== this.getCurrentNavigationItem().get('id') ) {
+						this.setCurrentNavigationItem( data.section_id );
+					}else{
+						waitForSection = false;
+					}
+					
+				}
+
+			}
+
+			// if there is a secondary route (e.g. to a paragraph),
+			// pass the ball on to the navigate listener
+			if( typeof data.identifier !== undefined ) {
+				if( waitForSection ) {
+					this.listenToOnce( Backbone, "columnsComplete", function() {
+						Backbone.trigger('navigate', { identifier: data.identifier } );
+					});
+				}else{
+					Backbone.trigger('navigate', { identifier: data.identifier } );
+				}
 			}
 
 			// set the document title | section name
@@ -60,18 +85,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		});
 
-		/*
-		// #section ==
-        var lastScrollLeft = $('#section').scrollLeft();
-        $('#section').scroll(function() {
-
-            var sectionScrollLeft = $('#section').scrollLeft();
-            if( lastScrollLeft != sectionScrollLeft ) {
-                lastScrollLeft  = sectionScrollLeft;
-            }
-
-        });
-		*/
+		
 
 		// Respond to keyboard events
 		var that = this;
@@ -111,17 +125,13 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		this.listenTo(Backbone, 'navigate', function(data) {
 
-			//console.log('NavigationView caught navigate');
-
-			var refs, occurrenceCount, j;
             var gotoPage = this.page;
-
-
 
             if (data.page) {
                 gotoPage = data.page;
             }
-            else if (data.identifier) {
+
+            if (data.identifier) {
 
                 switch (data.identifier) {
 
@@ -135,12 +145,17 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
                     default:
 
+                    console.log( data.identifier );
 
-                        // Route to a paragraph /p-[id]
+
+                        // Route to a paragraph /p-[section_id]-[id]
                         if(data.identifier.search(/^p-[0-9]+/) > -1) {
-                            var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
-                            gotoPage = this.getPageForSelector('[data-paragraph_number='+pid+']');
+
+                        	var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
+                            gotoPage = this.getPageForSelector('p[data-paragraph_number='+pid+']');
+
                         	break;
+
                         }
 
                         /*
@@ -247,8 +262,10 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	},
 
 	// Given a selector, find first element, its offset, and the corresponding page
-	getPageForElement: function() {
-
+	getPageForSelector: function( selector ) {
+		console.log( $(selector) );
+		var offset = $(selector).offset().left - $('#default-section-view').offset().left
+			return Math.floor( offset / ( $('#section').outerWidth() + 10 ) ) + 1;
 	},
 
 	// Get element by id, find its offset, determine corresponding page
@@ -314,7 +331,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		} else if (this.numPages > 1) {
 
 			var that = this;
-			//this.$el.find('.prev-page .label').html('Previous');
 
 			// TODO: UPDATE PREV BUTTON TO ENABLE PROPERLY
 			this.$el.find('.prev-page').removeClass('inactive').click(function () {
@@ -382,10 +398,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		return this.currentNavigationItem;
 	},
 
-	// Change section
-	setCurrentNavigationItem: function(section_id) {
-
-		//console.log( 'NavigationView calls setCurrentNavigationItem(' + section_id + ')' );
+	setCurrentNavigationItem: function( section_id ) {
 
 		var section = app.collections.navigationItems.get(section_id);
 
@@ -395,6 +408,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			this.currentNavigationItem = app.collections.navigationItems.first();
 		}
 
+		console.log( "Triggering currentNavigationItemChanged");
 		Backbone.trigger('currentNavigationItemChanged', this.currentNavigationItem);
 
 	}

@@ -8,7 +8,7 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 		'click a.register': 'showRegistrationForm',
 		'click a.login': 'showLoginForm',
 		'click a.logout': 'logout',
-		'click #dismiss': 'closeOverlay',
+		//'click #dismiss': 'closeOverlay',
 	},
 	className: 'toolbar-account-view',
 	template: null,
@@ -190,6 +190,7 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 
 	},
 
+	/*
 	closeOverlay: function() {
 
 		Backbone.trigger("toolbarRemoveViews");
@@ -205,5 +206,6 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 		Backbone.trigger('currentNavigationItemChanged', this.currentNavigationItem);
 		
 	}
-
+	*/
+	
 });

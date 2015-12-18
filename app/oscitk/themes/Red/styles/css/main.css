@@ -8870,12 +8870,14 @@ input[type=range]:focus::-ms-fill-upper {
 /* line 33, ../_paragraph-popover.scss */
 .popover .popover-content .popover-wrapper .nav li a:hover {
   color: #3c3c3c;
+  border-color: transparent;
 }
-/* line 39, ../_paragraph-popover.scss */
+/* line 40, ../_paragraph-popover.scss */
 .popover .popover-content .popover-wrapper .nav li.active a {
   color: #3c3c3c;
+  border: thin solid transparent;
 }
-/* line 47, ../_paragraph-popover.scss */
+/* line 49, ../_paragraph-popover.scss */
 .popover .popover-content .popover-wrapper textarea {
   border: none;
   outline: none;
@@ -8886,7 +8888,7 @@ input[type=range]:focus::-ms-fill-upper {
   padding: 5px;
   color: #333;
 }
-/* line 63, ../_paragraph-popover.scss */
+/* line 65, ../_paragraph-popover.scss */
 .popover .popover-content .popover-wrapper button {
   font-size: 15px;
   font-weight: 200;
@@ -8894,7 +8896,7 @@ input[type=range]:focus::-ms-fill-upper {
   border: thin solid transparent;
 }
 
-/* line 74, ../_paragraph-popover.scss */
+/* line 76, ../_paragraph-popover.scss */
 .tab-content {
   height: 160px;
 }

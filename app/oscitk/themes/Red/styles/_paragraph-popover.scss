@@ -32,12 +32,14 @@ $popover-height: 160px;
 						color: white;
 						&:hover {
 							color: #3c3c3c;
+							border-color: transparent;
 						}
 					}
 
 					&.active {
 						a {
 							color: #3c3c3c;
+							border: thin solid transparent;
 						}
 					}
 
