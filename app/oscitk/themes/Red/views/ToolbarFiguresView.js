@@ -29,6 +29,11 @@ OsciTk.views.FiguresToolbar = OsciTk.views.BaseView.extend({
 
 		var fig_data = app.collections.figures.toJSON();
 		this.$el.html( this.template( { figures: fig_data } ) );
+
+		// Enable linking functionality
+		this.$el.find('a').on('click', function() {
+			Backbone.trigger('navigate', { identifier: $(this).attr('data-figure-id') } );
+		});
 		
 		return this;
 

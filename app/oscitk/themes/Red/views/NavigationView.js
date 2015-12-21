@@ -119,9 +119,10 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		this.listenTo(Backbone, 'columnRenderStart', function() {
 	        
 	        var offset = $('#default-section-view').offset();
+			
 	        var em = $('#default-section-view>*').findNearest({
-	            left: offset.left + $('#section').scrollLeft(),
-	            top: offset.top
+	            left: offset.left + $('#section').scrollLeft() + 1,
+	            top: offset.top + 1
 	        });
 
 	        $('#section').attr('data-columns-element', em.index() );

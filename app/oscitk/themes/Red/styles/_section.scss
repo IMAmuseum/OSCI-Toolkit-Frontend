@@ -122,7 +122,8 @@ body {
 			color: #3c3c3c;
 
 			// Offset for p > .paragraph-controls
-			margin-left: 16px;
+			// Changing this to a margin will affect nearest element calculations
+			padding-left: 16px;
 
 			.footnote-reference {
 				margin: 0 5px;
