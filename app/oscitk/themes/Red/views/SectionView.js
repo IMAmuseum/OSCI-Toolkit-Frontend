@@ -51,16 +51,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
             $('#section').attr('data-columns-setting', columnCount );
 
-            // Figure out the first element on the page and save it
-            // TODO: Needs refinement
-            var em = $('#default-section-view>*').findNearest({
-                left: $('#section').scrollLeft(),
-                top: 0
-            });
-
-            $('#section').attr('data-columns-element', em.index() );
-
-
             this.renderColumns();
 
         });
@@ -103,6 +93,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     },
 
     renderColumns: function(  ) {
+
+        // see NavigationView.js
+        Backbone.trigger("columnRenderStart");
 
         var sh = $('#section').height();
 
@@ -196,7 +189,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         } while( ch > $('#section').height() );
 
         // see NavigationView.js
-        Backbone.trigger("columnsComplete");
+        Backbone.trigger("columnRenderEnd");
 
     },
 

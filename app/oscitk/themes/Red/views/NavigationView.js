@@ -72,7 +72,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			// pass the ball on to the navigate listener
 			if( typeof data.identifier !== undefined ) {
 				if( waitForSection ) {
-					this.listenToOnce( Backbone, "columnsComplete", function() {
+					this.listenToOnce( Backbone, "columnRenderEnd", function() {
 						Backbone.trigger('navigate', { identifier: data.identifier } );
 					});
 				}else{
@@ -115,11 +115,26 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		});
 
-		// the section resets to first page when columns re-render
-		this.listenTo(Backbone, 'columnsComplete', function() {
+		// Figure out the first element on the page and save it
+		this.listenTo(Backbone, 'columnRenderStart', function() {
+	        
+	        var offset = $('#default-section-view').offset();
+	        var em = $('#default-section-view>*').findNearest({
+	            left: offset.left + $('#section').scrollLeft(),
+	            top: offset.top
+	        });
 
-			//console.log('NavigationView caught columnsComplete');
-			Backbone.trigger('navigate', { page: this.page } );
+	        $('#section').attr('data-columns-element', em.index() );
+
+		});
+
+		// Navigate to page that contains last known element
+		this.listenTo(Backbone, 'columnRenderEnd', function() {
+
+			var i = $('#section').attr('data-columns-element');
+			var id = '#default-section-view>*:eq(' + i +')';
+
+			Backbone.trigger('navigate', { identifier: id } );
 
 		});
 
