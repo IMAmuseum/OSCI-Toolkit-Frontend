@@ -399,7 +399,9 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			this.currentNavigationItem = app.collections.navigationItems.first();
 		}
 
-		console.log( "Triggering currentNavigationItemChanged");
+		// Reset to first page when the section changes
+		$('#section').attr('data-columns-element', 0 ).scrollLeft(0);
+
 		Backbone.trigger('currentNavigationItemChanged', this.currentNavigationItem);
 
 	}
