@@ -92,35 +92,12 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         return true;
     },
 
+    // Layout magic happens here
     renderColumns: function(  ) {
 
         // see NavigationView.js
         Backbone.trigger("columnRenderStart");
 
-        var sh = $('#section').height();
-
-        $('figure').each( function( i, e ) {
-
-            // set max-height of figure equal to #section height
-            var $e = $(e);
-                $e.css('max-height', sh );
-
-            var $c = $e.find('figcaption');
-
-            // account for the figcaption when setting max height of inner elements
-            var ch = $c.outerHeight();
-                $e.find('.figure_content,object,img').css('max-height', sh - ch - 10);
-
-            // now, constrain the width of the figure caption
-            $e.css('max-width', 'none' );            
-
-            var iw = $e.find('img').outerWidth();
-                $c.css('max-width', iw );
-
-            $e.css('max-width', iw );
-
-        }); 
-            
         // set column gap here so that it's readily accessible
         var cg = 40;
         $('#default-section-view').css({
@@ -128,7 +105,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                '-moz-column-gap': cg,
                     'column-gap': cg
         });
-
 
         // Determine column count
         var cc = $('#section').attr('data-columns-setting');
@@ -139,6 +115,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             cc = parseInt( cc );
         }
 
+        // Note that this is hardcoded to match Bootstrap's breakpoints
         if( $(window).width() < 768 ) {
             cc = 1;
         }
@@ -161,16 +138,39 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         var sw = $('#section').width();
         var cw = (sw/cc) - cg/2; // account for one gap
         
-
-        //console.log( cw );
-
         $('#default-section-view').css({
             '-webkit-column-width': cw,
                '-moz-column-width': cw,
                     'column-width': cw
         }); 
 
-        // ENSURE THIS NEVER FAILS
+
+        // Now that the column widths are configured, resize figures
+        var sh = $('#section').height();
+        $('figure').each( function( i, e ) {
+
+            // set max-height of figure equal to #section height
+            var $e = $(e);
+                $e.css('max-height', sh );
+
+            var $c = $e.find('figcaption');
+
+            // account for the figcaption when setting max height of inner elements
+            var ch = $c.outerHeight();
+                $e.find('.figure_content,object,img').css('max-height', sh - ch - 10);
+
+            // now, constrain the width of the figure caption
+            $e.css('max-width', 'none' );            
+
+            var iw = $e.find('img').outerWidth();
+                $c.css('max-width', iw );
+
+            $e.css('max-width', iw );
+
+        }); 
+
+        // Now that the height of all elements is determined,
+        // Increase number of columns until everything fits vertically
         var ch = 0; var i = cc;
         do {
 
