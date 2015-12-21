@@ -50,6 +50,17 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         this.listenTo(Backbone, 'setSectionColumns', function( columnCount ) {
 
             $('#section').attr('data-columns-setting', columnCount );
+
+            // Figure out the first element on the page and save it
+            // TODO: Needs refinement
+            var em = $('#default-section-view>*').findNearest({
+                left: $('#section').scrollLeft(),
+                top: 0
+            });
+
+            $('#section').attr('data-columns-element', em.index() );
+
+
             this.renderColumns();
 
         });
