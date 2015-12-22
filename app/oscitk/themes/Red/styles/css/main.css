@@ -8610,17 +8610,31 @@ header .header-title .container .btn-menu, header .header-title .container-fluid
 #toolbar-figures figure img, #toolbar-figures figure figcaption {
   max-width: 75%;
 }
-/* line 269, ../_toolbar.scss */
-#toolbar-figures figure a {
+
+/* line 273, ../_toolbar.scss */
+a.toolbar-link {
   display: block;
   height: 22px;
-  min-width: 22px;
+  width: 22px;
   padding: 3px 1px;
   text-align: center;
   cursor: pointer;
 }
+/* line 281, ../_toolbar.scss */
+a.toolbar-link img {
+  max-width: 75%;
+}
 
-/* line 283, ../_toolbar.scss */
+/* line 289, ../_toolbar.scss */
+#toolbar-notes .notesListItem .note-buttons {
+  float: left;
+}
+/* line 293, ../_toolbar.scss */
+#toolbar-notes .notesListItem .the-note {
+  margin-left: 35px;
+}
+
+/* line 301, ../_toolbar.scss */
 #toolbar-account .account-footer {
   margin-top: 10px;
 }

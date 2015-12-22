@@ -266,17 +266,35 @@ $toolbar-margin-bottom: 5px;
 			max-width: 75%
 		}
 
-		a {
-			display: block;
-			height: 22px;
-			min-width: 22px;
-			padding: 3px 1px;
-			text-align: center;
-			cursor: pointer;
+	}
+
+}
+
+a.toolbar-link {
+	display: block;
+	height: 22px;
+	width: 22px;
+	padding: 3px 1px;
+	text-align: center;
+	cursor: pointer;
+
+	img {
+		max-width: 75%;
+	}
+}
+
+#toolbar-notes {
+	.notesListItem {
+
+		.note-buttons {
+			float: left;
+		}
+
+		.the-note {
+			margin-left: 35px;
 		}
 
 	}
-
 }
 
 #toolbar-account {

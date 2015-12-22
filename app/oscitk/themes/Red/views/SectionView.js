@@ -443,13 +443,13 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         var paragraphs = $(this.content.children).filter('p');
 
         _.each( paragraphs, function(e, i) {
-
+            var j = i+1; // see also ParagraphControlsView.js
             $(e).attr({
 
-                'data-paragraph_number': i+1,
-                'data-osci_content_id': 'osci-content-'+i,
+                'data-paragraph_number': j,
+                'data-osci_content_id': 'osci-content-'+j,
                 'data-sectionid': 'body',
-                'id': 'osci-content-'+i
+                'id': 'osci-content-'+j
 
             }).addClass('content-paragraph');
 

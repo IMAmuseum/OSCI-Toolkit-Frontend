@@ -5,7 +5,7 @@ OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
 	className: 'toolbar-notes-view',
 	template: OsciTk.templateManager.get('toolbar-notes'),
 	events: {
-		"click .noteLink": "noteLinkClick"
+		"click a.note-link": "noteLinkClick"
 	},
 
 	initialize: function() {
@@ -28,7 +28,9 @@ OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
 
 		});
 
-		// This just tells the user to login 
+
+
+		// Initial render is meant to just tell the user to log in
 		this.render();
 		
 	},
@@ -38,19 +40,24 @@ OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
 		var notes = this.getSavedNotes();
 		this.$el.html( this.template( { notes: notes } ) );
 
+
 		return this;
 	},
 
 	noteLinkClick: function(e) {
 
 		e.preventDefault();
-		var target = $(e.target);
-		var content_id = target.attr('data-content_id');
+
+		var $target = $(e.currentTarget);
+		var content_id = $target.attr('data-content_id');
+
+		console.log( $target, content_id );
+
 		if (content_id) {
-			Backbone.trigger('navigate', {identifier: content_id});
-			Backbone.trigger('toggleNoteDialog', { contentId: content_id });
-			$('#'+content_id).click();
-			app.views.toolbarView.contentClose();
+			Backbone.trigger('navigate', { identifier: '#' + content_id } );
+			//console.log( $('div[data-osci_content_id="'+content_id+'"] .paragraph-button') );
+			$('.close-toolbar-item').click(); // closes toolbar
+			$('.paragraph-controls[data-osci_content_id="'+content_id+'"] .paragraph-button').click(); // opens note dialog
 		}
 
 	},

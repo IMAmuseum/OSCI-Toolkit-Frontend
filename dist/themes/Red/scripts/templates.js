@@ -264,7 +264,7 @@ __p += '\n\t\t\t\t\t<div class=\'figure-thumbnail\'>&nbsp;</div>\n\t\t\t\t';
  } ;
 __p += '\n\t\t\t</div>\n\t\t\t<figcaption>\n\t\t\t\t<a data-figure-id="' +
 ((__t = ( figure.id )) == null ? '' : __t) +
-'" class="pull-right">\n\t\t\t\t\t<img src="images/light/link_icon.png"/>\n\t\t\t\t</a>\n\t\t\t\t' +
+'" class="toolbar-link pull-right">\n\t\t\t\t\t<img src="images/light/link_icon.png"/>\n\t\t\t\t</a>\n\t\t\t\t' +
 ((__t = ( figure.caption )) == null ? '' : __t) +
 '\n\t\t\t</figcaption>\n\t\t</figure>\n\t';
  }); ;
@@ -374,9 +374,13 @@ __p += '<h3>Notes</h3>\n\n<div class="toolbar-scroll">\n\t<div class="notesReel"
  if (notes.length > 0) { ;
 __p += '\n\t\t<ul class="notesList">\n\t\t\t';
  _.each(notes, function(note) { ;
-__p += '\n\t\t\t\t<li class="notesListItem">\n\t\t\t\t\t<div class="the-note">\n\t\t\t\t\t\t<span class="note-content">' +
+__p += '\n\t\t\t\t<li class="notesListItem">\n\t\t\t\t\t<div class="note-buttons">\n\t\t\t\t\t\t<a class="note-link toolbar-link pull-left" data-content_id="' +
+((__t = ( note.get('content_id') )) == null ? '' : __t) +
+'">\n\t\t\t\t\t\t\t<img src="images/light/link_icon.png"/>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t\t<!-- <a href="#" class="noteEdit" data-content_id="' +
+((__t = ( note.get('content_id') )) == null ? '' : __t) +
+'">Edit</a> -->\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="the-note">\n\t\t\t\t\t\t<span class="note-content">' +
 ((__t = ( note.get('note') )) == null ? '' : __t) +
-'</span>\n\t\t\t\t\t</div>\n\t\t\t\t\t';
+'</span>\n\t\t\t\t\t</div>\n\t\t\t\t\t<!--\n\t\t\t\t\t';
  if (note.get('tags').length > 0) { ;
 __p += '\n\t\t\t\t\t\t<div class="note-tags">\n\t\t                \t<span class="tags-label">tags:</span> ';
  _.each(note.get('tags'), function(tag) { ;
@@ -386,11 +390,7 @@ __p +=
  }); ;
 __p += '\n\t\t                </div>\n\t\t\t\t\t';
  } ;
-__p += '\n\t\t\t\t\t<div class="note-buttons">\n\t\t\t\t\t\t<a href="#" class="noteLink" data-content_id="' +
-((__t = ( note.get('content_id') )) == null ? '' : __t) +
-'">Link</a>\n\t\t\t\t\t\t<!-- <a href="#" class="noteEdit" data-content_id="' +
-((__t = ( note.get('content_id') )) == null ? '' : __t) +
-'">Edit</a> -->\n\t\t\t\t\t</div>\n\t\t\t\t</li>\n\t\t\t';
+__p += '\n\t\t\t\t\t-->\n\t\t\t\t</li>\n\t\t\t';
  }); ;
 __p += '\n\t\t</ul>\n\t\t';
  } else { ;

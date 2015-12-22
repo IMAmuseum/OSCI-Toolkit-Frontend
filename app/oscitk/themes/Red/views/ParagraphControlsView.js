@@ -100,7 +100,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         //console.log( "ParagraphControlsView calls addParagraphControls" );
 
         // get all paragraph with id and append controls
-        var i = 1;
+        var i = 1; // all osci-content counts start with 1
 
         _.each(this.paragraphs, function(paragraph) {
             
