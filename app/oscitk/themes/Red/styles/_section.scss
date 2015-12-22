@@ -162,49 +162,6 @@ body {
 
 		}
 
-		figure,
-		figure .figure_content,
-		figure .figure_content object,
-		figure .figure_content object img {
-
-			-webkit-column-break-inside: avoid;		/* Chrome, Safari */
-		    page-break-inside: avoid;				/* Theoretically FF 20+ */
-		    break-inside: avoid-column;				/* IE 11 */
-		    //display:table;						/* Actually FF 20+ */
-
-		    float: none !important;
-		    display: block;
-
-		    //text-align: center;
-
-		    max-width: 100%;
-		    line-height: 29px;
-
-		}
-
-		// Max heights overriden by JavaScript
-	    figure {
-	    	max-height: 741px;
-
-	    	margin: auto;  // ensures that the figure takes up the entire page
-	    	margin-bottom: 15px;
-	    	//display: block;
-
-			.figure_content {
-				max-height: 711px;
-
-			    object {
-	    			max-height: 711px;
-
-				    img {
-				    	max-height: 711px;
-				    }
-				}
-
-			}
-	    	    	
-	    }
-
 	}
 
 }

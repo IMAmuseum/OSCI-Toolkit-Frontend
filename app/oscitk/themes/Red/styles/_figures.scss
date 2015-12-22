@@ -2,15 +2,54 @@
 
 	#default-section-view {
 
+		figure,
+		figure .figure_content,
+		figure .figure_content object,
+		figure .figure_content object img {
 
-		figure {
-			border: thin $gray-lighter solid;
+			-webkit-column-break-inside: avoid;		/* Chrome, Safari */
+		    page-break-inside: avoid;				/* Theoretically FF 20+ */
+		    break-inside: avoid-column;				/* IE 11 */
+		    //display:table;						/* Actually FF 20+ */
+
+		    float: none !important;
+		    display: block;
+
+		    max-width: 100%;
+		    line-height: 29px;
+
+		}
+
+		// All max heights are overriden by JavaScript
+	    figure {
+
+	    	
+	    	max-height: 741px;
+
+	    	margin: auto;  // ensures that the figure takes up the entire page
+	    	margin-bottom: 15px;
+
+	    	border: thin $gray-lighter solid;
 			padding: 6px;
 
-			.figure_content {
+						.figure_content {
 				img {
-					border: 0;
+					
 				}
+			}
+
+			.figure_content {
+				max-height: 711px;
+
+			    object {
+	    			max-height: 711px;
+
+				    img {
+				    	max-height: 711px;
+				    	border: 0;
+				    }
+				}
+
 			}
 
 			figcaption {
@@ -28,54 +67,8 @@
 				}
 
 			}
-
-
-			/*
-
-			&.left {
-				float: left;
-				margin-right: 50px;
-			}
-
-			img.left {
-				float: left;
-				max-width: 100%;
-				max-height: 50vh;
-			}
-
-			&.right {
-				float: right;
-				margin-left: 40px;
-			}
-
-			img.right {
-				float: right;
-				max-width: 100%;
-				max-height: 50vh;
-			}
-
-			&.plate,
-			&.center {
-
-				width: 50%;
-				max-width: 100%;
-				margin-left: auto;
-				margin-right: auto;
-
-				img, figcaption {
-					width: 100%;
-				}
-
-				@media (max-width: 768px) {
-					width: 90%;
-				}
-			}
-			*/
-			.osci-figure {
-				
-			}
-
-		}
+	    	    	
+	    }
 
 	}
 

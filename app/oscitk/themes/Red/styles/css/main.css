@@ -8165,42 +8165,8 @@ body {
 #section #default-section-view p .glossary-term:hover {
   cursor: hand;
 }
-/* line 165, ../_section.scss */
-#section #default-section-view figure,
-#section #default-section-view figure .figure_content,
-#section #default-section-view figure .figure_content object,
-#section #default-section-view figure .figure_content object img {
-  -webkit-column-break-inside: avoid;
-  /* Chrome, Safari */
-  page-break-inside: avoid;
-  /* Theoretically FF 20+ */
-  break-inside: avoid-column;
-  /* IE 11 */
-  float: none !important;
-  display: block;
-  max-width: 100%;
-  line-height: 29px;
-}
-/* line 186, ../_section.scss */
-#section #default-section-view figure {
-  max-height: 741px;
-  margin: auto;
-  margin-bottom: 15px;
-}
-/* line 193, ../_section.scss */
-#section #default-section-view figure .figure_content {
-  max-height: 711px;
-}
-/* line 196, ../_section.scss */
-#section #default-section-view figure .figure_content object {
-  max-height: 711px;
-}
-/* line 199, ../_section.scss */
-#section #default-section-view figure .figure_content object img {
-  max-height: 711px;
-}
 
-/* line 213, ../_section.scss */
+/* line 170, ../_section.scss */
 .loader {
   margin: 80px auto;
   font-size: 10px;
@@ -8216,7 +8182,7 @@ body {
   -webkit-animation: load8 1.1s infinite linear;
   animation: load8 1.1s infinite linear;
 }
-/* line 232, ../_section.scss */
+/* line 189, ../_section.scss */
 .loader, .loader:after {
   border-radius: 50%;
   width: 10em;
@@ -8790,61 +8756,48 @@ input[type=range]:focus::-ms-fill-upper {
   background: #ccc;
 }
 
-/* line 6, ../_figures.scss */
+/* line 5, ../_figures.scss */
+#section #default-section-view figure,
+#section #default-section-view figure .figure_content,
+#section #default-section-view figure .figure_content object,
+#section #default-section-view figure .figure_content object img {
+  -webkit-column-break-inside: avoid;
+  /* Chrome, Safari */
+  page-break-inside: avoid;
+  /* Theoretically FF 20+ */
+  break-inside: avoid-column;
+  /* IE 11 */
+  float: none !important;
+  display: block;
+  max-width: 100%;
+  line-height: 29px;
+}
+/* line 24, ../_figures.scss */
 #section #default-section-view figure {
+  max-height: 741px;
+  margin: auto;
+  margin-bottom: 15px;
   border: thin #f1f1f1 solid;
   padding: 6px;
-  			/*
-  
-  			&.left {
-  				float: left;
-  				margin-right: 50px;
-  			}
-  
-  			img.left {
-  				float: left;
-  				max-width: 100%;
-  				max-height: 50vh;
-  			}
-  
-  			&.right {
-  				float: right;
-  				margin-left: 40px;
-  			}
-  
-  			img.right {
-  				float: right;
-  				max-width: 100%;
-  				max-height: 50vh;
-  			}
-  
-  			&.plate,
-  			&.center {
-  
-  				width: 50%;
-  				max-width: 100%;
-  				margin-left: auto;
-  				margin-right: auto;
-  
-  				img, figcaption {
-  					width: 100%;
-  				}
-  
-  				@media (max-width: 768px) {
-  					width: 90%;
-  				}
-  			}
-  			*/
 }
-/* line 11, ../_figures.scss */
-#section #default-section-view figure .figure_content img {
+/* line 41, ../_figures.scss */
+#section #default-section-view figure .figure_content {
+  max-height: 711px;
+}
+/* line 44, ../_figures.scss */
+#section #default-section-view figure .figure_content object {
+  max-height: 711px;
+}
+/* line 47, ../_figures.scss */
+#section #default-section-view figure .figure_content object img {
+  max-height: 711px;
   border: 0;
 }
-/* line 16, ../_figures.scss */
+/* line 55, ../_figures.scss */
 #section #default-section-view figure figcaption {
   background: white;
 }
-/* line 20, ../_figures.scss */
+/* line 59, ../_figures.scss */
 #section #default-section-view figure figcaption p {
   font-family: 'Lora', serif;
   font-style: italic;
