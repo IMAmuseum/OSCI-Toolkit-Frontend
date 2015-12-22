@@ -10,6 +10,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         this.userLogged = false;
         this.sectionId = null;
 
+
         // when layout is complete add numbers for paragraph controls
         this.listenTo(Backbone, 'layoutComplete', function() {
             this.sectionId = app.models.section.get('id');
@@ -21,22 +22,18 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         });
 
 
+        // We must wait for the section to load before setting up the account hook
+        this.listenTo(Backbone, 'sectionLoaded', function() {
+            this.sectionLoaded = true;
+            this.render();
+        });
+
+            this.userLogged = app.account.get('id') > 0;
         // Whenever something happens to the account, try to reload the notes
         // See ToolbarAccountView.js for more info
         this.listenTo(Backbone, 'accountReady accountStateChanged', function() {
-
             this.userLogged = app.account.get('id') > 0;
-
-            // Force re-load of Notes, see ../../../collections/NotesCollection.js
-            if( this.userLogged ) {
-
-                var section_id = app.models.section.id;
-                app.collections.notes.getNotesForSection( section_id );
-
-            }
-
             this.render();
-
         });
 
 
@@ -55,6 +52,12 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
 
     render: function() {
+
+        // Force re-load of Notes, see ../../../collections/NotesCollection.js
+        if( this.userLogged && this.sectionLoaded && !this.notesLoaded ) {
+            var section_id = app.models.section.id;
+            app.collections.notes.getNotesForSection( section_id );
+        }
 
         // This is the final check; based on log-in status, this toggles the notes
         if ( this.userLogged && this.notesLoaded) {

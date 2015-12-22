@@ -8788,24 +8788,24 @@ input[type=range]:focus::-ms-fill-upper {
   border: thin #f1f1f1 solid;
   padding: 6px;
 }
-/* line 41, ../_figures.scss */
+/* line 35, ../_figures.scss */
 #section #default-section-view figure .figure_content {
   max-height: 711px;
 }
-/* line 44, ../_figures.scss */
+/* line 38, ../_figures.scss */
 #section #default-section-view figure .figure_content object {
   max-height: 711px;
 }
-/* line 47, ../_figures.scss */
+/* line 41, ../_figures.scss */
 #section #default-section-view figure .figure_content object img {
   max-height: 711px;
   border: 0;
 }
-/* line 55, ../_figures.scss */
+/* line 50, ../_figures.scss */
 #section #default-section-view figure figcaption {
   background: white;
 }
-/* line 59, ../_figures.scss */
+/* line 54, ../_figures.scss */
 #section #default-section-view figure figcaption p {
   font-family: 'Lora', serif;
   font-style: italic;

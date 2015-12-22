@@ -66,7 +66,7 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
         var modelData = this.model.toJSON();
         var dimensions = this.options.sectionDimensions;
 
-        //if element shouold not be visible on the page, hide it and return
+        //if element should not be visible on the page, hide it and return
         if (modelData.position.vertical === "n") {
           	this.$el.css("visibility", "hidden");
             return true;

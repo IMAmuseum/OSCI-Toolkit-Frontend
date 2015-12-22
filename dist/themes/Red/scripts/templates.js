@@ -128,7 +128,7 @@ this["JST"]["app/oscitk/themes/Red/templates/navbar.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<!--\n\npage / total\nprogress slider\nfont size selector\n1 or 2 col selector\n\n-->\n\n<nav class="navbar navbar-default">\n\t<div class="container-fluid">\n\n        <!-- Page number readout -->\n        <div class="pull-left" id="osci-navbar-text">' +
+__p += '<nav class="navbar navbar-default">\n\t<div class="container-fluid">\n\n        <!-- Page number readout -->\n        <div class="pull-left" id="osci-navbar-text">' +
 ((__t = ( curPage )) == null ? '' : __t) +
 '/' +
 ((__t = ( numPages )) == null ? '' : __t) +

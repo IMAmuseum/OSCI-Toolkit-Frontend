@@ -60,7 +60,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         this.listenTo(Backbone, 'windowResized', function() {
 
             this.renderColumns();
-            //this.render();
 
         });
 
@@ -78,16 +77,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             this.render();
 
         });
-
-        this.listenTo(Backbone, "figuresAvailable", function(figures) {
-
-            //console.log( "SectionView caught figures available..." );
-
-            this.figures = figures;
-            this.setFigureStyles();
-
-        });
-
 
 
         return true;
@@ -146,8 +135,10 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         }); 
 
 
+
         // Now that the column widths are configured, resize figures
         var sh = $('#section').height();
+
         $('figure').each( function( i, e ) {
 
             // set max-height of figure equal to #section height
@@ -168,7 +159,32 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
             $e.css('max-width', iw );
 
+            // Layered image init
+            var url = $e.find('object').attr('data');
+            if (url !== undefined) {
+
+                $.ajax({
+
+                    url: url,
+                    type: 'GET',
+                    dataType: 'html',
+                    success: function(data) {
+
+                        var $content = $(data).filter('.layered_image-asset').first();
+                        var $container = $e.find('.figure_content');
+                        
+                        $container.empty();
+                        $content.appendTo( $container );
+
+
+                        new window.LayeredImage( $content );
+
+                    }
+                });
+            }
+
         }); 
+
 
         // Now that the height of all elements is determined,
         // Increase number of columns until everything fits vertically
@@ -335,58 +351,4 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
     },
 
-    // TODO: Delete me?
-    setFigureStyles: function() {
-
-        _.each(this.figures, function(figure) {
-
-            // UNWRAPPING FALLBACK DIV
-            var fallback_content =  $(figure).find('.figure_content > object > .fallback-content').html();
-                                    $(figure).find('.figure_content').html(fallback_content);
-
-            var figcaption = $(figure).find('figcaption').html();
-            var position = $(figure).data('position');
-            
-            switch(position) {
-
-                // full page
-                case 'p':
-                    var imgClass = 'fullpage';
-                    break;
-                // plate
-                case 'plate':
-                    var imgClass = 'plate';
-                    break;
-                // full page plate
-                case 'platefull':
-                    var imgClass = 'platefull';
-                    break;
-                // top left
-                case 'tl':
-                    var imgClass = 'top left';
-                    break;
-                // bottom left
-                case 'bl':
-                    var imgClass = 'bottom left';
-                    break;
-                // top right
-                case 'tr':
-                    var imgClass = 'top right';
-                    break;
-                // bottom right
-                case 'br':
-                    var imgClass = 'bottom right';
-                    break;
-                // inline, top, bottom
-                case 'i':
-                case 't':
-                case 'b':
-                    var imgClass = 'center';
-                    break;
-
-            }
-            $(figure).addClass(imgClass);
-            $(figure).find("div > img").addClass(imgClass);
-        }, this);
-    }
 });

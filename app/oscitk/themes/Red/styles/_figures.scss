@@ -32,12 +32,6 @@
 	    	border: thin $gray-lighter solid;
 			padding: 6px;
 
-						.figure_content {
-				img {
-					
-				}
-			}
-
 			.figure_content {
 				max-height: 711px;
 
@@ -48,8 +42,9 @@
 				    	max-height: 711px;
 				    	border: 0;
 				    }
-				}
 
+				}
+				
 			}
 
 			figcaption {
