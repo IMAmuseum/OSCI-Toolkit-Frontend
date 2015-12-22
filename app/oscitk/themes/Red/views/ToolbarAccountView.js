@@ -8,7 +8,6 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 		'click a.register': 'showRegistrationForm',
 		'click a.login': 'showLoginForm',
 		'click a.logout': 'logout',
-		//'click #dismiss': 'closeOverlay',
 	},
 	className: 'toolbar-account-view',
 	template: null,
@@ -190,22 +189,5 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 
 	},
 
-	/*
-	closeOverlay: function() {
 
-		Backbone.trigger("toolbarRemoveViews");
-
-		var section = app.collections.navigationItems.get(this.section_id);
-
-		if (section) {
-			this.currentNavigationItem = app.collections.navigationItems.get(section_id);
-		} else {
-			this.currentNavigationItem = app.collections.navigationItems.first();
-		}
-
-		Backbone.trigger('currentNavigationItemChanged', this.currentNavigationItem);
-		
-	}
-	*/
-	
 });

@@ -28,8 +28,6 @@ OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
 
 		});
 
-
-
 		// Initial render is meant to just tell the user to log in
 		this.render();
 		
@@ -55,7 +53,6 @@ OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
 
 		if (content_id) {
 			Backbone.trigger('navigate', { identifier: '#' + content_id } );
-			//console.log( $('div[data-osci_content_id="'+content_id+'"] .paragraph-button') );
 			$('.close-toolbar-item').click(); // closes toolbar
 			$('.paragraph-controls[data-osci_content_id="'+content_id+'"] .paragraph-button').click(); // opens note dialog
 		}

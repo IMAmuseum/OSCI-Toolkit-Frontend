@@ -15,7 +15,7 @@ OsciTk.views.CitationsToolbar = OsciTk.views.BaseView.extend({
 	render: function() {
 
 		this.$el.html(this.template({
-			//items: this.footnotes
+			
 		}));
 
 		return this;

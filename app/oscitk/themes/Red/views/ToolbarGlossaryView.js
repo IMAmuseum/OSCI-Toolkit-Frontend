@@ -11,38 +11,14 @@ OsciTk.views.GlossaryToolbar = OsciTk.views.BaseView.extend({
 
 		this.listenTo(Backbone, 'layoutComplete', function(params) {
 			
-			/*
-			var termLinks = app.views.sectionView.$el.find('a.glossary-term');
-
-			var terms = []; // can't use this.terms due to context conflict in loop
-
-			termLinks.each( function( i, e ) {
-				
-				// TODO: verify that this won't break if multiple footnotes exist
-				var $e = $(e);
-				
-				terms.push( {
-					id: $e.data('tid'),
-					term: $e.text(),
-					definition:
-				});
-
-			});
-
-			
-			this.terms = terms;
-			*/
-
-			
-		
 			this.render();
+			
 		}, this);
 	},
 	render: function() {
 
 		var that = this;
 
-		// console.log( !_.isEmpty(app.collections.glossaryTerms.models) );
 
 		this.$el.html(this.template({hasResults: !_.isEmpty(app.collections.glossaryTerms.models)}));
 

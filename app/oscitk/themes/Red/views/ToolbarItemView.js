@@ -20,8 +20,6 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 			style: this.options.toolbarItem.style
 		}));
 
-		//console.log( this.options.toolbarItem.style  );
-
 		if (this.options.toolbarItem.style != 'default') {
 			Backbone.trigger("toolbarInline", this.options.toolbarItem);
 		}
@@ -50,9 +48,6 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 
 		// get true / false target is active
 		this.active = this.$target.hasClass('active');
-
-		// triggered in ToolbarItemView.js
-		//Backbone.trigger("toolbarItemPreClick", {item : this.options.toolbarItem, active: this.active} );
 
 		// default actions only pass a
 		if(this.$target.data("style") != 'default') {

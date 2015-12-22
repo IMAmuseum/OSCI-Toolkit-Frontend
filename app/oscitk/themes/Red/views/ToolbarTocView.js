@@ -7,8 +7,9 @@ OsciTk.views.TocToolbar = OsciTk.views.BaseView.extend({
 	},
 	initialize: function() {
 		this.listenTo(Backbone, "currentNavigationItemChanged", function() {
-			// console.log( "currentNavigationItemChanged" );
+
 			this.render();
+			
 		});
 	},
 	render: function() {
@@ -24,8 +25,6 @@ OsciTk.views.TocToolbar = OsciTk.views.BaseView.extend({
 	itemClick: function(event) {
 
 		event.preventDefault();
-
-		// console.log( 'section clicked' );
 
 		var sectionId = $(event.currentTarget).attr('data-section-id');
 

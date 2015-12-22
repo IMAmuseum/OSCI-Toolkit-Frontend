@@ -86,15 +86,11 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 	toolbarInline: function(toolbarItem) {
 		var view = _.pick(app.views, toolbarItem.view);
-		//console.log( view );
 
 		view = view[toolbarItem.view];
-		//console.log( view );
 
 		this.removeView(view, false);
 
-
-		//console.log( '#'+toolbarItem.text );
 		this.addView(view, '#'+toolbarItem.text);
 	},
 
@@ -109,18 +105,14 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			var view = _.pick(app.views, toolbarItem.item.view);
 			view = view[toolbarItem.item.view];
 
-			//console.log( '#'+toolbarItem.item.text );
 			this.addView(view, '#'+toolbarItem.item.text);
 		}
 
 	},
 
 	toolbarToggle: function() {
-		//console.log(toolbarItem);
+		
 		_.each(app.toolbarItems, function(item) {
-
-			//remove all active classes
-			//$('.'+item.view+'-toolbar-item').removeClass('active');
 
 			if (item.style == 'default') {
 				var view = _.pick(app.views, item.view);

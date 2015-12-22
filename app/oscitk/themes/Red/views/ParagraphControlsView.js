@@ -5,7 +5,6 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
     initialize: function() {
 
-
         // Just some shorthands
         this.notesLoaded = false;
         this.userLogged = false;
@@ -13,14 +12,10 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
         // when layout is complete add numbers for paragraph controls
         this.listenTo(Backbone, 'layoutComplete', function() {
-
-            //console.log( "ParagraphControlsView caught layoutComplete" );
             this.sectionId = app.models.section.get('id');
-
         });
 
         this.listenTo(Backbone, 'notesLoaded', function(params) {
-            //console.log( "ParagraphControlsView caught notesLoaded" );
             this.notesLoaded = true;
             this.render();
         });
@@ -29,7 +24,6 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         // Whenever something happens to the account, try to reload the notes
         // See ToolbarAccountView.js for more info
         this.listenTo(Backbone, 'accountReady accountStateChanged', function() {
-            //console.log( "ParagraphControlsView caught account actions" );
 
             this.userLogged = app.account.get('id') > 0;
 
@@ -46,27 +40,14 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         });
 
 
-        // Clicking on the paragraph does nothing
-
-        /*
-        this.listenTo(Backbone, 'paragraphClicked', function(data) {
-            console.log( "ParagraphControlsView caught paragraphClicked" );
-            this.togglePopover(data);
-            this.getCitation(data);
-        });
-        */
-
-        
         // Clicking on the disc enables the popover
         this.listenTo(Backbone, 'paragraphButtonClicked', function(data) {
-            //console.log( "ParagraphControlsView caught paragraphButtonClicked" );
             this.togglePopover(data);
             this.getCitation(data);           
         });
 
         // When the user scrolls, destroy the popover
         this.listenTo(Backbone, 'navigate', function() {
-            //console.log( "ParagraphControlsView caught navigate" );
             $('[id^="paragraph-"]').popover('destroy');
         });
 
@@ -74,9 +55,6 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
 
     render: function() {
-
-        //console.log( "ParagraphControlsView rendering..." );
-
 
         // This is the final check; based on log-in status, this toggles the notes
         if ( this.userLogged && this.notesLoaded) {
@@ -96,8 +74,6 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
     },
 
     addParagraphControls: function() {
-
-        //console.log( "ParagraphControlsView calls addParagraphControls" );
 
         // get all paragraph with id and append controls
         var i = 1; // all osci-content counts start with 1
@@ -166,7 +142,6 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         $('#paragraph-'+data).popover('toggle');
 
 
-        
         //step through paragraphs and destroy existing open popovers
         var i = 1;
         _.each(this.paragraphs, function(paragraph) {

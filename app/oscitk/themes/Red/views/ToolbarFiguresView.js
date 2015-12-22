@@ -8,20 +8,8 @@ OsciTk.views.FiguresToolbar = OsciTk.views.BaseView.extend({
 		// re-render this view when collection changes
 		this.listenTo(app.collections.figures, 'add remove reset', function() {
 
-			/*
-			var data = app.collections.figures.toJSON();			
-			var out = [];
-			_.each( data, function( i, e ) {
-				out.push({
-
-				});
-			});
-
-			this.figures = out;
-			*/
-
 			this.render();
-		
+			
 		});
 
 	},

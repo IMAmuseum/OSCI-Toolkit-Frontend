@@ -9,13 +9,6 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 		// tracks the state of the content area drawer
 		// this.activeToolbarItemView = undefined;
 
-		/*
-		this.listenTo(Backbone, 'packageLoaded', function(packageModel) {
-			//Add the publication title to the Toolbar
-			this.title = packageModel.getTitle();
-		});
-		*/
-
 		this.listenTo(Backbone, 'figuresAvailable', function(figures) {
 
 			this.figureSize = figures.size();
@@ -26,7 +19,6 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 		this.listenTo(Backbone, 'menuClicked', function(data) {
 
 			this.$el.parent().toggle("slide", { direction: "right" }, 350);
-			//this.$el.slideToggle();
 
 		});
 
@@ -53,9 +45,7 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	},
 	render: function() {
 
-		this.$el.html(this.template({
-			//'title': this.title
-		}));
+		this.$el.html(this.template( { } ) );
 
 		// See config in index.html
 		_.each(app.toolbarItems, function(toolbarItem) {
@@ -74,7 +64,6 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 
 	},
 	closeToolbar: function(e) {
-		// console.log( this.$el.parent() );
 		this.$el.parent().hide("slide", {direction: "right"}, 350 );
 	}
 
