@@ -21,6 +21,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
             $('#section-view').empty();
             $('.header-view').empty();
+
             $('#loader').show();
 
             if (navItem) {

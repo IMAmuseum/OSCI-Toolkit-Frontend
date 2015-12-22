@@ -8479,105 +8479,113 @@ header .header-title .container .btn-menu, header .header-title .container-fluid
   padding: 15px 0px 0px 30px;
 }
 /* line 145, ../_toolbar.scss */
-#toolbar #toolbar-readout h3 {
+#toolbar #toolbar-readout > div {
+  height: 100%;
+}
+/* line 149, ../_toolbar.scss */
+#toolbar #toolbar-readout > div > div {
+  height: 100%;
+}
+/* line 153, ../_toolbar.scss */
+#toolbar #toolbar-readout > div > div h3 {
   margin: 0;
   margin-right: -30px;
   padding-right: 30px;
   border-bottom: 1px white solid;
   padding-bottom: 8px;
 }
-/* line 153, ../_toolbar.scss */
-#toolbar #toolbar-readout .toolbar-scroll {
+/* line 161, ../_toolbar.scss */
+#toolbar #toolbar-readout > div > div .toolbar-scroll {
   overflow-y: scroll;
   height: calc(100% - 39px);
   padding: 5px 5px 10px 0px;
 }
-/* line 160, ../_toolbar.scss */
-#toolbar #toolbar-readout .toolbar-scroll a {
+/* line 168, ../_toolbar.scss */
+#toolbar #toolbar-readout > div > div .toolbar-scroll a {
   color: white;
 }
-/* line 163, ../_toolbar.scss */
-#toolbar #toolbar-readout .toolbar-scroll a:hover {
+/* line 171, ../_toolbar.scss */
+#toolbar #toolbar-readout > div > div .toolbar-scroll a:hover {
   color: #b82927;
   text-decoration: none;
 }
-/* line 169, ../_toolbar.scss */
-#toolbar #toolbar-readout .toolbar-scroll p {
+/* line 177, ../_toolbar.scss */
+#toolbar #toolbar-readout > div > div .toolbar-scroll p {
   font-family: 'Lato', sans-serif;
 }
-/* line 173, ../_toolbar.scss */
-#toolbar #toolbar-readout .toolbar-scroll ul {
+/* line 181, ../_toolbar.scss */
+#toolbar #toolbar-readout > div > div .toolbar-scroll ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 179, ../_toolbar.scss */
-#toolbar #toolbar-readout .toolbar-scroll ul li {
+/* line 187, ../_toolbar.scss */
+#toolbar #toolbar-readout > div > div .toolbar-scroll ul li {
   margin: 10px 0px;
 }
-/* line 183, ../_toolbar.scss */
-#toolbar #toolbar-readout .toolbar-scroll ul li h4, #toolbar #toolbar-readout .toolbar-scroll ul li h5 {
+/* line 191, ../_toolbar.scss */
+#toolbar #toolbar-readout > div > div .toolbar-scroll ul li h4, #toolbar #toolbar-readout > div > div .toolbar-scroll ul li h5 {
   margin: 0px;
 }
 
-/* line 199, ../_toolbar.scss */
+/* line 209, ../_toolbar.scss */
 #toolbar-glossary #glossary-filter-box {
   color: black;
 }
-/* line 203, ../_toolbar.scss */
+/* line 213, ../_toolbar.scss */
 #toolbar-glossary #glossary-term-listing li {
   cursor: pointer;
 }
-/* line 207, ../_toolbar.scss */
+/* line 217, ../_toolbar.scss */
 #toolbar-glossary #glossary-term-listing-mobile {
   display: none;
 }
-/* line 211, ../_toolbar.scss */
+/* line 221, ../_toolbar.scss */
 #toolbar-glossary #glossary-content {
   border-top: 1px solid white;
 }
-/* line 217, ../_toolbar.scss */
+/* line 227, ../_toolbar.scss */
 #toolbar-glossary #glossary-content p p span {
   color: white !important;
 }
 @media (max-width: 767px) {
-  /* line 226, ../_toolbar.scss */
+  /* line 236, ../_toolbar.scss */
   #toolbar-glossary #glossary-term-listing {
     display: none;
   }
-  /* line 230, ../_toolbar.scss */
+  /* line 240, ../_toolbar.scss */
   #toolbar-glossary #glossary-content {
     display: none;
   }
-  /* line 234, ../_toolbar.scss */
+  /* line 244, ../_toolbar.scss */
   #toolbar-glossary #glossary-term-listing-mobile {
     display: block;
   }
-  /* line 237, ../_toolbar.scss */
+  /* line 247, ../_toolbar.scss */
   #toolbar-glossary #glossary-term-listing-mobile > li {
     cursor: pointer;
     border-bottom: 1px solid white;
   }
-  /* line 241, ../_toolbar.scss */
+  /* line 251, ../_toolbar.scss */
   #toolbar-glossary #glossary-term-listing-mobile > li ul {
     display: none;
   }
-  /* line 245, ../_toolbar.scss */
+  /* line 255, ../_toolbar.scss */
   #toolbar-glossary #glossary-term-listing-mobile > li ul p span {
     color: white !important;
   }
 }
 
-/* line 259, ../_toolbar.scss */
+/* line 269, ../_toolbar.scss */
 #toolbar-figures {
   position: relative;
 }
-/* line 265, ../_toolbar.scss */
+/* line 275, ../_toolbar.scss */
 #toolbar-figures figure img, #toolbar-figures figure figcaption {
   max-width: 75%;
 }
 
-/* line 273, ../_toolbar.scss */
+/* line 283, ../_toolbar.scss */
 a.toolbar-link {
   display: block;
   height: 22px;
@@ -8586,21 +8594,21 @@ a.toolbar-link {
   text-align: center;
   cursor: pointer;
 }
-/* line 281, ../_toolbar.scss */
+/* line 291, ../_toolbar.scss */
 a.toolbar-link img {
   max-width: 75%;
 }
 
-/* line 289, ../_toolbar.scss */
+/* line 299, ../_toolbar.scss */
 #toolbar-notes .notesListItem .note-buttons {
   float: left;
 }
-/* line 293, ../_toolbar.scss */
+/* line 303, ../_toolbar.scss */
 #toolbar-notes .notesListItem .the-note {
   margin-left: 35px;
 }
 
-/* line 301, ../_toolbar.scss */
+/* line 311, ../_toolbar.scss */
 #toolbar-account .account-footer {
   margin-top: 10px;
 }

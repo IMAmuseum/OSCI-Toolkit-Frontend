@@ -98,7 +98,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 		this.toolbarToggle();
 
-		// if toolbar items is active show it
+		// if toolbar item is active show it
 		// this toggles the view
 
 		if (toolbarItem.active) {
@@ -106,6 +106,8 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			view = view[toolbarItem.item.view];
 
 			this.addView(view, '#'+toolbarItem.item.text);
+
+			$('#' + toolbarItem.item.text ).show(); // For FireFox
 		}
 
 	},
@@ -119,6 +121,9 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 				view = view[item.view];
 
 				this.removeView(view, false);
+				console.log( $('#' + item.text ) );
+
+				$('#' + item.text ).hide(); // For FireFox
 			}
 
 		}, this);

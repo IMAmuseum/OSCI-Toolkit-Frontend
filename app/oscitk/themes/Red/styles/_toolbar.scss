@@ -142,52 +142,62 @@ $toolbar-margin-bottom: 5px;
 
 		padding: 15px 0px 0px 30px;
 
-		h3 {
-			margin: 0;
-			margin-right: -30px;
-			padding-right: 30px;
-			border-bottom: 1px white solid;
-			padding-bottom: 8px;
-		}
+		> div {
 
-		.toolbar-scroll {
+			height: 100%;
 
-			overflow-y: scroll;
-			height: calc(100% - 39px);
+			> div {
 
-			padding: 5px 5px 10px 0px;
+				height: 100%;
 
-			a {
-				color: white;
-
-				&:hover {
-					color: $color-light-red;
-					text-decoration: none;
+				h3 {
+					margin: 0;
+					margin-right: -30px;
+					padding-right: 30px;
+					border-bottom: 1px white solid;
+					padding-bottom: 8px;
 				}
-			}
 
-			p {
-				font-family: 'Lato', sans-serif;
-			}
+				.toolbar-scroll {
 
-			ul {
+					overflow-y: scroll;
+					height: calc(100% - 39px);
 
-				list-style: none;
-				padding: 0;
-				margin: 0;
+					padding: 5px 5px 10px 0px;
 
-				li {
+					a {
+						color: white;
 
-					margin: 10px 0px;
+						&:hover {
+							color: $color-light-red;
+							text-decoration: none;
+						}
+					}
 
-					h4, h5 {
-						margin: 0px;
+					p {
+						font-family: 'Lato', sans-serif;
+					}
+
+					ul {
+
+						list-style: none;
+						padding: 0;
+						margin: 0;
+
+						li {
+
+							margin: 10px 0px;
+
+							h4, h5 {
+								margin: 0px;
+							}
+
+						}
+
 					}
 
 				}
-
 			}
-
 		}
 	}
 }
