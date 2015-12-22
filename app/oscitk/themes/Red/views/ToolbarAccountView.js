@@ -15,6 +15,7 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 	initialize: function() {
 
 		// see ../../../models/AccountModel.js
+		// re-renders form when the account info is retrieved
 		this.listenTo(Backbone, 'accountReady', function(sectionModel) {
 			this.model = app.account;
 			this.render();
@@ -24,12 +25,16 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 			this.sectionId = sectionModel.get('id');
 		});
 
+
+		this.render();
+
 	},
 
 	render: function() {
+	
 
 		// determine if user is logged in.  Show login form or user details
-		if (this.model.get('id') > 0) {
+		if (this.model && this.model.get('id') > 0) {
 			this.showProfile();
 		}
 		else {
@@ -61,15 +66,18 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 
 					// user was logged in, set the returned user data
 					
+					console.log( data );
+
+					/*
 					accountView.model.set( {
 						username: data.user.username,
 						email: data.user.email,
 						id: parseInt(data.user.id)
 					});
-
+					*/
 					accountView.showProfile();
 
-					Backbone.trigger("accountStateChanged");
+					//Backbone.trigger("accountStateChanged");
 
 				}
 				else {

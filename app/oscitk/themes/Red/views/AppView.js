@@ -121,7 +121,6 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 				view = view[item.view];
 
 				this.removeView(view, false);
-				console.log( $('#' + item.text ) );
 
 				$('#' + item.text ).hide(); // For FireFox
 			}

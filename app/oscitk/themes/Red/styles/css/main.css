@@ -8643,11 +8643,11 @@ body {
     width: calc( 100% - 86px - 87px );
   }
 }
-/* line 32, ../_navbar.scss */
+/* line 34, ../_navbar.scss */
 #navbar nav #osci-navbar-text {
   padding: 9px 15px;
 }
-/* line 36, ../_navbar.scss */
+/* line 38, ../_navbar.scss */
 #navbar nav #font-size-area {
   list-style-type: none;
   margin: 0;
@@ -8655,26 +8655,26 @@ body {
   padding: 10px 15px;
 }
 
-/* line 16, ../_navbar-slider.scss */
+/* line 19, ../_navbar-slider.scss */
 input[type=range] {
   /*removes default webkit styles*/
   -webkit-appearance: none;
   /*fix for FF unable to apply focus style bug */
   border: 1px solid white;
   /*required for proper track sizing in FF*/
-  width: 300px;
+  width: 100%;
 }
 
-/* line 26, ../_navbar-slider.scss */
+/* line 29, ../_navbar-slider.scss */
 input[type=range]::-webkit-slider-runnable-track {
-  width: 300px;
+  width: 100%;
   height: 2px;
   background: #ccc;
   border: none;
   border-radius: 3px;
 }
 
-/* line 33, ../_navbar-slider.scss */
+/* line 36, ../_navbar-slider.scss */
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   border: none;
@@ -8685,26 +8685,26 @@ input[type=range]::-webkit-slider-thumb {
   margin-top: -7px;
 }
 
-/* line 42, ../_navbar-slider.scss */
+/* line 45, ../_navbar-slider.scss */
 input[type=range]:focus {
   outline: none;
 }
 
-/* line 45, ../_navbar-slider.scss */
+/* line 48, ../_navbar-slider.scss */
 input[type=range]:focus::-webkit-slider-runnable-track {
   background: #ccc;
 }
 
-/* line 49, ../_navbar-slider.scss */
+/* line 52, ../_navbar-slider.scss */
 input[type=range]::-moz-range-track {
-  width: 300px;
+  width: 100%;
   height: 2px;
   background: #ccc;
   border: none;
   border-radius: 3px;
 }
 
-/* line 56, ../_navbar-slider.scss */
+/* line 59, ../_navbar-slider.scss */
 input[type=range]::-moz-range-thumb {
   border: none;
   height: 16px;
@@ -8714,15 +8714,15 @@ input[type=range]::-moz-range-thumb {
 }
 
 /*hide the outline behind the border*/
-/* line 65, ../_navbar-slider.scss */
+/* line 68, ../_navbar-slider.scss */
 input[type=range]:-moz-focusring {
   outline: 1px solid white;
   outline-offset: -1px;
 }
 
-/* line 70, ../_navbar-slider.scss */
+/* line 73, ../_navbar-slider.scss */
 input[type=range]::-ms-track {
-  width: 300px;
+  width: 100%;
   height: 2px;
   /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
   background: transparent;
@@ -8733,19 +8733,19 @@ input[type=range]::-ms-track {
   color: transparent;
 }
 
-/* line 84, ../_navbar-slider.scss */
+/* line 87, ../_navbar-slider.scss */
 input[type=range]::-ms-fill-lower {
   background: #777;
   border-radius: 10px;
 }
 
-/* line 88, ../_navbar-slider.scss */
+/* line 91, ../_navbar-slider.scss */
 input[type=range]::-ms-fill-upper {
   background: #ccc;
   border-radius: 10px;
 }
 
-/* line 92, ../_navbar-slider.scss */
+/* line 95, ../_navbar-slider.scss */
 input[type=range]::-ms-thumb {
   border: none;
   height: 16px;
@@ -8754,12 +8754,12 @@ input[type=range]::-ms-thumb {
   background: #810c0b;
 }
 
-/* line 99, ../_navbar-slider.scss */
+/* line 102, ../_navbar-slider.scss */
 input[type=range]:focus::-ms-fill-lower {
   background: #888;
 }
 
-/* line 102, ../_navbar-slider.scss */
+/* line 105, ../_navbar-slider.scss */
 input[type=range]:focus::-ms-fill-upper {
   background: #ccc;
 }

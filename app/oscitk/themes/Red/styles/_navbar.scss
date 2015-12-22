@@ -21,8 +21,10 @@ body {
 
 		#osci-page-slider {
 			padding: 18px 15px;
+
 			width: calc( 100% - 86px - 119px - 87px );
 
+			// Account for hidden font and layout selector
 			@media ( max-width: 767px ) {
 				width: calc( 100% - 86px - 87px );
 			}
