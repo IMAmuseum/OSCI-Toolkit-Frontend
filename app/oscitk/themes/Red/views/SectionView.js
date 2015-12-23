@@ -148,8 +148,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             var $c = $e.find('figcaption');
 
             // account for the figcaption when setting max height of inner elements
+            // apply this to img and object too if using the fallback <img>
             var ch = $c.outerHeight();
-                $e.find('.figure_content,object,img').css('max-height', sh - ch - 10);
+                $e.find('.figure_content').css('height', sh - ch );
 
             // now, constrain the width of the figure caption
             $e.css('max-width', 'none' );            
