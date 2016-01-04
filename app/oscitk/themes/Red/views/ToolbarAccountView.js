@@ -66,18 +66,15 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 
 					// user was logged in, set the returned user data
 					
-					console.log( data );
-
-					/*
 					accountView.model.set( {
 						username: data.user.username,
 						email: data.user.email,
 						id: parseInt(data.user.id)
 					});
-					*/
+
 					accountView.showProfile();
 
-					//Backbone.trigger("accountStateChanged");
+					Backbone.trigger("accountStateChanged");
 
 				}
 				else {
@@ -138,8 +135,6 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 			success: function(data) {
 
 				if (data.success === true) {
-
-
 
 					// user was logged in, set the returned user data
 					accountView.model.set(data.user);
