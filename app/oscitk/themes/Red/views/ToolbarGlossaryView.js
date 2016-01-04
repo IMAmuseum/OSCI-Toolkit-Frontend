@@ -30,7 +30,7 @@ OsciTk.views.GlossaryToolbar = OsciTk.views.BaseView.extend({
 			that.$el.find('#glossary-term-listing-mobile').append(termViewMobile({item: item}));
 		});
 
-		// Attach triggers to the glossary terms in-text
+		// Attach triggers to the glossary terms in SECTION
 		$('a.glossary-term').on('click', function(e) {
 			e.preventDefault();
 			Backbone.trigger('openToolbar');

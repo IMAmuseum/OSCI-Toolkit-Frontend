@@ -285,11 +285,13 @@ __p += '\n\t\t<p>No footnotes in this section.</p>\n\t';
  } ;
 __p += '\n\n\t<ul>\n\t\t';
  _.each(items, function(item) { ;
-__p += '\n\t\t\t<li>\n\t\t\t\t<b>' +
+__p += '\n\t\t\t<li class="toolbar-footnote-single">\n\t\t\t\t<b>' +
 ((__t = ( item.id )) == null ? '' : __t) +
-'</b><br/>' +
+'</b>\n\t\t\t\t<a class="toolbar-link pull-right" data-id="' +
+((__t = ( item.id )) == null ? '' : __t) +
+'">\n\t\t\t\t\t<img src="images/light/link_icon.png"/>\n\t\t\t\t</a>\n\t\t\t\t<br/>' +
 ((__t = ( item.title )) == null ? '' : __t) +
-'\n\t\t\t</li>\n\t\t';
+'</li>\n\t\t';
  }); ;
 __p += '\n\t</ul>\n</div>';
 

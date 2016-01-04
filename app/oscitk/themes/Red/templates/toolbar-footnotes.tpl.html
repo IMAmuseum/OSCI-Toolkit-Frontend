@@ -7,9 +7,12 @@
 
 	<ul>
 		<% _.each(items, function(item) { %>
-			<li>
-				<b><%= item.id %></b><br/><%= item.title %>
-			</li>
+			<li class="toolbar-footnote-single">
+				<b><%= item.id %></b>
+				<a class="toolbar-link pull-right" data-id="<%= item.id %>">
+					<img src="images/light/link_icon.png"/>
+				</a>
+				<br/><%= item.title %></li>
 		<% }); %>
 	</ul>
 </div>

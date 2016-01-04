@@ -2,6 +2,7 @@ OsciTk.views.FootnotesToolbar = OsciTk.views.BaseView.extend({
 	className: 'toolbar-footnotes-view',
 	template: OsciTk.templateManager.get('toolbar-footnotes'),
 	events: {
+		'click li .toolbar-link': 'findFootnote',
 	},
 	initialize: function() {
 
@@ -38,6 +39,12 @@ OsciTk.views.FootnotesToolbar = OsciTk.views.BaseView.extend({
 
 		return this;
 
-	}
+	},
 
+	// Scrolls to the footnote in text
+	findFootnote: function(e) {
+		var $a = $(e.currentTarget);
+		Backbone.trigger('navigate', { identifier: ".footnote-reference:contains('" + $a.attr('data-id') + "')" } );
+	}
+	
 });
