@@ -1,0 +1,54 @@
+/* line 1, ../note-form.scss */
+.paragraph-controls {
+  height: 0;
+  right: 32px;
+  position: relative;
+  top: 6px;
+  z-index: 2;
+}
+
+/* line 9, ../note-form.scss */
+.btn {
+  text-transform: uppercase;
+}
+
+/* line 13, ../note-form.scss */
+.paragraph-button {
+  background-image: url(../../images/plus-grey.png);
+  background-size: 15px 15px;
+  background-repeat: no-repeat;
+  border: 0;
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+  width: 15px;
+  height: 15px;
+}
+
+/* line 25, ../note-form.scss */
+.withNotes {
+  background-image: url(../../images/plus-blue.png);
+}
+
+/* line 29, ../note-form.scss */
+#note-submit {
+  margin-top: 10px;
+}
+
+/* line 33, ../note-form.scss */
+.popover-content {
+  padding: 9px;
+}
+/* line 35, ../note-form.scss */
+.popover-content textarea {
+  border: none;
+  font-size: 14px;
+  color: #333;
+  padding: 5px;
+  height: 100px;
+}
+/* line 42, ../note-form.scss */
+.popover-content button {
+  font-size: 15px;
+  font-weight: 200;
+}

@@ -1,0 +1,35 @@
+$icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+$image-path : "/images";
+
+// Theme colors
+$color-dk-grey: #676767;
+$color-lt-grey: #dddddd;
+$color-fuchsia: #fa5d78;
+$color-text: #3c3c3c;
+
+// These were originally defined in bootstrap/variables; moved here for convenience
+$font-family-sans-serif:  'Raleway', "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-serif:       'Bitter', Georgia, "Times New Roman", Times, serif !default;
+
+$toolbar-width: 300px;
+
+@import "bootstrap/bootstrap";
+@import "typography";
+@import "browsehappy";
+
+@import "section";
+@import "navigation";
+//@import "header";
+//@import "toolbar";
+//@import "navbar";
+//@import "navbar-slider";
+
+@import "figures";
+@import "layered-image";
+
+//@import "overlay";
+//@import "paragraph-popover";
+//@import "note-form";
+//@import "citation";
+//@import "print";
+

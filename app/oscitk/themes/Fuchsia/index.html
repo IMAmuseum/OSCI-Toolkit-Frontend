@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- see styles/bootstrap/_variables.scss -->
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
 
     <!-- build:css(.tmp) styles/css/main.css -->
-        <link rel="stylesheet" href="styles/css/main.css">
+    <link rel="stylesheet" href="styles/css/main.css">
     <!-- endbuild -->
 
     <!-- build:js scripts/vendor.js -->
@@ -76,18 +76,21 @@
     <script src="views/BaseView.js"></script>
     <script src="views/AppView.js"></script>
 
+
+    <!--
     <script src="views/HeaderView.js"></script>
+-->
 
     <script src="views/SectionView.js"></script>
-
+<!--
     <script src="views/ParagraphControlsView.js"></script>
     <script src="views/FootnotesView.js"></script>
-
+-->
     <script src="views/NavigationView.js"></script>
-
+<!--
     <script src="views/NavbarView.js"></script>
     <script src="views/FontSizeView.js"></script>
-
+    
     <script src="views/ToolbarView.js"></script>
     <script src="views/ToolbarItemView.js"></script>
     
@@ -99,17 +102,20 @@
     <script src="views/ToolbarNotesView.js"></script>
     <script src="views/ToolbarCitationsView.js"></script>
     <script src="views/ToolbarAccountView.js"></script>
-    
+    -->
 
     <!--<script src="views/PrintView.js"></script>-->
     <!--<script src="views/GlossaryTooltipView.js"></script>-->
 
+    <!--
     <script src="views/CitationView.js"></script>
+    -->
 
     <script src="../../../appBootstrap.js"></script>
     <!-- endbuild -->
 
     <script>jQuery(function() {
+
             // $.ajaxSetup({
             //     async: false
             // });
@@ -117,10 +123,11 @@
             // oscitkJson = JSON.parse(oscitkJson.responseText);
 
             // app.bootstrap(oscitkJson);
+
             app.bootstrap({
                 packageUrl: '/api/epub/1/package.opf',
                 templateUrls: [
-                    '/osci-themes/app/oscitk/themes/Red/templates/'
+                    '/osci-themes/app/oscitk/themes/Fuchsia/templates/'
                 ],
                 endpoints: {
                     'OsciTkAccount': '/api/users/',
@@ -128,39 +135,30 @@
                     'OsciTkNote': '/api/notes/'
                 },
                 toolbarItems: [
-                    //{view: 'closeToolbarView', text: 'toolbar-close', style: 'default'},
-                    {view: 'tocToolbarView', text: 'toolbar-toc', style: 'default'},
-                    /*{view: 'printToolbarView', text: 'toolbar-print', style: 'default'},*/
-                    //{view: 'searchToolbarView', text: 'toolbar-search', style: 'default'},
-                    {view: 'glossaryToolbarView', text: 'toolbar-glossary', style: 'default'},
-                    {view: 'footnotesToolbarView', text: 'toolbar-footnotes', style: 'default'},
-                    {view: 'figuresToolbarView', text: 'toolbar-figures', style: 'default'},
-                    {view: 'notesToolbarView', text: 'toolbar-notes', style: 'default'},
-                    //{view: 'citationsToolbarView', text: 'toolbar-citations', style: 'default'},
                     {view: 'accountToolbarView', text: 'toolbar-account', style: 'default'},
-
-
-                    //{view: 'fontSizeView', text: 'font-size', style: 'default'}
-
-
+                    {view: 'tocToolbarView', text: 'toolbar-toc', style: 'default'},
+                    {view: 'printToolbarView', text: 'toolbar-print', style: 'default'},
                 ],
                 theme: 'Red',
                 themeFeatures: {
                     "account": true,
                     "search": false,
                     "notes": true,
-                    "citations": true,
-                    "glossary": true,
+                    "citations": false,
+                    "glossary": false,
                     "multicolumn": false,
-                    "layeredImage": false,
+                    "layeredImage": true,
                 },
             });
+
             app.run();
+
         });
     </script>
 
 </head>
 <body>
+
     <!--[if lt IE 10]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->

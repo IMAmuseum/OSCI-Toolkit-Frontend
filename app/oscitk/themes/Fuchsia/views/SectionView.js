@@ -1,8 +1,7 @@
 OsciTk.views.Section = OsciTk.views.BaseView.extend({
-    id: 'default-section-view',
+    id: 'section-view',
     template: OsciTk.templateManager.get('section'),
     events: {
-        'click .content-paragraph': 'paragraphClicked',
         'click .paragraph-button': 'paragraphButtonClicked',
         'click #note-submit': 'noteSubmit',
         'click #cite': 'getCitation',
@@ -16,12 +15,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 scrollTop: 0
             }, 0);
 
-            $('#section-view').empty();
-            $('.header-view').empty();
+            // this.$el.parent().empty(); // #section-view
 
-            $('#loader').show();
-
-            if (navItem) {
+            if ( navItem ) {
 
                 // loading section content
                 app.models.section = new OsciTk.models.Section({
@@ -35,19 +31,16 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 // this.model is undefined unless you call this function!
                 this.changeModel(app.models.section);
 
-                // console.log( this.model );
-
+                // This makes the AJAX calls, parsing XML
                 app.models.section.loadContent();
 
             }
-
-            $('#loader').hide();
 
         });
 
 
         // Set maximum height on figures to make sure they don't overflow their columns
-        this.listenTo(Backbone, 'windowResized', function() {
+        this.listenTo(Backbone, 'imagesLoaded', function() {
 
             this.renderColumns();
 
@@ -59,7 +52,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             // We will modify this and pass it to our template via this.render
             this.content = sectionModel.get('content')[0].children.body;
 
-            this.makeIds(sectionModel);
+            this.processParagraphs(sectionModel);
             this.sectionId = sectionModel.get('id');
             this.getSectionTitles(this.sectionId);
 
@@ -77,78 +70,23 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         // see NavigationView.js
         Backbone.trigger("columnRenderStart");
-
-        // set column gap here so that it's readily accessible
-        var cg = 40;
-        $('#default-section-view').css({
-            '-webkit-column-gap': cg,
-               '-moz-column-gap': cg,
-                    'column-gap': cg
-        });
-
-        // Determine column count
-        var cc = $('#section').attr('data-columns-setting');
-
-        if( typeof cc === 'undefined' ) {
-            cc = 2;
-        }else{
-            cc = parseInt( cc );
-        }
-
-        // Note that this is hardcoded to match Bootstrap's breakpoints
-        if( $(window).width() < 768 ) {
-            cc = 1;
-        }
-
-        $('#section').attr('data-columns-rendered', cc );
-
-
-        // Reset the stats of #default-section-view
-        $('#default-section-view').css({
-            '-webkit-column-width': 'auto',
-               '-moz-column-width': 'auto',
-                    'column-width': 'auto',
-            '-webkit-column-count': 'auto',
-               '-moz-column-count': 'auto',
-                    'column-count': 'auto',
-                           'width': 'auto'
-        });
-
-        // set the width of the columns in #section to equal 1/2 of #section width
-        var sw = $('#section').width();
-        var cw = (sw/cc) - cg/2; // account for one gap
         
-        $('#default-section-view').css({
-            '-webkit-column-width': cw,
-               '-moz-column-width': cw,
-                    'column-width': cw
-        }); 
-
-
-
-        // Now that the column widths are configured, resize figures
-        var sh = $('#section').height();
 
         $('figure').each( function( i, e ) {
 
-            // set max-height of figure equal to #section height
-            var $e = $(e);
-                $e.css('max-height', sh );
+            var $e = $(e); //shorthand
 
-            var $c = $e.find('figcaption');
+            // We need to explicitly set .figure_content height,
+            //   so as to avoid trouble when the window resizes
 
-            // account for the figcaption when setting max height of inner elements
-            // apply this to img and object too if using the fallback <img>
-            var ch = $c.outerHeight();
-                $e.find('.figure_content').css('height', sh - ch );
-
-            // now, constrain the width of the figure caption
-            $e.css('max-width', 'none' );            
-
-            var iw = $e.find('img').outerWidth();
-                $c.css('max-width', iw );
-
-            $e.css('max-width', iw );
+            var $i = $(e).find('img');
+            $e.find('.figure_content').css({
+                'height' : 'auto',
+                'width'  : 'auto'
+            }).css({
+                'height' : $i.outerHeight(),
+                'width'  : $i.outerWidth()
+            });
 
             // Layered image init
             var url = $e.find('object').attr('data');
@@ -176,26 +114,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         }); 
 
-
-        // Now that the height of all elements is determined,
-        // Increase number of columns until everything fits vertically
-        var ch = 0; var i = cc;
-        do {
-
-            $('#default-section-view').css({
-                '-webkit-column-count': i.toString(),
-                   '-moz-column-count': i.toString(),
-                        'column-count': i.toString()
-            }); 
-
-            //console.log( i );
-            $('#default-section-view').width( i * cw + (i - 1) * cg);
-
-            ch = $('#default-section-view').height();
-            i+=1;
-
-        } while( ch > $('#section').height() );
-
         // see NavigationView.js
         Backbone.trigger("columnRenderEnd");
 
@@ -219,11 +137,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
     render: function() {
 
-        // DEBUGGING
-        //console.log( "SectionView rendering..." );
-
-        //clean up the view incase we have already rendered this before
-        this.model.removeAllPages();
+        // clean up the view incase we have already rendered this before
         this.removeAllChildViews();
 
         // Apply template set above + render the html
@@ -239,27 +153,24 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // numPages is for NavigationView.js -- remove if it's not used
         // Backbone.trigger("layoutComplete", { numPages : this.model.get('pages').length } );
 
+
         Backbone.trigger("layoutComplete");
 
         // Used to ensure that all figures are of a conistent width
         $('img').load( function() {
-            Backbone.trigger("windowResized");
+            Backbone.trigger("imagesLoaded");
         });
 
         return this;
     },
 
-    // Garbage collection
-    onClose: function() {
-        this.model.removeAllPages();
-    },
-
     // Add data attributes to paragraphs; used for paragraph tooltips
-    makeIds: function(sectionModel) {
+    processParagraphs: function(sectionModel) {
         
         var paragraphs = $(this.content.children).filter('p');
 
         _.each( paragraphs, function(e, i) {
+
             var j = i+1; // see also ParagraphControlsView.js
             $(e).attr({
 
@@ -271,19 +182,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             }).addClass('content-paragraph');
 
         }, this);
-    },
-
-    // Trigger a paragraph clicked event (pops up a cite / note box)
-    paragraphClicked: function(e) {
-
-        // Checks if the user is logged in
-        if ( app.account.get('email') != null) {
-
-            var id = $(e.currentTarget).data('paragraph_number');
-            Backbone.trigger('paragraphClicked', id);
-
-        }
-
     },
 
     // Trigger a paragraph clicked event (pops up a cite / note box)
