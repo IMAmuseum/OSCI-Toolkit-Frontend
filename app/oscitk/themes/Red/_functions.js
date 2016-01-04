@@ -1,3 +1,4 @@
+// used in views/NavigationView.js
 $.fn.findNearest = function(offset) {
     var el = null, elOffset, x = offset.left, y = offset.top, distance, dx, dy, minDistance;
     this.each(function() {

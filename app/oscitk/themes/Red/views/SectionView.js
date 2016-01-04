@@ -12,9 +12,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // bind sectionChanged
         this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
 
-            // DEBUGGING
-            //console.log( "SectionView caught currentNavigationItemChanged" );
-
             $("html, body").animate({
                 scrollTop: 0
             }, 0);
@@ -48,6 +45,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         });
 
+        // Used for toggling column count
         this.listenTo(Backbone, 'setSectionColumns', function( columnCount ) {
 
             $('#section').attr('data-columns-setting', columnCount );
