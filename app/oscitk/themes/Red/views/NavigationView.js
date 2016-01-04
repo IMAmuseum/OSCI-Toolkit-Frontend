@@ -295,18 +295,13 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// Set previous button state
 		if (page == 1) {
 
-			/*
 			// check if we can go to the previous section
 			var previous = this.currentNavigationItem.get('previous');
 
-			console.log( previous );
-
 			if (previous) {
 
-				// this.$el.find('.prev-page .label').html('Previous Section');
-
 				this.$el.find('.prev-page').removeClass('inactive').click(function () {
-					app.router.navigate("section/" + previous.id + "/end", {trigger: true});
+					app.router.navigate("section/" + previous.id + "/end", { trigger: true } );
 				});
 
 			} else {
@@ -316,9 +311,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 			}
 
-			//*/
-
-			$('.prev-page', this.$el).addClass('inactive').unbind('click');
 
 		} else if (this.numPages > 1) {
 
@@ -337,14 +329,13 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// Set next button state
 		if (page == this.numPages) {
 
-			/*
+			
 			// check if we can go to the next section
 			var next = this.currentNavigationItem.get('next');
 
 			// TODO: UPDATE NEXT BUTTON TO ACTIVATE PROPERLIKE
 			if (next) {
 
-				//this.$el.find('.next-page .label').html('Next Section');
 				this.$el.find('.next-page').removeClass('inactive').click(function () {
 					app.router.navigate("section/" + next.id, {trigger: true});
 				});
@@ -359,13 +350,10 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 			}
 
-			*/
 
 			this.$el.find('.next-page').addClass('inactive').unbind('click');
 
 		} else if (this.numPages > 1) {
-
-			// this.$el.find('.next-page .label').html('Next');
 
 			this.$el.find('.next-page').removeClass('inactive').click(function () {
 				Backbone.trigger('navigate', { page: page + 1 } );
