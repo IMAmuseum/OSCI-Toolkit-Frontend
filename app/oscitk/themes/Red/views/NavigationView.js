@@ -96,21 +96,12 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
        			 return;
     		}
 
-    		event.preventDefault();
+    		var key = event.which;
+    		if( key == 39 || key == 37 ) {
+    			event.preventDefault();
+				Backbone.trigger('navigate', { page: that.page + key - 38 } );
+    		}
 
-    		var page = 0;
-			switch(event.which) {
-				case 39:
-					page = that.page + 1;
-				break;
-				case 37:
-					page = that.page - 1;
-				break;
-			}
-
-			if (page) {
-				Backbone.trigger('navigate', { page: page } );
-			}
 
 		});
 
@@ -140,10 +131,11 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		this.listenTo(Backbone, 'navigate', function( data ) {
 
+
 			// Stay on current page by default
             var gotoPage = this.page ? this.page : 1;
 
-            if (data.page) {
+            if (typeof data.page !== "undefined") {
                 gotoPage = data.page;
             }
 
@@ -219,9 +211,9 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
             // this.getPageForSelector() will return false (0) when the selector matches nothing
             // we should fix the URL and remain where we are when that happens
             // TODO: maybe alert the user that they had an invalid link?
-            if(!gotoPage) {
+            if( typeof gotoPage === 'undefined') {
             	gotoPage = this.page;
-            	app.router.navigate("section/" + this.getCurrentNavigationItem().get('id'), { trigger: false } );
+            	app.router.navigate("section/" + this.getCurrentNavigationItem().get('id'), { trigger: true } );
             }
 
             // page width is used for determining how far to scroll
@@ -235,11 +227,25 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 				page_width += 10;
 			}
 
-			// This is the only time when scrolling is allowed
-			$target.scrollLeft( page_width * ( gotoPage - 1 ) );
+			// Check if the page is available...
+			var previous = this.currentNavigationItem.get('previous');
+			var next = this.currentNavigationItem.get('next');
+		
+			//console.log( gotoPage, gotoPage < 1 );
 
-			this.calculatePages();
-			this.update(this.page);
+			if( gotoPage < 1 && previous ) {
+				app.router.navigate("section/" + previous.id + "/end", { trigger: true } );
+			} else if( gotoPage > this.numPages && next ) {
+				app.router.navigate("section/" + next.id, { trigger: true } ) ;
+			} else {
+				// This is the only time when scrolling is allowed
+				$target.scrollLeft( page_width * ( gotoPage - 1 ) );
+
+				this.calculatePages();
+				this.update(this.page);
+			}
+
+
 
 		});
 
@@ -287,78 +293,22 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	// Mostly updates the arrow button links to navigate to the right page
 	update: function(page) {
 
+		console.log( 'updating' );
+
 		// unbind both controls to start
 		this.$el.find('.prev-page').unbind('click');
 		this.$el.find('.next-page').unbind('click');
 
-		// Set previous button state
-		if (page == 1) {
+		var previous = this.currentNavigationItem.get('previous');
+		var next = this.currentNavigationItem.get('next');
+		
+		this.$el.find('.prev-page').removeClass('inactive').click(function () {
+			Backbone.trigger('navigate', { page: page-1 } );
+		});
 
-			// check if we can go to the previous section
-			var previous = this.currentNavigationItem.get('previous');
-
-			if (previous) {
-
-				this.$el.find('.prev-page').removeClass('inactive').click(function () {
-					app.router.navigate("section/" + previous.id + "/end", { trigger: true } );
-				});
-
-			} else {
-
-				// on first page and no previous section, disable interaction
-				$('.prev-page', this.$el).addClass('inactive').unbind('click');
-
-			}
-
-
-		} else if (this.numPages > 1) {
-
-			var that = this;
-
-			// TODO: UPDATE PREV BUTTON TO ENABLE PROPERLY
-			this.$el.find('.prev-page').removeClass('inactive').click(function () {
-
-				//app.router.navigate("section/" + that.currentNavigationItem.id);
-				Backbone.trigger('navigate', { page: page-1 } );
-
-			});
-
-		}
-
-		// Set next button state
-		if (page == this.numPages) {
-
-			
-			// check if we can go to the next section
-			var next = this.currentNavigationItem.get('next');
-
-			// TODO: UPDATE NEXT BUTTON TO ACTIVATE PROPERLIKE
-			if (next) {
-
-				this.$el.find('.next-page').removeClass('inactive').click(function () {
-					app.router.navigate("section/" + next.id, {trigger: true});
-				});
-
-			}
-
-			
-			else {
-
-				// on last page and no next section, disable interaction
-				this.$el.find('.next-page').addClass('inactive').unbind('click');
-
-			}
-
-
-			this.$el.find('.next-page').addClass('inactive').unbind('click');
-
-		} else if (this.numPages > 1) {
-
-			this.$el.find('.next-page').removeClass('inactive').click(function () {
-				Backbone.trigger('navigate', { page: page + 1 } );
-			});
-
-		}
+		this.$el.find('.next-page').removeClass('inactive').click(function () {
+			Backbone.trigger('navigate', { page: page+1 } );
+		});
 
 	},
 
@@ -378,6 +328,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	},
 
 	setCurrentNavigationItem: function( section_id ) {
+
+		// console.log("setCurrentNavigationItem called: " + section_id);
 
 		var section = app.collections.navigationItems.get(section_id);
 

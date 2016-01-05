@@ -5,6 +5,11 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 	initialize: function() {
 		this.render();
 
+		// Use this to toggle loading animations
+		app.loading = true;
+		this.listenTo(Backbone, 'loading', function( bool ) {
+			app.loading = bool;
+		});
 
 		app.toolbarItems = app.config.get('toolbarItems') ? app.config.get('toolbarItems') : [];
 

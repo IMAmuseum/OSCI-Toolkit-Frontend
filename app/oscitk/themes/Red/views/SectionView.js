@@ -56,9 +56,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         // Set maximum height on figures to make sure they don't overflow their columns
         this.listenTo(Backbone, 'windowResized', function() {
-
             this.renderColumns();
-
         });
 
         // Proceed to render after the section is ready
@@ -137,6 +135,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // Now that the column widths are configured, resize figures
         var sh = $('#section').height();
 
+        /*
         $('figure').each( function( i, e ) {
 
             // Shorthand 
@@ -150,14 +149,14 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 'width' : $i.outerWidth()
             });
 
-            /*
+            
             var $c = $e.find('figcaption');
 
             // account for the figcaption when setting max height of inner elements
             // apply this to img and object too if using the fallback <img>
             var ch = $c.outerHeight();
 
-            */
+            
             
             $e.find('.figure_content').css({
                 'max-height' : 'auto',
@@ -190,13 +189,15 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                     }
                 });
             }
+           
 
         }); 
+        */
 
 
         // Now that the height of all elements is determined,
         // Increase number of columns until everything fits vertically
-        var ch = 100; var i = cc;
+        var ch = 0; var i = cc;
         do {
 
             $('#default-section-view').css({
@@ -211,7 +212,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             ch = $('#default-section-view').height();
             i+=1;
 
-        } while( ch > $('#section').height() );
+        } while( ch > $('#section').height() - 30 );
 
         // see NavigationView.js
         Backbone.trigger("columnRenderEnd");
@@ -228,7 +229,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             if (item.get('id') == sectionId ) {
                 that.sectionTitle = item.get('title');
                 that.sectionSubtitle = item.get('subtitle');
-                that.sectionThumbnail = item.get('thumbnail');
+                //that.sectionThumbnail = item.get('thumbnail');
             }
         }, this);
 
@@ -248,7 +249,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             this.template( {
                 sectionTitle: this.sectionTitle,
                 sectionSubtitle: this.sectionSubtitle,
-                sectionThumbnail: this.sectionThumbnail,
+                //sectionThumbnail: this.sectionThumbnail,
                 content: $(this.content).html()
             } )
         );
@@ -259,7 +260,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         Backbone.trigger("layoutComplete");
 
         // Used to ensure that all figures are of a conistent width
-        $('img').load( function() {
+        $('#section').imagesLoaded( function() {
             Backbone.trigger("windowResized");
         });
 
