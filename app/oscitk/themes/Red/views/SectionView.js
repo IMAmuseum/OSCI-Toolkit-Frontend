@@ -139,24 +139,33 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         $('figure').each( function( i, e ) {
 
-            // set max-height of figure equal to #section height
+            // Shorthand 
             var $e = $(e);
-                $e.css('max-height', sh );
+            var $i = $e.find('img');
+            var $c = $e.find('figcaption');
 
+            // Ensure that the figure always takes up a full column
+            $e.css({
+                'max-height' : $('#section').innerHeight() - $('#section').css('padding-down'),
+                'width' : $i.outerWidth()
+            });
+
+            /*
             var $c = $e.find('figcaption');
 
             // account for the figcaption when setting max height of inner elements
             // apply this to img and object too if using the fallback <img>
             var ch = $c.outerHeight();
-                $e.find('.figure_content').css('height', sh - ch );
 
-            // now, constrain the width of the figure caption
-            $e.css('max-width', 'none' );            
-
-            var iw = $e.find('img').outerWidth();
-                $c.css('max-width', iw );
-
-            $e.css('max-width', iw );
+            */
+            
+            $e.find('.figure_content').css({
+                'max-height' : 'auto',
+                'max-width' : 'auto'
+            }).css({
+                'max-height' : $i.outerHeight(),
+                'max-width' : $i.outerWidth()
+            });
 
             // Layered image init
             var url = $e.find('object').attr('data');
@@ -172,7 +181,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                         var $content = $(data).filter('.layered_image-asset').first();
                         var $container = $e.find('.figure_content');
                         
-                        $container.empty();
+                       $container.empty();
                         $content.appendTo( $container );
 
 
@@ -187,7 +196,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         // Now that the height of all elements is determined,
         // Increase number of columns until everything fits vertically
-        var ch = 0; var i = cc;
+        var ch = 100; var i = cc;
         do {
 
             $('#default-section-view').css({

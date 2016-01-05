@@ -18,7 +18,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// when section is loaded, render the navigation control
 		this.listenTo(Backbone, 'layoutComplete', function(section) {
 
-			//console.log('NavigationView caught layoutComplete');
 			this.render();
 
 		});
@@ -139,7 +138,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		});
 
-		this.listenTo(Backbone, 'navigate', function(data) {
+		this.listenTo(Backbone, 'navigate', function( data ) {
 
 			// Stay on current page by default
             var gotoPage = this.page ? this.page : 1;
@@ -184,7 +183,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
                         	break;
 
                         }
-						
 
 						/*
 						// Route for footnote references
@@ -237,13 +235,14 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 				page_width += 10;
 			}
 
-
+			// This is the only time when scrolling is allowed
 			$target.scrollLeft( page_width * ( gotoPage - 1 ) );
 
 			this.calculatePages();
 			this.update(this.page);
 
 		});
+
 
 	},
 
