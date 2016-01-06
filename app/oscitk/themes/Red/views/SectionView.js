@@ -135,15 +135,32 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // Now that the column widths are configured, resize figures
         var sh = $('#section').height();
 
-        /*
+        //*/
         $('figure').each( function( i, e ) {
 
             // Shorthand 
             var $e = $(e);
             var $i = $e.find('img');
             var $c = $e.find('figcaption');
+            var $w = null;
+
+            // Check if the figure is wrapped; otherwise, wrap it
+            if( $e.parent().attr('id') === $e.attr('id') + '-wrapper' ) {
+                $w = $e.parent();
+            }else{
+                $w = $("<div></div>").attr('id', $e.attr('id') + '-wrapper');
+                $w.addClass('figure-wrapper');
+                /*
+                $w.css({
+                    'height' : $('#default-section-view').innerHeight(),
+                    'width' : cw // column width
+                });
+                */
+                $e.wrap( $w );
+            }
 
             // Ensure that the figure always takes up a full column
+            /*
             $e.css({
                 'max-height' : $('#section').innerHeight() - $('#section').css('padding-down'),
                 'width' : $i.outerWidth()
@@ -189,10 +206,10 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                     }
                 });
             }
-           
+           */
 
         }); 
-        */
+        //*/
 
 
         // Now that the height of all elements is determined,
@@ -236,9 +253,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     },
 
     render: function() {
-
-        // DEBUGGING
-        //console.log( "SectionView rendering..." );
 
         //clean up the view incase we have already rendered this before
         this.model.removeAllPages();

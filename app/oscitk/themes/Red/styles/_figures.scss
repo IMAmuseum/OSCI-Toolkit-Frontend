@@ -2,6 +2,12 @@
 
 	#default-section-view {
 
+		// Ensures that the figure will take up the whole column
+		.figure-wrapper {
+			height: calc(100% + 30px); 
+			width: 100%;
+		}
+
 		figure,
 		figure .figure_content,
 		figure .figure_content object,

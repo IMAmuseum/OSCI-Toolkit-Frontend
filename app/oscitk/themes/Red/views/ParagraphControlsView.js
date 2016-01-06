@@ -28,7 +28,9 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             this.render();
         });
 
-            this.userLogged = app.account.get('id') > 0;
+        // Default check
+        this.userLogged = app.account.get('id') > 0;
+
         // Whenever something happens to the account, try to reload the notes
         // See ToolbarAccountView.js for more info
         this.listenTo(Backbone, 'accountReady accountStateChanged', function() {
@@ -83,8 +85,6 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
         _.each(this.paragraphs, function(paragraph) {
             
-            // note that there is an off by one error b/c paragraph #id and other fields
-
             /// Make sure that there no redundant paragraphControls if this is called twice
             $('.paragraph-controls[data-osci_content_id="osci-content-' + i + '"]' ).remove();
 
