@@ -21,8 +21,8 @@ body {
 
 // TODO: Move some of this to _figures.scss
 #section {
-	overflow: auto;
-	overflow-y: hidden;
+	//overflow: auto;
+	overflow: hidden;
 
 	// Baseline font-size
 	font-size: 16px;
@@ -32,10 +32,15 @@ body {
 	width: 100%;
 
 	// hide scrollbar
-	height: calc(100% + 30px); 
+	height: calc( 100% );// + 30px); 
+
+	/*
 	margin-top: -15px;
 	margin-bottom: -15px;
-	padding: 15px;
+	
+	*/
+
+	padding: 0px 15px;
 
 	// Unsupported CSS3
 	//scroll-snap-points-x: repeat(100%);
@@ -123,9 +128,16 @@ body {
 
 			// Offset for p > .paragraph-controls
 			// Changing this to a margin will affect nearest element calculations
-			padding-left: 16px;
+		    padding-left: 20px;
+    		text-indent: -10px;
+
+			position: relative; // anchor for .paragraph-controls
+
 
 			.footnote-reference {
+
+				padding-left: 9px;
+
 				margin: 0 5px;
 
 				display: inline-block;

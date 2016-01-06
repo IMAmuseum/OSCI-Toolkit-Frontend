@@ -27,7 +27,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 app.models.section = new OsciTk.models.Section({
                     uri : navItem.get('uri'),
                     id : navItem.get('id')
-                })
+                });
 
                 // not sure where this is used
                 this.ContentId = navItem.get('id');
@@ -81,48 +81,53 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     // Layout magic happens here
     renderColumns: function(  ) {
 
+        // Shorthand
+        var $sv = this.$el;             // $('#default-section-view')
+        var $sc = this.$el.parent();    // $('#section') i.e. section-view container
+
+        var sb = 0,   // scroll bar height compensation, currently unused
+            cg = 40,  // column-gap
+            cc,       // column-count
+            sw,       // $('#section').width()
+            cw,       // column-width
+            sh,       // $('#section').heght()
+            ch;       // column-height i.e. $sv.height()
+
+
         // see NavigationView.js
         Backbone.trigger("columnRenderStart");
 
-        // set column gap here so that it's readily accessible
-        var cg = 40;
-        $('#default-section-view').css({
+        // Apply the column gap
+        $sv.css({
             '-webkit-column-gap': cg,
                '-moz-column-gap': cg,
                     'column-gap': cg
         });
 
-        // Determine column count
-        var cc = $('#section').attr('data-columns-setting');
-
-        if( typeof cc === 'undefined' ) {
-            cc = 2;
-        }else{
-            cc = parseInt( cc );
-        }
-
+        // Determine column count. Default is 2. Force 1 on mobile.
         // Note that this is hardcoded to match Bootstrap's breakpoints
-        if( $(window).width() < 768 ) {
-            cc = 1;
-        }
+        cc = $sc.attr('data-columns-setting');
+        cc = typeof cc === 'undefined' ? 2 : parseInt( cc );
+        cc = $(window).width() < 768 ? 1 : cc; 
 
-        $('#section').attr('data-columns-rendered', cc );
+        // Used for page scrolling in NavigationView.js
+        $sc.attr('data-columns-rendered', cc );
 
-
-        // Reset the stats of #default-section-view
-        $('#default-section-view').css({
+        // Reset all stats for the section view
+        $sv.css({
             '-webkit-column-width': 'auto',
                '-moz-column-width': 'auto',
                     'column-width': 'auto',
             '-webkit-column-count': 'auto',
                '-moz-column-count': 'auto',
                     'column-count': 'auto',
-                           'width': 'auto'
+                           'width': 'auto',
+                          'height': 'auto'
         });
 
-        // set the width of the columns in #section to equal 1/2 of #section width
-        var sw = $('#section').width();
-        var cw = (sw/cc) - cg/2; // account for one gap
+        // Determine column width using width of #section 
+        sw = $sc.width();
+        cw = (sw/cc) - cg/2; // account for one gap
         
         $('#default-section-view').css({
             '-webkit-column-width': cw,
@@ -130,36 +135,65 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                     'column-width': cw
         }); 
 
-
-
-        // Now that the column widths are configured, resize figures
-        var sh = $('#section').height();
-
-        //*/
+        // Now resize figures to the correct height
         $('figure').each( function( i, e ) {
 
-            // Shorthand 
-            var $e = $(e);
-            var $i = $e.find('img');
-            var $c = $e.find('figcaption');
-            var $w = null;
+            // Shorthand heirarchy
+            var $s = $('#section');
+            var $w = null; // wrapper
+
+            var $f = $(e);
+            var $d = $f.find('.figure_content');
+            var $o = $d.find('object');
+            var $i = $o.find('img');
+
+            var $c = $f.find('figcaption');
+
 
             // Check if the figure is wrapped; otherwise, wrap it
-            if( $e.parent().attr('id') === $e.attr('id') + '-wrapper' ) {
-                $w = $e.parent();
-            }else{
-                $w = $("<div></div>").attr('id', $e.attr('id') + '-wrapper');
+            if( $f.parent().attr('id') !== $f.attr('id') + '-wrapper' ) {
+                $w = $("<div></div>").attr('id', $f.attr('id') + '-wrapper');
                 $w.addClass('figure-wrapper');
-                /*
-                $w.css({
-                    'height' : $('#default-section-view').innerHeight(),
-                    'width' : cw // column width
-                });
-                */
-                $e.wrap( $w );
+                $f.wrap( $w )
             }
 
-            // Ensure that the figure always takes up a full column
+            // Figure was wrapped in a copy of $w, not $w itself, so select it again
+            $w = $f.parent();
+
+            // Ensure that the figure (via its wrapper) always takes up a full column
+            $w.css({
+                'height' : $s.innerHeight() - sb, // scrollbar offset
+                'width' : cw // column-width
+            });
+
+            // Expand figure to use all the available space
+            // Since the figure height is defaulted to 0 in CSS,
+            //   outerHeight(true) will return any margins
+            $f.css({
+                'height' : $w.innerHeight() - $f.outerHeight(true),
+                'width' : 'auto' // column-width
+            });
+
+            // Let the caption expand to fill the space it needs
+            $c.css({
+                'height' : 'auto',
+                'width' : 'auto'
+            });
+
+
+            // Set the dimensions of .figure_content to fill the space, sans figcaption
+            $d.css({
+                'height' : $f.innerHeight() - $c.outerHeight(true),
+                'width' : 'auto'
+            });
+
+            // Set dimensions of image to fill the .figure_content div
+            $i.css({
+                'height' : $d.innerHeight(),
+                'width' : 'auto'
+            });
+
+
             /*
             $e.css({
                 'max-height' : $('#section').innerHeight() - $('#section').css('padding-down'),
@@ -213,23 +247,28 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
 
         // Now that the height of all elements is determined,
-        // Increase number of columns until everything fits vertically
-        var ch = 0; var i = cc;
+        // Increase number of columns until everything fits vertically,
+        // Or until there is no more change in height
+        var ch = 0; var _ch = -1; var i = cc;
         do {
 
-            $('#default-section-view').css({
+            $sv.css({
                 '-webkit-column-count': i.toString(),
                    '-moz-column-count': i.toString(),
                         'column-count': i.toString()
             }); 
 
-            //console.log( i );
-            $('#default-section-view').width( i * cw + (i - 1) * cg);
+            $sv.width( i * cw + (i - 1) * cg);
 
-            ch = $('#default-section-view').height();
+            _ch = ch;
+             ch = this.$el.height();
+            
             i+=1;
 
-        } while( ch > $('#section').height() - 30 );
+        } while( ch > $sc.height() && ch !== _ch );
+
+        // FireFox needs explicit height set for the section view
+        $sv.css('height', $sc.innerHeight() );
 
         // see NavigationView.js
         Backbone.trigger("columnRenderEnd");
