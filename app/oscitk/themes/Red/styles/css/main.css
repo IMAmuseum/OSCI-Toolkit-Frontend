@@ -8933,7 +8933,7 @@ body {
   cursor: hand;
 }
 
-/* line 184, ../_section.scss */
+/* line 185, ../_section.scss */
 .loader {
   margin: 80px auto;
   font-size: 10px;
@@ -8949,7 +8949,7 @@ body {
   -webkit-animation: load8 1.1s infinite linear;
   animation: load8 1.1s infinite linear;
 }
-/* line 203, ../_section.scss */
+/* line 204, ../_section.scss */
 .loader, .loader:after {
   border-radius: 50%;
   width: 10em;
@@ -8975,6 +8975,15 @@ body {
     transform: rotate(360deg);
   }
 }
+/* line 235, ../_section.scss */
+#loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -5em;
+  margin-top: -40px;
+}
+
 /* line 1, ../_navigation.scss */
 #navigation {
   font-family: sans-serif;

@@ -181,6 +181,7 @@ body {
 }
 
 
+// Generic loader element
 .loader {
 	margin: 80px auto;
 
@@ -229,4 +230,13 @@ body {
 
 }
 
+
+// Only applies to the "main" section loader
+#loader {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -5em;
+	margin-top: -40px;
+}
 

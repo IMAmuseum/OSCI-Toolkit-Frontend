@@ -12,13 +12,10 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // bind sectionChanged
         this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
 
-            $("html, body").animate({
-                scrollTop: 0
-            }, 0);
+            $('#section-view').empty(); // removes all the headings, p, figure, etc.
+            $('.header-view').empty(); // changes section titles and whatnot
 
-            $('#section-view').empty();
-            $('.header-view').empty();
-
+            $('#section').css('opacity', 0); // straight-up hiding it would be bad
             $('#loader').show();
 
             if (navItem) {
@@ -35,14 +32,15 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 // this.model is undefined unless you call this function!
                 this.changeModel(app.models.section);
 
-                // console.log( this.model );
-
                 app.models.section.loadContent();
 
             }
 
-            $('#loader').hide();
+        });
 
+        this.listenTo(Backbone, 'hideLoader', function() {
+            $('#loader').hide();
+            $('#section').css('opacity', 1);
         });
 
         // Used for toggling column count
