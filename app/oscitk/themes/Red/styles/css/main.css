@@ -8906,7 +8906,7 @@ body {
   text-indent: -10px;
   position: relative;
 }
-/* line 137, ../_section.scss */
+/* line 139, ../_section.scss */
 #section #default-section-view p .footnote-reference {
   padding-left: 9px;
   margin: 0 5px;
@@ -8922,18 +8922,18 @@ body {
   text-align: center;
   background: #b82927;
 }
-/* line 160, ../_section.scss */
+/* line 162, ../_section.scss */
 #section #default-section-view p .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
   background: #810c0b;
 }
-/* line 170, ../_section.scss */
+/* line 172, ../_section.scss */
 #section #default-section-view p .glossary-term:hover {
   cursor: hand;
 }
 
-/* line 182, ../_section.scss */
+/* line 184, ../_section.scss */
 .loader {
   margin: 80px auto;
   font-size: 10px;
@@ -8949,7 +8949,7 @@ body {
   -webkit-animation: load8 1.1s infinite linear;
   animation: load8 1.1s infinite linear;
 }
-/* line 201, ../_section.scss */
+/* line 203, ../_section.scss */
 .loader, .loader:after {
   border-radius: 50%;
   width: 10em;
@@ -9531,7 +9531,11 @@ input[type=range]:focus::-ms-fill-upper {
   background: #ccc;
 }
 
-/* line 13, ../_figures.scss */
+/* line 3, ../_figures.scss */
+#section #default-section-view {
+  position: relative;
+}
+/* line 14, ../_figures.scss */
 #section #default-section-view .figure-wrapper {
   -webkit-column-break-inside: avoid;
   /* Chrome, Safari */
@@ -9539,12 +9543,20 @@ input[type=range]:focus::-ms-fill-upper {
   /* Theoretically FF 20+ */
   break-inside: avoid-column;
   /* IE 11 */
+  page-break-after: always;
+  -webkit-column-break-after: always;
+  break-after: always;
+  -webkit-column-break-before: always;
+  break-before: always;
+  background-color: white;
   height: calc(100% + 30px);
   width: 100%;
   height: 0px;
   float: right;
+  position: relative;
+  z-index: 3;
 }
-/* line 26, ../_figures.scss */
+/* line 42, ../_figures.scss */
 #section #default-section-view figure,
 #section #default-section-view figure .figure_content,
 #section #default-section-view figure .figure_content object,
@@ -9555,29 +9567,37 @@ input[type=range]:focus::-ms-fill-upper {
   /* Theoretically FF 20+ */
   break-inside: avoid-column;
   /* IE 11 */
-  float: none !important;
   display: block;
   max-width: 100%;
   line-height: 29px;
   height: 0px;
-  clear: both;
 }
-/* line 47, ../_figures.scss */
+/* line 61, ../_figures.scss */
 #section #default-section-view figure {
   margin: auto;
   border: thin #eeeeee solid;
+  border-radius: 5px;
   padding: 6px;
 }
-/* line 57, ../_figures.scss */
+/* line 75, ../_figures.scss */
 #section #default-section-view figure .figure_content object img {
   margin: 0 auto;
   border: 0;
 }
-/* line 65, ../_figures.scss */
+/* line 82, ../_figures.scss */
+#section #default-section-view figure .figure_content .layered_image-asset, #section #default-section-view figure .figure_content .layered_image-asset svg {
+  -webkit-column-break-inside: avoid;
+  /* Chrome, Safari */
+  page-break-inside: avoid;
+  /* Theoretically FF 20+ */
+  break-inside: avoid-column;
+  /* IE 11 */
+}
+/* line 89, ../_figures.scss */
 #section #default-section-view figure figcaption {
   background: white;
 }
-/* line 70, ../_figures.scss */
+/* line 94, ../_figures.scss */
 #section #default-section-view figure figcaption p {
   font-family: 'Lora', serif;
   font-style: italic;

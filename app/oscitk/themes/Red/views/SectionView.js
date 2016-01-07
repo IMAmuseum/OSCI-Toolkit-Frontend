@@ -134,7 +134,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                '-moz-column-width': cw,
                     'column-width': cw
         }); 
-
+        
         // Now resize figures to the correct height
         $('figure').each( function( i, e ) {
 
@@ -167,10 +167,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             });
 
             // Expand figure to use all the available space
-            // Since the figure height is defaulted to 0 in CSS,
-            //   outerHeight(true) will return any margins
+            // TODO: Account for margins?
             $f.css({
-                'height' : $w.innerHeight() - $f.outerHeight(true),
+                'height' : $w.innerHeight(),
                 'width' : 'auto' // column-width
             });
 
@@ -183,7 +182,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
             // Set the dimensions of .figure_content to fill the space, sans figcaption
             $d.css({
-                'height' : $f.innerHeight() - $c.outerHeight(true),
+                'height' : $f.innerHeight() - $c.outerHeight(true) - 10,
                 'width' : 'auto'
             });
 
@@ -194,31 +193,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             });
 
 
-            /*
-            $e.css({
-                'max-height' : $('#section').innerHeight() - $('#section').css('padding-down'),
-                'width' : $i.outerWidth()
-            });
-
-            
-            var $c = $e.find('figcaption');
-
-            // account for the figcaption when setting max height of inner elements
-            // apply this to img and object too if using the fallback <img>
-            var ch = $c.outerHeight();
-
-            
-            
-            $e.find('.figure_content').css({
-                'max-height' : 'auto',
-                'max-width' : 'auto'
-            }).css({
-                'max-height' : $i.outerHeight(),
-                'max-width' : $i.outerWidth()
-            });
 
             // Layered image init
-            var url = $e.find('object').attr('data');
+            var url = $f.find('object').attr('data');
             if (url !== undefined) {
 
                 $.ajax({
@@ -229,18 +206,31 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                     success: function(data) {
 
                         var $content = $(data).filter('.layered_image-asset').first();
-                        var $container = $e.find('.figure_content');
+                        var $container = $f.find('.figure_content');
                         
-                       $container.empty();
+
+                        $container.empty();
                         $content.appendTo( $container );
 
 
                         new window.LayeredImage( $content );
 
+                        // Chrome hack
+                        var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+                        if( is_chrome ) {
+                            var $b = $w.prev();
+                            $w.before( $b );
+                            setTimeout(function(){
+                                $w.after( $b );
+                            }, 10);
+                        }
+
+
                     }
                 });
+
             }
-           */
+           //*/
 
         }); 
         //*/
@@ -265,13 +255,34 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             
             i+=1;
 
-        } while( ch > $sc.height() && ch !== _ch );
+        } while( ch > $sc.height() && ch !== _ch);
 
         // FireFox needs explicit height set for the section view
         $sv.css('height', $sc.innerHeight() );
 
+        // Safari hack
+        var is_safari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        if( is_safari ) {
+            $('.figure-wrapper').css({
+                'float' : 'none'
+            });
+            /*
+            $('figure').css({
+                'height' : 'auto'
+            });
+
+            $('.figure_content').css({
+                'height' : 'auto'
+            });
+
+            $('.figure_content img').css({
+                'height' : 'auto'
+            });
+            */
+        }
+
         // see NavigationView.js
-        Backbone.trigger("columnRenderEnd");
+        //Backbone.trigger("columnRenderEnd");
 
     },
 
