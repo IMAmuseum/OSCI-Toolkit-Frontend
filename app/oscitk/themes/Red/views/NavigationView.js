@@ -145,6 +145,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
                     case 'end':
                         gotoPage = this.numPages;
+                        app.router.navigate("section/" + this.getCurrentNavigationItem().get('id'), { trigger: false } );
                     break;
 
                     case 'start':
