@@ -61,7 +61,7 @@
 	    	margin: auto;  // ensures that the figure takes up the entire page
 	    	// margin-bottom: 15px; // not necessary if the figure takes up the entire page
 
-	    	border: thin $gray-lighter solid;
+	    	//border: thin $gray-lighter solid;
 	    	border-radius: 5px;
 			padding: 6px;
 
@@ -87,6 +87,7 @@
 			figcaption {
 
 				background: white;
+				text-align: center;
 
 
 				p {

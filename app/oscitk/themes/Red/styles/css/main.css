@@ -9573,7 +9573,6 @@ input[type=range]:focus::-ms-fill-upper {
 /* line 59, ../_figures.scss */
 #section #default-section-view figure {
   margin: auto;
-  border: thin #eeeeee solid;
   border-radius: 5px;
   padding: 6px;
 }
@@ -9594,8 +9593,9 @@ input[type=range]:focus::-ms-fill-upper {
 /* line 87, ../_figures.scss */
 #section #default-section-view figure figcaption {
   background: white;
+  text-align: center;
 }
-/* line 92, ../_figures.scss */
+/* line 93, ../_figures.scss */
 #section #default-section-view figure figcaption p {
   font-family: 'Lora', serif;
   font-style: italic;
