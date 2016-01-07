@@ -135,6 +135,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                     'column-width': cw
         }); 
         
+        // Save context to avoid setting window variables
+        var that = this;
+
         // Now resize figures to the correct height
         $('figure').each( function( i, e ) {
 
@@ -197,7 +200,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
 
             // Layered image init
-           
             var url = $f.find('object').attr('data');
             if (url !== undefined) {
 
@@ -216,7 +218,17 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                         $content.appendTo( $container );
 
 
-                        new window.LayeredImage( $content );
+                        var li = new window.LayeredImage( $content );
+
+                        /*
+                        that.listenTo(Backbone, 'windowResized', function(e) {
+                            console.log( li.map );
+                            setTimeout( function() {
+                                //li.map.resize();
+                                li.reset();
+                            }, 250 );
+                        });
+                        */
 
                         // Chrome hack
                         var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
