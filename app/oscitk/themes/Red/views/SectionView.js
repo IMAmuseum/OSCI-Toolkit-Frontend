@@ -154,6 +154,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             if( $f.parent().attr('id') !== $f.attr('id') + '-wrapper' ) {
                 $w = $("<div></div>").attr('id', $f.attr('id') + '-wrapper');
                 $w.addClass('figure-wrapper');
+                $w.addClass('noSwipe'); // see NavigationView.js
                 $f.wrap( $w )
             }
 
