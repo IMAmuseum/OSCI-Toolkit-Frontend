@@ -10161,39 +10161,42 @@ images.image_opaque {
 /* line 3, ../_paragraph-popover.scss */
 .popover {
   border-radius: 10px;
-  border: thin solid transparent;
   background-color: #b82927;
 }
 /* line 11, ../_paragraph-popover.scss */
 .popover.right > .arrow, .popover.right > .arrow:after {
   border-right-color: #b82927;
 }
-/* line 16, ../_paragraph-popover.scss */
+/* line 17, ../_paragraph-popover.scss */
+.popover.top > .arrow, .popover.top > .arrow:after {
+  border-top-color: #b82927;
+}
+/* line 22, ../_paragraph-popover.scss */
 .popover .popover-content {
   padding: 0;
 }
-/* line 21, ../_paragraph-popover.scss */
+/* line 27, ../_paragraph-popover.scss */
 .popover .popover-content .popover-wrapper {
   padding: 9px;
   max-width: 200px;
   max-height: 240px;
   font-family: 'Lato', sans-serif;
 }
-/* line 31, ../_paragraph-popover.scss */
+/* line 37, ../_paragraph-popover.scss */
 .popover .popover-content .popover-wrapper .nav li a {
   color: white;
 }
-/* line 33, ../_paragraph-popover.scss */
+/* line 39, ../_paragraph-popover.scss */
 .popover .popover-content .popover-wrapper .nav li a:hover {
   color: #3c3c3c;
   border-color: transparent;
 }
-/* line 40, ../_paragraph-popover.scss */
+/* line 46, ../_paragraph-popover.scss */
 .popover .popover-content .popover-wrapper .nav li.active a {
   color: #3c3c3c;
   border: thin solid transparent;
 }
-/* line 49, ../_paragraph-popover.scss */
+/* line 55, ../_paragraph-popover.scss */
 .popover .popover-content .popover-wrapper textarea {
   border: none;
   outline: none;
@@ -10204,7 +10207,7 @@ images.image_opaque {
   padding: 5px;
   color: #333;
 }
-/* line 65, ../_paragraph-popover.scss */
+/* line 71, ../_paragraph-popover.scss */
 .popover .popover-content .popover-wrapper button {
   font-size: 15px;
   font-weight: 200;
@@ -10212,7 +10215,7 @@ images.image_opaque {
   border: thin solid transparent;
 }
 
-/* line 76, ../_paragraph-popover.scss */
+/* line 82, ../_paragraph-popover.scss */
 .tab-content {
   height: 160px;
 }
@@ -10220,9 +10223,10 @@ images.image_opaque {
 /* line 1, ../_note-form.scss */
 .note-form-wrapper {
   height: 160px;
+  display: block;
 }
 
-/* line 5, ../_note-form.scss */
+/* line 6, ../_note-form.scss */
 .paragraph-controls {
   /*
   float: left;
@@ -10238,11 +10242,11 @@ images.image_opaque {
   margin-right: 10px;
   z-index: 2;
 }
-/* line 28, ../_note-form.scss */
+/* line 29, ../_note-form.scss */
 .paragraph-controls .btn {
   text-transform: uppercase;
 }
-/* line 34, ../_note-form.scss */
+/* line 35, ../_note-form.scss */
 .paragraph-controls .paragraph-button {
   background-image: url(../../images/disk-grey.png);
   background-repeat: no-repeat;
@@ -10254,12 +10258,12 @@ images.image_opaque {
   text-shadow: none;
   color: transparent;
 }
-/* line 48, ../_note-form.scss */
+/* line 49, ../_note-form.scss */
 .paragraph-controls .paragraph-button.withNotes {
   background-image: url(../../images/disk-red.png);
 }
 
-/* line 58, ../_note-form.scss */
+/* line 59, ../_note-form.scss */
 #note-submit {
   margin-top: 10px;
 }

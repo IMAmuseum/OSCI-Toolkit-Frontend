@@ -134,8 +134,23 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
         var noteForm = this.templateNotes({paragraph_number: note.get('paragraph_number'), note: noteText, cid: note.cid});
 
-        var popover = this.template({noteForm: noteForm, citation: this.citation});
-        $('#paragraph-'+data).popover({html:true, trigger:'manual', placement:'right', content: popover});
+        // Unfortunately, FireFox requires tooltip placement to be on top rather than right
+        var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+        var notePlacement = is_firefox ? 'top' : 'right';
+        
+
+        var popover = this.template({
+            'noteForm' : noteForm,
+            'citation' : this.citation
+        });
+
+        $('#paragraph-'+data).popover({
+            'html' : true,
+            'trigger' : 'manual',
+            'placement' : notePlacement, // see FireFox hotfix above
+            'container' : 'body', // avoid overflow: hidden cutoff
+            'content' : popover
+        });
 
         // Set focus on the Notes textarea once the popover has toggled
         $('#paragraph-'+data).on('shown.bs.popover', function() {

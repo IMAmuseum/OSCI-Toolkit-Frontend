@@ -3,13 +3,19 @@ $popover-height: 160px;
 .popover {
 
 	border-radius: 10px;
-	border: thin solid transparent;
+	//border: thin solid transparent;
 
 	background-color: $color-light-red;
 
 	&.right > .arrow {
 		&, &:after {
 			border-right-color: $color-light-red;
+		}
+	}
+
+	&.top > .arrow {
+		&, &:after {
+			border-top-color: $color-light-red;
 		}
 	}
 
