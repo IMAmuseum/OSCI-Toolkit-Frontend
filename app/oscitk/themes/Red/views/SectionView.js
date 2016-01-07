@@ -162,9 +162,11 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
             // Ensure that the figure (via its wrapper) always takes up a full column
             $w.css({
-                'height' : $s.innerHeight() - sb, // scrollbar offset
-                'width' : cw // column-width
-            });
+                'width' : cw, // column-width
+                'height' : $s.innerHeight() - sb // scrollbar offset
+            }); 
+
+           
 
             // Expand figure to use all the available space
             // TODO: Account for margins?
@@ -178,7 +180,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 'height' : 'auto',
                 'width' : 'auto'
             });
-
 
             // Set the dimensions of .figure_content to fill the space, sans figcaption
             $d.css({
@@ -195,6 +196,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
 
             // Layered image init
+           
             var url = $f.find('object').attr('data');
             if (url !== undefined) {
 
@@ -230,6 +232,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 });
 
             }
+
            //*/
 
         }); 
@@ -253,36 +256,23 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             _ch = ch;
              ch = this.$el.height();
             
+             console.log( _ch, ch );
+
             i+=1;
 
-        } while( ch > $sc.height() && ch !== _ch);
+        } while( ch > $sc.height() && ch !== _ch );
 
         // FireFox needs explicit height set for the section view
         $sv.css('height', $sc.innerHeight() );
 
-        // Safari hack
+        // Safari will break if the figure wrappers have explicit heights 
         var is_safari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
         if( is_safari ) {
-            $('.figure-wrapper').css({
-                'float' : 'none'
-            });
-            /*
-            $('figure').css({
-                'height' : 'auto'
-            });
-
-            $('.figure_content').css({
-                'height' : 'auto'
-            });
-
-            $('.figure_content img').css({
-                'height' : 'auto'
-            });
-            */
+            $('.figure-wrapper').css('height', '' ); 
         }
 
         // see NavigationView.js
-        //Backbone.trigger("columnRenderEnd");
+        Backbone.trigger("columnRenderEnd");
 
     },
 
