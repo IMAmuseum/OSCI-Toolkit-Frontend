@@ -38,10 +38,18 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         });
 
-        this.listenTo(Backbone, 'hideLoader', function() {
+        // Technically, this should fire after all the AJAX calls, but it's close enough
+        this.listenTo(Backbone, 'columnRenderEnd', function() {
             $('#loader').hide();
             $('#section').css('opacity', 1);
         });
+
+
+        // We'll keep track of all things happening and hide the loader when it's done...
+
+
+        // listen a laundry list of events and trigger hideLoader when they are ready
+        // make sure to wait until all of the images have been converted into layeredImages
 
         // Used for toggling column count
         this.listenTo(Backbone, 'setSectionColumns', function( columnCount ) {
@@ -168,8 +176,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 'height' : $s.innerHeight() - sb // scrollbar offset
             }); 
 
-           
-
             // Expand figure to use all the available space
             // TODO: Account for margins?
             $f.css({
@@ -195,9 +201,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 'width' : 'auto'
             });
 
-
-
             // Layered image init
+            // <object/> is removed in the AJAX call, so this will be called only on first load of section
             var url = $f.find('object').attr('data');
             if (url !== undefined) {
 
@@ -241,13 +246,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
                     }
                 });
-
             }
-
-           //*/
-
-        }); 
-        //*/
+        });
 
 
         // Now that the height of all elements is determined,
