@@ -189,9 +189,18 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 'width' : 'auto'
             });
 
+            // We have to do some hot-fixes here for IE
+            var is_ie = detectIE(); // returns 0 or IE version, see _functions.js
+
+            if( is_ie ) {
+                $w.css({
+                    'float' : 'none'
+                });
+            }
+
             // Set the dimensions of .figure_content to fill the space, sans figcaption
             $d.css({
-                'height' : $f.innerHeight() - $c.outerHeight(true) - 10,
+                'height' : $f.innerHeight() - $c.outerHeight(true) - ( is_ie ? 50 : 10 ), // - 40 for IE ?
                 'width' : 'auto'
             });
 
@@ -223,15 +232,13 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
                         var li = new window.LayeredImage( $content );
 
-                        /*
+                        
                         that.listenTo(Backbone, 'windowResized', function(e) {
-                            console.log( li.map );
+                            //console.log( li.map );
                             setTimeout( function() {
-                                //li.map.resize();
-                                li.reset();
-                            }, 250 );
+                                li.map.resize();
+                            }, 1000 );
                         });
-                        */
 
                         // Chrome hack
                         var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
