@@ -183,18 +183,19 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 'width' : 'auto' // column-width
             });
 
-            // Let the caption expand to fill the space it needs
-            $c.css({
-                'height' : 'auto',
-                'width' : 'auto'
-            });
-
-            // We have to do some hot-fixes here for IE
+            // IE hot-fix: remove float from .figure-wrapper
             var is_ie = detectIE(); // returns 0 or IE version, see _functions.js
-
             if( is_ie ) {
                 $w.css({
                     'float' : 'none'
+                });
+            }
+
+            // In IE, figcaptions get pushed to next column if bottom: 0 is set
+            // Therefore, we must set bottom: 0 here instead of in _figures.css
+            if( !is_ie ) {
+                $c.css({
+                    'bottom' : 0
                 });
             }
 
@@ -209,6 +210,15 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 'height' : $d.innerHeight(),
                 'width' : 'auto'
             });
+
+            // In FireFox, figcaption will not appear unless it is first-child of figure
+            // This moves the figcaption above the LayeredImage; necessary compromise
+            // I think this is a conflict with CSS3 columns, which will be fixed in future versions
+            var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+            if( is_firefox ) {
+                //console.log( 'I am firefox!' );
+                $c.before( $d );
+            }
 
             // Layered image init
             // <object/> is removed in the AJAX call, so this will be called only on first load of section
@@ -232,15 +242,14 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
                         var li = new window.LayeredImage( $content );
 
-                        
+                        // This forces a re-centering of the layered image on windows.resize
                         that.listenTo(Backbone, 'windowResized', function(e) {
-                            //console.log( li.map );
                             setTimeout( function() {
                                 li.map.resize();
-                            }, 1000 );
+                            }, 500 ); // 500 is an estimate, tweak it if needed
                         });
 
-                        // Chrome hack
+                        // Chrome hack; moves figures back and forth, fixing mid-figure column breaks. Magic!
                         var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
                         if( is_chrome ) {
                             var $b = $w.prev();

@@ -65,7 +65,8 @@
 	    	border-radius: 5px;
 			padding: 6px;
 
-
+			// Anchor for figcaption
+			position: relative;
 
 			.figure_content {
 
@@ -86,6 +87,10 @@
 
 			figcaption {
 
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+
 				background: white;
 				text-align: center;
 
@@ -98,6 +103,9 @@
 					
 					padding-top: 4px;
 					margin: 0;
+
+				    padding-left: 0px;
+    				text-indent: 0px;
 				}
 
 			}

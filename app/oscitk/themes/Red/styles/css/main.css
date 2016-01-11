@@ -9584,13 +9584,14 @@ input[type=range]:focus::-ms-fill-upper {
   margin: auto;
   border-radius: 5px;
   padding: 6px;
+  position: relative;
 }
-/* line 73, ../_figures.scss */
+/* line 74, ../_figures.scss */
 #section #default-section-view figure .figure_content object img {
   margin: 0 auto;
   border: 0;
 }
-/* line 80, ../_figures.scss */
+/* line 81, ../_figures.scss */
 #section #default-section-view figure .figure_content .layered_image-asset, #section #default-section-view figure .figure_content .layered_image-asset svg {
   -webkit-column-break-inside: avoid;
   /* Chrome, Safari */
@@ -9599,12 +9600,15 @@ input[type=range]:focus::-ms-fill-upper {
   break-inside: avoid-column;
   /* IE 11 */
 }
-/* line 87, ../_figures.scss */
+/* line 88, ../_figures.scss */
 #section #default-section-view figure figcaption {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   background: white;
   text-align: center;
 }
-/* line 93, ../_figures.scss */
+/* line 98, ../_figures.scss */
 #section #default-section-view figure figcaption p {
   font-family: 'Lora', serif;
   font-style: italic;
@@ -9612,6 +9616,8 @@ input[type=range]:focus::-ms-fill-upper {
   color: #3c3c3c;
   padding-top: 4px;
   margin: 0;
+  padding-left: 0px;
+  text-indent: 0px;
 }
 
 /* line 1, ../_layered-image.scss */
