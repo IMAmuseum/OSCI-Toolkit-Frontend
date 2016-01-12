@@ -14,10 +14,11 @@ OsciTk.views.FontSize = OsciTk.views.BaseView.extend({
 
 	},
 	render: function() {
-		this.$el.html(this.template());
+		this.$el.html(this.template({}));
 		return this;
 	},
 	changeFontSize: function(href) {
+		
 		var sectionView = app.views.sectionView;
 
 		if (href === "font-larger" && this.currentFontSize < "200") {
@@ -32,5 +33,6 @@ OsciTk.views.FontSize = OsciTk.views.BaseView.extend({
 		});
 
 		Backbone.trigger("windowResized");
+
 	}
 });

@@ -247,7 +247,11 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                         // This forces a re-centering of the layered image on windows.resize
                         that.listenTo(Backbone, 'windowResized', function(e) {
                             setTimeout( function() {
-                                li.map.resize();
+
+                                li.map.resize(); // recenter
+                                li.resetZoomRange(); // ensure it can scale down
+                                li.reset(); // reset size and options
+
                             }, 500 ); // 500 is an estimate, tweak it if needed
                         });
 
