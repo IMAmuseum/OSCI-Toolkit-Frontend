@@ -249,9 +249,14 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                             setTimeout( function() {
 
                                 li.map.resize(); // recenter
-                                li.resetZoomRange(); // ensure it can scale down
-                                li.reset(); // reset size and options
-
+                                
+                                try {
+                                    li.resetZoomRange(); // ensure it can scale down
+                                    li.reset(); // reset size and options
+                                } catch(e) {
+                                    // slider not init'd error
+                                }
+                                
                             }, 500 ); // 500 is an estimate, tweak it if needed
                         });
 
