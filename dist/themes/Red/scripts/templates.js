@@ -170,13 +170,22 @@ return __p
 
 this["JST"]["app/oscitk/themes/Red/templates/paragraph-popover.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<div class="popover-wrapper">\n\t<ul class="nav nav-tabs" role="tablist">\n\t\t<li role="presentation" class="active">\n\t\t\t<a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Notes</a>\n\t\t</li>\n\t\t<li role="presentation">\n\t\t\t<a href="#cite" aria-controls="cite" role="tab" data-toggle="tab">Cite</a>\n\t\t</li>\n\t</ul>\n\n\t<div class="tab-content">\n    \t<div role="tabpanel" class="tab-pane active" id="notes">\n    \t\t' +
+__p += '<div class="popover-wrapper">\n\n';
+ if( noteForm ) { ;
+__p += '\n\n\t<ul class="nav nav-tabs" role="tablist">\n\t\t<li role="presentation" class="active">\n\t\t\t<a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Notes</a>\n\t\t</li>\n\t\t<li role="presentation">\n\t\t\t<a href="#cite" aria-controls="cite" role="tab" data-toggle="tab">Cite</a>\n\t\t</li>\n\t</ul>\n\n\t<div class="tab-content">\n    \t<div role="tabpanel" class="tab-pane active" id="notes">\n    \t\t' +
 ((__t = ( noteForm )) == null ? '' : __t) +
-'\n    \t</div>\n    \t<div role="tabpanel" class="tab-pane" id="cite">\n    \t\t' +
+'\n    \t</div>\n    \t<div role="tabpanel" class="tab-pane" id="cite">\n\n';
+ } ;
+__p += '\n\t\t\t<div id="cite-target">\n\t    \t\t' +
 ((__t = ( citation )) == null ? '' : __t) +
-'\n    \t</div>\n    </div>\n</div>\n';
+'\n\t    \t</div>\n';
+ if( noteForm ) { ;
+__p += '\n\n    \t</div>\n    </div>\n';
+ } ;
+__p += '\n\n</div>\n\n\n';
 
 }
 return __p

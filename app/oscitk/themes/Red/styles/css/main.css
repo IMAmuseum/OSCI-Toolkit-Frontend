@@ -10235,6 +10235,11 @@ images.image_opaque {
   height: 160px;
 }
 
+/* line 89, ../_paragraph-popover.scss */
+#cite-target {
+  height: 160px;
+}
+
 /* line 1, ../_note-form.scss */
 .note-form-wrapper {
   height: 160px;

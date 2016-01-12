@@ -306,7 +306,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	// Mostly updates the arrow button links to navigate to the right page
 	update: function(page) {
 
-		console.log( 'updating' );
+		//console.log( 'updating' );
 
 		// unbind both controls to start
 		this.$el.find('.prev-page').unbind('click');

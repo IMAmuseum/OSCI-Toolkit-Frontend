@@ -6,25 +6,34 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
     initialize: function() {
 
         // Just some shorthands
+        this.sectionLoaded = false;
         this.notesLoaded = false;
         this.userLogged = false;
-        this.sectionId = null;
+        this.section_id = null;
+        this.paragraphs = null;
 
-
-        // when layout is complete add numbers for paragraph controls
-        this.listenTo(Backbone, 'layoutComplete', function() {
-            this.sectionId = app.models.section.get('id');
+        // Reset vars on section change
+        this.listenTo(Backbone, 'routedToSection', function() {
+            this.sectionLoaded = false;
+            this.notesLoaded = false;
         });
-
-        this.listenTo(Backbone, 'notesLoaded', function(params) {
-            this.notesLoaded = true;
-            this.render();
-        });
-
 
         // We must wait for the section to load before setting up the account hook
         this.listenTo(Backbone, 'sectionLoaded', function() {
             this.sectionLoaded = true;
+            this.render();
+        });
+
+        // This happens after sectionLoaded
+        // TODO: We might not need this...?
+        this.listenTo(Backbone, 'layoutComplete', function() {
+            this.section_id = app.models.section.get('id');
+            this.render();
+        });
+
+        // Notes will not be loaded if the user is not logged in
+        this.listenTo(Backbone, 'notesLoaded', function(params) {
+            this.notesLoaded = true;
             this.render();
         });
 
@@ -34,15 +43,15 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         // Whenever something happens to the account, try to reload the notes
         // See ToolbarAccountView.js for more info
         this.listenTo(Backbone, 'accountReady accountStateChanged', function() {
+            $('[id^="paragraph-"]').popover('destroy');
             this.userLogged = app.account.get('id') > 0;
             this.render();
         });
 
-
         // Clicking on the disc enables the popover
         this.listenTo(Backbone, 'paragraphButtonClicked', function(data) {
             this.togglePopover(data);
-            this.getCitation(data);           
+            this.getCitation(data); // call 2nd since it targets jquery elements
         });
 
         // When the user scrolls, destroy the popover
@@ -55,24 +64,34 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
     render: function() {
 
+        console.log('sL: ' + this.sectionLoaded +', uL: ' + this.userLogged + ', nL: ' + this.notesLoaded);
+
         // Force re-load of Notes, see ../../../collections/NotesCollection.js
         if( this.userLogged && this.sectionLoaded && !this.notesLoaded ) {
+
             var section_id = app.models.section.id;
             app.collections.notes.getNotesForSection( section_id );
+        
         }
 
-        // This is the final check; based on log-in status, this toggles the notes
-        if ( this.userLogged && this.notesLoaded) {
+        // This is the final check; this will show the controls
+        if( this.sectionLoaded ) {
 
             this.paragraphs = $('.content-paragraph');
             this.addParagraphControls();
 
-        }else{
+        }
 
+        // Alt code: this destroys the controls on logout
+
+        /*
+        if ( this.userLogged && this.notesLoaded) {
+            // see above
+        }else{
             $('[id^="paragraph-"]').popover('destroy');
             $('.paragraph-controls').remove();
-
         }
+        */
 
         return this;
 
@@ -85,16 +104,24 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
         _.each(this.paragraphs, function(paragraph) {
             
-            /// Make sure that there no redundant paragraphControls if this is called twice
+            // Remove previous .paragraph-controls if this is called twice
             $('.paragraph-controls[data-osci_content_id="osci-content-' + i + '"]' ).remove();
 
-            var note = this.checkForNote({
-                content_id: 'osci-content-'+i,
-                section_id: this.sectionId,
-                paragraph_number: i
-            });
+            var hasNotes = ''; // determines if the dot is red
 
-            var hasNotes = note.get('note') ? 'withNotes' : '';
+            if( this.notesLoaded ) {
+
+                // This will find the note or return false if notesLoaded is false
+                var note = this.checkForNote({
+                    content_id: 'osci-content-'+i,
+                    section_id: this.section_id,
+                    paragraph_number: i
+                });
+
+                hasNotes = note.get('note') ? 'withNotes' : '';
+
+            }
+
 
             $(paragraph).prepend(
                 '<div class="paragraph-controls hidden-print" data-osci_content_id="osci-content-'+i+'" data-paragraph_identifier="'+i+'" >'+
@@ -112,33 +139,42 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
     togglePopover: function (data) {
 
-        this.data = data; // id
+        var noteForm = false;
 
-        var note = this.checkForNote({
-            content_id: 'osci-content-'+ data,
-            section_id: this.sectionId,
-            paragraph_number: data
-        });
+        // Out goal is to return undefined for noteform if the notes are not available
+        if( this.notesLoaded && this.userLogged ) {
 
-        var popoverData = {
-            id: data,
-            cid: note.cid,
-            noteText: noteText,
-            sectionId: this.sectionId,
-            contentId: 'osci-content-'+data,
-            paragraph_number: data
-        };
+            // Returns false if notes not loaded; else returns existing note or new note
+            var note = this.checkForNote({
+                content_id: 'osci-content-'+ data,
+                section_id: this.section_id,
+                paragraph_number: data
+            });
 
-        var noteText = note  ? note.get('note') : '';
-            noteText = noteText === null  ? '' : noteText;
+            var noteText = note  ? note.get('note') : '';
+                noteText = noteText === null  ? '' : noteText;
 
-        var noteForm = this.templateNotes({paragraph_number: note.get('paragraph_number'), note: noteText, cid: note.cid});
+            var popoverData = {
+                id: data,
+                cid: note.cid,
+                noteText: noteText,
+                sectionId: this.section_id,
+                contentId: 'osci-content-'+data,
+                paragraph_number: data
+            };
+
+            var noteForm = this.templateNotes({
+                paragraph_number: note.get('paragraph_number'),
+                note: noteText,
+                cid: note.cid
+            });
+
+        }
 
         // Unfortunately, FireFox requires tooltip placement to be on top rather than right
         var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
-        var notePlacement = is_firefox ? 'top' : 'right';
-        
-
+        var placement = is_firefox ? 'top' : 'right';
+       
         var popover = this.template({
             'noteForm' : noteForm,
             'citation' : this.citation
@@ -147,12 +183,13 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         $('#paragraph-'+data).popover({
             'html' : true,
             'trigger' : 'manual',
-            'placement' : notePlacement, // see FireFox hotfix above
+            'placement' : placement, // see FireFox hotfix above
             'container' : 'body', // avoid overflow: hidden cutoff
             'content' : popover
         });
 
         // Set focus on the Notes textarea once the popover has toggled
+        // Should auto-fail if the area doesn't exist
         $('#paragraph-'+data).on('shown.bs.popover', function() {
             $('#' + $(this).attr('aria-describedby') ).find('textarea').focus();
         });
@@ -163,7 +200,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         //step through paragraphs and destroy existing open popovers
         var i = 1;
         _.each(this.paragraphs, function(paragraph) {
-            if (this.data != i) {
+            if ( data != i ) {
                 $('#paragraph-'+i).popover('destroy');
             }
             i++;
@@ -188,12 +225,15 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             }
 
         } else {
+
             note = new OsciTk.models.Note({
                 content_id: data.content_id,
                 section_id: data.section_id,
                 paragraph_number: data.paragraph_number
             });
+
             app.collections.notes.add(note);
+
         }
 
         return note;
@@ -215,6 +255,8 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             'element_id': contentId,
             'field': 'body'
         };
+
+        console.log( citationRequestParams);
 
         $.ajax({
             url: app.config.get('endpoints').OsciTkCitation,
@@ -238,7 +280,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
                     data.citation.rights = data.citation.rights ? data.citation.rights : '';
                     data.citation.title = data.citation.title ? data.citation.title : '';
 
-                    $('#cite').html(citationView.templateCites(data.citation));
+                    $('#cite-target').html(citationView.templateCites(data.citation));
 
                 }
             }
