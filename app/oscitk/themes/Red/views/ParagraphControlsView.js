@@ -14,6 +14,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
         // Reset vars on section change
         this.listenTo(Backbone, 'routedToSection', function() {
+            $('[id^="paragraph-"]').popover('destroy');
             this.sectionLoaded = false;
             this.notesLoaded = false;
         });
@@ -43,9 +44,15 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         // Whenever something happens to the account, try to reload the notes
         // See ToolbarAccountView.js for more info
         this.listenTo(Backbone, 'accountReady accountStateChanged', function() {
+            
             $('[id^="paragraph-"]').popover('destroy');
+            //app.collections.notes.reset();
+
             this.userLogged = app.account.get('id') > 0;
+            this.notesLoaded = this.notesLoaded ? this.userLogged : this.notesLoaded;
+
             this.render();
+
         });
 
         // Clicking on the disc enables the popover
@@ -64,7 +71,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
     render: function() {
 
-        console.log('sL: ' + this.sectionLoaded +', uL: ' + this.userLogged + ', nL: ' + this.notesLoaded);
+        //console.log('sL: ' + this.sectionLoaded +', uL: ' + this.userLogged + ', nL: ' + this.notesLoaded);
 
         // Force re-load of Notes, see ../../../collections/NotesCollection.js
         if( this.userLogged && this.sectionLoaded && !this.notesLoaded ) {
@@ -109,7 +116,9 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
             var hasNotes = ''; // determines if the dot is red
 
-            if( this.notesLoaded ) {
+            if( this.userLogged && this.notesLoaded ) {
+
+                //console.log( "Everything is in order." );
 
                 // This will find the note or return false if notesLoaded is false
                 var note = this.checkForNote({
@@ -117,6 +126,8 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
                     section_id: this.section_id,
                     paragraph_number: i
                 });
+
+                //console.log( note );
 
                 hasNotes = note.get('note') ? 'withNotes' : '';
 
@@ -196,7 +207,6 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
         $('#paragraph-'+data).popover('toggle');
 
-
         //step through paragraphs and destroy existing open popovers
         var i = 1;
         _.each(this.paragraphs, function(paragraph) {
@@ -213,13 +223,15 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         var note;
         var notes = app.collections.notes.where({content_id: data.content_id});
 
-        if (notes[0]) {
+        if ( notes[0] ) {
+
             note = notes[0];
 
             // Clean-up: destroy note if it's blank
             // See also noteSubmit in SectionView.js
             // This might throw an error; not sure why
             // See Error in NotesCollection.js
+
             if( note.get('note') === '' ) {
                 note.destroy();
             }
@@ -256,7 +268,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             'field': 'body'
         };
 
-        console.log( citationRequestParams);
+        //console.log( citationRequestParams);
 
         $.ajax({
             url: app.config.get('endpoints').OsciTkCitation,
