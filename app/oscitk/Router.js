@@ -11,7 +11,10 @@ OsciTk.router = Backbone.Router.extend({
     },
 
 	routeToSection: function(section_id, identifier) {
-		Backbone.trigger('routedToSection', {section_id: section_id, identifier: identifier});
+		Backbone.trigger('routedToSection', {
+            section_id: section_id,
+            identifier: identifier
+        });
 	},
 
     _trackPageView: function() {

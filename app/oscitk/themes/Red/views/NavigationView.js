@@ -246,10 +246,47 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		
 			//console.log( gotoPage, gotoPage < 1 );
 
+			// If navigating too far, table of contents no longer works
+			var navigateRestoreToolbar = function( route ) {
+				
+				var $toolbar = app.views.toolbarView.$el;
+				var $activeItem = $toolbar.find('#toolbar-area > li.active');
+				var restoreItem = $activeItem.length > 0;
+
+
+				if( restoreItem ) {
+					var activeToolbarItemClass = $activeItem.attr('class').match(/(:?\s)(.+?-toolbar-item)(:?\s|$)/)[2];
+				}
+
+
+				Backbone.trigger("toolbarRemoveViews");
+				app.router.navigate( route, { trigger: true } );
+
+				if( restoreItem ) {
+					console.log( $toolbar.find( '.' + activeToolbarItemClass ) );
+					$toolbar.find( '.' + activeToolbarItemClass ).click();
+				}
+
+			};
+
 			if( gotoPage < 1 && previous ) {
-				app.router.navigate("section/" + previous.id + "/end", { trigger: true } );
+
+
+				navigateRestoreToolbar( "section/" + previous.id + "/end" );
+				/*
+				Backbone.trigger("toolbarRemoveViews");
+				app.router.navigate( "section/" + previous.id + "/end", { trigger: true } );
+				*/
+
 			} else if( gotoPage > this.numPages && next ) {
+
+			navigateRestoreToolbar( "section/" + next.id );
+
+			/*
+				Backbone.trigger("toolbarRemoveViews");
 				app.router.navigate("section/" + next.id, { trigger: true } ) ;
+			*/
+
 			} else {
 				// This is the only time when scrolling is allowed
 				$target.scrollLeft( page_width * ( gotoPage - 1 ) );

@@ -145,7 +145,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         var that = this;
 
         // Now resize figures to the correct height
-        $('figure').each( function( i, e ) {
+        this.$el.find('figure').each( function( i, e ) {
 
             // Shorthand heirarchy
             var $s = $('#section');

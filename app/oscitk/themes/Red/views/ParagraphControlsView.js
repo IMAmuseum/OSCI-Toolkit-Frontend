@@ -221,7 +221,9 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
     checkForNote: function (data) {
 
         var note;
-        var notes = app.collections.notes.where({content_id: data.content_id});
+        var notes = app.collections.notes.where({
+            content_id: data.content_id
+        });
 
         if ( notes[0] ) {
 

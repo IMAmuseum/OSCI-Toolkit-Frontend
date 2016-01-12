@@ -34,6 +34,8 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 
 		this.$target = $(e.target);
 
+		//console.log( this.$target );
+
 		// toggle active class
 		this.$target.addClass('active');
 
@@ -69,7 +71,10 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		}, this);
 
 		// triggered in AppView.js
-		Backbone.trigger("toolbarItemClicked", {item : this.options.toolbarItem, active: this.active} );
+		Backbone.trigger("toolbarItemClicked", {
+			item : this.options.toolbarItem,
+			active: this.active
+		});
 
 	}
 
