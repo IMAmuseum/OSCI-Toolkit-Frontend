@@ -56,11 +56,13 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
             $('#section').attr('data-columns-setting', columnCount );
 
-            this.renderColumns();
+            // We're doing this through windowResized to trigger LayeredImage re-centering
+            Backbone.trigger( 'windowResized' );
 
         });
 
         // Set maximum height on figures to make sure they don't overflow their columns
+        // Also re-centers LayeredImages
         this.listenTo(Backbone, 'windowResized', function() {
             this.renderColumns();
         });
