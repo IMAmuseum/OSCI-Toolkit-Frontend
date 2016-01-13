@@ -101,10 +101,10 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 		console.log( this.currentFontSize );
 
 		app.views.sectionView.$el.css({
-			"font-size": "18px"
+			"font-size": this.currentFontSize + "%";
 		});
 
-		// Backbone.trigger("windowResized");
+		Backbone.trigger("windowResized");
 
 	}
 
