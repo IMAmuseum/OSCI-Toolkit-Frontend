@@ -192,15 +192,30 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
             // In IE, figcaptions get pushed to next column if bottom: 0 is set
             // Therefore, we must set bottom: 0 here instead of in _figures.css
+            // Furthermore, position must be (re)set to absolute for calc,
+            //   but in ie, it will be set to relative later to avoid overflow
             if( !is_ie ) {
                 $c.css({
                     'bottom' : 0
                 });
+            }else{
+                $c.css({
+                    'position' : 'relative'
+                });
             }
+
+            setTimeout( function() {
+                var is_ie = detectIE();
+                if( is_ie ) {
+                    $c.css({
+                        'position' : 'relative'
+                    });
+                }
+            }, 250 );
 
             // Set the dimensions of .figure_content to fill the space, sans figcaption
             $d.css({
-                'height' : $f.innerHeight() - $c.outerHeight(true) - ( is_ie ? 50 : 10 ), // - 40 for IE ?
+                'height' : $f.innerHeight() - $c.outerHeight(true) - ( is_ie ? 80 : 10 ), // - 40 for IE ?
                 'width' : 'auto'
             });
 

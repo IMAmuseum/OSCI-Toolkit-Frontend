@@ -8850,7 +8850,7 @@ body {
 /* line 49, ../_section.scss */
 #section #default-section-view {
   overflow: hidden;
-  text-align: justify;
+  text-align: left;
   		/*
   		-webkit-columns: 2 300px;
   		   -moz-columns: 2 300px;
