@@ -1,7 +1,9 @@
 OsciTk.views.App = OsciTk.views.BaseView.extend({
 	id: 'reader',
 	template: OsciTk.templateManager.get('app'),
-
+    events: {
+        //'click #note-submit': 'noteSubmit'
+    },
 	initialize: function() {
 		this.render();
 
@@ -131,6 +133,8 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 		}, this);
 
-	}
+	},
+
+
 
 });

@@ -201,8 +201,13 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
         // Set focus on the Notes textarea once the popover has toggled
         // Should auto-fail if the area doesn't exist
+        // Also binds the noteSubmit event, since the button is ready
+        var that = this;
         $('#paragraph-'+data).on('shown.bs.popover', function() {
             $('#' + $(this).attr('aria-describedby') ).find('textarea').focus();
+            $('#note-submit').on('click', function(e) {
+                that.noteSubmit(e);
+            });
         });
 
         $('#paragraph-'+data).popover('toggle');
@@ -299,6 +304,47 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
                 }
             }
         });
-    }
+    },
+
+
+    // CALLED WHEN THE USER HITS THE SUBMIT NOTES BUTTON
+    noteSubmit: function(e) {
+
+        //console.log( 'noteSubmit' );
+
+        var textarea = $(e.currentTarget).parent().find('textarea');
+        var noteText = textarea.val();
+
+        var cid = textarea.data('id');
+        var paragraph_number = textarea.data('paragraph_number');
+
+        var note = app.collections.notes.get(cid);
+            note.set('note', noteText);
+
+        // Check to see if the red dot needs to be toggled
+        if ( $.trim(noteText) !== '') {
+
+            note.save();
+            textarea.html(noteText);
+            $('#paragraph-'+paragraph_number).addClass('withNotes');
+
+        }else{
+
+            note.destroy();
+            $('#paragraph-'+paragraph_number).removeClass('withNotes');
+
+        }
+
+        $('#paragraph-'+paragraph_number).popover({
+
+            content: function() {
+                return $("#popover-content").html();
+            }
+            
+        });
+
+        $('#paragraph-'+paragraph_number).popover('destroy');
+
+    },
 
 });

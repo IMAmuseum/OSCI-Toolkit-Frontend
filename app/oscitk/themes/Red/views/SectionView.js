@@ -2,10 +2,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     id: 'default-section-view',
     template: OsciTk.templateManager.get('section'),
     events: {
-        //'click .content-paragraph': 'paragraphClicked',
-        'click .paragraph-button': 'paragraphButtonClicked',
-        'click #note-submit': 'noteSubmit',
-        'click #cite': 'getCitation',
+        'click .paragraph-button': 'paragraphButtonClicked'
     },
     initialize: function(options) {
 
@@ -409,42 +406,5 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         return true;
     },
 
-    // CALLED WHEN THE USER HITS THE SUBMIT NOTES BUTTON
-    noteSubmit: function(e) {
-
-        var textarea = $(e.currentTarget).parent().find('textarea');
-        var noteText = textarea.val();
-
-        var cid = textarea.data('id');
-        var paragraph_number = textarea.data('paragraph_number');
-
-        var note = app.collections.notes.get(cid);
-            note.set('note', noteText);
-
-        // Check to see if the red dot needs to be toggled
-        if ( $.trim(noteText) !== '') {
-
-            note.save();
-            textarea.html(noteText);
-            $('#paragraph-'+paragraph_number).addClass('withNotes');
-
-        }else{
-
-            note.destroy();
-            $('#paragraph-'+paragraph_number).removeClass('withNotes');
-
-        }
-
-        $('#paragraph-'+paragraph_number).popover({
-
-            content: function() {
-                return $("#popover-content").html();
-            }
-            
-        });
-
-        $('#paragraph-'+paragraph_number).popover('destroy');
-
-    },
 
 });
