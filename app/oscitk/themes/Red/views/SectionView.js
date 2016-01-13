@@ -231,7 +231,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
             if( is_firefox ) {
                 //console.log( 'I am firefox!' );
-                $c.before( $d );
+                $d.before( $c );
             }
 
             // Layered image init
