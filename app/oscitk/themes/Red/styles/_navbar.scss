@@ -29,6 +29,14 @@ body {
 				width: calc( 100% - 86px - 87px );
 			}
 
+			// FireFox hotfix
+			&.ff {
+				width: calc( 100% - 86px - 119px );
+				@media ( max-width: 767px ) {
+					width: calc( 100% - 86px );
+				}
+			}
+
 		}
 
 		#osci-navbar-text {

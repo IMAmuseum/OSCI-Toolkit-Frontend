@@ -116,17 +116,24 @@ return __p
 
 this["JST"]["app/oscitk/themes/Red/templates/navbar.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<nav class="navbar navbar-default">\n\t<div class="container-fluid">\n\n        <!-- Page number readout -->\n        <div class="pull-left" id="osci-navbar-text">' +
 ((__t = ( curPage )) == null ? '' : __t) +
 '/' +
 ((__t = ( numPages )) == null ? '' : __t) +
-'</div>\n\n        <!-- Page progress slider -->\n        <input class="pull-left" id="osci-page-slider" type="range" min="1" max="' +
+'</div>\n\n        <!-- Page progress slider -->\n        <input \n            class="pull-left ' +
+((__t = ( is_firefox ?  'ff' : '' )) == null ? '' : __t) +
+'"\n            id="osci-page-slider"\n            type="range"\n            min="1"\n            max="' +
 ((__t = ( numPages )) == null ? '' : __t) +
 '" value="' +
 ((__t = ( curPage )) == null ? '' : __t) +
-'" />\n\n        <!-- Two-page spread vs. single column -->\n        <div class="pull-right hidden-xs" id="osci-spread-selector">\n          <a href="javascript:;" id="osci-spread-single"><img src="images/one_column_icon.png" /></a>\n          <a href="javascript:;" id="osci-spread-double"><img src="images/two_column_icon.png" /></a>\n        </div>\n\n        <!-- Font size area selector -->\n        <ul class="pull-right" id="font-size-area">\n            <li><a id="font-size-larger" href="javascript:;" class="font-button">A+</a></li>\n            <li><a id="font-size-smaller" href="javascript:;" class="font-button">A-</a></li>\n        </ul>\n\n\t</div>\n</nav>';
+'" \n        />\n\n        <!-- Two-page spread vs. single column -->\n        <div class="pull-right hidden-xs" id="osci-spread-selector">\n          <a href="javascript:;" id="osci-spread-single"><img src="images/one_column_icon.png" /></a>\n          <a href="javascript:;" id="osci-spread-double"><img src="images/two_column_icon.png" /></a>\n        </div>\n\n        ';
+ if( !is_firefox ) { ;
+__p += '\n\n        <!-- Font size area selector -->\n        <ul class="pull-right" id="font-size-area">\n            <li><a id="font-size-larger" href="javascript:;" class="font-button">A+</a></li>\n            <li><a id="font-size-smaller" href="javascript:;" class="font-button">A-</a></li>\n        </ul>\n\n        ';
+ } ;
+__p += '\n\n\t</div>\n</nav>';
 
 }
 return __p

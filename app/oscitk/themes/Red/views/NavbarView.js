@@ -35,10 +35,16 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 
 	render: function() {
 
+		// I don't like doing this, but FireFox has some known bugs with FontSize changes
+		// We we're going to disable the font-size selector until they are resolved
+		// There might be possible workarounds, but it seems best to wait
+        var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+
 		// Render basic template
 		this.$el.html( this.template( {
 			numPages: this.numPages,
-			curPage: this.curPage
+			curPage: this.curPage,
+			is_firefox: is_firefox
 		} ) );
 
 		var that = this;

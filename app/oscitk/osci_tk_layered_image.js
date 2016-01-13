@@ -1578,5 +1578,5 @@ function liMouseup(e) {
 }
 
 // bind the mouse events for asset dragging and viewfinder updating
-//window.addEventListener("mousemove", liMousemove, false);
-//window.addEventListener("mouseup", liMouseup, false);
+window.addEventListener("mousemove", liMousemove, false);
+window.addEventListener("mouseup", liMouseup, false);

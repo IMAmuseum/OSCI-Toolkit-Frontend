@@ -9419,18 +9419,28 @@ body {
     width: calc( 100% - 86px - 87px );
   }
 }
-/* line 34, ../_navbar.scss */
+/* line 33, ../_navbar.scss */
+#navbar nav #osci-page-slider.ff {
+  width: calc( 100% - 86px - 119px );
+}
+@media (max-width: 767px) {
+  /* line 33, ../_navbar.scss */
+  #navbar nav #osci-page-slider.ff {
+    width: calc( 100% - 86px );
+  }
+}
+/* line 42, ../_navbar.scss */
 #navbar nav #osci-navbar-text {
   padding: 9px 15px;
 }
-/* line 38, ../_navbar.scss */
+/* line 46, ../_navbar.scss */
 #navbar nav #font-size-area {
   list-style-type: none;
   margin: 0;
   font-size: 18px;
   padding: 10px 15px;
 }
-/* line 45, ../_navbar.scss */
+/* line 53, ../_navbar.scss */
 #navbar nav #font-size-area li {
   display: inline-block;
   margin: 0px 4px;
