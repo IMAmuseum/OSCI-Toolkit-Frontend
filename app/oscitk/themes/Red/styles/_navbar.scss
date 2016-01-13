@@ -40,7 +40,12 @@ body {
 			margin: 0;
 
 			font-size: 18px;
-			padding: 10px 15px;
+			padding: 10px 15px; 
+
+			li {
+				display: inline-block;
+				margin: 0px 4px;
+			}
 		}
 
 	}

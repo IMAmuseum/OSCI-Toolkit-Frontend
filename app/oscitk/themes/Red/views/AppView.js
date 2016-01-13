@@ -27,8 +27,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 			navigationView: new OsciTk.views.Navigation(),
 
-			navbarView: new OsciTk.views.Navbar(),
-			fontSizeView: new OsciTk.views.FontSize(),
+			navbarView: new OsciTk.views.Navbar(),			
 
 			toolbarView: new OsciTk.views.Toolbar(),
 			tocToolbarView: new OsciTk.views.TocToolbar(),

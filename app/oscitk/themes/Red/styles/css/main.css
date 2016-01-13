@@ -9430,6 +9430,11 @@ body {
   font-size: 18px;
   padding: 10px 15px;
 }
+/* line 45, ../_navbar.scss */
+#navbar nav #font-size-area li {
+  display: inline-block;
+  margin: 0px 4px;
+}
 
 /* line 19, ../_navbar-slider.scss */
 input[type=range] {
@@ -10238,6 +10243,7 @@ images.image_opaque {
 /* line 89, ../_paragraph-popover.scss */
 #cite-target {
   height: 160px;
+  width: 182px;
 }
 
 /* line 1, ../_note-form.scss */

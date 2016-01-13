@@ -79,16 +79,6 @@ __p += '&ldquo;<em>' +
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Red/templates/font-size.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<a href="#font-larger" class="larger font-button" data-href="font-larger" data-style="inline">A+</a>&nbsp;\n<a href="#font-smaller" class="smaller font-button" data-href="font-smaller" data-style="inline">A-</a>';
-
-}
-return __p
-};
-
 this["JST"]["app/oscitk/themes/Red/templates/font.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -136,7 +126,7 @@ __p += '<nav class="navbar navbar-default">\n\t<div class="container-fluid">\n\n
 ((__t = ( numPages )) == null ? '' : __t) +
 '" value="' +
 ((__t = ( curPage )) == null ? '' : __t) +
-'" />\n\n        <!-- Two-page spread vs. single column -->\n        <div class="pull-right hidden-xs" id="osci-spread-selector">\n          <a href="javascript:;" id="osci-spread-single"><img src="images/one_column_icon.png" /></a>\n          <a href="javascript:;" id="osci-spread-double"><img src="images/two_column_icon.png" /></a>\n        </div>\n\n        <!-- Font size area selector -->\n        <ul class="pull-right" id="font-size-area"></ul>\n\n\t</div>\n</nav>';
+'" />\n\n        <!-- Two-page spread vs. single column -->\n        <div class="pull-right hidden-xs" id="osci-spread-selector">\n          <a href="javascript:;" id="osci-spread-single"><img src="images/one_column_icon.png" /></a>\n          <a href="javascript:;" id="osci-spread-double"><img src="images/two_column_icon.png" /></a>\n        </div>\n\n        <!-- Font size area selector -->\n        <ul class="pull-right" id="font-size-area">\n            <li><a id="font-size-larger" href="javascript:;" class="font-button">A+</a></li>\n            <li><a id="font-size-smaller" href="javascript:;" class="font-button">A-</a></li>\n        </ul>\n\n\t</div>\n</nav>';
 
 }
 return __p
