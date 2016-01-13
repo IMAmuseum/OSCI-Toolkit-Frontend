@@ -10254,6 +10254,9 @@ images.image_opaque {
 #cite-target {
   height: 160px;
   width: 182px;
+  background-image: url(../../images/ajax-loader.gif);
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 /* line 1, ../_note-form.scss */

@@ -87,6 +87,12 @@ $popover-height: 160px;
 
 // AJAX messes up popover height 
 #cite-target {
+
 	height: 160px;
 	width: 182px;
+
+	background-image: url(../../images/ajax-loader.gif);
+	background-position: center center;
+	background-repeat: no-repeat;
+
 }

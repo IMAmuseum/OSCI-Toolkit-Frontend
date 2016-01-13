@@ -58,7 +58,6 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         // Clicking on the disc enables the popover
         this.listenTo(Backbone, 'paragraphButtonClicked', function(data) {
             this.togglePopover(data);
-            this.getCitation(data); // call 2nd since it targets jquery elements
         });
 
         // When the user scrolls, destroy the popover
@@ -204,11 +203,21 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         // Also binds the noteSubmit event, since the button is ready
         var that = this;
         $('#paragraph-'+data).on('shown.bs.popover', function() {
+
+            // Creates the little citation scrollbox
+            that.getCitation(data);
+
+            // Auto-focus on notes if it exists
             $('#' + $(this).attr('aria-describedby') ).find('textarea').focus();
+
+            // Bind "Submit note" button
             $('#note-submit').on('click', function(e) {
                 that.noteSubmit(e);
             });
 
+
+            // Remove popover if there is a click outside the popover
+            /*
             var that = this;
             $('html').one('click', function(e) {
                 $target = $(e.currentTarget);
@@ -218,6 +227,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
                     $popover.popover('destroy');
                 }
             });
+            */
 
         });
 
