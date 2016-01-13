@@ -43,6 +43,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 				// go to first section
 				var sectionId = app.collections.navigationItems.at(0).id;
+				//console.log( sectionId + " asdf"); //asdf
 				app.router.navigate("section/" + sectionId, { trigger: false } );
 				this.setCurrentNavigationItem( sectionId );
 
@@ -50,12 +51,14 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 				// if the first load is via #section/[id]
 				if( this.getCurrentNavigationItem() === null ) {
+					//console.log( data.section_id + " abba" );
 					this.setCurrentNavigationItem( data.section_id );
 				}else{
 
 					// trigger a nav item change *only* if it's a new section
 					// no need to re-render everything if we're staying put...
 					if( data.section_id !== this.getCurrentNavigationItem().get('id') ) {
+						//console.log( data.section_id + " wert" );
 						this.setCurrentNavigationItem( data.section_id );
 					}else{
 						waitForSection = false;
@@ -226,6 +229,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
             // TODO: maybe alert the user that they had an invalid link?
             if( typeof gotoPage === 'undefined') {
             	gotoPage = this.page;
+            	//console.log( this.getCurrentNavigationItem().get('id') + " jkl;");
             	app.router.navigate("section/" + this.getCurrentNavigationItem().get('id'), { trigger: true } );
             }
 
@@ -258,6 +262,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 					var activeToolbarItemClass = $activeItem.attr('class').match(/(:?\s)(.+?-toolbar-item)(:?\s|$)/)[2];
 				}
 
+				//console.log( route );
 
 				Backbone.trigger("toolbarRemoveViews");
 				app.router.navigate( route, { trigger: true } );
@@ -273,19 +278,23 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 
 				navigateRestoreToolbar( "section/" + previous.id + "/end" );
+
 				/*
 				Backbone.trigger("toolbarRemoveViews");
 				app.router.navigate( "section/" + previous.id + "/end", { trigger: true } );
 				*/
 
-			} else if( gotoPage > this.numPages && next ) {
+			// Note that we must wait for calculatePages to run in order to get this.numPages
+			} else if( gotoPage > this.numPages && this.numPages && next ) {
 
-			navigateRestoreToolbar( "section/" + next.id );
+				//console.log( gotoPage, this.numPages, next );
 
-			/*
+				navigateRestoreToolbar( "section/" + next.id );
+
+				/*
 				Backbone.trigger("toolbarRemoveViews");
 				app.router.navigate("section/" + next.id, { trigger: true } ) ;
-			*/
+				*/
 
 			} else {
 				// This is the only time when scrolling is allowed
