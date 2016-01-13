@@ -268,7 +268,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 				app.router.navigate( route, { trigger: true } );
 
 				if( restoreItem ) {
-					console.log( $toolbar.find( '.' + activeToolbarItemClass ) );
+					//console.log( $toolbar.find( '.' + activeToolbarItemClass ) );
 					$toolbar.find( '.' + activeToolbarItemClass ).click();
 				}
 
@@ -297,6 +297,11 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 				*/
 
 			} else {
+
+				// We will need to account for column offset
+				var cc = $('#section').attr('data-columns-rendered');
+					cc = cc ? cc : $('#section').attr('data-columns-setting');
+
 				// This is the only time when scrolling is allowed
 				$target.scrollLeft( page_width * ( gotoPage - 1 ) );
 
@@ -352,22 +357,40 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	// Mostly updates the arrow button links to navigate to the right page
 	update: function(page) {
 
-		//console.log( 'updating' );
+		var $prev = this.$el.find('.prev-page');
+		var $next = this.$el.find('.next-page');
+
+
 
 		// unbind both controls to start
-		this.$el.find('.prev-page').unbind('click');
-		this.$el.find('.next-page').unbind('click');
+		$prev.unbind('click');
+		$next.unbind('click');
 
 		var previous = this.currentNavigationItem.get('previous');
 		var next = this.currentNavigationItem.get('next');
 		
-		this.$el.find('.prev-page').removeClass('inactive').click(function () {
+		// First, just bind each button to move the page
+		$prev.removeClass('inactive').click(function () {
 			Backbone.trigger('navigate', { page: page-1 } );
 		});
 
-		this.$el.find('.next-page').removeClass('inactive').click(function () {
+		$next.removeClass('inactive').click(function () {
 			Backbone.trigger('navigate', { page: page+1 } );
 		});
+
+		// Wait until we have info about total and current page
+		// Will never be false unless null, i.e. not yet calculated
+		if( this.numPages && this.page ) {
+
+			if( !previous && this.page === 1 ) {
+				$prev.addClass('inactive').off('click');
+			}
+
+			if( !next && this.page === this.numPages ) {
+				$next.addClass('inactive').off('click');
+			}
+
+		}
 
 	},
 

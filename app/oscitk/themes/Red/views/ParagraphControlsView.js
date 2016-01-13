@@ -208,6 +208,17 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             $('#note-submit').on('click', function(e) {
                 that.noteSubmit(e);
             });
+
+            var that = this;
+            $('html').one('click', function(e) {
+                $target = $(e.currentTarget);
+                $popover = $('#paragraph-'+data);
+                if( $target.parents( ).is( $target ) ) {
+                    console.log( $popover, $target );
+                    $popover.popover('destroy');
+                }
+            });
+
         });
 
         $('#paragraph-'+data).popover('toggle');
