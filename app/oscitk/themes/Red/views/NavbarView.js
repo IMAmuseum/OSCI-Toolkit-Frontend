@@ -76,7 +76,7 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 
 	fontLarger: function() {
 
-		console.log( 'large clicked');
+		//console.log( 'large clicked');
 
 		if( this.currentFontSize < 200 ) {
 			this.currentFontSize += 10;
@@ -87,7 +87,7 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 
 	fontSmaller: function() {
 		
-		console.log( 'small clicked');
+		//console.log( 'small clicked');
 
 		if( this.currentFontSize > 50 ) {
 			this.currentFontSize -= 10;
@@ -98,10 +98,10 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 
 	changeFontSize: function() {
 		
-		console.log( this.currentFontSize );
+		//console.log( this.currentFontSize );
 
 		app.views.sectionView.$el.css({
-			"font-size": this.currentFontSize + "%";
+			"font-size": this.currentFontSize + "%"
 		});
 
 		Backbone.trigger("windowResized");

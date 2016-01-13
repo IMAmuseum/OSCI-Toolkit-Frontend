@@ -295,7 +295,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             _ch = ch;
              ch = this.$el.height();
             
-             console.log( _ch, ch );
+            // console.log( _ch, ch );
 
             i+=1;
 
