@@ -147,7 +147,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
     },
 
-    togglePopover: function (data) {
+    togglePopover: function (id) {
 
         var noteForm = false;
 
@@ -156,21 +156,21 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
             // Returns false if notes not loaded; else returns existing note or new note
             var note = this.checkForNote({
-                content_id: 'osci-content-'+ data,
+                content_id: 'osci-content-'+ id,
                 section_id: this.section_id,
-                paragraph_number: data
+                paragraph_number: id
             });
 
             var noteText = note  ? note.get('note') : '';
                 noteText = noteText === null  ? '' : noteText;
 
             var popoverData = {
-                id: data,
+                id: id,
                 cid: note.cid,
                 noteText: noteText,
                 sectionId: this.section_id,
-                contentId: 'osci-content-'+data,
-                paragraph_number: data
+                contentId: 'osci-content-'+id,
+                paragraph_number: id
             };
 
             var noteForm = this.templateNotes({
@@ -190,7 +190,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             'citation' : this.citation
         });
 
-        $('#paragraph-'+data).popover({
+        $('#paragraph-'+id).popover({
             'html' : true,
             'trigger' : 'manual',
             'placement' : placement, // see FireFox hotfix above
@@ -198,14 +198,15 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             'content' : popover
         });
 
+
         // Set focus on the Notes textarea once the popover has toggled
         // Should auto-fail if the area doesn't exist
         // Also binds the noteSubmit event, since the button is ready
         var that = this;
-        $('#paragraph-'+data).on('shown.bs.popover', function() {
+        $('#paragraph-'+id).on('shown.bs.popover', function(e) {
 
             // Creates the little citation scrollbox
-            that.getCitation(data);
+            that.getCitation(id);
 
             // Auto-focus on notes if it exists
             $('#' + $(this).attr('aria-describedby') ).find('textarea').focus();
@@ -216,27 +217,38 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             });
 
 
+
             // Remove popover if there is a click outside the popover
-            /*
-            var that = this;
-            $('html').one('click', function(e) {
-                $target = $(e.currentTarget);
-                $popover = $('#paragraph-'+data);
-                if( $target.parents( ).is( $target ) ) {
-                    console.log( $popover, $target );
-                    $popover.popover('destroy');
+            // $('html').one() wrapper that rebinds until success
+            var selfbound = function(e) {
+
+                $target = $(e.target);
+                $button = $('#paragraph-'+id);
+                $popover = $('#' + $button.attr('aria-describedby') );
+
+                // If the two DOM elements are not the same...
+                if( $target.get(0) !== $popover.get(0) ) {
+
+                    // If the target is not a descendant of popover...
+                    if( $popover.find($target).length < 1  ) {
+                        $button.popover('destroy');
+                    }else{
+                        $('html').one('click', selfbound );
+                    }
                 }
-            });
-            */
+            };
+
+            $('html').one('click', selfbound );
+
 
         });
 
-        $('#paragraph-'+data).popover('toggle');
+        $('#paragraph-'+id).popover('toggle');
 
         //step through paragraphs and destroy existing open popovers
         var i = 1;
         _.each(this.paragraphs, function(paragraph) {
-            if ( data != i ) {
+            if ( id != i ) {
                 $('#paragraph-'+i).popover('destroy');
             }
             i++;
