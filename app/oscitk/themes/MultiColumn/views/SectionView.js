@@ -9,40 +9,55 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         // bind sectionChanged
         this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
+
             var that = this;
+
             $('body').append('<div id="loader">Loading...</div>');
 
             $('#loader').fadeTo(500, 0.7, function() {
 
                 if (navItem) {
+
                     // loading section content
                     app.models.section = new OsciTk.models.Section({
                         uri : navItem.get('uri'),
                         id : navItem.get('id')
                     });
 
+        
                     app.models.section.loadContent();
+                    
+                    // that.model / this.model is undefined unless you call this function!
                     that.changeModel(app.models.section);
+
                     that.render();
                 }
 
                 $('#loader').remove();
+
             });
+
         });
 
     },
     render: function() {
+
         //Allow subclasses to do something before we render
         if (this.preRender) {
             this.preRender();
         }
+
         //clean up the view incase we have already rendered this before
         this.model.removeAllPages();
         this.removeAllChildViews();
 
         Backbone.trigger("layoutStart");
+        
+        // Wrapper for render()
         this.renderContent();
-        Backbone.trigger("layoutComplete", {numPages : this.model.get('pages').length});
+
+        Backbone.trigger("layoutComplete", { numPages : this.model.get('pages').length } );
+
         return this;
     },
     onClose: function() {
@@ -74,9 +89,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         }
         return null;
     },
-    isElementVisible: function(element) {
-        return true;
-    },
+ 
     getPageForProcessing : function(id, newTarget) {
         var page;
 
@@ -87,6 +100,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 return page.isPageComplete() === false;
             });
 
+            //console.log( page );
+            
             if (page.length === 0) {
                 var pagesCollection = this.model.get('pages');
                 pagesCollection.add({
@@ -105,21 +120,27 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         return page;
     },
+
+    // MultiColumn: used by InlineNotesView
     getCurrentPageView: function() {
         // TODO: so the only possible child view of a section is a page???
         return this.getChildViewByIndex(app.views.navigationView.page - 1);
     },
+
     renderContent: function() {
+
         //basic layout just loads the content into a single page with scrolling
         var pageView = this.getPageForProcessing();
 
         //add the content to the view/model
-        pageView.addContent($(this.model.get('content')));
+        pageView.addContent( $(this.model.get('content') ) );
 
         //render the view
         pageView.render();
 
         //mark processing complete (not necessary, but here for example)
         pageView.processingComplete();
+
     }
+
 });

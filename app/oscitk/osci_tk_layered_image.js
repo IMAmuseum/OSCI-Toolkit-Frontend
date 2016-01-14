@@ -59,7 +59,7 @@ var LayeredImage = function(container) { // container should be a html element
     else {
         return false;
     }
-    if (org.polymaps !== undefined) {
+    if (org !== undefined && org.polymaps !== undefined) {
         this.polymaps = org.polymaps;
     }
     else {
@@ -812,7 +812,10 @@ LayeredImage.prototype.refreshViewfinder = function() {
     this.ui.viewfinder.height(vfHeight);
 
     //remove the viewfinderViewport if already added
-    if (this.ui.viewfinderViewport !== undefined) {
+    
+    //if (this.ui.viewfinderViewport !== undefined) {
+    //will fail if it's null. using truthy.
+    if (this.ui.viewfinderViewport ) {
         this.ui.viewfinderViewport.remove();
     }
     this.ui.viewfinderViewport = undefined;

@@ -1,0 +1,61 @@
+body {
+	margin-bottom: 50px;
+}
+
+#navbar {
+
+	position: fixed;
+	bottom: 0;
+
+	width: 100%;
+	height: 50px;
+
+	z-index: 998;
+
+	nav {
+
+		background-color: white;
+		border-top: 1px solid $color-light-grey;
+		
+		margin: 0px -15px;
+
+		#osci-page-slider {
+			padding: 18px 15px;
+
+			width: calc( 100% - 86px - 119px - 87px );
+
+			// Account for hidden font and layout selector
+			@media ( max-width: 767px ) {
+				width: calc( 100% - 86px - 87px );
+			}
+
+			// FireFox hotfix
+			&.ff {
+				width: calc( 100% - 86px - 119px );
+				@media ( max-width: 767px ) {
+					width: calc( 100% - 86px );
+				}
+			}
+
+		}
+
+		#osci-navbar-text {
+			padding: 9px 15px;
+		}
+
+		#font-size-area {
+			list-style-type: none;
+			margin: 0;
+
+			font-size: 18px;
+			padding: 10px 15px; 
+
+			li {
+				display: inline-block;
+				margin: 0px 4px;
+			}
+		}
+
+	}
+
+}

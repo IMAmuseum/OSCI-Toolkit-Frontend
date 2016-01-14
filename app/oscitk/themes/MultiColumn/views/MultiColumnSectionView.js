@@ -201,21 +201,28 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
         var paragraphNumber = 1;
         var paragraphsOnPage = 0;
         var itemsOnPage = 0;
+
         while(this.layoutData.items > 0 || this.unplacedFigures.length > 0) {
+
             var pageView = this.getPageForProcessing(undefined, "#pages");
             var layoutResults = null;
             var figureIds = [];
 
             if (!pageView.processingData.rendered) {
+                
                 itemsOnPage = 0;
                 paragraphsOnPage = 0;
                 pageView.render();
 
                 //load any unplaced figures
                 figureIds = figureIds.concat(this.unplacedFigures);
+
             }
 
             var content = $(this.layoutData.data[i]).clone();
+
+
+            // console.log( content );
 
             if (figureIds.length === 0 && content.length === 0) {
                 if (this.unplacedFigures.length) {
@@ -230,7 +237,9 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
             var numFigureLinks = figureLinks.length;
             var inlineFigures = content.find("figure");
             var numinlineFigures = inlineFigures.length;
+
             if (content.is("figure") || numFigureLinks || numinlineFigures || figureIds.length) {
+
                 var j;
 
                 if (content.is("figure")) {
@@ -435,9 +444,11 @@ OsciTk.views.MultiColumnSection = OsciTk.views.Section.extend({
 
 
         this.dimensions = dimensions;
+
         //set the height of the container
         //dont need this if styled correctly I think
         //this.$el.height(dimensions.pageHeight);
+
     },
 
     cleanData: function() {
