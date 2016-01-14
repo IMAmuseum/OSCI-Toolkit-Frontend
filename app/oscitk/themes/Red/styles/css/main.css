@@ -9277,11 +9277,11 @@ header .header-title .container .btn-menu, header .header-title .container-fluid
   padding: 5px 5px 10px 0px;
 }
 /* line 168, ../_toolbar.scss */
-#toolbar #toolbar-readout > div > div .toolbar-scroll a {
+#toolbar #toolbar-readout > div > div .toolbar-scroll a:not(.btn) {
   color: white;
 }
 /* line 171, ../_toolbar.scss */
-#toolbar #toolbar-readout > div > div .toolbar-scroll a:hover {
+#toolbar #toolbar-readout > div > div .toolbar-scroll a:not(.btn):hover {
   color: #b82927;
   text-decoration: none;
 }
@@ -9384,9 +9384,13 @@ a.toolbar-link img {
   margin-left: 35px;
 }
 
-/* line 311, ../_toolbar.scss */
+/* line 312, ../_toolbar.scss */
 #toolbar-account .account-footer {
   margin-top: 10px;
+}
+/* line 316, ../_toolbar.scss */
+#toolbar-account .form-error:empty {
+  display: none;
 }
 
 /* line 1, ../_navbar.scss */

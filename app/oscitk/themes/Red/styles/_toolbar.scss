@@ -165,7 +165,7 @@ $toolbar-margin-bottom: 5px;
 
 					padding: 5px 5px 10px 0px;
 
-					a {
+					a:not(.btn) {
 						color: white;
 
 						&:hover {
@@ -308,7 +308,13 @@ a.toolbar-link {
 }
 
 #toolbar-account {
+
 	.account-footer {
 		margin-top: 10px;
 	}
+
+	.form-error:empty {
+		display: none;
+	}
+
 }
