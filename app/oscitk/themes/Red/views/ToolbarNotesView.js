@@ -49,7 +49,7 @@ OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
 		var $target = $(e.currentTarget);
 		var content_id = $target.attr('data-content_id');
 
-		console.log( $target, content_id );
+		//console.log( $target, content_id );
 
 		if (content_id) {
 			Backbone.trigger('navigate', { identifier: '#' + content_id } );
@@ -61,10 +61,17 @@ OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
 
 	getSavedNotes: function() {
 
+		//console.log( app.collections.notes.models );
+
 		// filter notes - only return notes with ids (saved to server)
 		var notes = _.filter(app.collections.notes.models, function(note) {
 			if (note.id !== null) return true;
 			return false;
+		});
+
+		// furthemore, ensure that they are returned in the same order as they appear in-text
+		notes = _.sortBy( notes, function( note ) {
+			return note.get('paragraph_number');
 		});
 
 		return notes;
