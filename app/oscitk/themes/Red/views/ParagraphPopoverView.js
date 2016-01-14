@@ -15,8 +15,6 @@ OsciTk.views.ParagraphPopover = OsciTk.views.BaseView.extend({
 
         var citeData = new OsciTk.views.Citation(data);
 
-        console.log( $('#section-view') );
-
         if ( $('#note-' + data.id).length === 0 ) {
             $('#section-view').append(this.template(data));
         }

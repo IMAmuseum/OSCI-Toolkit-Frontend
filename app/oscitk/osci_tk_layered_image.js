@@ -812,7 +812,10 @@ LayeredImage.prototype.refreshViewfinder = function() {
     this.ui.viewfinder.height(vfHeight);
 
     //remove the viewfinderViewport if already added
-    if (this.ui.viewfinderViewport !== undefined) {
+    
+    //if (this.ui.viewfinderViewport !== undefined) {
+    //will fail if it's null. using truthy.
+    if (this.ui.viewfinderViewport ) {
         this.ui.viewfinderViewport.remove();
     }
     this.ui.viewfinderViewport = undefined;

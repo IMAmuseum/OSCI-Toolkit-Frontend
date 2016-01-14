@@ -34,6 +34,8 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 
 		this.$target = $(e.target);
 
+		//console.log( this.$target );
+
 		// toggle active class
 		this.$target.addClass('active');
 
@@ -50,9 +52,11 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		this.active = this.$target.hasClass('active');
 
 		// default actions only pass a
+		/*
 		if(this.$target.data("style") != 'default') {
 			Backbone.trigger("toolbarInlineClicked", this.$target.data("href") );
 		}
+		*/
 
 		// get the target li for checking if true in each loop below
 		this.$targetCheck = $(e.currentTarget);
@@ -69,7 +73,10 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		}, this);
 
 		// triggered in AppView.js
-		Backbone.trigger("toolbarItemClicked", {item : this.options.toolbarItem, active: this.active} );
+		Backbone.trigger("toolbarItemClicked", {
+			item : this.options.toolbarItem,
+			active: this.active
+		});
 
 	}
 

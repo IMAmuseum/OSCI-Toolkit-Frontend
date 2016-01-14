@@ -5,7 +5,13 @@
         <div class="pull-left" id="osci-navbar-text"><%= curPage %>/<%= numPages %></div>
 
         <!-- Page progress slider -->
-        <input class="pull-left" id="osci-page-slider" type="range" min="1" max="<%= numPages %>" value="<%= curPage %>" />
+        <input 
+            class="pull-left <%= is_firefox ?  'ff' : '' %>"
+            id="osci-page-slider"
+            type="range"
+            min="1"
+            max="<%= numPages %>" value="<%= curPage %>" 
+        />
 
         <!-- Two-page spread vs. single column -->
         <div class="pull-right hidden-xs" id="osci-spread-selector">
@@ -13,8 +19,15 @@
           <a href="javascript:;" id="osci-spread-double"><img src="images/two_column_icon.png" /></a>
         </div>
 
+        <% if( !is_firefox ) { %>
+
         <!-- Font size area selector -->
-        <ul class="pull-right" id="font-size-area"></ul>
+        <ul class="pull-right" id="font-size-area">
+            <li><a id="font-size-larger" href="javascript:;" class="font-button">A+</a></li>
+            <li><a id="font-size-smaller" href="javascript:;" class="font-button">A-</a></li>
+        </ul>
+
+        <% } %>
 
 	</div>
 </nav>

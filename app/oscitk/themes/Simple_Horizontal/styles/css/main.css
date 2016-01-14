@@ -367,8 +367,8 @@ th {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot");
-  src: url("../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
+  src: url("../fonts/glyphicons-halflings-regular.eot");
+  src: url("../fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
 }
 /* line 25, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_glyphicons.scss */
 .glyphicon {
@@ -8250,22 +8250,27 @@ p, textarea {
 
 /* line 1, ../_header.scss */
 header {
+  height: 100%;
+  width: 100%;
   padding-top: 50px;
-  z-index: 1000;
+  z-index: 2000;
 }
 
-/* line 5, ../_header.scss */
+/* line 8, ../_header.scss */
+.header-view {
+  height: 80vh;
+}
+
+/* line 12, ../_header.scss */
 .container-header {
   background-color: #909090;
   background-position: center;
   background-size: cover;
-  height: 80%;
-  max-width: 100%;
+  height: 100%;
   position: relative;
-  width: 100%;
 }
 
-/* line 15, ../_header.scss */
+/* line 20, ../_header.scss */
 .header-title {
   color: #ffffff;
   left: 50%;
@@ -8278,30 +8283,30 @@ header {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/* line 27, ../_header.scss */
+/* line 32, ../_header.scss */
 .header-title h1 {
   margin: 0;
 }
-/* line 30, ../_header.scss */
+/* line 36, ../_header.scss */
 .header-title p {
   font-style: italic;
   font-weight: 300;
 }
 
-/* line 36, ../_header.scss */
+/* line 42, ../_header.scss */
 .header-scroll-icon {
   display: none;
 }
 
 @media (min-width: 768px) {
-  /* line 41, ../_header.scss */
+  /* line 47, ../_header.scss */
   header {
     padding-top: 0;
   }
 
-  /* line 44, ../_header.scss */
+  /* line 50, ../_header.scss */
   .container-header {
-    height: 100%;
+    height: 100vh;
   }
 
   @-moz-keyframes bounce {
@@ -8328,7 +8333,7 @@ header {
       right: 30px;
     }
   }
-  /* line 73, ../_header.scss */
+  /* line 79, ../_header.scss */
   .header-scroll-icon {
     color: #ffffff;
     display: inline-block;
@@ -8344,13 +8349,13 @@ header {
     -webkit-animation: bounce 2s infinite;
     animation: bounce 2s infinite;
   }
-  /* line 88, ../_header.scss */
+  /* line 94, ../_header.scss */
   .header-scroll-icon:hover {
     -moz-animation-play-state: paused;
     -webkit-animation-play-state: paused;
     animation-play-state: paused;
   }
-  /* line 94, ../_header.scss */
+  /* line 100, ../_header.scss */
   .header-scroll-icon:link, .header-scroll-icon:visited, .header-scroll-icon:hover, .header-scroll-icon:active {
     color: #ffffff;
   }

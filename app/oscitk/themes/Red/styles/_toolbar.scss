@@ -165,7 +165,7 @@ $toolbar-margin-bottom: 5px;
 
 					padding: 5px 5px 10px 0px;
 
-					a {
+					a:not(.btn) {
 						color: white;
 
 						&:hover {
@@ -308,7 +308,33 @@ a.toolbar-link {
 }
 
 #toolbar-account {
+
 	.account-footer {
 		margin-top: 10px;
 	}
+
+	.form-error:empty {
+		display: none;
+	}
+
+	h4 {
+		margin-bottom: 5px
+	}
+
+	h5{
+		margin-top: 5px;
+		margin-bottom: 22px;
+	}
+
+	.user-icon {
+		width: 52px;
+		height: 52px;
+		margin-right: 10px;
+		border-radius: 50%;
+		background-color: $color-light-red;
+		background-image: url(../../images/light/user_icon.png);
+		background-size: contain;
+		float: left;
+	}
+
 }

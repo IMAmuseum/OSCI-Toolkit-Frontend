@@ -24,7 +24,7 @@ this["JST"]["app/oscitk/themes/Red/templates/app.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<!-- TOP -->\n<header class="hidden-print">\n\t<div id="header"></div>\n</header>\n\n<!-- BOTTOM -->\n<div id="navbar" class="hidden-print unselectable"></div>\n\n<!-- RIGHT -->\n<div id="toolbar" class="hidden-print"></div>\n\n<!-- CENTER -->\n<div id="loader" class="loader hidden-print">Loading...</div>\n\n<div id="section-container" class="container">\n\t<div id="section"></div>\n</div>\n\n<div id="navigation" class="hidden-print unselectable"></div>\n';
+__p += '<!-- TOP -->\n<header class="hidden-print">\n\t<div id="header"></div>\n</header>\n\n<!-- BOTTOM -->\n<div id="navbar" class="hidden-print unselectable"></div>\n\n<!-- RIGHT -->\n<div id="toolbar" class="hidden-print"></div>\n\n<!-- CENTER -->\n<div id="loader" class="loader hidden-print">Loading...</div>\n\n<div id="section-container" class="container">\n\t<div id="section"><div id="plate-container"></div></div>\n</div>\n\n<div id="navigation" class="hidden-print unselectable"></div>\n';
 
 }
 return __p
@@ -79,16 +79,6 @@ __p += '&ldquo;<em>' +
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Red/templates/font-size.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<a href="#font-larger" class="larger font-button" data-href="font-larger" data-style="inline">A+</a>&nbsp;\n<a href="#font-smaller" class="smaller font-button" data-href="font-smaller" data-style="inline">A-</a>\n';
-
-}
-return __p
-};
-
 this["JST"]["app/oscitk/themes/Red/templates/font.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -106,11 +96,11 @@ function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<div class="header-title">\n\t<div class="container-fluid">\n\t\t<div class="pull-left" id="publication-title-container">\n\t\t\t<h1 class="publication-title">' +
 ((__t = ( pubTitle )) == null ? '' : __t) +
-'</h1>\n\t\t</div>\n\t\t<div class="pull-left hidden-xs hidden-sm">\n\t\t\t<p class="section-title">' +
+'</h1>\n\t\t</div>\n\t\t<div class="pull-left hidden-xs hidden-sm">\n\t\t\t<p class="section-title"><a class="prev-page" href="javascript:;">&lt;</a>' +
 ((__t = ( sectionTitle )) == null ? '' : __t) +
 ': ' +
 ((__t = ( sectionSubtitle )) == null ? '' : __t) +
-'</p>\n\t\t</div>\n\t\t<div class="pull-right">\n\t\t\t<p class="btn-menu"><a href ="javascript:;" id="header-menu-button">Menu</a></p>\n\t\t</div>\n\t\t<div class="pull-right hidden-xs hidden-sm">\n\t\t\t<p>\n\t\t\t\t<a href ="javascript:;" id="header-login-button">\n\t\t\t\t\t';
+'<a class="next-page" href="javascript:;">&gt;</a></p>\n\t\t</div>\n\t\t<div class="pull-right">\n\t\t\t<p class="btn-menu"><a href ="javascript:;" id="header-menu-button">Menu</a></p>\n\t\t</div>\n\t\t<div class="pull-right hidden-xs hidden-sm">\n\t\t\t<p>\n\t\t\t\t<a href ="javascript:;" id="header-login-button">\n\t\t\t\t\t';
  if( username !== null ) { ;
 __p += '\t' +
 ((__t = ( username )) == null ? '' : __t) +
@@ -126,17 +116,24 @@ return __p
 
 this["JST"]["app/oscitk/themes/Red/templates/navbar.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<nav class="navbar navbar-default">\n\t<div class="container-fluid">\n\n        <!-- Page number readout -->\n        <div class="pull-left" id="osci-navbar-text">' +
 ((__t = ( curPage )) == null ? '' : __t) +
 '/' +
 ((__t = ( numPages )) == null ? '' : __t) +
-'</div>\n\n        <!-- Page progress slider -->\n        <input class="pull-left" id="osci-page-slider" type="range" min="1" max="' +
+'</div>\n\n        <!-- Page progress slider -->\n        <input \n            class="pull-left ' +
+((__t = ( is_firefox ?  'ff' : '' )) == null ? '' : __t) +
+'"\n            id="osci-page-slider"\n            type="range"\n            min="1"\n            max="' +
 ((__t = ( numPages )) == null ? '' : __t) +
 '" value="' +
 ((__t = ( curPage )) == null ? '' : __t) +
-'" />\n\n        <!-- Two-page spread vs. single column -->\n        <div class="pull-right hidden-xs" id="osci-spread-selector">\n          <a href="javascript:;" id="osci-spread-single"><img src="images/one_column_icon.png" /></a>\n          <a href="javascript:;" id="osci-spread-double"><img src="images/two_column_icon.png" /></a>\n        </div>\n\n        <!-- Font size area selector -->\n        <ul class="pull-right" id="font-size-area"></ul>\n\n\t</div>\n</nav>';
+'" \n        />\n\n        <!-- Two-page spread vs. single column -->\n        <div class="pull-right hidden-xs" id="osci-spread-selector">\n          <a href="javascript:;" id="osci-spread-single"><img src="images/one_column_icon.png" /></a>\n          <a href="javascript:;" id="osci-spread-double"><img src="images/two_column_icon.png" /></a>\n        </div>\n\n        ';
+ if( !is_firefox ) { ;
+__p += '\n\n        <!-- Font size area selector -->\n        <ul class="pull-right" id="font-size-area">\n            <li><a id="font-size-larger" href="javascript:;" class="font-button">A+</a></li>\n            <li><a id="font-size-smaller" href="javascript:;" class="font-button">A-</a></li>\n        </ul>\n\n        ';
+ } ;
+__p += '\n\n\t</div>\n</nav>';
 
 }
 return __p
@@ -170,13 +167,22 @@ return __p
 
 this["JST"]["app/oscitk/themes/Red/templates/paragraph-popover.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<div class="popover-wrapper">\n\t<ul class="nav nav-tabs" role="tablist">\n\t\t<li role="presentation" class="active">\n\t\t\t<a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Notes</a>\n\t\t</li>\n\t\t<li role="presentation">\n\t\t\t<a href="#cite" aria-controls="cite" role="tab" data-toggle="tab">Cite</a>\n\t\t</li>\n\t</ul>\n\n\t<div class="tab-content">\n    \t<div role="tabpanel" class="tab-pane active" id="notes">\n    \t\t' +
+__p += '<div class="popover-wrapper">\n\n';
+ if( noteForm ) { ;
+__p += '\n\n\t<ul class="nav nav-tabs" role="tablist">\n\t\t<li role="presentation" class="active">\n\t\t\t<a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Notes</a>\n\t\t</li>\n\t\t<li role="presentation">\n\t\t\t<a href="#cite" aria-controls="cite" role="tab" data-toggle="tab">Cite</a>\n\t\t</li>\n\t</ul>\n\n\t<div class="tab-content">\n    \t<div role="tabpanel" class="tab-pane active" id="notes">\n    \t\t' +
 ((__t = ( noteForm )) == null ? '' : __t) +
-'\n    \t</div>\n    \t<div role="tabpanel" class="tab-pane" id="cite">\n    \t\t' +
+'\n    \t</div>\n    \t<div role="tabpanel" class="tab-pane" id="cite">\n\n';
+ } ;
+__p += '\n\t\t\t<div id="cite-target">\n\t    \t\t' +
 ((__t = ( citation )) == null ? '' : __t) +
-'\n    \t</div>\n    </div>\n</div>\n';
+'\n\t    \t</div>\n';
+ if( noteForm ) { ;
+__p += '\n\n    \t</div>\n    </div>\n';
+ } ;
+__p += '\n\n</div>\n\n\n';
 
 }
 return __p
@@ -207,7 +213,7 @@ this["JST"]["app/oscitk/themes/Red/templates/toolbar-account-login.tpl.html"] = 
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h3>Login</h3>\n\n<div class="toolbar-scroll">\n\t<div class="form-error"></div>\n\t<form id="account-form">\n\t\t<div class="form-group">\n\t\t\t<label for="username">Username:</label>\n\t\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t\t</div>\n\t\t<div class="form-group">\n\t\t\t<label for="password">Password:</label>\n\t\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t\t</div>\n\t\t<button type="button" class="btn login">Log In</button>\n\t\t<div class="account-footer"><a href="javascript:;" class="register">Register an account</a></div>\n\t</form>\n</div>';
+__p += '<h3>Login</h3>\n\n<div class="toolbar-scroll">\n\t<div class="form-error alert alert-danger"></div>\n\t<form id="account-form">\n\t\t<div class="form-group">\n\t\t\t<label for="username">Username:</label>\n\t\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t\t</div>\n\t\t<div class="form-group">\n\t\t\t<label for="password">Password:</label>\n\t\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t\t</div>\n\t\t<button type="button" class="btn btn-default login">Log In</button>\n\t\t<div class="account-footer"><a href="javascript:;" class="register">Register an account</a></div>\n\t</form>\n</div>';
 
 }
 return __p
@@ -217,11 +223,11 @@ this["JST"]["app/oscitk/themes/Red/templates/toolbar-account-profile.tpl.html"] 
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h3>Profile</h3>\n\n<div class="toolbar-scroll">\n\t<h4>' +
+__p += '<h3>User Profile</h3>\n\n<div class="toolbar-scroll">\n\t<p>Logged in as:</p>\n\t<div>\n\t\t<div class="user-icon"></div>\n\t\t<div>\n\t\t\t<h4>' +
 ((__t = ( username )) == null ? '' : __t) +
-'</h4>\n\t<h5>' +
+'</h4>\n\t\t\t<h5>' +
 ((__t = ( email )) == null ? '' : __t) +
-'</h5>\n\t<div class="account-footer"><a href="javascript:;" class="logout">Log out</a></div>\n</div>';
+'</h5>\n\t\t</div>\n\t</div>\n\t<div class="account-footer"><a href="javascript:;" class="btn btn-default logout">Log out</a></div>\n</div>';
 
 }
 return __p
@@ -231,7 +237,7 @@ this["JST"]["app/oscitk/themes/Red/templates/toolbar-account-register.tpl.html"]
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h3>Register</h3>\n\n<div class="toolbar-scroll">\n\t<div class="form-error"></div>\n\t<form id="account-form">\n\t\t<div class="form-group">\n\t\t\t<label for="username">Username:</label>\n\t\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t\t</div>\n\t\t<div class="form-group">\n\t\t\t<label for="password">Password:</label>\n\t\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t\t</div>\n\t\t<div class="form-group">\n\t\t\t<label for="email">Email:</label>\n\t\t\t<input class="form-control" type="text" id="email" placeholder="Email" />\n\t\t</div>\n\t\t<button type="button" class="btn register">Register</button>\n\t\t<div class="account-footer"><a href="javascript:;" class="login">Already have an account?</a></div>\n\t</form>\n</div>';
+__p += '<h3>Register</h3>\n\n<div class="toolbar-scroll">\n\t<div class="form-error alert alert-danger"></div>\n\t<form id="account-form">\n\t\t<div class="form-group">\n\t\t\t<label for="username">Username:</label>\n\t\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t\t</div>\n\t\t<div class="form-group">\n\t\t\t<label for="password">Password:</label>\n\t\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t\t</div>\n\t\t<div class="form-group">\n\t\t\t<label for="email">Email:</label>\n\t\t\t<input class="form-control" type="text" id="email" placeholder="Email" />\n\t\t</div>\n\t\t<button type="button" class="btn btn-default  register">Register</button>\n\t\t<div class="account-footer"><a href="javascript:;" class="login">Already have an account?</a></div>\n\t</form>\n</div>';
 
 }
 return __p

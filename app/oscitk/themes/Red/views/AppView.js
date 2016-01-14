@@ -1,10 +1,17 @@
 OsciTk.views.App = OsciTk.views.BaseView.extend({
 	id: 'reader',
 	template: OsciTk.templateManager.get('app'),
-
+    events: {
+        //'click #note-submit': 'noteSubmit'
+    },
 	initialize: function() {
 		this.render();
 
+		// Use this to toggle loading animations
+		app.loading = true;
+		this.listenTo(Backbone, 'loading', function( bool ) {
+			app.loading = bool;
+		});
 
 		app.toolbarItems = app.config.get('toolbarItems') ? app.config.get('toolbarItems') : [];
 
@@ -22,8 +29,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 			navigationView: new OsciTk.views.Navigation(),
 
-			navbarView: new OsciTk.views.Navbar(),
-			fontSizeView: new OsciTk.views.FontSize(),
+			navbarView: new OsciTk.views.Navbar(),			
 
 			toolbarView: new OsciTk.views.Toolbar(),
 			tocToolbarView: new OsciTk.views.TocToolbar(),
@@ -127,6 +133,8 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 		}, this);
 
-	}
+	},
+
+
 
 });

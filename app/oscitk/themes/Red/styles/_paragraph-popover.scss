@@ -3,13 +3,19 @@ $popover-height: 160px;
 .popover {
 
 	border-radius: 10px;
-	border: thin solid transparent;
+	//border: thin solid transparent;
 
 	background-color: $color-light-red;
 
 	&.right > .arrow {
 		&, &:after {
 			border-right-color: $color-light-red;
+		}
+	}
+
+	&.top > .arrow {
+		&, &:after {
+			border-top-color: $color-light-red;
 		}
 	}
 
@@ -77,4 +83,16 @@ $popover-height: 160px;
 
 	height: $popover-height;
 	
+}
+
+// AJAX messes up popover height 
+#cite-target {
+
+	height: 160px;
+	width: 182px;
+
+	background-image: url(../../images/ajax-loader.gif);
+	background-position: center center;
+	background-repeat: no-repeat;
+
 }

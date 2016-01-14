@@ -1,4 +1,7 @@
 <div class="popover-wrapper">
+
+<% if( noteForm ) { %>
+
 	<ul class="nav nav-tabs" role="tablist">
 		<li role="presentation" class="active">
 			<a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Notes</a>
@@ -13,7 +16,17 @@
     		<%= noteForm %>
     	</div>
     	<div role="tabpanel" class="tab-pane" id="cite">
-    		<%= citation %>
+
+<% } %>
+			<div id="cite-target">
+	    		<%= citation %>
+	    	</div>
+<% if( noteForm ) { %>
+
     	</div>
     </div>
+<% } %>
+
 </div>
+
+

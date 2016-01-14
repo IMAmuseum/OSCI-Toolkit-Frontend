@@ -1,6 +1,6 @@
 this["JST"] = this["JST"] || {};
 
-this["JST"]["app/oscitk/themes/base/templates/account-login.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Base/templates/account-login.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
@@ -10,7 +10,7 @@ __p += '<h3>Login</h3>\n<div class="form-error"></div>\n<form id="account-form">
 return __p
 };
 
-this["JST"]["app/oscitk/themes/base/templates/account-profile.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Base/templates/account-profile.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
@@ -24,7 +24,7 @@ __p += '<h3>Profile</h3>\n<h4>' +
 return __p
 };
 
-this["JST"]["app/oscitk/themes/base/templates/account-register.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Base/templates/account-register.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
@@ -34,7 +34,7 @@ __p += '<h2>Register</h2>\n<div class="form-error"></div>\n<form id="account-for
 return __p
 };
 
-this["JST"]["app/oscitk/themes/base/templates/figure-reference.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Base/templates/figure-reference.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
@@ -48,7 +48,7 @@ __p += '<a href="#' +
 return __p
 };
 
-this["JST"]["app/oscitk/themes/base/templates/figures.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Base/templates/figures.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -91,7 +91,7 @@ __p += '\n\t\t</div>\n\t</div>\n</div>';
 return __p
 };
 
-this["JST"]["app/oscitk/themes/base/templates/font.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Base/templates/font.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
@@ -101,7 +101,7 @@ __p += '<h3>Reading Settings</h3>\n<div class="font-control">\n\t<h3>Font Size</
 return __p
 };
 
-this["JST"]["app/oscitk/themes/base/templates/navigation.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Base/templates/navigation.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
@@ -113,7 +113,7 @@ __p += '<div class=\'header\'>' +
 return __p
 };
 
-this["JST"]["app/oscitk/themes/base/templates/page.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Base/templates/page.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
@@ -124,7 +124,7 @@ __p +=
 return __p
 };
 
-this["JST"]["app/oscitk/themes/base/templates/title.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Base/templates/title.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
@@ -134,7 +134,7 @@ __p += '<h1 id="publication-title"></h1>';
 return __p
 };
 
-this["JST"]["app/oscitk/themes/base/templates/toc.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Base/templates/toc.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -167,7 +167,7 @@ __p += '\n</ul>';
 return __p
 };
 
-this["JST"]["app/oscitk/themes/base/templates/toolbar-item.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Base/templates/toolbar-item.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
@@ -178,7 +178,7 @@ __p +=
 return __p
 };
 
-this["JST"]["app/oscitk/themes/base/templates/toolbar.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Base/templates/toolbar.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {

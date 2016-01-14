@@ -43,17 +43,31 @@ header {
 
 			.section-title {
 
-				&:before {
-					content: "<";
+
+				//&:before {
+				.prev-page {
+					//content: "<";
 					margin-right: 10px;
-					color: #ccc;
+					color: $color-light-red;
+					&.inactive {
+						color: #ccc;
+					}
 				}
 
-				&:after {
-					content: ">";
+				//&:after {
+				.next-page {
+					//content: ">";
 					margin-left: 10px;
-					color: #ccc;
+					color: $color-light-red;
+					&.inactive {
+						color: #ccc;
+					}
 				}
+
+				a:hover, a:focus {
+					text-decoration: none;
+				}
+
 			}
 
 			.btn-menu {

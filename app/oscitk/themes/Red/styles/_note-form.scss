@@ -1,5 +1,6 @@
 .note-form-wrapper {
 	height: $popover-height;
+	display: block;
 }
 
 .paragraph-controls {
@@ -8,9 +9,20 @@
 	//right: 0px;
 	//top: 19px;
 
+	/*
 	float: left;
 	margin-top: 9px;
 	margin-left: -16px;
+	*/
+
+	/*
+	position: absolute;
+	top: 9px;
+	left: 0px;
+	*/
+
+	display: inline-block;
+	margin-right: 10px;
 
 	z-index: 2;
 
