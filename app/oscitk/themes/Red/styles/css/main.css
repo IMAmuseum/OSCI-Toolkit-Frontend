@@ -9392,6 +9392,26 @@ a.toolbar-link img {
 #toolbar-account .form-error:empty {
   display: none;
 }
+/* line 320, ../_toolbar.scss */
+#toolbar-account h4 {
+  margin-bottom: 5px;
+}
+/* line 324, ../_toolbar.scss */
+#toolbar-account h5 {
+  margin-top: 5px;
+  margin-bottom: 22px;
+}
+/* line 329, ../_toolbar.scss */
+#toolbar-account .user-icon {
+  width: 52px;
+  height: 52px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background-color: #b82927;
+  background-image: url(../../images/light/user_icon.png);
+  background-size: contain;
+  float: left;
+}
 
 /* line 1, ../_navbar.scss */
 body {

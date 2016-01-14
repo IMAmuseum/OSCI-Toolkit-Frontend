@@ -223,11 +223,11 @@ this["JST"]["app/oscitk/themes/Red/templates/toolbar-account-profile.tpl.html"] 
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h3>User Profile</h3>\n\n<div class="toolbar-scroll">\n\t<h4>' +
+__p += '<h3>User Profile</h3>\n\n<div class="toolbar-scroll">\n\t<p>Logged in as:</p>\n\t<div>\n\t\t<div class="user-icon"></div>\n\t\t<div>\n\t\t\t<h4>' +
 ((__t = ( username )) == null ? '' : __t) +
-'</h4>\n\t<h5>' +
+'</h4>\n\t\t\t<h5>' +
 ((__t = ( email )) == null ? '' : __t) +
-'</h5>\n\t<div class="account-footer"><a href="javascript:;" class="btn btn-default logout">Log out</a></div>\n</div>';
+'</h5>\n\t\t</div>\n\t</div>\n\t<div class="account-footer"><a href="javascript:;" class="btn btn-default logout">Log out</a></div>\n</div>';
 
 }
 return __p
