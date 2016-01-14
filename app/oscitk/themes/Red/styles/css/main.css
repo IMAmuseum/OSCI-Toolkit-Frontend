@@ -8932,8 +8932,12 @@ body {
 #section #default-section-view p .glossary-term:hover {
   cursor: hand;
 }
+/* line 179, ../_section.scss */
+#section #default-section-view .tooltip-inner {
+  text-indent: 0;
+}
 
-/* line 185, ../_section.scss */
+/* line 189, ../_section.scss */
 .loader {
   margin: 80px auto;
   font-size: 10px;
@@ -8949,7 +8953,7 @@ body {
   -webkit-animation: load8 1.1s infinite linear;
   animation: load8 1.1s infinite linear;
 }
-/* line 204, ../_section.scss */
+/* line 208, ../_section.scss */
 .loader, .loader:after {
   border-radius: 50%;
   width: 10em;
@@ -8975,7 +8979,7 @@ body {
     transform: rotate(360deg);
   }
 }
-/* line 235, ../_section.scss */
+/* line 239, ../_section.scss */
 #loader {
   position: absolute;
   top: 50%;
