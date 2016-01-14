@@ -40,6 +40,13 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 			this.render();
 		});
 
+		// Trigger section arrow update on section change
+		// Because we use numPages in our navigation here,
+		//  we will wait until that number is ready
+		this.listenTo( Backbone, 'pagesCalculated', function() {
+			this.updateSectionArrows();
+		});
+
 	},
 	render: function( ) {
 
@@ -63,8 +70,6 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 			sectionSubtitle: this.sectionSubtitle
 		}));
 
-		//console.log( this );
-
 
 		return this;
 	},
@@ -75,6 +80,44 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 
 	loginClick: function() {
 		Backbone.trigger('loginClicked');
-	}
+	},
+
+	updateSectionArrows: function(page) {
+
+		// Note that the arrows in NavigationView have the same class names,
+		//   but their style and behavior is defined by the parent view.
+
+		// Here, these buttons always move between sections, not pages.
+
+		var $prev = this.$el.find('.prev-page');
+		var $next = this.$el.find('.next-page');
+
+		// reset both controls to start
+		$prev.unbind('click').addClass('inactive');
+		$next.unbind('click').addClass('inactive');
+
+		var previous = app.views.navigationView.currentNavigationItem.get('previous');
+		var next = app.views.navigationView.currentNavigationItem.get('next');
+		
+		// Wait until we have info about total and current page
+		// Will never be false unless null, i.e. not yet calculated
+
+		
+		// var page = app.views.navigationView.page;
+		var numPages = app.views.navigationView.numPages;
+
+		if( previous ) {
+			$prev.removeClass('inactive').on('click', function(e) {
+				Backbone.trigger('navigate', { page: -1 } );
+			});
+		}
+
+		if( next ) {
+			$next.removeClass('inactive').on('click', function(e) {
+				Backbone.trigger('navigate', { page: numPages+1 } );
+			});
+		}
+
+	},
 
 });

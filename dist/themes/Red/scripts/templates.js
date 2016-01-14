@@ -96,11 +96,11 @@ function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<div class="header-title">\n\t<div class="container-fluid">\n\t\t<div class="pull-left" id="publication-title-container">\n\t\t\t<h1 class="publication-title">' +
 ((__t = ( pubTitle )) == null ? '' : __t) +
-'</h1>\n\t\t</div>\n\t\t<div class="pull-left hidden-xs hidden-sm">\n\t\t\t<p class="section-title">' +
+'</h1>\n\t\t</div>\n\t\t<div class="pull-left hidden-xs hidden-sm">\n\t\t\t<p class="section-title"><a class="prev-page" href="javascript:;">&lt;</a>' +
 ((__t = ( sectionTitle )) == null ? '' : __t) +
 ': ' +
 ((__t = ( sectionSubtitle )) == null ? '' : __t) +
-'</p>\n\t\t</div>\n\t\t<div class="pull-right">\n\t\t\t<p class="btn-menu"><a href ="javascript:;" id="header-menu-button">Menu</a></p>\n\t\t</div>\n\t\t<div class="pull-right hidden-xs hidden-sm">\n\t\t\t<p>\n\t\t\t\t<a href ="javascript:;" id="header-login-button">\n\t\t\t\t\t';
+'<a class="next-page" href="javascript:;">&gt;</a></p>\n\t\t</div>\n\t\t<div class="pull-right">\n\t\t\t<p class="btn-menu"><a href ="javascript:;" id="header-menu-button">Menu</a></p>\n\t\t</div>\n\t\t<div class="pull-right hidden-xs hidden-sm">\n\t\t\t<p>\n\t\t\t\t<a href ="javascript:;" id="header-login-button">\n\t\t\t\t\t';
  if( username !== null ) { ;
 __p += '\t' +
 ((__t = ( username )) == null ? '' : __t) +

@@ -9110,26 +9110,36 @@ header .header-title .container h1, header .header-title .container p, header .h
 header .header-title .container h1, header .header-title .container-fluid h1 {
   font-weight: 700;
 }
-/* line 46, ../_header.scss */
-header .header-title .container .section-title:before, header .header-title .container-fluid .section-title:before {
-  content: "<";
+/* line 48, ../_header.scss */
+header .header-title .container .section-title .prev-page, header .header-title .container-fluid .section-title .prev-page {
   margin-right: 10px;
-  color: #ccc;
+  color: #b82927;
 }
 /* line 52, ../_header.scss */
-header .header-title .container .section-title:after, header .header-title .container-fluid .section-title:after {
-  content: ">";
-  margin-left: 10px;
+header .header-title .container .section-title .prev-page.inactive, header .header-title .container-fluid .section-title .prev-page.inactive {
   color: #ccc;
 }
-/* line 59, ../_header.scss */
+/* line 58, ../_header.scss */
+header .header-title .container .section-title .next-page, header .header-title .container-fluid .section-title .next-page {
+  margin-left: 10px;
+  color: #b82927;
+}
+/* line 62, ../_header.scss */
+header .header-title .container .section-title .next-page.inactive, header .header-title .container-fluid .section-title .next-page.inactive {
+  color: #ccc;
+}
+/* line 67, ../_header.scss */
+header .header-title .container .section-title a:hover, header .header-title .container .section-title a:focus, header .header-title .container-fluid .section-title a:hover, header .header-title .container-fluid .section-title a:focus {
+  text-decoration: none;
+}
+/* line 73, ../_header.scss */
 header .header-title .container .btn-menu, header .header-title .container-fluid .btn-menu {
   padding-left: 40px;
   background-image: url("../../images/dark/menu_icon.png");
   background-repeat: no-repeat;
 }
 @media (max-width: 991px) {
-  /* line 67, ../_header.scss */
+  /* line 81, ../_header.scss */
   header .header-title .container #publication-title-container, header .header-title .container h1, header .header-title .container-fluid #publication-title-container, header .header-title .container-fluid h1 {
     width: calc(100% - 102px);
     overflow: hidden;
