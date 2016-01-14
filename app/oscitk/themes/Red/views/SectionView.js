@@ -273,16 +273,14 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                         });
 
                         // Chrome hack; moves figures back and forth, fixing mid-figure column breaks. Magic!
-                        /*
                         var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
                         if( is_chrome ) {
-                            var $b = $w.prev();
-                            $w.before( $b );
-                            setTimeout(function(){
-                                $w.after( $b );
-                            }, 600);
+                            $('.figure-wrapper').each( function(i,e) {
+                                if( $(this).offset().top < 0 ) {
+                                    $(this).prev().before( $(this) );
+                                }
+                            });
                         }
-                        */
 
                     }
                 });
