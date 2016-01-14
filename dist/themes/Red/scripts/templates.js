@@ -340,7 +340,7 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<h3>Glossary</h3>\n\n<div class="toolbar-scroll">\n\n\t<div id="glossary-sidebar">\n\n\t\t<div id="glossary-filter-box">\n\t\t\t<input type="text" id="glossary-filter" placeholder="Search Glossary" />\n\t\t\t<div id="glossary-filter-search-icon"></div>\n\t\t\t<div id="glossary-filter-clear"></div>\n\t\t</div>\n\n\t\t';
+__p += '<h3>Glossary</h3>\n\n<div class="toolbar-scroll">\n\n\t<div id="glossary-sidebar">\n\n\t\t<div id="glossary-filter-box">\n\t\t\t<input type="text" class="form-control" id="glossary-filter" placeholder="Search Glossary" />\n\t\t\t<div id="glossary-filter-search-icon"></div>\n\t\t\t<div id="glossary-filter-clear"></div>\n\t\t</div>\n\n\t\t';
  if (!hasResults) { ;
 __p += '\n\t\t\tNo terms found.\n\t\t';
  } else { ;

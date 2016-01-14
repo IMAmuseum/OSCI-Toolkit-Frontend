@@ -71,9 +71,17 @@ header {
 			}
 
 			.btn-menu {
-				padding-left: 40px;
+
 				background-image: url("../../images/dark/menu_icon.png");
 				background-repeat: no-repeat;
+
+				padding: 0px;
+
+				a {
+					display: inline-block;
+					padding: 0 15px;
+					padding-left: 40px;
+				}
 			}
 
 			@media( max-width: 991px ) {
