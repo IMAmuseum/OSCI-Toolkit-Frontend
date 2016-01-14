@@ -140,32 +140,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                     'column-width': cw
         }); 
         
-        // Add plate image to front..?
-        //*
-        var plateFigures = app.collections.figures.where({plate: true});
-        if( plateFigures.length > 0 ) {
-            var $plate = $( plateFigures[0].get('body') );
-            var $table = this.$el;
+        
 
-            var id = $plate.find('object').attr('id');
-            var $img = $plate.find('img');
-                $img.attr('id', id );
 
-            if( $table.find('#'+id).length < 1 ) {
-                $img.prependTo( $table );
-                $img.css('width', '100%');
-            }
-            
-        }
-        //*/
-            
-        /*
-        if (plateFigures.length) {
-            _.each(plateFigures, function(fig) {
-                this.unplacedFigures.push(fig.id);
-            }, this);
-        }
-        */
 
         // Save context to avoid setting window variables
         var that = this;
@@ -386,8 +363,26 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         // numPages is for NavigationView.js -- remove if it's not used
         // Backbone.trigger("layoutComplete", { numPages : this.model.get('pages').length } );
+        
+        // Add plate image to front..?
+        var plateFigures = app.collections.figures.where({plate: true});
+        if( plateFigures.length > 0 ) {
+            var $plate = $( plateFigures[0].get('body') );
+            var $table = this.$el;
+
+            var id = $plate.find('object').attr('id');
+            var $img = $plate.find('img');
+                $img.attr('id', id );
+
+            if( $table.find('#'+id).length < 1 ) {
+                $img.prependTo( $table );
+                $img.css('width', '100%');
+            }
+            
+        }
 
         Backbone.trigger("layoutComplete");
+
 
         // Used to ensure that all figures are of a conistent width
         $('#section').imagesLoaded( function() {
