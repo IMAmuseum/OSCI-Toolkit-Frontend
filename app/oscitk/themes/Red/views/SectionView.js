@@ -273,6 +273,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                                 try {
                                     li.resetZoomRange(); // ensure it can scale down
                                     li.reset(); // reset size and options
+                                    li.map.resize();
                                 } catch(e) {
                                     // slider not init'd error
                                 }

@@ -8,10 +8,14 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 	},
 	initialize: function(options) {
 		this.options = options;
-		// add a class to this element based on view button uses
-		this.$el.addClass(this.options.toolbarItem.view + '-toolbar-item');
+		this.itemClass = this.options.toolbarItem.view + '-toolbar-item';
+
+		// add a class to this element based on the view this button triggers
+		this.$el.addClass( this.itemClass );
+
 		this.$el.attr('data-href', this.options.toolbarItem.text);
 		this.$el.attr('data-style', this.options.toolbarItem.style);
+
 	},
 	render: function() {
 
@@ -24,6 +28,13 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 			Backbone.trigger("toolbarInline", this.options.toolbarItem);
 		}
 
+		// We also want to keep an eye on #toolbar-filler, triggering
+		//   itemClicked if the user clicks the text assoc. with this item
+		var that = this;
+		$('#toolbar-filler .' + this.itemClass).on('click', function(e) {
+			$('#toolbar-area .' + that.itemClass).click();
+		});
+
 		return this;
 
 	},
@@ -33,8 +44,6 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		e.stopPropagation();
 
 		this.$target = $(e.target);
-
-		//console.log( this.$target );
 
 		// toggle active class
 		this.$target.addClass('active');
