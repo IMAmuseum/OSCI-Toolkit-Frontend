@@ -376,7 +376,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
             if( $table.find('#'+id).length < 1 ) {
                 $img.prependTo( $table );
-                $img.css('width', '100%');
+                $img.addClass('plate');
             }
             
         }
