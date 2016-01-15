@@ -53,8 +53,12 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
             $('#section').attr('data-columns-setting', columnCount );
 
-            // We're doing this through windowResized to trigger LayeredImage re-centering
-            Backbone.trigger( 'windowResized' );
+            setTimeout( function(){
+
+                // We're doing this through windowResized to trigger LayeredImage re-centering
+                Backbone.trigger( 'windowResized' );
+
+            }, 25)
 
         });
 
@@ -273,20 +277,27 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                                     // slider not init'd error
                                 }
                                 
-                            }, 500 ); // 500 is an estimate, tweak it if needed
+                            }, 100 ); // 250 is an estimate, tweak it if needed
                         });
 
                         // Chrome hack; moves figures back and forth, fixing mid-figure column breaks. Magic!
-                        var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-                        if( is_chrome ) {
-                            $('.figure-wrapper').each( function(i,e) {
-                                if( $(this).offset().top < 0 ) {
-                                    $(this).prev().before( $(this) );
-                                }
-                            });
-                        }
+                        that.listenTo(Backbone, 'windowResized', function(e) {
+
+                            var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+                            if( is_chrome ) {
+
+                                $('.figure-wrapper').each( function(i,e) {
+                                    var $fig = $(this);
+                                    $fig.prev().before( $fig );
+                                    $fig.next().after( $fig );
+                                });
+
+                            }
+
+                        });
 
                     }
+
                 });
             }
         });
@@ -365,6 +376,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // Backbone.trigger("layoutComplete", { numPages : this.model.get('pages').length } );
         
         // Add plate image to front..?
+        // Should be done before any height processing at all
+        // We want the images to load first!
         var plateFigures = app.collections.figures.where({plate: true});
         if( plateFigures.length > 0 ) {
             var $plate = $( plateFigures[0].get('body') );
@@ -382,7 +395,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         }
 
         Backbone.trigger("layoutComplete");
-
 
         // Used to ensure that all figures are of a conistent width
         $('#section').imagesLoaded( function() {

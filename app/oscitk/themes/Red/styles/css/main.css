@@ -9154,15 +9154,17 @@ header .header-title .container .btn-menu a, header .header-title .container-flu
   margin: -5px 0px;
   padding: 5px 10px;
   padding-left: 40px;
+  /*
   border-radius: 5px;
   border: thin solid #eee;
+  */
 }
-/* line 92, ../_header.scss */
+/* line 93, ../_header.scss */
 header .header-title .container .btn-menu a:hover, header .header-title .container .btn-menu a:focus, header .header-title .container-fluid .btn-menu a:hover, header .header-title .container-fluid .btn-menu a:focus {
   text-decoration: none;
 }
 @media (max-width: 991px) {
-  /* line 101, ../_header.scss */
+  /* line 102, ../_header.scss */
   header .header-title .container #publication-title-container, header .header-title .container h1, header .header-title .container-fluid #publication-title-container, header .header-title .container-fluid h1 {
     width: calc(100% - 122px);
     overflow: hidden;
