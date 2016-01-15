@@ -1,0 +1,32 @@
+<div class="popover-wrapper">
+
+<% if( noteForm ) { %>
+
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active">
+			<a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Notes</a>
+		</li>
+		<li role="presentation">
+			<a href="#cite" aria-controls="cite" role="tab" data-toggle="tab">Cite</a>
+		</li>
+	</ul>
+
+	<div class="tab-content">
+    	<div role="tabpanel" class="tab-pane active" id="notes">
+    		<%= noteForm %>
+    	</div>
+    	<div role="tabpanel" class="tab-pane" id="cite">
+
+<% } %>
+			<div id="cite-target">
+	    		<%= citation %>
+	    	</div>
+<% if( noteForm ) { %>
+
+    	</div>
+    </div>
+<% } %>
+
+</div>
+
+

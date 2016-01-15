@@ -89,7 +89,21 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		
 
-		// Respond to keyboard events
+		// TODO: Respond to scroll events?
+
+		// Respond to touch swipes
+		var that = this;
+		$('#section-container').swipe({
+			swipeLeft: function(event, direction, distance, duration, fingerCount, fingerData) {
+				Backbone.trigger('navigate', { page: that.page - 1 } );
+			},
+			swipeRight: function(event, direction, distance, duration, fingerCount, fingerData) {
+				Backbone.trigger('navigate', { page: that.page + 1 } );
+			},
+			//excludedElements: "button, input, select, textarea, a, .noSwipe"
+		});
+
+		// Respond to scroll up and down
 		var that = this;
 		$(document).keydown(function(event) {
 
@@ -106,18 +120,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
     		}
 
 
-		});
-
-		// Respond to touch swipes
-		var that = this;
-		$('#section-container').swipe({
-			swipeLeft: function(event, direction, distance, duration, fingerCount, fingerData) {
-				Backbone.trigger('navigate', { page: that.page - 1 } );
-			},
-			swipeRight: function(event, direction, distance, duration, fingerCount, fingerData) {
-				Backbone.trigger('navigate', { page: that.page + 1 } );
-			},
-			//excludedElements: "button, input, select, textarea, a, .noSwipe"
 		});
 
 		// Figure out the first element on the page and save it

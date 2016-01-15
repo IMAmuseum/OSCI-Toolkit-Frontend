@@ -8,8 +8,8 @@ $toolbar-margin-bottom: 5px;
 
 	position: fixed;
 	right: 0px;
-	top: 52px;
-	bottom: 50px;
+	top: $header-height;
+	bottom: $navbar-height;
 
 	// Constrains toolbar; see #toolbar-readout
 	min-width: 320px;
@@ -39,74 +39,72 @@ $toolbar-margin-bottom: 5px;
 
 				margin-bottom: $toolbar-margin-bottom;
 
-				
+				cursor: hand;
+				border: 0;
+				font: 0/0 a;
+				text-shadow: none;
+				color: transparent;
 
-					cursor: hand;
-					border: 0;
-					font: 0/0 a;
-					text-shadow: none;
-					color: transparent;
+				background-size: 50px 50px;
+				background-repeat: no-repeat;
+				width: 50px;
+				height: 50px;
 
-					background-size: 50px 50px;
-					background-repeat: no-repeat;
-					width: 50px;
-					height: 50px;
+				&.active {
+					background-color: $color-dark-red;
+				}
 
-					&.active {
-						background-color: $color-dark-red;
-					}
-
-					&.close-toolbar-item {
-						background-image: url(../../images/light/x_icon.png);
-					}
+				&.close-toolbar-item {
+					background-image: url(../../images/light/x_icon.png);
+				}
 
 
-					&.tocToolbarView-toolbar-item {
+				&.tocToolbarView-toolbar-item {
+					background-image: url(../../images/light/contents_icon.png);
+					&:hover {
 						background-image: url(../../images/light/contents_icon.png);
-						&:hover {
-							background-image: url(../../images/light/contents_icon.png);
-						}
 					}
+				}
 
-					/*
-					&.printToolbarView-toolbar-item {
+				/*
+				&.printToolbarView-toolbar-item {
+					background-image: url(../../images/light/print.png);
+					&:hover {
 						background-image: url(../../images/light/print.png);
-						&:hover {
-							background-image: url(../../images/light/print.png);
-						}
 					}
-					*/	
+				}
+				*/	
 
-					&.searchToolbarView-toolbar-item {
-						background-image: url(../../images/light/search_icon.png);
-					}
+				&.searchToolbarView-toolbar-item {
+					background-image: url(../../images/light/search_icon.png);
+				}
 
-					&.glossaryToolbarView-toolbar-item {
-						background-image: url(../../images/light/glossary_icon.png);
-					}
+				&.glossaryToolbarView-toolbar-item {
+					background-image: url(../../images/light/glossary_icon.png);
+				}
 
-					&.footnotesToolbarView-toolbar-item {
-						background-image: url(../../images/light/footnotes_icon.png);
-					}
+				&.footnotesToolbarView-toolbar-item {
+					background-image: url(../../images/light/footnotes_icon.png);
+				}
 
-					&.figuresToolbarView-toolbar-item {
-						background-image: url(../../images/light/figures_icon.png);
-					}
+				&.figuresToolbarView-toolbar-item {
+					background-image: url(../../images/light/figures_icon.png);
+				}
 
-					&.notesToolbarView-toolbar-item {
-						background-image: url(../../images/light/notes_icon.png);
-					}
+				&.notesToolbarView-toolbar-item {
+					background-image: url(../../images/light/notes_icon.png);
+				}
 
-					&.citationsToolbarView-toolbar-item {
-						background-image: url(../../images/light/cite_icon.png);
-					}
+				&.citationsToolbarView-toolbar-item {
+					background-image: url(../../images/light/cite_icon.png);
+				}
 
-					&.accountToolbarView-toolbar-item {
+				&.accountToolbarView-toolbar-item {
+					background-image: url(../../images/light/user_icon.png);
+					&:hover {
 						background-image: url(../../images/light/user_icon.png);
-						&:hover {
-							background-image: url(../../images/light/user_icon.png);
-						}
 					}
+				}
 				
 			}
 		}
@@ -121,6 +119,7 @@ $toolbar-margin-bottom: 5px;
 		width: calc( 100% - 50px );
 
 		color: white;
+
 	}
 
 	#toolbar-filler {
@@ -128,9 +127,16 @@ $toolbar-margin-bottom: 5px;
 
 		p {
 			font-family: 'Lato', sans-serif;
+			margin: 0;
+
 			line-height: 50px;
-			margin-bottom: $toolbar-margin-bottom;
-			margin-left: 10px;
+			padding-bottom: $toolbar-margin-bottom;
+			padding-left: 10px;
+
+			&.toolbar-trigger {
+				cursor: pointer;
+			}
+
 		}
 	}
 

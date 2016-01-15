@@ -1,0 +1,16 @@
+<div class="citation-wrapper">
+	<div class="citations">
+		<div id="citation-format-chicago" class="citation">
+			<h4>Chicago</h4>
+			<p><% if (creator.length > 0) { %> <%= creator + ", " %> <% } %>&ldquo;<em><%= title %></em>,&rdquo; in <em><%= publicationTitle %></em>, ed. <%= editor %> <%= publisher %> <%= formattedDate %>, para <%= paragraphNumber %>.</p>
+		</div>
+		<div id="citation-format-mla" class="citation">
+			<h4>MLA</h4>
+			<p><% if (creator.length > 0) { %> <%= creator + ", " %> <% } %>&ldquo;<em><%= title %></em>,&rdquo; in <span style="text-decoration:underline;"><%= publicationTitle %></span>, ed. <%= editor %> (<%= publisher %>), <%= formattedDate %>, <%= paragraphNumber %>.</p>
+		</div>
+		<div id="citation-url" class="citation">
+			<h4>Citation URL</h4>
+			<p><%= url %></p>
+		</div>
+	</div>
+</div>
