@@ -6,6 +6,9 @@ $color-text: #3c3c3c;
 $color-light-red: #b82927;
 $color-dark-red: #810c0b;
 
+$header-height: 52px;
+$navbar-height: 50px;
+
 @import "bootstrap/bootstrap";
 @import "typography";
 @import "browsehappy";

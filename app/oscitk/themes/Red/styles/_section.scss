@@ -1,7 +1,7 @@
 #section-container.container {
 
-	margin-top: calc(53px + 15px);
-    height: calc(100% - 50px - 53px - 30px );
+	margin-top: calc( #{$header-height} + 15px);
+    height: calc(100% - 50px - #{$header-height} - 30px );
 
 }
 

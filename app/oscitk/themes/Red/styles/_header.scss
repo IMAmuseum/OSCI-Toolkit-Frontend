@@ -23,7 +23,7 @@ header {
 		.container, .container-fluid {
 			padding-top: 15px;
 			padding-bottom: 10px;
-			height: 52px;
+			height: $header-height;
 
 
 			h1, p {
@@ -74,20 +74,32 @@ header {
 
 				background-image: url("../../images/dark/menu_icon.png");
 				background-repeat: no-repeat;
+				background-position: 20px 0px;
 
-				padding: 0px;
+				padding-right: 5px;
+
 
 				a {
 					display: inline-block;
-					padding: 0 15px;
+					margin: -5px 0px;
+					padding: 5px 10px;
 					padding-left: 40px;
+
+
+					border-radius: 5px;
+					border: thin solid #eee;
+
+					&:hover, &:focus {
+						text-decoration: none;
+					}
+
 				}
 			}
 
 			@media( max-width: 991px ) {
 
 				#publication-title-container, h1 {
-					width: calc(100% - 102px);
+					width: calc(100% - 122px);
 					overflow: hidden;
 					white-space: nowrap;
 					text-overflow: ellipsis;
