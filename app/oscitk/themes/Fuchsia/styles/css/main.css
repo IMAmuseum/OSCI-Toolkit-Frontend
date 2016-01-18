@@ -8265,19 +8265,33 @@ body {
   #navigation .chapter-info .chapter-title {
     margin-left: 30px;
   }
+  /* line 93, ../_navigation.scss */
+  #navigation .btn-page {
+    background-image: url(../../images/icon-arrow-white.png);
+  }
+  /* line 95, ../_navigation.scss */
+  #navigation .btn-page.inactive {
+    background-image: url(../../images/icon-arrow-grey.png);
+  }
+}
+@media (max-width: 479px) {
+  /* line 104, ../_navigation.scss */
+  #navigation .chapter-info .chapter-title {
+    display: none;
+  }
 }
 
-/* line 99, ../_navigation.scss */
+/* line 112, ../_navigation.scss */
 .progress {
   height: 6px;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
-/* line 105, ../_navigation.scss */
+/* line 118, ../_navigation.scss */
 .progress .progress-bar.progress-bar-fuchsia {
   background-color: #fa5d78;
 }
 
-/* line 114, ../_navigation.scss */
+/* line 127, ../_navigation.scss */
 *.unselectable {
   -moz-user-select: none;
   -khtml-user-select: none;
