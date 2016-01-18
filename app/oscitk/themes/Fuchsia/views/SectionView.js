@@ -174,6 +174,24 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // numPages is for NavigationView.js -- remove if it's not used
         // Backbone.trigger("layoutComplete", { numPages : this.model.get('pages').length } );
 
+        // Add plate image to front..?
+        // Should be done before any height processing at all
+        // We want the images to load first!
+        var plateFigures = app.collections.figures.where({plate: true});
+        if( plateFigures.length > 0 ) {
+            var $plate = $( plateFigures[0].get('body') );
+            var $table = this.$el;
+
+            var id = $plate.find('object').attr('id');
+            var $img = $plate.find('img');
+                $img.attr('id', id );
+
+            if( $table.find('#'+id).length < 1 ) {
+                $img.prependTo( $table );
+                $img.addClass('plate');
+            }
+            
+        }
 
         Backbone.trigger("layoutComplete");
 

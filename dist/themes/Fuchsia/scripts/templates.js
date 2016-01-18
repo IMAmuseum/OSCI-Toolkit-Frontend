@@ -25,7 +25,7 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<div class="section-page">\n\t<div class="section-page">\n\t\t<div class="section-content">\n\t\t\n\t\t\t<div class="clearfix"></div>\n\n\t\t\t<h2>' +
+__p += '<!-- .section-page is used to create the 3D effect -->\n<div class="section-page">\n\t<div class="section-page">\n\t\t<div class="section-content">\n\t\t\n\t\t\t<div class="clearfix"></div>\n\n\t\t\t<h2>' +
 ((__t = ( sectionTitle )) == null ? '' : __t) +
 '</h2>\n\t\t\t';
  if (typeof(sectionSubtitle) !== null) { ;

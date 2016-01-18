@@ -6,8 +6,8 @@
 	line-height: 20px;
 
 	position: fixed;
-	bottom: 20px;
 	right: 0px;
+	top: 20px;
 
 	width: $toolbar-width;
 	padding: 10px;
@@ -71,7 +71,10 @@
 		background-color: $color-dk-grey;
 		
 		width: 100%;
+		
+		top: initial;
 		bottom: 0;
+
 		padding-bottom: 0px;
 		
 		.chapter-info {
