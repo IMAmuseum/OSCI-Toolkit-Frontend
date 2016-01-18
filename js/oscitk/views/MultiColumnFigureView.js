@@ -277,10 +277,16 @@ OsciTk.views.MultiColumnFigure = OsciTk.views.BaseView.extend({
             aspect = modelData.options.aspect;
         }
 		
+		if (modelData.type == 'rti_viewer') {
+			var contentrti = modelData.content;
+			aspect = 900 / 600;
+		}
+		
 		if (modelData.type == '360_slider') {
 			var content360 = modelData.content;
 			aspect = $(content360).data('360-width') / $(content360).data('360-height');
 		}
+
 
         //If a percentage based width hint is specified, convert to number of columns to cover
         if (typeof(modelData.columns) === 'string' && modelData.columns.indexOf("%") > 0) {
