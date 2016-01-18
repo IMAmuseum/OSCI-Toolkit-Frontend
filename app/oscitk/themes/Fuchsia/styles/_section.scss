@@ -74,7 +74,8 @@ body {
 
 			// Offset for p > .paragraph-controls
 			// Changing this to a margin will affect nearest element calculations
-			padding-left: 16px;
+		    padding-left: $paragraph-button-size + $paragraph-button-margin;
+    		text-indent: #{ 0 - ($paragraph-button-size + $paragraph-button-margin) / 2 }; 
 
 			.footnote-reference {
 				margin: 0 5px;

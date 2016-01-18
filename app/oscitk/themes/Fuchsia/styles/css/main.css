@@ -8117,9 +8117,10 @@ body {
   line-height: 1.8125em;
   margin-bottom: 16px;
   color: #3c3c3c;
-  padding-left: 16px;
+  padding-left: 30px;
+  text-indent: -15px;
 }
-/* line 79, ../_section.scss */
+/* line 80, ../_section.scss */
 #section #section-view p .footnote-reference {
   margin: 0 5px;
   display: inline-block;
@@ -8133,26 +8134,26 @@ body {
   line-height: 15px;
   text-align: center;
 }
-/* line 99, ../_section.scss */
+/* line 100, ../_section.scss */
 #section #section-view p .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
 }
-/* line 109, ../_section.scss */
+/* line 110, ../_section.scss */
 #section #section-view p .glossary-term:hover {
   cursor: hand;
 }
-/* line 117, ../_section.scss */
+/* line 118, ../_section.scss */
 #section #section-view .tooltip-inner {
   text-indent: 0;
 }
-/* line 122, ../_section.scss */
+/* line 123, ../_section.scss */
 #section #section-view .plate {
   max-width: 100%;
   max-height: 100%;
 }
 
-/* line 134, ../_section.scss */
+/* line 135, ../_section.scss */
 .loader {
   margin: 80px auto;
   overflow: hidden;
@@ -8169,7 +8170,7 @@ body {
   -webkit-animation: load8 1.1s infinite linear;
   animation: load8 1.1s infinite linear;
 }
-/* line 155, ../_section.scss */
+/* line 156, ../_section.scss */
 .loader, .loader:after {
   border-radius: 50%;
   width: 10em;
@@ -8877,4 +8878,162 @@ images.image_opaque {
 /* line 502, ../_layered-image.scss */
 #edit-initial-frame figure {
   border: 2px solid black;
+}
+
+/* line 5, ../_paragraph-popover.scss */
+.popover {
+  border-radius: 10px;
+  background-color: #676767;
+}
+/* line 13, ../_paragraph-popover.scss */
+.popover.right > .arrow, .popover.right > .arrow:after {
+  border-right-color: #676767;
+}
+/* line 19, ../_paragraph-popover.scss */
+.popover.top > .arrow, .popover.top > .arrow:after {
+  border-top-color: #676767;
+}
+/* line 24, ../_paragraph-popover.scss */
+.popover .popover-content {
+  padding: 0;
+}
+/* line 29, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper {
+  padding: 9px;
+  max-width: 200px;
+  max-height: 240px;
+  font-family: 'Lato', sans-serif;
+}
+/* line 39, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper .nav li a {
+  color: white;
+}
+/* line 41, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper .nav li a:hover {
+  color: #3c3c3c;
+  border-color: transparent;
+}
+/* line 48, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper .nav li.active a {
+  color: #3c3c3c;
+  border: thin solid transparent;
+}
+/* line 57, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper textarea {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  line-height: 16px;
+  height: 115px;
+  width: 100%;
+  padding: 5px;
+  color: #333;
+}
+/* line 73, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper button {
+  font-size: 15px;
+  font-weight: 200;
+  background-color: #fa5d78;
+  border: thin solid transparent;
+}
+
+/* line 84, ../_paragraph-popover.scss */
+.tab-content {
+  height: 160px;
+}
+
+/* line 91, ../_paragraph-popover.scss */
+#cite-target {
+  height: 160px;
+  width: 182px;
+  background-image: url(../../images/ajax-loader.gif);
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* line 1, ../_note-form.scss */
+.note-form-wrapper {
+  height: 160px;
+  display: block;
+}
+
+/* line 6, ../_note-form.scss */
+.paragraph-controls {
+  /*
+  float: left;
+  margin-top: 9px;
+  margin-left: -16px;
+  */
+  /*
+  position: absolute;
+  top: 9px;
+  left: 0px;
+  */
+  display: inline-block;
+  margin-right: 10px;
+  z-index: 2;
+}
+/* line 29, ../_note-form.scss */
+.paragraph-controls .btn {
+  text-transform: uppercase;
+}
+/* line 37, ../_note-form.scss */
+.paragraph-controls .paragraph-button {
+  background-image: url(../../images/icon-cite-grey.png);
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  width: 20px;
+  height: 20px;
+  border: 0;
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+}
+/* line 51, ../_note-form.scss */
+.paragraph-controls .paragraph-button.withNotes {
+  background-image: url(../../images/icon-cite.png);
+}
+
+/* line 61, ../_note-form.scss */
+#note-submit {
+  margin-top: 10px;
+}
+
+/* line 1, ../_citation.scss */
+.citation-wrapper {
+  background: #FFF;
+  overflow-y: scroll;
+  height: 160px;
+}
+/* line 7, ../_citation.scss */
+.citation-wrapper .citations {
+  padding: 0 10px 5px 10px;
+}
+/* line 13, ../_citation.scss */
+.citation-wrapper .citations .citation h4 {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+/* line 18, ../_citation.scss */
+.citation-wrapper .citations .citation > p {
+  font-size: 12px !important;
+  line-height: 14px !important;
+  font-family: 'Lato', sans-serif !important;
+  /* Breaking long URLs */
+  white-space: pre !important;
+  /* CSS 2.0 */
+  white-space: pre-wrap !important;
+  /* CSS 2.1 */
+  white-space: pre-line !important;
+  /* CSS 3.0 */
+  white-space: -pre-wrap !important;
+  /* Opera 4-6 */
+  white-space: -o-pre-wrap !important;
+  /* Opera 7 */
+  white-space: -moz-pre-wrap !important;
+  /* Mozilla */
+  white-space: -hp-pre-wrap !important;
+  /* HP Printers */
+  word-wrap: break-word !important;
+  /* IE 5+ */
 }

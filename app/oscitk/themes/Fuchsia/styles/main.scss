@@ -11,7 +11,11 @@ $color-text: #3c3c3c;
 $font-family-sans-serif:  'Raleway', "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $font-family-serif:       'Bitter', Georgia, "Times New Roman", Times, serif !default;
 
+
+$paragraph-button-size: 20px;
+$paragraph-button-margin: 10px;
 $toolbar-width: 300px;
+
 
 @import "bootstrap/bootstrap";
 @import "typography";
@@ -28,8 +32,10 @@ $toolbar-width: 300px;
 @import "layered-image";
 
 //@import "overlay";
-//@import "paragraph-popover";
-//@import "note-form";
-//@import "citation";
+
+@import "paragraph-popover";
+@import "note-form";
+@import "citation";
+
 //@import "print";
 

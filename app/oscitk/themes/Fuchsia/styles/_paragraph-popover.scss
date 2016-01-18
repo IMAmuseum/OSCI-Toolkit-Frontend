@@ -1,0 +1,100 @@
+$popover-height: 160px;
+$popover-color: $color-dk-grey;
+$popover-color-btn: $color-fuchsia;
+
+.popover {
+
+	border-radius: 10px;
+	//border: thin solid transparent;
+
+	background-color: $popover-color;
+
+	&.right > .arrow {
+		&, &:after {
+			border-right-color: $popover-color;
+		}
+	}
+
+	&.top > .arrow {
+		&, &:after {
+			border-top-color: $popover-color;
+		}
+	}
+
+	.popover-content {
+
+		padding: 0;
+
+
+		.popover-wrapper {
+
+			padding: 9px;
+			max-width: 200px;
+			max-height: 240px;
+
+			font-family: 'Lato', sans-serif;
+
+			.nav {
+				li {
+					a {
+						color: white;
+						&:hover {
+							color: #3c3c3c;
+							border-color: transparent;
+						}
+					}
+
+					&.active {
+						a {
+							color: #3c3c3c;
+							border: thin solid transparent;
+						}
+					}
+
+				}
+			}
+
+			textarea {
+
+				border: none;
+				outline: none;
+
+				font-size: 14px;
+				line-height: 16px;
+
+				height: 115px;
+				width: 100%;
+				padding: 5px;
+
+				color: #333;
+
+			}
+
+			button {
+				font-size: 15px;
+				font-weight: 200;
+				background-color: $popover-color-btn;
+				border: thin solid transparent;
+			}
+
+		}
+	}
+}
+
+.tab-content {
+
+	height: $popover-height;
+	
+}
+
+// AJAX messes up popover height 
+#cite-target {
+
+	height: 160px;
+	width: 182px;
+
+	background-image: url(../../images/ajax-loader.gif);
+	background-position: center center;
+	background-repeat: no-repeat;
+
+}
