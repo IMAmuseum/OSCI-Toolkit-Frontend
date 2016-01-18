@@ -3,6 +3,8 @@
 	font-family: sans-serif;
 	font-size: 0.8em;
 
+	line-height: 20px;
+
 	position: fixed;
 	bottom: 20px;
 	right: 0px;
@@ -11,94 +13,101 @@
 	padding: 10px;
 
 	.chapter-info {
+
 		display: inline-block;
-		width: calc( 100% - 30px );
+		width: calc( 100% - 50px );
 
 		.chapter-number {
 			font-family: $font-family-serif;
-			font-size: 12px;
+			font-size: 14px;
 
 		}
 
 		.chapter-title {
 			font-family: $font-family-sans-serif;
-			font-size: 12px;
+			font-size: 14px;
 		}
 
 
 	}
 
 	.btn-page {
+
 		display: inline-block;
 
-		height: 100%;
-		width: 30px;
+		height: 20px;
+		width: 20px;
 
 		cursor: pointer;
 
-		text-align: center;
 
-		&:hover {
-			color: #888;
+		background-image: url(../../images/icon-arrow-grey.png);
 
-			.indicator {
-				opacity: 1;
-			}
-		}
-
-		&.prev-page {
-			width: 15px;
-		}
+		&.prev-page { }
 
 		&.next-page {
-			width: 15px;
+
+			// Horizontal filp
+		    -moz-transform: scaleX(-1);
+		    -o-transform: scaleX(-1);
+		    -webkit-transform: scaleX(-1);
+		    transform: scaleX(-1);
+		    filter: FlipH;
+		    -ms-filter: "FlipH";
+
 		}
 
 		&.inactive {
 			display: none;
 		}
 
-		.indicator {
-			position: absolute;
-			top: 50%;
+	}
 
-			text-indent: 100%;
-			overflow: hidden;
 
-			height: 100%;
-			width: 100%;
+	background-color: transparent;
 
-			opacity: 0.4;
+	@media( max-width: #{$screen-md-min - 1} ) {
+
+		background-color: $color-dk-grey;
+		
+		width: 100%;
+		bottom: 0;
+		padding-bottom: 0px;
+		
+		.chapter-info {
+
+			color: #fff;
+
+			.chapter-number,
+			.chapter-title {
+				display: inline-block;
+				height: 20px;
+			}
+
+			.chapter-title {
+				margin-left: 30px;
+			}
 
 		}
+
+		.btn-page {}
 
 	}
 
 }
 
-/*
-.progress.vertical {
-  position: fixed;
-  top: 70px;
-  right: 40px;
-  width: .25em;
-  height: 85%;
+.progress {
+
+	height: 6px;
+	margin-bottom: 10px;
+
+	.progress-bar {
+		&.progress-bar-fuchsia {
+			background-color: $color-fuchsia;
+		}
+	}
+
 }
-.progress.vertical.bottom {
-  position: relative;
-}
-.progress.vertical.bottom .progressbar-front-text {
-  position: absolute;
-  bottom: 0;
-}
-.progress.vertical .progress-bar {
-  width: 100%;
-  height: 0;
-  -webkit-transition: height 0.6s ease;
-  -o-transition: height 0.6s ease;
-  transition: height 0.6s ease;
-}
-*/
 
 // Double-clicking on the navigation tends to select it...
 

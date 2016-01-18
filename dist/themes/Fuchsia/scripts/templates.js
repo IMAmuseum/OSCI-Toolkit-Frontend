@@ -14,7 +14,7 @@ this["JST"]["app/oscitk/themes/Fuchsia/templates/navigation.tpl.html"] = functio
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="progress">\n\t<div class="progress-bar progress-bar-danger progress-bar-striped" style="width: 50%"></div>\n</div>\n\n<div class="chapter-info">\n\t<div class="chapter-number">Chapter I</div>\n\t<div class="chapter-title">Down the Rabbit-Hole</div>\n</div>\n\n<div class="btn-page prev-page"><div class="indicator">&lt;</div></div>\n<div class="btn-page next-page"><div class="indicator">&gt;</div></div>';
+__p += '<div class="progress">\n\t<div class="progress-bar progress-bar-fuchsia"></div>\n</div>\n\n<div class="chapter-info">\n\t<div class="chapter-number">Chapter I</div>\n\t<div class="chapter-title">Down the Rabbit-Hole</div>\n</div>\n<div class="pull-right">\n\t<div class="btn-page prev-page"></div>\n\t<div class="btn-page next-page"></div>\n</div>';
 
 }
 return __p
