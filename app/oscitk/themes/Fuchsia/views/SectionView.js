@@ -71,6 +71,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // see NavigationView.js
         Backbone.trigger("columnRenderStart");
         
+        // that refers to the view
+        var that = this;
 
         $('figure').each( function( i, e ) {
 
@@ -106,10 +108,29 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                         $content.appendTo( $container );
 
 
-                        new window.LayeredImage( $content );
+                        var li = new window.LayeredImage( $content );
+
+                        // This forces a re-centering of the layered image on windows.resize
+                        that.listenTo(Backbone, 'windowResized', function(e) {
+                            setTimeout( function() {
+
+                                li.map.resize(); // recenter
+                                
+                                try {
+                                    li.resetZoomRange(); // ensure it can scale down
+                                    li.reset(); // reset size and options
+                                    li.map.resize();
+                                } catch(e) {
+                                    // slider not init'd error
+                                }
+                                
+                            }, 100 ); // this is an estimate, tweak it if needed
+                        });
 
                     }
+
                 });
+
             }
 
         }); 
