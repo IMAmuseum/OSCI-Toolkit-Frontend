@@ -216,8 +216,6 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
                 that.noteSubmit(e);
             });
 
-
-
             // Remove popover if there is a click outside the popover
             // $('html').one() wrapper that rebinds until success
             var selfbound = function(e) {

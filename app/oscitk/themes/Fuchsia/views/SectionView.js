@@ -3,8 +3,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     template: OsciTk.templateManager.get('section'),
     events: {
         'click .paragraph-button': 'paragraphButtonClicked',
-        'click #note-submit': 'noteSubmit',
-        'click #cite': 'getCitation',
     },
     initialize: function(options) {
 
@@ -180,7 +178,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         var plateFigures = app.collections.figures.where({plate: true});
         if( plateFigures.length > 0 ) {
             var $plate = $( plateFigures[0].get('body') );
-            var $table = this.$el;
+            var $table = this.$el.find('#figure-plate-container');
 
             var id = $plate.find('object').attr('id');
             var $img = $plate.find('img');
@@ -241,42 +239,5 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         return true;
     },
 
-    // CALLED WHEN THE USER HITS THE SUBMIT NOTES BUTTON
-    noteSubmit: function(e) {
-
-        var textarea = $(e.currentTarget).parent().find('textarea');
-        var noteText = textarea.val();
-
-        var cid = textarea.data('id');
-        var paragraph_number = textarea.data('paragraph_number');
-
-        var note = app.collections.notes.get(cid);
-            note.set('note', noteText);
-
-        // Check to see if the red dot needs to be toggled
-        if ( $.trim(noteText) !== '') {
-
-            note.save();
-            textarea.html(noteText);
-            $('#paragraph-'+paragraph_number).addClass('withNotes');
-
-        }else{
-
-            note.destroy();
-            $('#paragraph-'+paragraph_number).removeClass('withNotes');
-
-        }
-
-        $('#paragraph-'+paragraph_number).popover({
-
-            content: function() {
-                return $("#popover-content").html();
-            }
-            
-        });
-
-        $('#paragraph-'+paragraph_number).popover('destroy');
-
-    },
 
 });

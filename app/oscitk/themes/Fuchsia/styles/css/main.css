@@ -8302,6 +8302,12 @@ body {
   user-select: none;
 }
 
+@media (max-width: 991px) {
+  /* line 143, ../_navigation.scss */
+  body {
+    margin-bottom: 48px;
+  }
+}
 /* line 5, ../_figures.scss */
 #section #section-view figure,
 #section #section-view figure .figure_content,

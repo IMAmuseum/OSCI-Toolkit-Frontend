@@ -1,6 +1,9 @@
 OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	id: 'navigation-view',
 	template: OsciTk.templateManager.get('navigation'),
+	events: {
+        //"scroll" : "updateProgress",
+    },
 	initialize: function() {
 
 		// Stores current section from SectionCollection
@@ -76,6 +79,12 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		});
 
+		// Bind scroll event to progress bar
+		var that = this;
+		$(window).on('scroll', function() {
+			that.updateProgress();
+		});
+
 	},
 
 	render: function() {
@@ -86,6 +95,33 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 	},
 
+    updateProgress: function() {
+
+        var value = $(window).scrollTop();
+        var offset = 0;
+        var sectionValue = value - offset;
+
+        $('.progress .progress-bar').attr('data-now', value);
+
+        if(! this.maxHeightSet) {
+
+            var height = $(document).height();
+            var w = window,
+                d = document,
+                e = d.documentElement,
+                g = d.getElementsByTagName("body")[0],
+                cy = g.clientHeight;
+
+            var max = (height-cy)-offset;
+            $('.progress .progress-bar').attr('data-max', max);
+
+            var percent = Math.floor((sectionValue/max)*100);
+            $('.progress .progress-bar').attr('style', 'width: '+percent+'%');
+
+        }
+
+
+    },
 	
 	// Book Title | Section Title
 	setDocumentTitle: function() {

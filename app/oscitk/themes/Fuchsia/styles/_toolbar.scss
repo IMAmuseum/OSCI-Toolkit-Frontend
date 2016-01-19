@@ -1,0 +1,360 @@
+$toolbar-margin-bottom: 5px;
+
+#toolbar-overlay-wrapper {
+	
+	position: fixed;
+
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	background: red;
+
+	#toolbar-overlay {
+
+	}
+
+	#toolbar-sidebar {
+
+	}
+
+}
+
+/*
+#toolbar {
+
+	display: none;
+
+	float: left;
+
+	position: fixed;
+	right: 0px;
+	top: $header-height;
+	bottom: $navbar-height;
+
+	// Constrains toolbar; see #toolbar-readout
+	min-width: 320px;
+	width: 25%;
+
+	// TODO: Make the navbar have higher z-index
+	z-index: 10001;
+
+	background: $color-dark-red;
+
+	#toolbar-view {
+
+		#toolbar-area {
+
+			float: left;
+			height: 100%;
+
+			background: $color-light-red;
+
+
+			z-index: 990;
+
+			list-style-type: none;
+			padding: 0;
+
+			li {
+
+				margin-bottom: $toolbar-margin-bottom;
+
+				cursor: hand;
+				border: 0;
+				font: 0/0 a;
+				text-shadow: none;
+				color: transparent;
+
+				background-size: 50px 50px;
+				background-repeat: no-repeat;
+				width: 50px;
+				height: 50px;
+
+				&.active {
+					background-color: $color-dark-red;
+				}
+
+				&.close-toolbar-item {
+					background-image: url(../../images/light/x_icon.png);
+				}
+
+
+				&.tocToolbarView-toolbar-item {
+					background-image: url(../../images/light/contents_icon.png);
+					&:hover {
+						background-image: url(../../images/light/contents_icon.png);
+					}
+				}
+
+				&.searchToolbarView-toolbar-item {
+					background-image: url(../../images/light/search_icon.png);
+				}
+
+				&.glossaryToolbarView-toolbar-item {
+					background-image: url(../../images/light/glossary_icon.png);
+				}
+
+				&.footnotesToolbarView-toolbar-item {
+					background-image: url(../../images/light/footnotes_icon.png);
+				}
+
+				&.figuresToolbarView-toolbar-item {
+					background-image: url(../../images/light/figures_icon.png);
+				}
+
+				&.notesToolbarView-toolbar-item {
+					background-image: url(../../images/light/notes_icon.png);
+				}
+
+				&.citationsToolbarView-toolbar-item {
+					background-image: url(../../images/light/cite_icon.png);
+				}
+
+				&.accountToolbarView-toolbar-item {
+					background-image: url(../../images/light/user_icon.png);
+					&:hover {
+						background-image: url(../../images/light/user_icon.png);
+					}
+				}
+				
+			}
+		}
+	}
+
+	#toolbar-filler,
+	#toolbar-readout {
+		float: left;
+		height: 100%;
+
+		// Relative to position:fixed #toolbar
+		width: calc( 100% - 50px );
+
+		color: white;
+
+	}
+
+	#toolbar-filler {
+		background: $color-light-red;
+
+		p {
+			font-family: 'Lato', sans-serif;
+			margin: 0;
+
+			line-height: 50px;
+			padding-bottom: $toolbar-margin-bottom;
+			padding-left: 10px;
+
+			&.toolbar-trigger {
+				cursor: pointer;
+			}
+
+		}
+	}
+
+	#toolbar-readout {
+
+		display: none;
+
+		background: $color-dark-red;
+
+		padding: 15px 0px 0px 30px;
+
+		> div {
+
+			height: 100%;
+
+			> div {
+
+				height: 100%;
+
+				h3 {
+					margin: 0;
+					margin-right: -30px;
+					padding-right: 30px;
+					border-bottom: 1px white solid;
+					padding-bottom: 8px;
+				}
+
+				.toolbar-scroll {
+
+					overflow-y: scroll;
+					height: calc(100% - 39px);
+
+					padding: 5px 5px 10px 0px;
+
+					a:not(.btn) {
+						color: white;
+
+						&:hover {
+							color: $color-light-red;
+							text-decoration: none;
+						}
+					}
+
+					p {
+						font-family: 'Lato', sans-serif;
+					}
+
+					ul {
+
+						list-style: none;
+						padding: 0;
+						margin: 0;
+
+						li {
+
+							margin: 10px 0px;
+
+							h4, h5 {
+								margin: 0px;
+							}
+
+						}
+
+					}
+
+				}
+			}
+		}
+	}
+}
+
+
+
+#toolbar-glossary {
+
+	#glossary-filter-box {
+		color: black;
+	}
+
+	#glossary-term-listing li {
+		cursor: pointer;
+	}
+
+	#glossary-term-listing-mobile {
+		display: none;
+	}
+
+	#glossary-content {
+
+		border-top: 1px solid white;
+		
+		p {
+			p {
+				span {
+					color: white !important;
+				}
+			}
+		}
+	}
+
+	@media ( max-width: 767px ) {
+
+		#glossary-term-listing {
+			display: none;
+		}
+
+		#glossary-content {
+			display: none;
+		}
+
+		#glossary-term-listing-mobile {
+			display: block;
+
+			> li {
+
+				cursor: pointer;
+				border-bottom: 1px solid white;
+				ul {
+					display: none;
+
+					p {
+						span {
+							color: white !important;
+						}
+					}
+				}
+
+			}
+
+		}
+
+	}
+
+}
+
+#toolbar-figures {
+
+	position: relative;
+
+	figure {
+
+		img, figcaption {
+			max-width: 75%
+		}
+
+	}
+
+}
+
+a.toolbar-link {
+	display: block;
+	height: 22px;
+	width: 22px;
+	padding: 3px 1px;
+	text-align: center;
+	cursor: pointer;
+
+	img {
+		max-width: 75%;
+	}
+}
+
+#toolbar-notes {
+	.notesListItem {
+
+		.note-buttons {
+			float: left;
+		}
+
+		.the-note {
+			margin-left: 35px;
+		}
+
+	}
+}
+
+#toolbar-account {
+
+	.account-footer {
+		margin-top: 10px;
+	}
+
+	.form-error:empty {
+		display: none;
+	}
+
+	h4 {
+		margin-bottom: 5px
+	}
+
+	h5{
+		margin-top: 5px;
+		margin-bottom: 22px;
+	}
+
+	.user-icon {
+		width: 52px;
+		height: 52px;
+		margin-right: 10px;
+		border-radius: 50%;
+		background-color: $color-light-red;
+		background-image: url(../../images/light/user_icon.png);
+		background-size: contain;
+		float: left;
+	}
+
+}
+*/

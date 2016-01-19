@@ -24,15 +24,19 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			//navbarView: new OsciTk.views.Navbar(),
 			//fontSizeView: new OsciTk.views.FontSize(),
 
-			//toolbarView: new OsciTk.views.Toolbar(),
-			//tocToolbarView: new OsciTk.views.TocToolbar(),
+			toolbarView: new OsciTk.views.Toolbar(),
+
+			accountToolbarView: new OsciTk.views.AccountToolbar(),
+			tocToolbarView: new OsciTk.views.TocToolbar(),
+			notesToolbarView: new OsciTk.views.NotesToolbar(),
+
 			//searchToolbarView: new OsciTk.views.SearchToolbar(),
 			//glossaryToolbarView: new OsciTk.views.GlossaryToolbar(),
 			//footnotesToolbarView: new OsciTk.views.FootnotesToolbar(),
 			//figuresToolbarView: new OsciTk.views.FiguresToolbar(),
-			//notesToolbarView: new OsciTk.views.NotesToolbar(),
+			
 			//citationsToolbarView: new OsciTk.views.CitationsToolbar(),
-			//accountToolbarView: new OsciTk.views.AccountToolbar(),
+			
 
 		};
 
@@ -54,7 +58,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 
 		// TODO: Move these functions to ToolbarView.js?
-		/*
+
 		this.listenTo(Backbone, "toolbarInline", function(toolbarItem) {
 			this.toolbarInline(toolbarItem);
 		});
@@ -66,7 +70,6 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		this.listenTo(Backbone, "toolbarRemoveViews", function() {
 			this.toolbarToggle();
 		});
-		*/
 
 	},
 
@@ -78,7 +81,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		$('body').append(this.el);
 
 	},
-	/*
+
 	toolbarInline: function(toolbarItem) {
 		var view = _.pick(app.views, toolbarItem.view);
 
@@ -123,5 +126,5 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		}, this);
 
 	}
-	*/
+	
 });
