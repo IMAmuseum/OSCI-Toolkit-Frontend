@@ -9,7 +9,7 @@
 	right: 0px;
 	top: 20px;
 
-	width: $toolbar-width;
+	width: $toolbar-width-md;
 	padding: 10px;
 
 	.chapter-info {
@@ -63,10 +63,8 @@
 
 	}
 
-
-	background-color: transparent;
-
-	@media( max-width: #{$screen-md-min - 1} ) {
+	// Navigation collapses to bottom below this point
+	@media( max-width: $osci-bp-lg ) {
 
 		background-color: $color-dk-grey;
 		
@@ -112,6 +110,7 @@
 
 }
 
+// For the .progress-bar in navbar
 .progress {
 
 	height: 6px;
@@ -126,7 +125,6 @@
 }
 
 // Double-clicking on the navigation tends to select it...
-
 *.unselectable {
 
    -moz-user-select: none;
@@ -139,8 +137,9 @@
 
 }
 
-@media( max-width: #{$screen-md-min - 1} ) {
+// Offset body for the fixed navbar
+@media( max-width: $osci-bp-lg ) {
 	body {
-		margin-bottom: 48px;
+		margin-bottom: $navigation-height;
 	}
 }

@@ -254,7 +254,7 @@ this["JST"]["app/oscitk/themes/Fuchsia/templates/toolbar.tpl.html"] = function(o
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div id="toolbar-overlay-wrapper">\n\t<div id="toolbar-overlay"></div>\n\t<div id="toolbar-sidebar"></div>\n</div>\n\n<div id="toolbar-area">\n\t<div id="toolbar-account"></div>\n\t<div id="toolbar-toc"></div>\n\t<div id="toolbar-notes"></div>\n</div>';
+__p += '<div id="toolbar-overlay-wrapper">\n\n\t<div id="toolbar-overlay"></div>\n\n\t<div id="toolbar-sidebar">\n\t\t<div id="toolbar-account"></div>\n\t\t<div id="toolbar-toc"></div>\n\t\t<div id="toolbar-notes"></div>\n\t</div>\n\n</div>\n\n<div id="toolbar-area"></div>';
 
 }
 return __p

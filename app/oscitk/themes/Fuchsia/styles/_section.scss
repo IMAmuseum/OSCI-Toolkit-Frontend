@@ -9,7 +9,12 @@ body {
 	font-size: 18px;
 	line-height: 24px;
 
-	width: calc( 100% - #{$toolbar-width} );
+	width: calc( 100% - #{$toolbar-width-md} );
+
+	// Toolbar should shrink to vertical here as well
+	@media( max-width: $osci-bp-lg ) {
+		width: calc( 100% - #{$toolbar-width-sm} );
+	}
 
 	#section-view {
 

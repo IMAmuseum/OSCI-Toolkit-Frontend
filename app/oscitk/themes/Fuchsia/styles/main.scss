@@ -11,20 +11,35 @@ $color-text: #3c3c3c;
 $font-family-sans-serif:  'Raleway', "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $font-family-serif:       'Bitter', Georgia, "Times New Roman", Times, serif !default;
 
-
+// For the little speech-bubble icons representing notes
 $paragraph-button-size: 20px;
 $paragraph-button-margin: 10px;
-$toolbar-width: 300px;
+
+// Shrinks to vertical layout on smaller screens
+$toolbar-width-md: 300px;
+$toolbar-width-sm: 50px;
+
+// We don't have to hard-code the navigation height.
+// This is just for constraining the #toolbar-overlay-wrapper
+//   and setting body's margin-bottom.
+$navigation-height: 48px;
 
 
+// Import bootstrap variables for the below to work
 @import "bootstrap/bootstrap";
+
+// Intended to be used w/ max-width
+$osci-bp-sm: 480px; // Both navigation and toolbar are collapsed at or below this width
+$osci-bp-md: 600px; // Toolbar collapses to vertical at or below this width
+$osci-bp-lg: #{$screen-md-min - 1}; // Navigation collapses to bottom of screen at or below this width
+
 @import "typography";
 @import "browsehappy";
 
 @import "section";
 @import "navigation";
 //@import "header";
-//@import "toolbar";
+@import "toolbar";
 //@import "navbar";
 //@import "navbar-slider";
 

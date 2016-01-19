@@ -44,7 +44,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		//this.addView(app.views.headerView, '#header');
 
 		// Add the toolbar view
-		//this.addView(app.views.toolbarView, '#toolbar');
+		this.addView(app.views.toolbarView, '#toolbar');
 
 		// Add the navbar view
 		//this.addView(app.views.navbarView, '#navbar');
