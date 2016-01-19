@@ -18,20 +18,40 @@ $toolbar-margin-bottom: 5px;
 
 		.toolbar-item-view {
 
-
 			list-style-type: none;
 			padding: 0;
 
-			&.accountToolbarView-toolbar-item {
+			cursor: hand;
 
+			// This disables all text inside the button
+			border: 0;
+			font: 0/0 a;
+			text-shadow: none;
+			color: transparent;
+
+			width: 50px;
+			height: 50px;
+
+			background-size: 50px 50px;
+
+			&.accountToolbarView-toolbar-item {
+				background-image: url(../../images/light/icon-user.png);
 			}
 
 			&.tocToolbarView-toolbar-item {
-
+				background-image: url(../../images/light/icon-contents.png);
 			}
 
-			&.accountToolbarView-toolbar-item {
+			&.notesToolbarView-toolbar-item {
+				background-image: url(../../images/light/icon-notes.png);
+			}
 
+			display: inline-block;
+
+			@media( max-width: $osci-bp-md ) {
+				display: block;
+				bottom: initial;
+				top: 0;
 			}
 
 		}
@@ -87,6 +107,79 @@ $toolbar-margin-bottom: 5px;
 
 		}
 
+	}
+
+	// #toolbar-overlay-wrapper > #toolbar-sidebar
+	#toolbar-readout {
+
+		//float: left;
+		//height: 100%;
+
+		color: white;
+
+		//display: none;
+
+		//background: $color-dark-red;
+
+		padding: 15px 0px 0px 30px;
+
+		> div {
+
+			height: 100%;
+
+			> div {
+
+				height: 100%;
+
+				h3 {
+					margin: 0;
+					margin-right: -30px;
+					padding-right: 30px;
+					border-bottom: 1px white solid;
+					padding-bottom: 8px;
+				}
+
+				.toolbar-scroll {
+
+					overflow-y: scroll;
+					height: calc(100% - 39px - #{50px} );
+
+					padding: 5px 5px 10px 0px;
+
+					a:not(.btn) {
+						color: white;
+
+						&:hover {
+							//color: $color-light-red;
+							text-decoration: none;
+						}
+					}
+
+					p {
+						//font-family: 'Lato', sans-serif;
+					}
+
+					ul {
+
+						list-style: none;
+						padding: 0;
+						margin: 0;
+
+						li {
+
+							margin: 10px 0px;
+
+							h4, h5 {
+								margin: 0px;
+							}
+
+						}
+
+					}
+
+				}
+			}
+		}
 	}
 
 }
