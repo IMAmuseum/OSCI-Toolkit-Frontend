@@ -91,6 +91,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			// 0 = beginning, 1 = end
 
 			var gotoPage = 0; 
+			var selector = false;
 
             if (data.identifier) {
 
@@ -111,7 +112,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
                         if(data.identifier.search(/^p-[0-9]+/) > -1) {
 
                         	var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
-                            gotoPage = this.getPageForSelector('p[data-paragraph_number='+pid+']');
+                        	selector = 'p[data-paragraph_number='+pid+']';
+                            gotoPage = this.getPageForSelector( selector );
 
                         	break;
 
@@ -124,7 +126,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
                         if (data.identifier.search(/^fig-[0-9]+-[0-9]+$/) > -1) {
 
                         	var fid = data.identifier;
-                        	gotoPage = this.getPageForSelector("#" + fid);
+                        	selector = "#" + fid;
+                        	gotoPage = this.getPageForSelector( selector );
 
                         	break;
 
@@ -154,6 +157,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
                         */
 
                         // Route to specific element
+                        selector = data.identifier;
                         gotoPage = this.getPageForSelector( data.identifier );
 	                    break;
 
@@ -167,6 +171,18 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
             var scroll = gotoPage * $(document).height();
             	scroll = scroll - $(window).height() / 2;
             	scroll = Math.max( 0, scroll );
+
+            if( selector ) {
+            	// todo: for paragraphs, use the button selector, not the paragraph selector
+            	scroll = scroll + $(selector).height() / 2;
+            	console.log( $(selector).height() / 2 );
+            }
+
+
+            if( parseInt( this.$el.css('bottom') ) === 0 ) {
+            	
+            	//scroll = scroll - this.$el.height();
+            }
 
             $(window).scrollTop( scroll );
             
@@ -253,8 +269,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
         $('.progress .progress-bar').attr('data-now', value);
 
         $('.progress .progress-bar').attr('style', 'width: ' + percent + '%');
-
-
 
     },
 
