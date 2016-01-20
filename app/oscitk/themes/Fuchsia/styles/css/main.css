@@ -8031,6 +8031,35 @@ button.close {
     display: none !important;
   }
 }
+/* line 36, ../main.scss */
+#osci-bp-sm, #osci-bp-md, #osci-bp-lg, #osci-bp-xl {
+  float: none;
+}
+
+@media (max-width: 480px) {
+  /* line 41, ../main.scss */
+  #osci-bp-sm {
+    float: left;
+  }
+}
+@media (min-width: 481px) and (max-width: 600px) {
+  /* line 45, ../main.scss */
+  #osci-bp-md {
+    float: left;
+  }
+}
+@media (min-width: 601px) and (max-width: 991px) {
+  /* line 49, ../main.scss */
+  #osci-bp-lg {
+    float: left;
+  }
+}
+@media (min-width: 992px) {
+  /* line 53, ../main.scss */
+  #osci-bp-xl {
+    float: left;
+  }
+}
 /* line 1, ../_typography.scss */
 p {
   font-family: "Bitter", Georgia, "Times New Roman", Times, serif;

@@ -4,7 +4,7 @@ this["JST"]["app/oscitk/themes/Fuchsia/templates/app.tpl.html"] = function(obj) 
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<!-- TOP -->\n<header class="hidden-print">\n\t<div id="header"></div>\n</header>\n\n<!-- BOTTOM -->\n<div id="navbar" class="hidden-print unselectable"></div>\n\n<!-- RIGHT -->\n<div id="toolbar" class="hidden-print"></div>\n\n<!-- CENTER -->\n<!--\n<div id="loader" class="loader hidden-print">Loading...</div>\n-->\n\n<div id="section"></div>\n\n<!-- RIGHT -->\n<div id="navigation" class="hidden-print unselectable"></div>\n';
+__p += '<!-- TOP -->\n<header class="hidden-print">\n\t<div id="header"></div>\n</header>\n\n<!-- RIGHT -->\n<div id="toolbar" class="hidden-print"></div>\n\n<!-- CENTER -->\n<!--\n<div id="loader" class="loader hidden-print">Loading...</div>\n-->\n\n<div id="section"></div>\n\n<!-- RIGHT -->\n<div id="navigation" class="hidden-print unselectable"></div>\n\n<!-- Breakpoint testing area -->\n<div id="osci-bp-sm"></div>\n<div id="osci-bp-md"></div>\n<div id="osci-bp-lg"></div>\n<div id="osci-bp-xl"></div>';
 
 }
 return __p
