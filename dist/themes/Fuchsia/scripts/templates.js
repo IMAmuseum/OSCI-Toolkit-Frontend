@@ -195,7 +195,7 @@ __p += '\n\t\t<ul class="notesList">\n\t\t\t';
  _.each(notes, function(note) { ;
 __p += '\n\t\t\t\t<li class="notesListItem">\n\t\t\t\t\t<div class="note-buttons">\n\t\t\t\t\t\t<a class="note-link toolbar-link pull-left" data-content_id="' +
 ((__t = ( note.get('content_id') )) == null ? '' : __t) +
-'">\n\t\t\t\t\t\t\t<img src="images/icon-link.png"/>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t\t<!-- <a href="#" class="noteEdit" data-content_id="' +
+'" href="javascript:;">\n\t\t\t\t\t\t\t<img src="images/icon-link.png"/>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t\t<!-- <a href="#" class="noteEdit" data-content_id="' +
 ((__t = ( note.get('content_id') )) == null ? '' : __t) +
 '">Edit</a> -->\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="the-note">\n\t\t\t\t\t\t<span class="note-content">' +
 ((__t = ( note.get('note') )) == null ? '' : __t) +

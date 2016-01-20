@@ -78,13 +78,13 @@ $toolbar-margin-bottom: 5px;
 		z-index: 10001;
 
 		// TESTING
-		background: rgba(255,0,0, 0.25);
+		//background: rgba(255,0,0, 0.25);
 
 		#toolbar-overlay {
 			width: calc( 100% - #{$toolbar-width-md} );
-			background: rgba(0,255,0, 0.25);
+			background: rgba(0,0,0, 0.65);
 
-			box-shadow: 0px 0px 5px grey;
+			box-shadow: 0px 0px 5px black;
 
 			position: relative;
 			z-index: 2;
@@ -99,7 +99,7 @@ $toolbar-margin-bottom: 5px;
 
 		#toolbar-sidebar {
 			width: $toolbar-width-md;
-			background: rgba(0,0,255, 0.25);
+			background: $color-fuchsia;
 			//background: white;
 
 			height: 100%;
@@ -120,8 +120,7 @@ $toolbar-margin-bottom: 5px;
 		//display: none;
 
 		//background: $color-dark-red;
-
-		padding: 15px 0px 0px 30px;
+		padding: 8px 8px 8px 12px;
 
 		> div {
 
@@ -133,8 +132,6 @@ $toolbar-margin-bottom: 5px;
 
 				h3 {
 					margin: 0;
-					margin-right: -30px;
-					padding-right: 30px;
 					border-bottom: 1px white solid;
 					padding-bottom: 8px;
 				}
@@ -142,7 +139,7 @@ $toolbar-margin-bottom: 5px;
 				.toolbar-scroll {
 
 					overflow-y: scroll;
-					height: calc(100% - 39px - #{50px} );
+					height: calc(100% - 39px - #{50px} - 15px );
 
 					padding: 5px 5px 10px 0px;
 
@@ -183,6 +180,54 @@ $toolbar-margin-bottom: 5px;
 	}
 
 }
+
+
+#toolbar-notes {
+	.notesListItem {
+
+		.note-buttons {
+			float: left;
+		}
+
+		.the-note {
+			margin-left: 35px;
+		}
+
+	}
+}
+
+#toolbar-account {
+
+	.account-footer {
+		margin-top: 10px;
+	}
+
+	.form-error:empty {
+		display: none;
+	}
+
+	h4 {
+		margin-bottom: 5px
+	}
+
+	h5{
+		margin-top: 5px;
+		margin-bottom: 22px;
+	}
+
+	.user-icon {
+		width: 52px;
+		height: 52px;
+		margin-right: 10px;
+		border-radius: 50%;
+		background-color: $color-lt-grey;
+		background-image: url(../../images/light/icon-user.png);
+		background-size: contain;
+		float: left;
+	}
+
+}
+
 
 /*
 

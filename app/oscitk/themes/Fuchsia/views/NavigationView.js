@@ -79,6 +79,140 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		});
 
+		this.listenTo(Backbone, 'navigate', function( data ) {
+
+			// In this theme, navigate accomplished two things:
+			//    1. Change section
+			//    2. Scroll to the item refered to in identifier
+
+			// Here, gotoPage refers to how far to scroll in percent
+			// 0 = beginning, 1 = end
+
+			var gotoPage = 0; 
+
+            if (data.identifier) {
+
+                switch (data.identifier) {
+
+                    case 'end':
+                        app.router.navigate("section/" + this.getCurrentNavigationItem().get('id'), { trigger: false } );
+                        gotoPage = 1;
+                    break;
+
+                    case 'start':
+                        gotoPage = 0;
+                    break;
+
+                    default:
+
+                        // Route to a paragraph /p-[section_id]-[id]
+                        if(data.identifier.search(/^p-[0-9]+/) > -1) {
+
+                        	var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
+                            gotoPage = this.getPageForSelector('p[data-paragraph_number='+pid+']');
+
+                        	break;
+
+                        }
+
+
+                        // Route to a figure /fig-[section_id]-[figure_index]-[occurance]
+                        // [occurance] is meant to be used when the same figure is placed multiple times
+                        // We'll ignore it for now and just link to the first one...
+                        if (data.identifier.search(/^fig-[0-9]+-[0-9]+$/) > -1) {
+
+                        	var fid = data.identifier;
+                        	gotoPage = this.getPageForSelector("#" + fid);
+
+                        	break;
+
+                        }
+
+						/*
+						// Route for footnote references
+                        if (data.identifier.search(/^fn-[0-9]+-[0-9]+/) > -1) {
+                            
+                            matches = data.identifier.match(/^fn-[0-9]+-[0-9]+/);
+                            refs = $('a[href="#' + matches[0] + '"]');
+                            if (refs.length === 1) {
+                                page_for_id = this.getPageNumberForSelector(refs[0]);
+                            }
+                            else {
+                                // find visible occurence
+                                for (j = 0; j < refs.length; j++) {
+                                    if (this.isElementVisible(refs[j])) {
+                                        page_for_id = this.getPageNumberForSelector(refs[j]);
+                                        break;
+                                    }
+                                }
+                            }
+                            break;
+                        
+                        }
+                        */
+
+                        // Route to specific element
+                        gotoPage = this.getPageForSelector( data.identifier );
+	                    break;
+
+
+                }
+            }
+
+            console.log( gotoPage );
+            console.log( gotoPage * $(window).height() - $(window).height() / 2 );
+            $(window).scrollTop( Math.max( 0, gotoPage * $(window).height() - $(window).height() / 2) );
+
+            /*
+            // this.getPageForSelector() will return false (0) when the selector matches nothing
+            // we should fix the URL and remain where we are when that happens
+            // TODO: maybe alert the user that they had an invalid link?
+            if( typeof gotoPage === 'undefined') {
+            	gotoPage = this.page;
+            	app.router.navigate("section/" + this.getCurrentNavigationItem().get('id'), { trigger: true } );
+            }
+
+            // page width is used for determining how far to scroll
+			var $target = $('#section');
+			var page_width = $target.outerWidth();
+
+			// account for column gutter
+			if( $target.attr('data-columns-rendered') == 1 ) {
+				page_width -= 10;
+			}else{
+				page_width += 10;
+			}
+		
+			*/
+
+			/*
+			// Check if the page is available...
+			var previous = this.currentNavigationItem.get('previous');
+			var next = this.currentNavigationItem.get('next');
+		
+			// If navigating to other section, table of contents no longer works
+			var navigateRestoreToolbar = function( route ) {
+				
+				var $toolbar = app.views.toolbarView.$el;
+				var $activeItem = $toolbar.find('#toolbar-area > li.active');
+				var restoreItem = $activeItem.length > 0;
+
+				if( restoreItem ) {
+					var activeToolbarItemClass = $activeItem.attr('class').match(/(:?\s)(.+?-toolbar-item)(:?\s|$)/)[2];
+				}
+
+				Backbone.trigger("toolbarRemoveViews");
+				app.router.navigate( route, { trigger: true } );
+
+				if( restoreItem ) {
+					$toolbar.find( '.' + activeToolbarItemClass ).click();
+				}
+
+			};
+			*/
+
+		});
+
 		// Bind scroll event to progress bar
 		var that = this;
 		$(window).on('scroll', function() {
@@ -121,6 +255,10 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
         }
 
 
+    },
+
+    getPageForSelector: function( e ) {
+    	return  $(e).offset().top / $(window).height();
     },
 	
 	// Book Title | Section Title
