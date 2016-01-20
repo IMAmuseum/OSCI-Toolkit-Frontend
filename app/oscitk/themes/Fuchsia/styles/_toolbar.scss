@@ -20,9 +20,7 @@ $toolbar-margin-bottom: 5px;
 
 			list-style-type: none;
 			padding: 0;
-
-			cursor: hand;
-
+			
 			// This disables all text inside the button
 			border: 0;
 			font: 0/0 a;
@@ -33,6 +31,8 @@ $toolbar-margin-bottom: 5px;
 			height: 50px;
 
 			background-size: 50px 50px;
+
+			cursor: pointer;
 
 			&.accountToolbarView-toolbar-item {
 				background-image: url(../../images/light/icon-user.png);
@@ -143,9 +143,11 @@ $toolbar-margin-bottom: 5px;
 				.toolbar-scroll {
 
 					overflow-y: scroll;
-					height: calc(100% - 39px - #{50px} - 15px );
+					height: calc(100% - 39px - #{50px} );
 
 					padding: 5px 5px 10px 0px;
+
+				    border-bottom: thin solid white;
 
 					a:not(.btn) {
 						color: white;

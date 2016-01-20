@@ -8332,7 +8332,6 @@ body {
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view {
   list-style-type: none;
   padding: 0;
-  cursor: hand;
   border: 0;
   font: 0/0 a;
   text-shadow: none;
@@ -8340,6 +8339,7 @@ body {
   width: 50px;
   height: 50px;
   background-size: 50px 50px;
+  cursor: pointer;
   display: inline-block;
 }
 /* line 37, ../_toolbar.scss */
@@ -8423,59 +8423,60 @@ body {
 /* line 143, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll {
   overflow-y: scroll;
-  height: calc(100% - 39px - 50px - 15px );
+  height: calc(100% - 39px - 50px );
   padding: 5px 5px 10px 0px;
+  border-bottom: thin solid white;
 }
-/* line 150, ../_toolbar.scss */
+/* line 152, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll a:not(.btn) {
   color: white;
 }
-/* line 153, ../_toolbar.scss */
+/* line 155, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll a:not(.btn):hover {
   text-decoration: none;
 }
-/* line 163, ../_toolbar.scss */
+/* line 165, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 169, ../_toolbar.scss */
+/* line 171, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li {
   margin: 10px 0px;
 }
-/* line 173, ../_toolbar.scss */
+/* line 175, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li h4, #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li h5 {
   margin: 0px;
 }
 
-/* line 192, ../_toolbar.scss */
+/* line 194, ../_toolbar.scss */
 #toolbar-notes .notesListItem .note-buttons {
   float: left;
 }
-/* line 196, ../_toolbar.scss */
+/* line 198, ../_toolbar.scss */
 #toolbar-notes .notesListItem .the-note {
   margin-left: 35px;
 }
 
-/* line 205, ../_toolbar.scss */
+/* line 207, ../_toolbar.scss */
 #toolbar-account .account-footer {
   margin-top: 10px;
 }
-/* line 209, ../_toolbar.scss */
+/* line 211, ../_toolbar.scss */
 #toolbar-account .form-error:empty {
   display: none;
 }
-/* line 213, ../_toolbar.scss */
+/* line 215, ../_toolbar.scss */
 #toolbar-account h4 {
   margin-bottom: 5px;
 }
-/* line 217, ../_toolbar.scss */
+/* line 219, ../_toolbar.scss */
 #toolbar-account h5 {
   margin-top: 5px;
   margin-bottom: 22px;
 }
-/* line 222, ../_toolbar.scss */
+/* line 224, ../_toolbar.scss */
 #toolbar-account .user-icon {
   width: 52px;
   height: 52px;
