@@ -164,13 +164,11 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
             //console.log( gotoPage );
             //console.log( gotoPage * $(window).height() - $(window).height() / 2 );
             
-            $(window).scrollTop( 
-            	Math.max( 
-            		0,
-            		gotoPage * $(document).height( ) 
-            		- $(window).height() / 2
-            	)
-            );
+            var scroll = gotoPage * $(document).height();
+            	scroll = scroll - $(window).height() / 2;
+            	scroll = Math.max( 0, scroll );
+
+            $(window).scrollTop( scroll );
             
             //$(window).scrollTop( Math.max( 0, gotoPage * $(window).height() ) );
 

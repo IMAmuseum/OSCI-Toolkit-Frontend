@@ -113,17 +113,17 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<!-- .section-page is used to create the 3D effect -->\n<div class="section-page">\n\t<div class="section-page">\n\t\t<div class="section-content">\n\t\t\n\t\t\t<div id="figure-plate-container"></div>\n\n\t\t\t<div class="clearfix"></div>\n\n\t\t\t<h2>' +
+__p += '<!-- .section-page is used to create the 3D effect -->\n<div class="section-page">\n\t<div class="section-content">\n\t\n\t\t<div id="figure-plate-container"></div>\n\n\t\t<div class="clearfix"></div>\n\n\t\t<h2>' +
 ((__t = ( sectionTitle )) == null ? '' : __t) +
-'</h2>\n\t\t\t';
+'</h2>\n\t\t';
  if (typeof(sectionSubtitle) !== null) { ;
-__p += '\n\t\t\t<h3>' +
+__p += '\n\t\t<h3>' +
 ((__t = ( sectionSubtitle )) == null ? '' : __t) +
-'</h3>\n\t\t\t';
+'</h3>\n\t\t';
  } ;
-__p += '\n\t\t\t<hr>\n\t\t\t' +
+__p += '\n\t\t<hr>\n\t\t' +
 ((__t = ( content )) == null ? '' : __t) +
-'\n\n\t\t\t<div class="clearfix"></div>\n\n\t\t</div>\n\t</div>\n</div>';
+'\n\n\t\t<div class="clearfix"></div>\n\n\t</div>\n</div>';
 
 }
 return __p
