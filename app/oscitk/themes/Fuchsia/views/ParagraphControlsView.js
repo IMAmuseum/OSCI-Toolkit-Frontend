@@ -62,6 +62,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
         // When the user scrolls, destroy the popover
         this.listenTo(Backbone, 'navigate', function() {
+            //debugger;
             $('[id^="paragraph-"]').popover('destroy');
         });
 
@@ -235,7 +236,9 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
                     }else{
                         $('html').one('click', selfbound );
                     }
+
                 }
+
             };
 
             $('html').one('click', selfbound );

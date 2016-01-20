@@ -22,11 +22,6 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 			this.$el.parent().show("slide", { direction: "right" }, 350);
 		});
 
-		this.listenTo(Backbone, 'loginClicked', function(data) {
-			Backbone.trigger('openToolbar');
-			$('.accountToolbarView-toolbar-item').click();
-		});
-
 		// Switch filler and readout when items are toggled
 		this.listenTo(Backbone, 'toolbarItemClicked', function(data) {
 			

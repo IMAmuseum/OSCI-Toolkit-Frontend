@@ -1467,7 +1467,7 @@ img {
 
 /* line 86, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_scaffolding.scss */
 .img-rounded {
-  border-radius: 0px;
+  border-radius: 6px;
 }
 
 /* line 93, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_scaffolding.scss */
@@ -1476,7 +1476,7 @@ img {
   line-height: 1.42857;
   background-color: #fff;
   border: 1px solid #ddd;
-  border-radius: 0px;
+  border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
@@ -1989,7 +1989,7 @@ code {
   font-size: 90%;
   color: #c7254e;
   background-color: #f9f2f4;
-  border-radius: 0px;
+  border-radius: 4px;
 }
 
 /* line 24, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_code.scss */
@@ -1998,7 +1998,7 @@ kbd {
   font-size: 90%;
   color: #fff;
   background-color: #333;
-  border-radius: 0px;
+  border-radius: 3px;
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 /* line 32, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_code.scss */
@@ -2020,7 +2020,7 @@ pre {
   color: #333333;
   background-color: #f5f5f5;
   border: 1px solid #ccc;
-  border-radius: 0px;
+  border-radius: 4px;
 }
 /* line 54, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_code.scss */
 pre code {
@@ -3509,7 +3509,7 @@ output {
   background-color: #fff;
   background-image: none;
   border: 1px solid #ccc;
-  border-radius: 0px;
+  border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
@@ -3707,7 +3707,7 @@ input[type="checkbox"] {
   padding: 5px 10px;
   font-size: 14px;
   line-height: 1.5;
-  border-radius: 0px;
+  border-radius: 3px;
 }
 
 /* line 75, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_forms.scss */
@@ -3738,7 +3738,7 @@ select[multiple].input-sm,
   padding: 10px 16px;
   font-size: 20px;
   line-height: 1.33;
-  border-radius: 0px;
+  border-radius: 6px;
 }
 
 /* line 75, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_forms.scss */
@@ -4041,7 +4041,7 @@ select[multiple].input-lg,
   padding: 6px 12px;
   font-size: 16px;
   line-height: 1.42857;
-  border-radius: 0px;
+  border-radius: 4px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -4271,7 +4271,7 @@ select[multiple].input-lg,
   padding: 10px 16px;
   font-size: 20px;
   line-height: 1.33;
-  border-radius: 0px;
+  border-radius: 6px;
 }
 
 /* line 128, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_buttons.scss */
@@ -4279,7 +4279,7 @@ select[multiple].input-lg,
   padding: 5px 10px;
   font-size: 14px;
   line-height: 1.5;
-  border-radius: 0px;
+  border-radius: 3px;
 }
 
 /* line 132, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_buttons.scss */
@@ -4287,7 +4287,7 @@ select[multiple].input-lg,
   padding: 1px 5px;
   font-size: 14px;
   line-height: 1.5;
-  border-radius: 0px;
+  border-radius: 3px;
 }
 
 /* line 140, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_buttons.scss */
@@ -4388,7 +4388,7 @@ tbody.collapse.in {
   background-color: #fff;
   border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0px;
+  border-radius: 4px;
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   background-clip: padding-box;
@@ -4706,13 +4706,13 @@ tbody.collapse.in {
 }
 /* line 178, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group-vertical > .btn:first-child:not(:last-child) {
-  border-top-right-radius: 0px;
+  border-top-right-radius: 4px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 /* line 182, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group-vertical > .btn:last-child:not(:first-child) {
-  border-bottom-left-radius: 0px;
+  border-bottom-left-radius: 4px;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
@@ -4819,7 +4819,7 @@ tbody.collapse.in {
   text-align: center;
   background-color: #eeeeee;
   border: 1px solid #ccc;
-  border-radius: 0px;
+  border-radius: 4px;
 }
 /* line 85, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_input-groups.scss */
 .input-group-addon.input-sm, .form-horizontal .form-group-sm .input-group-addon.form-control,
@@ -4827,7 +4827,7 @@ tbody.collapse.in {
 .input-group-sm > .input-group-btn > .input-group-addon.btn {
   padding: 5px 10px;
   font-size: 14px;
-  border-radius: 0px;
+  border-radius: 3px;
 }
 /* line 90, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_input-groups.scss */
 .input-group-addon.input-lg, .form-horizontal .form-group-lg .input-group-addon.form-control,
@@ -4835,7 +4835,7 @@ tbody.collapse.in {
 .input-group-lg > .input-group-btn > .input-group-addon.btn {
   padding: 10px 16px;
   font-size: 20px;
-  border-radius: 0px;
+  border-radius: 6px;
 }
 /* line 97, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_input-groups.scss */
 .input-group-addon input[type="radio"],
@@ -4979,7 +4979,7 @@ tbody.collapse.in {
   margin-right: 2px;
   line-height: 1.42857;
   border: 1px solid transparent;
-  border-radius: 0px 0px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 /* line 89, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
 .nav-tabs > li > a:hover {
@@ -5000,7 +5000,7 @@ tbody.collapse.in {
 }
 /* line 122, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
 .nav-pills > li > a {
-  border-radius: 0px;
+  border-radius: 4px;
 }
 /* line 125, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
 .nav-pills > li + li {
@@ -5059,7 +5059,7 @@ tbody.collapse.in {
 /* line 193, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
 .nav-tabs-justified > li > a, .nav-tabs.nav-justified > li > a {
   margin-right: 0;
-  border-radius: 0px;
+  border-radius: 4px;
 }
 /* line 199, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
 .nav-tabs-justified > .active > a, .nav-tabs.nav-justified > .active > a,
@@ -5073,7 +5073,7 @@ tbody.collapse.in {
   /* line 206, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
   .nav-tabs-justified > li > a, .nav-tabs.nav-justified > li > a {
     border-bottom: 1px solid #ddd;
-    border-radius: 0px 0px 0 0;
+    border-radius: 4px 4px 0 0;
   }
   /* line 210, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navs.scss */
   .nav-tabs-justified > .active > a, .nav-tabs.nav-justified > .active > a,
@@ -5120,7 +5120,7 @@ tbody.collapse.in {
 @media (min-width: 768px) {
   /* line 11, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
   .navbar {
-    border-radius: 0px;
+    border-radius: 4px;
   }
 }
 
@@ -5292,7 +5292,7 @@ tbody.collapse.in {
   background-color: transparent;
   background-image: none;
   border: 1px solid transparent;
-  border-radius: 0px;
+  border-radius: 4px;
 }
 /* line 203, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-toggle:focus {
@@ -5682,7 +5682,7 @@ tbody.collapse.in {
   margin-bottom: 22px;
   list-style: none;
   background-color: #f5f5f5;
-  border-radius: 0px;
+  border-radius: 4px;
 }
 /* line 13, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_breadcrumbs.scss */
 .breadcrumb > li {
@@ -5704,7 +5704,7 @@ tbody.collapse.in {
   display: inline-block;
   padding-left: 0;
   margin: 22px 0;
-  border-radius: 0px;
+  border-radius: 4px;
 }
 /* line 10, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_pagination.scss */
 .pagination > li {
@@ -5727,14 +5727,14 @@ tbody.collapse.in {
 .pagination > li:first-child > a,
 .pagination > li:first-child > span {
   margin-left: 0;
-  border-bottom-left-radius: 0px;
-  border-top-left-radius: 0px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
 }
 /* line 32, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_pagination.scss */
 .pagination > li:last-child > a,
 .pagination > li:last-child > span {
-  border-bottom-right-radius: 0px;
-  border-top-right-radius: 0px;
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
 }
 /* line 41, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_pagination.scss */
 .pagination > li > a:hover, .pagination > li > a:focus,
@@ -5777,14 +5777,14 @@ tbody.collapse.in {
 /* line 11, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_pagination.scss */
 .pagination-lg > li:first-child > a,
 .pagination-lg > li:first-child > span {
-  border-bottom-left-radius: 0px;
-  border-top-left-radius: 0px;
+  border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px;
 }
 /* line 17, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_pagination.scss */
 .pagination-lg > li:last-child > a,
 .pagination-lg > li:last-child > span {
-  border-bottom-right-radius: 0px;
-  border-top-right-radius: 0px;
+  border-bottom-right-radius: 6px;
+  border-top-right-radius: 6px;
 }
 
 /* line 5, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_pagination.scss */
@@ -5796,14 +5796,14 @@ tbody.collapse.in {
 /* line 11, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_pagination.scss */
 .pagination-sm > li:first-child > a,
 .pagination-sm > li:first-child > span {
-  border-bottom-left-radius: 0px;
-  border-top-left-radius: 0px;
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
 }
 /* line 17, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins/_pagination.scss */
 .pagination-sm > li:last-child > a,
 .pagination-sm > li:last-child > span {
-  border-bottom-right-radius: 0px;
-  border-top-right-radius: 0px;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
 }
 
 /* line 6, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_pager.scss */
@@ -6015,7 +6015,7 @@ a.badge:hover, a.badge:focus {
 }
 /* line 26, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_jumbotron.scss */
 .container .jumbotron {
-  border-radius: 0px;
+  border-radius: 6px;
 }
 /* line 30, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_jumbotron.scss */
 .jumbotron .container {
@@ -6047,7 +6047,7 @@ a.badge:hover, a.badge:focus {
   line-height: 1.42857;
   background-color: #fff;
   border: 1px solid #ddd;
-  border-radius: 0px;
+  border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
@@ -6080,7 +6080,7 @@ a.thumbnail.active {
   padding: 15px;
   margin-bottom: 22px;
   border: 1px solid transparent;
-  border-radius: 0px;
+  border-radius: 4px;
 }
 /* line 16, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_alerts.scss */
 .alert h4 {
@@ -6197,7 +6197,7 @@ a.thumbnail.active {
   height: 22px;
   margin-bottom: 22px;
   background-color: #f5f5f5;
-  border-radius: 0px;
+  border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
@@ -6353,14 +6353,14 @@ a.thumbnail.active {
 }
 /* line 31, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_list-group.scss */
 .list-group-item:first-child {
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
 }
 /* line 34, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_list-group.scss */
 .list-group-item:last-child {
   margin-bottom: 0;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 /* line 40, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_list-group.scss */
 .list-group-item > .badge {
@@ -6542,7 +6542,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
   margin-bottom: 22px;
   background-color: #fff;
   border: 1px solid transparent;
-  border-radius: 0px;
+  border-radius: 4px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
@@ -6565,8 +6565,8 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel-heading {
   padding: 10px 15px;
   border-bottom: 1px solid transparent;
-  border-top-right-radius: -1px;
-  border-top-left-radius: -1px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
 }
 /* line 27, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel-heading > .dropdown .dropdown-toggle {
@@ -6590,8 +6590,8 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
   padding: 10px 15px;
   background-color: #f5f5f5;
   border-top: 1px solid #ddd;
-  border-bottom-right-radius: -1px;
-  border-bottom-left-radius: -1px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
 }
 
 /* line 59, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
@@ -6606,14 +6606,14 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 /* line 69, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .list-group:first-child .list-group-item:first-child {
   border-top: 0;
-  border-top-right-radius: -1px;
-  border-top-left-radius: -1px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
 }
 /* line 76, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .list-group:last-child .list-group-item:last-child {
   border-bottom: 0;
-  border-bottom-right-radius: -1px;
-  border-bottom-left-radius: -1px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
 }
 
 /* line 85, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
@@ -6635,8 +6635,8 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 /* line 105, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .table:first-child,
 .panel > .table-responsive:first-child > .table:first-child {
-  border-top-right-radius: -1px;
-  border-top-left-radius: -1px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
 }
 /* line 112, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .table:first-child > thead:first-child > tr:first-child td:first-child,
@@ -6647,7 +6647,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:first-child,
 .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:first-child,
 .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:first-child {
-  border-top-left-radius: -1px;
+  border-top-left-radius: 3px;
 }
 /* line 116, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .table:first-child > thead:first-child > tr:first-child td:last-child,
@@ -6658,13 +6658,13 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:last-child,
 .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:last-child,
 .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:last-child {
-  border-top-right-radius: -1px;
+  border-top-right-radius: 3px;
 }
 /* line 124, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .table:last-child,
 .panel > .table-responsive:last-child > .table:last-child {
-  border-bottom-right-radius: -1px;
-  border-bottom-left-radius: -1px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
 }
 /* line 131, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .table:last-child > tbody:last-child > tr:last-child td:first-child,
@@ -6675,7 +6675,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:first-child,
 .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:first-child,
 .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:first-child {
-  border-bottom-left-radius: -1px;
+  border-bottom-left-radius: 3px;
 }
 /* line 135, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .table:last-child > tbody:last-child > tr:last-child td:last-child,
@@ -6686,7 +6686,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:last-child,
 .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:last-child,
 .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:last-child {
-  border-bottom-right-radius: -1px;
+  border-bottom-right-radius: 3px;
 }
 /* line 142, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .panel-body + .table,
@@ -6768,7 +6768,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 /* line 202, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel-group .panel {
   margin-bottom: 0;
-  border-radius: 0px;
+  border-radius: 4px;
 }
 /* line 205, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_panels.scss */
 .panel-group .panel + .panel {
@@ -6972,7 +6972,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
   margin-bottom: 20px;
   background-color: #f5f5f5;
   border: 1px solid #e3e3e3;
-  border-radius: 0px;
+  border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
@@ -6985,13 +6985,13 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 /* line 22, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_wells.scss */
 .well-lg {
   padding: 24px;
-  border-radius: 0px;
+  border-radius: 6px;
 }
 
 /* line 26, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_wells.scss */
 .well-sm {
   padding: 9px;
-  border-radius: 0px;
+  border-radius: 3px;
 }
 
 /* line 6, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_close.scss */
@@ -7075,7 +7075,7 @@ button.close {
   background-color: #fff;
   border: 1px solid #999;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 0px;
+  border-radius: 6px;
   -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   background-clip: padding-box;
@@ -7234,7 +7234,7 @@ button.close {
   text-align: center;
   text-decoration: none;
   background-color: #f1f1f1;
-  border-radius: 0px;
+  border-radius: 4px;
 }
 
 /* line 35, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_tooltip.scss */
@@ -7321,7 +7321,7 @@ button.close {
   background-clip: padding-box;
   border: 1px solid #ccc;
   border: 1px solid #eeeeee;
-  border-radius: 0px;
+  border-radius: 6px;
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   white-space: normal;
@@ -7352,7 +7352,7 @@ button.close {
   line-height: 18px;
   background-color: #e7e7e7;
   border-bottom: 1px solid #dadada;
-  border-radius: -1px -1px 0 0;
+  border-radius: 5px 5px 0 0;
 }
 
 /* line 43, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_popovers.scss */
@@ -8257,48 +8257,49 @@ body {
     top: initial;
     bottom: 0;
     padding-bottom: 0px;
+    z-index: 10001;
   }
-  /* line 78, ../_navigation.scss */
+  /* line 79, ../_navigation.scss */
   #navigation .chapter-info {
     color: #fff;
   }
-  /* line 82, ../_navigation.scss */
+  /* line 83, ../_navigation.scss */
   #navigation .chapter-info .chapter-number,
   #navigation .chapter-info .chapter-title {
     display: inline-block;
     height: 20px;
   }
-  /* line 88, ../_navigation.scss */
+  /* line 89, ../_navigation.scss */
   #navigation .chapter-info .chapter-title {
     margin-left: 30px;
   }
-  /* line 94, ../_navigation.scss */
+  /* line 95, ../_navigation.scss */
   #navigation .btn-page {
     background-image: url(../../images/icon-arrow-white.png);
   }
-  /* line 96, ../_navigation.scss */
+  /* line 97, ../_navigation.scss */
   #navigation .btn-page.inactive {
     background-image: url(../../images/icon-arrow-grey.png);
   }
 }
 @media (max-width: 479px) {
-  /* line 105, ../_navigation.scss */
+  /* line 106, ../_navigation.scss */
   #navigation .chapter-info .chapter-title {
     display: none;
   }
 }
 
-/* line 114, ../_navigation.scss */
+/* line 115, ../_navigation.scss */
 .progress {
   height: 6px;
   margin-bottom: 6px;
 }
-/* line 120, ../_navigation.scss */
+/* line 121, ../_navigation.scss */
 .progress .progress-bar.progress-bar-fuchsia {
   background-color: #fa5d78;
 }
 
-/* line 128, ../_navigation.scss */
+/* line 129, ../_navigation.scss */
 *.unselectable {
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -8308,7 +8309,7 @@ body {
 }
 
 @media (max-width: 991px) {
-  /* line 142, ../_navigation.scss */
+  /* line 143, ../_navigation.scss */
   body {
     margin-bottom: 48px;
   }
@@ -8378,95 +8379,102 @@ body {
 /* line 83, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-overlay-wrapper #toolbar-overlay {
   width: calc( 100% - 300px );
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(0, 0, 0, 0.5);
   box-shadow: 0px 0px 5px black;
   position: relative;
   z-index: 2;
   height: 100%;
   float: left;
 }
-/* line 100, ../_toolbar.scss */
+@media (max-width: 991px) {
+  /* line 83, ../_toolbar.scss */
+  #toolbar > #toolbar-view #toolbar-overlay-wrapper #toolbar-overlay {
+    box-shadow: none;
+  }
+}
+/* line 104, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-overlay-wrapper #toolbar-sidebar {
   width: 300px;
   background: #fa5d78;
   height: 100%;
   float: left;
 }
-/* line 113, ../_toolbar.scss */
+/* line 117, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout {
+  height: 100%;
   color: white;
   padding: 8px 8px 8px 12px;
 }
-/* line 125, ../_toolbar.scss */
+/* line 129, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div {
   height: 100%;
 }
-/* line 129, ../_toolbar.scss */
+/* line 133, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div {
   height: 100%;
 }
-/* line 133, ../_toolbar.scss */
+/* line 137, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div h3 {
   margin: 0;
   border-bottom: 1px white solid;
   padding-bottom: 8px;
 }
-/* line 139, ../_toolbar.scss */
+/* line 143, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll {
   overflow-y: scroll;
   height: calc(100% - 39px - 50px - 15px );
   padding: 5px 5px 10px 0px;
 }
-/* line 146, ../_toolbar.scss */
+/* line 150, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll a:not(.btn) {
   color: white;
 }
-/* line 149, ../_toolbar.scss */
+/* line 153, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll a:not(.btn):hover {
   text-decoration: none;
 }
-/* line 159, ../_toolbar.scss */
+/* line 163, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 165, ../_toolbar.scss */
+/* line 169, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li {
   margin: 10px 0px;
 }
-/* line 169, ../_toolbar.scss */
+/* line 173, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li h4, #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li h5 {
   margin: 0px;
 }
 
-/* line 188, ../_toolbar.scss */
+/* line 192, ../_toolbar.scss */
 #toolbar-notes .notesListItem .note-buttons {
   float: left;
 }
-/* line 192, ../_toolbar.scss */
+/* line 196, ../_toolbar.scss */
 #toolbar-notes .notesListItem .the-note {
   margin-left: 35px;
 }
 
-/* line 201, ../_toolbar.scss */
+/* line 205, ../_toolbar.scss */
 #toolbar-account .account-footer {
   margin-top: 10px;
 }
-/* line 205, ../_toolbar.scss */
+/* line 209, ../_toolbar.scss */
 #toolbar-account .form-error:empty {
   display: none;
 }
-/* line 209, ../_toolbar.scss */
+/* line 213, ../_toolbar.scss */
 #toolbar-account h4 {
   margin-bottom: 5px;
 }
-/* line 213, ../_toolbar.scss */
+/* line 217, ../_toolbar.scss */
 #toolbar-account h5 {
   margin-top: 5px;
   margin-bottom: 22px;
 }
-/* line 218, ../_toolbar.scss */
+/* line 222, ../_toolbar.scss */
 #toolbar-account .user-icon {
   width: 52px;
   height: 52px;

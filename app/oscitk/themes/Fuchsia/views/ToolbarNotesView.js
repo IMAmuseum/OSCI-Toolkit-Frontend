@@ -5,7 +5,7 @@ OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
 	className: 'toolbar-notes-view',
 	template: OsciTk.templateManager.get('toolbar-notes'),
 	events: {
-		"click a.note-link": "noteLinkClick"
+		//"click a.note-link": "noteLinkClick"
 	},
 
 	initialize: function() {
@@ -37,6 +37,13 @@ OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
 		var notes = this.getSavedNotes();
 		this.$el.html( this.template( { notes: notes } ) );
 
+		var that = this;
+		this.$el.find('a.note-link').on('click', function(e) {
+			e.preventDefault();
+			that.noteLinkClick(e);
+			return false;
+		});
+
 		return this;
 		
 	},
@@ -51,8 +58,10 @@ OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
 		if (content_id) {
 			Backbone.trigger('navigate', { identifier: '#' + content_id } );
 			//$('.close-toolbar-item').click(); // closes toolbar
-			//$('.paragraph-controls[data-osci_content_id="'+content_id+'"] .paragraph-button').click(); // opens note dialog
+			$('.paragraph-controls[data-osci_content_id="'+content_id+'"] .paragraph-button').click(); // opens note dialog
 		}
+
+		return false;
 
 	},
 

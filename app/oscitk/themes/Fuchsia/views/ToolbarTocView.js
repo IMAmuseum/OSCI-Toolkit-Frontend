@@ -36,7 +36,6 @@ OsciTk.views.TocToolbar = OsciTk.views.BaseView.extend({
 		Backbone.trigger("toolbarRemoveViews");
 
 		// TODO: don't really want to address the appRouter directly
-		//console.log( sectionId + " qwer" );
 		app.router.navigate("section/" + sectionId, { trigger: true } );
 
 		// This opens the menu again so that the user can pick another chapter

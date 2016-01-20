@@ -81,6 +81,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		this.listenTo(Backbone, 'navigate', function( data ) {
 
+			//debugger;
+
 			// In this theme, navigate accomplished two things:
 			//    1. Change section
 			//    2. Scroll to the item refered to in identifier
@@ -159,9 +161,18 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
                 }
             }
 
-            console.log( gotoPage );
-            console.log( gotoPage * $(window).height() - $(window).height() / 2 );
-            $(window).scrollTop( Math.max( 0, gotoPage * $(window).height() - $(window).height() / 2) );
+            //console.log( gotoPage );
+            //console.log( gotoPage * $(window).height() - $(window).height() / 2 );
+            
+            $(window).scrollTop( 
+            	Math.max( 
+            		0,
+            		gotoPage * $(document).height( ) 
+            		- $(window).height() / 2
+            	)
+            );
+            
+            //$(window).scrollTop( Math.max( 0, gotoPage * $(window).height() ) );
 
             /*
             // this.getPageForSelector() will return false (0) when the selector matches nothing
@@ -258,7 +269,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
     },
 
     getPageForSelector: function( e ) {
-    	return  $(e).offset().top / $(window).height();
+    	return  $(e).offset().top / $(document).height();
     },
 	
 	// Book Title | Section Title
