@@ -16,7 +16,6 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 			this.closeToolbar();
 		});
 
-
 		this.listenTo(Backbone, 'openToolbar', function(data) {
 			this.openToolbar();
 		});
@@ -53,10 +52,12 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	},
 
 	closeToolbar: function() {
+		$('.toolbar-item-view').removeClass('light');
 		this.$container.hide();
 	},
 
 	openToolbar: function() {
+		$('.toolbar-item-view').addClass('light');
 		this.$container.show();
 	}
 

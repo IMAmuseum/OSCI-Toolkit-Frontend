@@ -38,24 +38,40 @@ $toolbar-margin-bottom: 5px;
 
 			float: right;
 
+			display: inline-block;
+
 			&.close-toolbar-item {
+				
 				background-image: url(../../images/light/icon-x.png);
+				display: none;
 				float: left;
+
+				&.light {
+					display: inline-block;
+				}
+				
 			}
 
 			&.accountToolbarView-toolbar-item {
-				background-image: url(../../images/light/icon-user.png);
+				background-image: url(../../images/dark/icon-user.png);
+				&.light {
+					background-image: url(../../images/light/icon-user.png);
+				}
 			}
 
 			&.tocToolbarView-toolbar-item {
-				background-image: url(../../images/light/icon-contents.png);
+				background-image: url(../../images/dark/icon-contents.png);
+				&.light {
+					background-image: url(../../images/light/icon-contents.png);
+				}
 			}
 
 			&.notesToolbarView-toolbar-item {
-				background-image: url(../../images/light/icon-notes.png);
+				background-image: url(../../images/dark/icon-notes.png);
+				&.light {
+					background-image: url(../../images/light/icon-notes.png);
+				}
 			}
-
-			display: inline-block;
 
 			@media( max-width: $osci-bp-md ) {
 				display: block;
@@ -70,7 +86,7 @@ $toolbar-margin-bottom: 5px;
 	#toolbar-overlay-wrapper {
 		
 		// Toggled w/ javascript
-		//display: none;
+		display: none;
 
 		position: fixed;
 
