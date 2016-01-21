@@ -1,7 +1,7 @@
 OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
     template: OsciTk.templateManager.get('paragraph-popover'),
-    templateNotes: OsciTk.templateManager.get('note-form'),
-    templateCites: OsciTk.templateManager.get('citation'),
+    templateNotes: OsciTk.templateManager.get('paragraph-notes'),
+    templateCites: OsciTk.templateManager.get('paragraph-cite'),
 
     initialize: function() {
 

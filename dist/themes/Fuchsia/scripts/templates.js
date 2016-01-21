@@ -10,7 +10,17 @@ __p += '<!-- TOP -->\n<header class="hidden-print">\n\t<div id="header"></div>\n
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Fuchsia/templates/citation.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Fuchsia/templates/navigation.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div class="progress">\n\t<div class="progress-bar progress-bar-fuchsia"></div>\n</div>\n\n<div class="chapter-info">\n\t<div class="chapter-number">Chapter I</div>\n\t<div class="chapter-title">Down the Rabbit-Hole</div>\n</div>\n<div class="pull-right">\n\t<div class="btn-page prev-page"></div>\n\t<div class="btn-page next-page"></div>\n</div>';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Fuchsia/templates/paragraph-cite.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -59,17 +69,7 @@ __p += '&ldquo;<em>' +
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Fuchsia/templates/navigation.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<div class="progress">\n\t<div class="progress-bar progress-bar-fuchsia"></div>\n</div>\n\n<div class="chapter-info">\n\t<div class="chapter-number">Chapter I</div>\n\t<div class="chapter-title">Down the Rabbit-Hole</div>\n</div>\n<div class="pull-right">\n\t<div class="btn-page prev-page"></div>\n\t<div class="btn-page next-page"></div>\n</div>';
-
-}
-return __p
-};
-
-this["JST"]["app/oscitk/themes/Fuchsia/templates/note-form.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Fuchsia/templates/paragraph-notes.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
