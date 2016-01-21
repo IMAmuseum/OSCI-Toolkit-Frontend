@@ -8033,31 +8033,31 @@ button.close {
 }
 /* line 36, ../main.scss */
 #osci-bp-sm, #osci-bp-md, #osci-bp-lg, #osci-bp-xl {
-  float: none;
+  display: hidden;
 }
 
 @media (max-width: 480px) {
   /* line 41, ../main.scss */
   #osci-bp-sm {
-    float: left;
+    display: block;
   }
 }
 @media (min-width: 481px) and (max-width: 600px) {
   /* line 45, ../main.scss */
   #osci-bp-md {
-    float: left;
+    display: block;
   }
 }
 @media (min-width: 601px) and (max-width: 991px) {
   /* line 49, ../main.scss */
   #osci-bp-lg {
-    float: left;
+    display: block;
   }
 }
 @media (min-width: 992px) {
   /* line 53, ../main.scss */
   #osci-bp-xl {
-    float: left;
+    display: block;
   }
 }
 /* line 1, ../_typography.scss */
@@ -8349,6 +8349,7 @@ body {
   position: fixed;
   bottom: 0;
   right: 0;
+  width: 300px;
   z-index: 10002;
 }
 @media (max-width: 991px) {
@@ -8357,7 +8358,7 @@ body {
     bottom: 48px;
   }
 }
-/* line 19, ../_toolbar.scss */
+/* line 21, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view {
   list-style-type: none;
   padding: 0;
@@ -8369,29 +8370,35 @@ body {
   height: 50px;
   background-size: 50px 50px;
   cursor: pointer;
+  float: right;
   display: inline-block;
 }
-/* line 37, ../_toolbar.scss */
+/* line 41, ../_toolbar.scss */
+#toolbar > #toolbar-view #toolbar-area .toolbar-item-view.close-toolbar-item {
+  background-image: url(../../images/light/icon-x.png);
+  float: left;
+}
+/* line 46, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.accountToolbarView-toolbar-item {
   background-image: url(../../images/light/icon-user.png);
 }
-/* line 41, ../_toolbar.scss */
+/* line 50, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.tocToolbarView-toolbar-item {
   background-image: url(../../images/light/icon-contents.png);
 }
-/* line 45, ../_toolbar.scss */
+/* line 54, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.notesToolbarView-toolbar-item {
   background-image: url(../../images/light/icon-notes.png);
 }
 @media (max-width: 600px) {
-  /* line 19, ../_toolbar.scss */
+  /* line 21, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-area .toolbar-item-view {
     display: block;
     bottom: initial;
     top: 0;
   }
 }
-/* line 61, ../_toolbar.scss */
+/* line 70, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-overlay-wrapper {
   position: fixed;
   top: 0;
@@ -8401,12 +8408,12 @@ body {
   z-index: 10001;
 }
 @media (max-width: 991px) {
-  /* line 61, ../_toolbar.scss */
+  /* line 70, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-overlay-wrapper {
     bottom: 48px;
   }
 }
-/* line 83, ../_toolbar.scss */
+/* line 92, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-overlay-wrapper #toolbar-overlay {
   width: calc( 100% - 300px );
   background: rgba(0, 0, 0, 0.5);
@@ -8417,95 +8424,95 @@ body {
   float: left;
 }
 @media (max-width: 991px) {
-  /* line 83, ../_toolbar.scss */
+  /* line 92, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-overlay-wrapper #toolbar-overlay {
     box-shadow: none;
   }
 }
-/* line 104, ../_toolbar.scss */
+/* line 113, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-overlay-wrapper #toolbar-sidebar {
   width: 300px;
   background: #fa5d78;
   height: 100%;
   float: left;
 }
-/* line 117, ../_toolbar.scss */
+/* line 126, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout {
   height: 100%;
   color: white;
   padding: 8px 8px 8px 12px;
 }
-/* line 129, ../_toolbar.scss */
+/* line 138, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div {
   height: 100%;
 }
-/* line 133, ../_toolbar.scss */
+/* line 142, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div {
   height: 100%;
 }
-/* line 137, ../_toolbar.scss */
+/* line 146, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div h3 {
   margin: 0;
   border-bottom: 1px white solid;
   padding-bottom: 8px;
 }
-/* line 143, ../_toolbar.scss */
+/* line 152, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll {
   overflow-y: scroll;
   height: calc(100% - 39px - 50px );
   padding: 5px 5px 10px 0px;
   border-bottom: thin solid white;
 }
-/* line 152, ../_toolbar.scss */
+/* line 161, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll a:not(.btn) {
   color: white;
 }
-/* line 155, ../_toolbar.scss */
+/* line 164, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll a:not(.btn):hover {
   text-decoration: none;
 }
-/* line 165, ../_toolbar.scss */
+/* line 174, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 171, ../_toolbar.scss */
+/* line 180, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li {
   margin: 10px 0px;
 }
-/* line 175, ../_toolbar.scss */
+/* line 184, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li h4, #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li h5 {
   margin: 0px;
 }
 
-/* line 194, ../_toolbar.scss */
+/* line 203, ../_toolbar.scss */
 #toolbar-notes .notesListItem .note-buttons {
   float: left;
 }
-/* line 198, ../_toolbar.scss */
+/* line 207, ../_toolbar.scss */
 #toolbar-notes .notesListItem .the-note {
   margin-left: 35px;
 }
 
-/* line 207, ../_toolbar.scss */
+/* line 216, ../_toolbar.scss */
 #toolbar-account .account-footer {
   margin-top: 10px;
 }
-/* line 211, ../_toolbar.scss */
+/* line 220, ../_toolbar.scss */
 #toolbar-account .form-error:empty {
   display: none;
 }
-/* line 215, ../_toolbar.scss */
+/* line 224, ../_toolbar.scss */
 #toolbar-account h4 {
   margin-bottom: 5px;
 }
-/* line 219, ../_toolbar.scss */
+/* line 228, ../_toolbar.scss */
 #toolbar-account h5 {
   margin-top: 5px;
   margin-bottom: 22px;
 }
-/* line 224, ../_toolbar.scss */
+/* line 233, ../_toolbar.scss */
 #toolbar-account .user-icon {
   width: 52px;
   height: 52px;

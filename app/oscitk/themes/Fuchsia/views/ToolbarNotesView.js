@@ -57,7 +57,7 @@ OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
 
 		if (content_id) {
 			Backbone.trigger('navigate', { identifier: '#' + content_id } );
-			//$('.close-toolbar-item').click(); // closes toolbar
+			$('.close-toolbar-item').click(); // closes toolbar
 			$('.paragraph-controls[data-osci_content_id="'+content_id+'"] .paragraph-button').click(); // opens note dialog
 		}
 

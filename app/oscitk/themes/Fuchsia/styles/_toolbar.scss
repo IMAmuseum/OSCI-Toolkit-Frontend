@@ -8,6 +8,8 @@ $toolbar-margin-bottom: 5px;
 		bottom: 0;	
 		right: 0;
 
+		width: $toolbar-width-md;
+
 		// Bump this up to avoid the navigation
 		@media( max-width: $osci-bp-lg ) {
 			bottom: $navigation-height;
@@ -20,7 +22,7 @@ $toolbar-margin-bottom: 5px;
 
 			list-style-type: none;
 			padding: 0;
-			
+
 			// This disables all text inside the button
 			border: 0;
 			font: 0/0 a;
@@ -33,6 +35,13 @@ $toolbar-margin-bottom: 5px;
 			background-size: 50px 50px;
 
 			cursor: pointer;
+
+			float: right;
+
+			&.close-toolbar-item {
+				background-image: url(../../images/light/icon-x.png);
+				float: left;
+			}
 
 			&.accountToolbarView-toolbar-item {
 				background-image: url(../../images/light/icon-user.png);

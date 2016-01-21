@@ -34,23 +34,23 @@ $osci-bp-md: 600px; // Toolbar collapses to vertical at or below this width
 $osci-bp-lg: $screen-md-min - 1; // Navigation collapses to bottom of screen at or below this width
 
 #osci-bp-sm, #osci-bp-md, #osci-bp-lg, #osci-bp-xl  {
-	float: none;
+	display: hidden;
 }
 
 @media( max-width: $osci-bp-sm ) {
-	#osci-bp-sm { float: left; }
+	#osci-bp-sm { display: block; }
 }
 
 @media( min-width: $osci-bp-sm + 1 ) and ( max-width: $osci-bp-md ) {
-	#osci-bp-md { float: left; }
+	#osci-bp-md { display: block; }
 }
 
 @media( min-width: $osci-bp-md + 1 ) and ( max-width: $osci-bp-lg ) {
-	#osci-bp-lg  { float: left; }
+	#osci-bp-lg  { display: block; }
 }
 
 @media( min-width: $osci-bp-lg + 1 ) {
-	#osci-bp-xl  { float: left; }
+	#osci-bp-xl  { display: block; }
 }
 
 

@@ -1,44 +1,39 @@
 OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	id: 'toolbar-view',
 	template: OsciTk.templateManager.get('toolbar'),
+
 	events: {
-		'click .close-toolbar-item': 'closeToolbar'
+		'click .close-toolbar-item' : 'closeToolbar',
+		'click #toolbar-overlay' : 'closeToolbar'
 	},
+
 	initialize: function() {
-		
-		// tracks the state of the content area drawer
-		// this.activeToolbarItemView = undefined;
 
-		this.listenTo(Backbone, 'figuresAvailable', function(figures) {
-			this.figureSize = figures.size();
-			this.render();
+		// Just declaring objects for future use
+		this.$container = $();
+
+		this.listenTo(Backbone, 'closeToolbar', function(data) {
+			this.closeToolbar();
 		});
 
-		this.listenTo(Backbone, 'menuClicked', function(data) {
-			this.$el.parent().toggle("slide", { direction: "right" }, 350);
-		});
 
 		this.listenTo(Backbone, 'openToolbar', function(data) {
-			this.$el.parent().show("slide", { direction: "right" }, 350);
+			this.openToolbar();
 		});
 
-		// Switch filler and readout when items are toggled
-		this.listenTo(Backbone, 'toolbarItemClicked', function(data) {
-			
-			if( data.active ) {
-				$('#toolbar-filler').hide();
-				$('#toolbar-readout').show();
-			}else{
-				$('#toolbar-filler').show();
-				$('#toolbar-readout').hide();
-			}
-
-		});
+		// In other themes, we wait for figuresAvailable,
+		// but since we don't have a figures section here,
+		// it doesn't matter as much
+		this.render();
 
 	},
+
 	render: function() {
 
-		this.$el.html(this.template( { } ) );
+		this.$el.html( this.template() );
+
+		// After pulling the template, #tow is now available
+		this.$container = this.$el.find('#toolbar-overlay-wrapper');
 
 		// See config in index.html
 		_.each(app.toolbarItems, function(toolbarItem) {
@@ -56,8 +51,13 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 		}, this);
 
 	},
-	closeToolbar: function(e) {
-		this.$el.parent().hide("slide", {direction: "right"}, 350 );
+
+	closeToolbar: function() {
+		this.$container.hide();
+	},
+
+	openToolbar: function() {
+		this.$container.show();
 	}
 
 });

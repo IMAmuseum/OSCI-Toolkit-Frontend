@@ -10,10 +10,6 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 		// initialize all possible views
 		app.views = {
-			
-			//headerView: new OsciTk.views.Header(),
-
-			//printView: new OsciTk.views.Print(),
 
 			sectionView: new OsciTk.views.Section(),
 			//footnotesView: new OsciTk.views.Footnotes(),
@@ -21,33 +17,16 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 			navigationView: new OsciTk.views.Navigation(),
 
-			//navbarView: new OsciTk.views.Navbar(),
-			//fontSizeView: new OsciTk.views.FontSize(),
-
 			toolbarView: new OsciTk.views.Toolbar(),
 
 			accountToolbarView: new OsciTk.views.AccountToolbar(),
 			tocToolbarView: new OsciTk.views.TocToolbar(),
 			notesToolbarView: new OsciTk.views.NotesToolbar(),
 
-			//searchToolbarView: new OsciTk.views.SearchToolbar(),
-			//glossaryToolbarView: new OsciTk.views.GlossaryToolbar(),
-			//footnotesToolbarView: new OsciTk.views.FootnotesToolbar(),
-			//figuresToolbarView: new OsciTk.views.FiguresToolbar(),
-			
-			//citationsToolbarView: new OsciTk.views.CitationsToolbar(),
-			
-
 		};
-
-		// Add the header view
-		//this.addView(app.views.headerView, '#header');
 
 		// Add the toolbar view
 		this.addView(app.views.toolbarView, '#toolbar');
-
-		// Add the navbar view
-		//this.addView(app.views.navbarView, '#navbar');
 
 		// Add the section view
 		this.addView(app.views.sectionView, '#section');
@@ -58,7 +37,6 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 
 		// TODO: Move these functions to ToolbarView.js?
-
 		this.listenTo(Backbone, "toolbarInline", function(toolbarItem) {
 			this.toolbarInline(toolbarItem);
 		});

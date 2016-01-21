@@ -112,7 +112,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
                         if(data.identifier.search(/^p-[0-9]+/) > -1) {
 
                         	var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
-                        	selector = 'p[data-paragraph_number='+pid+']';
+                        	//selector = 'p[data-paragraph_number='+pid+']';
+                        	selectro = '.paragraph-controls[data-paragraph_identifier='+pid+']';
                             gotoPage = this.getPageForSelector( selector );
 
                         	break;
@@ -179,9 +180,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
             }
 
 
-            if( parseInt( this.$el.css('bottom') ) === 0 ) {
-            	
-            	//scroll = scroll - this.$el.height();
+            if( $('#osci-bp-xl').is(':not(visible)') ) {
+            	scroll = scroll - this.$el.height();
             }
 
             $(window).scrollTop( scroll );
