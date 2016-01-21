@@ -8355,10 +8355,15 @@ body {
 @media (max-width: 991px) {
   /* line 5, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-area {
+    width: auto;
     bottom: 48px;
   }
+  /* line 19, ../_toolbar.scss */
+  #toolbar > #toolbar-view #toolbar-area.open {
+    width: 300px;
+  }
 }
-/* line 21, ../_toolbar.scss */
+/* line 27, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view {
   list-style-type: none;
   padding: 0;
@@ -8373,49 +8378,56 @@ body {
   float: right;
   display: inline-block;
 }
-/* line 43, ../_toolbar.scss */
+/* line 49, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.close-toolbar-item {
   background-image: url(../../images/light/icon-x.png);
   display: none;
   float: left;
 }
-/* line 49, ../_toolbar.scss */
-#toolbar > #toolbar-view #toolbar-area .toolbar-item-view.close-toolbar-item.light {
+/* line 55, ../_toolbar.scss */
+#toolbar > #toolbar-view #toolbar-area .toolbar-item-view.close-toolbar-item.open {
   display: inline-block;
 }
-/* line 55, ../_toolbar.scss */
+/* line 61, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.accountToolbarView-toolbar-item {
   background-image: url(../../images/dark/icon-user.png);
 }
-/* line 57, ../_toolbar.scss */
-#toolbar > #toolbar-view #toolbar-area .toolbar-item-view.accountToolbarView-toolbar-item.light {
+/* line 63, ../_toolbar.scss */
+#toolbar > #toolbar-view #toolbar-area .toolbar-item-view.accountToolbarView-toolbar-item.open {
   background-image: url(../../images/light/icon-user.png);
 }
-/* line 62, ../_toolbar.scss */
+/* line 68, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.tocToolbarView-toolbar-item {
   background-image: url(../../images/dark/icon-contents.png);
 }
-/* line 64, ../_toolbar.scss */
-#toolbar > #toolbar-view #toolbar-area .toolbar-item-view.tocToolbarView-toolbar-item.light {
+/* line 70, ../_toolbar.scss */
+#toolbar > #toolbar-view #toolbar-area .toolbar-item-view.tocToolbarView-toolbar-item.open {
   background-image: url(../../images/light/icon-contents.png);
 }
-/* line 69, ../_toolbar.scss */
+/* line 75, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.notesToolbarView-toolbar-item {
   background-image: url(../../images/dark/icon-notes.png);
 }
-/* line 71, ../_toolbar.scss */
-#toolbar > #toolbar-view #toolbar-area .toolbar-item-view.notesToolbarView-toolbar-item.light {
+/* line 77, ../_toolbar.scss */
+#toolbar > #toolbar-view #toolbar-area .toolbar-item-view.notesToolbarView-toolbar-item.open {
   background-image: url(../../images/light/icon-notes.png);
 }
-@media (max-width: 600px) {
-  /* line 21, ../_toolbar.scss */
+@media (max-width: 991px) {
+  /* line 27, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-area .toolbar-item-view {
     display: block;
-    bottom: initial;
-    top: 0;
+    float: none;
+  }
+  /* line 85, ../_toolbar.scss */
+  #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.open {
+    float: right;
+  }
+  /* line 89, ../_toolbar.scss */
+  #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.close-toolbar-item {
+    float: left;
   }
 }
-/* line 86, ../_toolbar.scss */
+/* line 99, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-overlay-wrapper {
   display: none;
   position: fixed;
@@ -8426,12 +8438,12 @@ body {
   z-index: 10001;
 }
 @media (max-width: 991px) {
-  /* line 86, ../_toolbar.scss */
+  /* line 99, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-overlay-wrapper {
     bottom: 48px;
   }
 }
-/* line 108, ../_toolbar.scss */
+/* line 121, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-overlay-wrapper #toolbar-overlay {
   width: calc( 100% - 300px );
   background: rgba(0, 0, 0, 0.5);
@@ -8442,95 +8454,95 @@ body {
   float: left;
 }
 @media (max-width: 991px) {
-  /* line 108, ../_toolbar.scss */
+  /* line 121, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-overlay-wrapper #toolbar-overlay {
     box-shadow: none;
   }
 }
-/* line 129, ../_toolbar.scss */
+/* line 142, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-overlay-wrapper #toolbar-sidebar {
   width: 300px;
   background: #fa5d78;
   height: 100%;
   float: left;
 }
-/* line 142, ../_toolbar.scss */
+/* line 155, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout {
   height: 100%;
   color: white;
   padding: 8px 8px 8px 12px;
 }
-/* line 154, ../_toolbar.scss */
+/* line 167, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div {
   height: 100%;
 }
-/* line 158, ../_toolbar.scss */
+/* line 171, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div {
   height: 100%;
 }
-/* line 162, ../_toolbar.scss */
+/* line 175, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div h3 {
   margin: 0;
   border-bottom: 1px white solid;
   padding-bottom: 8px;
 }
-/* line 168, ../_toolbar.scss */
+/* line 181, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll {
   overflow-y: scroll;
   height: calc(100% - 39px - 50px );
   padding: 5px 5px 10px 0px;
   border-bottom: thin solid white;
 }
-/* line 177, ../_toolbar.scss */
+/* line 190, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll a:not(.btn) {
   color: white;
 }
-/* line 180, ../_toolbar.scss */
+/* line 193, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll a:not(.btn):hover {
   text-decoration: none;
 }
-/* line 190, ../_toolbar.scss */
+/* line 203, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 196, ../_toolbar.scss */
+/* line 209, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li {
   margin: 10px 0px;
 }
-/* line 200, ../_toolbar.scss */
+/* line 213, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li h4, #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li h5 {
   margin: 0px;
 }
 
-/* line 219, ../_toolbar.scss */
+/* line 232, ../_toolbar.scss */
 #toolbar-notes .notesListItem .note-buttons {
   float: left;
 }
-/* line 223, ../_toolbar.scss */
+/* line 236, ../_toolbar.scss */
 #toolbar-notes .notesListItem .the-note {
   margin-left: 35px;
 }
 
-/* line 232, ../_toolbar.scss */
+/* line 245, ../_toolbar.scss */
 #toolbar-account .account-footer {
   margin-top: 10px;
 }
-/* line 236, ../_toolbar.scss */
+/* line 249, ../_toolbar.scss */
 #toolbar-account .form-error:empty {
   display: none;
 }
-/* line 240, ../_toolbar.scss */
+/* line 253, ../_toolbar.scss */
 #toolbar-account h4 {
   margin-bottom: 5px;
 }
-/* line 244, ../_toolbar.scss */
+/* line 257, ../_toolbar.scss */
 #toolbar-account h5 {
   margin-top: 5px;
   margin-bottom: 22px;
 }
-/* line 249, ../_toolbar.scss */
+/* line 262, ../_toolbar.scss */
 #toolbar-account .user-icon {
   width: 52px;
   height: 52px;

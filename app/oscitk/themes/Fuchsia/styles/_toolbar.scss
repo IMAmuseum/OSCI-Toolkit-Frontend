@@ -10,9 +10,15 @@ $toolbar-margin-bottom: 5px;
 
 		width: $toolbar-width-md;
 
+
 		// Bump this up to avoid the navigation
 		@media( max-width: $osci-bp-lg ) {
+			width: auto;
 			bottom: $navigation-height;
+
+			&.open {
+				width: $toolbar-width-md;
+			}
 		}
 
 		// We want this to be higher than the overlay
@@ -41,12 +47,12 @@ $toolbar-margin-bottom: 5px;
 			display: inline-block;
 
 			&.close-toolbar-item {
-				
+
 				background-image: url(../../images/light/icon-x.png);
 				display: none;
 				float: left;
 
-				&.light {
+				&.open {
 					display: inline-block;
 				}
 				
@@ -54,29 +60,36 @@ $toolbar-margin-bottom: 5px;
 
 			&.accountToolbarView-toolbar-item {
 				background-image: url(../../images/dark/icon-user.png);
-				&.light {
+				&.open {
 					background-image: url(../../images/light/icon-user.png);
 				}
 			}
 
 			&.tocToolbarView-toolbar-item {
 				background-image: url(../../images/dark/icon-contents.png);
-				&.light {
+				&.open {
 					background-image: url(../../images/light/icon-contents.png);
 				}
 			}
 
 			&.notesToolbarView-toolbar-item {
 				background-image: url(../../images/dark/icon-notes.png);
-				&.light {
+				&.open {
 					background-image: url(../../images/light/icon-notes.png);
 				}
 			}
 
-			@media( max-width: $osci-bp-md ) {
+			@media( max-width: #{$osci-bp-lg} ) {
 				display: block;
-				bottom: initial;
-				top: 0;
+				float: none;
+				&.open {
+					float: right;
+				}
+
+				&.close-toolbar-item {
+					float: left;
+				}
+
 			}
 
 		}

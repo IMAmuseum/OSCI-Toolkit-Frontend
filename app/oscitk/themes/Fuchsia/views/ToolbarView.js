@@ -52,12 +52,12 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	},
 
 	closeToolbar: function() {
-		$('.toolbar-item-view').removeClass('light');
+		$('#toolbar-area, .toolbar-item-view').removeClass('open');
 		this.$container.hide();
 	},
 
 	openToolbar: function() {
-		$('.toolbar-item-view').addClass('light');
+		$('#toolbar-area, .toolbar-item-view').addClass('open');
 		this.$container.show();
 	}
 
