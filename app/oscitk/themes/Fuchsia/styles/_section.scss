@@ -16,6 +16,11 @@ body {
 		width: calc( 100% - #{$toolbar-width-sm} );
 	}
 
+	// Toolbar disappears at this width
+	@media( max-width: $osci-bp-md ) {
+		width: 100%;
+	}
+
 	#section-view {
 
 		font-size: 100%; // 16px
@@ -29,6 +34,19 @@ body {
 		.section-content {
 			box-shadow: 0px 0px 5px grey;
 			padding: 15px;
+		}
+
+		// Removing all page effects at this width
+		@media( max-width: $osci-bp-md ) {
+			&, .section-page {
+				box-shadow: none;
+				padding-right: 0;
+			}
+
+			.section-content {
+				box-shadow: none;
+			}
+
 		}
 
 		// Bootstrap override
@@ -125,10 +143,14 @@ body {
 			text-indent: 0;
 		}
 
-		// Ensure that the plate image(s) take up max space w/o overflowing
+		// Plate is a div w/ background-image; see SectionView.js
 		.plate {
 			max-width: 100%;
 			max-height: 100%;
+
+			background-size: cover;
+			background-position: center center;
+
 		}
 
 	}

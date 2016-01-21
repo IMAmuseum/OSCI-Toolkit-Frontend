@@ -172,22 +172,77 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // numPages is for NavigationView.js -- remove if it's not used
         // Backbone.trigger("layoutComplete", { numPages : this.model.get('pages').length } );
 
-        // Add plate image to front..?
+        // Add plate image to front as background to .plate
         // Should be done before any height processing at all
         // We want the images to load first!
         var plateFigures = app.collections.figures.where({plate: true});
         if( plateFigures.length > 0 ) {
+
             var $plate = $( plateFigures[0].get('body') );
             var $table = this.$el.find('#figure-plate-container');
 
             var id = $plate.find('object').attr('id');
             var $img = $plate.find('img');
-                $img.attr('id', id );
 
+            // This is what we would use to place the plate as an img
+            /*
             if( $table.find('#'+id).length < 1 ) {
                 $img.prependTo( $table );
                 $img.addClass('plate');
+                $img.attr('id', id );
             }
+            */
+
+            var src = $img.attr('src');
+
+            $table.css('background-image', 'url("' + src + '")' );
+            $table.attr('id', id);
+            $table.addClass('plate');
+
+            // We want to get the dimensions of the image w/o displaying it
+            $('<img/>')
+                .attr( 'src', src )
+                .load( function() {
+                    $table.attr('data-width', this.width);
+                    $table.attr('data-height', this.height);
+                    $table.attr('data-aspect', this.height / this.width);
+                });
+
+            // Now we need to constrain the $table to be no taller than that which would allow for the 
+            //   chapter title to be seen; accounting for navigation and toolbar on smaller screens
+
+
+            var resizePlate = function() {
+
+                $table.height(0);
+
+                var h = $(window).height();
+                    h -= 15; // .section-content vertical padding
+                    h -= $('#section-offset').offset().top; // size of section heading
+                
+                // Account for navigation
+                if( $('#osci-bp-lg').is(':visible') ) {
+                    h -= $('#navigation').outerHeight();
+                }
+
+                // TODO: Account for toolbar menu on mobile
+
+                // Check if the auto height is smaller than the necessary height
+                // Since this is a div, we need to calculate the auto height by hand
+                var w = $table.width();
+                var t = $table.attr('data-aspect') * w;
+
+                if( t > h ) {
+                    $table.height(h);
+                }else{
+                    $table.height(t);
+                }
+
+                
+            };
+
+            $(window).on('resize', resizePlate );
+            $(window).on('load', resizePlate );
             
         }
 

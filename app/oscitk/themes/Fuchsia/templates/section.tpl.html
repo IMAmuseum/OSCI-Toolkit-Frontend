@@ -6,13 +6,16 @@
 
 		<div class="clearfix"></div>
 
-		<h2><%= sectionTitle %></h2>
-		<% if (typeof(sectionSubtitle) !== null) { %>
-		<h3><%= sectionSubtitle %></h3>
-		<% } %>
-		<hr>
-		<%= content %>
+		<div id="section-header">
+			<h2><%= sectionTitle %></h2>
+			<% if (typeof(sectionSubtitle) !== null) { %>
+			<h3><%= sectionSubtitle %></h3>
+			<% } %>
+		</div>
 
+		<hr id="section-offset">
+
+		<%= content %>
 		<div class="clearfix"></div>
 
 	</div>

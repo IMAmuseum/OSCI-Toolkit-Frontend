@@ -29,15 +29,15 @@ $navigation-height-sans-progress: 34px;
 // Import bootstrap variables for the below to work
 @import "bootstrap/bootstrap";
 
-// Intended to be used w/ max-width
-$osci-bp-sm: 480px; // Both navigation and toolbar are collapsed at or below this width
-$osci-bp-md: 600px; // Toolbar collapses to vertical at or below this width
-$osci-bp-lg: $screen-md-min - 1; // Navigation collapses to bottom of screen at or below this width
+// Intended to be used w/ max-width, i.e. each one is to be read as "[...] at or below this width"
+$osci-bp-sm: 480px; // Does nothing at the moment
+$osci-bp-md: 600px; // Toolbar collapses to top, superimposed; text extends all the way to the right
+$osci-bp-lg: $screen-md-min - 1; // Navigation collapses to bottom of screen; toolbar buttons collapse into a vertical column on right
 
-$osci-bp-vert: 640px; // Progress bar is hidden at or below this height
+$osci-bp-vert: 640px; // Progress bar is hidden
 
 #osci-bp-sm, #osci-bp-md, #osci-bp-lg, #osci-bp-xl  {
-	display: hidden;
+	display: none;
 }
 
 @media( max-width: $osci-bp-sm ) {

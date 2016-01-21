@@ -21,12 +21,18 @@ $toolbar-margin-bottom: 5px;
 			}
 		}
 
+		// Accounting for the navigation and the disappearing progress bar 
 		@media( max-width: $osci-bp-lg ) and (min-height: #{ $osci-bp-vert + 1 } ) {
 			bottom: $navigation-height;
 		}
 
 		@media( max-width: $osci-bp-lg ) and (max-height: #{ $osci-bp-vert } ) {
 			bottom: $navigation-height-sans-progress;
+		}
+
+		// TODO: Move this to top on small screens 
+		@media( max-width: $osci-bp-md ) {
+			display: none;
 		}
 
 		// We want this to be higher than the overlay
