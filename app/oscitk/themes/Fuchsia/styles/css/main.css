@@ -8031,31 +8031,31 @@ button.close {
     display: none !important;
   }
 }
-/* line 36, ../main.scss */
+/* line 39, ../main.scss */
 #osci-bp-sm, #osci-bp-md, #osci-bp-lg, #osci-bp-xl {
   display: hidden;
 }
 
 @media (max-width: 480px) {
-  /* line 41, ../main.scss */
+  /* line 44, ../main.scss */
   #osci-bp-sm {
     display: block;
   }
 }
 @media (min-width: 481px) and (max-width: 600px) {
-  /* line 45, ../main.scss */
+  /* line 48, ../main.scss */
   #osci-bp-md {
     display: block;
   }
 }
 @media (min-width: 601px) and (max-width: 991px) {
-  /* line 49, ../main.scss */
+  /* line 52, ../main.scss */
   #osci-bp-lg {
     display: block;
   }
 }
 @media (min-width: 992px) {
-  /* line 53, ../main.scss */
+  /* line 56, ../main.scss */
   #osci-bp-xl {
     display: block;
   }
@@ -8241,7 +8241,7 @@ body {
   right: 0px;
   top: 20px;
   width: 300px;
-  padding: 10px;
+  padding: 8px;
 }
 /* line 15, ../_navigation.scss */
 #navigation .chapter-info {
@@ -8328,8 +8328,14 @@ body {
 .progress .progress-bar.progress-bar-fuchsia {
   background-color: #fa5d78;
 }
+@media (max-width: 991px) and (max-height: 640px) {
+  /* line 115, ../_navigation.scss */
+  .progress {
+    display: none;
+  }
+}
 
-/* line 129, ../_navigation.scss */
+/* line 133, ../_navigation.scss */
 *.unselectable {
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -8338,10 +8344,16 @@ body {
   user-select: none;
 }
 
-@media (max-width: 991px) {
-  /* line 143, ../_navigation.scss */
+@media (max-width: 991px) and (min-height: 641px) {
+  /* line 147, ../_navigation.scss */
   body {
-    margin-bottom: 48px;
+    margin-bottom: 46px;
+  }
+}
+@media (max-width: 991px) and (max-height: 640px) {
+  /* line 153, ../_navigation.scss */
+  body {
+    margin-bottom: 34px;
   }
 }
 /* line 5, ../_toolbar.scss */
@@ -8356,14 +8368,26 @@ body {
   /* line 5, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-area {
     width: auto;
-    bottom: 48px;
+    bottom: 46px;
   }
   /* line 19, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-area.open {
     width: 300px;
   }
 }
-/* line 27, ../_toolbar.scss */
+@media (max-width: 991px) and (min-height: 641px) {
+  /* line 5, ../_toolbar.scss */
+  #toolbar > #toolbar-view #toolbar-area {
+    bottom: 46px;
+  }
+}
+@media (max-width: 991px) and (max-height: 640px) {
+  /* line 5, ../_toolbar.scss */
+  #toolbar > #toolbar-view #toolbar-area {
+    bottom: 34px;
+  }
+}
+/* line 35, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view {
   list-style-type: none;
   padding: 0;
@@ -8378,56 +8402,56 @@ body {
   float: right;
   display: inline-block;
 }
-/* line 49, ../_toolbar.scss */
+/* line 57, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.close-toolbar-item {
   background-image: url(../../images/light/icon-x.png);
   display: none;
   float: left;
 }
-/* line 55, ../_toolbar.scss */
+/* line 63, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.close-toolbar-item.open {
   display: inline-block;
 }
-/* line 61, ../_toolbar.scss */
+/* line 69, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.accountToolbarView-toolbar-item {
   background-image: url(../../images/dark/icon-user.png);
 }
-/* line 63, ../_toolbar.scss */
+/* line 71, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.accountToolbarView-toolbar-item.open {
   background-image: url(../../images/light/icon-user.png);
 }
-/* line 68, ../_toolbar.scss */
+/* line 76, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.tocToolbarView-toolbar-item {
   background-image: url(../../images/dark/icon-contents.png);
 }
-/* line 70, ../_toolbar.scss */
+/* line 78, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.tocToolbarView-toolbar-item.open {
   background-image: url(../../images/light/icon-contents.png);
 }
-/* line 75, ../_toolbar.scss */
+/* line 83, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.notesToolbarView-toolbar-item {
   background-image: url(../../images/dark/icon-notes.png);
 }
-/* line 77, ../_toolbar.scss */
+/* line 85, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.notesToolbarView-toolbar-item.open {
   background-image: url(../../images/light/icon-notes.png);
 }
 @media (max-width: 991px) {
-  /* line 27, ../_toolbar.scss */
+  /* line 35, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-area .toolbar-item-view {
     display: block;
     float: none;
   }
-  /* line 85, ../_toolbar.scss */
+  /* line 93, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.open {
     float: right;
   }
-  /* line 89, ../_toolbar.scss */
+  /* line 97, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.close-toolbar-item {
     float: left;
   }
 }
-/* line 99, ../_toolbar.scss */
+/* line 107, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-overlay-wrapper {
   display: none;
   position: fixed;
@@ -8437,13 +8461,19 @@ body {
   left: 0;
   z-index: 10001;
 }
-@media (max-width: 991px) {
-  /* line 99, ../_toolbar.scss */
+@media (max-width: 991px) and (min-height: 641px) {
+  /* line 107, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-overlay-wrapper {
-    bottom: 48px;
+    bottom: 46px;
   }
 }
-/* line 121, ../_toolbar.scss */
+@media (max-width: 991px) and (max-height: 640px) {
+  /* line 107, ../_toolbar.scss */
+  #toolbar > #toolbar-view #toolbar-overlay-wrapper {
+    bottom: 34px;
+  }
+}
+/* line 133, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-overlay-wrapper #toolbar-overlay {
   width: calc( 100% - 300px );
   background: rgba(0, 0, 0, 0.5);
@@ -8454,95 +8484,95 @@ body {
   float: left;
 }
 @media (max-width: 991px) {
-  /* line 121, ../_toolbar.scss */
+  /* line 133, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-overlay-wrapper #toolbar-overlay {
     box-shadow: none;
   }
 }
-/* line 142, ../_toolbar.scss */
+/* line 154, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-overlay-wrapper #toolbar-sidebar {
   width: 300px;
   background: #fa5d78;
   height: 100%;
   float: left;
 }
-/* line 155, ../_toolbar.scss */
+/* line 167, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout {
   height: 100%;
   color: white;
   padding: 8px 8px 8px 12px;
 }
-/* line 167, ../_toolbar.scss */
+/* line 179, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div {
   height: 100%;
 }
-/* line 171, ../_toolbar.scss */
+/* line 183, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div {
   height: 100%;
 }
-/* line 175, ../_toolbar.scss */
+/* line 187, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div h3 {
   margin: 0;
   border-bottom: 1px white solid;
   padding-bottom: 8px;
 }
-/* line 181, ../_toolbar.scss */
+/* line 193, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll {
   overflow-y: scroll;
   height: calc(100% - 39px - 50px );
   padding: 5px 5px 10px 0px;
   border-bottom: thin solid white;
 }
-/* line 190, ../_toolbar.scss */
+/* line 202, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll a:not(.btn) {
   color: white;
 }
-/* line 193, ../_toolbar.scss */
+/* line 205, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll a:not(.btn):hover {
   text-decoration: none;
 }
-/* line 203, ../_toolbar.scss */
+/* line 215, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 209, ../_toolbar.scss */
+/* line 221, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li {
   margin: 10px 0px;
 }
-/* line 213, ../_toolbar.scss */
+/* line 225, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li h4, #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li h5 {
   margin: 0px;
 }
 
-/* line 232, ../_toolbar.scss */
+/* line 244, ../_toolbar.scss */
 #toolbar-notes .notesListItem .note-buttons {
   float: left;
 }
-/* line 236, ../_toolbar.scss */
+/* line 248, ../_toolbar.scss */
 #toolbar-notes .notesListItem .the-note {
   margin-left: 35px;
 }
 
-/* line 245, ../_toolbar.scss */
+/* line 257, ../_toolbar.scss */
 #toolbar-account .account-footer {
   margin-top: 10px;
 }
-/* line 249, ../_toolbar.scss */
+/* line 261, ../_toolbar.scss */
 #toolbar-account .form-error:empty {
   display: none;
 }
-/* line 253, ../_toolbar.scss */
+/* line 265, ../_toolbar.scss */
 #toolbar-account h4 {
   margin-bottom: 5px;
 }
-/* line 257, ../_toolbar.scss */
+/* line 269, ../_toolbar.scss */
 #toolbar-account h5 {
   margin-top: 5px;
   margin-bottom: 22px;
 }
-/* line 262, ../_toolbar.scss */
+/* line 274, ../_toolbar.scss */
 #toolbar-account .user-icon {
   width: 52px;
   height: 52px;

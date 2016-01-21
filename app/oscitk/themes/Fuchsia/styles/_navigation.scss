@@ -10,7 +10,7 @@
 	top: 20px;
 
 	width: $toolbar-width-md;
-	padding: 10px;
+	padding: 8px;
 
 	.chapter-info {
 
@@ -123,6 +123,10 @@
 		}
 	}
 
+	@media( max-width: $osci-bp-lg ) and (max-height: #{ $osci-bp-vert } ) {
+		display: none;
+	}
+
 }
 
 // Double-clicking on the navigation tends to select it...
@@ -139,8 +143,14 @@
 }
 
 // Offset body for the fixed navbar
-@media( max-width: $osci-bp-lg ) {
+@media( max-width: $osci-bp-lg ) and (min-height: #{ $osci-bp-vert + 1 } ) {
 	body {
 		margin-bottom: $navigation-height;
+	}
+}
+
+@media( max-width: $osci-bp-lg ) and (max-height: #{ $osci-bp-vert } ) {
+	body {
+		margin-bottom: $navigation-height-sans-progress;
 	}
 }

@@ -22,7 +22,8 @@ $toolbar-width-sm: 50px;
 // We don't have to hard-code the navigation height.
 // This is just for constraining the #toolbar-overlay-wrapper
 //   and setting body's margin-bottom.
-$navigation-height: 48px;
+$navigation-height: 46px;
+$navigation-height-sans-progress: 34px;
 
 
 // Import bootstrap variables for the below to work
@@ -32,6 +33,8 @@ $navigation-height: 48px;
 $osci-bp-sm: 480px; // Both navigation and toolbar are collapsed at or below this width
 $osci-bp-md: 600px; // Toolbar collapses to vertical at or below this width
 $osci-bp-lg: $screen-md-min - 1; // Navigation collapses to bottom of screen at or below this width
+
+$osci-bp-vert: 640px; // Progress bar is hidden at or below this height
 
 #osci-bp-sm, #osci-bp-md, #osci-bp-lg, #osci-bp-xl  {
 	display: hidden;

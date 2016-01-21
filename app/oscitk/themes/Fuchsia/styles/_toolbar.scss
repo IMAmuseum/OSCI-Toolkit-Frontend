@@ -21,6 +21,14 @@ $toolbar-margin-bottom: 5px;
 			}
 		}
 
+		@media( max-width: $osci-bp-lg ) and (min-height: #{ $osci-bp-vert + 1 } ) {
+			bottom: $navigation-height;
+		}
+
+		@media( max-width: $osci-bp-lg ) and (max-height: #{ $osci-bp-vert } ) {
+			bottom: $navigation-height-sans-progress;
+		}
+
 		// We want this to be higher than the overlay
 		z-index: 10002;
 
@@ -108,8 +116,12 @@ $toolbar-margin-bottom: 5px;
 		bottom: 0;
 		left: 0;
 
-		@media( max-width: $osci-bp-lg ) {
+		@media( max-width: $osci-bp-lg ) and (min-height: #{ $osci-bp-vert + 1 } ) {
 			bottom: $navigation-height;
+		}
+
+		@media( max-width: $osci-bp-lg ) and (max-height: #{ $osci-bp-vert } ) {
+			bottom: $navigation-height-sans-progress;
 		}
 
 		// Note that this is lower than the icons
