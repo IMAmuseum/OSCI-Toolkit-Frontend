@@ -39,9 +39,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         // Set maximum height on figures to make sure they don't overflow their columns
         this.listenTo(Backbone, 'imagesLoaded', function() {
-
             this.renderLayout();
-
         });
 
         // Proceed to render after the section is ready
@@ -69,6 +67,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // see NavigationView.js
         Backbone.trigger("sectionRenderStart");
         
+
+
+
         // that refers to the view
         var that = this;
 
@@ -200,17 +201,23 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             $table.addClass('plate');
 
             // We want to get the dimensions of the image w/o displaying it
-            $('<img/>')
-                .attr( 'src', src )
-                .load( function() {
+            var imageLoad = function() {
+
+                var $img = $('<img/>');
+
+                $img.attr( 'src', src );
+                $img.load( function() {
                     $table.attr('data-width', this.width);
                     $table.attr('data-height', this.height);
                     $table.attr('data-aspect', this.height / this.width);
-                });
+                    $img.remove(); // vs. memory leaks
+                    resizePlate(); // requires data-aspect
+                } );
+
+            };
 
             // Now we need to constrain the $table to be no taller than that which would allow for the 
             //   chapter title to be seen; accounting for navigation and toolbar on smaller screens
-
 
             var resizePlate = function() {
 
@@ -238,11 +245,15 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                     $table.height(t);
                 }
 
-                
             };
 
+            // Just some standard jQuery binds...
             $(window).on('resize', resizePlate );
-            $(window).on('load', resizePlate );
+
+            // Not necessary, since section won't render until all images are loaded anyway
+            //$(window).on('load', imageLoad );
+
+            this.listenTo( Backbone, "sectionRenderEnd", imageLoad );
             
         }
 
