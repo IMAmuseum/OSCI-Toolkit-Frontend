@@ -170,8 +170,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             } )
         );
 
-        // numPages is for NavigationView.js -- remove if it's not used
-        // Backbone.trigger("layoutComplete", { numPages : this.model.get('pages').length } );
+
+        // Adjust the size of the headline
+        $('h3').fitText(1.2, { minFontSize: '30px', maxFontSize: '42px' });
 
         // Add plate image to front as background to .plate
         // Should be done before any height processing at all
