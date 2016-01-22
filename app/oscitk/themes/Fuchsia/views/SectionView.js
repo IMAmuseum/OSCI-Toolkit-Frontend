@@ -40,7 +40,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // Set maximum height on figures to make sure they don't overflow their columns
         this.listenTo(Backbone, 'imagesLoaded', function() {
 
-            this.renderColumns();
+            this.renderLayout();
 
         });
 
@@ -64,10 +64,10 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     },
 
     // Layout magic happens here
-    renderColumns: function(  ) {
+    renderLayout: function(  ) {
 
         // see NavigationView.js
-        Backbone.trigger("columnRenderStart");
+        Backbone.trigger("sectionRenderStart");
         
         // that refers to the view
         var that = this;
@@ -134,7 +134,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         }); 
 
         // see NavigationView.js
-        Backbone.trigger("columnRenderEnd");
+        Backbone.trigger("sectionRenderEnd");
 
     },
 

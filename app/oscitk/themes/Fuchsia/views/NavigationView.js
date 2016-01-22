@@ -14,11 +14,9 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			this.render();
 		});
 
-		/*
-		this.listenTo(Backbone, 'windowResized', function(section) {
-			this.render();
+		this.listenTo(Backbone, 'navigate', function() {
+			this.updateNavigationArrows();
 		});
-		*/
 
 		// See ../../../Router.js
 		this.listenTo(Backbone, 'routedToSection', function( data ) {
@@ -62,8 +60,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			if( typeof data.identifier !== undefined ) {
 				if( waitForSection ) {
 
-					// We can unwrap this
-					this.listenToOnce( Backbone, "columnRenderEnd", function() {
+					this.listenToOnce( Backbone, "sectionRenderEnd", function() {
 						Backbone.trigger('navigate', { identifier: data.identifier } );
 					});
 
@@ -134,29 +131,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
                         }
 
-						/*
-						// Route for footnote references
-                        if (data.identifier.search(/^fn-[0-9]+-[0-9]+/) > -1) {
-                            
-                            matches = data.identifier.match(/^fn-[0-9]+-[0-9]+/);
-                            refs = $('a[href="#' + matches[0] + '"]');
-                            if (refs.length === 1) {
-                                page_for_id = this.getPageNumberForSelector(refs[0]);
-                            }
-                            else {
-                                // find visible occurence
-                                for (j = 0; j < refs.length; j++) {
-                                    if (this.isElementVisible(refs[j])) {
-                                        page_for_id = this.getPageNumberForSelector(refs[j]);
-                                        break;
-                                    }
-                                }
-                            }
-                            break;
-                        
-                        }
-                        */
-
                         // Route to specific element
                         selector = data.identifier;
                         gotoPage = this.getPageForSelector( data.identifier );
@@ -166,9 +140,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
                 }
             }
 
-            //console.log( gotoPage );
-            //console.log( gotoPage * $(window).height() - $(window).height() / 2 );
-            
             var scroll = gotoPage * $(document).height();
             	scroll = scroll - $(window).height() / 2;
             	scroll = Math.max( 0, scroll );
@@ -241,16 +212,40 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 	setCurrentNavigationItem: function( section_id ) {
 
-		var section = app.collections.navigationItems.get(section_id);
+		var collection = app.collections.navigationItems;
+		var section = collection.get(section_id);
 
-		if (section) {
-			this.currentNavigationItem = app.collections.navigationItems.get(section_id);
-		} else {
-			this.currentNavigationItem = app.collections.navigationItems.first();
+		// Verify that the section exists; else go to first
+		this.currentNavigationItem = section ? section : collection.first() ;
+
+		Backbone.trigger( 'currentNavigationItemChanged', this.currentNavigationItem );
+
+	},
+	// Here, these buttons always move between sections, not pages.
+	updateNavigationArrows: function(page) {
+
+		var $prev = this.$el.find('.prev-page');
+		var $next = this.$el.find('.next-page');
+
+		// reset both controls to start
+		$prev.unbind('click').addClass('inactive');
+		$next.unbind('click').addClass('inactive');
+
+		var previous = app.views.navigationView.currentNavigationItem.get('previous');
+		var next = app.views.navigationView.currentNavigationItem.get('next');
+		
+		if( previous ) {
+			$prev.removeClass('inactive').on('click', function(e) {
+				app.router.navigate("section/" + previous.get('id'), { trigger: true } );
+			});
 		}
 
-		Backbone.trigger('currentNavigationItemChanged', this.currentNavigationItem);
+		if( next ) {
+			$next.removeClass('inactive').on('click', function(e) {
+				app.router.navigate("section/" + next.get('id'), { trigger: true } );
+			});
+		}
 
-	}
+	},
 
 });

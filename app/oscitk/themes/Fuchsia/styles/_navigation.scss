@@ -43,6 +43,10 @@
 
 		background-image: url(../../images/icon-arrow-grey.png);
 
+		&.inactive {
+			background-image: url(../../images/icon-arrow-white.png);
+		}
+
 		&.prev-page { }
 
 		&.next-page {
@@ -56,11 +60,7 @@
 		    -ms-filter: "FlipH";
 
 		}
-
-		&.inactive {
-			display: none;
-		}
-
+		
 	}
 
 	// Navigation collapses to bottom below this point

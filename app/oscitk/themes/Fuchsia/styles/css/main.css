@@ -8285,7 +8285,11 @@ body {
   cursor: pointer;
   background-image: url(../../images/icon-arrow-grey.png);
 }
-/* line 48, ../_navigation.scss */
+/* line 46, ../_navigation.scss */
+#navigation .btn-page.inactive {
+  background-image: url(../../images/icon-arrow-white.png);
+}
+/* line 52, ../_navigation.scss */
 #navigation .btn-page.next-page {
   -moz-transform: scaleX(-1);
   -o-transform: scaleX(-1);
@@ -8293,10 +8297,6 @@ body {
   transform: scaleX(-1);
   filter: FlipH;
   -ms-filter: "FlipH";
-}
-/* line 60, ../_navigation.scss */
-#navigation .btn-page.inactive {
-  display: none;
 }
 @media (max-width: 991px) {
   /* line 1, ../_navigation.scss */
