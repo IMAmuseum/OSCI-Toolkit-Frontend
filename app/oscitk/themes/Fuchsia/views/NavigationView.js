@@ -185,63 +185,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
             }
 
             $(window).scrollTop( scroll );
-            
-            //$(window).scrollTop( Math.max( 0, gotoPage * $(window).height() ) );
 
-            /*
-            // this.getPageForSelector() will return false (0) when the selector matches nothing
-            // we should fix the URL and remain where we are when that happens
-            // TODO: maybe alert the user that they had an invalid link?
-            if( typeof gotoPage === 'undefined') {
-            	gotoPage = this.page;
-            	app.router.navigate("section/" + this.getCurrentNavigationItem().get('id'), { trigger: true } );
-            }
-
-            // page width is used for determining how far to scroll
-			var $target = $('#section');
-			var page_width = $target.outerWidth();
-
-			// account for column gutter
-			if( $target.attr('data-columns-rendered') == 1 ) {
-				page_width -= 10;
-			}else{
-				page_width += 10;
-			}
-		
-			*/
-
-			/*
-			// Check if the page is available...
-			var previous = this.currentNavigationItem.get('previous');
-			var next = this.currentNavigationItem.get('next');
-		
-			// If navigating to other section, table of contents no longer works
-			var navigateRestoreToolbar = function( route ) {
-				
-				var $toolbar = app.views.toolbarView.$el;
-				var $activeItem = $toolbar.find('#toolbar-area > li.active');
-				var restoreItem = $activeItem.length > 0;
-
-				if( restoreItem ) {
-					var activeToolbarItemClass = $activeItem.attr('class').match(/(:?\s)(.+?-toolbar-item)(:?\s|$)/)[2];
-				}
-
-				Backbone.trigger("toolbarRemoveViews");
-				app.router.navigate( route, { trigger: true } );
-
-				if( restoreItem ) {
-					$toolbar.find( '.' + activeToolbarItemClass ).click();
-				}
-
-			};
-			*/
-
-		});
-
-		// Bind scroll event to progress bar
-		var that = this;
-		$(window).on('scroll', function() {
-			that.updateProgress();
 		});
 
 	},
@@ -252,19 +196,23 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			chapter: this.currentNavigationItem.get('title')
 		}));
 
+		// Bind scroll event to progress bar
+		var that = this;
+		$(window).on('scroll', function() {
+			that.updateProgress();
+		});
+
 	},
 
     updateProgress: function() {
 
-        var value = $(window).scrollTop();
+        var value = $(document).scrollTop();
         var max = $('body').innerHeight();
-
-        // This ends up adding 0% at the top and 100% at the bottom
-        value += Math.floor( $(window).height() * value/max );
+        	max -= $(window).height();
 
         var percent = (value/max)*100;
-		//	percent = Math.floor(percent);
 
+        // Just some debug info
         $('.progress .progress-bar').attr('data-max', max);
         $('.progress .progress-bar').attr('data-now', value);
 
