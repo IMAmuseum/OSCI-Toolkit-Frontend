@@ -102,6 +102,9 @@ body {
     		text-indent: #{ 0 - ($paragraph-button-size + $paragraph-button-margin) / 2 }; 
 
 			.footnote-reference {
+
+				padding-left: 15px;
+
 				margin: 0 5px;
 
 				display: inline-block;
@@ -119,14 +122,24 @@ body {
 				line-height: 15px;
 				text-align: center;
 				
-				//background: $color-light-red;
+				background: $color-fuchsia;
 				
 				&:hover {
 					color:#fff;
 					text-decoration: none;
-					//background: $color-dark-red;
+					background: $color-fuchsia;
 				}
 				
+			}
+
+			.tooltip {
+				.tooltip-arrow {
+					border-bottom-color: $color-dk-grey;
+				}
+				.tooltip-inner {
+					background: $color-dk-grey;
+					color: white;
+				}
 			}
 
 			// TODO: Remove me? Hide me?

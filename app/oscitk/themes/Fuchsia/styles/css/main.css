@@ -8175,6 +8175,7 @@ body {
 }
 /* line 104, ../_section.scss */
 #section #section-view p .footnote-reference {
+  padding-left: 15px;
   margin: 0 5px;
   display: inline-block;
   position: relative;
@@ -8186,21 +8187,32 @@ body {
   font-size: 12px;
   line-height: 15px;
   text-align: center;
+  background: #fa5d78;
 }
-/* line 124, ../_section.scss */
+/* line 127, ../_section.scss */
 #section #section-view p .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
+  background: #fa5d78;
 }
-/* line 134, ../_section.scss */
+/* line 136, ../_section.scss */
+#section #section-view p .tooltip .tooltip-arrow {
+  border-bottom-color: #676767;
+}
+/* line 139, ../_section.scss */
+#section #section-view p .tooltip .tooltip-inner {
+  background: #676767;
+  color: white;
+}
+/* line 147, ../_section.scss */
 #section #section-view p .glossary-term:hover {
   cursor: hand;
 }
-/* line 142, ../_section.scss */
+/* line 155, ../_section.scss */
 #section #section-view .tooltip-inner {
   text-indent: 0;
 }
-/* line 147, ../_section.scss */
+/* line 160, ../_section.scss */
 #section #section-view .plate {
   max-width: 100%;
   max-height: 100%;
@@ -8208,7 +8220,7 @@ body {
   background-position: center center;
 }
 
-/* line 163, ../_section.scss */
+/* line 176, ../_section.scss */
 .loader {
   margin: 80px auto;
   overflow: hidden;
@@ -8225,7 +8237,7 @@ body {
   -webkit-animation: load8 1.1s infinite linear;
   animation: load8 1.1s infinite linear;
 }
-/* line 184, ../_section.scss */
+/* line 197, ../_section.scss */
 .loader, .loader:after {
   border-radius: 50%;
   width: 10em;
