@@ -148,7 +148,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
             if( selector ) {
             	// todo: for paragraphs, use the button selector, not the paragraph selector
             	scroll = scroll + $(selector).height() / 2;
-            	console.log( $(selector).height() / 2 );
             }
 
 
@@ -250,7 +249,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	},
 
 	triggerToggleToolbar: function() {
-		console.log( 'triggering' );
 		Backbone.trigger('toggleToolbar');
 	}
 

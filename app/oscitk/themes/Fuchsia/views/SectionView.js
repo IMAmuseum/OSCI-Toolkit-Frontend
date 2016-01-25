@@ -291,13 +291,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     // Trigger a paragraph clicked event (pops up a cite / note box)
     paragraphButtonClicked: function(e) {
 
-        // Checks if the user is logged in
-        if ( app.account.get('email') != null) {
+        var id = $(e.currentTarget).data('paragraph_number');
+        Backbone.trigger('paragraphButtonClicked', id);
 
-            var id = $(e.currentTarget).data('paragraph_number');
-            Backbone.trigger('paragraphButtonClicked', id);
-
-        }
 
     },
 
