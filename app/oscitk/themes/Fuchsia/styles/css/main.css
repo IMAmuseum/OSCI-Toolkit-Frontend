@@ -9002,41 +9002,44 @@ a.toolbar-link {
 }
 */
 /* line 5, ../_figures.scss */
-#section #section-view figure,
-#section #section-view figure .figure_content,
-#section #section-view figure .figure_content object,
-#section #section-view figure .figure_content object img {
-  -webkit-column-break-inside: avoid;
-  /* Chrome, Safari */
-  page-break-inside: avoid;
-  /* Theoretically FF 20+ */
-  break-inside: avoid-column;
-  /* IE 11 */
+#section #section-view .figure-wrapper figure,
+#section #section-view .figure-wrapper figure .figure_content,
+#section #section-view .figure-wrapper figure .figure_content object,
+#section #section-view .figure-wrapper figure .figure_content object img {
   float: none;
   display: block;
   max-width: 100%;
   line-height: 29px;
 }
-/* line 25, ../_figures.scss */
-#section #section-view figure {
+/* line 19, ../_figures.scss */
+#section #section-view .figure-wrapper {
   margin: 15px;
+  max-width: 33%;
+  float: right;
+  clear: both;
+  /*
+  figure, 
+  figure .figure_content {
+  	height: 100%;
+  }
+  */
+}
+/* line 37, ../_figures.scss */
+#section #section-view .figure-wrapper figure {
   border: thin #eeeeee solid;
   border-radius: 5px;
   padding: 6px;
-  float: right;
-  clear: both;
-  max-width: 33%;
 }
-/* line 42, ../_figures.scss */
-#section #section-view figure .figure_content object img {
+/* line 46, ../_figures.scss */
+#section #section-view .figure-wrapper figure .figure_content object img {
   border: 0;
 }
-/* line 48, ../_figures.scss */
-#section #section-view figure figcaption {
+/* line 52, ../_figures.scss */
+#section #section-view .figure-wrapper figure figcaption {
   background: white;
 }
-/* line 51, ../_figures.scss */
-#section #section-view figure figcaption p {
+/* line 56, ../_figures.scss */
+#section #section-view .figure-wrapper figure figcaption p {
   font-family: 'Lora', serif;
   font-style: italic;
   font-size: 14px;

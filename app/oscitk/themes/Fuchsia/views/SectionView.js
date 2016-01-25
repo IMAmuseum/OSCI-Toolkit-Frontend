@@ -67,30 +67,66 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // see NavigationView.js
         Backbone.trigger("sectionRenderStart");
         
-
-
-
         // that refers to the view
         var that = this;
 
         $('figure').each( function( i, e ) {
 
-            var $e = $(e); //shorthand
+            // Shorthand heirarchy
+            var $w = null; // wrapper
 
-            // We need to explicitly set .figure_content height,
-            //   so as to avoid trouble when the window resizes
+            var $f = $(e);
+            var $d = $f.find('.figure_content');
+            var $o = $d.find('object');
+            var $i = $o.find('img');
 
-            var $i = $(e).find('img');
-            $e.find('.figure_content').css({
+
+            var $c = $f.find('figcaption');
+
+            // Check if the figure is wrapped; otherwise, wrap it
+            if( $f.parent().attr('id') !== $f.attr('id') + '-wrapper' ) {
+                $w = $("<div></div>").attr('id', $f.attr('id') + '-wrapper');
+                $w.addClass('figure-wrapper');
+                $f.wrap( $w ); // wraps in a copy!
+            }
+
+            // Figure was wrapped in a copy of $w, not $w itself, so select it again
+            // This is super important! If attr() is not sticking, this is why
+            $w = $f.parent();
+
+            // Save the image dimensions if they are not already saved
+            $i = $i[0]; // FireFox work-around... tentative!
+            if( !$w.attr("data-aspect") ) {
+                $w.attr('data-width', $i.width );
+                $w.attr('data-height', $i.height );
+                $w.attr('data-aspect', $i.height / $i.width );
+            }
+
+            // Reset all dimensions
+            $w.add($f).add($d).add($o).add($i).css({
                 'height' : 'auto',
                 'width'  : 'auto'
+            });
+
+            // Use max-width on .figure-wrapper in _figure.scss to constrain it
+            $w.css({
+                'width' : $w.attr('data-width')
             }).css({
-                'height' : $i.outerHeight(),
-                'width'  : $i.outerWidth()
+                'height' : $w.attr('data-aspect') * $w.width() + $c.outerHeight()
+            });
+
+            $f.css({
+                'height' : $w.innerHeight(),
+                'width' : $w.innerWidth()
+            });
+
+            $d.css({
+                'height' : $f.innerHeight() - $c.outerHeight() - 12, // padding..?
+                'width' : $f.innerWidth()
             });
 
             // Layered image init
-            var url = $e.find('object').attr('data');
+            var url = $o.attr('data');
             if (url !== undefined) {
 
                 $.ajax({
@@ -101,11 +137,11 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                     success: function(data) {
 
                         var $content = $(data).filter('.layered_image-asset').first();
-                        var $container = $e.find('.figure_content');
+                        var $container = $f.find('.figure_content');
                         
+                        // Note that this permanently deletes $o and $i
                         $container.empty();
                         $content.appendTo( $container );
-
 
                         var li = new window.LayeredImage( $content );
 
@@ -136,6 +172,10 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         // see NavigationView.js
         Backbone.trigger("sectionRenderEnd");
+
+        this.listenToOnce(Backbone, 'windowResized', function(section) {
+            this.renderLayout();
+        });
 
     },
 
@@ -261,7 +301,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         Backbone.trigger("layoutComplete");
 
         // Used to ensure that all figures are of a conistent width
-        $('img').load( function() {
+        $('img').imagesLoaded( function() {
+            console.log( 'images loaded!' );
             Backbone.trigger("imagesLoaded");
         });
 
