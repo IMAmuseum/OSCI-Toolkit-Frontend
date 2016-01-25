@@ -61,7 +61,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         });
 
         // When the user scrolls, destroy the popover
-        this.listenTo(Backbone, 'navigate', function() {
+        this.listenTo(Backbone, 'navigate windowResized', function() {
             //debugger;
             $('[id^="paragraph-"]').popover('destroy');
         });

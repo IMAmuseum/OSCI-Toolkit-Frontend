@@ -17,6 +17,7 @@ $toolbar-margin-bottom: 5px;
 			bottom: $navigation-height;
 
 			&.open {
+				max-width: 100%;
 				width: $toolbar-width-md;
 			}
 		}
@@ -252,7 +253,7 @@ $toolbar-margin-bottom: 5px;
 					}
 
 					p {
-						//font-family: 'Lato', sans-serif;
+						font-family: $font-family-sans-serif;
 					}
 
 					ul {

@@ -110,15 +110,24 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
             // Use max-width on .figure-wrapper in _figure.scss to constrain it
             $w.css({
-                'width' : $w.attr('data-width')
+                'width' : '66%' // constrained by max width
             }).css({
                 'height' : $w.attr('data-aspect') * $w.width() + $c.outerHeight()
             });
 
+
+            // Continuing on...
             $f.css({
                 'height' : $w.innerHeight(),
                 'width' : $w.innerWidth()
             });
+
+            // Just a little hack for mobile...
+            if( $('#osci-bp-md,#osci-bp-sm').is(':visible') ) {
+                $w.css({
+                    'width' : '100%'
+                });
+            }
 
             $d.css({
                 'height' : $f.innerHeight() - $c.outerHeight() - 12, // padding..?
@@ -302,7 +311,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         // Used to ensure that all figures are of a conistent width
         $('img').imagesLoaded( function() {
-            console.log( 'images loaded!' );
             Backbone.trigger("imagesLoaded");
         });
 

@@ -25,6 +25,8 @@ $toolbar-width-sm: 50px;
 $navigation-height: 46px;
 $navigation-height-sans-progress: 34px;
 
+// http://stackoverflow.com/questions/17045132/scrollbar-overlay-in-ie10-how-do-you-stop-that
+@-ms-viewport{ width: auto !important; } 
 
 // Import bootstrap variables for the below to work
 @import "bootstrap/bootstrap";

@@ -7,7 +7,11 @@
 
 	position: fixed;
 	right: 0px;
-	top: 20px;
+
+	// IE work-around; initial doesn't work
+	@media( min-width: #{$osci-bp-lg+1} ) {
+		top: 20px;
+	}
 
 	width: $toolbar-width-md;
 	padding: 8px;

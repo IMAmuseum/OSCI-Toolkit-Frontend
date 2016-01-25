@@ -58,13 +58,23 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	},
 
 	closeToolbar: function() {
-		this.$items.removeClass('open');
-		this.$container.hide();
+		if( this.$items.hasClass('open') ) {
+			this.$items.removeClass('open');
+			this.$container.hide();
+		}
 	},
 
 	openToolbar: function() {
-		this.$items.addClass('open');
-		this.$container.show();
+		if( !this.$items.hasClass('open') ) {
+			this.$items.addClass('open');
+			this.$container.show();
+
+
+			if( !this.$items.is('.active') ) {
+				$('.tocToolbarView-toolbar-item').click();
+			}
+		}
+
 	},
 
 	toggleToolbar: function() {
