@@ -20,13 +20,28 @@
 		.chapter-number {
 			font-family: $font-family-serif;
 			font-size: 14px;
-
 		}
 
 		.chapter-title {
 			font-family: $font-family-sans-serif;
 			font-size: 14px;
 		}
+
+		.mobile-menu {
+			width: 24px; // 25
+			height: 22px; // 23
+			cursor: pointer;
+			background-image: url(../../images/light/icon-menu.png);
+
+			display: none; // see media queries
+
+			position: absolute;
+		    left: 50%;
+		    margin-left: -12px;
+		    bottom: 6px;
+		}
+
+
 
 
 	}
@@ -41,10 +56,10 @@
 		cursor: pointer;
 
 
-		background-image: url(../../images/icon-arrow-grey.png);
+		background-image: url(../../images/dark/icon-arrow.png);
 
 		&.inactive {
-			background-image: url(../../images/icon-arrow-white.png);
+			background-image: url(../../images/light/icon-arrow.png);
 		}
 
 		&.prev-page { }
@@ -60,10 +75,10 @@
 		    -ms-filter: "FlipH";
 
 		}
-		
+
 	}
 
-	// Navigation collapses to bottom below this point
+	// Navigation collapses to a grey bar fixed to bottom
 	@media( max-width: $osci-bp-lg ) {
 
 		background-color: $color-dk-grey;
@@ -93,18 +108,30 @@
 		}
 
 		.btn-page {
-			background-image: url(../../images/icon-arrow-white.png);
+			background-image: url(../../images/light/icon-arrow.png);
 			&.inactive {
-				background-image: url(../../images/icon-arrow-grey.png);
+				background-image: url(../../images/dark/icon-arrow.png);
 			}
 		}
 
 	}
 
-	@media( max-width: #{$screen-xs-min - 1} ) {
+	// When the toolbar buttons disappear, show hamburger menu
+	// Make the chapter title disappear on smaller screens
+	// @media( max-width: #{$screen-xs-min - 1} ) {
+	@media( max-width: $osci-bp-md ) {
 		.chapter-info {
+			.chapter-number {
+				width: 90px;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
 			.chapter-title {
 				display: none;
+			}
+			.mobile-menu {
+				display: block;
 			}
 		}
 	}

@@ -16,7 +16,7 @@ body {
 		width: calc( 100% - #{$toolbar-width-sm} );
 	}
 
-	// Toolbar disappears at this width
+	// Toolbar buttons disappear at this width
 	@media( max-width: $osci-bp-md ) {
 		width: 100%;
 	}

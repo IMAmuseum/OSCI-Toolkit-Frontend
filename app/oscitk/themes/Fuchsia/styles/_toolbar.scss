@@ -13,7 +13,7 @@ $toolbar-margin-bottom: 5px;
 
 		// Bump this up to avoid the navigation
 		@media( max-width: $osci-bp-lg ) {
-			width: auto;
+			width: auto; // bumps unopened back to vertical
 			bottom: $navigation-height;
 
 			&.open {
@@ -31,9 +31,16 @@ $toolbar-margin-bottom: 5px;
 		}
 
 		// TODO: Move this to top on small screens 
+		/*
 		@media( max-width: $osci-bp-md ) {
-			display: none;
+			bottom: initial;
+			top: 0;
+			width: 100%;
+			background-color: $color-dk-grey;
 		}
+		*/
+
+		// On small screens
 
 		// We want this to be higher than the overlay
 		z-index: 10002;
@@ -105,6 +112,36 @@ $toolbar-margin-bottom: 5px;
 				}
 
 			}
+
+			@media( max-width: $osci-bp-md ) {
+				display: none;
+				&.open {
+					display: inline-block;
+				}
+			}
+
+			/*
+			@media( max-width: $osci-bp-md ) {
+				display: inline-block;
+
+				&.accountToolbarView-toolbar-item {
+					background-image: url(../../images/light/icon-user.png);
+				}
+
+				&.tocToolbarView-toolbar-item {
+					background-image: url(../../images/light/icon-contents.png);
+				}
+
+				&.notesToolbarView-toolbar-item {
+					background-image: url(../../images/light/icon-notes.png);
+				}
+
+				&.open {
+					background-color: $color-fuchsia;
+				}
+
+			}
+			*/
 
 		}
 

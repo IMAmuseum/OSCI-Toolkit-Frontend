@@ -3,6 +3,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('navigation'),
 	events: {
         //"scroll" : "updateProgress",
+        'click .mobile-menu' : 'triggerToggleToolbar',
     },
 	initialize: function() {
 
@@ -247,5 +248,10 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		}
 
 	},
+
+	triggerToggleToolbar: function() {
+		console.log( 'triggering' );
+		Backbone.trigger('toggleToolbar');
+	}
 
 });

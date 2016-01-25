@@ -11,6 +11,7 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 
 		// Just declaring objects for future use
 		this.$container = $();
+		this.$items = $();
 
 		this.listenTo(Backbone, 'closeToolbar', function(data) {
 			this.closeToolbar();
@@ -18,6 +19,10 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 
 		this.listenTo(Backbone, 'openToolbar', function(data) {
 			this.openToolbar();
+		});
+
+		this.listenTo(Backbone, 'toggleToolbar', function(data) {
+			this.toggleToolbar();
 		});
 
 		// In other themes, we wait for figuresAvailable,
@@ -30,9 +35,6 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 	render: function() {
 
 		this.$el.html( this.template() );
-
-		// After pulling the template, #tow is now available
-		this.$container = this.$el.find('#toolbar-overlay-wrapper');
 
 		// See config in index.html
 		_.each(app.toolbarItems, function(toolbarItem) {
@@ -49,17 +51,29 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 
 		}, this);
 
+		// After pulling the template, #tow is now available
+		this.$container = this.$el.find('#toolbar-overlay-wrapper');
+		this.$items = this.$el.find('#toolbar-area, .toolbar-item-view');
+
 	},
 
 	closeToolbar: function() {
-		$('#toolbar-area, .toolbar-item-view').removeClass('open');
+		this.$items.removeClass('open');
 		this.$container.hide();
 	},
 
 	openToolbar: function() {
-		$('#toolbar-area, .toolbar-item-view').addClass('open');
+		this.$items.addClass('open');
 		this.$container.show();
-	}
+	},
+
+	toggleToolbar: function() {
+		if( this.$items.hasClass('open') ) {
+			this.closeToolbar();
+		}else{
+			this.openToolbar();
+		}
+	},
 
 });
 
