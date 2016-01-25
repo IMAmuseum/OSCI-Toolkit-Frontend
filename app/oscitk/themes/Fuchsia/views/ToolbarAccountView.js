@@ -16,7 +16,7 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 
 		// see ../../../models/AccountModel.js
 		// re-renders form when the account info is retrieved
-		this.listenTo(Backbone, 'accountReady', function(sectionModel) {
+		this.listenTo(Backbone, 'accountReady accountStateChanged', function(sectionModel) {
 			this.model = app.account;
 			this.render();
 		});
