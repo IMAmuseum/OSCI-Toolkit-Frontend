@@ -164,7 +164,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	render: function() {
 
 		this.$el.html(this.template({
-			chapter: this.currentNavigationItem.get('title')
+			title: this.currentNavigationItem.get('title'),
+			subtitle: this.currentNavigationItem.get('subtitle')
 		}));
 
 		// Bind scroll event to progress bar
