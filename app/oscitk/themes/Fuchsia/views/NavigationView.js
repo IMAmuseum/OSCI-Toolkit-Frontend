@@ -61,7 +61,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			if( typeof data.identifier !== undefined ) {
 				if( waitForSection ) {
 
-					this.listenToOnce( Backbone, "sectionRenderEnd", function() {
+					//this.listenTo( Backbone, "sectionRenderEnd", imageLoad );
+					this.listenToOnce( Backbone, "navigateReady", function() {
 						Backbone.trigger('navigate', { identifier: data.identifier } );
 					});
 
@@ -91,6 +92,9 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			var gotoPage = 0; 
 			var selector = false;
 
+			// Clear any p- etc nonsense
+			app.router.navigate("section/" + this.getCurrentNavigationItem().get('id'), { trigger: false } );
+
             if (data.identifier) {
 
                 switch (data.identifier) {
@@ -106,12 +110,14 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
                     default:
 
+
                         // Route to a paragraph /p-[section_id]-[id]
                         if(data.identifier.search(/^p-[0-9]+/) > -1) {
 
                         	var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
                         	//selector = 'p[data-paragraph_number='+pid+']';
-                        	selectro = '.paragraph-controls[data-paragraph_identifier='+pid+']';
+                        	selector = '.paragraph-controls[data-paragraph_identifier='+pid+']';
+                        	console.log( selector );
                             gotoPage = this.getPageForSelector( selector );
 
                         	break;
@@ -143,8 +149,9 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
             var scroll = gotoPage * $(document).height();
             	scroll = scroll - $(window).height() / 2;
+            	scroll -= selector ? $(selector).outerHeight() / 2 : 0;
             	scroll = Math.max( 0, scroll );
-
+            	
             if( selector ) {
             	// todo: for paragraphs, use the button selector, not the paragraph selector
             	scroll = scroll + $(selector).height() / 2;

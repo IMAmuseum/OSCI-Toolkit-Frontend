@@ -295,6 +295,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                     $table.height(t);
                 }
 
+                // See NavigationView.js
+                Backbone.trigger("navigateReady");
+
             };
 
             // Just some standard jQuery binds...
