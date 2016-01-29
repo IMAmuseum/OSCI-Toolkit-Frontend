@@ -16,6 +16,20 @@
 	width: $toolbar-width-md;
 	padding: 8px;
 
+	// For the .progress-bar in navbar
+	.progress {
+
+		height: 6px;
+		margin-bottom: 6px;
+
+		.progress-bar {
+			&.progress-bar-fuchsia {
+				background-color: $color-fuchsia;
+			}
+		}
+
+	}
+
 	.chapter-info {
 
 		display: inline-block;
@@ -40,43 +54,48 @@
 			display: none; // see media queries
 
 			position: absolute;
-		    left: 50%;
+		    //left: 50%;
+		    right: 6px;
+		    bottom: 5px;
+
 		    margin-left: -12px;
-		    bottom: 6px;
 		}
-
-
-
 
 	}
 
-	.btn-page {
+	.btn-container {
 
-		display: inline-block;
+		float: right;
 
-		height: 20px;
-		width: 20px;
+		.btn-page {
 
-		cursor: pointer;
+			display: inline-block;
+
+			height: 20px;
+			width: 20px;
+
+			cursor: pointer;
 
 
-		background-image: url(../../images/dark/icon-arrow.png);
+			background-image: url(../../images/dark/icon-arrow.png);
 
-		&.inactive {
-			background-image: url(../../images/light/icon-arrow.png);
-		}
+			&.inactive {
+				background-image: url(../../images/light/icon-arrow.png);
+			}
 
-		&.prev-page { }
+			&.prev-page { }
 
-		&.next-page {
+			&.next-page {
 
-			// Horizontal filp
-		    -moz-transform: scaleX(-1);
-		    -o-transform: scaleX(-1);
-		    -webkit-transform: scaleX(-1);
-		    transform: scaleX(-1);
-		    filter: FlipH;
-		    -ms-filter: "FlipH";
+				// Horizontal filp
+			    -moz-transform: scaleX(-1);
+			    -o-transform: scaleX(-1);
+			    -webkit-transform: scaleX(-1);
+			    transform: scaleX(-1);
+			    filter: FlipH;
+			    -ms-filter: "FlipH";
+
+			}
 
 		}
 
@@ -86,16 +105,37 @@
 	@media( max-width: $osci-bp-lg ) {
 
 		background-color: $color-dk-grey;
-		
+
+		height: $navigation-height;
 		width: 100%;
 		
 		top: initial;
 		bottom: 0;
 
-		padding-bottom: 0px;
 		z-index: 10001;
+
+		padding-bottom: 0px;
+		padding-top: 0px;
 		
+		.progress {
+
+			margin-left: -8px;
+			margin-right: -8px;
+
+			height: 4px;
+
+			border-radius: 0px;
+			background-color: $color-lt-grey;
+
+
+		}
+
+
 		.chapter-info {
+
+			width: calc( 100% - 50px );
+			margin-left: 24px;
+    		
 
 			color: #fff;
 
@@ -111,10 +151,24 @@
 
 		}
 
-		.btn-page {
-			background-image: url(../../images/light/icon-arrow.png);
-			&.inactive {
-				background-image: url(../../images/dark/icon-arrow.png);
+		.btn-container {
+
+			float: none;
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			width: calc( 100% - 24px - 12px - 24px );
+			margin-left: 6px;
+			//margin-bottom: 2px;
+
+			.btn-page {
+				background-image: url(../../images/light/icon-arrow.png);
+				&.inactive {
+					background-image: url(../../images/dark/icon-arrow.png);
+				}
+				&.next-page {
+					float: right;
+				}
 			}
 		}
 
@@ -142,23 +196,7 @@
 
 }
 
-// For the .progress-bar in navbar
-.progress {
 
-	height: 6px;
-	margin-bottom: 6px;
-
-	.progress-bar {
-		&.progress-bar-fuchsia {
-			background-color: $color-fuchsia;
-		}
-	}
-
-	@media( max-width: $osci-bp-lg ) and (max-height: #{ $osci-bp-vert } ) {
-		display: none;
-	}
-
-}
 
 // Double-clicking on the navigation tends to select it...
 *.unselectable {
@@ -174,6 +212,7 @@
 }
 
 // Offset body for the fixed navbar
+/*
 @media( max-width: $osci-bp-lg ) and (min-height: #{ $osci-bp-vert + 1 } ) {
 	body {
 		margin-bottom: $navigation-height;
@@ -183,5 +222,13 @@
 @media( max-width: $osci-bp-lg ) and (max-height: #{ $osci-bp-vert } ) {
 	body {
 		margin-bottom: $navigation-height-sans-progress;
+	}
+}
+*/
+
+
+@media( max-width: $osci-bp-lg ) {
+	body {
+		margin-bottom: $navigation-height;
 	}
 }

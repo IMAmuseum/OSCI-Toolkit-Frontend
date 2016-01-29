@@ -23,12 +23,18 @@ $toolbar-margin-bottom: 5px;
 		}
 
 		// Accounting for the navigation and the disappearing progress bar 
+		/*
 		@media( max-width: $osci-bp-lg ) and (min-height: #{ $osci-bp-vert + 1 } ) {
 			bottom: $navigation-height;
 		}
 
 		@media( max-width: $osci-bp-lg ) and (max-height: #{ $osci-bp-vert } ) {
 			bottom: $navigation-height-sans-progress;
+		}
+		*/
+
+		@media( max-width: $osci-bp-lg ) {
+			bottom: $navigation-height;
 		}
 
 		// TODO: Move this to top on small screens 
@@ -160,6 +166,7 @@ $toolbar-margin-bottom: 5px;
 		bottom: 0;
 		left: 0;
 
+		/*
 		@media( max-width: $osci-bp-lg ) and (min-height: #{ $osci-bp-vert + 1 } ) {
 			bottom: $navigation-height;
 		}
@@ -167,6 +174,11 @@ $toolbar-margin-bottom: 5px;
 		@media( max-width: $osci-bp-lg ) and (max-height: #{ $osci-bp-vert } ) {
 			bottom: $navigation-height-sans-progress;
 		}
+		*/
+
+		@media( max-width: $osci-bp-lg ) {
+			bottom: $navigation-height;
+		}		
 
 		// Note that this is lower than the icons
 		z-index: 10001;

@@ -18,7 +18,7 @@ __p += '<div class="progress">\n\t<div class="progress-bar progress-bar-fuchsia"
 ((__t = ( title )) == null ? '' : __t) +
 '</div>\n\t<div class="chapter-title">' +
 ((__t = ( subtitle )) == null ? '' : __t) +
-'</div>\n\t<div class="mobile-menu"></div>\n</div>\n<div class="pull-right">\n\t<div class="btn-page prev-page"></div>\n\t<div class="btn-page next-page"></div>\n</div>';
+'</div>\n\t<div class="mobile-menu"></div>\n</div>\n\n<div class="btn-container">\n\t<div class="btn-page prev-page"></div>\n\t<div class="btn-page next-page"></div>\n</div>';
 
 }
 return __p
