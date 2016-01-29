@@ -101,7 +101,6 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 		
 		// Wait until we have info about total and current page
 		// Will never be false unless null, i.e. not yet calculated
-
 		
 		// var page = app.views.navigationView.page;
 		var numPages = app.views.navigationView.numPages;

@@ -2,9 +2,6 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 	className: 'navbar-view',
 	template: OsciTk.templateManager.get('navbar'),
 
-	// TODO: Fix infinite loop bug in FireFox
-	// Why does it happen?
-
 	initialize: function() {
 		
 		this.currentFontSize = 100;
@@ -76,8 +73,6 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 
 	fontLarger: function() {
 
-		//console.log( 'large clicked');
-
 		if( this.currentFontSize < 200 ) {
 			this.currentFontSize += 10;
 		}
@@ -86,8 +81,6 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 	},
 
 	fontSmaller: function() {
-		
-		//console.log( 'small clicked');
 
 		if( this.currentFontSize > 50 ) {
 			this.currentFontSize -= 10;
@@ -97,8 +90,6 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 	},
 
 	changeFontSize: function() {
-		
-		//console.log( this.currentFontSize );
 
 		app.views.sectionView.$el.css({
 			"font-size": this.currentFontSize + "%"

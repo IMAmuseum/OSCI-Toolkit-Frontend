@@ -1,9 +1,6 @@
 OsciTk.views.App = OsciTk.views.BaseView.extend({
 	id: 'reader',
 	template: OsciTk.templateManager.get('app'),
-    events: {
-        //'click #note-submit': 'noteSubmit'
-    },
 	initialize: function() {
 		this.render();
 
@@ -22,7 +19,6 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			
 			//printView: new OsciTk.views.Print(),
 
-			
 			sectionView: new OsciTk.views.Section(),
 			footnotesView: new OsciTk.views.Footnotes(),
 			paragraphControlsView: new OsciTk.views.ParagraphControls(),
@@ -55,12 +51,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		// Add the section view
 		this.addView(app.views.sectionView, '#section');
 
-
-
-
-
-
-		// Add the navigation view to the AppView
+		// Add the navigation view
 		this.addView(app.views.navigationView, '#navigation');
 
 

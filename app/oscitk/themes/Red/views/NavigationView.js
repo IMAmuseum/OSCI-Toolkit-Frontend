@@ -250,8 +250,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			var previous = this.currentNavigationItem.get('previous');
 			var next = this.currentNavigationItem.get('next');
 		
-			//console.log( gotoPage, gotoPage < 1 );
-
 			// If navigating too far, table of contents no longer works
 			var navigateRestoreToolbar = function( route ) {
 				
@@ -263,8 +261,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 				if( restoreItem ) {
 					var activeToolbarItemClass = $activeItem.attr('class').match(/(:?\s)(.+?-toolbar-item)(:?\s|$)/)[2];
 				}
-
-				//console.log( route );
 
 				Backbone.trigger("toolbarRemoveViews");
 				app.router.navigate( route, { trigger: true } );
@@ -278,25 +274,12 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 			if( gotoPage < 1 && previous ) {
 
-
 				navigateRestoreToolbar( "section/" + previous.id + "/end" );
-
-				/*
-				Backbone.trigger("toolbarRemoveViews");
-				app.router.navigate( "section/" + previous.id + "/end", { trigger: true } );
-				*/
 
 			// Note that we must wait for calculatePages to run in order to get this.numPages
 			} else if( gotoPage > this.numPages && this.numPages && next ) {
 
-				//console.log( gotoPage, this.numPages, next );
-
 				navigateRestoreToolbar( "section/" + next.id );
-
-				/*
-				Backbone.trigger("toolbarRemoveViews");
-				app.router.navigate("section/" + next.id, { trigger: true } ) ;
-				*/
 
 			} else {
 
@@ -309,6 +292,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 				this.calculatePages();
 				this.update(this.page);
+				
 			}
 
 
