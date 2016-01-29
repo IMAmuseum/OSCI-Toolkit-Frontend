@@ -4,8 +4,7 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 		'click button.register': 'register',
 		'click a.register': 'showRegistrationForm',
 		'click a.login': 'showLoginForm',
-		'click a.logout': 'logout',
-		'click #dismiss': 'closeOverlay',
+		'click a.logout': 'logout'
 	},
 	className: 'account-view',
 	template: null,
@@ -27,6 +26,27 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 		else {
 			this.showLoginForm();
 		}
+
+        // Remove overlay if there is a click outside it
+        // $('html').one() wrapper that rebinds until success
+        var that = this;
+        var selfbound = function(e) {
+            $target = $(e.target);
+            $exclude = that.$el.find('.panel');
+            // If the two DOM elements are not the same...
+            if( $target.get(0) !== $exclude.get(0) ) {
+                // If the target is not a descendant of the panel...
+                if( $exclude.find($target).length < 1  ) {
+                	that.closeOverlay();
+                }else{
+                    $('html').one('click', selfbound );
+                }
+            }
+        };
+
+        $('html').one('click', selfbound );
+
+
 		return this;
 	},
 	login: function() {
