@@ -1,8 +1,15 @@
+$navbar-layout-width: 119px;
+$navbar-font-width: 87px;
+$navbar-page-width: 86px;
+
 body {
 	margin-bottom: $navbar-height;
 }
 
 #navbar {
+
+	background-color: white;
+	border-top: 1px solid $color-light-grey;
 
 	position: fixed;
 	bottom: 0;
@@ -12,28 +19,32 @@ body {
 
 	z-index: 998;
 
+	.navbar-view {
+		@media( max-width: 800px ) {
+			margin-left: 40px;
+			margin-right: 40px;
+		}
+	}
+
 	nav {
 
-		background-color: white;
-		border-top: 1px solid $color-light-grey;
-		
 		margin: 0px -15px;
 
 		#osci-page-slider {
 			padding: 18px 15px;
 
-			width: calc( 100% - 86px - 119px - 87px );
+			width: calc( 100% - #{$navbar-page-width} - #{$navbar-layout-width} - #{$navbar-font-width} );
 
-			// Account for hidden font and layout selector
+			// Account for hidden layout selector
 			@media ( max-width: 767px ) {
-				width: calc( 100% - 86px - 87px );
+				width: calc( 100% - #{$navbar-page-width} - #{$navbar-font-width} );
 			}
 
 			// FireFox hotfix. Exclude font-size selector
 			&.ff {
-				width: calc( 100% - 86px - 119px );
+				width: calc( 100% - #{$navbar-page-width} - #{$navbar-layout-width} );
 				@media ( max-width: 767px ) {
-					width: calc( 100% - 86px );
+					width: calc( 100% - #{$navbar-page-width} );
 				}
 			}
 

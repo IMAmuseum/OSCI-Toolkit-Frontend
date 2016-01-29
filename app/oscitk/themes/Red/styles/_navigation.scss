@@ -40,10 +40,20 @@
 	
 	.side {
 		position: fixed;
-		top: 0;
+		z-index: 999; // #navbar + 1
 
-		height: 100%;
 		width: 40px;
+
+		// adjust to the width and # of columns
+		@media( max-width: 800px ) {
+			height: 49px; // #navbar height - 1
+			bottom: 0;
+		}
+
+		@media( min-width: 801px ) {
+			height: calc( 100% - 53px - 50px );
+			top: 53px; //header height
+		}
 
 		cursor: pointer;
 
@@ -68,6 +78,8 @@
 			position: absolute;
 			top: 50%;
 
+			margin-top: -14px;
+
 			text-indent: 100%;
 			overflow: hidden;
 
@@ -76,11 +88,6 @@
 
 			opacity: 0.4;
 
-		}
-
-		// adjust to the width and # of columns
-		@media( max-width: 800px ) {
-			display: none;
 		}
 
 	}
