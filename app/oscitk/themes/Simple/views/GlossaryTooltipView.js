@@ -9,7 +9,7 @@ OsciTk.views.GlossaryTooltip = OsciTk.views.BaseView.extend({
                     var item = app.collections.glossaryTerms.get(tid);
                     var term = item.get('term');
                     var definition = item.get('definition');
-                    var template = '<h5 class="glossaryTerm pull-left">' + term + ': </h5><p class="glossaryDefinition">' + definition + '</p>';
+                    var template = '<h5 class="glossaryTerm">' + term + ': </h5><p class="glossaryDefinition">' + definition + '</p>';
                     glossaryRef.attr("title", template);
                     glossaryRef.attr("data-toggle", "tooltip");
                     glossaryRef.off('click');
