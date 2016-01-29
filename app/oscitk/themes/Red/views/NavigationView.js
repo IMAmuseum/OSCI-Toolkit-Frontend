@@ -94,10 +94,10 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// Respond to touch swipes
 		var that = this;
 		$('#section-container').swipe({
-			swipeLeft: function(event, direction, distance, duration, fingerCount, fingerData) {
+			swipeRight: function(event, direction, distance, duration, fingerCount, fingerData) {
 				Backbone.trigger('navigate', { page: that.page - 1 } );
 			},
-			swipeRight: function(event, direction, distance, duration, fingerCount, fingerData) {
+			swipeLeft: function(event, direction, distance, duration, fingerCount, fingerData) {
 				Backbone.trigger('navigate', { page: that.page + 1 } );
 			},
 			//excludedElements: "button, input, select, textarea, a, .noSwipe"
