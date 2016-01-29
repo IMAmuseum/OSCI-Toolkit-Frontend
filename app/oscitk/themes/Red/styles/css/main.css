@@ -10394,13 +10394,13 @@ images.image_opaque {
   background-repeat: no-repeat;
 }
 
-/* line 1, ../_note-form.scss */
+/* line 1, ../_paragraph-notes.scss */
 .note-form-wrapper {
   height: 160px;
   display: block;
 }
 
-/* line 6, ../_note-form.scss */
+/* line 6, ../_paragraph-notes.scss */
 .paragraph-controls {
   /*
   float: left;
@@ -10416,11 +10416,11 @@ images.image_opaque {
   margin-right: 10px;
   z-index: 2;
 }
-/* line 29, ../_note-form.scss */
+/* line 29, ../_paragraph-notes.scss */
 .paragraph-controls .btn {
   text-transform: uppercase;
 }
-/* line 35, ../_note-form.scss */
+/* line 35, ../_paragraph-notes.scss */
 .paragraph-controls .paragraph-button {
   background-image: url(../../images/disk-grey.png);
   background-repeat: no-repeat;
@@ -10432,32 +10432,32 @@ images.image_opaque {
   text-shadow: none;
   color: transparent;
 }
-/* line 49, ../_note-form.scss */
+/* line 49, ../_paragraph-notes.scss */
 .paragraph-controls .paragraph-button.withNotes {
   background-image: url(../../images/disk-red.png);
 }
 
-/* line 59, ../_note-form.scss */
+/* line 59, ../_paragraph-notes.scss */
 #note-submit {
   margin-top: 10px;
 }
 
-/* line 1, ../_citation.scss */
+/* line 1, ../_paragraph-citation.scss */
 .citation-wrapper {
   background: #FFF;
   overflow-y: scroll;
   height: 160px;
 }
-/* line 7, ../_citation.scss */
+/* line 7, ../_paragraph-citation.scss */
 .citation-wrapper .citations {
   padding: 0 10px 5px 10px;
 }
-/* line 13, ../_citation.scss */
+/* line 13, ../_paragraph-citation.scss */
 .citation-wrapper .citations .citation h4 {
   font-size: 14px;
   margin-bottom: 5px;
 }
-/* line 18, ../_citation.scss */
+/* line 18, ../_paragraph-citation.scss */
 .citation-wrapper .citations .citation > p {
   font-size: 12px !important;
   line-height: 14px !important;

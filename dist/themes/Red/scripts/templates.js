@@ -1,25 +1,5 @@
 this["JST"] = this["JST"] || {};
 
-this["JST"]["app/oscitk/themes/Red/templates/_print.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<a href="#print" id="print">Print</a>\n';
-
-}
-return __p
-};
-
-this["JST"]["app/oscitk/themes/Red/templates/_title.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<h1 id="publication-title"></h1>';
-
-}
-return __p
-};
-
 this["JST"]["app/oscitk/themes/Red/templates/app.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -463,7 +443,7 @@ this["JST"]["app/oscitk/themes/Red/templates/toolbar.tpl.html"] = function(obj) 
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<nav class="nav nav-stacked">\n\t<ul id="toolbar-area" class="">\n\t\t<li class="close-toolbar-item"></li>\n\t</ul>\n\n\t<div id="toolbar-filler">\n\n\n\t\t<p>&nbsp;</p>\n\n\t\t<p class="toolbar-trigger tocToolbarView-toolbar-item">Contents</p>\n\t\t<!--<p>Search</p>-->\n\t\t<p class="toolbar-trigger glossaryToolbarView-toolbar-item">Glossary</p>\n\t\t<p class="toolbar-trigger footnotesToolbarView-toolbar-item">Footnotes</p>\n\t\t<p class="toolbar-trigger figuresToolbarView-toolbar-item">Figures</p>\n\t\t<p class="toolbar-trigger notesToolbarView-toolbar-item">Notes</p>\n\t\t<!--<p>Citations</p>-->\n\t\t<p class="toolbar-trigger accountToolbarView-toolbar-item">User Profile</p>\n\n\t</div>\n\t<div id="toolbar-readout">\n\t\t<div id="toolbar-toc"></div>\n\t\t<!--<div id="toolbar-search"></div>-->\n\t\t<div id="toolbar-glossary"></div>\n\t\t<div id="toolbar-footnotes"></div>\n\t\t<div id="toolbar-figures"></div>\n\t\t<div id="toolbar-notes"></div>\n\t\t<!--<div id="toolbar-citations"></div>-->\n\t\t<div id="toolbar-account"></div>\n\t</div>\n</nav>\n';
+__p += '<nav class="nav nav-stacked">\n\t<ul id="toolbar-area" class="">\n\t\t<li class="close-toolbar-item"></li>\n\t</ul>\n\n\t<div id="toolbar-filler">\n\n\n\t\t<p>&nbsp;</p>\n\n\t\t<p class="toolbar-trigger tocToolbarView-toolbar-item">Contents</p>\n\t\t<!--<p>Search</p>-->\n\t\t<p class="toolbar-trigger glossaryToolbarView-toolbar-item">Glossary</p>\n\t\t<p class="toolbar-trigger footnotesToolbarView-toolbar-item">Footnotes</p>\n\t\t<p class="toolbar-trigger figuresToolbarView-toolbar-item">Figures</p>\n\t\t<p class="toolbar-trigger notesToolbarView-toolbar-item">Notes</p>\n\t\t<p class="toolbar-trigger accountToolbarView-toolbar-item">User Profile</p>\n\n\t</div>\n\t<div id="toolbar-readout">\n\t\t<div id="toolbar-toc"></div>\n\t\t<!--<div id="toolbar-search"></div>-->\n\t\t<div id="toolbar-glossary"></div>\n\t\t<div id="toolbar-footnotes"></div>\n\t\t<div id="toolbar-figures"></div>\n\t\t<div id="toolbar-notes"></div>\n\t\t<div id="toolbar-account"></div>\n\t</div>\n</nav>\n';
 
 }
 return __p

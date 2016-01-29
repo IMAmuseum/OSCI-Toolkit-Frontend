@@ -38,7 +38,6 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			footnotesToolbarView: new OsciTk.views.FootnotesToolbar(),
 			figuresToolbarView: new OsciTk.views.FiguresToolbar(),
 			notesToolbarView: new OsciTk.views.NotesToolbar(),
-			citationsToolbarView: new OsciTk.views.CitationsToolbar(),
 			accountToolbarView: new OsciTk.views.AccountToolbar(),
 			
 

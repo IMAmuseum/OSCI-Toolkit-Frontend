@@ -24,7 +24,9 @@ $navbar-height: 50px;
 @import "layered-image";
 
 @import "overlay";
+
 @import "paragraph-popover";
-@import "note-form";
-@import "citation";
+@import "paragraph-notes";
+@import "paragraph-citation";
+
 @import "print";
