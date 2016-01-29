@@ -6,10 +6,20 @@ body {
 	background-color: white;
 
 	// Baseline font-size
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 24px;
 
-	width: calc( 100% - #{$toolbar-width} );
+	width: calc( 100% - #{$toolbar-width-md} );
+
+	// Toolbar should shrink to vertical here as well
+	@media( max-width: $osci-bp-lg ) {
+		width: calc( 100% - #{$toolbar-width-sm} );
+	}
+
+	// Toolbar buttons disappear at this width
+	@media( max-width: $osci-bp-md ) {
+		width: 100%;
+	}
 
 	#section-view {
 
@@ -22,7 +32,21 @@ body {
 		}
 
 		.section-content {
+			box-shadow: 0px 0px 5px grey;
 			padding: 15px;
+		}
+
+		// Removing all page effects at this width
+		@media( max-width: $osci-bp-md ) {
+			&, .section-page {
+				box-shadow: none;
+				padding-right: 0;
+			}
+
+			.section-content {
+				box-shadow: none;
+			}
+
 		}
 
 		// Bootstrap override
@@ -74,9 +98,13 @@ body {
 
 			// Offset for p > .paragraph-controls
 			// Changing this to a margin will affect nearest element calculations
-			padding-left: 16px;
+		    padding-left: $paragraph-button-size + $paragraph-button-margin;
+    		text-indent: #{ 0 - ($paragraph-button-size + $paragraph-button-margin) / 2 }; 
 
 			.footnote-reference {
+
+				padding-left: 15px;
+				
 				margin: 0 5px;
 
 				display: inline-block;
@@ -94,14 +122,24 @@ body {
 				line-height: 15px;
 				text-align: center;
 				
-				//background: $color-light-red;
+				background: $color-fuchsia;
 				
 				&:hover {
 					color:#fff;
 					text-decoration: none;
-					//background: $color-dark-red;
+					background: $color-fuchsia;
 				}
 				
+			}
+
+			.tooltip {
+				.tooltip-arrow {
+					border-bottom-color: $color-dk-grey;
+				}
+				.tooltip-inner {
+					background: $color-dk-grey;
+					color: white;
+				}
 			}
 
 			// TODO: Remove me? Hide me?
@@ -113,8 +151,19 @@ body {
 
 		}
 
+		// Paragraph styles affect tooltips too
 		.tooltip-inner {
 			text-indent: 0;
+		}
+
+		// Plate is a div w/ background-image; see SectionView.js
+		.plate {
+			max-width: 100%;
+			max-height: 100%;
+
+			background-size: cover;
+			background-position: center center;
+
 		}
 
 	}

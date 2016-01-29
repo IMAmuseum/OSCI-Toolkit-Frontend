@@ -1,7 +1,7 @@
 OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
     template: OsciTk.templateManager.get('paragraph-popover'),
-    templateNotes: OsciTk.templateManager.get('note-form'),
-    templateCites: OsciTk.templateManager.get('citation'),
+    templateNotes: OsciTk.templateManager.get('paragraph-notes'),
+    templateCites: OsciTk.templateManager.get('paragraph-cite'),
 
     initialize: function() {
 
@@ -61,7 +61,8 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         });
 
         // When the user scrolls, destroy the popover
-        this.listenTo(Backbone, 'navigate', function() {
+        this.listenTo(Backbone, 'navigate windowResized', function() {
+            //debugger;
             $('[id^="paragraph-"]').popover('destroy');
         });
 
@@ -216,6 +217,8 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
                 that.noteSubmit(e);
             });
 
+
+
             // Remove popover if there is a click outside the popover
             // $('html').one() wrapper that rebinds until success
             var selfbound = function(e) {
@@ -233,7 +236,9 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
                     }else{
                         $('html').one('click', selfbound );
                     }
+
                 }
+
             };
 
             $('html').one('click', selfbound );
