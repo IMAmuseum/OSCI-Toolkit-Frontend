@@ -10,55 +10,6 @@ __p += '<!-- TOP -->\n<header class="hidden-print">\n\t<div id="header"></div>\n
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Red/templates/citation.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
-with (obj) {
-__p += '<div class="citation-wrapper">\n\t<div class="citations">\n\t\t<div id="citation-format-chicago" class="citation">\n\t\t\t<h4>Chicago</h4>\n\t\t\t<p>';
- if (creator.length > 0) { ;
-__p += ' ' +
-((__t = ( creator + ", " )) == null ? '' : __t) +
-' ';
- } ;
-__p += '&ldquo;<em>' +
-((__t = ( title )) == null ? '' : __t) +
-'</em>,&rdquo; in <em>' +
-((__t = ( publicationTitle )) == null ? '' : __t) +
-'</em>, ed. ' +
-((__t = ( editor )) == null ? '' : __t) +
-' ' +
-((__t = ( publisher )) == null ? '' : __t) +
-' ' +
-((__t = ( formattedDate )) == null ? '' : __t) +
-', para ' +
-((__t = ( paragraphNumber )) == null ? '' : __t) +
-'.</p>\n\t\t</div>\n\t\t<div id="citation-format-mla" class="citation">\n\t\t\t<h4>MLA</h4>\n\t\t\t<p>';
- if (creator.length > 0) { ;
-__p += ' ' +
-((__t = ( creator + ", " )) == null ? '' : __t) +
-' ';
- } ;
-__p += '&ldquo;<em>' +
-((__t = ( title )) == null ? '' : __t) +
-'</em>,&rdquo; in <span style="text-decoration:underline;">' +
-((__t = ( publicationTitle )) == null ? '' : __t) +
-'</span>, ed. ' +
-((__t = ( editor )) == null ? '' : __t) +
-' (' +
-((__t = ( publisher )) == null ? '' : __t) +
-'), ' +
-((__t = ( formattedDate )) == null ? '' : __t) +
-', ' +
-((__t = ( paragraphNumber )) == null ? '' : __t) +
-'.</p>\n\t\t</div>\n\t\t<div id="citation-url" class="citation">\n\t\t\t<h4>Citation URL</h4>\n\t\t\t<p>' +
-((__t = ( url )) == null ? '' : __t) +
-'</p>\n\t\t</div>\n\t</div>\n</div>';
-
-}
-return __p
-};
-
 this["JST"]["app/oscitk/themes/Red/templates/font.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -129,7 +80,56 @@ __p += '<div class=\'prev-page side\'><div class=\'indicator\'>&lt;</div></div>\
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Red/templates/note-form.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Red/templates/paragraph-citation.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<div class="citation-wrapper">\n\t<div class="citations">\n\t\t<div id="citation-format-chicago" class="citation">\n\t\t\t<h4>Chicago</h4>\n\t\t\t<p>';
+ if (creator.length > 0) { ;
+__p += ' ' +
+((__t = ( creator + ", " )) == null ? '' : __t) +
+' ';
+ } ;
+__p += '&ldquo;<em>' +
+((__t = ( title )) == null ? '' : __t) +
+'</em>,&rdquo; in <em>' +
+((__t = ( publicationTitle )) == null ? '' : __t) +
+'</em>, ed. ' +
+((__t = ( editor )) == null ? '' : __t) +
+' ' +
+((__t = ( publisher )) == null ? '' : __t) +
+' ' +
+((__t = ( formattedDate )) == null ? '' : __t) +
+', para ' +
+((__t = ( paragraphNumber )) == null ? '' : __t) +
+'.</p>\n\t\t</div>\n\t\t<div id="citation-format-mla" class="citation">\n\t\t\t<h4>MLA</h4>\n\t\t\t<p>';
+ if (creator.length > 0) { ;
+__p += ' ' +
+((__t = ( creator + ", " )) == null ? '' : __t) +
+' ';
+ } ;
+__p += '&ldquo;<em>' +
+((__t = ( title )) == null ? '' : __t) +
+'</em>,&rdquo; in <span style="text-decoration:underline;">' +
+((__t = ( publicationTitle )) == null ? '' : __t) +
+'</span>, ed. ' +
+((__t = ( editor )) == null ? '' : __t) +
+' (' +
+((__t = ( publisher )) == null ? '' : __t) +
+'), ' +
+((__t = ( formattedDate )) == null ? '' : __t) +
+', ' +
+((__t = ( paragraphNumber )) == null ? '' : __t) +
+'.</p>\n\t\t</div>\n\t\t<div id="citation-url" class="citation">\n\t\t\t<h4>Citation URL</h4>\n\t\t\t<p>' +
+((__t = ( url )) == null ? '' : __t) +
+'</p>\n\t\t</div>\n\t</div>\n</div>';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Red/templates/paragraph-notes.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
