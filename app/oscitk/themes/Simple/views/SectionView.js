@@ -18,8 +18,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             }, 0);
             $('#section-view').empty();
             $('.header-view').empty();
-            $('#loader').show();
-            $('#loader').fadeTo(500, 0.7);
 
             if (navItem) {
                 // loading section content
@@ -50,7 +48,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     },
 
     render: function() {
-        $('#loader').hide();
         this.$el.html(this.template({sectionTitle: this.sectionTitle, content: $(this.content).html()}));
         Backbone.trigger("layoutComplete");
         return this;

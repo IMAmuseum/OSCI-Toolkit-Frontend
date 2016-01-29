@@ -8350,66 +8350,49 @@ figcaption {
   padding: 4px 4px 2px 6px;
   font-size: 14px;
 }
-
-/* line 19, ../_figures.scss */
+/* line 17, ../_figures.scss */
 figcaption p {
   font-size: 14px;
   font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-/* line 25, ../_figures.scss */
+/*
 figure.left {
-  float: left;
-  margin-right: 50px;
+   float: left;
+   margin-right: 50px;
 }
 
-/* line 30, ../_figures.scss */
 img.left {
-  float: left;
-  max-width: 100%;
-  max-height: 50vh;
+   float: left;
+   max-width: 100%;
+   max-height: 50vh;
 }
 
-/* line 36, ../_figures.scss */
 figure.right {
-  float: right;
-  margin-left: 40px;
+   float: right;
+   margin-left: 40px;
 }
 
-/* line 41, ../_figures.scss */
 img.right {
-  float: right;
-  max-width: 100%;
-  max-height: 50vh;
+   float: right;
+   max-width: 100%;
+   max-height: 50vh;
 }
 
-/* line 47, ../_figures.scss */
 figure.plate,
 figure.center {
-  width: 50%;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+   width: 50%;
+   max-width: 100%;
+   margin-left: auto;
+   margin-right: auto;
+   img, figcaption {
+      width: 100%;
+   }
+   @media (max-width: 768px) {
+      width: 90%;
+   }
 }
-/* line 53, ../_figures.scss */
-figure.plate img, figure.plate figcaption,
-figure.center img,
-figure.center figcaption {
-  width: 100%;
-}
-@media (max-width: 768px) {
-  /* line 47, ../_figures.scss */
-  figure.plate,
-  figure.center {
-    width: 90%;
-  }
-}
-
-/* line 61, ../_figures.scss */
-.osci-figure {
-  background: #f1f1f1;
-}
-
+*/
 /* line 1, ../_overlay.scss */
 .overlay {
   position: fixed;
