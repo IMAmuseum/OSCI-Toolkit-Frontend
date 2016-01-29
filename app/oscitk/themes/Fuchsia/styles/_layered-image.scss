@@ -1,12 +1,11 @@
 /* BEGIN JQUERY-UI EXCERPT */
 
+.ui-widget-content a {
+    color: #333333;
+}
 .ui-slider {
     position: relative;
     text-align: left;
-}
-
-.ui-widget-content a {
-    color: #333333;
 }
 .ui-slider .ui-slider-handle {
     position: absolute;
