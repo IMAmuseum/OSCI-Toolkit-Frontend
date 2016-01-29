@@ -133,8 +133,8 @@
 
 		.chapter-info {
 
-			width: calc( 100% - 50px );
-			margin-left: 24px;
+			width: calc( 100% - 98px );
+			margin-left: 70px;
     		
 
 			color: #fff;
@@ -157,7 +157,10 @@
 			position: fixed;
 			bottom: 0;
 			left: 0;
-			width: calc( 100% - 24px - 12px - 24px );
+
+			// width: calc( 100% - 24px - 12px - 24px );
+			width: 60px;
+
 			margin-left: 6px;
 			//margin-bottom: 2px;
 
@@ -193,6 +196,12 @@
 			}
 		}
 	}
+
+	/*
+	.btn-container {
+		width: calc( 100% - 24px - 12px - 24px );
+	}
+	*/
 
 }
 

@@ -8276,6 +8276,11 @@ body {
   right: 0px;
   width: 300px;
   padding: 8px;
+  /*
+  .btn-container {
+  	width: calc( 100% - 24px - 12px - 24px );
+  }
+  */
 }
 @media (min-width: 992px) {
   /* line 1, ../_navigation.scss */
@@ -8366,8 +8371,8 @@ body {
   }
   /* line 134, ../_navigation.scss */
   #navigation .chapter-info {
-    width: calc( 100% - 50px );
-    margin-left: 24px;
+    width: calc( 100% - 98px );
+    margin-left: 70px;
     color: #fff;
   }
   /* line 142, ../_navigation.scss */
@@ -8386,41 +8391,41 @@ body {
     position: fixed;
     bottom: 0;
     left: 0;
-    width: calc( 100% - 24px - 12px - 24px );
+    width: 60px;
     margin-left: 6px;
   }
-  /* line 164, ../_navigation.scss */
+  /* line 167, ../_navigation.scss */
   #navigation .btn-container .btn-page {
     background-image: url(../../images/light/icon-arrow.png);
   }
-  /* line 166, ../_navigation.scss */
+  /* line 169, ../_navigation.scss */
   #navigation .btn-container .btn-page.inactive {
     background-image: url(../../images/dark/icon-arrow.png);
   }
-  /* line 169, ../_navigation.scss */
+  /* line 172, ../_navigation.scss */
   #navigation .btn-container .btn-page.next-page {
     float: right;
   }
 }
 @media (max-width: 600px) {
-  /* line 182, ../_navigation.scss */
+  /* line 185, ../_navigation.scss */
   #navigation .chapter-info .chapter-number {
     width: 90px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  /* line 188, ../_navigation.scss */
+  /* line 191, ../_navigation.scss */
   #navigation .chapter-info .chapter-title {
     display: none;
   }
-  /* line 191, ../_navigation.scss */
+  /* line 194, ../_navigation.scss */
   #navigation .chapter-info .mobile-menu {
     display: block;
   }
 }
 
-/* line 202, ../_navigation.scss */
+/* line 211, ../_navigation.scss */
 *.unselectable {
   -moz-user-select: none;
   -khtml-user-select: none;
@@ -8443,7 +8448,7 @@ body {
 }
 */
 @media (max-width: 991px) {
-  /* line 231, ../_navigation.scss */
+  /* line 240, ../_navigation.scss */
   body {
     margin-bottom: 34px;
   }
