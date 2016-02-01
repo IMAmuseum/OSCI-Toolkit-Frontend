@@ -26,6 +26,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         });
 
         // This happens after sectionLoaded
+        // TODO: We might not need this...?
         this.listenTo(Backbone, 'layoutComplete', function() {
             this.section_id = app.models.section.get('id');
             this.render();
@@ -253,114 +254,127 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
     },
 
-    togglePopover: function (id) {
+    checkForNote: function (data) {
 
-        var noteForm = false;
+        var note;
+        var notes = app.collections.notes.where({
+            content_id: data.content_id
+        });
 
-        // Out goal is to return undefined for noteform if the notes are not available
-        if( this.notesLoaded && this.userLogged ) {
+        if ( notes[0] ) {
 
-            // Returns false if notes not loaded; else returns existing note or new note
-            var note = this.checkForNote({
-                content_id: 'osci-content-'+ id,
-                section_id: this.section_id,
-                paragraph_number: id
+            note = notes[0];
+
+            // Clean-up: destroy note if it's blank
+            // See also noteSubmit in SectionView.js
+            // This might throw an error; not sure why
+            // See Error in NotesCollection.js
+
+            if( note.get('note') === '' ) {
+                note.destroy();
+            }
+
+        } else {
+
+            note = new OsciTk.models.Note({
+                content_id: data.content_id,
+                section_id: data.section_id,
+                paragraph_number: data.paragraph_number
             });
 
-            var noteText = note  ? note.get('note') : '';
-                noteText = noteText === null  ? '' : noteText;
-
-            var popoverData = {
-                id: id,
-                cid: note.cid,
-                noteText: noteText,
-                sectionId: this.section_id,
-                contentId: 'osci-content-'+id,
-                paragraph_number: id
-            };
-
-            var noteForm = this.templateNotes({
-                paragraph_number: note.get('paragraph_number'),
-                note: noteText,
-                cid: note.cid
-            });
+            app.collections.notes.add(note);
 
         }
 
-        // Unfortunately, FireFox requires tooltip placement to be on top rather than right
-        var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
-        var placement = is_firefox ? 'top' : 'right';
-       
-        var popover = this.template({
-            'noteForm' : noteForm,
-            'citation' : this.citation
-        });
+        return note;
 
-        $('#paragraph-'+id).popover({
-            'html' : true,
-            'trigger' : 'manual',
-            'placement' : placement, // see FireFox hotfix above
-            'container' : 'body', // avoid overflow: hidden cutoff
-            'content' : popover
-        });
+    },
 
+    getCitation: function(data) {
 
-        // Set focus on the Notes textarea once the popover has toggled
-        // Should auto-fail if the area doesn't exist
-        // Also binds the noteSubmit event, since the button is ready
-        var that = this;
-        $('#paragraph-'+id).on('shown.bs.popover', function(e) {
+        // data is paragraph index
+        
 
-            // Creates the little citation scrollbox
-            that.getCitation(id);
+        var citationView = this;
+        var contentId = 'osci-content-'+data;
+        var content = $('#' + contentId);
 
-            // Auto-focus on notes if it exists
-            $('#' + $(this).attr('aria-describedby') ).find('textarea').focus();
+        var citationRequestParams = {
+            'section_id': app.models.section.get('id'),
+            'publication_id': app.models.docPackage.get('id'),
+            'element_id': contentId,
+            'field': 'body'
+        };
 
-            // Bind "Submit note" button
-            $('#note-submit').on('click', function(e) {
-                that.noteSubmit(e);
-            });
+        //console.log( citationRequestParams);
 
+        $.ajax({
+            url: app.config.get('endpoints').OsciTkCitation,
+            data: citationRequestParams,
+            success: function(data, status) {
+                if (data.success) {
 
+                    //add reference text to the response
+                    data.citation.referenceText = content.text();
+                    data.citation.url = document.URL + "/p-" + app.models.section.get('id') + "-" + content.data('paragraph_number');
+                    data.citation.paragraphNumber = content.data('paragraph_number');
+                    data.citation.date = new Date(data.citation.date);
+                    data.citation.formattedDate = (data.citation.date.getMonth() + 1) + "/" + data.citation.date.getDate() + "/" + data.citation.date.getFullYear();
 
-            // Remove popover if there is a click outside the popover
-            // $('html').one() wrapper that rebinds until success
-            var selfbound = function(e) {
+                    //make sure data exists for all variables in templates
+                    data.citation.creator = data.citation.creator ? data.citation.creator : '';
+                    data.citation.description = data.citation.description ? data.citation.description : '';
+                    data.citation.editor = data.citation.editor ? data.citation.editor : '';
+                    data.citation.publicationTitle = data.citation.publicationTitle ? data.citation.publicationTitle : '';
+                    data.citation.publisher = data.citation.publisher ? data.citation.publisher : '';
+                    data.citation.rights = data.citation.rights ? data.citation.rights : '';
+                    data.citation.title = data.citation.title ? data.citation.title : '';
 
-                $target = $(e.target);
-                $button = $('#paragraph-'+id);
-                $popover = $('#' + $button.attr('aria-describedby') );
-
-                // If the two DOM elements are not the same...
-                if( $target.get(0) !== $popover.get(0) ) {
-
-                    // If the target is not a descendant of popover...
-                    if( $popover.find($target).length < 1  ) {
-                        $button.popover('destroy');
-                    }else{
-                        $('html').one('click', selfbound );
-                    }
+                    $('#cite-target').html(citationView.templateCites(data.citation));
 
                 }
+            }
+        });
+    },
 
-            };
 
-            $('html').one('click', selfbound );
+    // CALLED WHEN THE USER HITS THE SUBMIT NOTES BUTTON
+    noteSubmit: function(e) {
 
+        //console.log( 'noteSubmit' );
 
+        var textarea = $(e.currentTarget).parent().find('textarea');
+        var noteText = textarea.val();
+
+        var cid = textarea.data('id');
+        var paragraph_number = textarea.data('paragraph_number');
+
+        var note = app.collections.notes.get(cid);
+            note.set('note', noteText);
+
+        // Check to see if the red dot needs to be toggled
+        if ( $.trim(noteText) !== '') {
+
+            note.save();
+            textarea.html(noteText);
+            $('#paragraph-'+paragraph_number).addClass('withNotes');
+
+        }else{
+
+            note.destroy();
+            $('#paragraph-'+paragraph_number).removeClass('withNotes');
+
+        }
+
+        $('#paragraph-'+paragraph_number).popover({
+
+            content: function() {
+                return $("#popover-content").html();
+            }
+            
         });
 
-        $('#paragraph-'+id).popover('toggle');
-
-        //step through paragraphs and destroy existing open popovers
-        var i = 1;
-        _.each(this.paragraphs, function(paragraph) {
-            if ( id != i ) {
-                $('#paragraph-'+i).popover('destroy');
-            }
-            i++;
-        }, this);
+        $('#paragraph-'+paragraph_number).popover('destroy');
 
     },
 

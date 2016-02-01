@@ -13,9 +13,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// When section is loaded, render the navigation control
 		this.listenTo(Backbone, 'layoutComplete', function( section ) {
 			this.render();
-		});
-
-		this.listenTo(Backbone, 'navigate', function() {
 			this.updateNavigationArrows();
 		});
 
