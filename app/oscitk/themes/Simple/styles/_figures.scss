@@ -1,3 +1,76 @@
+.figure-wrapper figure,
+.figure-wrapper figure .figure_content,
+.figure-wrapper figure .figure_content object,
+.figure-wrapper figure .figure_content object img {
+
+    // Reset attributes just in case
+    float: none;
+    display: block;
+
+    max-width: 100%;
+    line-height: 29px;
+
+}
+
+.figure-wrapper {
+
+   margin: 15px;
+   float: right;
+   clear: both;
+
+   // TODO: Adjust this~
+   max-width: 33%;
+
+   /*
+   @media( max-width: $osci-bp-md ) {
+
+      max-width: 100%;
+      margin: 0 auto;
+      float: none;
+
+      figure {
+         max-width: 66%;
+         margin: 0 auto;
+      }
+
+   }
+   */
+
+    figure {
+
+      border: thin #eee solid;
+      border-radius: 5px;
+
+      padding: 6px;
+
+      .figure_content {
+          object {
+             img {
+               border: 0;
+             }
+         }
+      }
+
+      figcaption {
+
+         background: white;
+
+         p {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 14px;
+            color: #3c3c3c;
+            
+            padding-top: 4px;
+            margin: 0;
+         }
+
+      }
+            
+    }
+}
+
+/*
 figure {
    margin: 20px;
 }
@@ -18,9 +91,9 @@ figcaption {
       font-size: 14px;
       font-family: $font-family-sans-serif;
    }
-   
-}
 
+}
+*/
 /*
 figure.left {
    float: left;

@@ -17,6 +17,7 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 		this.listenTo(Backbone, 'sectionLoaded', function(sectionModel) {
 			this.sectionId = sectionModel.get('id');
 		});
+		
 	},
 	render: function() {
 		// determine if user is logged in.  Show login form or user details

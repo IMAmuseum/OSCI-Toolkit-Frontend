@@ -45,15 +45,130 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             this.figures = figures;
             this.setFigureStyles();
         });
+
     },
 
     render: function() {
         this.$el.html(this.template({sectionTitle: this.sectionTitle, content: $(this.content).html()}));
+
+        // that refers to the view
+        var that = this;
+
+        $('figure').each( function( i, e ) {
+
+            // Shorthand heirarchy
+            var $w = null; // wrapper
+
+            var $f = $(e);
+            var $d = $f.find('.figure_content');
+            var $o = $d.find('object');
+            var $i = $o.find('img');
+
+
+            var $c = $f.find('figcaption');
+
+            // Check if the figure is wrapped; otherwise, wrap it
+            if( $f.parent().attr('id') !== $f.attr('id') + '-wrapper' ) {
+                $w = $("<div></div>").attr('id', $f.attr('id') + '-wrapper');
+                $w.addClass('figure-wrapper');
+                $f.wrap( $w ); // wraps in a copy!
+            }
+
+            // Figure was wrapped in a copy of $w, not $w itself, so select it again
+            // This is super important! If attr() is not sticking, this is why
+            $w = $f.parent();
+
+            // Save the image dimensions if they are not already saved
+            $i = $i[0]; // FireFox work-around... tentative!
+            if( !$w.attr("data-aspect") ) {
+                $w.attr('data-width', $i.width );
+                $w.attr('data-height', $i.height );
+                $w.attr('data-aspect', $i.height / $i.width );
+            }
+
+            // Reset all dimensions
+            $w.add($f).add($d).add($o).add($i).css({
+                'height' : 'auto',
+                'width'  : 'auto'
+            });
+
+            // Use max-width on .figure-wrapper in _figure.scss to constrain it
+            $w.css({
+                'width' : '66%' // constrained by max width
+            }).css({
+                'height' : $w.attr('data-aspect') * $w.width() + $c.outerHeight()
+            });
+
+
+            // Continuing on...
+            $f.css({
+                'height' : $w.innerHeight(),
+                'width' : $w.innerWidth()
+            });
+
+            // Just a little hack for mobile...
+            if( $('#osci-bp-md,#osci-bp-sm').is(':visible') ) {
+                $w.css({
+                    'width' : '100%'
+                });
+            }
+
+            $d.css({
+                'height' : $f.innerHeight() - $c.outerHeight() - 12, // padding..?
+                'width' : $f.innerWidth()
+            });
+
+            // Layered image init
+            var url = $o.attr('data');
+            if (url !== undefined) {
+
+                $.ajax({
+
+                    url: url,
+                    type: 'GET',
+                    dataType: 'html',
+                    success: function(data) {
+
+                        var $content = $(data).filter('.layered_image-asset').first();
+                        var $container = $f.find('.figure_content');
+                        
+                        // Note that this permanently deletes $o and $i
+                        $container.empty();
+                        $content.appendTo( $container );
+
+                        var li = new window.LayeredImage( $content );
+
+                        // This forces a re-centering of the layered image on windows.resize
+                        that.listenTo(Backbone, 'windowResized', function(e) {
+                            setTimeout( function() {
+
+                                li.map.resize(); // recenter
+                                
+                                try {
+                                    li.resetZoomRange(); // ensure it can scale down
+                                    li.reset(); // reset size and options
+                                    li.map.resize();
+                                } catch(e) {
+                                    // slider not init'd error
+                                }
+                                
+                            }, 100 ); // this is an estimate, tweak it if needed
+                        });
+
+                    }
+
+                });
+
+            }
+
+        }); 
+
         Backbone.trigger("layoutComplete");
         return this;
     },
 
     getSectionTitles: function(sectionId) {
+
         // get section sectionTitle, subtitle, and thumbnail for use in template
         _.each(app.collections.navigationItems.models, function(item) {
             if (item.get('id') == sectionId ) {
@@ -62,6 +177,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 this.sectionThumbnail = item.get('thumbnail');
             }
         }, this);
+
         this.render();
     },
 

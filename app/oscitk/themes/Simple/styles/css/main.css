@@ -8335,27 +8335,85 @@ ul.toc {
 }
 
 /* line 1, ../_figures.scss */
+.figure-wrapper figure,
+.figure-wrapper figure .figure_content,
+.figure-wrapper figure .figure_content object,
+.figure-wrapper figure .figure_content object img {
+  float: none;
+  display: block;
+  max-width: 100%;
+  line-height: 29px;
+}
+
+/* line 15, ../_figures.scss */
+.figure-wrapper {
+  margin: 15px;
+  float: right;
+  clear: both;
+  max-width: 33%;
+   /*
+   @media( max-width: $osci-bp-md ) {
+
+      max-width: 100%;
+      margin: 0 auto;
+      float: none;
+
+      figure {
+         max-width: 66%;
+         margin: 0 auto;
+      }
+
+   }
+   */
+}
+/* line 39, ../_figures.scss */
+.figure-wrapper figure {
+  border: thin #eee solid;
+  border-radius: 5px;
+  padding: 6px;
+}
+/* line 48, ../_figures.scss */
+.figure-wrapper figure .figure_content object img {
+  border: 0;
+}
+/* line 54, ../_figures.scss */
+.figure-wrapper figure figcaption {
+  background: white;
+}
+/* line 58, ../_figures.scss */
+.figure-wrapper figure figcaption p {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: #3c3c3c;
+  padding-top: 4px;
+  margin: 0;
+}
+
+/*
 figure {
-  margin: 20px;
+   margin: 20px;
 }
 
-/* line 7, ../_figures.scss */
-.figure_content img {
-  border: 2px solid #f1f1f1;
+
+.figure_content {
+   img {
+      border: 2px solid $gray-lighter;
+   }
 }
 
-/* line 12, ../_figures.scss */
 figcaption {
-  background: #f1f1f1;
-  padding: 4px 4px 2px 6px;
-  font-size: 14px;
-}
-/* line 17, ../_figures.scss */
-figcaption p {
-  font-size: 14px;
-  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
+   background: $gray-lighter;
+   padding: 4px 4px 2px 6px;
+   font-size: 14px;
 
+   p {
+      font-size: 14px;
+      font-family: $font-family-sans-serif;
+   }
+
+}
+*/
 /*
 figure.left {
    float: left;
