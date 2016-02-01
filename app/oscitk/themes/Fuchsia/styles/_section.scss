@@ -22,6 +22,19 @@ body {
 		width: 100%;
 	}
 
+	.navigated {
+		-webkit-transition: background-color .7s ease-out;
+		   -moz-transition: background-color .7s ease-out;
+		     -o-transition: background-color .7s ease-out;
+		        transition: background-color .7s ease-out;
+
+		border-radius: 3px;
+
+		&.navigating {
+			background-color: lighten($color-fuchsia, 20%);
+		}
+	}
+
 	#section-view {
 
 		font-size: 100%; // 16px

@@ -34,7 +34,7 @@ OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
 
 	render: function() {
 
-		var notes = this.getSavedNotes();
+		var notes = this.getSavedNotes(); console.log( notes );
 		this.$el.html( this.template( { notes: notes } ) );
 
 		var that = this;
@@ -53,12 +53,12 @@ OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
 		e.preventDefault();
 
 		var $target = $(e.currentTarget);
-		var content_id = $target.attr('data-content_id');
+		var pid = $target.attr('data-paragraph_number');
 
-		if (content_id) {
-			Backbone.trigger('navigate', { identifier: '#' + content_id } );
+		if( pid ) {
+			Backbone.trigger('navigate', { identifier: 'button#paragraph-' + pid } );
 			$('.close-toolbar-item').click(); // closes toolbar
-			$('.paragraph-controls[data-osci_content_id="'+content_id+'"] .paragraph-button').click(); // opens note dialog
+			$('button#paragraph-'+pid).click(); // opens note dialog
 		}
 
 		return false;

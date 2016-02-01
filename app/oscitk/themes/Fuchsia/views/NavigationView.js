@@ -90,7 +90,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			var selector = false;
 
 			// Clear any p- etc nonsense
-			app.router.navigate("section/" + this.getCurrentNavigationItem().get('id'), { trigger: false } );
+			//app.router.navigate("section/" + this.getCurrentNavigationItem().get('id'), { trigger: false } );
 
             if (data.identifier) {
 
@@ -112,8 +112,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
                         if(data.identifier.search(/^p-[0-9]+/) > -1) {
 
                         	var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
-                        	//selector = 'p[data-paragraph_number='+pid+']';
-                        	selector = '.paragraph-controls[data-paragraph_identifier='+pid+']';
+                        	selector = 'p[data-paragraph_number='+pid+']';
+                        	//selector = 'button#paragraph-'+pid;
                         	console.log( selector );
                             gotoPage = this.getPageForSelector( selector );
 
@@ -136,7 +136,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
                         }
 
                         // Route to specific element
-                        selector = data.identifier;
+                        selector = data.identifier; console.log( selector );
                         gotoPage = this.getPageForSelector( data.identifier );
 	                    break;
 
@@ -145,18 +145,28 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
             }
 
             var scroll = gotoPage * $(document).height();
-            	scroll = scroll - $(window).height() / 2;
-            	scroll -= selector ? $(selector).outerHeight() / 2 : 0;
+            	scroll -= $(window).height() / 2;
             	scroll = Math.max( 0, scroll );
             	
             if( selector ) {
+
             	// todo: for paragraphs, use the button selector, not the paragraph selector
-            	scroll = scroll + $(selector).height() / 2;
+            	scroll += $(selector).innerHeight() / 2;
+
+            	// Animate background etc...
+            	$('.navigating').removeClass('navigated');
+            	$(selector).addClass('navigated');
+            	$(selector).addClass('navigating');
+
+            	setTimeout( function() {
+            		$(selector).removeClass('navigating');
+            	}, 1000);
+
             }
 
 
             if( $('#osci-bp-xl').is(':not(visible)') ) {
-            	scroll = scroll - this.$el.height();
+            	scroll += this.$el.height() / 2;
             }
 
             $(window).scrollTop( scroll );
