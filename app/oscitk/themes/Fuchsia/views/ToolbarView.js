@@ -25,6 +25,20 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 			this.toggleToolbar();
 		});
 
+		// TODO: Move these functions to ToolbarView.js?
+		this.listenTo(Backbone, "toolbarInline", function(toolbarItem) {
+			this.toolbarInline(toolbarItem);
+		});
+
+		this.listenTo(Backbone, "toolbarItemClicked", function(toolbarItem) {
+			this.toolbarAction(toolbarItem);
+		});
+
+		this.listenTo(Backbone, "toolbarRemoveViews", function() {
+			this.toolbarToggle();
+		});
+
+
 		// In other themes, we wait for figuresAvailable,
 		// but since we don't have a figures section here,
 		// it doesn't matter as much
@@ -69,7 +83,6 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 			this.$items.addClass('open');
 			this.$container.show();
 
-
 			if( !this.$items.is('.active') ) {
 				$('.tocToolbarView-toolbar-item').click();
 			}
@@ -84,6 +97,48 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 			this.openToolbar();
 		}
 	},
+
+	toolbarInline: function(toolbarItem) {
+		var view = _.pick(app.views, toolbarItem.view);
+		view = view[toolbarItem.view];
+		app.removeView(view, false);
+		app.addView(view, '#'+toolbarItem.text);
+	},
+
+	toolbarAction: function(toolbarItem) {
+
+		this.toolbarToggle();
+
+		// if toolbar item is active show it
+		// this toggles the view
+
+		if (toolbarItem.active) {
+			var view = _.pick(app.views, toolbarItem.item.view);
+			view = view[toolbarItem.item.view];
+
+			this.addView(view, '#'+toolbarItem.item.text);
+
+			$('#' + toolbarItem.item.text ).show(); // For FireFox
+		}
+
+	},
+
+	toolbarToggle: function() {
+		
+		_.each(app.toolbarItems, function(item) {
+
+			if (item.style == 'default') {
+				var view = _.pick(app.views, item.view);
+				view = view[item.view];
+
+				this.removeView(view, false);
+
+				$('#' + item.text ).hide(); // For FireFox
+			}
+
+		}, this);
+
+	}
 
 });
 

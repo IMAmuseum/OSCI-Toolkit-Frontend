@@ -35,20 +35,6 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		// Add the navigation view to the AppView
 		this.addView(app.views.navigationView, '#navigation');
 
-
-		// TODO: Move these functions to ToolbarView.js?
-		this.listenTo(Backbone, "toolbarInline", function(toolbarItem) {
-			this.toolbarInline(toolbarItem);
-		});
-
-		this.listenTo(Backbone, "toolbarItemClicked", function(toolbarItem) {
-			this.toolbarAction(toolbarItem);
-		});
-
-		this.listenTo(Backbone, "toolbarRemoveViews", function() {
-			this.toolbarToggle();
-		});
-
 	},
 
 	render: function() {
@@ -60,49 +46,6 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 	},
 
-	toolbarInline: function(toolbarItem) {
-		var view = _.pick(app.views, toolbarItem.view);
 
-		view = view[toolbarItem.view];
-
-		this.removeView(view, false);
-
-		this.addView(view, '#'+toolbarItem.text);
-	},
-
-	toolbarAction: function(toolbarItem) {
-
-		this.toolbarToggle();
-
-		// if toolbar item is active show it
-		// this toggles the view
-
-		if (toolbarItem.active) {
-			var view = _.pick(app.views, toolbarItem.item.view);
-			view = view[toolbarItem.item.view];
-
-			this.addView(view, '#'+toolbarItem.item.text);
-
-			$('#' + toolbarItem.item.text ).show(); // For FireFox
-		}
-
-	},
-
-	toolbarToggle: function() {
-		
-		_.each(app.toolbarItems, function(item) {
-
-			if (item.style == 'default') {
-				var view = _.pick(app.views, item.view);
-				view = view[item.view];
-
-				this.removeView(view, false);
-
-				$('#' + item.text ).hide(); // For FireFox
-			}
-
-		}, this);
-
-	}
 	
 });
