@@ -8410,7 +8410,7 @@ body {
 @media (max-width: 600px) {
   /* line 185, ../_navigation.scss */
   #navigation .chapter-info .chapter-number {
-    width: 90px;
+    width: calc(100% - 20px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

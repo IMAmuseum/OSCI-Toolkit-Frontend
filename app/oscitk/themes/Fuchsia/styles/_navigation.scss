@@ -183,7 +183,7 @@
 	@media( max-width: $osci-bp-md ) {
 		.chapter-info {
 			.chapter-number {
-				width: 90px;
+			    width: calc(100% - 20px);
 				white-space: nowrap;
 				overflow: hidden;
 				text-overflow: ellipsis;
