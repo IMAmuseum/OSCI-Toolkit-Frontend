@@ -112,7 +112,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
                         if(data.identifier.search(/^p-[0-9]+/) > -1) {
 
                         	var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
-                        	selector = 'p[data-paragraph_number='+pid+']';
+                        	selector = 'p#osci-content-'+pid;
                         	//selector = 'button#paragraph-'+pid;
                         	console.log( selector );
                             gotoPage = this.getPageForSelector( selector );
@@ -136,7 +136,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
                         }
 
                         // Route to specific element
-                        selector = data.identifier; console.log( selector );
+                        selector = data.identifier;
                         gotoPage = this.getPageForSelector( data.identifier );
 	                    break;
 
