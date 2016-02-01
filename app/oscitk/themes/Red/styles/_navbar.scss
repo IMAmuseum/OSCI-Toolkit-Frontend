@@ -20,53 +20,59 @@ body {
 	z-index: 998;
 
 	.navbar-view {
+
 		@media( max-width: 800px ) {
 			margin-left: 40px;
 			margin-right: 40px;
 		}
-	}
 
-	nav {
 
-		margin: 0px -15px;
+		nav {
+			border-color: transparent;
+			background-color:transparent;
+			margin: 0px -15px;
 
-		#osci-page-slider {
-			padding: 18px 15px;
+			#osci-page-slider {
+				padding: 18px 15px;
 
-			width: calc( 100% - #{$navbar-page-width} - #{$navbar-layout-width} - #{$navbar-font-width} );
+				width: calc( 100% - #{$navbar-page-width} - #{$navbar-layout-width} - #{$navbar-font-width} );
 
-			// Account for hidden layout selector
-			@media ( max-width: 767px ) {
-				width: calc( 100% - #{$navbar-page-width} - #{$navbar-font-width} );
+				// Account for hidden layout selector
+				@media ( max-width: 767px ) {
+					width: calc( 100% - #{$navbar-page-width} - #{$navbar-font-width} );
+				}
+
+				// FireFox hotfix. Exclude font-size selector
+				&.ff {
+					width: calc( 100% - #{$navbar-page-width} - #{$navbar-layout-width} );
+					@media ( max-width: 767px ) {
+						width: calc( 100% - #{$navbar-page-width} );
+					}
+				}
+
 			}
 
-			// FireFox hotfix. Exclude font-size selector
-			&.ff {
-				width: calc( 100% - #{$navbar-page-width} - #{$navbar-layout-width} );
-				@media ( max-width: 767px ) {
-					width: calc( 100% - #{$navbar-page-width} );
+			#osci-navbar-text {
+				padding: 9px 15px;
+			}
+
+			#font-size-area {
+				list-style-type: none;
+				margin: 0;
+
+				font-size: 18px;
+				padding: 10px 15px; 
+
+				li {
+					display: inline-block;
+					margin: 0px 4px;
 				}
 			}
 
 		}
 
-		#osci-navbar-text {
-			padding: 9px 15px;
-		}
-
-		#font-size-area {
-			list-style-type: none;
-			margin: 0;
-
-			font-size: 18px;
-			padding: 10px 15px; 
-
-			li {
-				display: inline-block;
-				margin: 0px 4px;
-			}
-		}
-
 	}
+
+	
 
 }
