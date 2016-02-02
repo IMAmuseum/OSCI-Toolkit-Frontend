@@ -182,9 +182,16 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         }
 
         // Unfortunately, FireFox requires tooltip placement to be on top rather than right
+        // UPDATE: This is fixed by setting an explicit height on popover elements
+        // See .tab-content and #cite-target in _paragraph-popover.scss
+        
+        /*
         var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
         var placement = is_firefox ? 'top' : 'right';
-       
+        */
+
+        var placement = 'right';
+
         var popover = this.template({
             'noteForm' : noteForm,
             'citation' : this.citation

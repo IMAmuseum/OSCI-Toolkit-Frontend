@@ -93,7 +93,8 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 	logout: function() {
 
 		// alias this for use in ajax callback
-		var accountView = this;
+		var that = this;
+
 		$.ajax({
 
 			url: app.config.get('endpoints').OsciTkAccount,
@@ -106,7 +107,7 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 				// { email: null, id: "1", uid: 0, username: "anonymous" }
 
 				app.account.set( app.account.defaults );
-				accountView.showLoginForm();
+				that.showLoginForm();
 
 				Backbone.trigger("accountStateChanged");
 

@@ -81,16 +81,15 @@ $popover-color-btn: $color-fuchsia;
 	}
 }
 
+// FireFox will bug out if the height is not set explicitly
 .tab-content {
-
 	height: $popover-height;
-	
 }
 
 // AJAX messes up popover height 
 #cite-target {
 
-	height: 160px;
+	height: $popover-height;
 	width: 182px;
 
 	background-image: url(../../images/ajax-loader.gif);
