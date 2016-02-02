@@ -8171,88 +8171,66 @@ header .container-header .header-title p {
 }
 
 /* line 1, ../_toolbar.scss */
-#toolbar.affix {
-  top: 50px;
-}
-/* line 3, ../_toolbar.scss */
-#toolbar.affix + .container {
-  padding-top: 50px;
-}
-
-/* line 8, ../_toolbar.scss */
 #toolbar {
   float: left;
   margin-top: 20px;
   z-index: 998;
 }
-
-/* line 14, ../_toolbar.scss */
-ul.toc {
-  list-style-type: none;
+/* line 6, ../_toolbar.scss */
+#toolbar.affix {
+  top: 50px;
+}
+/* line 8, ../_toolbar.scss */
+#toolbar.affix + .container {
+  padding-top: 50px;
 }
 
-/* line 18, ../_toolbar.scss */
+/* line 14, ../_toolbar.scss */
 #toolbar-area {
   z-index: 990;
   list-style-type: none;
 }
-/* line 21, ../_toolbar.scss */
-#toolbar-area li {
+/* line 18, ../_toolbar.scss */
+#toolbar-area .toolbar-item-view {
   margin-bottom: 10px;
-}
-
-/* line 26, ../_toolbar.scss */
-.tocView-toolbar-item {
   cursor: hand;
   border: 0;
   font: 0/0 a;
   text-shadow: none;
   color: transparent;
-  background-image: url(../../images/list.png);
   background-size: 50px 50px;
   background-repeat: no-repeat;
   width: 50px;
   height: 50px;
 }
-/* line 37, ../_toolbar.scss */
-.tocView-toolbar-item:hover {
+/* line 31, ../_toolbar.scss */
+#toolbar-area .toolbar-item-view.tocView-toolbar-item {
+  background-image: url(../../images/list.png);
+}
+/* line 33, ../_toolbar.scss */
+#toolbar-area .toolbar-item-view.tocView-toolbar-item:hover {
   background-image: url(../../images/list-active.png);
 }
-
-/* line 42, ../_toolbar.scss */
-.accountView-toolbar-item {
-  cursor: hand;
-  border: 0;
-  font: 0/0 a;
-  text-shadow: none;
-  color: transparent;
+/* line 38, ../_toolbar.scss */
+#toolbar-area .toolbar-item-view.accountView-toolbar-item {
   background-image: url(../../images/login.png);
-  background-size: 50px 50px;
-  background-repeat: no-repeat;
-  width: 50px;
-  height: 50px;
 }
-/* line 53, ../_toolbar.scss */
-.accountView-toolbar-item:hover {
+/* line 40, ../_toolbar.scss */
+#toolbar-area .toolbar-item-view.accountView-toolbar-item:hover {
   background-image: url(../../images/login-active.png);
 }
-
-/* line 58, ../_toolbar.scss */
-.printView-toolbar-item {
-  cursor: hand;
-  border: 0;
-  font: 0/0 a;
-  text-shadow: none;
-  color: transparent;
+/* line 45, ../_toolbar.scss */
+#toolbar-area .toolbar-item-view.printView-toolbar-item {
   background-image: url(../../images/print.png);
-  background-size: 50px 50px;
-  background-repeat: no-repeat;
-  width: 50px;
-  height: 50px;
 }
-/* line 69, ../_toolbar.scss */
-.printView-toolbar-item:hover {
+/* line 47, ../_toolbar.scss */
+#toolbar-area .toolbar-item-view.printView-toolbar-item:hover {
   background-image: url(../../images/print-active.png);
+}
+
+/* line 57, ../_toolbar.scss */
+ul.toc {
+  list-style-type: none;
 }
 
 /* line 1, ../_navbar.scss */
