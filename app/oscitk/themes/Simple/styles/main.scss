@@ -4,14 +4,20 @@ $image-path : "/images";
 @import "bootstrap/bootstrap";
 @import "typography";
 @import "browsehappy";
+
 @import "section";
 @import "navigation";
 @import "header";
 @import "toolbar";
 @import "navbar";
+
 @import "figures";
+@import "layered-image";
+
 @import "overlay";
+
 @import "paragraph-popover";
-@import "note-form";
-@import "citation";
+@import "paragraph-notes";
+@import "paragraph-citation";
+
 @import "print";
