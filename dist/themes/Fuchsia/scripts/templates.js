@@ -137,7 +137,7 @@ this["JST"]["app/oscitk/themes/Fuchsia/templates/toolbar-account-login.tpl.html"
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h3>Login</h3>\n\n<div class="toolbar-scroll">\n\t<div class="form-error alert alert-danger"></div>\n\t<form id="account-form">\n\t\t<div class="form-group">\n\t\t\t<label for="username">Username:</label>\n\t\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t\t</div>\n\t\t<div class="form-group">\n\t\t\t<label for="password">Password:</label>\n\t\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t\t</div>\n\t\t<button type="button" class="btn btn-default login">Log In</button>\n\t\t<div class="account-footer"><a href="javascript:;" class="register">Register an account</a></div>\n\t</form>\n</div>';
+__p += '<h3>Login</h3>\n\n<div class="toolbar-scroll">\n\n\t<div class="form-error alert alert-danger"></div>\n\n\t<form id="account-form">\n\t\t<div class="form-group">\n\t\t\t<label for="username">Username:</label>\n\t\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t\t</div>\n\t\t<div class="form-group">\n\t\t\t<label for="password">Password:</label>\n\t\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t\t</div>\n\n\t\t<button type="button" class="btn btn-default login">Log in</button>\n\n\t\t<div class="account-footer"><a href="javascript:;" class="register">Register an account</a></div>\n\n\t</form>\n\n</div>';
 
 }
 return __p
@@ -147,11 +147,11 @@ this["JST"]["app/oscitk/themes/Fuchsia/templates/toolbar-account-profile.tpl.htm
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h3>User Profile</h3>\n\n<div class="toolbar-scroll">\n\t<p>Logged in as:</p>\n\t<div>\n\t\t<div class="user-icon"></div>\n\t\t<div>\n\t\t\t<h4>' +
+__p += '<h3>User Profile</h3>\n\n<div class="toolbar-scroll">\n\n\t<p>Logged in as:</p>\n\n\t<div>\n\t\t<div class="user-icon"></div>\n\t\t<div>\n\t\t\t<h4>' +
 ((__t = ( username )) == null ? '' : __t) +
 '</h4>\n\t\t\t<h5>' +
 ((__t = ( email )) == null ? '' : __t) +
-'</h5>\n\t\t</div>\n\t</div>\n\t<div class="account-footer"><a href="javascript:;" class="btn btn-default logout">Log out</a></div>\n</div>';
+'</h5>\n\t\t</div>\n\t</div>\n\n\t\n\t<button type="button" class="btn btn-default logout">Log out</button>\n\t\n\t<div class="account-footer">\n\t</div>\n\n</div>';
 
 }
 return __p
@@ -161,7 +161,7 @@ this["JST"]["app/oscitk/themes/Fuchsia/templates/toolbar-account-register.tpl.ht
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h3>Register</h3>\n\n<div class="toolbar-scroll">\n\t<div class="form-error alert alert-danger"></div>\n\t<form id="account-form">\n\t\t<div class="form-group">\n\t\t\t<label for="username">Username:</label>\n\t\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t\t</div>\n\t\t<div class="form-group">\n\t\t\t<label for="password">Password:</label>\n\t\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t\t</div>\n\t\t<div class="form-group">\n\t\t\t<label for="email">Email:</label>\n\t\t\t<input class="form-control" type="text" id="email" placeholder="Email" />\n\t\t</div>\n\t\t<button type="button" class="btn btn-default  register">Register</button>\n\t\t<div class="account-footer"><a href="javascript:;" class="login">Already have an account?</a></div>\n\t</form>\n</div>';
+__p += '<h3>Register</h3>\n\n<div class="toolbar-scroll">\n\n\t<div class="form-error alert alert-danger"></div>\n\n\t<form id="account-form">\n\n\t\t<div class="form-group">\n\t\t\t<label for="username">Username:</label>\n\t\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t\t</div>\n\n\t\t<div class="form-group">\n\t\t\t<label for="password">Password:</label>\n\t\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t\t</div>\n\n\t\t<div class="form-group">\n\t\t\t<label for="email">Email:</label>\n\t\t\t<input class="form-control" type="text" id="email" placeholder="Email" />\n\t\t</div>\n\n\t\t<button type="button" class="btn btn-default  register">Register</button>\n\n\t\t<div class="account-footer"><a href="javascript:;" class="login">Already have an account?</a></div>\n\n\t</form>\n\t\n</div>';
 
 }
 return __p

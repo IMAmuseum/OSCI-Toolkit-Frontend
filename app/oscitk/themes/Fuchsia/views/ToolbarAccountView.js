@@ -5,26 +5,27 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 	events: {
 		'click button.login': 'login',
 		'click button.register': 'register',
+		'click button.logout': 'logout',
 		'click a.register': 'showRegistrationForm',
 		'click a.login': 'showLoginForm',
-		'click a.logout': 'logout',
 	},
 	className: 'toolbar-account-view',
 	template: null,
 
 	initialize: function() {
 
+		// login, register, and logout fire accountStateChanged
+		// it destroys popovers and forces the notes toolbar to reload
+
 		// see ../../../models/AccountModel.js
-		// re-renders form when the account info is retrieved
-		this.listenTo(Backbone, 'accountReady accountStateChanged', function(sectionModel) {
+		// re-renders form when the account info is ready
+		// theoretically, we ought to include accountStateChanged here too
+		// but below, we set this.$el.html explicitly, so we don't need it
+		this.listenTo(Backbone, 'accountReady', function() {
 			this.render();
 		});
 
-		this.listenTo(Backbone, 'sectionLoaded', function(sectionModel) {
-			this.sectionId = sectionModel.get('id');
-		});
-
-
+		// This shows the login form at least until accountReady is triggered
 		this.render();
 
 	},
@@ -35,8 +36,7 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 		// determine if user is logged in.  Show login form or user details
 		if (app.account && app.account.get('id') > 0) {
 			this.showProfile();
-		}
-		else {
+		}else {
 			this.showLoginForm();
 		}
 
@@ -71,13 +71,11 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 						email: data.user.email,
 						id: parseInt(data.user.id)
 					});
+					that.showProfile();
 
 					Backbone.trigger("accountStateChanged");
 
-					that.showProfile();
-
-				}
-				else {
+				} else {
 
 					// user was not logged in, show error
 					accountView.$el.find('div.form-error').html(data.error);
@@ -92,7 +90,7 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 
 	logout: function() {
 
-		// alias this for use in ajax callback
+		// alias for callback
 		var that = this;
 
 		$.ajax({
@@ -119,7 +117,7 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 
 	register: function() {
 
-		// alias for callbacks
+		// alias for callback
 		var that = this;
 
 		// get user/pass from form
@@ -143,8 +141,7 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 
 					Backbone.trigger("accountStateChanged");
 
-				}
-				else {
+				}else {
 
 					// user was not logged in, show error
 					accountView.$el.find('div.form-error').html(data.error);
