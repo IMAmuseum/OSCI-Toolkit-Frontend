@@ -3,12 +3,12 @@ OsciTk.views.Footnotes = OsciTk.views.BaseView.extend({
 	
 	initialize: function() {
 
-		// listen to layoutComplete event
 		this.listenTo(Backbone, 'layoutComplete', function(params) {
 
 			var fnLinks = app.views.sectionView.$el.find('a.footnote-reference');
 
 			for (var i = 0; i < fnLinks.length; i++) {
+				
 				var fnRef = $(fnLinks[i]);
 				var id = fnRef.attr('href').slice(1);
 				var fn = app.collections.footnotes.get(id);
@@ -17,10 +17,13 @@ OsciTk.views.Footnotes = OsciTk.views.BaseView.extend({
 				// fnRef.attr("id", id );
 				fnRef.attr("title", title);
 				// fnRef.tooltip();
+
 				fnRef.attr("data-toggle", "tooltip");
 				fnRef.attr("data-placement","bottom");
+
 				fnRef.off('click');
 				fnRef.bind('click', {'caller': this}, this.footnoteClicked);
+
 			}
 
 			$('[data-toggle="tooltip"]').tooltip();

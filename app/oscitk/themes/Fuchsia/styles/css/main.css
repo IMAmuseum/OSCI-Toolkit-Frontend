@@ -8219,16 +8219,19 @@ body {
 #section #section-view p .tooltip .tooltip-inner {
   background: #676767;
   color: white;
+  text-align: left;
+  font-size: 12px;
 }
-/* line 161, ../_section.scss */
+/* line 163, ../_section.scss */
 #section #section-view p .glossary-term:hover {
-  cursor: hand;
+  text-decoration: none;
+  cursor: pointer;
 }
-/* line 169, ../_section.scss */
+/* line 172, ../_section.scss */
 #section #section-view .tooltip-inner {
   text-indent: 0;
 }
-/* line 174, ../_section.scss */
+/* line 177, ../_section.scss */
 #section #section-view .plate {
   max-width: 100%;
   max-height: 100%;
@@ -8236,7 +8239,7 @@ body {
   background-position: center center;
 }
 
-/* line 190, ../_section.scss */
+/* line 193, ../_section.scss */
 .loader {
   margin: 80px auto;
   overflow: hidden;
@@ -8253,7 +8256,7 @@ body {
   -webkit-animation: load8 1.1s infinite linear;
   animation: load8 1.1s infinite linear;
 }
-/* line 211, ../_section.scss */
+/* line 214, ../_section.scss */
 .loader, .loader:after {
   border-radius: 50%;
   width: 10em;

@@ -22,7 +22,6 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
         // We must wait for the section to load before setting up the account hook
         this.listenTo(Backbone, 'sectionLoaded', function() {
-            //console.log( 'sectionLoaded' );
             this.sectionLoaded = true;
             this.render();
         });
@@ -30,14 +29,12 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         // This happens after sectionLoaded
         // TODO: We might not need this...?
         this.listenTo(Backbone, 'layoutComplete', function() {
-            //console.log( 'layoutComplete' );
             this.section_id = app.models.section.get('id');
             this.render();
         });
 
         // Notes will not be loaded if the user is not logged in
         this.listenTo(Backbone, 'notesLoaded', function(params) {
-            //console.log( 'notesLoaded' );
             this.notesLoaded = true;
             this.render();
         });
@@ -50,7 +47,6 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         this.listenTo(Backbone, 'accountReady accountStateChanged', function() {
             
             $('[id^="paragraph-"]').popover('destroy');
-            //app.collections.notes.reset();
 
             this.userLogged = app.account.get('id') > 0;
             this.notesLoaded = this.notesLoaded ? this.userLogged : this.notesLoaded;
@@ -249,7 +245,6 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
             $('html').one('click', selfbound );
 
-
         });
 
         $('#paragraph-'+id).popover('toggle');
@@ -301,13 +296,12 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
     },
 
-    getCitation: function(data) {
+    getCitation: function(pid) {
 
-        // data is paragraph index
-        
+        // pid is paragraph index
 
         var citationView = this;
-        var contentId = 'osci-content-'+data;
+        var contentId = 'osci-content-'+pid;
         var content = $('#' + contentId);
 
         var citationRequestParams = {

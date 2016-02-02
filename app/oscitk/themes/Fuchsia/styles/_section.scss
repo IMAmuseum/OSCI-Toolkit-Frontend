@@ -153,13 +153,16 @@ body {
 				.tooltip-inner {
 					background: $color-dk-grey;
 					color: white;
+
+				    text-align: left;
+    				font-size: 12px;
 				}
 			}
 
-			// TODO: Remove me? Hide me?
 			.glossary-term {
 				&:hover {
-					cursor: hand;
+					text-decoration: none;
+					cursor: pointer;
 				}
 			}
 

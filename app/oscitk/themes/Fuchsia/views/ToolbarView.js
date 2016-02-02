@@ -24,8 +24,7 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 		this.listenTo(Backbone, 'toggleToolbar', function(data) {
 			this.toggleToolbar();
 		});
-
-		// TODO: Move these functions to ToolbarView.js?
+		
 		this.listenTo(Backbone, "toolbarInline", function(toolbarItem) {
 			this.toolbarInline(toolbarItem);
 		});

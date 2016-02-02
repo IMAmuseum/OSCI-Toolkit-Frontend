@@ -13,11 +13,12 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 			sectionView: new OsciTk.views.Section(),
 			footnotesView: new OsciTk.views.Footnotes(),
-			paragraphControlsView: new OsciTk.views.ParagraphControls(),
 
 			navigationView: new OsciTk.views.Navigation(),
-
 			toolbarView: new OsciTk.views.Toolbar(),
+
+			paragraphControlsView: new OsciTk.views.ParagraphControls(),
+			glossaryTooltipView: new OsciTk.views.GlossaryTooltip(),
 
 			accountToolbarView: new OsciTk.views.AccountToolbar(),
 			tocToolbarView: new OsciTk.views.TocToolbar(),

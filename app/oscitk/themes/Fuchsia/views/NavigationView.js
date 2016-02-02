@@ -40,7 +40,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 					this.setCurrentNavigationItem( data.section_id );
 				}else{
 
-
 					// trigger a nav item change *only* if it's a new section
 					// no need to re-render everything if we're staying put...
 					if( data.section_id !== this.getCurrentNavigationItem().get('id') ) {
@@ -56,7 +55,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			// if there is a secondary route (e.g. to a paragraph),
 			// pass the ball on to the navigate listener
 			if( typeof data.identifier !== 'undefined' ) {
-
 
 				if( data.identifier.length > 0 )				
 				if( waitForSection ) {

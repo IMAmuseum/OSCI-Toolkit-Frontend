@@ -41,7 +41,7 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		$('.toolbar-item-view').removeClass('active');
 		this.$el.addClass('active');
 
-		// triggered in AppView.js
+		// See ToolbarView.js
 		Backbone.trigger("toolbarItemClicked", {
 			item : this.options.toolbarItem,
 			active: true
