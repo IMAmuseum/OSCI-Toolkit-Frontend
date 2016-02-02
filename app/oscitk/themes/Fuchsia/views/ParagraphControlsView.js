@@ -12,15 +12,17 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         this.section_id = null;
         this.paragraphs = null;
 
-        // Reset vars on section change
+        // Destroy pop-over on any navigate action. See ../../../Router.js
+        // routedToSection is triggered before any other navigation logic
+        // However! It is also triggered when the [section_id[ stays the same, but the [identifier] changes
+        // Be aware of this! Stuff like layoutComplete or notesLoaded might not fire on [identifier] change
         this.listenTo(Backbone, 'routedToSection', function() {
             $('[id^="paragraph-"]').popover('destroy');
-            this.sectionLoaded = false;
-            this.notesLoaded = false;
         });
 
         // We must wait for the section to load before setting up the account hook
         this.listenTo(Backbone, 'sectionLoaded', function() {
+            //console.log( 'sectionLoaded' );
             this.sectionLoaded = true;
             this.render();
         });
@@ -28,12 +30,14 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         // This happens after sectionLoaded
         // TODO: We might not need this...?
         this.listenTo(Backbone, 'layoutComplete', function() {
+            //console.log( 'layoutComplete' );
             this.section_id = app.models.section.get('id');
             this.render();
         });
 
         // Notes will not be loaded if the user is not logged in
         this.listenTo(Backbone, 'notesLoaded', function(params) {
+            //console.log( 'notesLoaded' );
             this.notesLoaded = true;
             this.render();
         });

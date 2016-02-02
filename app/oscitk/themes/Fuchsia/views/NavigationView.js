@@ -19,7 +19,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// See ../../../Router.js
 		this.listenTo(Backbone, 'routedToSection', function( data ) {
 
-
 			// Used to delay triggering of navigate with an identifier
 			var waitForSection = true;
 
@@ -41,6 +40,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 					this.setCurrentNavigationItem( data.section_id );
 				}else{
 
+
 					// trigger a nav item change *only* if it's a new section
 					// no need to re-render everything if we're staying put...
 					if( data.section_id !== this.getCurrentNavigationItem().get('id') ) {
@@ -55,7 +55,10 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 			// if there is a secondary route (e.g. to a paragraph),
 			// pass the ball on to the navigate listener
-			if( typeof data.identifier !== undefined ) {
+			if( typeof data.identifier !== 'undefined' ) {
+
+
+				if( data.identifier.length > 0 )				
 				if( waitForSection ) {
 
 					//this.listenTo( Backbone, "sectionRenderEnd", imageLoad );
@@ -207,7 +210,13 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
     },
 
     getPageForSelector: function( e ) {
-    	return  $(e).offset().top / $(document).height();
+    	var $e = $(e);
+    	if( $e.length > 0 ) {
+   			return $e.offset().top / $(document).height();
+   		}else{
+   			return 0;
+   		}
+
     },
 	
 	// Book Title | Section Title
@@ -221,7 +230,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 	},
 
-	getCurrentNavigationItem: function(){
+	getCurrentNavigationItem: function() {
 		return this.currentNavigationItem;
 	},
 
@@ -233,6 +242,11 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// Verify that the section exists; else go to first
 		this.currentNavigationItem = section ? section : collection.first() ;
 
+		// This is an inaccurate name for this event.
+		// It should be something like "sectionChanged"
+		// B/c the user can navigate to a different [identifier] w/in the same [section]
+		// However! ../../../collections/NotesCollection.js requires this event!
+		// Otherwise the notes won't be loaded after the section loads
 		Backbone.trigger( 'currentNavigationItemChanged', this.currentNavigationItem );
 
 	},

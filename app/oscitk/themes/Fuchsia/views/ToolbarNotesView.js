@@ -34,7 +34,7 @@ OsciTk.views.NotesToolbar = OsciTk.views.BaseView.extend({
 
 	render: function() {
 
-		var notes = this.getSavedNotes(); console.log( notes );
+		var notes = this.getSavedNotes();
 		this.$el.html( this.template( { notes: notes } ) );
 
 		var that = this;
