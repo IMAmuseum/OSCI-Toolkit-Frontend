@@ -8087,7 +8087,7 @@ p, textarea {
   cursor: hand;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   /* line 36, ../_section.scss */
   #section {
     padding-left: 0;
@@ -8140,9 +8140,8 @@ p, textarea {
 header {
   z-index: 1000;
 }
-
-/* line 4, ../_header.scss */
-.container-header {
+/* line 5, ../_header.scss */
+header .container-header {
   width: 100%;
   height: 400px;
   max-width: 100%;
@@ -8150,9 +8149,8 @@ header {
   background-position: center;
   background-size: cover;
 }
-
-/* line 13, ../_header.scss */
-.header-title {
+/* line 14, ../_header.scss */
+header .container-header .header-title {
   position: absolute;
   top: 200px;
   left: 50%;
@@ -8162,12 +8160,12 @@ header {
   text-align: center;
   text-shadow: 0 1px 0 black;
 }
-/* line 22, ../_header.scss */
-.header-title h1 {
+/* line 25, ../_header.scss */
+header .container-header .header-title h1 {
   margin: 0;
 }
-/* line 25, ../_header.scss */
-.header-title p {
+/* line 29, ../_header.scss */
+header .container-header .header-title p {
   font-style: italic;
   font-weight: 300;
 }
@@ -8258,63 +8256,40 @@ ul.toc {
 }
 
 /* line 1, ../_navbar.scss */
+#navbar {
+  z-index: 998;
+}
+/* line 4, ../_navbar.scss */
 #navbar.affix {
   position: fixed;
   top: 0;
   width: 100%;
 }
-
-/* line 7, ../_navbar.scss */
-#navbar {
-  z-index: 998;
-}
 /* line 10, ../_navbar.scss */
-#navbar .nav li {
-  text-align: center;
-  width: 55px;
-}
-/* line 11, ../_navbar.scss */
-#navbar .nav li a {
-  font-size: 24px;
-  z-index: 999;
-}
-@media (max-width: 768px) {
-  /* line 11, ../_navbar.scss */
-  #navbar .nav li a {
-    font-size: 14px;
-  }
-}
-/* line 20, ../_navbar.scss */
-#navbar .nav li:hover {
-  cursor: hand;
-}
-/* line 26, ../_navbar.scss */
-#navbar .nav li.active a {
-  z-index: 999;
-  background-color: #e7e7e7;
-}
-
-/* line 34, ../_navbar.scss */
-#navbar-title {
+#navbar #navbar-title {
   color: #333;
   font-size: 24px;
 }
-@media (max-width: 768px) {
-  /* line 34, ../_navbar.scss */
-  #navbar-title {
-    font-size: 14px;
-  }
+/* line 17, ../_navbar.scss */
+#navbar #navbar-area li {
+  text-align: center;
+  width: 55px;
 }
-
-@media (max-width: 480px) {
-  /* line 45, ../_navbar.scss */
-  #navbar .nav li {
-    width: 100%;
-    text-align: left;
-  }
+/* line 21, ../_navbar.scss */
+#navbar #navbar-area li:hover {
+  cursor: hand;
 }
-/* line 54, ../_navbar.scss */
-#navbar-area .tooltip > .tooltip-inner {
+/* line 25, ../_navbar.scss */
+#navbar #navbar-area li a {
+  font-size: 24px;
+  z-index: 999;
+}
+/* line 34, ../_navbar.scss */
+#navbar #navbar-area li.active a {
+  background-color: #e7e7e7;
+}
+/* line 42, ../_navbar.scss */
+#navbar .tooltip > .tooltip-inner {
   background-color: #52818b;
   height: 40px;
   position: relative;
@@ -8325,8 +8300,8 @@ ul.toc {
   line-height: 35px;
   color: #FFF;
 }
-/* line 65, ../_navbar.scss */
-#navbar-area .tooltip.bottom > .tooltip-arrow {
+/* line 53, ../_navbar.scss */
+#navbar .tooltip.bottom > .tooltip-arrow {
   top: -16px;
   left: 50%;
   margin-left: -15px;
@@ -8334,6 +8309,21 @@ ul.toc {
   border-width: 0 15px 15px;
 }
 
+@media (max-width: 767px) {
+  /* line 65, ../_navbar.scss */
+  #navbar #navbar-title {
+    font-size: 14px;
+  }
+  /* line 69, ../_navbar.scss */
+  #navbar #navbar-area li {
+    width: 100%;
+    text-align: left;
+  }
+  /* line 73, ../_navbar.scss */
+  #navbar #navbar-area li a {
+    font-size: 14px;
+  }
+}
 /* line 1, ../_figures.scss */
 .figure-wrapper figure,
 .figure-wrapper figure .figure_content,
@@ -8390,67 +8380,6 @@ ul.toc {
   margin: 0;
 }
 
-/*
-figure {
-   margin: 20px;
-}
-
-
-.figure_content {
-   img {
-      border: 2px solid $gray-lighter;
-   }
-}
-
-figcaption {
-   background: $gray-lighter;
-   padding: 4px 4px 2px 6px;
-   font-size: 14px;
-
-   p {
-      font-size: 14px;
-      font-family: $font-family-sans-serif;
-   }
-
-}
-*/
-/*
-figure.left {
-   float: left;
-   margin-right: 50px;
-}
-
-img.left {
-   float: left;
-   max-width: 100%;
-   max-height: 50vh;
-}
-
-figure.right {
-   float: right;
-   margin-left: 40px;
-}
-
-img.right {
-   float: right;
-   max-width: 100%;
-   max-height: 50vh;
-}
-
-figure.plate,
-figure.center {
-   width: 50%;
-   max-width: 100%;
-   margin-left: auto;
-   margin-right: auto;
-   img, figcaption {
-      width: 100%;
-   }
-   @media (max-width: 768px) {
-      width: 90%;
-   }
-}
-*/
 /* BEGIN JQUERY-UI EXCERPT */
 /* line 3, ../_layered-image.scss */
 .ui-widget-content a {
