@@ -11,18 +11,22 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		app.views = {
 			titleView: new OsciTk.views.Title(),
 			headerView: new OsciTk.views.Header(),
+
+			toolbarView: new OsciTk.views.Toolbar(),
 			fontSizeView: new OsciTk.views.FontSize(),
 			printView: new OsciTk.views.Print(),
 			tocView: new OsciTk.views.Toc(),
-			toolbarView: new OsciTk.views.Toolbar(),
+			
 			sectionView: new OsciTk.views.Section(),
-			navigationView: new OsciTk.views.Navigation(),
 			footnotesView: new OsciTk.views.Footnotes(),
+			navigationView: new OsciTk.views.Navigation(),
+
 			paragraphControlsView: new OsciTk.views.ParagraphControls(),
 			glossaryTooltipView: new OsciTk.views.GlossaryTooltip(),
-			notesView: new OsciTk.views.Notes(),
+
 			accountView: new OsciTk.views.Account(),
 			navbarView: new OsciTk.views.Navbar(),
+			
 		};
 
 		// Add the header view

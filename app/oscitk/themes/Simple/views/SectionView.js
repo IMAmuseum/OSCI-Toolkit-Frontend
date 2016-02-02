@@ -203,12 +203,11 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         }, this);
     },
 
+    // Just trigger the event, leave the logic to ParagraphControlsView
     paragraphClicked: function(e) {
-        if ( app.account.get('email') != null) {
-            var p = $(e.currentTarget);
-            var paragraphNum = p.data("paragraph_number");
-            Backbone.trigger("paragraphClicked", paragraphNum);
-        }
+        var p = $(e.currentTarget);
+        var paragraphNum = p.data("paragraph_number");
+        Backbone.trigger("paragraphClicked", paragraphNum);
     },
 
     noteSubmit: function(e) {

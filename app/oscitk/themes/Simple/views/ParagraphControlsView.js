@@ -1,96 +1,250 @@
 OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
     template: OsciTk.templateManager.get('paragraph-popover'),
-    templateNotes: OsciTk.templateManager.get('note-form'),
-    templateCites: OsciTk.templateManager.get('citation'),
+    templateNotes: OsciTk.templateManager.get('paragraph-notes'),
+    templateCites: OsciTk.templateManager.get('paragraph-cite'),
 
     initialize: function() {
-        // when layout is complete add numbers for paragraph controls
-        this.listenTo(Backbone, 'layoutComplete', function() {
-            this.sectionId = app.models.section.get('id');
+        
+        // Just some shorthands
+        this.sectionLoaded = false;
+        this.notesLoaded = false;
+        this.userLogged = false;
+        this.section_id = null;
+        this.paragraphs = null;
+
+        // Reset vars on section change
+        this.listenTo(Backbone, 'routedToSection', function() {
+            $('[id^="paragraph-"]').popover('destroy');
+            this.sectionLoaded = false;
+            this.notesLoaded = false;
         });
 
-        this.listenTo(Backbone, 'notesLoaded', function(params) {
-            this.notesLoaded = false;
-            if (params.length > 0 || params == 'resized') {
-                if (app.account.get('email') != null) {
-                    this.notesLoaded = true;
-                }
-            }
+        // We must wait for the section to load before setting up the account hook
+        this.listenTo(Backbone, 'sectionLoaded', function() {
+            this.sectionLoaded = true;
             this.render();
         });
 
-        this.listenTo(Backbone, 'paragraphClicked', function(data) {
-            this.togglePopover(data);
-            this.getCitation(data);
+        // This happens after sectionLoaded
+        this.listenTo(Backbone, 'layoutComplete', function() {
+            this.section_id = app.models.section.get('id');
+            this.render();
         });
 
-        this.listenTo(Backbone, 'windowResized', function() {
-            Backbone.trigger('notesLoaded', 'resized');
+        // Notes will not be loaded if the user is not logged in
+        this.listenTo(Backbone, 'notesLoaded', function(params) {
+            this.notesLoaded = true;
+            this.render();
+        });
+
+        // Default check
+        this.userLogged = app.account.get('id') > 0;
+
+        // Whenever something happens to the account, try to reload the notes
+        // See ToolbarAccountView.js for more info
+        this.listenTo(Backbone, 'accountReady accountStateChanged', function() {
+            
+            $('[id^="paragraph-"]').popover('destroy');
+            //app.collections.notes.reset();
+
+            this.userLogged = app.account.get('id') > 0;
+            this.notesLoaded = this.notesLoaded ? this.userLogged : this.notesLoaded;
+
+            this.render();
+
+        });
+
+        // Clicking on the disc enables the popover
+        this.listenTo(Backbone, 'paragraphButtonClicked', function(data) {
+            this.togglePopover(data);
+        });
+
+        // When the user scrolls, destroy the popover
+        this.listenTo(Backbone, 'navigate windowResized', function() {
+            $('[id^="paragraph-"]').popover('destroy');
         });
 
     },
 
     render: function() {
-        if ( app.account.get('email') != null && this.notesLoaded) {
+
+        //console.log('sL: ' + this.sectionLoaded +', uL: ' + this.userLogged + ', nL: ' + this.notesLoaded);
+
+        // Force re-load of Notes, see ../../../collections/NotesCollection.js
+        if( this.userLogged && this.sectionLoaded && !this.notesLoaded ) {
+
+            var section_id = app.models.section.id;
+            app.collections.notes.getNotesForSection( section_id );
+        
+        }
+
+        // This is the final check; this will show the controls
+        if( this.sectionLoaded ) {
+
             this.paragraphs = $('.content-paragraph');
             this.addParagraphControls();
+
         }
+
+        // Alt code: this destroys the controls on logout
+
+        /*
+        if ( this.userLogged && this.notesLoaded) {
+            // see above
+        }else{
+            $('[id^="paragraph-"]').popover('destroy');
+            $('.paragraph-controls').remove();
+        }
+        */
+
         return this;
+
     },
 
     addParagraphControls: function() {
-        // get all paragraph with id and append controls
-        var i = 1;
-        _.each(this.paragraphs, function(paragraph) {
-            var note = this.checkForNote({
-                content_id: 'osci-content-'+i,
-                section_id: this.sectionId,
-                paragraph_number: i
-            });
-            var hasNotes = note.get('note') ? 'withNotes' : '';
 
-            $(paragraph).before(
+        // get all paragraph with id and append controls
+        var i = 1; // all osci-content counts start with 1
+
+        _.each(this.paragraphs, function(paragraph) {
+            
+            // Remove previous .paragraph-controls if this is called twice
+            $('.paragraph-controls[data-osci_content_id="osci-content-' + i + '"]' ).remove();
+
+            var hasNotes = ''; // determines if the dot is red
+
+            if( this.userLogged && this.notesLoaded ) {
+
+                // This will find the note or return false if notesLoaded is false
+                var note = this.checkForNote({
+                    content_id: 'osci-content-'+i,
+                    section_id: this.section_id,
+                    paragraph_number: i
+                });
+
+                hasNotes = note.get('note') ? 'withNotes' : '';
+
+            }
+
+
+            $(paragraph).prepend(
                 '<div class="paragraph-controls hidden-print" data-osci_content_id="osci-content-'+i+'" data-paragraph_identifier="'+i+'" >'+
                 '<button class="btn btn-link '+ hasNotes +' btn-xs paragraph-button" type="button" id="paragraph-'+i+'" data-paragraph_number="'+i+'">'+
                 '<span class="paragraph-identifier" paragraph-identifier="'+i+'">'+i+'</span>'+
                 '</button>'+
                 '</div>'
             );
+
             i++;
+
         }, this);
+
     },
 
-    togglePopover: function (data) {
-        this.data = data;
+    togglePopover: function (id) {
 
-        var note = this.checkForNote({
-            content_id: 'osci-content-'+ data,
-            section_id: this.sectionId,
-            paragraph_number: data
-        });
+        var noteForm = false;
 
-        var popoverData = {
-            id: data,
-            cid: note.cid,
-            noteText: noteText,
-            sectionId: this.sectionId,
-            contentId: 'osci-content-'+data,
-            paragraph_number: data
+        // Out goal is to return undefined for noteform if the notes are not available
+        if( this.notesLoaded && this.userLogged ) {
+
+            // Returns false if notes not loaded; else returns existing note or new note
+            var note = this.checkForNote({
+                content_id: 'osci-content-'+ id,
+                section_id: this.section_id,
+                paragraph_number: id
+            });
+
+            var noteText = note  ? note.get('note') : '';
+                noteText = noteText === null  ? '' : noteText;
+
+            var popoverData = {
+                id: id,
+                cid: note.cid,
+                noteText: noteText,
+                sectionId: this.section_id,
+                contentId: 'osci-content-'+id,
+                paragraph_number: id
+            };
+
+            var noteForm = this.templateNotes({
+                paragraph_number: note.get('paragraph_number'),
+                note: noteText,
+                cid: note.cid
+            });
+
         }
 
-        var noteText = note  ? note.get('note') : '';
-        noteText = noteText === null  ? '' : noteText;
+        // Unfortunately, FireFox requires tooltip placement to be on top rather than right
+        var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+        var placement = is_firefox ? 'top' : 'right';
+       
+        var popover = this.template({
+            'noteForm' : noteForm,
+            'citation' : this.citation
+        });
 
-        var noteForm = this.templateNotes({paragraph_number: note.get('paragraph_number'), note: noteText, cid: note.cid});
+        $('#paragraph-'+id).popover({
+            'html' : true,
+            'trigger' : 'manual',
+            'placement' : placement, // see FireFox hotfix above
+            'container' : 'body', // avoid overflow: hidden cutoff
+            'content' : popover
+        });
 
-        var popover = this.template({noteForm: noteForm, citation: this.citation});
-        $('#paragraph-'+data).popover({html:true, trigger:'manual', placement:'top', content: popover});
-        $('#paragraph-'+data).popover('toggle');
+
+        // Set focus on the Notes textarea once the popover has toggled
+        // Should auto-fail if the area doesn't exist
+        // Also binds the noteSubmit event, since the button is ready
+        var that = this;
+        $('#paragraph-'+id).on('shown.bs.popover', function(e) {
+
+            // Creates the little citation scrollbox
+            that.getCitation(id);
+
+            // Auto-focus on notes if it exists
+            $('#' + $(this).attr('aria-describedby') ).find('textarea').focus();
+
+            // Bind "Submit note" button
+            $('#note-submit').on('click', function(e) {
+                that.noteSubmit(e);
+            });
+
+
+
+            // Remove popover if there is a click outside the popover
+            // $('html').one() wrapper that rebinds until success
+            var selfbound = function(e) {
+
+                $target = $(e.target);
+                $button = $('#paragraph-'+id);
+                $popover = $('#' + $button.attr('aria-describedby') );
+
+                // If the two DOM elements are not the same...
+                if( $target.get(0) !== $popover.get(0) ) {
+
+                    // If the target is not a descendant of popover...
+                    if( $popover.find($target).length < 1  ) {
+                        $button.popover('destroy');
+                    }else{
+                        $('html').one('click', selfbound );
+                    }
+
+                }
+
+            };
+
+            $('html').one('click', selfbound );
+
+
+        });
+
+        $('#paragraph-'+id).popover('toggle');
 
         //step through paragraphs and destroy existing open popovers
         var i = 1;
         _.each(this.paragraphs, function(paragraph) {
-            if (this.data != i) {
+            if ( id != i ) {
                 $('#paragraph-'+i).popover('destroy');
             }
             i++;
@@ -99,22 +253,46 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
     },
 
     checkForNote: function (data) {
+
         var note;
-        var notes = app.collections.notes.where({content_id: data.content_id});
-        if (notes[0]) {
+        var notes = app.collections.notes.where({
+            content_id: data.content_id
+        });
+
+        if ( notes[0] ) {
+
             note = notes[0];
+
+            // Clean-up: destroy note if it's blank
+            // See also noteSubmit in SectionView.js
+            // This might throw an error; not sure why
+            // See Error in NotesCollection.js
+
+            if( note.get('note') === '' ) {
+                note.destroy();
+            }
+
         } else {
+
             note = new OsciTk.models.Note({
                 content_id: data.content_id,
                 section_id: data.section_id,
                 paragraph_number: data.paragraph_number
             });
+
             app.collections.notes.add(note);
+
         }
+
         return note;
+
     },
 
     getCitation: function(data) {
+
+        // data is paragraph index
+        
+
         var citationView = this;
         var contentId = 'osci-content-'+data;
         var content = $('#' + contentId);
@@ -126,11 +304,14 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             'field': 'body'
         };
 
+        //console.log( citationRequestParams);
+
         $.ajax({
             url: app.config.get('endpoints').OsciTkCitation,
             data: citationRequestParams,
             success: function(data, status) {
                 if (data.success) {
+
                     //add reference text to the response
                     data.citation.referenceText = content.text();
                     data.citation.url = document.URL + "/p-" + app.models.section.get('id') + "-" + content.data('paragraph_number');
@@ -147,10 +328,52 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
                     data.citation.rights = data.citation.rights ? data.citation.rights : '';
                     data.citation.title = data.citation.title ? data.citation.title : '';
 
-                    $('#cite').html(citationView.templateCites(data.citation));
+                    $('#cite-target').html(citationView.templateCites(data.citation));
+
                 }
             }
         });
-    }
+    },
+
+
+    // CALLED WHEN THE USER HITS THE SUBMIT NOTES BUTTON
+    noteSubmit: function(e) {
+
+        //console.log( 'noteSubmit' );
+
+        var textarea = $(e.currentTarget).parent().find('textarea');
+        var noteText = textarea.val();
+
+        var cid = textarea.data('id');
+        var paragraph_number = textarea.data('paragraph_number');
+
+        var note = app.collections.notes.get(cid);
+            note.set('note', noteText);
+
+        // Check to see if the red dot needs to be toggled
+        if ( $.trim(noteText) !== '') {
+
+            note.save();
+            textarea.html(noteText);
+            $('#paragraph-'+paragraph_number).addClass('withNotes');
+
+        }else{
+
+            note.destroy();
+            $('#paragraph-'+paragraph_number).removeClass('withNotes');
+
+        }
+
+        $('#paragraph-'+paragraph_number).popover({
+
+            content: function() {
+                return $("#popover-content").html();
+            }
+            
+        });
+
+        $('#paragraph-'+paragraph_number).popover('destroy');
+
+    },
 
 });
