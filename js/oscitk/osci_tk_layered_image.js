@@ -66,7 +66,7 @@ var LayeredImage = function(container) { // container should be a html element
         return false;
     }
 
-    // turn the element into a jQuery object
+    // turn the html element into a jQuery object
     this.container = $(container);
 
     // ensure we have something to work on
@@ -81,6 +81,7 @@ var LayeredImage = function(container) { // container should be a html element
 
     // load the layered image id and configuration
     this.id = this.container.attr('id');
+    this.slideshow = this.container.attr('slideshow');
     this.settings = this.container.data();
     this.settings.zoomStep = this.settings.zoomStep || 0.1;
     this.settings.annotationSelectorVisible = false;
@@ -183,40 +184,49 @@ var LayeredImage = function(container) { // container should be a html element
         }
     }
 
-    // create the first two layers, using preset data if available
-    var baseLayerPreset = this.figureOptions.baseLayerPreset ? this.figureOptions.baseLayerPreset : [],
-        numBaseLayerPresets = baseLayerPreset.length,
-        usedPresetLayers = false;
+    if (this.slideshow == "false") {
+        // create the first two layers, using preset data if available
+        var baseLayerPreset = this.figureOptions.baseLayerPreset ? this.figureOptions.baseLayerPreset : [],
+            numBaseLayerPresets = baseLayerPreset.length,
+            usedPresetLayers = false;
 
-    if (numBaseLayerPresets > 0) {
-        var firstLayer = this.getLayerById(baseLayerPreset[0]);
-        var secondLayer;
+        if (numBaseLayerPresets > 0) {
+            var firstLayer = this.getLayerById(baseLayerPreset[0]);
+            var secondLayer;
 
-        if (numBaseLayerPresets > 1) {
-            secondLayer = this.getLayerById(baseLayerPreset[1]);
-        }
-
-        if (firstLayer && (secondLayer || numBaseLayerPresets == 1)) {
-            this.createLayer(firstLayer);
-
-            if (secondLayer) {
-                this.createLayer(secondLayer);
-                $('#' + secondLayer.id).css('opacity', 0);
+            if (numBaseLayerPresets > 1) {
+                secondLayer = this.getLayerById(baseLayerPreset[1]);
             }
 
-            usedPresetLayers = true;
-        }
-    }
+            if (firstLayer && (secondLayer || numBaseLayerPresets == 1)) {
+                this.createLayer(firstLayer);
 
-    if (!usedPresetLayers && this.baseLayers.length) {
-        // create first layer, second layer, and make second transparent
-        this.createLayer(this.baseLayers[0]);
-        if (this.baseLayers[1]) {
-            this.createLayer(this.baseLayers[1]);
-            $('#' + this.baseLayers[1].id).css('opacity', 0);
-        }
-    }
+                if (secondLayer) {
+                    this.createLayer(secondLayer);
+                    $('#' + secondLayer.id).css('opacity', 0);
+                }
 
+                usedPresetLayers = true;
+            }
+        }
+
+        if (!usedPresetLayers && this.baseLayers.length) {
+            // create first layer, second layer, and make second transparent
+            this.createLayer(this.baseLayers[0]);
+            if (this.baseLayers[1]) {
+                this.createLayer(this.baseLayers[1]);
+                $('#' + this.baseLayers[1].id).css('opacity', 0);
+            }
+        }
+
+    } else if (this.slideshow == "true") {
+        //all layers hidden except for the first one
+        for (i=0; i < this.baseLayers.length; i++) {
+          this.createLayer(this.baseLayers[i]);
+          $('#' + this.baseLayers[i].id).css('opacity', 0);
+        }
+        $('#' + this.baseLayers[0].id).css('opacity', 1);
+    }
     // create control interface
     this.createUI();
 
@@ -279,6 +289,9 @@ LayeredImage.prototype.createLayer = function(layerData) {
     if (layerData.type == 'svg') {
         layer = this.createLayerSVG(layerData);
     }
+    if (layerData.type == 'json') {
+        layer = this.createLayerJSON(layerData);
+    }
 
     // flag the layer as visible and
     // give the layer a reference to its polymap object
@@ -314,6 +327,50 @@ LayeredImage.prototype.repaintLayer = function(layerData) {
     this.removeLayer(layerData);
     this.createLayer(layerData);
 };
+
+LayeredImage.prototype.createLayerJSON = function(layerData) {
+    var CA = this;
+    var layer = this.polymaps.geoJson();
+    var jsondata = layerData.json_data;
+    layer
+    .on("load", tooltips)
+    .url(jsondata)
+    return layer;
+};
+
+//tooltips for json layer
+function tooltips(e) {
+  for (var i = 0; i < e.features.length; i++) {
+    var f = e.features[i];
+    $(f.element).each(function() {
+        $(this).qtip({
+            content: {
+                text: f.data.properties.html
+                },
+            show: {
+                effect: function() {
+                    $(this).fadeTo(300, 1);
+                    }
+                },
+            hide: {
+                fixed: true,
+                delay: 800,
+                effect: function() {
+                    $(this).fadeTo(100, 0);
+                    }
+                },
+            position: {
+                target: 'mouse',
+                adjust: {
+                    mouse:false
+                    },
+                my: 'top left'
+                },
+            style: 'qtip-map'
+            });
+        });
+    }
+}
 
 LayeredImage.prototype.createLayerIIP = function(layerData) {
     var CA = this;
@@ -477,6 +534,8 @@ LayeredImage.prototype.createUI = function() {
                     x: event.clientX,
                     y: event.clientY
                 };
+                //get longitude latitude values for json layer
+                //console.log('locationPoint', CA.map.pointLocation({x: event.clientX, y: event.clientY}));
                 liCollection.userIsDraggingAsset = CA.id;
             }
         });
@@ -534,69 +593,101 @@ LayeredImage.prototype.createUI = function() {
     // layer controls
     var baseLayers = this.getVisibleBaseLayers();
     this.settings.currentLayer1 = baseLayers[0];
+    this.settings.presentLayer = baseLayers[0];
+    this.settings.prevLayer = baseLayers[0];
+
     if (baseLayers.length > 1) {
         this.settings.currentLayer2 = baseLayers[1];
+        if (this.slideshow == "false") {
+            // layer selector
+            this.ui.layerSelector = $('<div class="ca-ui-layer-selector"></div>');
 
-        // layer selector
-        this.ui.layerSelector = $('<div class="ca-ui-layer-selector"></div>');
+            // only provide selectable layers if there are at least three
+            //if (this.baseLayers.length > 2) {
+            this.ui.layerSelector
+                .bind('click', {
+                    layeredImage: this
+                }, this.toggleLayerSelector);
+            //}
+            if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
+                this.ui.controlbar.append(this.ui.layerSelector);
+            }
 
-        // only provide selectable layers if there are at least three
-        //if (this.baseLayers.length > 2) {
-        this.ui.layerSelector
-            .bind('click', {
-                layeredImage: this
-            }, this.toggleLayerSelector);
-        //}
-        if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
-            this.ui.controlbar.append(this.ui.layerSelector);
+            // opacity slider
+            this.ui.sliderContainer = $('<div class="ca-ui-layer-slider-container"></div>');
+            // this.ui.sliderLayerText = $('<div class="ca-ui-layer-slider-layer-text"></div>')
+            //     .text(this.settings.currentLayer1.title + " - " + this.settings.currentLayer2.title)
+            //     .appendTo(this.ui.sliderContainer);
+
+            this.ui.sliderLayerText1 = $('<div class="ca-ui-layer-slider-layer-text1">1</div>')
+                .attr("title", this.settings.currentLayer1.title)
+                .appendTo(this.ui.sliderContainer)
+                .qtip();
+
+            this.ui.slider = $('<div class="ca-ui-layer-slider"></div>')
+                .slider({
+                    slide: function(event, ui) {
+                        // set the opacity of layers
+                        // var primaryOpacity = (100 - ui.value) / 100;
+                        var secondaryOpacity = ui.value / 100;
+                        // $('#'+CA.settings.currentLayer1.id).css('opacity', primaryOpacity);
+                        $('#'+CA.settings.currentLayer2.id).css('opacity', secondaryOpacity);
+                        CA.refreshViewfinderOpacity(secondaryOpacity);
+                    },
+                    change: function(event, ui) {
+                        var secondaryOpacity = ui.value / 100;
+                        $('#'+CA.settings.currentLayer2.id).css('opacity', secondaryOpacity);
+                        CA.refreshViewfinderOpacity(secondaryOpacity);
+                    }
+                })
+                .appendTo(this.ui.sliderContainer);
+
+            this.ui.sliderLayerText2 = $('<div class="ca-ui-layer-slider-layer-text2">2</div>')
+                .attr("title", this.settings.currentLayer2.title)
+                .appendTo(this.ui.sliderContainer)
+                .qtip();
+
+            if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
+                this.ui.sliderContainer.appendTo(this.ui.controlbar);
+                this.ui.layerSelector.after(this.ui.sliderContainer);
+            }
+            // restore preset if available
+            if (this.figureOptions.sliderPosition !== undefined) {
+                this.ui.slider.slider('value', this.figureOptions.sliderPosition);
+            }
         }
 
-        // opacity slider
-        this.ui.sliderContainer = $('<div class="ca-ui-layer-slider-container"></div>');
-        // this.ui.sliderLayerText = $('<div class="ca-ui-layer-slider-layer-text"></div>')
-        //     .text(this.settings.currentLayer1.title + " - " + this.settings.currentLayer2.title)
-        //     .appendTo(this.ui.sliderContainer);
+        //adding slideshow UI
+        if (this.slideshow == "true") {
+            this.ui.slideshow = $('<div class="ca-ui-slideshow"></div>');
 
-        this.ui.sliderLayerText1 = $('<div class="ca-ui-layer-slider-layer-text1">1</div>')
-            .attr("title", this.settings.currentLayer1.title)
-            .appendTo(this.ui.sliderContainer)
-            .qtip();
+            this.ui.slideshowprev = $('<div class="ca-ui-layer-slideshow-prev"><</div>')
+                .on('click', {layeredImage: this}, this.prevLayerSlide)
+                .qtip({content: 'previous'})
+                .appendTo(this.ui.slideshow);
 
-        this.ui.slider = $('<div class="ca-ui-layer-slider"></div>')
-            .slider({
-                slide: function(event, ui) {
-                    // set the opacity of layers
-                    // var primaryOpacity = (100 - ui.value) / 100;
-                    var secondaryOpacity = ui.value / 100;
-                    // $('#'+CA.settings.currentLayer1.id).css('opacity', primaryOpacity);
-                    $('#'+CA.settings.currentLayer2.id).css('opacity', secondaryOpacity);
-                    CA.refreshViewfinderOpacity(secondaryOpacity);
-                },
-                change: function(event, ui) {
-                    var secondaryOpacity = ui.value / 100;
-                    $('#'+CA.settings.currentLayer2.id).css('opacity', secondaryOpacity);
-                    CA.refreshViewfinderOpacity(secondaryOpacity);
-                }
-            })
-            .appendTo(this.ui.sliderContainer);
+            this.ui.slideshownext = $('<div class="ca-ui-layer-slideshow-next">></div>')
+                .bind('click', {layeredImage: this}, this.nextLayerSlide)
+                .qtip({content: 'next'})
+                .appendTo(this.ui.slideshow);
 
-        this.ui.sliderLayerText2 = $('<div class="ca-ui-layer-slider-layer-text2">2</div>')
-            .attr("title", this.settings.currentLayer2.title)
-            .appendTo(this.ui.sliderContainer)
-            .qtip();
+            this.ui.slideshowstatus = $('<div class="ca-ui-layer-slideshow-status"></div>')
+                .html(this.settings.presentLayer.layer_num + ' of ' + baseLayers.length)
+                .appendTo(this.ui.slideshow);
 
-        if (!this.figureOptions.disable_interaction || this.figureOptions.editing) {
-            this.ui.sliderContainer.appendTo(this.ui.controlbar);
-            this.ui.layerSelector.after(this.ui.sliderContainer);
-        }
-        // restore preset if available
-        if (this.figureOptions.sliderPosition !== undefined) {
-            this.ui.slider.slider('value', this.figureOptions.sliderPosition);
+            this.ui.slideshow.appendTo(this.ui.controlbar);
+
+            this.ui.slideshowtitle = $('<div class="ca-ui-slideshow-title"></div>')
+                .appendTo(this.container);
+            if (this.settings.presentLayer.title) {
+                this.ui.slideshowtitle.html(this.settings.presentLayer.title);
+            }
         }
     }
 
     // add controlbar to container
     this.ui.controlbar.appendTo(this.container);
+
     this.resizeControlBar();
 
     // zoom control
@@ -746,6 +837,7 @@ LayeredImage.prototype.reset = function() {
      * Reset original layer selection
      */
     var baseLayers;
+
     if (CA.figureOptions.baseLayerPreset) {
         baseLayers = [];
         for (i=0, count = CA.figureOptions.baseLayerPreset.length; i < count; i++) {
@@ -772,6 +864,7 @@ LayeredImage.prototype.reset = function() {
             CA.ui['sliderLayerText' + (i + 1)].attr("title", CA.settings['currentLayer' + (i + 1)].title);
         }
     }
+
     // if more than one layer, restore transparency setting
     if (baseLayers.length > 1 && CA.ui.slider) {
         $('#'+CA.settings.currentLayer2.id).css('opacity', CA.ui.slider.slider('value') / 100);
@@ -780,6 +873,20 @@ LayeredImage.prototype.reset = function() {
         }
     }
 
+    if (this.slideshow == "true") {
+        for (i = 0; i < baseLayers.length; i++) {
+            d3.select('#'+ baseLayers[i].id).style('opacity', 0);
+        }
+        CA.settings['presentLayer'] = CA.settings['currentLayer1'];
+        d3.select('#'+ CA.settings['presentLayer'].id).style('opacity', 1);
+        CA.settings.prevLayer = CA.baseLayers[CA.settings['presentLayer']['layer_num'] - 1];
+        CA.ui.slideshowtitle.html(CA.settings['presentLayer'].title);
+        CA.ui.slideshowstatus.html(CA.settings['presentLayer']['layer_num'] + ' of ' + CA.baseLayers.length);
+        CA.ui.slideshowprev.css("background-color", "#ffffff");
+        CA.ui.slideshownext.css("background-color", "#ffffff");
+    }
+
+    CA.refreshViewfinder();
     // reset annotation layer visibility
     CA.showAnnotationPresets();
 };
@@ -788,23 +895,28 @@ LayeredImage.prototype.reset = function() {
 LayeredImage.prototype.refreshViewfinder = function() {
     var $ = this.$;
     var CA = this;
+    var thumbUrl1;
     // first clear out any contents
     this.ui.viewfinder.empty();
 
-    // get image urls from current layers
-    var thumbUrl1 = this.settings.currentLayer1.thumb;
+    if (this.slideshow == "true") {
+        thumbUrl1 = this.settings.presentLayer.thumb;
+    } else {
+        // get image urls from current layers
+        thumbUrl1 = this.settings.currentLayer1.thumb;
+        if (this.settings.currentLayer2) {
+            var thumbUrl2 = this.settings.currentLayer2.thumb;
+            this.ui.viewfinderLayer2 = $('<div class="ca-ui-viewfinderLayer viewfinderLayer2"></div>');
+            $('<img />').attr('src', thumbUrl2).appendTo(this.ui.viewfinderLayer2);
+            this.ui.viewfinder.append(this.ui.viewfinderLayer2);
+            // set opacity to match
+            this.ui.viewfinderLayer2.css('opacity', this.ui.slider.slider("value") / 100);
+        }
+    }
+
     this.ui.viewfinderLayer1 = $('<div class="ca-ui-viewfinderLayer viewfinderLayer1"></div>');
     $('<img />').attr('src', thumbUrl1).appendTo(this.ui.viewfinderLayer1);
     this.ui.viewfinder.append(this.ui.viewfinderLayer1);
-
-    if (this.settings.currentLayer2) {
-        var thumbUrl2 = this.settings.currentLayer2.thumb;
-        this.ui.viewfinderLayer2 = $('<div class="ca-ui-viewfinderLayer viewfinderLayer2"></div>');
-        $('<img />').attr('src', thumbUrl2).appendTo(this.ui.viewfinderLayer2);
-        this.ui.viewfinder.append(this.ui.viewfinderLayer2);
-        // set opacity to match
-        this.ui.viewfinderLayer2.css('opacity', this.ui.slider.slider("value") / 100);
-    }
 
     // set height based on width and aspect
     var vfWidth = this.ui.viewfinder.width();
@@ -1030,6 +1142,141 @@ LayeredImage.prototype.resizeZoomControls = function()
         } else {
             var currentHeight = this.ui.zoomSlider.outerHeight(true) - this.ui.zoomSlider.outerHeight();
             this.ui.zoomSlider.height((maxHeight - currentHeight) + 'px');
+        }
+    }
+}
+
+LayeredImage.prototype.prevLayerSlide = function(event) {
+    var CA = event.data.layeredImage;
+    var newLayer;
+
+    CA.ui.slideshowprev.off('click', this.prevLayerSlide);
+
+    //if it's the first slide do nothing
+    if (CA.settings.presentLayer.layer_num == CA.baseLayers[0]['layer_num']) {
+        return;
+    }
+
+    CA.ui.slideshowprev.css("background-color", "#ffffff");
+    CA.ui.slideshownext.css("background-color", "#ffffff");
+
+    for (var i = 0; i < CA.baseLayers.length; i++) {
+        var baseLayer = CA.baseLayers[i];
+        //find current image
+        if (CA.settings.presentLayer.layer_num == baseLayer['layer_num']) {
+            newLayer = CA.baseLayers[i - 1];
+            d3.select('#'+ baseLayer.id).transition()
+                .duration(300)
+                .style('opacity', 0)
+                .each('end', function () {
+                    d3.select('#'+ newLayer.id).transition()
+                        .duration(300)
+                        .style('opacity', 1)
+                        .each('end', function () {
+                            CA.ui.slideshowprev.on('click', {
+                                layeredImage: CA
+                            }, CA.prevLayerSlide);
+                        });
+                    });
+            CA.settings.presentLayer = newLayer;
+            CA.settings.prevLayer = baseLayer;
+            if (CA.settings.presentLayer.title) {
+                CA.ui.slideshowtitle.html(CA.settings.presentLayer.title);
+            }
+            CA.ui.slideshowstatus.html(CA.settings.presentLayer.layer_num + ' of ' + CA.baseLayers.length);
+            if (CA.ui.viewfinder.hasClass('viewfinder-open')) {
+                CA.refreshViewfinder();
+            }
+            if (typeof CA.figureOptions.swLat != 'undefined' && !CA.figureOptions.editing) {
+                var extents =  [
+                    {
+                        lon: CA.figureOptions.swLon,
+                        lat: CA.figureOptions.swLat
+                    },
+                    {
+                        lon: CA.figureOptions.neLon,
+                        lat: CA.figureOptions.neLat
+                    }
+                ];
+                CA.map.extent(extents);
+            } else {
+                CA.zoomToContainer();
+            }
+            // correct zoom control to reflect new zoom
+            CA.ui.zoomSlider.slider('value', CA.map.zoom());
+            if (CA.settings.presentLayer.layer_num == CA.baseLayers[0]['layer_num']) {
+                CA.ui.slideshowprev.css("background-color", "#888888");
+            }
+            return;
+        }
+    }
+}
+
+LayeredImage.prototype.nextLayerSlide = function(event) {
+    var CA = event.data.layeredImage;
+    var newLayer;
+
+    CA.ui.slideshownext.off('click', this.nextLayerSlide);
+
+    //if it's the last slide do nothing
+    if (CA.settings.presentLayer.layer_num == CA.baseLayers.length) {
+        return;
+    }
+
+    CA.ui.slideshowprev.css("background-color", "#ffffff");
+    CA.ui.slideshownext.css("background-color", "#ffffff");
+
+    for (var i = 0; i < CA.baseLayers.length; i++) {
+        var baseLayer = CA.baseLayers[i];
+        //find current image
+        if (CA.settings.presentLayer.layer_num == baseLayer['layer_num']) {
+            newLayer = CA.baseLayers[i + 1];
+            d3.select('#'+ baseLayer.id).transition()
+                .duration(300)
+                .style('opacity', 0)
+                .each('end', function () {
+                    d3.select('#'+ newLayer.id).transition()
+                        .duration(300)
+                        .style('opacity', 1)
+                        .each('end', function () {
+                            CA.ui.slideshownext.on('click', {
+                                layeredImage: CA
+                            }, CA.nextLayerSlide);
+                        });
+                    });
+            CA.settings.presentLayer = newLayer;
+            if (newLayer['layer_num'] > 1) {
+                CA.settings.prevLayer = baseLayer;
+            }
+            if (CA.settings.presentLayer.title) {
+                CA.ui.slideshowtitle.html(CA.settings.presentLayer.title);
+            }
+            CA.ui.slideshowstatus.html(CA.settings.presentLayer.layer_num + ' of ' + CA.baseLayers.length);
+            if (CA.ui.viewfinder.hasClass('viewfinder-open')) {
+                CA.refreshViewfinder();
+            }
+            if (typeof CA.figureOptions.swLat != 'undefined' && !CA.figureOptions.editing) {
+                var extents =  [
+                    {
+                        lon: CA.figureOptions.swLon,
+                        lat: CA.figureOptions.swLat
+                    },
+                    {
+                        lon: CA.figureOptions.neLon,
+                        lat: CA.figureOptions.neLat
+                    }
+                ];
+                CA.map.extent(extents);
+            } else {
+                CA.zoomToContainer();
+            }
+            // correct zoom control to reflect new zoom
+            CA.ui.zoomSlider.slider('value', CA.map.zoom());
+
+            if (CA.settings.presentLayer.layer_num == CA.baseLayers.length) {
+                CA.ui.slideshownext.css("background-color", "#888888");
+            }
+            return;
         }
     }
 }
