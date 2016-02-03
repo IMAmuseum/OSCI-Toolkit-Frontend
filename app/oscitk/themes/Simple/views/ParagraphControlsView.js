@@ -155,8 +155,12 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
                 paragraph_number: id
             });
 
+            console.log( note );
+
             var noteText = note  ? note.get('note') : '';
                 noteText = noteText === null  ? '' : noteText;
+
+            console.log( noteText );
 
             var popoverData = {
                 id: id,
@@ -166,6 +170,8 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
                 contentId: 'osci-content-'+id,
                 paragraph_number: id
             };
+
+            console.log( popoverData );
 
             var noteForm = this.templateNotes({
                 paragraph_number: note.get('paragraph_number'),

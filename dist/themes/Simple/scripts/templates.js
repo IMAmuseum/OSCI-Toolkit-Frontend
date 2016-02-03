@@ -126,22 +126,6 @@ __p += '\n<div class=\'next-page corner\'>\n\t<a href="#section/' +
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple/templates/note-form.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<textarea class="note-form-wrapper" data-paragraph_number="' +
-((__t = ( paragraph_number )) == null ? '' : __t) +
-'" data-id="' +
-((__t = ( cid )) == null ? '' : __t) +
-'">' +
-((__t = ( note )) == null ? '' : __t) +
-'</textarea>\n<button id=\'note-submit\' type=\'button\' class=\'btn btn-primary btn-block\'>Add Note</button>';
-
-}
-return __p
-};
-
 this["JST"]["app/oscitk/themes/Simple/templates/page.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -204,30 +188,15 @@ return __p
 
 this["JST"]["app/oscitk/themes/Simple/templates/paragraph-notes.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
+var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h3>Notes</h3>\n<div class="notesReel">\n\t<ul class="notesList">\n\t\t';
- _.each(notes, function(note) { ;
-__p += '\n\t\t\t<li class="notesListItem">\n\t\t\t\t<div class="the-note">\n\t\t\t\t\t<span class="note-content">' +
-((__t = ( note.get('note') )) == null ? '' : __t) +
-'</span>\n\t\t\t\t</div>\n\t\t\t\t';
- if (note.get('tags').length > 0) { ;
-__p += '\n\t\t\t\t\t<div class="note-tags">\n\t                \t<span class="tags-label">tags:</span> ';
- _.each(note.get('tags'), function(tag) { ;
-__p +=
-((__t = ( tag )) == null ? '' : __t) +
-' ';
- }); ;
-__p += '\n\t                </div>\n\t\t\t\t';
- } ;
-__p += '\n\t\t\t\t<div class="note-buttons">\n\t\t\t\t\t<a href="#" class="noteLink" data-content_id="' +
-((__t = ( note.get('content_id') )) == null ? '' : __t) +
-'">Link</a>\n\t\t\t\t\t<!-- <a href="#" class="noteEdit" data-content_id="' +
-((__t = ( note.get('content_id') )) == null ? '' : __t) +
-'">Edit</a> -->\n\t\t\t\t</div>\n\t\t\t</li>\n\t\t';
- }); ;
-__p += '\n\t</ul>\n</div>';
+__p += '<textarea class="note-form-wrapper" data-paragraph_number="' +
+((__t = ( paragraph_number )) == null ? '' : __t) +
+'" data-id="' +
+((__t = ( cid )) == null ? '' : __t) +
+'">' +
+((__t = ( note )) == null ? '' : __t) +
+'</textarea>\n<button id=\'note-submit\' type=\'button\' class=\'btn btn-primary btn-block\'>Add Note</button>';
 
 }
 return __p
