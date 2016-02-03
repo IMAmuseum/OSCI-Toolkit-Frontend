@@ -8511,7 +8511,7 @@ body {
     bottom: 34px;
   }
 }
-/* line 55, ../_toolbar.scss */
+/* line 56, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view {
   list-style-type: none;
   padding: 0;
@@ -8548,66 +8548,66 @@ body {
   			}
   			*/
 }
-/* line 77, ../_toolbar.scss */
+/* line 78, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.close-toolbar-item {
   background-image: url(../../images/light/icon-x.png);
   display: none;
   float: left;
 }
-/* line 83, ../_toolbar.scss */
+/* line 84, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.close-toolbar-item.open {
   display: inline-block;
 }
-/* line 89, ../_toolbar.scss */
+/* line 90, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.accountToolbarView-toolbar-item {
   background-image: url(../../images/dark/icon-user.png);
 }
-/* line 91, ../_toolbar.scss */
+/* line 92, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.accountToolbarView-toolbar-item.open {
   background-image: url(../../images/light/icon-user.png);
 }
-/* line 96, ../_toolbar.scss */
+/* line 97, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.tocToolbarView-toolbar-item {
   background-image: url(../../images/dark/icon-contents.png);
 }
-/* line 98, ../_toolbar.scss */
+/* line 99, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.tocToolbarView-toolbar-item.open {
   background-image: url(../../images/light/icon-contents.png);
 }
-/* line 103, ../_toolbar.scss */
+/* line 104, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.notesToolbarView-toolbar-item {
   background-image: url(../../images/dark/icon-notes.png);
 }
-/* line 105, ../_toolbar.scss */
+/* line 106, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.notesToolbarView-toolbar-item.open {
   background-image: url(../../images/light/icon-notes.png);
 }
 @media (max-width: 991px) {
-  /* line 55, ../_toolbar.scss */
+  /* line 56, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-area .toolbar-item-view {
     display: block;
     float: none;
   }
-  /* line 113, ../_toolbar.scss */
+  /* line 114, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.open {
     float: right;
   }
-  /* line 117, ../_toolbar.scss */
+  /* line 118, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.close-toolbar-item {
     float: left;
   }
 }
 @media (max-width: 600px) {
-  /* line 55, ../_toolbar.scss */
+  /* line 56, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-area .toolbar-item-view {
     display: none;
   }
-  /* line 125, ../_toolbar.scss */
+  /* line 126, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.open {
     display: inline-block;
   }
 }
-/* line 157, ../_toolbar.scss */
+/* line 158, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-overlay-wrapper {
   display: none;
   position: fixed;
@@ -8627,12 +8627,12 @@ body {
   z-index: 10001;
 }
 @media (max-width: 991px) {
-  /* line 157, ../_toolbar.scss */
+  /* line 158, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-overlay-wrapper {
     bottom: 34px;
   }
 }
-/* line 189, ../_toolbar.scss */
+/* line 190, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-overlay-wrapper #toolbar-overlay {
   width: calc( 100% - 300px );
   background: rgba(0, 0, 0, 0.5);
@@ -8643,99 +8643,99 @@ body {
   float: left;
 }
 @media (max-width: 991px) {
-  /* line 189, ../_toolbar.scss */
+  /* line 190, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-overlay-wrapper #toolbar-overlay {
     box-shadow: none;
   }
 }
-/* line 210, ../_toolbar.scss */
+/* line 211, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-overlay-wrapper #toolbar-sidebar {
   width: 300px;
   background: #fa5d78;
   height: 100%;
   float: left;
 }
-/* line 223, ../_toolbar.scss */
+/* line 224, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout {
   height: 100%;
   color: white;
   padding: 8px 8px 8px 12px;
 }
-/* line 235, ../_toolbar.scss */
+/* line 236, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div {
   height: 100%;
 }
-/* line 239, ../_toolbar.scss */
+/* line 240, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div {
   height: 100%;
 }
-/* line 243, ../_toolbar.scss */
+/* line 244, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div h3 {
   margin: 0;
   border-bottom: 1px white solid;
   padding-bottom: 8px;
 }
-/* line 249, ../_toolbar.scss */
+/* line 250, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll {
   overflow-y: scroll;
   height: calc(100% - 39px - 50px );
   padding: 5px 5px 10px 0px;
   border-bottom: thin solid white;
 }
-/* line 258, ../_toolbar.scss */
+/* line 259, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll a:not(.btn) {
   color: white;
 }
-/* line 261, ../_toolbar.scss */
+/* line 262, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll a:not(.btn):hover {
   text-decoration: none;
 }
-/* line 267, ../_toolbar.scss */
+/* line 268, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll p {
   font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-/* line 271, ../_toolbar.scss */
+/* line 272, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 277, ../_toolbar.scss */
+/* line 278, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li {
   margin: 10px 0px;
 }
-/* line 281, ../_toolbar.scss */
+/* line 282, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li h4, #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li h5 {
   margin: 0px;
 }
 
-/* line 300, ../_toolbar.scss */
+/* line 301, ../_toolbar.scss */
 #toolbar-notes .notesListItem .note-buttons {
   float: left;
 }
-/* line 304, ../_toolbar.scss */
+/* line 305, ../_toolbar.scss */
 #toolbar-notes .notesListItem .the-note {
   margin-left: 35px;
 }
 
-/* line 313, ../_toolbar.scss */
+/* line 314, ../_toolbar.scss */
 #toolbar-account .account-footer {
   margin-top: 10px;
 }
-/* line 317, ../_toolbar.scss */
+/* line 318, ../_toolbar.scss */
 #toolbar-account .form-error:empty {
   display: none;
 }
-/* line 321, ../_toolbar.scss */
+/* line 322, ../_toolbar.scss */
 #toolbar-account h4 {
   margin-bottom: 5px;
 }
-/* line 325, ../_toolbar.scss */
+/* line 326, ../_toolbar.scss */
 #toolbar-account h5 {
   margin-top: 5px;
   margin-bottom: 22px;
 }
-/* line 330, ../_toolbar.scss */
+/* line 331, ../_toolbar.scss */
 #toolbar-account .user-icon {
   width: 52px;
   height: 52px;
@@ -8747,329 +8747,6 @@ body {
   float: left;
 }
 
-/*
-
-
-
-
-	background: $color-dark-red;
-
-	#toolbar-view {
-
-		#toolbar-area {
-
-			float: left;
-			height: 100%;
-
-			background: $color-light-red;
-
-
-			z-index: 990;
-
-			list-style-type: none;
-			padding: 0;
-
-			li {
-
-				margin-bottom: $toolbar-margin-bottom;
-
-				cursor: hand;
-				border: 0;
-				font: 0/0 a;
-				text-shadow: none;
-				color: transparent;
-
-				background-size: 50px 50px;
-				background-repeat: no-repeat;
-				width: 50px;
-				height: 50px;
-
-				&.active {
-					background-color: $color-dark-red;
-				}
-
-				&.close-toolbar-item {
-					background-image: url(../../images/light/x_icon.png);
-				}
-
-
-				&.tocToolbarView-toolbar-item {
-					background-image: url(../../images/light/contents_icon.png);
-					&:hover {
-						background-image: url(../../images/light/contents_icon.png);
-					}
-				}
-
-				&.searchToolbarView-toolbar-item {
-					background-image: url(../../images/light/search_icon.png);
-				}
-
-				&.glossaryToolbarView-toolbar-item {
-					background-image: url(../../images/light/glossary_icon.png);
-				}
-
-				&.footnotesToolbarView-toolbar-item {
-					background-image: url(../../images/light/footnotes_icon.png);
-				}
-
-				&.figuresToolbarView-toolbar-item {
-					background-image: url(../../images/light/figures_icon.png);
-				}
-
-				&.notesToolbarView-toolbar-item {
-					background-image: url(../../images/light/notes_icon.png);
-				}
-
-				&.citationsToolbarView-toolbar-item {
-					background-image: url(../../images/light/cite_icon.png);
-				}
-
-				&.accountToolbarView-toolbar-item {
-					background-image: url(../../images/light/user_icon.png);
-					&:hover {
-						background-image: url(../../images/light/user_icon.png);
-					}
-				}
-				
-			}
-		}
-	}
-
-	#toolbar-filler,
-	#toolbar-readout {
-		float: left;
-		height: 100%;
-
-		// Relative to position:fixed #toolbar
-		width: calc( 100% - 50px );
-
-		color: white;
-
-	}
-
-	#toolbar-filler {
-		background: $color-light-red;
-
-		p {
-			font-family: 'Lato', sans-serif;
-			margin: 0;
-
-			line-height: 50px;
-			padding-bottom: $toolbar-margin-bottom;
-			padding-left: 10px;
-
-			&.toolbar-trigger {
-				cursor: pointer;
-			}
-
-		}
-	}
-
-	#toolbar-readout {
-
-		display: none;
-
-		background: $color-dark-red;
-
-		padding: 15px 0px 0px 30px;
-
-		> div {
-
-			height: 100%;
-
-			> div {
-
-				height: 100%;
-
-				h3 {
-					margin: 0;
-					margin-right: -30px;
-					padding-right: 30px;
-					border-bottom: 1px white solid;
-					padding-bottom: 8px;
-				}
-
-				.toolbar-scroll {
-
-					overflow-y: scroll;
-					height: calc(100% - 39px);
-
-					padding: 5px 5px 10px 0px;
-
-					a:not(.btn) {
-						color: white;
-
-						&:hover {
-							color: $color-light-red;
-							text-decoration: none;
-						}
-					}
-
-					p {
-						font-family: 'Lato', sans-serif;
-					}
-
-					ul {
-
-						list-style: none;
-						padding: 0;
-						margin: 0;
-
-						li {
-
-							margin: 10px 0px;
-
-							h4, h5 {
-								margin: 0px;
-							}
-
-						}
-
-					}
-
-				}
-			}
-		}
-	}
-}
-
-
-
-#toolbar-glossary {
-
-	#glossary-filter-box {
-		color: black;
-	}
-
-	#glossary-term-listing li {
-		cursor: pointer;
-	}
-
-	#glossary-term-listing-mobile {
-		display: none;
-	}
-
-	#glossary-content {
-
-		border-top: 1px solid white;
-		
-		p {
-			p {
-				span {
-					color: white !important;
-				}
-			}
-		}
-	}
-
-	@media ( max-width: 767px ) {
-
-		#glossary-term-listing {
-			display: none;
-		}
-
-		#glossary-content {
-			display: none;
-		}
-
-		#glossary-term-listing-mobile {
-			display: block;
-
-			> li {
-
-				cursor: pointer;
-				border-bottom: 1px solid white;
-				ul {
-					display: none;
-
-					p {
-						span {
-							color: white !important;
-						}
-					}
-				}
-
-			}
-
-		}
-
-	}
-
-}
-
-#toolbar-figures {
-
-	position: relative;
-
-	figure {
-
-		img, figcaption {
-			max-width: 75%
-		}
-
-	}
-
-}
-
-a.toolbar-link {
-	display: block;
-	height: 22px;
-	width: 22px;
-	padding: 3px 1px;
-	text-align: center;
-	cursor: pointer;
-
-	img {
-		max-width: 75%;
-	}
-}
-
-#toolbar-notes {
-	.notesListItem {
-
-		.note-buttons {
-			float: left;
-		}
-
-		.the-note {
-			margin-left: 35px;
-		}
-
-	}
-}
-
-#toolbar-account {
-
-	.account-footer {
-		margin-top: 10px;
-	}
-
-	.form-error:empty {
-		display: none;
-	}
-
-	h4 {
-		margin-bottom: 5px
-	}
-
-	h5{
-		margin-top: 5px;
-		margin-bottom: 22px;
-	}
-
-	.user-icon {
-		width: 52px;
-		height: 52px;
-		margin-right: 10px;
-		border-radius: 50%;
-		background-color: $color-light-red;
-		background-image: url(../../images/light/user_icon.png);
-		background-size: contain;
-		float: left;
-	}
-
-}
-*/
 /* line 5, ../_figures.scss */
 #section #section-view .figure-wrapper figure,
 #section #section-view .figure-wrapper figure .figure_content,
