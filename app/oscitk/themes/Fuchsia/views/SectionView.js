@@ -7,24 +7,18 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     initialize: function(options) {
 
         // See NavigationView.js and  ../../../Router.js
-        this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
+        this.listenTo(Backbone, 'currentNavigationItemChanged', function( navItem ) {
 
-            $("html, body").animate({
-                scrollTop: 0
-            }, 0);
+            $("html, body").animate( { scrollTop: 0 }, 0 );
 
-            // this.$el.parent().empty(); // #section-view
 
-            if ( navItem ) {
+            if( navItem ) {
 
                 // loading section content
                 app.models.section = new OsciTk.models.Section({
                     uri : navItem.get('uri'),
                     id : navItem.get('id')
-                })
-
-                // not sure where this is used
-                this.ContentId = navItem.get('id');
+                });
 
                 // this.model is undefined unless you call this function!
                 this.changeModel(app.models.section);
@@ -64,7 +58,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     // Layout magic happens here
     renderLayout: function(  ) {
 
-        // see NavigationView.js
+        // Currently not used by anything
         Backbone.trigger("sectionRenderStart");
         
         // that refers to the view
@@ -76,8 +70,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             var $w = null; // wrapper
 
             var $f = $(e);
-            var $d = $f.find('.figure_content');
-            var $o = $d.find('object');
+            var $d = $f.find('div.figure_content'); 
+            var $o = $d.find('object'); 
             var $i = $o.find('img');
 
 
@@ -348,11 +342,5 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
 
     },
-
-    // Over-ridden by the sub-theme
-    isElementVisible: function(element) {
-        return true;
-    },
-
-
+    
 });
