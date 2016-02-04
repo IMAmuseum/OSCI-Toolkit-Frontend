@@ -7,11 +7,14 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		'touch': 'itemClicked'
 	},
 	initialize: function(options) {
+
 		this.options = options;
+
 		// add a class to this element based on view button uses
 		this.$el.addClass(this.options.toolbarItem.view + '-toolbar-item');
 		this.$el.attr('data-href', this.options.toolbarItem.text);
 		this.$el.attr('data-style', this.options.toolbarItem.style);
+		
 	},
 	render: function() {
 		this.$el.html(this.template({
@@ -26,13 +29,10 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 		return this;
 	},
 	itemClicked: function(e) {
+
 		e.preventDefault();
 		e.stopPropagation();
 
-		this.setActiveStates(e);
-	},
-
-	setActiveStates: function(e) {
 		this.e = e;
 		this.view = app.views.toolbarView;
 
@@ -48,8 +48,10 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 
 		// get true / false target is active
 		this.active = this.$target.hasClass('active');
+
 		// toggle active class
 		this.$target.toggleClass('active');
+
 		//get the target li for checking if true in each loop below
 		this.$targetCheck = $(e.currentTarget);
 
@@ -63,5 +65,6 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 
 		// triggered in appView.js
 		Backbone.trigger("toolbarItemClicked", {item : this.options.toolbarItem, active: this.active});
+
 	}
 });

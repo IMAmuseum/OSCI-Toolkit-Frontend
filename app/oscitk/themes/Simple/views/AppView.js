@@ -3,29 +3,26 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 	template: OsciTk.templateManager.get('app'),
 
 	initialize: function() {
+
+		// Render executed first so that the view containers get created
 		this.render();
 
-		app.toolbarItems = app.config.get('toolbarItems') ? app.config.get('toolbarItems') : [];
+		// See also app.toolbarItems in toolbarView
 
 		// initialize all possible views
 		app.views = {
-			titleView: new OsciTk.views.Title(),
+
 			headerView: new OsciTk.views.Header(),
+			navbarView: new OsciTk.views.Navbar(),
 
 			toolbarView: new OsciTk.views.Toolbar(),
-			fontSizeView: new OsciTk.views.FontSize(),
-			printView: new OsciTk.views.Print(),
-			tocView: new OsciTk.views.Toc(),
-			
+
 			sectionView: new OsciTk.views.Section(),
 			footnotesView: new OsciTk.views.Footnotes(),
 			navigationView: new OsciTk.views.Navigation(),
 
 			paragraphControlsView: new OsciTk.views.ParagraphControls(),
 			glossaryTooltipView: new OsciTk.views.GlossaryTooltip(),
-
-			accountView: new OsciTk.views.Account(),
-			navbarView: new OsciTk.views.Navbar(),
 			
 		};
 
@@ -38,60 +35,17 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		// Add the navbar view
 		this.addView(app.views.navbarView, '#navbar');
 
-		// Add Section
+		// Add section
 		this.addView(app.views.sectionView, '#section');
 
 		// Add the navigation view to the AppView
 		this.addView(app.views.navigationView, '#navigation');
 
-		this.listenTo(Backbone, "toolbarInline", function(toolbarItem) {
-			this.toolbarInline(toolbarItem);
-		});
-
-		this.listenTo(Backbone, "toolbarItemClicked", function(toolbarItem, active) {
-			this.toolbarAction(toolbarItem);
-		});
-
-		this.listenTo(Backbone, "toolbarRemoveViews", function() {
-			this.toolbarToggle();
-		});
-
 	},
 
 	render: function() {
-		this.$el.html(this.template);
-		$('body').append(this.el);
+		this.$el.html( this.template );
+		$('body').append( this.el );
 	},
 
-	toolbarInline: function(toolbarItem) {
-		var view = _.pick(app.views, toolbarItem.view);
-		view = view[toolbarItem.view];
-		this.removeView(view, false);
-		this.addView(view, '#'+toolbarItem.text);
-	},
-
-	toolbarAction: function(toolbarItem) {
-
-		this.toolbarToggle();
-		// if toolbar items is active show it
-		// this toggles the view
-		if (! toolbarItem.active) {
-			var view = _.pick(app.views, toolbarItem.item.view);
-			view = view[toolbarItem.item.view];
-			this.addView(view, '#'+toolbarItem.item.text);
-		}
-	},
-
-	toolbarToggle: function() {
-		//console.log(toolbarItem);
-		_.each(app.toolbarItems, function(item) {
-			//remove all active classes
-			$('.'+item.view+'-toolbar-item > a').removeClass('active')
-			if (item.style == 'default') {
-				var view = _.pick(app.views, item.view);
-				view = view[item.view];
-				this.removeView(view, false);
-			}
-		}, this);
-	}
 });

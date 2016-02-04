@@ -1,3 +1,5 @@
+// Honestly, chances are you won't ever need to modify this file
+// IIRC it's identical for all of the themes
 OsciTk.views.BaseView = Backbone.View.extend({
 	getChildViews: function() {
 		if (!this.childViews) { this.childViews = []; }

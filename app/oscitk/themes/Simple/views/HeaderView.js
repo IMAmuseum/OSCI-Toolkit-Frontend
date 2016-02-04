@@ -2,20 +2,27 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 	className: 'header-view',
 	template: OsciTk.templateManager.get('header'),
 	initialize: function() {
+
+		// Retrieves title and author
 		this.listenTo(Backbone, 'packageLoaded', function(packageModel) {
 			this.creator = $(packageModel)[0].attributes['metadata']['dc:creator'];
 			this.pubTitle = packageModel.getTitle();
 		});
 
+		// Resets variables when a new section is ready
 		this.listenTo(Backbone, 'sectionLoaded', function(sectionModel) {
+
 			this.sectionTitle = null;
 			this.sectionSubtitle = null;
 			this.sectionThumbnail = null;
 			this.headerImage = null;
 			this.headerImageCaption = null;
+
 			var sectionId = sectionModel.get('id');
 			this.render(sectionId);
+
 		});
+
 	},
 	render: function(sectionId) {
 
@@ -30,12 +37,14 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 
 		// get first figure marked as plate for header image
 		if (! _.isEmpty(app.collections.figures.models)) {
+
 			_.each(app.collections.figures.models, function(figure) {
 				if (figure.get('plate') == true) {
 					this.headerImage = figure.get('preview_url');
 					this.headerImageCaption = figure.get('caption');
 				}
 			});
+
 		} else {
 			this.headerImage = null;
 			this.headerImageCaption = null;
@@ -47,6 +56,8 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 			sectionTitle: this.sectionTitle,
 			sectionSubtitle: this.sectionSubtitle
 		}));
+
 		return this;
+		
 	}
 });
