@@ -8237,36 +8237,46 @@ ul.toc {
 #navbar {
   z-index: 998;
 }
-/* line 4, ../_navbar.scss */
-#navbar.affix {
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-/* line 10, ../_navbar.scss */
+/* line 5, ../_navbar.scss */
 #navbar #navbar-title {
   color: #333;
   font-size: 24px;
+  opacity: 0;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -ms-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
 }
-/* line 17, ../_navbar.scss */
+/* line 18, ../_navbar.scss */
+#navbar.affix {
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+/* line 23, ../_navbar.scss */
+#navbar.affix #navbar-title {
+  opacity: 1;
+}
+/* line 32, ../_navbar.scss */
 #navbar #navbar-area li {
   text-align: center;
   width: 55px;
 }
-/* line 21, ../_navbar.scss */
+/* line 36, ../_navbar.scss */
 #navbar #navbar-area li:hover {
   cursor: hand;
 }
-/* line 25, ../_navbar.scss */
+/* line 40, ../_navbar.scss */
 #navbar #navbar-area li a {
   font-size: 24px;
   z-index: 999;
 }
-/* line 34, ../_navbar.scss */
+/* line 49, ../_navbar.scss */
 #navbar #navbar-area li.active a {
   background-color: #e7e7e7;
 }
-/* line 42, ../_navbar.scss */
+/* line 57, ../_navbar.scss */
 #navbar .tooltip > .tooltip-inner {
   background-color: #52818b;
   height: 40px;
@@ -8278,7 +8288,7 @@ ul.toc {
   line-height: 35px;
   color: #FFF;
 }
-/* line 53, ../_navbar.scss */
+/* line 68, ../_navbar.scss */
 #navbar .tooltip.bottom > .tooltip-arrow {
   top: -16px;
   left: 50%;
@@ -8288,16 +8298,16 @@ ul.toc {
 }
 
 @media (max-width: 767px) {
-  /* line 65, ../_navbar.scss */
+  /* line 80, ../_navbar.scss */
   #navbar #navbar-title {
     font-size: 14px;
   }
-  /* line 69, ../_navbar.scss */
+  /* line 84, ../_navbar.scss */
   #navbar #navbar-area li {
     width: 100%;
     text-align: left;
   }
-  /* line 73, ../_navbar.scss */
+  /* line 88, ../_navbar.scss */
   #navbar #navbar-area li a {
     font-size: 14px;
   }
@@ -8967,70 +8977,113 @@ images.image_opaque {
   z-index: 11;
 }
 
-/* line 3, ../_paragraph-popover.scss */
-.popover-content {
+/* line 5, ../_paragraph-popover.scss */
+.popover {
+  border-radius: 10px;
+  background-color: #52818b;
+}
+/* line 13, ../_paragraph-popover.scss */
+.popover.right > .arrow, .popover.right > .arrow:after {
+  border-right-color: #52818b;
+}
+/* line 19, ../_paragraph-popover.scss */
+.popover.top > .arrow, .popover.top > .arrow:after {
+  border-top-color: #52818b;
+}
+/* line 24, ../_paragraph-popover.scss */
+.popover .popover-content {
+  padding: 0;
+}
+/* line 29, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper {
   padding: 9px;
   max-width: 200px;
   max-height: 240px;
+  font-family: 'Lato', sans-serif;
 }
-/* line 7, ../_paragraph-popover.scss */
-.popover-content textarea {
+/* line 39, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper .nav li a {
+  color: white;
+}
+/* line 41, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper .nav li a:hover {
+  color: #3c3c3c;
+  border-color: transparent;
+}
+/* line 48, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper .nav li.active a {
+  color: #3c3c3c;
+  border: thin solid transparent;
+}
+/* line 57, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper textarea {
   border: none;
+  outline: none;
+  resize: none;
   font-size: 14px;
-  color: #333;
-  padding: 5px;
+  line-height: 16px;
   height: 115px;
   width: 100%;
+  padding: 5px;
+  color: #333;
 }
-/* line 15, ../_paragraph-popover.scss */
-.popover-content button {
+/* line 74, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper button {
   font-size: 15px;
   font-weight: 200;
+  background-color: white;
+  color: #52818b;
+  border: thin solid transparent;
 }
 
-/* line 21, ../_paragraph-popover.scss */
+/* line 87, ../_paragraph-popover.scss */
 .tab-content {
   height: 160px;
+}
+
+/* line 92, ../_paragraph-popover.scss */
+#cite-target {
+  height: 160px;
+  width: 182px;
+  background-image: url(../../images/ajax-loader.gif);
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 /* line 1, ../_paragraph-notes.scss */
 .note-form-wrapper {
   height: 160px;
+  display: block;
 }
 
-/* line 5, ../_paragraph-notes.scss */
+/* line 6, ../_paragraph-notes.scss */
 .paragraph-controls {
-  height: 0;
-  right: 32px;
-  position: relative;
-  top: 6px;
+  display: inline-block;
+  margin-right: 10px;
   z-index: 2;
 }
-
 /* line 13, ../_paragraph-notes.scss */
-.btn {
+.paragraph-controls .btn {
   text-transform: uppercase;
 }
-
-/* line 17, ../_paragraph-notes.scss */
-.paragraph-button {
+/* line 21, ../_paragraph-notes.scss */
+.paragraph-controls .paragraph-button {
   background-image: url(../../images/plus-grey.png);
-  background-size: 15px 15px;
   background-repeat: no-repeat;
+  background-size: 20px 20px;
+  width: 20px;
+  height: 20px;
   border: 0;
   font: 0/0 a;
   text-shadow: none;
   color: transparent;
-  width: 15px;
-  height: 15px;
 }
-
-/* line 29, ../_paragraph-notes.scss */
-.withNotes {
+/* line 35, ../_paragraph-notes.scss */
+.paragraph-controls .paragraph-button.withNotes {
   background-image: url(../../images/plus-blue.png);
 }
 
-/* line 33, ../_paragraph-notes.scss */
+/* line 45, ../_paragraph-notes.scss */
 #note-submit {
   margin-top: 10px;
 }

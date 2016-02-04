@@ -1,23 +1,101 @@
 $popover-height: 160px;
+$popover-color: #52818b;
+$popover-color-btn: white;
 
-.popover-content {
-	padding: 9px;
-	max-width: 200px;
-	max-height: 240px;
-	textarea {
-		border: none;
-		font-size: 14px;
-		color: #333;
-		padding: 5px;
-		height: 115px;
-		width: 100%;
+.popover {
+
+	border-radius: 10px;
+	//border: thin solid transparent;
+
+	background-color: $popover-color;
+
+	&.right > .arrow {
+		&, &:after {
+			border-right-color: $popover-color;
+		}
 	}
-	button {
-		font-size: 15px;
-		font-weight: 200;
+
+	&.top > .arrow {
+		&, &:after {
+			border-top-color: $popover-color;
+		}
+	}
+
+	.popover-content {
+
+		padding: 0;
+
+
+		.popover-wrapper {
+
+			padding: 9px;
+			max-width: 200px;
+			max-height: 240px;
+
+			font-family: 'Lato', sans-serif;
+
+			.nav {
+				li {
+					a {
+						color: white;
+						&:hover {
+							color: #3c3c3c;
+							border-color: transparent;
+						}
+					}
+
+					&.active {
+						a {
+							color: #3c3c3c;
+							border: thin solid transparent;
+						}
+					}
+
+				}
+			}
+
+			textarea {
+
+				border: none;
+				outline: none;
+				resize: none;
+
+				font-size: 14px;
+				line-height: 16px;
+
+				height: 115px;
+				width: 100%;
+				padding: 5px;
+
+				color: #333;
+
+			}
+
+			button {
+				font-size: 15px;
+				font-weight: 200;
+				background-color: $popover-color-btn;
+				color: $popover-color;
+				border: thin solid transparent;
+			}
+
+		}
 	}
 }
 
+// FireFox will bug out if the height is not set explicitly
 .tab-content {
 	height: $popover-height;
+}
+
+// AJAX messes up popover height 
+#cite-target {
+
+	height: $popover-height;
+	width: 182px;
+
+	background-image: url(../../images/ajax-loader.gif);
+	background-position: center center;
+	background-repeat: no-repeat;
+
 }

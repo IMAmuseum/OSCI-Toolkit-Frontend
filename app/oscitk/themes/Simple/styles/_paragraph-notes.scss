@@ -1,34 +1,46 @@
 .note-form-wrapper {
 	height: $popover-height;
+	display: block;
 }
 
 .paragraph-controls {
-	height: 0;
-	right: 32px;
-	position: relative;
-	top: 6px;
+
+	display: inline-block;
+	margin-right: $paragraph-button-margin;
+
 	z-index: 2;
+
+	.btn {
+		text-transform: uppercase;
+	}
+
+	// defined in main.scss
+	// used in _section.scss
+	// $paragraph-button-size: 20px; 
+
+	.paragraph-button {
+
+		background-image: url(../../images/plus-grey.png);
+		background-repeat: no-repeat;
+
+		background-size: $paragraph-button-size $paragraph-button-size;
+		width: $paragraph-button-size;
+		height: $paragraph-button-size;
+
+		border: 0;
+		font: 0/0 a;
+		text-shadow: none;
+		color: transparent;
+
+		&.withNotes {
+			background-image: url(../../images/plus-blue.png);
+		}
+
+	}
+
 }
 
-.btn {
-	text-transform: uppercase;
-}
 
-.paragraph-button {
-	background-image: url(../../images/plus-grey.png);
-	background-size: 15px 15px;
-	background-repeat: no-repeat;
-	border: 0;
-	font: 0/0 a;
-	text-shadow: none;
-	color: transparent;
-	width: 15px;
-	height: 15px;
-}
-
-.withNotes {
-	background-image: url(../../images/plus-blue.png);
-}
 
 #note-submit {
 	margin-top: 10px;

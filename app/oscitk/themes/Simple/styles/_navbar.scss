@@ -1,16 +1,31 @@
 #navbar {
-	z-index: 998;
 
-	&.affix {
-		position: fixed;
-	    top: 0;
-	    width: 100%;
-	}
+	z-index: 998;
 
 	#navbar-title {
 		color: #333;
 		font-size: 24px;
+
+		opacity: 0;
+		-webkit-transition: opacity 1s ease-in-out;
+		-moz-transition: opacity 1s ease-in-out;
+		-ms-transition: opacity 1s ease-in-out;
+		-o-transition: opacity 1s ease-in-out;
+		transition: opacity 1s ease-in-out;
+
 	}
+
+	&.affix {
+		position: fixed;
+	    width: 100%;
+	    top: 0;
+
+	    #navbar-title {
+	    	opacity: 1;
+	    }
+	}
+
+
 
 	#navbar-area {
 

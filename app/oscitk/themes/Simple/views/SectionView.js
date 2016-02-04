@@ -2,53 +2,79 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     id: 'section-view',
     template: OsciTk.templateManager.get('section'),
     events: {
-        'click .paragraph-button': 'paragraphClicked',
-        'click #note-submit': 'noteSubmit',
-        'click #cite': 'getCitation',
+        'click .paragraph-button': 'paragraphButtonClicked'
     },
     initialize: function() {
 
-
-        // bind sectionChanged
         this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
-            var that = this;
-            $("html, body").animate({
-                scrollTop: 0
-            }, 0);
-            $('#section-view').empty();
-            $('.header-view').empty();
 
-            if (navItem) {
+            if ( navItem ) {
+
                 // loading section content
                 app.models.section = new OsciTk.models.Section({
-                    uri : navItem.get('uri'),
-                    id : navItem.get('id')
+                    uri : navItem.get( 'uri' ),
+                    id : navItem.get( 'id' )
                 });
-                this.ContentId = navItem.get('id');
+
+                // This makes the AJAX calls, parsing XML
                 app.models.section.loadContent();
+
             }
+
         });
 
-        this.listenTo(Backbone, 'windowResized', function() {
-            this.maxHeightSet = false;
+        // Set maximum height on figures to make sure they don't overflow their columns
+        this.listenTo(Backbone, 'imagesLoaded', function() {
+            this.renderLayout();
+        });
+
+        // Proceed to render after the section is ready
+        this.listenTo(Backbone, 'sectionLoaded', function( sectionModel ) {
+
+            // We will modify this and pass it to our template via this.render
+            this.content = sectionModel.get('content')[0].children.body;
+
+            this.processParagraphs( sectionModel );
+            this.sectionId = sectionModel.get( 'id' );
+            this.getSectionTitles( this.sectionId );
+
+            // Render will be expecting the above functions to have completed
             this.render();
-        });
 
-        this.listenTo(Backbone, 'sectionLoaded', function(sectionModel) {
-            this.makeIds(sectionModel);
-            this.sectionId = sectionModel.get('id');
-            this.getSectionTitles(this.sectionId);
-        });
-
-        this.listenTo(Backbone, "figuresAvailable", function(figures) {
-            this.figures = figures;
-            this.setFigureStyles();
         });
 
     },
 
     render: function() {
-        this.$el.html(this.template({sectionTitle: this.sectionTitle, content: $(this.content).html()}));
+
+        // clean up the view incase we have already rendered this before
+        this.removeAllChildViews();
+
+        // Apply template set above + render the html
+        this.$el.html(
+            this.template( {
+                sectionTitle: this.sectionTitle,
+                sectionSubtitle: this.sectionSubtitle,
+                sectionThumbnail: this.sectionThumbnail,
+                content: $(this.content).html()
+            } )
+        );
+
+        // See Footnotes, GlossaryTooltip, Navigation, and ParagraphControls
+        Backbone.trigger("layoutComplete");
+
+        // Used to ensure that all figures are of a conistent width
+        $('img').imagesLoaded( function() {
+            Backbone.trigger("imagesLoaded");
+        });
+
+        return this;
+    },
+
+    renderLayout: function() {
+
+        // Currently not used by anything
+        Backbone.trigger("sectionRenderStart");
 
         // that refers to the view
         var that = this;
@@ -59,7 +85,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             var $w = null; // wrapper
 
             var $f = $(e);
-            var $d = $f.find('.figure_content');
+            var $d = $f.find('div.figure_content');
             var $o = $d.find('object');
             var $i = $o.find('img');
 
@@ -162,13 +188,19 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         }); 
 
-        Backbone.trigger("layoutComplete");
-        return this;
+        // again, currently not used
+        Backbone.trigger("sectionRenderEnd");
+
+        // we want to re-calibrate the layout on resize
+        this.listenToOnce(Backbone, 'windowResized', function(section) {
+            this.renderLayout();
+        });
+
     },
 
+    // Get section sectionTitle, subtitle, and thumbnail for use in template
     getSectionTitles: function(sectionId) {
 
-        // get section sectionTitle, subtitle, and thumbnail for use in template
         _.each(app.collections.navigationItems.models, function(item) {
             if (item.get('id') == sectionId ) {
                 this.sectionTitle = item.get('title');
@@ -177,110 +209,34 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             }
         }, this);
 
-        this.render();
     },
 
+    // Add data attributes to paragraphs; used in ParagraphControlsView.js
+    processParagraphs: function( sectionModel ) {
 
-    makeIds: function(sectionModel) {
-        var content =  sectionModel.get('content')[0].children.body;
-        this.content = content;
-        var i = 0;
-        var p = 1;
-        //var paragraphs = sectionModel.get('content')[0].children.body.children;
-        _.each(this.content.children, function(sectionItem) {
-            if($(sectionItem).is('p')){
-                // add attr to p and add
-                $(sectionItem).attr({
-                    'data-paragraph_number': p,
-                    'data-osci_content_id': 'osci-content-'+i,
-                    'data-sectionid': 'body',
-                    'id': 'osci-content-'+i
-                }).addClass('content-paragraph');
-                p++;
-            }
-            i++;
+        var paragraphs = $(this.content.children).filter('p');
+        _.each( paragraphs, function(e, i) {
+
+            var $e = $(e);
+            var j = i+1; 
+
+            $(e).addClass('content-paragraph');
+            $(e).attr({
+                'data-paragraph_number': j,
+                'data-osci_content_id': 'osci-content-'+j,
+                'data-sectionid': 'body',
+                'id': 'osci-content-'+j
+            });
+
         }, this);
+
     },
 
-    // Just trigger the event, leave the logic to ParagraphControlsView
-    paragraphClicked: function(e) {
-        var p = $(e.currentTarget);
-        var paragraphNum = p.data("paragraph_number");
-        Backbone.trigger("paragraphButtonClicked", paragraphNum);
+    // Trigger a paragraph clicked event (pops up a cite / note box)
+    paragraphButtonClicked: function(e) {
+        var id = $(e.currentTarget).data('paragraph_number');
+        Backbone.trigger('paragraphButtonClicked', id);
+
     },
 
-    noteSubmit: function(e) {
-        var $this = this;
-        var textarea = $(e.currentTarget).parent().find('textarea');
-        var noteText = textarea.val();
-        var cid = textarea.data('id');
-        var paragraph_number = textarea.data('paragraph_number');
-        var note = app.collections.notes.get(cid);
-        note.set('note', noteText);
-
-        if (noteText != '') {
-            note.save();
-            textarea.html(noteText);
-            $('#paragraph-'+paragraph_number).addClass('withNotes');
-        }
-
-        if (noteText === '') {
-            note.destroy();
-            $('#paragraph-'+paragraph_number).removeClass('withNotes');
-        }
-
-        $('#paragraph-'+paragraph_number).popover({
-            content: function() {
-                return $("#popover-content").html();
-            }
-        });
-        $('#paragraph-'+paragraph_number).popover('destroy');
-    },
-
-    setFigureStyles: function() {
-        _.each(this.figures, function(figure) {
-            var position = $(figure).data('position');
-            var fallback_content = $(figure).find('.figure_content > object > .fallback-content').html();
-            var figcaption = $(figure).find('figcaption').html();
-            $(figure).find('.figure_content').html(fallback_content);
-            switch(position) {
-                // full page
-                case 'p':
-                    var imgClass = 'fullpage';
-                    break;
-                // plate
-                case 'plate':
-                    var imgClass = 'plate';
-                    break;
-                // full page plate
-                case 'platefull':
-                    var imgClass = 'platefull';
-                    break;
-                // top left
-                case 'tl':
-                    var imgClass = 'top left';
-                    break;
-                // bottom left
-                case 'bl':
-                    var imgClass = 'bottom left';
-                    break;
-                // top right
-                case 'tr':
-                    var imgClass = 'top right';
-                    break;
-                // bottom right
-                case 'br':
-                    var imgClass = 'bottom right';
-                    break;
-                // inline, top, bottom
-                case 'i':
-                case 't':
-                case 'b':
-                    var imgClass = 'center';
-                    break;
-            }
-            $(figure).addClass(imgClass);
-            $(figure).find("div > img").addClass(imgClass);
-        }, this);
-    }
 });

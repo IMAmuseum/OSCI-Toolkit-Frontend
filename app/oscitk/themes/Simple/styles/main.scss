@@ -1,6 +1,11 @@
 $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 $image-path : "/images";
 
+
+// For the plus icons representing notes
+$paragraph-button-size: 20px;
+$paragraph-button-margin: 10px;
+
 @import "bootstrap/bootstrap";
 @import "typography";
 @import "browsehappy";

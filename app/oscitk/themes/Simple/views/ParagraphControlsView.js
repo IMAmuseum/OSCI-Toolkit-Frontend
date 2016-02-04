@@ -155,12 +155,8 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
                 paragraph_number: id
             });
 
-            console.log( note );
-
             var noteText = note  ? note.get('note') : '';
                 noteText = noteText === null  ? '' : noteText;
-
-            console.log( noteText );
 
             var popoverData = {
                 id: id,
@@ -171,8 +167,6 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
                 paragraph_number: id
             };
 
-            console.log( popoverData );
-
             var noteForm = this.templateNotes({
                 paragraph_number: note.get('paragraph_number'),
                 note: noteText,
@@ -182,8 +176,13 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         }
 
         // Unfortunately, FireFox requires tooltip placement to be on top rather than right
+        // UPDATE: No longer the case, but height must be set explicitly
+        /*
         var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
         var placement = is_firefox ? 'top' : 'right';
+        */
+
+        var placement = 'right';
        
         var popover = this.template({
             'noteForm' : noteForm,
