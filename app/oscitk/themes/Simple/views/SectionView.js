@@ -6,8 +6,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     },
     initialize: function() {
 
-        this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
-
+        this.listenTo(Backbone, "currentNavigationItemChanged", function(navItem) {
+            
             if ( navItem ) {
 
                 // loading section content
@@ -24,12 +24,12 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         });
 
         // Set maximum height on figures to make sure they don't overflow their columns
-        this.listenTo(Backbone, 'imagesLoaded', function() {
+        this.listenTo(Backbone, "imagesLoaded", function() {
             this.renderLayout();
         });
 
         // Proceed to render after the section is ready
-        this.listenTo(Backbone, 'sectionLoaded', function( sectionModel ) {
+        this.listenTo(Backbone, "sectionLoaded", function( sectionModel ) {
 
             // We will modify this and pass it to our template via this.render
             this.content = sectionModel.get('content')[0].children.body;

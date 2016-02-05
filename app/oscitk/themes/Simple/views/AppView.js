@@ -12,17 +12,18 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 		// initialize all possible views
 		app.views = {
 
+			sectionView: new OsciTk.views.Section(),
+			footnotesView: new OsciTk.views.Footnotes(),
+
+			// These two should be init'd after section, but before navigation
+			paragraphControlsView: new OsciTk.views.ParagraphControls(),
+			glossaryTooltipView: new OsciTk.views.GlossaryTooltip(),
+
 			headerView: new OsciTk.views.Header(),
 			navbarView: new OsciTk.views.Navbar(),
 
-			toolbarView: new OsciTk.views.Toolbar(),
-
-			sectionView: new OsciTk.views.Section(),
-			footnotesView: new OsciTk.views.Footnotes(),
 			navigationView: new OsciTk.views.Navigation(),
-
-			paragraphControlsView: new OsciTk.views.ParagraphControls(),
-			glossaryTooltipView: new OsciTk.views.GlossaryTooltip(),
+			toolbarView: new OsciTk.views.Toolbar(),
 			
 		};
 

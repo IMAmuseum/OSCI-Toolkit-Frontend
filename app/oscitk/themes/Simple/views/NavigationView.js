@@ -17,7 +17,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			if (this.identifier) {
 				Backbone.trigger("navigate", {identifier: this.identifier});
 				this.identifier = null;
-			}else {
+			} else {
 				Backbone.trigger("navigate", {page: 1});
 			}
 
@@ -25,10 +25,10 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		});
 
-		// bind routedTo
 		this.listenTo(Backbone, 'routedToSection', function(params) {
 
 			this.identifier = params.identifier;
+
 			if (!params.section_id) {
 
 				// go to first section
@@ -36,7 +36,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 				this.setCurrentNavigationItem(sectionId);
 				app.router.navigate("section/" + sectionId, {trigger: false});
 
-			}else {
+			} else {
 
 				// go to section_id
 				this.setCurrentNavigationItem(params.section_id);
@@ -78,13 +78,21 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	},
 
 	setCurrentNavigationItem: function(section_id) {
+
 		var section = app.collections.navigationItems.get(section_id);
 		if (section) {
 			this.currentNavigationItem = app.collections.navigationItems.get(section_id);
 		} else {
 			this.currentNavigationItem = app.collections.navigationItems.first();
 		}
-		Backbone.trigger('currentNavigationItemChanged', this.currentNavigationItem);
+
+		// "currentNavigationItemChanged" is an inaccurate name for this event.
+		// It should be something like "sectionChanged"
+		// B/c one can navigate to a different [identifier] w/in the same [section]
+		// However! ../../../collections/NotesCollection.js requires this event!
+		// Otherwise the notes won't be loaded after the section loads
+		Backbone.trigger("currentNavigationItemChanged", this.currentNavigationItem);
+
 	}
 
 });

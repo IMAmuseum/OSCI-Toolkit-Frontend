@@ -1,3 +1,5 @@
+// Notes not loading? Check when "currentNavigationItemChanged" is triggered
+
 OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
     template: OsciTk.templateManager.get('paragraph-popover'),
     templateNotes: OsciTk.templateManager.get('paragraph-notes'),
@@ -12,24 +14,25 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         this.section_id = null;
         this.paragraphs = null;
 
+
         // Reset vars on section change
-        this.listenTo(Backbone, 'routedToSection', function() {
-            console.log( 'routedToSection' );
+        this.listenTo(Backbone, 'routedToSection', function(e) {
             $('[id^="paragraph-"]').popover('destroy');
-            this.sectionLoaded = false;
-            this.notesLoaded = false;
+            if( e.section_id !== this.section_id ) {
+                this.sectionLoaded = false;
+                this.notesLoaded = false;
+                this.section_id = e.section_id;
+            }
         });
 
         // We must wait for the section to load before setting up the account hook
         this.listenTo(Backbone, 'sectionLoaded', function() {
-            console.log( 'sectionLoaded' );
             this.sectionLoaded = true;
             this.render();
         });
 
         // This happens after sectionLoaded
         this.listenTo(Backbone, 'layoutComplete', function() {
-            console.log( 'layoutComplete' );
             this.section_id = app.models.section.get('id');
             this.render();
         });
@@ -37,7 +40,6 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         // Notes will not be loaded if the user is not logged in
         // This is fired by the notes toolbar in the other themes
         this.listenTo(Backbone, 'notesLoaded', function(params) {
-            console.log( 'notesLoaded' );
             this.notesLoaded = true;
             this.render();
         });
@@ -107,8 +109,6 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
     },
 
     addParagraphControls: function() {
-
-        console.log( 'addingParagraphControls');
 
         // get all paragraph with id and append controls
         var i = 1; // all osci-content counts start with 1

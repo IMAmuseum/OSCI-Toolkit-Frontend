@@ -8059,9 +8059,15 @@ p, textarea {
 #section {
   padding-left: 40px;
 }
+/* line 8, ../_section.scss */
+#section p {
+  text-indent: -15px;
+  padding-left: 30px;
+}
 
-/* line 9, ../_section.scss */
+/* line 14, ../_section.scss */
 .footnote-reference {
+  padding-left: 12px;
   margin: 0 5px;
   display: inline-block;
   position: relative;
@@ -8075,26 +8081,26 @@ p, textarea {
   text-align: center;
   background: #52818B;
 }
-/* line 22, ../_section.scss */
+/* line 28, ../_section.scss */
 .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
   background: #3f636b;
 }
 
-/* line 30, ../_section.scss */
+/* line 36, ../_section.scss */
 .glossary-term:hover {
   cursor: hand;
 }
 
 @media (max-width: 991px) {
-  /* line 36, ../_section.scss */
+  /* line 42, ../_section.scss */
   #section {
     padding-left: 0;
   }
 }
 @media (min-width: 992px) {
-  /* line 42, ../_section.scss */
+  /* line 48, ../_section.scss */
   .section-col {
     float: none;
   }
