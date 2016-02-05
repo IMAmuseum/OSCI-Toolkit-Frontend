@@ -9,6 +9,19 @@
 		text-indent: -15px;
     	padding-left: 30px;
 	}
+
+	.tooltip {
+		text-indent: 0px;
+		.tooltip-arrow {
+			border-bottom-color: #52818B;
+		}
+		.tooltip-inner  {
+			border-radius: 5px;
+			background-color: #52818B;
+			color: white;
+		}
+	}
+
 }
 
 .footnote-reference {
@@ -31,6 +44,8 @@
 		background:#3f636b;
 	}
 }
+
+
 
 .glossary-term {
 	&:hover {

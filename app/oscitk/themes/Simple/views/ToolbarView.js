@@ -69,13 +69,11 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 			$('.'+item.view+'-toolbar-item > a').removeClass('active')
 
 			// if this item is inline, don't remove its view
-			if (item.style != 'default') {
-				continue;
+			if (item.style == 'default') {
+				var view = _.pick(app.views, item.view);
+				view = view[item.view];
+				this.removeView(view, false);
 			}
-
-			var view = _.pick(app.views, item.view);
-			view = view[item.view];
-			this.removeView(view, false);
 
 		}, this);
 

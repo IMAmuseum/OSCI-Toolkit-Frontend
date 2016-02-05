@@ -8064,8 +8064,22 @@ p, textarea {
   text-indent: -15px;
   padding-left: 30px;
 }
+/* line 13, ../_section.scss */
+#section .tooltip {
+  text-indent: 0px;
+}
+/* line 15, ../_section.scss */
+#section .tooltip .tooltip-arrow {
+  border-bottom-color: #52818B;
+}
+/* line 18, ../_section.scss */
+#section .tooltip .tooltip-inner {
+  border-radius: 5px;
+  background-color: #52818B;
+  color: white;
+}
 
-/* line 14, ../_section.scss */
+/* line 27, ../_section.scss */
 .footnote-reference {
   padding-left: 12px;
   margin: 0 5px;
@@ -8081,26 +8095,26 @@ p, textarea {
   text-align: center;
   background: #52818B;
 }
-/* line 28, ../_section.scss */
+/* line 41, ../_section.scss */
 .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
   background: #3f636b;
 }
 
-/* line 36, ../_section.scss */
+/* line 51, ../_section.scss */
 .glossary-term:hover {
   cursor: hand;
 }
 
 @media (max-width: 991px) {
-  /* line 42, ../_section.scss */
+  /* line 57, ../_section.scss */
   #section {
     padding-left: 0;
   }
 }
 @media (min-width: 992px) {
-  /* line 48, ../_section.scss */
+  /* line 63, ../_section.scss */
   .section-col {
     float: none;
   }

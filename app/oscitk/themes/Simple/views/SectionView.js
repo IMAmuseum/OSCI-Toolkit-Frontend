@@ -147,6 +147,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             var url = $o.attr('data');
             if (url !== undefined) {
 
+                console.log('argh');
+
                 $.ajax({
 
                     url: url,
@@ -160,6 +162,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                         // Note that this permanently deletes $o and $i
                         $container.empty();
                         $content.appendTo( $container );
+
 
                         var li = new window.LayeredImage( $content );
 
