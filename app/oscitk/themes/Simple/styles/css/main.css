@@ -8050,36 +8050,32 @@ p, textarea {
   text-align: center;
 }
 
-/* line 1, ../_section.scss */
-#section-view {
-  padding-left: 40px;
-}
-
 /* line 5, ../_section.scss */
-#section {
-  padding-left: 40px;
-}
-/* line 8, ../_section.scss */
-#section p {
+#section p.content-paragraph {
   text-indent: -15px;
   padding-left: 30px;
+  text-align: justify;
+  font-family: 'Crimson+Text';
+  font-size: 18px;
+  color: #1F1F26;
+  line-height: 1.5;
 }
-/* line 13, ../_section.scss */
+/* line 15, ../_section.scss */
 #section .tooltip {
   text-indent: 0px;
 }
-/* line 15, ../_section.scss */
+/* line 17, ../_section.scss */
 #section .tooltip .tooltip-arrow {
   border-bottom-color: #52818B;
 }
-/* line 18, ../_section.scss */
+/* line 20, ../_section.scss */
 #section .tooltip .tooltip-inner {
   border-radius: 5px;
   background-color: #52818B;
   color: white;
 }
 
-/* line 27, ../_section.scss */
+/* line 29, ../_section.scss */
 .footnote-reference {
   padding-left: 12px;
   margin: 0 5px;
@@ -8095,30 +8091,18 @@ p, textarea {
   text-align: center;
   background: #52818B;
 }
-/* line 41, ../_section.scss */
+/* line 43, ../_section.scss */
 .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
   background: #3f636b;
 }
 
-/* line 51, ../_section.scss */
+/* line 53, ../_section.scss */
 .glossary-term:hover {
   cursor: hand;
 }
 
-@media (max-width: 991px) {
-  /* line 57, ../_section.scss */
-  #section {
-    padding-left: 0;
-  }
-}
-@media (min-width: 992px) {
-  /* line 63, ../_section.scss */
-  .section-col {
-    float: none;
-  }
-}
 /* line 1, ../_navigation.scss */
 #navigation {
   margin: 0;
@@ -8163,28 +8147,23 @@ header {
 /* line 5, ../_header.scss */
 header .container-header {
   width: 100%;
-  height: 400px;
   max-width: 100%;
-  background-color: #909090;
+  background-image: url("../../images/triangular.png");
   background-position: center;
-  background-size: cover;
 }
-/* line 14, ../_header.scss */
+/* line 15, ../_header.scss */
 header .container-header .header-title {
-  position: absolute;
-  top: 200px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
+  width: 100%;
+  padding: 25px 0px;
   color: white;
   text-align: center;
   text-shadow: 0 1px 0 black;
 }
-/* line 25, ../_header.scss */
+/* line 28, ../_header.scss */
 header .container-header .header-title h1 {
   margin: 0;
 }
-/* line 29, ../_header.scss */
+/* line 32, ../_header.scss */
 header .container-header .header-title p {
   font-style: italic;
   font-weight: 300;
