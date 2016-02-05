@@ -186,7 +186,7 @@ var LayeredImage = function(container) { // container should be a html element
         }
     }
 
-    if (this.slideshow == "false") {
+    if ( !this.slideshow ) {
         // create the first two layers, using preset data if available
         var baseLayerPreset = this.figureOptions.baseLayerPreset ? this.figureOptions.baseLayerPreset : [],
             numBaseLayerPresets = baseLayerPreset.length,
