@@ -9120,8 +9120,8 @@ images.image_opaque {
 }
 /* line 18, ../_paragraph-citation.scss */
 .citation-wrapper .citations .citation > p {
-  font-size: 10px !important;
-  line-height: 12px !important;
+  font-size: 12px !important;
+  line-height: 14px !important;
   /* Breaking long URLs */
   white-space: pre !important;
   /* CSS 2.0 */

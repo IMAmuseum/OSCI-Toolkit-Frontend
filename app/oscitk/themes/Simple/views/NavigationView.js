@@ -21,7 +21,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// Technically incorrect: section can remain the same while identifier changes
 		this.listenTo(Backbone, 'routedToSection', function( data ) {
 
-
 			// Used to delay triggering of navigate with an identifier
 			// i.e. navigating to a new section *and* w/ an identifier
 			var waitForSection = true;
