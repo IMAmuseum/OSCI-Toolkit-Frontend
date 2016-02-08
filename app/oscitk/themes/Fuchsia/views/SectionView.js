@@ -300,8 +300,16 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             // Not necessary, since section won't render until all images are loaded anyway
             //$(window).on('load', imageLoad );
 
-            this.listenTo( Backbone, "sectionRenderEnd", imageLoad );
+            this.listenToOnce( Backbone, "sectionRenderEnd", imageLoad );
             
+        }else{
+
+            // We still must trigger navigateReady, even if there are no plate images
+            // Otherwise, visiting e.g. /#section/7/p-9 *directly* won't scroll
+            this.listenToOnce( Backbone, "sectionRenderEnd", function() {
+                Backbone.trigger("navigateReady");
+            });
+
         }
 
         Backbone.trigger("layoutComplete");

@@ -60,6 +60,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			if( typeof data.identifier !== 'undefined' ) {
 				if( data.identifier.length > 0 ) {
 					if( waitForSection ) {
+						
 						// Triggered in SectionView.js, usually alongside sectionRenderEnd
 						this.listenToOnce( Backbone, "navigateReady", function() {
 							Backbone.trigger('navigate', { identifier: data.identifier } );

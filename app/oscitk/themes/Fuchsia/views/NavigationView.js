@@ -116,7 +116,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
                         	var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
                         	selector = 'p#osci-content-'+pid;
                         	//selector = 'button#paragraph-'+pid;
-                        	console.log( selector );
                             gotoPage = this.getPageForSelector( selector );
 
                         	break;
