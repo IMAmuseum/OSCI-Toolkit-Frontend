@@ -147,8 +147,6 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             var url = $o.attr('data');
             if (url !== undefined) {
 
-                console.log('argh');
-
                 $.ajax({
 
                     url: url,
@@ -193,6 +191,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         // again, currently not used
         Backbone.trigger("sectionRenderEnd");
+
+        // See NavigationView.js
+        Backbone.trigger("navigateReady");
 
         // we want to re-calibrate the layout on resize
         this.listenToOnce(Backbone, 'windowResized', function(section) {

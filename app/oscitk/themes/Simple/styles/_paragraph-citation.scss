@@ -1,17 +1,36 @@
 .citation-wrapper {
+
 	background: #FFF;
-	overflow: scroll;
+	overflow-y: scroll;
 	height: $popover-height;
+
 	.citations {
+
 		padding: 0 10px 5px 10px;
+
 		.citation {
+
 			h4 {
 				font-size: 14px;
 				margin-bottom: 5px;
 			}
-			p {
-				font-size: 10px;
+
+			> p {
+				font-size: 10px !important;
+				line-height: 12px !important;
+
+				/* Breaking long URLs */
+				white-space: pre !important;           /* CSS 2.0 */
+				white-space: pre-wrap !important;      /* CSS 2.1 */
+				white-space: pre-line !important;      /* CSS 3.0 */
+				white-space: -pre-wrap !important;     /* Opera 4-6 */
+				white-space: -o-pre-wrap !important;   /* Opera 7 */
+				white-space: -moz-pre-wrap !important; /* Mozilla */
+				white-space: -hp-pre-wrap !important;  /* HP Printers */
+				word-wrap: break-word !important;      /* IE 5+ */
+
 			}
+
 		}
 	}
 }

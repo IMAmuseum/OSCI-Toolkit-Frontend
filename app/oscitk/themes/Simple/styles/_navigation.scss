@@ -1,16 +1,22 @@
 #navigation {
+	
 	margin: 0;
+
 	.corner {
+
 		text-align:center;
 		text-transform: uppercase;
 		width: 120px;
-		background-color: $brand-primary;
+		background-color: $osci-color-primary;
 		padding-top: 8px;
 		padding-bottom: 8px;
+
 		&:hover {
-			background-color: #3f636b;
+			background-color: darken($osci-color-primary, 10%);
 		}
+
 	}
+
 	.prev-page {
 		float: left;
 	}

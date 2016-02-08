@@ -8050,7 +8050,7 @@ p, textarea {
   text-align: center;
 }
 
-/* line 5, ../_section.scss */
+/* line 3, ../_section.scss */
 #section p.content-paragraph {
   text-indent: -15px;
   padding-left: 30px;
@@ -8060,7 +8060,7 @@ p, textarea {
   color: #1F1F26;
   line-height: 1.5;
 }
-/* line 15, ../_section.scss */
+/* line 13, ../_section.scss */
 #section .tooltip {
   text-indent: 0px;
 }
@@ -8068,14 +8068,30 @@ p, textarea {
 #section .tooltip .tooltip-arrow {
   border-bottom-color: #52818B;
 }
-/* line 20, ../_section.scss */
+/* line 21, ../_section.scss */
 #section .tooltip .tooltip-inner {
+  font-family: 'Verdana';
   border-radius: 5px;
   background-color: #52818B;
   color: white;
+  font-size: 12px;
+  text-align: center;
+  font-weight: normal;
+}
+/* line 34, ../_section.scss */
+#section .navigated {
+  -webkit-transition: background-color .7s ease-out;
+  -moz-transition: background-color .7s ease-out;
+  -o-transition: background-color .7s ease-out;
+  transition: background-color .7s ease-out;
+  border-radius: 3px;
+}
+/* line 42, ../_section.scss */
+#section .navigated.navigating {
+  background-color: #cadcdf;
 }
 
-/* line 29, ../_section.scss */
+/* line 49, ../_section.scss */
 .footnote-reference {
   padding-left: 12px;
   margin: 0 5px;
@@ -8085,20 +8101,20 @@ p, textarea {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  font-size: 12px;
+  background: #52818B;
   color: #fff;
+  font-size: 12px;
   line-height: 15px;
   text-align: center;
-  background: #52818B;
 }
-/* line 43, ../_section.scss */
+/* line 70, ../_section.scss */
 .footnote-reference:hover {
-  color: #fff;
   text-decoration: none;
   background: #3f636b;
+  color: #fff;
 }
 
-/* line 53, ../_section.scss */
+/* line 81, ../_section.scss */
 .glossary-term:hover {
   cursor: hand;
 }
@@ -8107,35 +8123,35 @@ p, textarea {
 #navigation {
   margin: 0;
 }
-/* line 3, ../_navigation.scss */
+/* line 5, ../_navigation.scss */
 #navigation .corner {
   text-align: center;
   text-transform: uppercase;
   width: 120px;
-  background-color: #52818b;
+  background-color: #52818B;
   padding-top: 8px;
   padding-bottom: 8px;
 }
-/* line 10, ../_navigation.scss */
+/* line 14, ../_navigation.scss */
 #navigation .corner:hover {
   background-color: #3f636b;
 }
-/* line 14, ../_navigation.scss */
+/* line 20, ../_navigation.scss */
 #navigation .prev-page {
   float: left;
 }
-/* line 18, ../_navigation.scss */
+/* line 24, ../_navigation.scss */
 #navigation .next-page {
   float: right;
 }
-/* line 22, ../_navigation.scss */
+/* line 28, ../_navigation.scss */
 #navigation a {
   padding: 8px;
   font-size: 15px;
   color: #FFF;
 }
 
-/* line 29, ../_navigation.scss */
+/* line 35, ../_navigation.scss */
 .navbar-default {
   margin: 0;
 }
@@ -8264,7 +8280,7 @@ ul.toc {
 }
 /* line 36, ../_navbar.scss */
 #navbar #navbar-area li:hover {
-  cursor: hand;
+  cursor: pointer;
 }
 /* line 40, ../_navbar.scss */
 #navbar #navbar-area li a {
@@ -8277,36 +8293,36 @@ ul.toc {
 }
 /* line 57, ../_navbar.scss */
 #navbar .tooltip > .tooltip-inner {
-  background-color: #52818b;
-  height: 40px;
+  background-color: #52818B;
   position: relative;
-  text-transform: uppercase;
   right: 50px;
   top: -8px;
+  height: 40px;
   min-width: 150px;
+  text-transform: uppercase;
   line-height: 35px;
   color: #FFF;
 }
-/* line 68, ../_navbar.scss */
+/* line 72, ../_navbar.scss */
 #navbar .tooltip.bottom > .tooltip-arrow {
   top: -16px;
   left: 50%;
   margin-left: -15px;
-  border-bottom-color: #52818b;
+  border-bottom-color: #52818B;
   border-width: 0 15px 15px;
 }
 
 @media (max-width: 767px) {
-  /* line 80, ../_navbar.scss */
+  /* line 84, ../_navbar.scss */
   #navbar #navbar-title {
     font-size: 14px;
   }
-  /* line 84, ../_navbar.scss */
+  /* line 88, ../_navbar.scss */
   #navbar #navbar-area li {
     width: 100%;
     text-align: left;
   }
-  /* line 88, ../_navbar.scss */
+  /* line 92, ../_navbar.scss */
   #navbar #navbar-area li a {
     font-size: 14px;
   }
@@ -9090,21 +9106,39 @@ images.image_opaque {
 /* line 1, ../_paragraph-citation.scss */
 .citation-wrapper {
   background: #FFF;
-  overflow: scroll;
+  overflow-y: scroll;
   height: 160px;
 }
-/* line 5, ../_paragraph-citation.scss */
+/* line 7, ../_paragraph-citation.scss */
 .citation-wrapper .citations {
   padding: 0 10px 5px 10px;
 }
-/* line 8, ../_paragraph-citation.scss */
+/* line 13, ../_paragraph-citation.scss */
 .citation-wrapper .citations .citation h4 {
   font-size: 14px;
   margin-bottom: 5px;
 }
-/* line 12, ../_paragraph-citation.scss */
-.citation-wrapper .citations .citation p {
-  font-size: 10px;
+/* line 18, ../_paragraph-citation.scss */
+.citation-wrapper .citations .citation > p {
+  font-size: 10px !important;
+  line-height: 12px !important;
+  /* Breaking long URLs */
+  white-space: pre !important;
+  /* CSS 2.0 */
+  white-space: pre-wrap !important;
+  /* CSS 2.1 */
+  white-space: pre-line !important;
+  /* CSS 3.0 */
+  white-space: -pre-wrap !important;
+  /* Opera 4-6 */
+  white-space: -o-pre-wrap !important;
+  /* Opera 7 */
+  white-space: -moz-pre-wrap !important;
+  /* Mozilla */
+  white-space: -hp-pre-wrap !important;
+  /* HP Printers */
+  word-wrap: break-word !important;
+  /* IE 5+ */
 }
 
 @media print {

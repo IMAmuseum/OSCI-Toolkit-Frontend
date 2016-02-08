@@ -17,6 +17,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		});
 
 		// See ../../../Router.js
+		// Technically incorrect: section can remain the same while identifier changes
 		this.listenTo(Backbone, 'routedToSection', function( data ) {
 
 			// Used to delay triggering of navigate with an identifier
@@ -55,19 +56,19 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			// if there is a secondary route (e.g. to a paragraph),
 			// pass the ball on to the navigate listener
 			if( typeof data.identifier !== 'undefined' ) {
+				if( data.identifier.length > 0 ) {
+					if( waitForSection ) {
 
-				if( data.identifier.length > 0 )				
-				if( waitForSection ) {
+						//this.listenTo( Backbone, "sectionRenderEnd", imageLoad );
+						this.listenToOnce( Backbone, "navigateReady", function() {
+							Backbone.trigger('navigate', { identifier: data.identifier } );
+						});
 
-					//this.listenTo( Backbone, "sectionRenderEnd", imageLoad );
-					this.listenToOnce( Backbone, "navigateReady", function() {
+					}else{
+
 						Backbone.trigger('navigate', { identifier: data.identifier } );
-					});
-
-				}else{
-
-					Backbone.trigger('navigate', { identifier: data.identifier } );
-				
+					
+					}
 				}
 			}
 
@@ -145,6 +146,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
                 }
             }
 
+            // http://stackoverflow.com/questions/12103208/jquery-window-height-is-returning-the-document-height
             var scroll = gotoPage * $(document).height();
             	scroll -= $(window).height() / 2;
             	scroll = Math.max( 0, scroll );
@@ -165,7 +167,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
             }
 
-
+            // Remove this if your navigation template takes up no vertical space
             if( $('#osci-bp-xl').is(':not(visible)') ) {
             	scroll += this.$el.height() / 2;
             }
@@ -220,7 +222,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	// Book Title | Section Title
 	setDocumentTitle: function() {
 
-		//set the document title
 		var title = app.models.docPackage.getTitle();
 		title = (title) ? title + " | ": "";
 		title += this.getCurrentNavigationItem().get('title');

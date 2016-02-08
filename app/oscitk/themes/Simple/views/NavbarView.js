@@ -25,7 +25,9 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 			sections: this.sections
 		}));
 
-		$('.navbar-item[data-toggle="tooltip"]').tooltip({left:'150px'});
+		$('.navbar-item[data-toggle="tooltip"]').tooltip({
+			left:'150px'//,container:'body'
+		});
 
 		return this;
 	},
