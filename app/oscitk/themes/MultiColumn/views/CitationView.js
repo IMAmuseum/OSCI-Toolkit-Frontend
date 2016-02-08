@@ -25,10 +25,16 @@ OsciTk.views.Citation = OsciTk.views.BaseView.extend({
                 if (data.success) {
                     //add reference text to the response
                     data.citation.referenceText = content.text();
-                    data.citation.url = document.URL + "/p-" + app.models.section.get('id') + "-" + content.data('paragraph_number');
                     data.citation.paragraphNumber = content.data('paragraph_number');
                     data.citation.date = new Date(data.citation.date);
                     data.citation.formattedDate = (data.citation.date.getMonth() + 1) + "/" + data.citation.date.getDate() + "/" + data.citation.date.getFullYear();
+
+                    // url is a bit tricky...
+                    var url = document.location.href.match(/(^[^#]*)/)[0];
+                        url += '#section/' + app.models.section.get('id');
+                        url += '/p-' + content.data('paragraph_number');
+
+                    data.citation.url = url;
 
                     //make sure data exists for all variables in templates
                     data.citation.creator = data.citation.creator ? data.citation.creator : '';

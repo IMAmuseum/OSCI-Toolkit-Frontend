@@ -10367,6 +10367,7 @@ images.image_opaque {
 .popover .popover-content .popover-wrapper textarea {
   border: none;
   outline: none;
+  resize: none;
   font-size: 14px;
   line-height: 16px;
   height: 115px;
@@ -10374,7 +10375,7 @@ images.image_opaque {
   padding: 5px;
   color: #333;
 }
-/* line 71, ../_paragraph-popover.scss */
+/* line 72, ../_paragraph-popover.scss */
 .popover .popover-content .popover-wrapper button {
   font-size: 15px;
   font-weight: 200;
@@ -10382,12 +10383,12 @@ images.image_opaque {
   border: thin solid transparent;
 }
 
-/* line 82, ../_paragraph-popover.scss */
+/* line 83, ../_paragraph-popover.scss */
 .tab-content {
   height: 160px;
 }
 
-/* line 89, ../_paragraph-popover.scss */
+/* line 90, ../_paragraph-popover.scss */
 #cite-target {
   height: 160px;
   width: 182px;
