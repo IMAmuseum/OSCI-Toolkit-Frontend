@@ -8990,7 +8990,7 @@ images.image_opaque {
 */
 /* line 5, ../_paragraph-popover.scss */
 .popover {
-  border-radius: 10px;
+  border-radius: 5px;
   border: none;
   background-color: #52818b;
 }

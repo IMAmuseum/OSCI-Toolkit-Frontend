@@ -2,21 +2,20 @@ OsciTk.views.TocToolbar = OsciTk.views.BaseView.extend({
 	className: 'toc-view',
 	template: OsciTk.templateManager.get('toolbar-toc'),
     templateModal: OsciTk.templateManager.get('toolbar-modal'),
-	events: {
-
-	},
 
 	initialize: function() {
 		
-		this.listenTo(Backbone, "sectionLoaded", function() {
+
+		// See ../../../collections/NavigationItemsCollection.js
+		// Unfortunately navigationLoaded does not work here
+		// Once so that multiple modals aren't created after section change
+		this.listenToOnce(Backbone, "sectionLoaded", function() {
 
 			// get the modal backdrop
 			var body = this.template({
 				items: app.collections.navigationItems.where({depth: 0})
 			});
 
-			console.log( body );
-			
 			var modal = this.templateModal({
 				title: "Table of Contents",
 				body: body
@@ -24,37 +23,22 @@ OsciTk.views.TocToolbar = OsciTk.views.BaseView.extend({
 
 			var $modal = $(modal);
 
+			// Bind section change to the links inside list items
+			$modal.find('li.toc-item>a').on('click', this.itemClick );
+
 			this.listenTo(Backbone, "toolbarItemClicked", function(toolbarItem) {
-				console.log( 'modaling' );
 				$modal.modal();
 			});
 
 		});
 
-		//console.log( modal );
-
-
-		/*
-		this.listenTo(Backbone, "currentNavigationItemChanged", function() {
-			this.render();
-		});
-		*/
-
-	},
-
-	render: function() {
-
-
-
-		
-
-		return this;
 
 	},
 
 	// Executed when a section link is clicked
-	itemClick: function(event) {
+	itemClick: function( event ) {
 
+		// Just in case the href hasn't been set to javascript:;
 		event.preventDefault();
 
 		var sectionId = $(event.currentTarget).attr('data-section-id');
@@ -65,9 +49,5 @@ OsciTk.views.TocToolbar = OsciTk.views.BaseView.extend({
 		app.router.navigate("section/" + sectionId, {trigger: true});
 
 	},
-
-	closeOverlay: function() {
-		Backbone.trigger("toolbarRemoveViews");
-	}
 
 });
