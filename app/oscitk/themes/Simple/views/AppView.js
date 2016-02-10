@@ -25,10 +25,13 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			navigationView: new OsciTk.views.Navigation(),
 			toolbarView: new OsciTk.views.Toolbar(),
 
+			// We can't list the toolbar views here, since toolbarInline queries app.views,
+			// and at this stage, app.views is not yet defined
+
 			//accountToolbarView: new OsciTk.views.AccountToolbar(), // PROBLEM
 			tocToolbarView: new OsciTk.views.TocToolbar(), // NO PROB
 			//printToolbarView: new OsciTk.views.PrintToolbar(), // NO PROB
-			//fontsizeToolbarView: new OsciTk.views.FontSizeToolbar(), // NO PROB
+			fontsizeToolbarView: new OsciTk.views.FontSizeToolbar(), // NO PROB
 			
 		};
 

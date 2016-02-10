@@ -215,16 +215,6 @@ __p += '\n<hr>\n' +
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple/templates/toolbar-account-container.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<button class="btn btn-link">\n\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</button>\n\t</div>\n\t<div class="container">\n\t\t<div class="row" style="margin-top: 30vh;">\n\t\t\t<div class="col-md-8 col-md-offset-2">\n\t\t\t\t<div class="panel panel-default">\n\t\t\t\t\t<div class="panel-heading">\n\t\t\t\t\t\t<h3><!-- ECHO THE PANEL HEADING HERE --></h3>\n\t\t\t\t\t</div>\n\t\t  \t\t\t<div class="panel-body">\n\t\t  \t\t\t<!-- STUFF GOES HERE -->\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>';
-
-}
-return __p
-};
-
 this["JST"]["app/oscitk/themes/Simple/templates/toolbar-account-login.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
@@ -263,7 +253,7 @@ this["JST"]["app/oscitk/themes/Simple/templates/toolbar-font-size.tpl.html"] = f
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<a href="#font-larger" class="larger font-button" data-href="font-larger" data-style="inline">A+</a>&nbsp;\n<a href="#font-smaller" class="smaller font-button" data-href="font-smaller" data-style="inline">A-</a>\n';
+__p += '<div class="btn-group">\n\t<a href="javascript:;" class="larger btn btn-primary">A+</a>\n\t<a href="javascript:;" class="smaller btn btn-primary">A-</a>\n</div>';
 
 }
 return __p

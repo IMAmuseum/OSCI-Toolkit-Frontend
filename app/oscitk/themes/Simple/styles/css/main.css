@@ -8051,48 +8051,21 @@ p, textarea {
 }
 
 /* line 3, ../_section.scss */
-#section p.content-paragraph {
+#section {
+  font-size: 18px;
+}
+/* line 9, ../_section.scss */
+#section #section-view p.content-paragraph {
   text-indent: -15px;
   padding-left: 30px;
   text-align: justify;
   font-family: 'Crimson+Text';
-  font-size: 18px;
   color: #1F1F26;
+  font-size: 1em;
   line-height: 1.5;
 }
-/* line 13, ../_section.scss */
-#section .tooltip {
-  text-indent: 0px;
-}
-/* line 17, ../_section.scss */
-#section .tooltip .tooltip-arrow {
-  border-bottom-color: #52818B;
-}
-/* line 21, ../_section.scss */
-#section .tooltip .tooltip-inner {
-  font-family: 'Verdana';
-  border-radius: 5px;
-  background-color: #52818B;
-  color: white;
-  font-size: 12px;
-  text-align: center;
-  font-weight: normal;
-}
-/* line 34, ../_section.scss */
-#section .navigated {
-  -webkit-transition: background-color .7s ease-out;
-  -moz-transition: background-color .7s ease-out;
-  -o-transition: background-color .7s ease-out;
-  transition: background-color .7s ease-out;
-  border-radius: 3px;
-}
-/* line 42, ../_section.scss */
-#section .navigated.navigating {
-  background-color: #cadcdf;
-}
-
-/* line 49, ../_section.scss */
-.footnote-reference {
+/* line 25, ../_section.scss */
+#section #section-view .footnote-reference {
   padding-left: 12px;
   margin: 0 5px;
   display: inline-block;
@@ -8107,16 +8080,45 @@ p, textarea {
   line-height: 15px;
   text-align: center;
 }
-/* line 70, ../_section.scss */
-.footnote-reference:hover {
+/* line 46, ../_section.scss */
+#section #section-view .footnote-reference:hover {
   text-decoration: none;
   background: #3f636b;
   color: #fff;
 }
-
-/* line 81, ../_section.scss */
-.glossary-term:hover {
+/* line 56, ../_section.scss */
+#section #section-view .tooltip {
+  text-indent: 0px;
+}
+/* line 60, ../_section.scss */
+#section #section-view .tooltip .tooltip-arrow {
+  border-bottom-color: #52818B;
+}
+/* line 64, ../_section.scss */
+#section #section-view .tooltip .tooltip-inner {
+  font-family: 'Verdana';
+  border-radius: 5px;
+  background-color: #52818B;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  font-weight: normal;
+}
+/* line 77, ../_section.scss */
+#section #section-view .glossary-term:hover {
   cursor: hand;
+}
+/* line 83, ../_section.scss */
+#section #section-view .navigated {
+  -webkit-transition: background-color .7s ease-out;
+  -moz-transition: background-color .7s ease-out;
+  -o-transition: background-color .7s ease-out;
+  transition: background-color .7s ease-out;
+  border-radius: 3px;
+}
+/* line 91, ../_section.scss */
+#section #section-view .navigated.navigating {
+  background-color: #cadcdf;
 }
 
 /* line 1, ../_navigation.scss */
@@ -8242,8 +8244,30 @@ header .container-header .header-title p {
 #toolbar-area .toolbar-item-view.printToolbarView-toolbar-item:hover {
   background-image: url(../../images/print-active.png);
 }
-
+/* line 52, ../_toolbar.scss */
+#toolbar-area .toolbar-item-view.fontsizeToolbarView-toolbar-item {
+  font: inherit;
+  width: auto;
+  height: auto;
+  color: auto;
+}
+/* line 57, ../_toolbar.scss */
+#toolbar-area .toolbar-item-view.fontsizeToolbarView-toolbar-item .btn-group > .btn {
+  padding: 2px;
+  border-radius: 5px;
+}
 /* line 60, ../_toolbar.scss */
+#toolbar-area .toolbar-item-view.fontsizeToolbarView-toolbar-item .btn-group > .btn.larger {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+/* line 64, ../_toolbar.scss */
+#toolbar-area .toolbar-item-view.fontsizeToolbarView-toolbar-item .btn-group > .btn.smaller {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+/* line 77, ../_toolbar.scss */
 ul.toc {
   list-style-type: none;
 }

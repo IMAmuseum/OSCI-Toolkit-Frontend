@@ -23,8 +23,9 @@ OsciTk.views.ToolbarItem = OsciTk.views.BaseView.extend({
 			style: this.options.toolbarItem.style
 		}));
 
+		// This should be used to replace the view content w/ inline item's template
 		if (this.options.toolbarItem.style != 'default') {
-			//Backbone.trigger("toolbarInline", this.options.toolbarItem);
+			Backbone.trigger("toolbarInline", this.options.toolbarItem);
 		}
 
 		return this;

@@ -50,6 +50,23 @@
 		}
 
 		&.fontsizeToolbarView-toolbar-item {
+			font: inherit;
+			width: auto; height: auto;
+			color: auto;
+
+			.btn-group > .btn {
+			    padding: 2px;
+    			border-radius: 5px;
+    			&.larger {
+				    border-bottom-right-radius: 0;
+				    border-top-right-radius: 0;
+				}
+				&.smaller {
+				    border-bottom-left-radius: 0;
+    				border-top-left-radius: 0;
+				}
+			}
+
 		}
 
 	}

@@ -7,22 +7,22 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 		app.toolbarItems = app.config.get('toolbarItems') ? app.config.get('toolbarItems') : [];
 
 		// Triggered in ToolbarItemView.js
+		// This happens when a new inline view is created
 		this.listenTo(Backbone, "toolbarInline", function(toolbarItem) {
+			console.log( toolbarItem.text );
 
-			var view = _.pick(app.views, toolbarItem.view);
-			view = view[toolbarItem.view];
-
+			var view = app.views[toolbarItem.view];
+			
 			this.removeView(view, false);
+
 			this.addView(view, '#'+toolbarItem.text);
+			view.render();
 
 		});
 
-		// Used to open account + toc
-		//this.listenTo(Backbone, "toolbarItemClicked", function(toolbarItem) {
-		//});
-
 		// Triggered in ToolbarTocView.js and ToolbarAccountView.js
 		// In this theme, we'll use it to just close the modals
+		/*
 		this.listenTo(Backbone, "toolbarRemoveViews", function() {
 
 			_.each(app.toolbarItems, function(item) {
@@ -37,11 +37,14 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 			}, this);
 
 		});
+		*/
 
-		// In some other themes, we wait for figuresAvailable,
-		// but since we don't have a figures section here,
-		// it doesn't matter as much
-		this.render();
+		// We must wait until the section is loaded to add the menu
+		// Otherwise, values we need won't have been loaded
+		this.listenToOnce(Backbone, "sectionLoaded", function() {
+			this.render();
+		});
+		
 
 	},
 

@@ -1,39 +1,40 @@
 OsciTk.views.FontSizeToolbar = OsciTk.views.BaseView.extend({
 	className: 'font-size-view',
 	template: OsciTk.templateManager.get('toolbar-font-size'),
+	events: {
+		'click .larger' : 'changeFontSize',
+		'click .smaller' : 'changeFontSize'
+	},
+
 	initialize: function() {
-
 		this.currentFontSize = 100;
-
-		// listen for inline toolbar item clicks in ToolbarItemView.js
-		this.listenTo(Backbone, "toolbarInlineClicked", function(href) {
-			this.changeFontSize(href);
-		});
-
-		this.render();
-
 	},
 
 	render: function() {
-
 		this.$el.html(this.template());
-		return this;
-
 	},
 
-	changeFontSize: function(href) {
+	changeFontSize: function( e ) {
 
-		var sectionView = app.views.sectionView;
+		e.preventDefault();
 
-		if (href === "font-larger" && this.currentFontSize < "200") {
+
+
+		var $target = $(e.currentTarget);
+
+		
+		if ( $target.hasClass('larger') && this.currentFontSize < "200") {
 			this.currentFontSize += 10;
 		}
 
-		if (href === "font-smaller" && this.currentFontSize > "50")  {
+		if ( $target.hasClass('smaller') && this.currentFontSize > "50")  {
 			this.currentFontSize -= 10;
 		}
 
-		sectionView.$el.css({
+
+				console.log( this.currentFontSize );
+
+		app.views.sectionView.$el.css({
 			"font-size": this.currentFontSize + "%"
 		});
 

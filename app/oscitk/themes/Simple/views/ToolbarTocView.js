@@ -26,8 +26,13 @@ OsciTk.views.TocToolbar = OsciTk.views.BaseView.extend({
 			// Bind section change to the links inside list items
 			$modal.find('li.toc-item>a').on('click', this.itemClick );
 
-			this.listenTo(Backbone, "toolbarItemClicked", function(toolbarItem) {
-				$modal.modal();
+			this.listenTo(Backbone, "toolbarItemClicked", function(e) {
+				
+				// TODO: this check is too hard-coded
+				if( e.item.text === "toolbar-toc" ) {
+					$modal.modal();
+				}
+				
 			});
 
 		});
