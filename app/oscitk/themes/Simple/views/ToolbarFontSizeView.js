@@ -18,11 +18,8 @@ OsciTk.views.FontSizeToolbar = OsciTk.views.BaseView.extend({
 
 		e.preventDefault();
 
-
-
 		var $target = $(e.currentTarget);
 
-		
 		if ( $target.hasClass('larger') && this.currentFontSize < "200") {
 			this.currentFontSize += 10;
 		}
@@ -30,9 +27,6 @@ OsciTk.views.FontSizeToolbar = OsciTk.views.BaseView.extend({
 		if ( $target.hasClass('smaller') && this.currentFontSize > "50")  {
 			this.currentFontSize -= 10;
 		}
-
-
-				console.log( this.currentFontSize );
 
 		app.views.sectionView.$el.css({
 			"font-size": this.currentFontSize + "%"

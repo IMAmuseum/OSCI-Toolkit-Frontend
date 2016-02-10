@@ -8255,19 +8255,20 @@ header .container-header .header-title p {
 #toolbar-area .toolbar-item-view.fontsizeToolbarView-toolbar-item .btn-group > .btn {
   padding: 2px;
   border-radius: 5px;
+  border-color: #52818B;
 }
-/* line 60, ../_toolbar.scss */
+/* line 61, ../_toolbar.scss */
 #toolbar-area .toolbar-item-view.fontsizeToolbarView-toolbar-item .btn-group > .btn.larger {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
-/* line 64, ../_toolbar.scss */
+/* line 65, ../_toolbar.scss */
 #toolbar-area .toolbar-item-view.fontsizeToolbarView-toolbar-item .btn-group > .btn.smaller {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 }
 
-/* line 77, ../_toolbar.scss */
+/* line 78, ../_toolbar.scss */
 ul.toc {
   list-style-type: none;
 }

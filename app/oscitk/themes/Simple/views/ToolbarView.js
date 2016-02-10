@@ -8,7 +8,7 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 
 		// Triggered in ToolbarItemView.js
 		// This happens when a new inline view is created
-		this.listenTo(Backbone, "toolbarInline", function(toolbarItem) {
+		this.listenTo(Backbone, "toolbarAddItemInline", function(toolbarItem) {
 			console.log( toolbarItem.text );
 
 			var view = app.views[toolbarItem.view];
