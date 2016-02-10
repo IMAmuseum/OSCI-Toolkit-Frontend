@@ -38,6 +38,8 @@
 
     figure {
 
+      background: white;
+
       border: thin #eee solid;
       border-radius: 5px;
 
@@ -52,8 +54,6 @@
       }
 
       figcaption {
-
-         background: white;
 
          p {
             font-family: 'Lora', serif;

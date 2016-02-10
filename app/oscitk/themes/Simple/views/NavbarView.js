@@ -26,7 +26,8 @@ OsciTk.views.Navbar = OsciTk.views.BaseView.extend({
 		}));
 
 		$('.navbar-item[data-toggle="tooltip"]').tooltip({
-			left:'150px'//,container:'body'
+			left:'150px',
+			//container:'body' // needs correct stylesheet
 		});
 
 		return this;

@@ -38,7 +38,7 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 		});
 
 
-		// In other themes, we wait for figuresAvailable,
+		// In some other themes, we wait for figuresAvailable,
 		// but since we don't have a figures section here,
 		// it doesn't matter as much
 		this.render();

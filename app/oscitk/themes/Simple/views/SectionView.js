@@ -193,6 +193,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         Backbone.trigger("sectionRenderEnd");
 
         // See NavigationView.js
+        // Typically triggered at same time as "sectionRenderEnd"
         Backbone.trigger("navigateReady");
 
         // we want to re-calibrate the layout on resize

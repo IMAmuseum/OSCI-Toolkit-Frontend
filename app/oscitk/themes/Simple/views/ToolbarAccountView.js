@@ -1,4 +1,4 @@
-OsciTk.views.Account = OsciTk.views.BaseView.extend({
+OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 	events: {
 		'click button.login': 'login',
 		'click button.register': 'register',
@@ -9,48 +9,34 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 	className: 'account-view',
 	template: null,
 	initialize: function() {
-		// this.listenTo(Backbone, 'accountReady', function() {
 
-		// });
-		this.model = app.account;
-		this.render();
-		this.listenTo(Backbone, 'sectionLoaded', function(sectionModel) {
-			this.sectionId = sectionModel.get('id');
+		// see ../../../models/AccountModel.js
+		// re-renders form when the account info is ready
+		// theoretically, we ought to include accountStateChanged here too
+		// but below, we set this.$el.html explicitly, so we don't need it
+		this.listenTo(Backbone, 'accountReady', function() {
+			
 		});
+
+		this.render();
 		
 	},
+
 	render: function() {
+
 		// determine if user is logged in.  Show login form or user details
-		if (this.model.get('id') > 0) {
+		if( app.account.get('id') > 0 ) {
 			this.showProfile();
-		}
-		else {
+		} else {
 			this.showLoginForm();
 		}
-
-        // Remove overlay if there is a click outside it
-        // $('html').one() wrapper that rebinds until success
-        var that = this;
-        var selfbound = function(e) {
-            $target = $(e.target);
-            $exclude = that.$el.find('.panel');
-            // If the two DOM elements are not the same...
-            if( $target.get(0) !== $exclude.get(0) ) {
-                // If the target is not a descendant of the panel...
-                if( $exclude.find($target).length < 1  ) {
-                	that.closeOverlay();
-                }else{
-                    $('html').one('click', selfbound );
-                }
-            }
-        };
-
-        $('html').one('click', selfbound );
 
 
 		return this;
 	},
+
 	login: function() {
+
 		// alias this for use in ajax callbacks
 		var accountView = this;
 		// get user/pass from form
@@ -65,7 +51,7 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 			success: function(data) {
 				if (data.success === true) {
 					// user was logged in, set the returned user data
-					accountView.model.set(data.user);
+					app.account.set(data.user);
 					accountView.showProfile();
 				}
 				else {
@@ -75,7 +61,9 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 			}
 		});
 	},
+
 	logout: function() {
+
 		// alias this for use in ajax callback
 		var accountView = this;
 		$.ajax({
@@ -84,13 +72,16 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 			type: 'POST',
 			dataType: 'json',
 			success: function(data) {
-				accountView.model.set(data.user);
+				app.account.set(data.user);
 				accountView.showLoginForm();
 				app.account.set({'email': null});
 			}
 		});
+
 	},
+
 	register: function() {
+
 		// alias for callbacks
 		var accountView = this;
 		// get user/pass from form
@@ -106,7 +97,7 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 			success: function(data) {
 				if (data.success === true) {
 					// user was logged in, set the returned user data
-					accountView.model.set(data.user);
+					app.account.set(data.user);
 					accountView.showProfile();
 				}
 				else {
@@ -116,19 +107,24 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 			}
 		});
 	},
+
 	showRegistrationForm: function() {
 		this.template = OsciTk.templateManager.get('toolbar-account-register');
 		this.$el.html(this.template());
 	},
+
 	showLoginForm: function() {
 		this.template = OsciTk.templateManager.get('toolbar-account-login');
 		this.$el.html(this.template());
 	},
+
 	showProfile: function() {
 		this.template = OsciTk.templateManager.get('toolbar-account-profile');
-		this.$el.html(this.template(this.model.toJSON()));
+		this.$el.html(this.template( app.account.toJSON() ));
 	},
+
 	closeOverlay: function() {
+
 		Backbone.trigger("toolbarRemoveViews");
 		var section = app.collections.navigationItems.get(this.section_id);
 		if (section) {
@@ -136,6 +132,10 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 		} else {
 			this.currentNavigationItem = app.collections.navigationItems.first();
 		}
-		Backbone.trigger('currentNavigationItemChanged', this.currentNavigationItem);
+
+		// This causes the page to refresh in a bad way
+		//Backbone.trigger('currentNavigationItemChanged', this.currentNavigationItem);
+
 	}
+
 });

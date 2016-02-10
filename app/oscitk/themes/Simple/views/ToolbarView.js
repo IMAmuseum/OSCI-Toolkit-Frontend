@@ -6,17 +6,42 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 		// Also used in instances of ToolbarItemView.js
 		app.toolbarItems = app.config.get('toolbarItems') ? app.config.get('toolbarItems') : [];
 
+		// Triggered in ToolbarItemView.js
 		this.listenTo(Backbone, "toolbarInline", function(toolbarItem) {
-			this.toolbarInline(toolbarItem);
+
+			var view = _.pick(app.views, toolbarItem.view);
+			view = view[toolbarItem.view];
+
+			this.removeView(view, false);
+			this.addView(view, '#'+toolbarItem.text);
+
 		});
 
-		this.listenTo(Backbone, "toolbarItemClicked", function(toolbarItem, active) {
-			this.toolbarAction(toolbarItem);
-		});
+		// Used to open account + toc
+		//this.listenTo(Backbone, "toolbarItemClicked", function(toolbarItem) {
+		//});
 
+		// Triggered in ToolbarTocView.js and ToolbarAccountView.js
+		// In this theme, we'll use it to just close the modals
 		this.listenTo(Backbone, "toolbarRemoveViews", function() {
-			this.toolbarToggle();
+
+			_.each(app.toolbarItems, function(item) {
+
+				// if this item is inline, don't remove its view
+				if (item.style == 'default') {
+					var view = _.pick(app.views, item.view);
+					view = view[item.view];
+					this.removeView(view, false);
+				}
+
+			}, this);
+
 		});
+
+		// In some other themes, we wait for figuresAvailable,
+		// but since we don't have a figures section here,
+		// it doesn't matter as much
+		this.render();
 
 	},
 
@@ -25,58 +50,15 @@ OsciTk.views.Toolbar = OsciTk.views.BaseView.extend({
 		// Renders div.toolbar-view from toolbar.tpl.html
 		this.$el.html( this.template( { } ) );
 
-		// Loop through 
+		// See config in index.html
 		_.each(app.toolbarItems, function(toolbarItem) {
-			var item = new OsciTk.views.ToolbarItem({toolbarItem: toolbarItem});
+
+			var item = new OsciTk.views.ToolbarItem({ toolbarItem: toolbarItem });
 			this.addView(item, '#toolbar-area');
 			item.render();
-		}, this);
-
-	},
-
-	toolbarInline: function(toolbarItem) {
-
-		var view = _.pick(app.views, toolbarItem.view);
-		view = view[toolbarItem.view];
-
-		this.removeView(view, false);
-		this.addView(view, '#'+toolbarItem.text);
-
-	},
-
-	toolbarAction: function(toolbarItem) {
-
-		// Opens / closes the item
-		this.toolbarToggle();
-
-		// Do nothing if this item is already open
-		if (toolbarItem.active) {
-			return false;
-		}
-
-		var view = _.pick(app.views, toolbarItem.item.view);
-		view = view[toolbarItem.item.view];
-
-		this.addView(view, '#'+toolbarItem.item.text);
-
-	},
-
-	toolbarToggle: function() {
-
-		_.each(app.toolbarItems, function(item) {
-
-			//remove all active classes
-			$('.'+item.view+'-toolbar-item > a').removeClass('active')
-
-			// if this item is inline, don't remove its view
-			if (item.style == 'default') {
-				var view = _.pick(app.views, item.view);
-				view = view[item.view];
-				this.removeView(view, false);
-			}
 
 		}, this);
 
-	}
+	},
 
 });

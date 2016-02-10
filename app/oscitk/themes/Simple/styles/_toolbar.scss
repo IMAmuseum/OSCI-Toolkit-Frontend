@@ -18,7 +18,7 @@
 	.toolbar-item-view {
 		margin-bottom: 10px;
 
-		cursor: hand;
+		cursor: pointer;
 		border: 0;
 		font: 0/0 a;
 		text-shadow: none;
@@ -28,25 +28,28 @@
 		width: 50px;
 		height: 50px;
 
-		&.tocView-toolbar-item {
+		&.tocToolbarView-toolbar-item {
 			background-image: url(../../images/list.png);
 			&:hover {
 				background-image: url(../../images/list-active.png);
 			}
 		}
 
-		&.accountView-toolbar-item {
+		&.accountToolbarView-toolbar-item {
 			background-image: url(../../images/login.png);
 			&:hover {
 				background-image: url(../../images/login-active.png);
 			}
 		}
 
-		&.printView-toolbar-item {
+		&.printToolbarView-toolbar-item {
 			background-image: url(../../images/print.png);
 			&:hover {
 				background-image: url(../../images/print-active.png);
 			}
+		}
+
+		&.fontsizeToolbarView-toolbar-item {
 		}
 
 	}
