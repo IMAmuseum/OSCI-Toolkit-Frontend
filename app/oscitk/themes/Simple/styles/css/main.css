@@ -8170,24 +8170,29 @@ header {
 /* line 5, ../_header.scss */
 header .container-header {
   width: 100%;
-  height: 250px;
+  min-height: 250px;
   max-width: 100%;
   background-image: url("../../images/triangular.png");
   background-position: center;
+  position: relative;
 }
-/* line 17, ../_header.scss */
+/* line 19, ../_header.scss */
 header .container-header .header-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
   padding: 25px 0px;
   color: white;
   text-align: center;
   text-shadow: 0 1px 0 black;
 }
-/* line 30, ../_header.scss */
+/* line 38, ../_header.scss */
 header .container-header .header-title h1 {
   margin: 0;
 }
-/* line 34, ../_header.scss */
+/* line 42, ../_header.scss */
 header .container-header .header-title p {
   font-style: italic;
   font-weight: 300;

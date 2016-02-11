@@ -25,18 +25,23 @@ __p += '\n<div class="container-header">\n';
  } ;
 __p += '\n\t<div class="container header-title">\n\t\t<h1>' +
 ((__t = ( title )) == null ? '' : __t) +
-'</h1>\n\t\t<p>';
- address = 'by ' ;
-
- _.each(creator, function(author) { ;
-__p +=
-((__t = ( address )) == null ? '' : __t) +
-'' +
-((__t = ( author.value )) == null ? '' : __t);
- address = 'and ' ;
-
+'</h1>\n\t\t';
+ if( creator ) {;
+__p += '\n\t\t\t<p>by ';
+ $.each(creator, function(i,v) { ;
+__p += '\n\t\t\t\t' +
+((__t = ( v.value )) == null ? '' : __t) +
+'\n\t\t\t\t';
+ if( i !== creator.length-1 ) { ;
+__p += '\n\t\t\t\t\t';
+ ', ' ;
+__p += '\n\t\t\t\t';
+ } ;
+__p += '\n\t\t\t';
  }); ;
-__p += '</p>\n\n  \t</div>\n</div>';
+__p += '\n\t\t';
+ } ;
+__p += '\n\t\t</p>\n\n  \t</div>\n</div>';
 
 }
 return __p
