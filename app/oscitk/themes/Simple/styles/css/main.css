@@ -8170,11 +8170,12 @@ header {
 /* line 5, ../_header.scss */
 header .container-header {
   width: 100%;
+  height: 250px;
   max-width: 100%;
   background-image: url("../../images/triangular.png");
   background-position: center;
 }
-/* line 15, ../_header.scss */
+/* line 17, ../_header.scss */
 header .container-header .header-title {
   width: 100%;
   padding: 25px 0px;
@@ -8182,11 +8183,11 @@ header .container-header .header-title {
   text-align: center;
   text-shadow: 0 1px 0 black;
 }
-/* line 28, ../_header.scss */
+/* line 30, ../_header.scss */
 header .container-header .header-title h1 {
   margin: 0;
 }
-/* line 32, ../_header.scss */
+/* line 34, ../_header.scss */
 header .container-header .header-title p {
   font-style: italic;
   font-weight: 300;
@@ -8198,21 +8199,23 @@ header .container-header .header-title p {
   margin-top: 20px;
   z-index: 998;
 }
-/* line 6, ../_toolbar.scss */
-#toolbar.affix {
-  top: 50px;
-}
-/* line 8, ../_toolbar.scss */
-#toolbar.affix + .container {
-  padding-top: 50px;
+@media (min-width: 926px) {
+  /* line 7, ../_toolbar.scss */
+  #toolbar.affix {
+    top: 50px;
+  }
+  /* line 9, ../_toolbar.scss */
+  #toolbar.affix + .container {
+    padding-top: 50px;
+  }
 }
 
-/* line 14, ../_toolbar.scss */
+/* line 17, ../_toolbar.scss */
 #toolbar-area {
   z-index: 990;
   list-style-type: none;
 }
-/* line 18, ../_toolbar.scss */
+/* line 21, ../_toolbar.scss */
 #toolbar-area .toolbar-item-view {
   margin-bottom: 10px;
   cursor: pointer;
@@ -8225,38 +8228,38 @@ header .container-header .header-title p {
   width: 50px;
   height: 50px;
 }
-/* line 31, ../_toolbar.scss */
+/* line 34, ../_toolbar.scss */
 #toolbar-area .toolbar-item-view.tocToolbarView-toolbar-item {
   background-image: url(../../images/list.png);
 }
-/* line 33, ../_toolbar.scss */
+/* line 36, ../_toolbar.scss */
 #toolbar-area .toolbar-item-view.tocToolbarView-toolbar-item:hover {
   background-image: url(../../images/list-active.png);
 }
-/* line 38, ../_toolbar.scss */
+/* line 41, ../_toolbar.scss */
 #toolbar-area .toolbar-item-view.accountToolbarView-toolbar-item {
   background-image: url(../../images/login.png);
 }
-/* line 40, ../_toolbar.scss */
+/* line 43, ../_toolbar.scss */
 #toolbar-area .toolbar-item-view.accountToolbarView-toolbar-item:hover {
   background-image: url(../../images/login-active.png);
 }
-/* line 45, ../_toolbar.scss */
+/* line 48, ../_toolbar.scss */
 #toolbar-area .toolbar-item-view.printToolbarView-toolbar-item {
   background-image: url(../../images/print.png);
 }
-/* line 47, ../_toolbar.scss */
+/* line 50, ../_toolbar.scss */
 #toolbar-area .toolbar-item-view.printToolbarView-toolbar-item:hover {
   background-image: url(../../images/print-active.png);
 }
-/* line 52, ../_toolbar.scss */
+/* line 55, ../_toolbar.scss */
 #toolbar-area .toolbar-item-view.fontsizeToolbarView-toolbar-item {
   font: inherit;
   width: auto;
   height: auto;
   color: auto;
 }
-/* line 57, ../_toolbar.scss */
+/* line 60, ../_toolbar.scss */
 #toolbar-area .toolbar-item-view.fontsizeToolbarView-toolbar-item .btn-group > .btn {
   padding: 2px;
   border-radius: 5px;
@@ -8268,22 +8271,56 @@ header .container-header .header-title p {
   border-radius: 25px;
   border: 0;
 }
-/* line 70, ../_toolbar.scss */
+/* line 73, ../_toolbar.scss */
 #toolbar-area .toolbar-item-view.fontsizeToolbarView-toolbar-item .btn-group > .btn.larger {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
-/* line 74, ../_toolbar.scss */
+/* line 77, ../_toolbar.scss */
 #toolbar-area .toolbar-item-view.fontsizeToolbarView-toolbar-item .btn-group > .btn.smaller {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 }
 
-/* line 87, ../_toolbar.scss */
+/* line 89, ../_toolbar.scss */
 ul.toc {
   list-style-type: none;
 }
 
+@media (max-width: 925px) {
+  /* line 97, ../_toolbar.scss */
+  #toolbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  /* line 104, ../_toolbar.scss */
+  #toolbar .nav {
+    padding-top: 5px;
+    background-color: #f8f8f8;
+    border-top: thin solid #e7e7e7;
+    text-align: center;
+  }
+  /* line 112, ../_toolbar.scss */
+  #toolbar .nav #toolbar-area {
+    padding-left: 0px;
+    display: inline-block;
+    margin: 0px -10px;
+  }
+  /* line 122, ../_toolbar.scss */
+  #toolbar .nav #toolbar-area .toolbar-item-view {
+    float: left;
+    margin: 0px 10px;
+    height: 30px;
+    width: 30px;
+    background-size: 30px 30px;
+  }
+  /* line 131, ../_toolbar.scss */
+  #toolbar .nav #toolbar-area .toolbar-item-view.fontsizeToolbarView-toolbar-item {
+    display: none;
+  }
+}
 /* line 1, ../_navbar.scss */
 #navbar {
   z-index: 998;

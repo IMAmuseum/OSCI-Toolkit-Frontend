@@ -3,12 +3,15 @@
 	margin-top: 20px;
 	z-index: 998;
 
-	&.affix {
-		top: 50px;
-	    + .container {
-		    padding-top: 50px
+	@media( min-width: 926px ) {
+		&.affix {
+			top: 50px;
+		    + .container {
+			    padding-top: 50px
+			}
 		}
 	}
+
 }
 
 #toolbar-area {
@@ -80,10 +83,58 @@
 		}
 
 	}
-
 }
 
 
 ul.toc {
 	list-style-type: none;
+}
+
+$osci-tbms: 30px;
+
+@media( max-width: 925px ) {
+
+	#toolbar {
+
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+
+		.nav {
+
+			padding-top: 5px;
+
+		    background-color: #f8f8f8;
+		    border-top: thin solid #e7e7e7;
+
+		    text-align: center;
+			#toolbar-area {
+
+
+				padding-left: 0px;
+
+
+				display: inline-block;
+
+				margin: 0px -10px;
+
+				.toolbar-item-view {
+					float: left;
+
+					margin: 0px 10px;
+					height: $osci-tbms;
+					width: $osci-tbms;
+
+					background-size: $osci-tbms $osci-tbms;
+
+					&.fontsizeToolbarView-toolbar-item {
+						display: none;
+					}
+				}
+
+			}
+		}
+	}
+
 }

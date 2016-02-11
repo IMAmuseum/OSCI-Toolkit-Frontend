@@ -30,8 +30,6 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 				register : this.prepareRegister( error )
 			};
 
-			console.log( app.account.attributes );
-
 			if( app.account.get('id') > 0 ) {
 				active = 'profile';
 			} else {
