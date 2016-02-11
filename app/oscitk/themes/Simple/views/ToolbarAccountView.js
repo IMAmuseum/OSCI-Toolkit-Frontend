@@ -1,4 +1,5 @@
 OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
+	
 	events: {
 		'click button.login': 'login',
 		'click button.register': 'register',
@@ -6,42 +7,178 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 		'click a.login': 'showLoginForm',
 		'click a.logout': 'logout'
 	},
+
 	className: 'account-view',
-	template: null,
+
+    templateModal: OsciTk.templateManager.get('toolbar-modal'),
+    templateLogin: OsciTk.templateManager.get('toolbar-account-login'),
+    templateProfile: OsciTk.templateManager.get('toolbar-account-profile'),
+    templateRegister: OsciTk.templateManager.get('toolbar-account-register'),
+	
 	initialize: function() {
 
-		// see ../../../models/AccountModel.js
-		// re-renders form when the account info is ready
-		// theoretically, we ought to include accountStateChanged here too
-		// but below, we set this.$el.html explicitly, so we don't need it
-		this.listenTo(Backbone, 'accountReady', function() {
-			
+		this.$modals = {};
+		var active = 'login';
+
+		// For accountReady, see ../../../models/AccountModel.js
+		// We will trigger accountStateChanged below, e.g. on logout
+		this.listenTo(Backbone, 'accountReady accountStateChanged', function( error ) {
+
+			this.$modals = {
+				login : this.prepareLogin( error ),
+				profile : this.prepareProfile( error ),
+				register : this.prepareRegister( error )
+			};
+
+			console.log( app.account.attributes );
+
+			if( app.account.get('id') > 0 ) {
+				active = 'profile';
+			} else {
+				active = 'login';
+			}
+
 		});
 
-		this.render();
+		this.listenTo(Backbone, "toolbarItemClicked", function(e) {
+
+			if( e.item.text === "toolbar-account" ) {
+				this.showForm( active );
+			}
+
+		});
+
 		
 	},
 
-	render: function() {
+	modalBindings: function( $modal ) {
 
-		// determine if user is logged in.  Show login form or user details
-		if( app.account.get('id') > 0 ) {
-			this.showProfile();
-		} else {
-			this.showLoginForm();
-		}
-
-
-		return this;
 	},
 
-	login: function() {
+	showForm: function( form ) {
+		this.$modals[form].clone(true).modal().on('hidden.bs.modal', function() {
+			$(this).data('bs.modal', null).remove();
+		});
+
+	},
+
+	prepareLogin: function( error ) {
+
+		var form = this.templateLogin(); 
+		var modal = this.templateModal({
+			title: "Login",
+			body: form
+		});
+
+		var $modal = $(modal);
+
+		if( error ) {
+			$modal.find('div.form-error').html(error);
+		}
+
+		var that = this;
+		$modal.find('.login').on('click', function(e) {
+
+			// get user/pass from form
+			var $form = $(this).parents('#account-form');
+			var username = $form.find('#username').val();
+			var password = $form.find('#password').val();
+
+			$(this).parents('.modal').modal('hide');
+			that.login( username, password );
+
+		});
+
+		$modal.find('.register').on('click', function(e) {
+
+			$(this).parents('.modal').modal('hide');
+			Backbone.trigger("accountStateChanged");
+			that.showForm( 'register' );
+
+		});
+
+		// Save it for showing later
+		return $modal;
+
+	},
+
+	prepareRegister: function( error ) {
+
+		var form = this.templateRegister();
+		var modal = this.templateModal({
+			title: "Register",
+			body: form
+		});
+
+		var $modal = $(modal);
+
+		if( error ) {
+			$modal.find('div.form-error').html(error);
+		}
+
+		var that = this;
+		$modal.find('.register').on('click', function(e) {
+
+			// get user/pass from form
+			var $form = $(this).parents('#account-form');
+			var username = $form.find('#username').val();
+			var password = $form.find('#password').val();
+			var email = $form.find('#email').val();
+
+			$(this).parents('.modal').modal('hide');
+			that.register( username, password, email );
+
+		});
+
+		$modal.find('.login').on('click', function(e) {
+
+			$(this).parents('.modal').modal('hide');
+			Backbone.trigger("accountStateChanged");
+			that.showForm( 'login' );
+
+		});
+
+		// Save it for showing later
+		return $modal;
+
+	},
+
+	prepareProfile: function( error ) {
+
+		var profile = this.templateProfile({
+			username: app.account.get('username'),
+			email: app.account.get('email')
+		});
+
+		var modal = this.templateModal({
+			title: "User Profile",
+			body: profile
+		});
+
+		var $modal = $(modal);
+
+		if( error ) {
+			$modal.find('div.form-error').html(error);
+		}
+
+		var that = this;
+		$modal.find('.logout').on('click', function(e) {
+
+			$(this).parents('.modal').modal('hide');
+			that.logout();
+
+		});
+
+		// Save it for showing later
+		return $modal;
+
+	},
+
+	login: function( username, password ) {
 
 		// alias this for use in ajax callbacks
-		var accountView = this;
-		// get user/pass from form
-		var username = this.$el.find('#username').val();
-		var password = this.$el.find('#password').val();
+		var that = this;
+
 		// send login request
 		$.ajax({
 			url: app.config.get('endpoints').OsciTkAccount,
@@ -49,45 +186,71 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 			type: 'POST',
 			dataType: 'json',
 			success: function(data) {
+
 				if (data.success === true) {
+
 					// user was logged in, set the returned user data
-					app.account.set(data.user);
-					accountView.showProfile();
+					app.account.set({
+						'id' : data.user.id,
+						'username' : data.user.username,
+						'email' : data.user.email,
+					});
+
+					Backbone.trigger("accountStateChanged");
+					that.showForm('profile');
+
+				} else {
+
+					Backbone.trigger("accountStateChanged", data.error);
+					that.showForm('login');
+
 				}
-				else {
-					// user was not logged in, show error
-					accountView.$el.find('div.form-error').html(data.error);
-				}
+
 			}
 		});
+		
 	},
 
-	logout: function() {
+	logout: function( ) {
 
 		// alias this for use in ajax callback
-		var accountView = this;
+		var that = this;
+
 		$.ajax({
 			url: app.config.get('endpoints').OsciTkAccount,
 			data: {action: 'logout'},
 			type: 'POST',
 			dataType: 'json',
 			success: function(data) {
-				app.account.set(data.user);
-				accountView.showLoginForm();
-				app.account.set({'email': null});
+
+				if( data.success === true ) {
+
+					app.account.set( {
+						'id' : 0,
+						'username' : 'anonymous',
+						'email' : null
+					});
+
+					Backbone.trigger("accountStateChanged");
+					that.showForm('login');
+
+				} else {
+
+					Backbone.trigger("accountStateChanged", data.error);
+					that.showForm('profile');
+
+				}
+
 			}
 		});
 
 	},
 
-	register: function() {
+	register: function( username, password, email ) {
 
 		// alias for callbacks
-		var accountView = this;
-		// get user/pass from form
-		var username = this.$el.find('#username').val();
-		var password = this.$el.find('#password').val();
-		var email = this.$el.find('#email').val();
+		var that = this;
+
 		// send registration request
 		$.ajax({
 			url: app.config.get('endpoints').OsciTkAccount,
@@ -95,47 +258,26 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 			type: 'POST',
 			dataType: 'json',
 			success: function(data) {
+
+				// user was logged in, set the returned user data
 				if (data.success === true) {
-					// user was logged in, set the returned user data
-					app.account.set(data.user);
-					accountView.showProfile();
+
+					app.account.set( data.user );
+
+					Backbone.trigger("accountStateChanged");
+					that.showForm('profile');
+
+				}else{
+
+					Backbone.trigger("accountStateChanged", data.error);
+					that.showForm('register');
+
 				}
-				else {
-					// user was not logged in, show error
-					accountView.$el.find('div.form-error').html(data.error);
-				}
+
 			}
 		});
+
 	},
 
-	showRegistrationForm: function() {
-		this.template = OsciTk.templateManager.get('toolbar-account-register');
-		this.$el.html(this.template());
-	},
-
-	showLoginForm: function() {
-		this.template = OsciTk.templateManager.get('toolbar-account-login');
-		this.$el.html(this.template());
-	},
-
-	showProfile: function() {
-		this.template = OsciTk.templateManager.get('toolbar-account-profile');
-		this.$el.html(this.template( app.account.toJSON() ));
-	},
-
-	closeOverlay: function() {
-
-		Backbone.trigger("toolbarRemoveViews");
-		var section = app.collections.navigationItems.get(this.section_id);
-		if (section) {
-			this.currentNavigationItem = app.collections.navigationItems.get(section_id);
-		} else {
-			this.currentNavigationItem = app.collections.navigationItems.first();
-		}
-
-		// This causes the page to refresh in a bad way
-		//Backbone.trigger('currentNavigationItemChanged', this.currentNavigationItem);
-
-	}
 
 });

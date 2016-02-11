@@ -4,7 +4,7 @@ this["JST"]["app/oscitk/themes/Simple/templates/app.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n<div id="navbar" class="hidden-print" data-spy="affix" data-offset-top="400"></div>\n<div id="toolbar" class="hidden-print" data-spy="affix" data-offset-top="400"></div>\n<div class="container">\n\t<div class="row">\n\t\t<div class="col-md-10 col-md-offset-1">\n\t\t\t<div id="section"></div>\n\t\t</div>\n\t</div>\n</div>\n\n<div id="navigation" class="hidden-print"></div>';
+__p += '<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n\n<div id="navbar" class="hidden-print" data-spy="affix" data-offset-top="106"></div>\n<div id="toolbar" class="hidden-print" data-spy="affix" data-offset-top="106"></div>\n\n<div class="container">\n\t<div class="row">\n\t\t<div class="col-md-10 col-md-offset-1">\n\t\t\t<div id="section"></div>\n\t\t</div>\n\t</div>\n</div>\n\n<div id="navigation" class="hidden-print"></div>';
 
 }
 return __p
@@ -219,7 +219,7 @@ this["JST"]["app/oscitk/themes/Simple/templates/toolbar-account-login.tpl.html"]
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="form-error"></div>\n<form id="account-form">\n\t<div class="form-group">\n\t\t<label for="username">Username:</label>\n\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t</div>\n\t<div class="form-group">\n\t\t<label for="password">Password:</label>\n\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t</div>\n\t<button type="button" class="btn login">Log In</button>\n\t<div><a href="#" class="register">Register an account</a></div>\n</form>';
+__p += '<div class="form-error alert alert-danger"></div>\n<form id="account-form">\n\t<div class="form-group">\n\t\t<label for="username">Username:</label>\n\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t</div>\n\t<div class="form-group">\n\t\t<label for="password">Password:</label>\n\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t</div>\n\t<button type="button" class="btn login">Log In</button>\n\t<div><a href="javascript:;" class="register">Register an account</a></div>\n</form>';
 
 }
 return __p
@@ -229,11 +229,11 @@ this["JST"]["app/oscitk/themes/Simple/templates/toolbar-account-profile.tpl.html
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="panel-body">\n<h4>' +
+__p += '<div class="form-error alert alert-danger"></div>\n<h4>' +
 ((__t = ( username )) == null ? '' : __t) +
 '</h4>\n<h5>' +
 ((__t = ( email )) == null ? '' : __t) +
-'</h5>\n<div><a href="#" class="logout">Log out</a></div>';
+'</h5>\n<div><a href="javascript:;" class="logout">Log out</a></div>';
 
 }
 return __p
@@ -243,7 +243,7 @@ this["JST"]["app/oscitk/themes/Simple/templates/toolbar-account-register.tpl.htm
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="form-error"></div>\n<form id="account-form">\n\t<div class="form-group">\n\t\t<label for="username">Username:</label>\n\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t</div>\n\t<div class="form-group">\n\t\t<label for="password">Password:</label>\n\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t</div>\n\t<div class="form-group">\n\t\t<label for="email">Email:</label>\n\t\t<input class="form-control" type="text" id="email" placeholder="Email" />\n\t</div>\n\t<button type="button" class="btn register">Register</button>\n\t<div><a href="#" class="login">Already have an account?</a></div>\n</form>';
+__p += '<div class="form-error alert alert-danger"></div>\n<form id="account-form">\n\t<div class="form-group">\n\t\t<label for="username">Username:</label>\n\t\t<input class="form-control" type="text" id="username" placeholder="Username" />\n\t</div>\n\t<div class="form-group">\n\t\t<label for="password">Password:</label>\n\t\t<input class="form-control" type="password" id="password" placeholder="Password" />\n\t</div>\n\t<div class="form-group">\n\t\t<label for="email">Email:</label>\n\t\t<input class="form-control" type="text" id="email" placeholder="Email" />\n\t</div>\n\t<button type="button" class="btn register">Register</button>\n\t<div><a href="javascript:;" class="login">Already have an account?</a></div>\n</form>';
 
 }
 return __p
@@ -298,7 +298,7 @@ this["JST"]["app/oscitk/themes/Simple/templates/toolbar-print.tpl.html"] = funct
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<a href="#print" id="print">Print</a>\n';
+__p += '<a href="javascript:;" id="print">Print</a>\n';
 
 }
 return __p
@@ -315,7 +315,7 @@ __p += '\n\t\t<li class="toc-item';
  if (item.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;
 __p += '">\n\t\t\t<a data-section-id="' +
 ((__t = ( item.id )) == null ? '' : __t) +
-'" href="#">\n\t\t\t\t<div class="toc-item-thumbnail">\n\t\t\t\t\t';
+'" href="javascript:;">\n\t\t\t\t<div class="toc-item-thumbnail">\n\t\t\t\t\t';
  if (item.get('thumbnail')) { ;
 __p += '\n\t\t\t\t\t\t<img src="' +
 ((__t = ( item.get('thumbnail') )) == null ? '' : __t) +

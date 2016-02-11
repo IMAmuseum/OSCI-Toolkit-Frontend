@@ -1,5 +1,9 @@
 // Some relative font-sizing is required to make the font size selector work
 
+.alert:empty {
+	display: none;
+}
+
 #section {
 
 	font-size: 18px;

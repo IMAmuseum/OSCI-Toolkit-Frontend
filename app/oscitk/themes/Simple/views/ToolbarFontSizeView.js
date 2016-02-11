@@ -16,8 +16,6 @@ OsciTk.views.FontSizeToolbar = OsciTk.views.BaseView.extend({
 
 	changeFontSize: function( e ) {
 
-		e.preventDefault();
-
 		var $target = $(e.currentTarget);
 
 		if ( $target.hasClass('larger') && this.currentFontSize < "200") {

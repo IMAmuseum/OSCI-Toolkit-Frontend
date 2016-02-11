@@ -25,7 +25,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			navigationView: new OsciTk.views.Navigation(),
 			toolbarView: new OsciTk.views.Toolbar(),
 
-			//accountToolbarView: new OsciTk.views.AccountToolbar(), // PROBLEM
+			accountToolbarView: new OsciTk.views.AccountToolbar(), // PROBLEM
 			tocToolbarView: new OsciTk.views.TocToolbar(), // NO PROB
 			printToolbarView: new OsciTk.views.PrintToolbar(), // NO PROB
 			fontsizeToolbarView: new OsciTk.views.FontSizeToolbar(), // NO PROB

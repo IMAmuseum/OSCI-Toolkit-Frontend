@@ -43,9 +43,6 @@ OsciTk.views.TocToolbar = OsciTk.views.BaseView.extend({
 	// Executed when a section link is clicked
 	itemClick: function( event ) {
 
-		// Just in case the href hasn't been set to javascript:;
-		event.preventDefault();
-
 		var sectionId = $(event.currentTarget).attr('data-section-id');
 		$('li.tocView-toolbar-item>a').removeClass('active');
 		Backbone.trigger("toolbarRemoveViews");

@@ -15,6 +15,6 @@ OsciTk.views.PrintToolbar = OsciTk.views.BaseView.extend({
 			window.print();
 		});
 
-	},
+	}
 
 });
