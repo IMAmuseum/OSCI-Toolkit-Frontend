@@ -1,12 +1,45 @@
 OsciTk.views.GlossaryTooltip = OsciTk.views.BaseView.extend({
     initialize: function() {
 
-        this.listenTo(Backbone, 'layoutComplete', function() {
+        // Also requires packageLoaded
+        this.listenTo(Backbone, 'sectionLoaded', function() {
+            
+            if ( app.collections.glossaryTerms && app.collections.glossaryTerms.length !== 0 ) {
 
-            if (app.collections.glossaryTerms.length !== 0) {
+                $('.glossary-term').qtip({
+                    content: {
+                        title: ' ',
+                        text: ' '
+                    },
+                    position: {
+                        viewport: $(window)
+                    },
+                    style: {
+                        classes: 'glossary-tooltip',
+                        def: false,
+                        width: '200px',
+                        tip: {
+                            color: '#6699CC',
+                        }
+                    },
+                    events: {
+                        show: function(event, api) {
+                            var tid = $(event.originalEvent.target).data('tid');
+                            var item = app.collections.glossaryTerms.get(tid);
+                            // set the tooltip contents
+                            api.set('content.title', item.get('term'));
+                            api.set('content.text', $(item.get('definition')).text() );
+                        }
+                    }
+                }).click(function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+
+                /*
 
                 var glossaryLinks = app.views.sectionView.$el.find('a.glossary-term');
-
+                console.log( glossaryLinks );
                 for (var i = 0; i < glossaryLinks.length; i++) {
 
                     var glossaryRef = $(glossaryLinks[i]);
@@ -26,15 +59,11 @@ OsciTk.views.GlossaryTooltip = OsciTk.views.BaseView.extend({
                 }
 
                 $('[data-toggle="tooltip"]').tooltip({placement: 'bottom', html: true});
+                */
 
             }
 
         });
 
-    },
-
-    glossaryClicked: function(e) {
-        e.preventDefault();
-        e.stopPropagation();
     }
 });

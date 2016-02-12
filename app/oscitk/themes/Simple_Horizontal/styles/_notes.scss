@@ -33,6 +33,7 @@
 
 .modal-content {
 	textarea {
+		resize: none;
 		color: $text-color;
 		font-size: 14px;
 		height: 100px;

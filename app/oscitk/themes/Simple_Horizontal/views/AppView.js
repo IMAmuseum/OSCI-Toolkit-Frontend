@@ -9,19 +9,31 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 		// initialize all possible views
 		app.views = {
+
 			titleView: new OsciTk.views.Title(),
 			headerView: new OsciTk.views.Header(),
-			fontSizeView: new OsciTk.views.FontSize(),
-			printView: new OsciTk.views.Print(),
-			tocView: new OsciTk.views.Toc(),
-			toolbarView: new OsciTk.views.Toolbar(),
+
+			// Section must be init'd after title
 			sectionView: new OsciTk.views.Section(),
-			navigationView: new OsciTk.views.Navigation(),
 			footnotesView: new OsciTk.views.Footnotes(),
+
+			navigationView: new OsciTk.views.Navigation(),
+			toolbarView: new OsciTk.views.Toolbar(),
+
+			// These two should be init'd after section, but before navigation
 			paragraphControlsView: new OsciTk.views.ParagraphControls(),
+			glossaryTooltipView: new OsciTk.views.GlossaryTooltip(),			
+
+			// Not too sure where this belongs
 			notesView: new OsciTk.views.Notes(),
+			
 			accountView: new OsciTk.views.Account(),
 			navbarView: new OsciTk.views.Navbar(),
+			fontSizeView: new OsciTk.views.FontSize(),
+			printView: new OsciTk.views.Print(),
+			tocView: new OsciTk.views.Toc(),			
+
+
 		};
 
 		// Add the header view

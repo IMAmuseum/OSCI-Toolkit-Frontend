@@ -8584,6 +8584,16 @@ figure.center figcaption {
   background: #3f636b;
 }
 
+/* line 1, ../_tooltips.scss */
+.qtip {
+  background-color: #52818b;
+  color: #52818b;
+}
+/* line 4, ../_tooltips.scss */
+.qtip .qtip-titlebar, .qtip .qtip-content {
+  color: white !important;
+}
+
 /* line 1, ../_overlay.scss */
 .overlay {
   position: fixed;
@@ -8643,6 +8653,7 @@ figure.center figcaption {
 
 /* line 35, ../_notes.scss */
 .modal-content textarea {
+  resize: none;
   color: #333333;
   font-size: 14px;
   height: 100px;

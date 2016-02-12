@@ -3,7 +3,7 @@ OsciTk.views.GlossaryTooltip = OsciTk.views.BaseView.extend({
 
         this.listenTo(Backbone, 'layoutComplete', function() {
 
-            if (app.collections.glossaryTerms.length !== 0) {
+            if (app.collections.glossaryTerms) {
 
                 var glossaryLinks = app.views.sectionView.$el.find('a.glossary-term');
 
