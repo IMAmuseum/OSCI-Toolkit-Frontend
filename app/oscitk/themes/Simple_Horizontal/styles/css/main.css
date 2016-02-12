@@ -1,4 +1,9 @@
 @charset "UTF-8";
+/* line 3, ../main.scss */
+html {
+  overflow-y: hidden;
+}
+
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 /* line 9, ../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_normalize.scss */
 html {

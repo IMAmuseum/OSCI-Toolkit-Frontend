@@ -1,8 +1,13 @@
 $icon-font-path: "../fonts/";
 
+html {
+	overflow-y: hidden;
+}
+
 @import "bootstrap/bootstrap";
 @import "typography";
 @import "browsehappy";
+
 @import "section";
 @import "navigation";
 @import "progress";
