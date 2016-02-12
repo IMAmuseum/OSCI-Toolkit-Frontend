@@ -8505,25 +8505,30 @@ header {
   }
 }
 /* line 1, ../_toolbar.scss */
+.alert:empty {
+  display: none;
+}
+
+/* line 3, ../_toolbar.scss */
 #toolbar {
   float: right;
   position: relative;
   z-index: 998;
 }
 
-/* line 7, ../_toolbar.scss */
+/* line 9, ../_toolbar.scss */
 ul.toc {
   list-style-type: none;
 }
 
-/* line 11, ../_toolbar.scss */
+/* line 13, ../_toolbar.scss */
 #toolbar-area {
   list-style-type: none;
   margin: 0;
   padding: 0;
   z-index: 990;
 }
-/* line 17, ../_toolbar.scss */
+/* line 19, ../_toolbar.scss */
 #toolbar-area li {
   background-repeat: no-repeat;
   background-size: cover;
@@ -8534,38 +8539,38 @@ ul.toc {
   width: 30px !important;
 }
 
-/* line 28, ../_toolbar.scss */
+/* line 30, ../_toolbar.scss */
 .tocView-toolbar-item {
   background-image: url(../../images/list.png);
 }
-/* line 30, ../_toolbar.scss */
+/* line 32, ../_toolbar.scss */
 .tocView-toolbar-item:hover {
   background-image: url(../../images/list-active.png);
 }
 
-/* line 35, ../_toolbar.scss */
+/* line 37, ../_toolbar.scss */
 .accountView-toolbar-item {
   background-image: url(../../images/login.png);
 }
-/* line 37, ../_toolbar.scss */
+/* line 39, ../_toolbar.scss */
 .accountView-toolbar-item:hover {
   background-image: url(../../images/login-active.png);
 }
 
-/* line 42, ../_toolbar.scss */
+/* line 44, ../_toolbar.scss */
 .printView-toolbar-item {
   background-image: url(../../images/print.png);
 }
-/* line 44, ../_toolbar.scss */
+/* line 46, ../_toolbar.scss */
 .printView-toolbar-item:hover {
   background-image: url(../../images/print-active.png);
 }
 
-/* line 50, ../_toolbar.scss */
+/* line 52, ../_toolbar.scss */
 #toolbar-area .fontSizeView-toolbar-item {
   width: 60px !important;
 }
-/* line 53, ../_toolbar.scss */
+/* line 55, ../_toolbar.scss */
 #toolbar-area .fontSizeView-toolbar-item a {
   display: inline-block;
   padding: 7px 5px 7px 0;
