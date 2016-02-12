@@ -70,6 +70,13 @@ OsciTk.views.Figures = OsciTk.views.BaseView.extend({
 			var thumbs = this.$el.find('figure.thumbnail');
 			this.$el.find('.figure-browser .figure-reel').width(thumbs.length * (thumbs.outerWidth(true)));
 		}
+
+		if (typeof this.slider != 'undefined') {
+			this.slider.close();
+		}
+		this.slider = new OsciTk.views.GenericSliderView({parent: this, element: this.$el.find('.figure-browser .figure-tray'), orientation: 'horizontal'});
+		this.slider.render();
+
 	},
 	render: function() {
 		var fig_data = app.collections.figures.toJSON();

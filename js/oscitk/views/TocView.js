@@ -6,15 +6,17 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 	},
 	initialize: function(options) {
 		this.parent = options.parent;
-
+ 
 		this.listenTo(Backbone, "currentNavigationItemChanged", function() {
 			this.render();
+			this.active();
 		});
 	},
 	render: function() {
 		this.$el.html(this.template({
 			items: app.collections.navigationItems.where({depth: 0})
 		}));
+
 	},
 	itemClick: function(event) {
 		event.preventDefault();
@@ -30,6 +32,13 @@ OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 		var headerSize = this.$el.find("h3").outerHeight();
 
 		var newContainerHeight = containerSize - headerSize;
-		this.$el.find("ul").height(newContainerHeight);
+		// this.$el.find("ul").height(newContainerHeight);
+		this.$el.find('#toc-container').height(newContainerHeight);
+
+		if (typeof this.slider != 'undefined') {
+			this.slider.close();
+		}
+		this.slider = new OsciTk.views.GenericSliderView({parent: this, element: this.$el.find('#toc-container'), orientation: 'vertical'});
+		this.slider.render();
 	}
 });

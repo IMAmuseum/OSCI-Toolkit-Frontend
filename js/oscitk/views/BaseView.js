@@ -8,6 +8,9 @@ OsciTk.views.BaseView = Backbone.View.extend({
 		if (typeof target === "undefined") {
 			this.$el.append(view.el);
 		}
+		else if (typeof target == 'object') {
+			target.append(view.el);
+		}
 		else {
 			this.$el.find(target).append(view.el);
 		}
