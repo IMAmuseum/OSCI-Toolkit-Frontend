@@ -41,7 +41,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		});
 
 		this.listenTo(Backbone, 'packageLoaded', function(packageModel) {
-			this.creator = $(packageModel)[0].attributes['metadata']['dc:creator']['value'];
+			//this.creator = $(packageModel)[0].attributes['metadata']['dc:creator']['value'];
+			this.creator = $(packageModel)[0].attributes['metadata']['dc:creator'];
 			this.pubTitle = packageModel.getTitle();
 			this.sections = app.collections.navigationItems.where({depth: 0});
 		});
