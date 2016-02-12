@@ -1,7 +1,7 @@
 OsciTk.views.Modal = OsciTk.views.BaseView.extend({
     template: OsciTk.templateManager.get('modal'),
-    templateNotes: OsciTk.templateManager.get('note-form'),
-    templateCites: OsciTk.templateManager.get('citation'),
+    templateNotes: OsciTk.templateManager.get('paragraph-note-form'),
+    templateCites: OsciTk.templateManager.get('paragraph-citation'),
     initialize: function(data) {
 
         this.render(data);

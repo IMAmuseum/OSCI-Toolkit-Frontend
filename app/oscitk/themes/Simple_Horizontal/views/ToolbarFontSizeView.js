@@ -1,6 +1,6 @@
 OsciTk.views.FontSize = OsciTk.views.BaseView.extend({
 	className: 'font-size-view',
-	template: OsciTk.templateManager.get('font-size'),
+	template: OsciTk.templateManager.get('toolbar-font-size'),
 	initialize: function() {
 		this.currentFontSize = 100;
 		// listen for inline toolbar item clicks in ToolbarItemView.js

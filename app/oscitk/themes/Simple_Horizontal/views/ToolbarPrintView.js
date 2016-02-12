@@ -1,6 +1,6 @@
 OsciTk.views.Print = OsciTk.views.BaseView.extend({
 	className: 'print-view',
-	template: OsciTk.templateManager.get('print'),
+	template: OsciTk.templateManager.get('toolbar-print'),
 	initialize: function() {
 		this.render();
 		this.listenTo(Backbone, "toolbarInlineClicked", function(href) {

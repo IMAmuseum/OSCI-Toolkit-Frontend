@@ -1,6 +1,6 @@
 OsciTk.views.Toc = OsciTk.views.BaseView.extend({
 	className: 'toc-view',
-	template: OsciTk.templateManager.get('toc'),
+	template: OsciTk.templateManager.get('toolbar-toc'),
 	events: {
 		'click li a': 'itemClick',
 		'click #dismiss': 'closeOverlay',

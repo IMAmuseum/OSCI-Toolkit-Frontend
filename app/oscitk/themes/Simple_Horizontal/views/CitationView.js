@@ -1,5 +1,5 @@
 OsciTk.views.Citation = OsciTk.views.BaseView.extend({
-    template: OsciTk.templateManager.get('citation'),
+    template: OsciTk.templateManager.get('paragraph-citation'),
     initialize: function(data) {
         this.render(data);
     },
