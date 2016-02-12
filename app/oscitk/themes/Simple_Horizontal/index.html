@@ -23,6 +23,9 @@
     <script src="../../../external/jquery-ui/jquery-ui.min.js"></script>
 	<!-- endbuild -->
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.0.0/imagesloaded.pkgd.min.js"></script>
+
 	<!-- build:js scripts/plugins.js -->
 	<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
 	<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
@@ -43,6 +46,7 @@
 	<script src="../../Router.js"></script>
 	<script src="../../helper.js"></script>
 	<script src="../../osci_tk_layered_image.js"></script>
+    <script src="_functions.js"></script>
 
 	<!-- template loader uses 'templateUrls' in config below -->
 	<script src="../../TemplateManager.js"></script>
@@ -123,10 +127,10 @@
 					"account": true,
 					"search": false,
 					"notes": true,
-					"citations": false,
+					"citations": true,
 					"glossary": true,
 					"multicolumn": false,
-					"layeredImage": false,
+					"layeredImage": true,
 				},
 				paragraphControls: {
 					'toggleNoteDialog': 'note',

@@ -1,3 +1,4 @@
+/*
 figure {
    -webkit-column-break-inside:avoid;
    -moz-column-break-inside:avoid;
@@ -89,3 +90,118 @@ figure.center {
    }
 }
 
+*/
+
+#section {
+
+      @mixin page-break-avoid() {
+         
+         -webkit-column-break-inside: avoid;    /* Chrome, Safari */
+          page-break-inside: avoid;          /* Theoretically FF 20+ */
+          break-inside: avoid-column;           /* IE 11 */
+          //display:table;                /* Actually FF 20+ */
+      }
+
+      // Ensures that the figure will take up the whole column
+      .figure-wrapper {
+
+         @include page-break-avoid();
+
+         page-break-after: always;
+
+         -webkit-column-break-after: always;
+                        break-after: always;
+
+         -webkit-column-break-before: always;
+                        break-before: always;
+
+         background-color: white;
+
+         height: calc(100% + 30px); 
+         width: 100%;
+
+         float: right;
+
+         position: relative;
+         z-index: 3;
+
+      }
+
+      position: relative;
+
+      figure,
+      figure .figure_content,
+      figure .figure_content object,
+      figure .figure_content object img {
+         
+         @include page-break-avoid();
+
+          //float: none !important;
+          display: block;
+
+          max-width: 100%;
+          line-height: 29px;
+
+          // All heights on these elements are overriden by JavaScript
+         //height: 0px;
+
+
+      }
+
+       figure {
+
+         margin: auto;  // ensures that the figure takes up the entire page
+         // margin-bottom: 15px; // not necessary if the figure takes up the entire page
+
+         //border: thin $gray-lighter solid;
+         border-radius: 5px;
+         padding: 6px;
+
+         // Anchor for figcaption
+         position: relative;
+
+         .figure_content {
+
+             object {
+                img {
+                  margin: 0 auto;
+                  border: 0;
+                }
+            }
+
+            .layered_image-asset {
+               &, svg {
+                  @include page-break-avoid();
+               }
+            }
+            
+         }
+
+         figcaption {
+
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+
+            background: white;
+            text-align: center;
+
+
+            p {
+               font-family: 'Lora', serif;
+               font-style: italic;
+               font-size: 14px;
+               color: #3c3c3c;
+               
+               padding-top: 4px;
+               margin: 0;
+
+                padding-left: 0px;
+               text-indent: 0px;
+            }
+
+         }
+               
+       }
+
+}

@@ -8,153 +8,397 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         'click .note-submit': 'noteSubmit',
     },
     initialize: function() {
+
+        // http://underscorejs.org/#bindAll
         _.bindAll(this, 'updateProgress');
-        // bind to window
-        var width;
-        //$('.content').scroll(this.updateProgress);
+
+        var width; // see updateProgress
         $(window).scroll(this.updateProgress);
         this.maxHeightSet = false;
 
         // bind sectionChanged
         this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
+
             var that = this;
+
             $('#determineWidth').remove();
-            $('#section-view').empty();
-            $('.header-view').empty();
-            $('#loader').show().fadeTo(500, 0.7);
+            $('#section-view').empty(); // removes all the headings, p, figure, etc.
+            $('.header-view').empty(); // changes section titles and whatnot
+
+            $('#loader').show();
 
             if (navItem) {
+
                 // loading section content
                 app.models.section = new OsciTk.models.Section({
                     uri : navItem.get('uri'),
                     id : navItem.get('id')
                 });
-                this.ContentId = navItem.get('id');
+
+                // this.model is undefined unless you call this function!
+                this.changeModel(app.models.section);
+
                 app.models.section.loadContent();
             }
         });
 
-        this.listenTo(Backbone, 'windowResized', function() {
-            this.maxHeightSet = false;
-            this.getViewportSize();
-            this.setFigureStyles();
-            this.render();
+
+        // Technically, this should fire after all the AJAX calls, but it's close enough
+        this.listenTo(Backbone, 'columnRenderEnd', function() {
+            $('#loader').hide();
+            $('#section').css('opacity', 1);
         });
 
+
+        // Used for toggling column count
+        this.listenTo(Backbone, 'setSectionColumns', function( columnCount ) {
+
+            $('#section').attr('data-columns-setting', columnCount );
+
+            setTimeout( function(){
+
+                // We're doing this through windowResized to trigger LayeredImage re-centering
+                Backbone.trigger( 'windowResized' );
+
+            }, 25)
+
+        });
+
+        // Set maximum height on figures to make sure they don't overflow their columns
+        // Also re-centers LayeredImages
+        this.listenTo(Backbone, 'windowResized', function() {
+            this.renderColumns();
+        });
+
+        // Proceed to render after the section is ready
         this.listenTo(Backbone, 'sectionLoaded', function(sectionModel) {
+
+            // We will modify this and pass it to our template via this.render
+            this.content = sectionModel.get('content')[0].children.body;
+
             this.makeIds(sectionModel);
             this.sectionId = sectionModel.get('id');
             this.getSectionTitles(this.sectionId);
-            this.getViewportSize();
-            this.setFigureStyles();
+
+            // Render will be expecting the above functions to have completed
+            this.render();
+
         });
 
-        this.listenTo(Backbone, 'layoutComplete', function() {
-            this.getFullSectionWidth();
+    },
+
+    // Layout magic happens here
+    renderColumns: function(  ) {
+
+        // Shorthand
+        var $sv = this.$el;             // $('#default-section-view')
+        var $sc = this.$el.parent();    // $('#section') i.e. section-view container
+
+        var sb = 0,   // scroll bar height compensation, currently unused
+            cg = 40,  // column-gap
+            cc,       // column-count
+            sw,       // $('#section').width()
+            cw,       // column-width
+            sh,       // $('#section').heght()
+            ch;       // column-height i.e. $sv.height()
+
+
+        // see NavigationView.js
+        Backbone.trigger("columnRenderStart");
+
+        // Apply the column gap
+        $sv.css({
+            '-webkit-column-gap': cg,
+               '-moz-column-gap': cg,
+                    'column-gap': cg
         });
 
-        this.listenTo(Backbone, "figuresAvailable", function(figures) {
-            this.figures = figures;
-            this.setFigureStyles();
+        // Determine column count. Default is 2. Force 1 on mobile.
+        // Note that this is hardcoded to match Bootstrap's breakpoints
+        cc = $sc.attr('data-columns-setting');
+        cc = typeof cc === 'undefined' ? 2 : parseInt( cc );
+        cc = $(window).width() < 768 ? 1 : cc; 
+
+        // Used for page scrolling in NavigationView.js
+        $sc.attr('data-columns-rendered', cc );
+
+        // Reset all stats for the section view
+        $sv.css({
+            '-webkit-column-width': 'auto',
+               '-moz-column-width': 'auto',
+                    'column-width': 'auto',
+            '-webkit-column-count': 'auto',
+               '-moz-column-count': 'auto',
+                    'column-count': 'auto',
+                           'width': 'auto',
+                          'height': 'auto'
         });
+
+        // Determine column width using width of #section 
+        sw = $sc.width();
+        cw = (sw/cc) - cg/2; // account for one gap
+        
+        $('#default-section-view').css({
+            '-webkit-column-width': cw,
+               '-moz-column-width': cw,
+                    'column-width': cw
+        }); 
+        
+        
+
+
+
+        // Save context to avoid setting window variables
+        var that = this;
+
+        // Now resize figures to the correct height
+        this.$el.find('figure').each( function( i, e ) {
+
+            // Shorthand heirarchy
+            var $s = $('#section');
+            var $w = null; // wrapper
+
+            var $f = $(e);
+            var $d = $f.find('.figure_content');
+            var $o = $d.find('object');
+            var $i = $o.find('img');
+
+            var $c = $f.find('figcaption');
+
+
+            // Check if the figure is wrapped; otherwise, wrap it
+            if( $f.parent().attr('id') !== $f.attr('id') + '-wrapper' ) {
+                $w = $("<div></div>").attr('id', $f.attr('id') + '-wrapper');
+                $w.addClass('figure-wrapper');
+                $w.addClass('noSwipe'); // see NavigationView.js
+                $f.wrap( $w )
+            }
+
+            // Figure was wrapped in a copy of $w, not $w itself, so select it again
+            $w = $f.parent();
+
+            // Ensure that the figure (via its wrapper) always takes up a full column
+            $w.css({
+                'width' : cw, // column-width
+                'height' : $s.innerHeight() - sb // scrollbar offset
+            }); 
+
+            // Expand figure to use all the available space
+            // TODO: Account for margins?
+            $f.css({
+                'height' : $w.innerHeight(),
+                'width' : 'auto' // column-width
+            });
+
+            // IE hot-fix: remove float from .figure-wrapper
+            var is_ie = detectIE(); // returns 0 or IE version, see _functions.js
+            if( is_ie ) {
+                $w.css({
+                    'float' : 'none'
+                });
+            }
+
+            // In IE, figcaptions get pushed to next column if bottom: 0 is set
+            // Therefore, we must set bottom: 0 here instead of in _figures.css
+            // Furthermore, position must be (re)set to absolute for calc,
+            //   but in ie, it will be set to relative later to avoid overflow
+            if( !is_ie ) {
+                $c.css({
+                    'bottom' : 0
+                });
+            }else{
+                $c.css({
+                    'position' : 'relative'
+                });
+            }
+
+            setTimeout( function() {
+                var is_ie = detectIE();
+                if( is_ie ) {
+                    $c.css({
+                        'position' : 'relative'
+                    });
+                }
+            }, 250 );
+
+            // Set the dimensions of .figure_content to fill the space, sans figcaption
+            $d.css({
+                'height' : $f.innerHeight() - $c.outerHeight(true) - ( is_ie ? 80 : 10 ), // - 40 for IE ?
+                'width' : 'auto'
+            });
+
+            // Set dimensions of image to fill the .figure_content div
+            $i.css({
+                'height' : $d.innerHeight(),
+                'width' : 'auto'
+            });
+
+            // In FireFox, figcaption will not appear unless it is first-child of figure
+            // This moves the figcaption above the LayeredImage; necessary compromise
+            // I think this is a conflict with CSS3 columns, which will be fixed in future versions
+            var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+            if( is_firefox ) {
+                //console.log( 'I am firefox!' );
+                $d.before( $c );
+            }
+
+            // Layered image init
+            // <object/> is removed in the AJAX call, so this will be called only on first load of section
+            var url = $f.find('object').attr('data');
+            if (url !== undefined) {
+
+                $.ajax({
+
+                    url: url,
+                    type: 'GET',
+                    dataType: 'html',
+                    success: function(data) {
+
+                        var $content = $(data).filter('.layered_image-asset').first();
+                        var $container = $f.find('.figure_content');
+                        
+
+                        $container.empty();
+                        $content.appendTo( $container );
+
+
+                        var li = new window.LayeredImage( $content );
+
+                        // This forces a re-centering of the layered image on windows.resize
+                        that.listenTo(Backbone, 'windowResized', function(e) {
+                            setTimeout( function() {
+
+                                li.map.resize(); // recenter
+                                
+                                try {
+                                    li.resetZoomRange(); // ensure it can scale down
+                                    li.reset(); // reset size and options
+                                    li.map.resize();
+                                } catch(e) {
+                                    // slider not init'd error
+                                }
+                                
+                            }, 100 ); // 250 is an estimate, tweak it if needed
+                        });
+
+                        // Chrome hack; moves figures back and forth, fixing mid-figure column breaks. Magic!
+                        that.listenTo(Backbone, 'windowResized', function(e) {
+
+                            var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+                            if( is_chrome ) {
+
+                                $('.figure-wrapper').each( function(i,e) {
+                                    var $fig = $(this);
+                                    $fig.prev().before( $fig );
+                                    $fig.next().after( $fig );
+                                });
+
+                            }
+
+                        });
+
+                    }
+
+                });
+            }
+        });
+
+
+        // Now that the height of all elements is determined,
+        // Increase number of columns until everything fits vertically,
+        // Or until there is no more change in height
+        var ch = 0; var _ch = -1; var i = cc;
+        do {
+
+            $sv.css({
+                '-webkit-column-count': i.toString(),
+                   '-moz-column-count': i.toString(),
+                        'column-count': i.toString()
+            }); 
+
+            $sv.width( i * cw + (i - 1) * cg);
+
+            _ch = ch;
+             ch = this.$el.height();
+            
+            // console.log( _ch, ch );
+
+            i+=1;
+
+        } while( ch > $sc.height() && ch !== _ch );
+
+        // FireFox needs explicit height set for the section view
+        //$sv.css('height', $sc.innerHeight() );
+
+        // Safari will break if the figure wrappers have explicit heights 
+        var is_safari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        if( is_safari ) {
+            $('.figure-wrapper').css('height', '' ); 
+        }
+
+        // see NavigationView.js
+        Backbone.trigger("columnRenderEnd");
+
     },
 
     render: function() {
-        $('#loader').hide();
-        this.$el.html(this.template({sectionTitle: this.sectionTitle, content: $(this.content).html()}));
+
+        //clean up the view incase we have already rendered this before
+        this.model.removeAllPages();
+        this.removeAllChildViews();
+
+        // Apply template set above + render the html
+        this.$el.html(
+            this.template( {
+                sectionTitle: this.sectionTitle,
+                sectionSubtitle: this.sectionSubtitle,
+                //sectionThumbnail: this.sectionThumbnail,
+                content: $(this.content).html()
+            } )
+        );
+
         Backbone.trigger("layoutComplete");
+
+        // Used to ensure that all figures are of a conistent width
+        $('#section').imagesLoaded( function() {
+            Backbone.trigger("windowResized");
+        });
+
         return this;
     },
 
+    // Get section sectionTitle, subtitle for use in template
     getSectionTitles: function(sectionId) {
-        // get section sectionTitle, subtitle, and thumbnail for use in template
+
         _.each(app.collections.navigationItems.models, function(item) {
             if (item.get('id') == sectionId ) {
                 this.sectionTitle = item.get('title');
                 this.sectionSubtitle = item.get('subtitle');
-                this.sectionThumbnail = item.get('thumbnail');
             }
         }, this);
+
         this.render();
+
     },
 
     updateProgress: function() {
-        var scrollValue = $(window).scrollLeft();
-        //var sectionValue = $('.content').scrollLeft();
-        var winWidth = $(window).width();
-        var sectionValue = $('body').scrollLeft() - winWidth;
-
-        // Check if test element exists or not
-        if( $('#determineWidth').length == 0) {
-
-            // Add element to test the width of the content
-            $('#section').append('<div id="determineWidth" style="float: right;"></div>');
-        }
-
-        // Get the wide of the content
-        var dw = $('#determineWidth').position().left;
-
-        // Set the width of the content minus the screen size
-        // width = ((+dw) - (+scrollValue);
-        width = dw - winWidth;
 
 
-        if (scrollValue > winWidth){
-            // Set the percentage of the progress width
-            var percent = Math.floor((sectionValue/width)*100);
-        } else {
-            var percent = 0;
-            sectionValue = 0;
-        }
+        var value = $(document).scrollLeft();
+        var max = $('body').innerWidth();
+            max -= $(window).width();
 
-        // Set variables as attributes on progress bar
-        $('.progress .progress-bar').attr('aria-valuemax', width)
-            .attr('aria-valuenow', sectionValue)
-            .attr('style', 'width: '+percent+'%');
+        var percent = (value/max)*100;
 
+        console.log( value, max, percent );
+
+        // Just some debug info
+        $('.progress .progress-bar').attr('data-max', max);
+        $('.progress .progress-bar').attr('data-now', value);
+
+        $('.progress .progress-bar').attr('style', 'width: ' + percent + '%');
     },
 
-    getViewportSize: function() {
-        var w = window,
-            d = document,
-            e = d.documentElement,
-            g = d.getElementsByTagName("body")[0],
-            x = w.innerWidth||e.clientWidth||g.clientWidth,
-            y = w.innerHeight||e.clientHeight||g.clientHeight;
-        this.x = x;
-        this.y = y-60;
-
-        if (this.x > 767){
-            // get reflow column styles
-            this.columnWidthStyle = this.getPrefixedStyle('columnWidth');
-            this.columnGapStyle = this.getPrefixedStyle('columnGap');
-            this.spreadColumnWidth = this.x / 2.5;
-            this.spreadGapWidth = this.spreadColumnWidth / 5;
-            this.reflowStyle = 'height:'+ this.y +'px; ' + this.columnGapStyle + ': '
-                +this.spreadGapWidth+'px; '+this.columnWidthStyle +': '+this.spreadColumnWidth+'px;';
-            $('#section').attr("style", this.reflowStyle);
-        } else {
-            $('#section').attr("style", "");
-        }
-    },
-
-    getFullSectionWidth: function() {
-        var d = document,
-            e = d.documentElement,
-            g = d.getElementsByTagName("body")[0],
-            sx = g.scrollWidth;
-
-            this.sectionWidth = sx;
-            this.numPages = Math.floor(this.sectionWidth / (this.x - 80));
-            // move width is page width + gap width - padding on container
-            this.moveWidth = this.x + this.spreadGapWidth - 80;
-
-        if (this.x > 767){
-            $('#section').attr("style", this.reflowStyle);
-        } else {
-            $('#section').attr("style", "");
-        }
-    },
 
     getPrefixedStyle: function(unprefixed) {
         var vendors = ["Webkit", "Moz", "O", "ms" ],
@@ -224,51 +468,5 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         }
     },
 
-    setFigureStyles: function() {
-        _.each(this.figures, function(figure) {
-            var position = $(figure).data('position');
-            var fallback_content = $(figure).find('.figure_content > object > .fallback-content').html();
-            var figcaption = $(figure).find('figcaption').html();
-            $(figure).find('.figure_content').html(fallback_content);
-            switch(position) {
-                // full page
-                case 'p':
-                    var imgClass = 'fullpage';
-                    break;
-                // plate
-                case 'plate':
-                    var imgClass = 'plate';
-                    break;
-                // full page plate
-                case 'platefull':
-                    var imgClass = 'platefull';
-                    break;
-                // top left
-                case 'tl':
-                    var imgClass = 'top left';
-                    break;
-                // bottom left
-                case 'bl':
-                    var imgClass = 'bottom left';
-                    break;
-                // top right
-                case 'tr':
-                    var imgClass = 'top right';
-                    break;
-                // bottom right
-                case 'br':
-                    var imgClass = 'bottom right';
-                    break;
-                // inline, top, bottom
-                case 'i':
-                case 't':
-                case 'b':
-                    var imgClass = 'center';
-                    break;
-            }
-            $(figure).addClass(imgClass);
-            $(figure).find("div > img").addClass(imgClass);
-        }, this);
-    }
 
 });
