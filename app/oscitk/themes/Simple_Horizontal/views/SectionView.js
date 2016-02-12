@@ -385,18 +385,17 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
 
         var value = $(document).scrollLeft();
-        var max = $('body').innerWidth();
+        var max = this.$el.innerWidth();
             max -= $(window).width();
 
         var percent = (value/max)*100;
-
-        console.log( value, max, percent );
 
         // Just some debug info
         $('.progress .progress-bar').attr('data-max', max);
         $('.progress .progress-bar').attr('data-now', value);
 
         $('.progress .progress-bar').attr('style', 'width: ' + percent + '%');
+
     },
 
 
