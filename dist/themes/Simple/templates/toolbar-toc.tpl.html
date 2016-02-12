@@ -1,7 +1,7 @@
 <ul class="toc">
 	<% _.each(items, function(item) { %>
 		<li class="toc-item<% if (item.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } %>">
-			<a data-section-id="<%= item.id %>" href="#">
+			<a data-section-id="<%= item.id %>" href="javascript:;">
 				<div class="toc-item-thumbnail">
 					<% if (item.get('thumbnail')) { %>
 						<img src="<%= item.get('thumbnail') %>">

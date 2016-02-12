@@ -19,7 +19,7 @@ with (obj) {
  if (typeof(headerImage) !== "undefined") { ;
 __p += '\n<div class="container-header" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url(\'' +
 ((__t = ( headerImage )) == null ? '' : __t) +
-'\');">\n';
+'\'); background-size: cover;">\n';
  } else { ;
 __p += '\n<div class="container-header">\n';
  } ;
