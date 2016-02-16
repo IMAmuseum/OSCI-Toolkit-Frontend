@@ -1,7 +1,3 @@
-$popover-height: 160px;
-$popover-color: #52818b;
-$popover-color-btn: white;
-
 .popover {
 
 	border-radius: 5px;
@@ -32,21 +28,19 @@ $popover-color-btn: white;
 			max-width: 200px;
 			max-height: 240px;
 
-			font-family: 'Lato', sans-serif;
-
 			.nav {
 				li {
 					a {
 						color: white;
 						&:hover {
-							color: #3c3c3c;
+							color: $osci-color-text;
 							border-color: transparent;
 						}
 					}
 
 					&.active {
 						a {
-							color: #3c3c3c;
+							color: $osci-color-text;
 							border: thin solid transparent;
 						}
 					}

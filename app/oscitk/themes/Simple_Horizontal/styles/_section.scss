@@ -1,7 +1,3 @@
-$header-height: 41px;
-$color-light-red: maroon;
-$color-dark-red: red;
-
 #section-container.container {
 
 	margin-top: calc( #{$header-height} + 15px);
@@ -80,8 +76,8 @@ $color-dark-red: red;
 
 		p.content-paragraph {
 
- 			padding-left: 29px;
-		    text-indent: -12.5px;
+ 			padding-left: 30px;
+		    text-indent: -15px;
 
 			font-size: 1em;
 			line-height: 1.8125em;
@@ -92,18 +88,18 @@ $color-dark-red: red;
 			// See ../views/FootnotesView.js
 			.footnote-reference {
 
-				padding-left: 9px;
+				padding-left: 14px;
 
 				margin: 0 5px;
 				display: inline-block;
 				position: relative;
 				
-				top: -5px;
+				top: -2px;
 				width: 15px;
 				height: 15px;
 				border-radius: 50%;
 
-				background: $color-light-red;				
+				background: $osci-color-secondary;				
 				color: #fff;
 
 				font-size: 12px;
@@ -111,9 +107,9 @@ $color-dark-red: red;
 				text-align: center;
 								
 				&:hover {
-					color:#fff;
+					color: #fff;
 					text-decoration: none;
-					background: $color-dark-red;
+					background: $osci-color-primary;
 				}
 				
 			}
@@ -151,10 +147,10 @@ $color-dark-red: red;
 	position: relative;
 	text-indent: -9999em;
 
-	border-top: 1.1em solid rgba(184, 41, 39, 0.2);
-	border-right: 1.1em solid rgba(184, 41, 39, 0.2);
-	border-bottom: 1.1em solid rgba(184, 41, 39, 0.2);
-	border-left: 1.1em solid rgb(184, 41, 39);
+	border-top: 1.1em solid rgba( $osci-color-primary, 0.2);
+	border-right: 1.1em solid rgba( $osci-color-primary, 0.2);
+	border-bottom: 1.1em solid rgba( $osci-color-primary, 0.2);
+	border-left: 1.1em solid $osci-color-primary;
 
 	-webkit-transform: translateZ(0);
 	-ms-transform: translateZ(0);

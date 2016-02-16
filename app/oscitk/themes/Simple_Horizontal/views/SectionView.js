@@ -11,6 +11,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // http://underscorejs.org/#bindAll
         _.bindAll(this, 'updateProgress');
 
+
         var width; // see updateProgress
         $(window).scroll(this.updateProgress);
         this.maxHeightSet = false;
@@ -24,6 +25,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             $('#section-view').empty(); // removes all the headings, p, figure, etc.
             $('.header-view').empty(); // changes section titles and whatnot
 
+
+            $('#section').css('opacity', 0); // straight-up hiding it would be bad
             $('#loader').show();
 
             if (navItem) {

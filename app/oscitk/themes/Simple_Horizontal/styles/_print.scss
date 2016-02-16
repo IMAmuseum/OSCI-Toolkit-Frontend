@@ -1,28 +1,28 @@
 @media print {
-  .content {
-    position: relative;
-  }
+	.content {
+		position: relative;
+	}
 
-  #section {
-    page-break-before: always;
-    height: auto !important;
-    display: table;
-  }
+	#section {
+		page-break-before: always;
+		height: auto !important;
+		display: table;
+	}
 
-  figure {
-    page-break-inside: avoid;
-    width: 100% !important;
-    float: none !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    img {
-        max-width: 40% !important;
-        max-height: inherit !important;
-        float: none !important;
-    }
-  }
+	figure {
+		page-break-inside: avoid;
+		width: 100% !important;
+		float: none !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		img {
+				max-width: 40% !important;
+				max-height: inherit !important;
+				float: none !important;
+		}
+	}
 
-  div, p, ul, ol{
-      page-break-inside: avoid;
-  }
+	div, p, ul, ol{
+			page-break-inside: avoid;
+	}
 }
