@@ -4,6 +4,10 @@ html {
 	overflow-y: hidden;
 }
 
+// For the plus icons representing notes
+$paragraph-button-size: 20px;
+$paragraph-button-margin: 10px;
+
 @import "bootstrap/bootstrap";
 @import "typography";
 @import "browsehappy";
@@ -16,10 +20,12 @@ html {
 @import "navbar";
 @import "layered-image";
 @import "figures";
-@import "footnotes";
 @import "tooltips";
 @import "overlay";
 @import "notes";
 @import "layout";
-@import "citations";
 @import "print";
+
+@import "paragraph-popover";
+@import "paragraph-notes";
+@import "paragraph-citation";

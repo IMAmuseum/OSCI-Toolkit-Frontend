@@ -8,13 +8,9 @@
 			<h4>MLA</h4>
 			<p><% if (creator.length > 0) { %> <%= creator + ", " %> <% } %>&ldquo;<em><%= title %></em>,&rdquo; in <span style="text-decoration:underline;"><%= publicationTitle %></span>, ed. <%= editor %> (<%= publisher %>), <%= formattedDate %>, <%= paragraphNumber %>.</p>
 		</div>
-	</div>
-	<div class="citation-url">
-		<h4>Citation URL</h4>
-		<input disabled="disabled" value="<%= url %>" />
-	</div>
-	<div class="reference-text">
-		<h4>Reference Text</h4>
-		<textarea disabled="disabled"><%= referenceText %></textarea>
+		<div id="citation-url" class="citation">
+			<h4>Citation URL</h4>
+			<p><%= url %></p>
+		</div>
 	</div>
 </div>

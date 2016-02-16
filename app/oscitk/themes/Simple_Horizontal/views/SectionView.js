@@ -3,8 +3,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     template: OsciTk.templateManager.get('section'),
     events: {
         'scroll' : 'updateProgress',
-        'click .content-paragraph': 'paragraphClicked',
-        'click .paragraph-button': 'paragraphClicked',
+        'click .paragraph-button': 'paragraphButtonClicked',
         'click .note-submit': 'noteSubmit',
     },
     initialize: function() {
@@ -443,10 +442,10 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         }, this);
     },
 
-    paragraphClicked: function(e) {
+    paragraphButtonClicked: function(e) {
         var p = $(e.currentTarget);
         var paragraphNum = p.data("paragraph_number");
-        Backbone.trigger("paragraphClicked", paragraphNum);
+        Backbone.trigger("paragraphButtonClicked", paragraphNum);
     },
 
     noteSubmit: function(e) {

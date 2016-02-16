@@ -183,7 +183,7 @@ __p +=
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/paragraph-citation.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/paragraph-cite.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -224,41 +224,48 @@ __p += '&ldquo;<em>' +
 ((__t = ( formattedDate )) == null ? '' : __t) +
 ', ' +
 ((__t = ( paragraphNumber )) == null ? '' : __t) +
-'.</p>\n\t\t</div>\n\t</div>\n\t<div class="citation-url">\n\t\t<h4>Citation URL</h4>\n\t\t<input disabled="disabled" value="' +
+'.</p>\n\t\t</div>\n\t\t<div id="citation-url" class="citation">\n\t\t\t<h4>Citation URL</h4>\n\t\t\t<p>' +
 ((__t = ( url )) == null ? '' : __t) +
-'" />\n\t</div>\n\t<div class="reference-text">\n\t\t<h4>Reference Text</h4>\n\t\t<textarea disabled="disabled">' +
-((__t = ( referenceText )) == null ? '' : __t) +
-'</textarea>\n\t</div>\n</div>';
+'</p>\n\t\t</div>\n\t</div>\n</div>';
 
 }
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/paragraph-note-form.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/paragraph-notes.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<textarea data-paragraph_number="' +
-((__t = ( id )) == null ? '' : __t) +
+__p += '<textarea class="note-form-wrapper" data-paragraph_number="' +
+((__t = ( paragraph_number )) == null ? '' : __t) +
 '" data-id="' +
 ((__t = ( cid )) == null ? '' : __t) +
 '">' +
-((__t = ( noteText )) == null ? '' : __t) +
-'</textarea>\n<button type="button" class="btn btn-primary btn-block note-submit">Add Note</button>';
+((__t = ( note )) == null ? '' : __t) +
+'</textarea>\n<button id=\'note-submit\' type=\'button\' class=\'btn btn-primary btn-block\'>Save Note</button>';
 
 }
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/paragraph-note-popup.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/paragraph-popover.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<div class=\'overlay\'>\n    <!-- TODO: Check if this is obsolete-->\n    <div id="dismiss">\n        <button class="btn btn-link">\n        <span class="glyphicon glyphicon-remove"></span>\n        </button>\n    </div>\n    <div class="container">\n        <div class="row" style="margin-top: 30vh;">\n            <div class="col-md-8 col-md-offset-2">\n                <div class="panel panel-default">\n                    <div class="panel-heading">\n                        <h3>Notes</h3>\n                    </div>\n                    <div class="panel-body">\n\n                        <div class="note-popup">\n                            <form class="noteForm">\n                            \t<textarea>' +
-((__t = ( note )) == null ? '' : __t) +
-'</textarea>\n                                <label for="note-tags">Tags:</label>\n                                <input type="text" name="note-tags" id="note-tags" value="' +
-((__t = ( tags.join(', ') )) == null ? '' : __t) +
-'" />\n                            </form>\n                            <div class="status">Saved</div>\n                        </div>\n\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>';
+__p += '<div class="popover-wrapper">\n\n';
+ if( noteForm ) { ;
+__p += '\n\n    <ul class="nav nav-tabs" role="tablist">\n        <li role="presentation" class="active">\n            <a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Notes</a>\n        </li>\n        <li role="presentation">\n            <a href="#cite" aria-controls="cite" role="tab" data-toggle="tab">Cite</a>\n        </li>\n    </ul>\n\n    <div class="tab-content">\n        <div role="tabpanel" class="tab-pane active" id="notes">\n            ' +
+((__t = ( noteForm )) == null ? '' : __t) +
+'\n        </div>\n        <div role="tabpanel" class="tab-pane" id="cite">\n\n';
+ } ;
+__p += '\n            <div id="cite-target">\n                ' +
+((__t = ( citation )) == null ? '' : __t) +
+'\n            </div>\n';
+ if( noteForm ) { ;
+__p += '\n\n        </div>\n    </div>\n';
+ } ;
+__p += '\n\n</div>\n\n\n';
 
 }
 return __p

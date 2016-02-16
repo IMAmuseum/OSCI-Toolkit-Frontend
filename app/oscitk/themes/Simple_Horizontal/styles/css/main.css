@@ -9195,104 +9195,11 @@ images.image_opaque {
   border: 2px solid black;
 }
 
-/*
-figure {
-   -webkit-column-break-inside:avoid;
-   -moz-column-break-inside:avoid;
-   -o-column-break-inside:avoid;
-   -ms-column-break-inside:avoid;
-   column-break-inside:avoid;
-   -webkit-break-inside:avoid;
-   -moz-break-inside:avoid;
-   -o-break-inside:avoid;
-   -ms-break-inside:avoid;
-   break-inside:avoid;
-   margin: 20px;
-   max-height: auto;
-   position: relative;
-   text-align: center;
-}
-
-.figure_content {
-   img {
-      border: 2px solid $gray-lighter;
-      max-width: 100%;
-   }
-}
-
-figcaption {
-   background: $gray-lighter;
-   font-size: 14px;
-   padding: 4px 4px 2px 6px;
-   text-align: center;
-   width: 100%;
-
-   p {
-      font-size: 14px;
-      font-family: $font-family-sans-serif;
-   }
-}
-
-// figure.left {
-//    float: left;
-//    margin-right: 50px;
-//    margin-left: 0;
-// }
-
-// img.left {
-//    float: left;
-//    max-height: 50vh;
-// }
-
-// figure.right {
-//    float: right;
-//    margin-left: 40px;
-//    margin-right: 0;
-// }
-
-// img.right {
-//    float: right;
-//    max-height: 50vh;
-// }
-
-figure.plate,
-figure.center {
-   margin-left: auto;
-   margin-right: auto;
-   max-width: 100%;
-   width: 50%;
-   img, figcaption {
-      width: 100%;
-   }
-   @media (max-width: $screen-sm) {
-      width: 90%;
-   }
-}
-
-.osci-figure {
-   background: $gray-lighter;
-}
-
-@media (min-width: $screen-sm) {
-   figure {
-      max-height: 100%;
-      overflow: auto;
-      padding-bottom: 36px;
-   }
-
-   figcaption {
-      bottom: 0;
-      position: absolute;
-      width: 100%;
-   }
-}
-
-*/
-/* line 95, ../_figures.scss */
+/* line 1, ../_figures.scss */
 #section {
   position: relative;
 }
-/* line 106, ../_figures.scss */
+/* line 12, ../_figures.scss */
 #section .figure-wrapper {
   -webkit-column-break-inside: avoid;
   /* Chrome, Safari */
@@ -9312,7 +9219,7 @@ figure.center {
   position: relative;
   z-index: 3;
 }
-/* line 132, ../_figures.scss */
+/* line 38, ../_figures.scss */
 #section figure,
 #section figure .figure_content,
 #section figure .figure_content object,
@@ -9327,19 +9234,19 @@ figure.center {
   max-width: 100%;
   line-height: 29px;
 }
-/* line 151, ../_figures.scss */
+/* line 57, ../_figures.scss */
 #section figure {
   margin: auto;
   border-radius: 5px;
   padding: 6px;
   position: relative;
 }
-/* line 166, ../_figures.scss */
+/* line 72, ../_figures.scss */
 #section figure .figure_content object img {
   margin: 0 auto;
   border: 0;
 }
-/* line 173, ../_figures.scss */
+/* line 79, ../_figures.scss */
 #section figure .figure_content .layered_image-asset, #section figure .figure_content .layered_image-asset svg {
   -webkit-column-break-inside: avoid;
   /* Chrome, Safari */
@@ -9348,7 +9255,7 @@ figure.center {
   break-inside: avoid-column;
   /* IE 11 */
 }
-/* line 180, ../_figures.scss */
+/* line 86, ../_figures.scss */
 #section figure figcaption {
   position: absolute;
   bottom: 0;
@@ -9356,7 +9263,7 @@ figure.center {
   background: white;
   text-align: center;
 }
-/* line 190, ../_figures.scss */
+/* line 96, ../_figures.scss */
 #section figure figcaption p {
   font-family: 'Lora', serif;
   font-style: italic;
@@ -9366,28 +9273,6 @@ figure.center {
   margin: 0;
   padding-left: 0px;
   text-indent: 0px;
-}
-
-/* line 1, ../_footnotes.scss */
-.footnote-reference {
-  margin: 0 5px;
-  display: inline-block;
-  position: relative;
-  top: -5px;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  font-size: 12px;
-  color: #fff;
-  line-height: 15px;
-  text-align: center;
-  background: #52818B;
-}
-/* line 15, ../_footnotes.scss */
-.footnote-reference:hover {
-  color: #fff;
-  text-decoration: none;
-  background: #3f636b;
 }
 
 /* line 1, ../_tooltips.scss */
@@ -9502,31 +9387,6 @@ figure.center {
     margin-top: 0;
   }
 }
-/* line 1, ../_citations.scss */
-.tab-content {
-  padding-top: 10px;
-}
-
-/* line 6, ../_citations.scss */
-.citation-wrapper h4 {
-  font-size: 14px;
-  margin-top: 3px;
-}
-/* line 11, ../_citations.scss */
-.citation-wrapper p {
-  font-size: 12px;
-}
-/* line 15, ../_citations.scss */
-.citation-wrapper input {
-  font-size: 12px;
-  width: 100%;
-}
-
-/* line 21, ../_citations.scss */
-.citation-url {
-  padding-bottom: 10px;
-}
-
 @media print {
   /* line 2, ../_print.scss */
   .content {
@@ -9559,4 +9419,153 @@ figure.center {
   div, p, ul, ol {
     page-break-inside: avoid;
   }
+}
+/* line 5, ../_paragraph-popover.scss */
+.popover {
+  border-radius: 5px;
+  border: none;
+  background-color: #52818b;
+}
+/* line 13, ../_paragraph-popover.scss */
+.popover.right > .arrow, .popover.right > .arrow:after {
+  border-right-color: #52818b;
+}
+/* line 19, ../_paragraph-popover.scss */
+.popover.top > .arrow, .popover.top > .arrow:after {
+  border-top-color: #52818b;
+}
+/* line 24, ../_paragraph-popover.scss */
+.popover .popover-content {
+  padding: 0;
+}
+/* line 29, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper {
+  padding: 9px;
+  max-width: 200px;
+  max-height: 240px;
+  font-family: 'Lato', sans-serif;
+}
+/* line 39, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper .nav li a {
+  color: white;
+}
+/* line 41, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper .nav li a:hover {
+  color: #3c3c3c;
+  border-color: transparent;
+}
+/* line 48, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper .nav li.active a {
+  color: #3c3c3c;
+  border: thin solid transparent;
+}
+/* line 57, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper textarea {
+  border: none;
+  outline: none;
+  resize: none;
+  font-size: 14px;
+  line-height: 16px;
+  height: 115px;
+  width: 100%;
+  padding: 5px;
+  color: #333;
+}
+/* line 74, ../_paragraph-popover.scss */
+.popover .popover-content .popover-wrapper button {
+  font-size: 15px;
+  font-weight: 200;
+  background-color: white;
+  color: #52818b;
+  border: thin solid transparent;
+}
+
+/* line 87, ../_paragraph-popover.scss */
+.tab-content {
+  height: 160px;
+}
+
+/* line 92, ../_paragraph-popover.scss */
+#cite-target {
+  height: 160px;
+  width: 182px;
+  background-image: url(../../images/ajax-loader.gif);
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* line 1, ../_paragraph-notes.scss */
+.note-form-wrapper {
+  height: 160px;
+  display: block;
+}
+
+/* line 6, ../_paragraph-notes.scss */
+.paragraph-controls {
+  display: inline-block;
+  margin-right: 10px;
+  z-index: 2;
+}
+/* line 13, ../_paragraph-notes.scss */
+.paragraph-controls .btn {
+  text-transform: uppercase;
+}
+/* line 21, ../_paragraph-notes.scss */
+.paragraph-controls .paragraph-button {
+  background-image: url(../../images/plus-grey.png);
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  width: 20px;
+  height: 20px;
+  border: 0;
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+}
+/* line 35, ../_paragraph-notes.scss */
+.paragraph-controls .paragraph-button.withNotes {
+  background-image: url(../../images/plus-blue.png);
+}
+
+/* line 45, ../_paragraph-notes.scss */
+#note-submit {
+  margin-top: 10px;
+}
+
+/* line 1, ../_paragraph-citation.scss */
+.citation-wrapper {
+  background: #FFF;
+  overflow-y: scroll;
+  height: 160px;
+}
+/* line 7, ../_paragraph-citation.scss */
+.citation-wrapper .citations {
+  padding: 0 10px 5px 10px;
+}
+/* line 13, ../_paragraph-citation.scss */
+.citation-wrapper .citations .citation h4 {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+/* line 18, ../_paragraph-citation.scss */
+.citation-wrapper .citations .citation > p {
+  font-size: 12px !important;
+  line-height: 14px !important;
+  /* Breaking long URLs */
+  white-space: pre !important;
+  /* CSS 2.0 */
+  white-space: pre-wrap !important;
+  /* CSS 2.1 */
+  white-space: pre-line !important;
+  /* CSS 3.0 */
+  white-space: -pre-wrap !important;
+  /* Opera 4-6 */
+  white-space: -o-pre-wrap !important;
+  /* Opera 7 */
+  white-space: -moz-pre-wrap !important;
+  /* Mozilla */
+  white-space: -hp-pre-wrap !important;
+  /* HP Printers */
+  word-wrap: break-word !important;
+  /* IE 5+ */
 }
