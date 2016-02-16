@@ -26,15 +26,9 @@ $color-dark-red: red;
 
 	// This constrains #section b/w the #header and #navbar
 	width: 100%;
-
-	// hide scrollbar
 	height: 100%;
 
 	padding: 0px 15px;
-
-	// Unsupported CSS3
-	//scroll-snap-points-x: repeat(100%);
-	//scroll-snap-type: mandatory;
 
 	#section-view {
 
@@ -60,15 +54,8 @@ $color-dark-red: red;
 		// Chapter #
 		h2 {
 
-			//*
 			font-size: 0.875em;
 			line-height: 1.14285714285714em;
-			//*/
-
-			/*
-			font-size: 14px;
-			line-height: 16px;
-			//*/
 
 			text-align: center;
 			text-transform: uppercase;
@@ -81,20 +68,14 @@ $color-dark-red: red;
 
 			font-weight: 700;
 
-			/*
-			font-size: 36px;
-			line-height: 40px;
-			//*/
-
-			//*
 			font-size: 2.25em;
 			line-height: 1.1111111111111em;
-			//*/
 
 			text-align: center;
 			
 			margin-bottom: 16px;
 			color: #3c3c3c;
+			
 		}
 
 		p.content-paragraph {

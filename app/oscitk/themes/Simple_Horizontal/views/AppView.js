@@ -9,8 +9,6 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 		// initialize all possible views
 		app.views = {
-
-			titleView: new OsciTk.views.Title(),
 			headerView: new OsciTk.views.Header(),
 
 			// Section must be init'd after title

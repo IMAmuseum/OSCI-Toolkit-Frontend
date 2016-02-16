@@ -10,16 +10,6 @@ __p += '<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></d
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/font.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<h3>Reading Settings</h3>\n<div class="font-control">\n\t<h3>Font Size</h3>\n\t<a href="#font-larger" class="larger font-button">A</a>\n\t<a href="#font-smaller" class="smaller font-button">A</a>\n</div>\n<div class="theme-control">\n\t<h3>Theme</h3>\n\t<a href="#normal" class="theme-button">Normal</a>\n\t<a href="#sepia" class="theme-button">Sepia</a>\n\t<a href="#night" class="theme-button">Night</a>\n</div>';
-
-}
-return __p
-};
-
 this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/header.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
@@ -290,16 +280,6 @@ __p += '\n<h3>' +
 __p += '\n<hr>\n' +
 ((__t = ( content )) == null ? '' : __t) +
 '\n';
-
-}
-return __p
-};
-
-this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/title.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<h1 id="publication-title"></h1>';
 
 }
 return __p
