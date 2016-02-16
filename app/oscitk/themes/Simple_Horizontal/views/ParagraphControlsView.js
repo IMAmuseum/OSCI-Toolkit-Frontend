@@ -6,6 +6,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         });
 
         this.listenTo(Backbone, 'notesLoaded', function(params) {
+            //console.log('notesLoaded');
             this.notesLoaded = true;
             this.render();
         });
@@ -16,7 +17,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
         this.listenTo(Backbone, 'windowResized', function() {
             if (this.notesLoaded) {
-                this.render();
+                //this.render();
             }
         });
 
@@ -31,6 +32,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         // get all paragraph with id and append controls
         var paragraphs = $('.content-paragraph');
         var i = 1;
+        //console.log( paragraphs );
         _.each(paragraphs, function(paragraph) {
             var note = this.checkForNote({
                 content_id: 'osci-content-'+i,

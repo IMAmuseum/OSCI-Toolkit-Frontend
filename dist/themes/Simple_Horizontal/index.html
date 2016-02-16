@@ -12,6 +12,9 @@
 
 	<script src="scripts/vendor.js"></script>
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.0.0/imagesloaded.pkgd.min.js"></script>
+
 	<script src="scripts/plugins.js"></script>
 
 	<script src="scripts/main.js"></script>
@@ -28,7 +31,7 @@
 					'OsciTkNote': '/api/notes/'
 				},
 				toolbarItems: [
-					{view: 'accountView', text: 'account', style: 'default'},
+					{view: 'accountView', text: 'toolbar-account', style: 'default'},
 					{view: 'tocView', text: 'toc', style: 'default'},
 					{view: 'printView', text: 'print', style: 'inline'},
 					{view: 'fontSizeView', text: 'font-size', style: 'inline'}
@@ -38,10 +41,10 @@
 					"account": true,
 					"search": false,
 					"notes": true,
-					"citations": false,
+					"citations": true,
 					"glossary": true,
 					"multicolumn": false,
-					"layeredImage": false,
+					"layeredImage": true,
 				},
 				paragraphControls: {
 					'toggleNoteDialog': 'note',

@@ -50,7 +50,7 @@ body {
 	//scroll-snap-points-x: repeat(100%);
 	//scroll-snap-type: mandatory;
 
-	#default-section-view {
+	#section-view {
 
 		overflow: hidden;
 		text-align: left;
@@ -74,8 +74,6 @@ body {
 		// Chapter #
 		h2 {
 
-			font-family: 'Lora', serif;
-
 			//*
 			font-size: 0.875em;
 			line-height: 1.14285714285714em;
@@ -94,7 +92,7 @@ body {
 
 		// Chapter Title
 		h3 {
-			font-family: 'Lora', serif;
+
 			font-weight: 700;
 
 			/*
@@ -115,7 +113,6 @@ body {
 
 		// Body copy
 		p {
-			font-family: 'Lora', serif;
 
 			//clear: both;
 
@@ -134,8 +131,8 @@ body {
 
 			// Offset for p > .paragraph-controls
 			// Changing this to a margin will affect nearest element calculations
-		    padding-left: 20px;
-    		text-indent: -10px;
+ 			padding-left: 29px;
+		    text-indent: -12.5px;
 
 			position: relative; // anchor for .paragraph-controls
 

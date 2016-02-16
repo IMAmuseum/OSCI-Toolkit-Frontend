@@ -8078,7 +8078,7 @@ p, textarea {
   padding: 0px 15px;
 }
 /* line 53, ../_section.scss */
-#section #default-section-view {
+#section #section-view {
   overflow: hidden;
   text-align: left;
   		/*
@@ -8095,8 +8095,7 @@ p, textarea {
   padding-right: 15px;
 }
 /* line 75, ../_section.scss */
-#section #default-section-view h2 {
-  font-family: 'Lora', serif;
+#section #section-view h2 {
   font-size: 0.875em;
   line-height: 1.14285714285714em;
   /*
@@ -8107,9 +8106,8 @@ p, textarea {
   text-transform: uppercase;
   color: #3c3c3c;
 }
-/* line 96, ../_section.scss */
-#section #default-section-view h3 {
-  font-family: 'Lora', serif;
+/* line 94, ../_section.scss */
+#section #section-view h3 {
   font-weight: 700;
   /*
   font-size: 36px;
@@ -8121,9 +8119,8 @@ p, textarea {
   margin-bottom: 16px;
   color: #3c3c3c;
 }
-/* line 117, ../_section.scss */
-#section #default-section-view p {
-  font-family: 'Lora', serif;
+/* line 115, ../_section.scss */
+#section #section-view p {
   /*
   font-size: 16px;
   line-height: 29px;
@@ -8132,12 +8129,12 @@ p, textarea {
   line-height: 1.8125em;
   margin-bottom: 16px;
   color: #3c3c3c;
-  padding-left: 20px;
-  text-indent: -10px;
+  padding-left: 29px;
+  text-indent: -12.5px;
   position: relative;
 }
-/* line 143, ../_section.scss */
-#section #default-section-view p .footnote-reference {
+/* line 140, ../_section.scss */
+#section #section-view p .footnote-reference {
   padding-left: 9px;
   margin: 0 5px;
   display: inline-block;
@@ -8152,27 +8149,27 @@ p, textarea {
   text-align: center;
   background: maroon;
 }
-/* line 166, ../_section.scss */
-#section #default-section-view p .footnote-reference:hover {
+/* line 163, ../_section.scss */
+#section #section-view p .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
   background: red;
 }
-/* line 176, ../_section.scss */
-#section #default-section-view p .glossary-term:hover {
+/* line 173, ../_section.scss */
+#section #section-view p .glossary-term:hover {
   cursor: hand;
 }
-/* line 184, ../_section.scss */
-#section #default-section-view .tooltip-inner {
+/* line 181, ../_section.scss */
+#section #section-view .tooltip-inner {
   text-indent: 0;
 }
-/* line 189, ../_section.scss */
-#section #default-section-view .plate {
+/* line 186, ../_section.scss */
+#section #section-view .plate {
   max-width: 100%;
   max-height: 100%;
 }
 
-/* line 200, ../_section.scss */
+/* line 197, ../_section.scss */
 .loader {
   margin: 80px auto;
   font-size: 10px;
@@ -8188,7 +8185,7 @@ p, textarea {
   -webkit-animation: load8 1.1s infinite linear;
   animation: load8 1.1s infinite linear;
 }
-/* line 219, ../_section.scss */
+/* line 216, ../_section.scss */
 .loader, .loader:after {
   border-radius: 50%;
   width: 10em;
@@ -8214,7 +8211,7 @@ p, textarea {
     transform: rotate(360deg);
   }
 }
-/* line 250, ../_section.scss */
+/* line 247, ../_section.scss */
 #loader {
   position: absolute;
   top: 50%;
@@ -9440,45 +9437,40 @@ figure.center {
   z-index: 11;
 }
 
-/* line 1, ../_notes.scss */
+/* line 3, ../_notes.scss */
 .paragraph-controls {
+  display: inline-block;
+  margin-right: 5px;
   height: 15px;
-  left: -24px;
-  position: absolute;
-  top: 3px;
   z-index: 2;
 }
-
-/* line 9, ../_notes.scss */
-.btn {
-  line-height: 1.2;
+/* line 10, ../_notes.scss */
+.paragraph-controls .btn {
   text-transform: uppercase;
 }
-
 /* line 14, ../_notes.scss */
-.paragraph-button {
+.paragraph-controls .paragraph-button {
   background-image: url(../../images/plus-grey.png);
   background-repeat: no-repeat;
-  background-size: 15px 15px;
+  background-size: 20px 20px;
+  width: 20px;
+  height: 20px;
   border: 0;
-  color: transparent;
   font: 0/0 a;
-  height: 15px;
   text-shadow: none;
-  width: 15px;
+  color: transparent;
 }
-
-/* line 26, ../_notes.scss */
-.withNotes {
+/* line 28, ../_notes.scss */
+.paragraph-controls .paragraph-button.withNotes {
   background-image: url(../../images/plus-blue.png);
 }
 
-/* line 30, ../_notes.scss */
+/* line 43, ../_notes.scss */
 .note-submit {
   margin-top: 10px;
 }
 
-/* line 35, ../_notes.scss */
+/* line 48, ../_notes.scss */
 .modal-content textarea {
   resize: none;
   color: #333333;
