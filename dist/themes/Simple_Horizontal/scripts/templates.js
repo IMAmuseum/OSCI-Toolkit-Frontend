@@ -4,7 +4,7 @@ this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/app.tpl.html"] = func
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n<!--\n<header>\n\t<div id="header"></div>\n</header>\n-->\n\n<!-- Top Navigation -->\n<div id="navbar" class="hidden-print" data-spy="affix">\n\t<div id="toolbar" class="hidden-print hidden-xs" data-spy="affix"></div>\n</div>\n\n<!-- Progress Bar -->\n<div class="progress horizontal hidden-print hidden-xs" data-spy="affix">\n\t<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n\n<div id="loader" class="loader hidden-print">Loading...</div>\n\n<!-- Main Content -->\n<!--\n<div role="content" class="content">\n\t<div class="container">\n\t\t<div id="section"></div>\n\t</div>\n</div>\n-->\n\n<div id="section-container" class="container">\n\t<div id="section"><div id="plate-container"></div></div>\n</div>\n\n<!-- Bottom Navigation -->\n<div id="navigation" class="hidden-print unselectable"></div>';
+__p += '<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n\n\n<!-- Top Navigation -->\n<div id="navbar" class="hidden-print" data-spy="affix">\n\t<div id="toolbar" class="hidden-print hidden-xs" data-spy="affix"></div>\n</div>\n\n<!-- Progress Bar -->\n<div class="progress horizontal hidden-print hidden-xs" data-spy="affix">\n\t<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n\n<div id="loader" class="loader hidden-print">Loading...</div>\n\n<!-- Main Content -->\n<!--\n<div role="content" class="content">\n\t<div class="container">\n\t\t<div id="section"></div>\n\t</div>\n</div>\n-->\n\n<div id="section-container" class="container">\n\t<div id="section"><div id="plate-container"></div></div>\n</div>\n\n<!-- Bottom Navigation -->\n<div id="navigation" class="hidden-print unselectable"></div>';
 
 }
 return __p
@@ -167,17 +167,6 @@ __p += '\n\t\t\t\t<div class="note-buttons">\n\t\t\t\t\t<a href="#" class="noteL
 '">Edit</a> -->\n\t\t\t\t</div>\n\t\t\t</li>\n\t\t';
  }); ;
 __p += '\n\t</ul>\n</div>';
-
-}
-return __p
-};
-
-this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/page.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p +=
-((__t = ( content.content )) == null ? '' : __t);
 
 }
 return __p
