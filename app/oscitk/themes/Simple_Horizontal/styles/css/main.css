@@ -8064,20 +8064,15 @@ p, textarea {
   left: 0;
 }
 
-/* line 27, ../_section.scss */
+/* line 21, ../_section.scss */
 #section {
   font-size: 16px;
   line-height: 24px;
   width: 100%;
-  height: calc( 100% );
-  /*
-  margin-top: -15px;
-  margin-bottom: -15px;
-  
-  */
+  height: 100%;
   padding: 0px 15px;
 }
-/* line 53, ../_section.scss */
+/* line 39, ../_section.scss */
 #section #section-view {
   overflow: hidden;
   text-align: left;
@@ -8094,7 +8089,7 @@ p, textarea {
   line-height: 100%;
   padding-right: 15px;
 }
-/* line 75, ../_section.scss */
+/* line 61, ../_section.scss */
 #section #section-view h2 {
   font-size: 0.875em;
   line-height: 1.14285714285714em;
@@ -8106,7 +8101,7 @@ p, textarea {
   text-transform: uppercase;
   color: #3c3c3c;
 }
-/* line 94, ../_section.scss */
+/* line 80, ../_section.scss */
 #section #section-view h3 {
   font-weight: 700;
   /*
@@ -8119,22 +8114,17 @@ p, textarea {
   margin-bottom: 16px;
   color: #3c3c3c;
 }
-/* line 115, ../_section.scss */
-#section #section-view p {
-  /*
-  font-size: 16px;
-  line-height: 29px;
-  //*/
+/* line 100, ../_section.scss */
+#section #section-view p.content-paragraph {
+  padding-left: 29px;
+  text-indent: -12.5px;
   font-size: 1em;
   line-height: 1.8125em;
   margin-bottom: 16px;
   color: #3c3c3c;
-  padding-left: 29px;
-  text-indent: -12.5px;
-  position: relative;
 }
-/* line 140, ../_section.scss */
-#section #section-view p .footnote-reference {
+/* line 112, ../_section.scss */
+#section #section-view p.content-paragraph .footnote-reference {
   padding-left: 9px;
   margin: 0 5px;
   display: inline-block;
@@ -8143,33 +8133,33 @@ p, textarea {
   width: 15px;
   height: 15px;
   border-radius: 50%;
+  background: maroon;
   color: #fff;
   font-size: 12px;
   line-height: 15px;
   text-align: center;
-  background: maroon;
 }
-/* line 163, ../_section.scss */
-#section #section-view p .footnote-reference:hover {
+/* line 132, ../_section.scss */
+#section #section-view p.content-paragraph .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
   background: red;
 }
-/* line 173, ../_section.scss */
-#section #section-view p .glossary-term:hover {
+/* line 142, ../_section.scss */
+#section #section-view p.content-paragraph .glossary-term:hover {
   cursor: hand;
 }
-/* line 181, ../_section.scss */
+/* line 150, ../_section.scss */
 #section #section-view .tooltip-inner {
   text-indent: 0;
 }
-/* line 186, ../_section.scss */
+/* line 155, ../_section.scss */
 #section #section-view .plate {
   max-width: 100%;
   max-height: 100%;
 }
 
-/* line 197, ../_section.scss */
+/* line 166, ../_section.scss */
 .loader {
   margin: 80px auto;
   font-size: 10px;
@@ -8185,7 +8175,7 @@ p, textarea {
   -webkit-animation: load8 1.1s infinite linear;
   animation: load8 1.1s infinite linear;
 }
-/* line 216, ../_section.scss */
+/* line 185, ../_section.scss */
 .loader, .loader:after {
   border-radius: 50%;
   width: 10em;
@@ -8211,7 +8201,7 @@ p, textarea {
     transform: rotate(360deg);
   }
 }
-/* line 247, ../_section.scss */
+/* line 216, ../_section.scss */
 #loader {
   position: absolute;
   top: 50%;

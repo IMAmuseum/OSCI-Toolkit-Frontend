@@ -17,16 +17,8 @@ $color-dark-red: red;
 	left: 0;
 }
 
-// Scrolling tricks
-#section-container.container,
-body {
-	//overflow: hidden;
-}
-
 // TODO: Move some of this to _figures.scss
 #section {
-	//overflow: auto;
-	//overflow: hidden;
 
 	// Baseline font-size
 	font-size: 16px;
@@ -36,13 +28,7 @@ body {
 	width: 100%;
 
 	// hide scrollbar
-	height: calc( 100% );// + 30px); 
-
-	/*
-	margin-top: -15px;
-	margin-bottom: -15px;
-	
-	*/
+	height: 100%;
 
 	padding: 0px 15px;
 
@@ -111,55 +97,38 @@ body {
 			color: #3c3c3c;
 		}
 
-		// Body copy
-		p {
+		p.content-paragraph {
 
-			//clear: both;
-
-			/*
-			font-size: 16px;
-			line-height: 29px;
-			//*/
-
-			//*
-			font-size: 1em;
-			line-height: 1.8125em;
-			//*/
-
-			margin-bottom: 16px;
-			color: #3c3c3c;
-
-			// Offset for p > .paragraph-controls
-			// Changing this to a margin will affect nearest element calculations
  			padding-left: 29px;
 		    text-indent: -12.5px;
 
-			position: relative; // anchor for .paragraph-controls
+			font-size: 1em;
+			line-height: 1.8125em;
+			
+			margin-bottom: 16px;
+			color: #3c3c3c;
 
-
+			// See ../views/FootnotesView.js
 			.footnote-reference {
 
 				padding-left: 9px;
 
 				margin: 0 5px;
-
 				display: inline-block;
 				position: relative;
 				
 				top: -5px;
-				
 				width: 15px;
 				height: 15px;
-				
 				border-radius: 50%;
-				
+
+				background: $color-light-red;				
 				color: #fff;
+
 				font-size: 12px;
 				line-height: 15px;
 				text-align: center;
-				
-				background: $color-light-red;
-				
+								
 				&:hover {
 					color:#fff;
 					text-decoration: none;
