@@ -399,29 +399,29 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<button class="btn btn-link">\n\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</button>\n\t</div>\n\t<div class="container">\n\t\t<div class="row" style="margin-top: 30vh;">\n\t\t\t<div class="col-md-8 col-md-offset-2">\n\t\t\t\t<div class="panel panel-default">\n\t\t\t\t\t<div class="panel-heading">\n\t\t\t\t\t\t<h3>Table of Contents</h3>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="panel-body">\n\t\t\t\t\t\t<ul class="toc">\n\t\t\t\t\t\t\t';
+__p += '<ul class="toc">\n\t';
  _.each(items, function(item) { ;
-__p += '\n\t\t\t\t\t\t\t\t<li class="toc-item';
+__p += '\n\t\t<li class="toc-item';
  if (item.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;
-__p += '">\n\t\t\t\t\t\t\t\t\t<a data-section-id="' +
+__p += '">\n\t\t\t<a data-section-id="' +
 ((__t = ( item.id )) == null ? '' : __t) +
-'" href="#">\n\t\t\t\t\t\t\t\t\t\t<div class="toc-item-thumbnail">\n\t\t\t\t\t\t\t\t\t\t\t';
+'" href="javascript:;">\n\t\t\t\t<div class="toc-item-thumbnail">\n\t\t\t\t\t';
  if (item.get('thumbnail')) { ;
-__p += '\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="' +
+__p += '\n\t\t\t\t\t\t<img src="' +
 ((__t = ( item.get('thumbnail') )) == null ? '' : __t) +
-'">\n\t\t\t\t\t\t\t\t\t\t\t';
+'">\n\t\t\t\t\t';
  } ;
-__p += '\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t<div class="toc-item-text">\n\t\t\t\t\t\t\t\t\t\t\t<h4>' +
+__p += '\n\t\t\t\t</div>\n\t\t\t\t<div class="toc-item-text">\n\t\t\t\t\t<h4>' +
 ((__t = ( item.get('title') )) == null ? '' : __t) +
-'</h4>\n\t\t\t\t\t\t\t\t\t\t\t';
+'</h4>\n\t\t\t\t\t';
  if (item.get('subtitle')) { ;
-__p += '\n\t\t\t\t\t\t\t\t\t\t\t\t<h5>' +
+__p += '\n\t\t\t\t\t\t<h5>' +
 ((__t = ( item.get('subtitle') )) == null ? '' : __t) +
-'</h5>\n\t\t\t\t\t\t\t\t\t\t\t';
+'</h5>\n\t\t\t\t\t';
  } ;
-__p += '\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t\t<hr>\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t';
+__p += '\n\t\t\t\t</div>\n\t\t\t</a>\n\t\t\t<hr>\n\t\t</li>\n\t';
  }); ;
-__p += '\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>';
+__p += '\n</ul>';
 
 }
 return __p
