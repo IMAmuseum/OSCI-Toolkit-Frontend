@@ -55,6 +55,14 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 			}
 
+			// Basically, we'd like to scroll to top on this one
+			if( waitForSection ) {
+				this.listenToOnce( Backbone, "navigateReady", function() {
+					console.log( 'hi' );
+					$('body').scrollTop(0);
+				});
+			}
+
 			// if there is a secondary route (e.g. to a paragraph),
 			// pass the ball on to the navigate listener
 			if( typeof data.identifier !== 'undefined' ) {
