@@ -9353,8 +9353,8 @@ images.image_opaque {
 /* line 25, ../_paragraph-popover.scss */
 .popover .popover-content .popover-wrapper {
   padding: 9px;
-  max-width: 200px;
   max-height: 240px;
+  width: 200px;
 }
 /* line 33, ../_paragraph-popover.scss */
 .popover .popover-content .popover-wrapper .nav li a {
