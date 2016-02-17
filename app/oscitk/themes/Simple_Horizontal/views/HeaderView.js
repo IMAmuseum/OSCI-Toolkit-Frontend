@@ -1,25 +1,37 @@
 OsciTk.views.Header = OsciTk.views.BaseView.extend({
 	className: 'header-view',
 	template: OsciTk.templateManager.get('header'),
+
 	events: {
 		"click #skip-header": "skipHeader"
 	},
+
 	initialize: function() {
-		this.listenTo(Backbone, 'packageLoaded', function(packageModel) {
-			this.creator = $(packageModel)[0].attributes['metadata']['dc:creator'];
+
+		// Gets info about the package, i.e. title and author
+		this.listenTo( Backbone, 'packageLoaded', function( packageModel ) {
+
+			this.creator = $( packageModel )[0].attributes['metadata']['dc:creator'];
 			this.pubTitle = packageModel.getTitle();
+
 		});
 
-		this.listenTo(Backbone, 'sectionLoaded', function(sectionModel) {
+		// Updates
+		this.listenTo( Backbone, 'sectionLoaded', function( sectionModel ) {
+
 			this.sectionTitle = null;
 			this.sectionSubtitle = null;
 			this.sectionThumbnail = null;
 			this.headerImage = null;
 			this.headerImageCaption = null;
+
 			var sectionId = sectionModel.get('id');
-			this.render(sectionId);
+			this.render( sectionId );
+
 		});
+
 	},
+
 	render: function(sectionId) {
 
 		// get section sectionTitle, subtitle, and thumbnail for use in template
@@ -33,15 +45,19 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 
 		// get first figure marked as plate for header image
 		if (! _.isEmpty(app.collections.figures.models)) {
+
 			_.each(app.collections.figures.models, function(figure) {
 				if (figure.get('plate') == true) {
 					this.headerImage = figure.get('preview_url');
 					this.headerImageCaption = figure.get('caption');
 				}
 			});
+
 		} else {
+
 			this.headerImage = null;
 			this.headerImageCaption = null;
+
 		}
 
 		this.$el.html(this.template({
@@ -50,14 +66,19 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 			sectionTitle: this.sectionTitle,
 			sectionSubtitle: this.sectionSubtitle
 		}));
+
 		return this;
+
 	},
 
 	skipHeader: function(e){
+
 		e.preventDefault();
 
 		var winWidth = $(window).width();
 
 		$('body').animate({scrollLeft: winWidth}, 800);
+
 	}
+
 });

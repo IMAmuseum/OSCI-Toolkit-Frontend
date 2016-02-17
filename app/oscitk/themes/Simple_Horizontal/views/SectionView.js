@@ -16,6 +16,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         $(window).scroll(this.updateProgress);
         this.maxHeightSet = false;
 
+        this.$container = $('#container-container');
+
         // bind sectionChanged
         this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
 
@@ -26,7 +28,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             $('.header-view').empty(); // changes section titles and whatnot
 
 
-            $('#section').css('opacity', 0); // straight-up hiding it would be bad
+            this.$container.css('opacity', 0); // straight-up hiding it would be bad
             $('#loader').show();
 
             if (navItem) {
@@ -48,7 +50,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // Technically, this should fire after all the AJAX calls, but it's close enough
         this.listenTo(Backbone, 'columnRenderEnd', function() {
             $('#loader').hide();
-            $('#section').css('opacity', 1);
+            this.$container.css('opacity', 1);
         });
 
 

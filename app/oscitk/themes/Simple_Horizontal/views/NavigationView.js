@@ -1,11 +1,13 @@
 OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	id: 'navigation-view',
 	template: OsciTk.templateManager.get('navigation'),
+
 	events: {
         'click .next-page': 'nextPageClicked',
         'click .prev-page': 'prevPageClicked',
         'click li a': 'itemClick',
     },
+    
 	initialize: function() {
 		//set some defaults
 		this.identifier = null;
@@ -92,6 +94,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		}
 		Backbone.trigger('currentNavigationItemChanged', this.currentNavigationItem);
 	},
+
 	itemClick: function(event) {
 		event.preventDefault();
 

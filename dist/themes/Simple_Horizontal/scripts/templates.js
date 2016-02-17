@@ -4,7 +4,7 @@ this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/app.tpl.html"] = func
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<header>\n\t<div id="header"></div>\n</header>\n\n\n<!-- Top Navigation -->\n<div id="navbar" class="hidden-print" data-spy="affix">\n\t<div id="toolbar" class="hidden-print hidden-xs" data-spy="affix"></div>\n</div>\n\n<!-- Progress Bar -->\n<div class="progress horizontal hidden-print hidden-xs" data-spy="affix">\n\t<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n\n<div id="loader" class="loader hidden-print">Loading...</div>\n\n<!-- Main Content -->\n<!--\n<div role="content" class="content">\n\t<div class="container">\n\t\t<div id="section"></div>\n\t</div>\n</div>\n-->\n\n<div id="section-container" class="container">\n\t<div id="section"><div id="plate-container"></div></div>\n</div>\n\n<!-- Bottom Navigation -->\n<div id="navigation" class="hidden-print unselectable"></div>';
+__p += '<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<!-- Top Navigation -->\n<div id="navbar" class="hidden-print" data-spy="affix">\n\t<div id="toolbar" class="hidden-print hidden-xs" data-spy="affix"></div>\n</div>\n\n<!-- Progress Bar -->\n<div class="progress horizontal hidden-print hidden-xs" data-spy="affix">\n\t<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n<!--\n<header>\n\t<div id="header"></div>\n</header>\n-->\n\n<div id="loader" class="loader hidden-print">Loading...</div>\n\n<!-- Main Content -->\n<!--\n<div role="content" class="content">\n\t<div class="container">\n\t\t<div id="section"></div>\n\t</div>\n</div>\n-->\n\n<div id="container-container">\n\t<div id="header-container">\n\t\t<div id="header"></div>\n\t</div>\n\t<div id="section-container">\n\t\t<div id="section-padding" class="container">\n\t\t\t<div id="section"></div>\n\t\t</div>\n\t</div>\n</div>\n\n<!-- Bottom Navigation -->\n<div id="navigation" class="hidden-print unselectable"></div>';
 
 }
 return __p
@@ -23,21 +23,20 @@ __p += '\n<div class="container-header" style="background-image: linear-gradient
  } else { ;
 __p += '\n<div class="container-header">\n';
  } ;
-__p += '\n\t<div class="container header-title">\n\t\t<a href="#left" id="skip-header" class="header-scroll-icon"><span class="glyphicon glyphicon-chevron-right"></span></a>\n\t\t<h1>' +
+__p += '\n\n\t<div class="container header-title">\n\t\t<a href="javascript:;" id="skip-header" class="header-scroll-icon"><span class="glyphicon glyphicon-chevron-right"></span></a>\n\t\t<h1>' +
 ((__t = ( title )) == null ? '' : __t) +
-'</h1>\n\t\t<p>\n\t\t\t';
+'</h1>\n\t\t<p>';
  address = 'by ' ;
-__p += '\n\t\t\t';
+
  _.each(creator, function(author) { ;
-__p += '\n\t\t\t\t' +
+__p +=
 ((__t = ( address )) == null ? '' : __t) +
 '' +
-((__t = ( author.value )) == null ? '' : __t) +
-'\n\t\t\t\t';
+((__t = ( author.value )) == null ? '' : __t);
  address = 'and ' ;
-__p += '\n\t\t\t';
+
  }); ;
-__p += '\n\t\t</p>\n\n  \t</div>\n</div>';
+__p += '</p>\n  \t</div>\n\n</div>';
 
 }
 return __p

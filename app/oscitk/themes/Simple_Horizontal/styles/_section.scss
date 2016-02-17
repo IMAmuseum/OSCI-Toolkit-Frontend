@@ -1,8 +1,41 @@
-#section-container.container {
+#container-container {
+	
+	height: calc(100% - 90px);
+    margin-top: 45px;
 
-	margin-top: calc( #{$header-height} + 15px);
-    height: calc(100% - 50px - #{$header-height} - 30px );
+    white-space: nowrap;
 
+    > * {
+    	white-space: normal;
+    	display: inline-block;
+    }
+
+	#header-container {
+
+		height: 100%;
+		width: 100%;
+
+		#header {
+
+		}
+
+	}
+
+	#section-container {
+
+		height: 100%;
+	    padding-top: 15px;
+	    padding-bottom: 15px;
+
+		#section-padding.container {
+
+			//margin-top: calc( #{$header-height} + 15px);
+		    //height: calc(100% - 50px - #{$header-height} - 30px );
+
+			height: 100%;
+
+		}
+	}
 }
 
 #reader {
