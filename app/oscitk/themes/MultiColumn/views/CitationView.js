@@ -7,9 +7,11 @@ OsciTk.views.Citation = OsciTk.views.BaseView.extend({
         });
     },
     render: function(data) {
+
         var citationView = this;
-        var contentId = data.contentId;
-        var content = $('#' + contentId);
+
+        var content = $('p[data-paragraph_number=' + data.paragraphNumber + ']');
+        var contentId = content.attr('data-osci_content_id');
 
         var citationRequestParams = {
             'section_id': app.models.section.get('id'),
