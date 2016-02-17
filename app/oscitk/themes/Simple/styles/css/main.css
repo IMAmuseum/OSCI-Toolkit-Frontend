@@ -8111,7 +8111,7 @@ p, textarea {
 }
 /* line 81, ../_section.scss */
 #section #section-view .glossary-term:hover {
-  cursor: hand;
+  cursor: pointer;
 }
 /* line 87, ../_section.scss */
 #section #section-view .navigated {
