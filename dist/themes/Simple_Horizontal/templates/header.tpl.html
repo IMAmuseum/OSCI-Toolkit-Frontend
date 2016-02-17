@@ -3,16 +3,11 @@
 <% } else { %>
 <div class="container-header">
 <% } %>
-	<div class="container header-title">
-		<a href="#left" id="skip-header" class="header-scroll-icon"><span class="glyphicon glyphicon-chevron-right"></span></a>
-		<h1><%= title %></h1>
-		<p>
-			<% address = 'by ' %>
-			<% _.each(creator, function(author) { %>
-				<%= address %><%= author.value %>
-				<% address = 'and ' %>
-			<% }); %>
-		</p>
 
+	<div class="container header-title">
+		<a href="javascript:;" id="skip-header" class="header-scroll-icon"><span class="glyphicon glyphicon-chevron-right"></span></a>
+		<h1><%= title %></h1>
+		<p><% address = 'by ' %><% _.each(creator, function(author) { %><%= address %><%= author.value %><% address = 'and ' %><% }); %></p>
   	</div>
+
 </div>

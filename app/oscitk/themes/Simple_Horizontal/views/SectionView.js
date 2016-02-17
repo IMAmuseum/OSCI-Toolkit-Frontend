@@ -48,7 +48,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
 
         // Technically, this should fire after all the AJAX calls, but it's close enough
-        this.listenTo(Backbone, 'columnRenderEnd', function() {
+        this.listenTo(Backbone, 'sectionRenderEnd', function() {
             $('#loader').hide();
             this.$container.css('opacity', 1);
         });
@@ -107,8 +107,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             ch;       // column-height i.e. $sv.height()
 
 
-        // see NavigationView.js
-        Backbone.trigger("columnRenderStart");
+        // Currently unused
+        Backbone.trigger("sectionRenderStart");
 
         // Apply the column gap
         $sv.css({
@@ -341,7 +341,15 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         }
 
         // see NavigationView.js
-        Backbone.trigger("columnRenderEnd");
+        Backbone.trigger("sectionRenderEnd");
+
+        $('img').imagesLoaded( function() {
+
+            // See NavigationView.js
+            // Typically triggered at same time as "sectionRenderEnd"
+            Backbone.trigger("navigateReady");
+
+        });
 
     },
 
