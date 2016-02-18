@@ -72,12 +72,11 @@ OsciTk.views.Header = OsciTk.views.BaseView.extend({
 	},
 
 	skipHeader: function(e){
-
-		e.preventDefault();
-
-		var winWidth = $(window).width();
-
-		$('body').animate({scrollLeft: winWidth}, 800);
+		
+		var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+        
+        var $target = is_firefox ? $('html') : $('body');
+        	$target.animate( { scrollLeft: $(window).width() }, 800 );
 
 	}
 
