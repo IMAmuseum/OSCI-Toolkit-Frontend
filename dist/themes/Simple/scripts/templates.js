@@ -293,7 +293,7 @@ __p += '<div class="modal fade" tabindex="-1" role="dialog">\n\t<div class="moda
 ((__t = ( title )) == null ? '' : __t) +
 '</h4>\n\t\t\t</div>\n\t\t\t<div class="modal-body">\n\t\t\t\t' +
 ((__t = ( body )) == null ? '' : __t) +
-'\n\t\t\t</div>\n\t\t\t<div class="modal-footer">\n\t\t\t\t<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n\t\t\t\t<button type="button" class="btn btn-primary">Save changes</button>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>';
+'\n\t\t\t</div>\n\t\t\t<div class="modal-footer">\n\t\t\t\t<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>';
 
 }
 return __p
