@@ -8057,7 +8057,7 @@ p, textarea {
 }
 /* line 8, ../_section.scss */
 #container-container > * {
-  white-space: normal;
+  white-space: initial;
   display: inline-block;
 }
 /* line 13, ../_section.scss */

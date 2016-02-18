@@ -335,9 +335,11 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         //$sv.css('height', $sc.innerHeight() );
 
         // Safari will break if the figure wrappers have explicit heights 
+        // For some reason, on this theme, it'll also beak due to content overflow
         var is_safari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
         if( is_safari ) {
-            $('.figure-wrapper').css('height', '' ); 
+            $('.figure-wrapper').css('height', '' );
+            $('.figure-wrapper').css('-webkit-column-break-inside', 'auto' );
         }
 
         // see NavigationView.js
