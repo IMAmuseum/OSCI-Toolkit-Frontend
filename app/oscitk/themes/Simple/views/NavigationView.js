@@ -5,6 +5,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
         'click .next-page': 'nextPageClicked',
         'click .prev-page': 'prevPageClicked'
     },
+    
 	initialize: function() {
 
 		// Stores current section from SectionCollection
@@ -12,9 +13,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		// When section is loaded, render the navigation control
 		this.listenTo(Backbone, 'layoutComplete', function(section) {
-
 			this.render();
-
 		});
 
 		// Triggered in ../../../Router.js
@@ -53,6 +52,13 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 					
 				}
 
+			}
+
+			// Basically, we'd like to scroll to top on this one
+			if( waitForSection ) {
+				this.listenToOnce( Backbone, "navigateReady", function() {
+					$('body').scrollTop(0);
+				});
 			}
 
 			// if there is a secondary route (e.g. to a paragraph),
@@ -198,10 +204,13 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
     },
 
 	setDocumentTitle: function() {
+
 		var title = app.models.docPackage.getTitle();
-		title = (title) ? title + " | ": "";
-		title += this.getCurrentNavigationItem().get('title');
+			title = (title) ? title + " | ": "";
+			title += this.getCurrentNavigationItem().get('title');
+
 		document.title = title;
+
 	},
 
 	getCurrentNavigationItem: function(){

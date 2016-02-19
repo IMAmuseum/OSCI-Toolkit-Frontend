@@ -8111,7 +8111,7 @@ p, textarea {
 }
 /* line 81, ../_section.scss */
 #section #section-view .glossary-term:hover {
-  cursor: hand;
+  cursor: pointer;
 }
 /* line 87, ../_section.scss */
 #section #section-view .navigated {
@@ -8422,33 +8422,31 @@ ul.toc {
   float: right;
   clear: both;
   max-width: 33%;
-   /*
-   @media( max-width: $osci-bp-md ) {
-
-      max-width: 100%;
-      margin: 0 auto;
-      float: none;
-
-      figure {
-         max-width: 66%;
-         margin: 0 auto;
-      }
-
-   }
-   */
 }
-/* line 39, ../_figures.scss */
+@media (max-width: 600px) {
+  /* line 15, ../_figures.scss */
+  .figure-wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+    float: none;
+  }
+  /* line 30, ../_figures.scss */
+  .figure-wrapper figure {
+    margin: 0 auto;
+  }
+}
+/* line 37, ../_figures.scss */
 .figure-wrapper figure {
   background: white;
   border: thin #eee solid;
   border-radius: 5px;
   padding: 6px;
 }
-/* line 50, ../_figures.scss */
+/* line 48, ../_figures.scss */
 .figure-wrapper figure .figure_content object img {
   border: 0;
 }
-/* line 58, ../_figures.scss */
+/* line 56, ../_figures.scss */
 .figure-wrapper figure figcaption p {
   font-family: 'Lora', serif;
   font-style: italic;

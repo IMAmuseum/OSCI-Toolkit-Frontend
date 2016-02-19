@@ -901,40 +901,44 @@ LayeredImage.prototype.refreshViewfinder = function() {
     // first clear out any contents
     this.ui.viewfinder.empty();
 
-    if (this.slideshow == "true") {
-        thumbUrl1 = this.settings.presentLayer.thumb;
-    } else {
-        // get image urls from current layers
-        thumbUrl1 = this.settings.currentLayer1.thumb;
-        if (this.settings.currentLayer2) {
-            var thumbUrl2 = this.settings.currentLayer2.thumb;
-            this.ui.viewfinderLayer2 = $('<div class="ca-ui-viewfinderLayer viewfinderLayer2"></div>');
-            $('<img />').attr('src', thumbUrl2).appendTo(this.ui.viewfinderLayer2);
-            this.ui.viewfinder.append(this.ui.viewfinderLayer2);
-            // set opacity to match
-            this.ui.viewfinderLayer2.css('opacity', this.ui.slider.slider("value") / 100);
+    if (this.ui.viewfinder.hasClass('viewfinder-open')) {
+
+        if (this.slideshow == "true") {
+            thumbUrl1 = this.settings.presentLayer.thumb;
+        } else {
+            // get image urls from current layers
+            thumbUrl1 = this.settings.currentLayer1.thumb;
+            if (this.settings.currentLayer2) {
+                var thumbUrl2 = this.settings.currentLayer2.thumb;
+                this.ui.viewfinderLayer2 = $('<div class="ca-ui-viewfinderLayer viewfinderLayer2"></div>');
+                $('<img />').attr('src', thumbUrl2).appendTo(this.ui.viewfinderLayer2);
+                this.ui.viewfinder.append(this.ui.viewfinderLayer2);
+                // set opacity to match
+                this.ui.viewfinderLayer2.css('opacity', this.ui.slider.slider("value") / 100);
+            }
         }
+
+        this.ui.viewfinderLayer1 = $('<div class="ca-ui-viewfinderLayer viewfinderLayer1"></div>');
+        $('<img />').attr('src', thumbUrl1).appendTo(this.ui.viewfinderLayer1);
+        this.ui.viewfinder.append(this.ui.viewfinderLayer1);
+
+        // set height based on width and aspect
+        var vfWidth = this.ui.viewfinder.width();
+        var vfHeight = Math.floor(vfWidth / this.settings.aspect);
+        this.ui.viewfinder.height(vfHeight);
+
+        //remove the viewfinderViewport if already added
+        //if (this.ui.viewfinderViewport !== undefined) {
+        //will fail if it's null. using truthy.
+        if (this.ui.viewfinderViewport ) {
+            this.ui.viewfinderViewport.remove();
+        }
+        this.ui.viewfinderViewport = undefined;
+
+        // bounds div
+        this.refreshViewfinderViewport();
+
     }
-
-    this.ui.viewfinderLayer1 = $('<div class="ca-ui-viewfinderLayer viewfinderLayer1"></div>');
-    $('<img />').attr('src', thumbUrl1).appendTo(this.ui.viewfinderLayer1);
-    this.ui.viewfinder.append(this.ui.viewfinderLayer1);
-
-    // set height based on width and aspect
-    var vfWidth = this.ui.viewfinder.width();
-    var vfHeight = Math.floor(vfWidth / this.settings.aspect);
-    this.ui.viewfinder.height(vfHeight);
-
-    //remove the viewfinderViewport if already added
-    //if (this.ui.viewfinderViewport !== undefined) {
-    //will fail if it's null. using truthy.
-    if (this.ui.viewfinderViewport ) {
-        this.ui.viewfinderViewport.remove();
-    }
-    this.ui.viewfinderViewport = undefined;
-
-    // bounds div
-    this.refreshViewfinderViewport();
 
     // - hook up drag events so the div can be dragged
     // - when dragged reflect the change on the map

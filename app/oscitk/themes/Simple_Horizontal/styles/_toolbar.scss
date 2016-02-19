@@ -1,5 +1,13 @@
 .alert:empty {display: none;}
 
+.hide-text {
+	font:0/0 a;
+	color: transparent;
+	text-shadow: none;
+	background-color: transparent;
+	border: 0;
+}
+
 #toolbar {
 	float: right;
 	position: relative;

@@ -3,8 +3,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
     template: OsciTk.templateManager.get('section'),
     events: {
         'scroll' : 'updateProgress',
-        'click .content-paragraph': 'paragraphClicked',
-        'click .paragraph-button': 'paragraphClicked',
+        'click .paragraph-button': 'paragraphButtonClicked',
         'click .note-submit': 'noteSubmit',
     },
     initialize: function() {
@@ -12,9 +11,12 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         // http://underscorejs.org/#bindAll
         _.bindAll(this, 'updateProgress');
 
+
         var width; // see updateProgress
         $(window).scroll(this.updateProgress);
         this.maxHeightSet = false;
+
+        this.$container = $('#container-container');
 
         // bind sectionChanged
         this.listenTo(Backbone, 'currentNavigationItemChanged', function(navItem) {
@@ -25,6 +27,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             $('#section-view').empty(); // removes all the headings, p, figure, etc.
             $('.header-view').empty(); // changes section titles and whatnot
 
+
+            this.$container.css('opacity', 0); // straight-up hiding it would be bad
             $('#loader').show();
 
             if (navItem) {
@@ -44,9 +48,9 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
 
         // Technically, this should fire after all the AJAX calls, but it's close enough
-        this.listenTo(Backbone, 'columnRenderEnd', function() {
+        this.listenTo(Backbone, 'sectionRenderEnd', function() {
             $('#loader').hide();
-            $('#section').css('opacity', 1);
+            this.$container.css('opacity', 1);
         });
 
 
@@ -103,8 +107,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             ch;       // column-height i.e. $sv.height()
 
 
-        // see NavigationView.js
-        Backbone.trigger("columnRenderStart");
+        // Currently unused
+        Backbone.trigger("sectionRenderStart");
 
         // Apply the column gap
         $sv.css({
@@ -331,13 +335,23 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         //$sv.css('height', $sc.innerHeight() );
 
         // Safari will break if the figure wrappers have explicit heights 
+        // For some reason, on this theme, it'll also beak due to content overflow
         var is_safari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
         if( is_safari ) {
-            $('.figure-wrapper').css('height', '' ); 
+            $('.figure-wrapper').css('height', '' );
+            $('.figure-wrapper').css('-webkit-column-break-inside', 'auto' );
         }
 
         // see NavigationView.js
-        Backbone.trigger("columnRenderEnd");
+        Backbone.trigger("sectionRenderEnd");
+
+        $('img').imagesLoaded( function() {
+
+            // See NavigationView.js
+            // Typically triggered at same time as "sectionRenderEnd"
+            Backbone.trigger("navigateReady");
+
+        });
 
     },
 
@@ -443,10 +457,10 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
         }, this);
     },
 
-    paragraphClicked: function(e) {
+    paragraphButtonClicked: function(e) {
         var p = $(e.currentTarget);
         var paragraphNum = p.data("paragraph_number");
-        Backbone.trigger("paragraphClicked", paragraphNum);
+        Backbone.trigger("paragraphButtonClicked", paragraphNum);
     },
 
     noteSubmit: function(e) {

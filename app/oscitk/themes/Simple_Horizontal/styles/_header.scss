@@ -1,107 +1,132 @@
-header {
-    height: 100%;
-    width: 100%;
-    padding-top: 50px;
-    z-index: 2000;
+#header, .header-view, .container-header {
+	height: 100%;
+	width: 100%;
+}
+
+#section-view {
+	display: inline-block;
 }
 
 .header-view {
-    height:80vh;
+
+	.container-header {
+
+		background-color: #909090;
+		background-position: center;
+		background-size: cover;
+		height:100%;
+		position: relative;
+
+		.header-title {
+
+			color: $white;
+			text-align: center;
+			text-shadow: 0 1px 0 $black;
+
+			position: absolute;
+			left: 50%;
+			top: 50%;
+
+			-webkit-transform: translate(-50%, -50%);
+			   -moz-transform: translate(-50%, -50%);
+			    -ms-transform: translate(-50%, -50%);
+				    transform: translate(-50%, -50%);
+
+			h1 {
+				margin: 0;
+			}
+
+			p {
+				font-style: italic;
+				font-weight: 300;
+			}
+
+			.header-scroll-icon{
+				//display: none;
+			}
+
+		}
+		
+	}
+
 }
 
-.container-header {
-    background-color: #909090;
-    background-position: center;
-    background-size: cover;
-    height:100%;
-    position: relative;
-}
 
-.header-title {
-    color: $white;
-    left: 50%;
-    position: absolute;
-    text-align: center;
-    text-shadow: 0 1px 0 $black;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
 
-    h1 {
-        margin: 0;
-    }
 
-    p {
-        font-style: italic;
-        font-weight: 300;
-    }
-}
 
-.header-scroll-icon{
-    display: none;
-}
+
+
 
 @media (min-width: $screen-sm) {
-    header{
-        padding-top: 0;
-    }
-    .container-header {
-        height: 100vh;
-    }
 
-    @-moz-keyframes bounce {
-      0%, 40%, 80%, 100% {
-        right: 10px;
-      }
-      50% {
-        right: 30px;
-      }
-    }
-    @-webkit-keyframes bounce {
-      0%, 40%, 80%, 100% {
-        right: 10px;
-      }
-      50% {
-        right: 30px;
-      }
-    }
-    @keyframes bounce {
-      0%, 40%, 80%, 100% {
-        right: 10px;
-      }
-      50% {
-        right: 30px;
-      }
-    }
+	header{
+		padding-top: 0;
+	}
 
-    .header-scroll-icon{
-        color: $white;
-        display: inline-block;
-        font-size: 32px;
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        -moz-transform: translateY(-50%);
-        -ms-transform: translateY(-50%);
-        -webkit-transform: translateY(-50%);
-        transform: translateY(-50%);
-        -moz-animation: bounce 2s infinite;
-        -webkit-animation: bounce 2s infinite;
-        animation: bounce 2s infinite;
+	.container-header {
+		height: 100vh;
+	}
 
-        &:hover {
-            -moz-animation-play-state: paused;
-            -webkit-animation-play-state: paused;
-            animation-play-state: paused;
-        }
+	@-moz-keyframes bounce {
+	  0%, 40%, 80%, 100% {
+		right: 10px;
+	  }
+	  50% {
+		right: 30px;
+	  }
+	}
 
-        &:link,
-        &:visited,
-        &:hover,
-        &:active {
-            color: $white;
-        }
-    }
+	@-webkit-keyframes bounce {
+	  0%, 40%, 80%, 100% {
+		right: 10px;
+	  }
+	  50% {
+		right: 30px;
+	  }
+	}
+
+	@keyframes bounce {
+	  0%, 40%, 80%, 100% {
+		right: 10px;
+	  }
+	  50% {
+		right: 30px;
+	  }
+	}
+
+	.header-scroll-icon{
+
+		color: $white;
+		display: inline-block;
+		font-size: 32px;
+
+		position: absolute;
+		right: 10px;
+		top: 50%;
+
+		-webkit-transform: translateY(-50%);
+		   -moz-transform: translateY(-50%);
+		    -ms-transform: translateY(-50%);
+				transform: translateY(-50%);
+
+		-webkit-animation: bounce 2s infinite;
+		   -moz-animation: bounce 2s infinite;
+				animation: bounce 2s infinite;
+
+		&:hover {
+			-webkit-animation-play-state: paused;
+			   -moz-animation-play-state: paused;
+			   		animation-play-state: paused;
+		}
+
+		&:link,
+		&:visited,
+		&:hover,
+		&:active {
+			color: $white;
+		}
+
+	}
+
 }

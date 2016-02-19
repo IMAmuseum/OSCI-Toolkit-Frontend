@@ -40,11 +40,7 @@ OsciTk.views.Account = OsciTk.views.BaseView.extend({
 
 		this.listenTo(Backbone, "toolbarItemClicked", function(e) {
 
-			console.log('hey');
-
 			if( e.item.text === "toolbar-account" ) {
-
-				console.log('yes');
 				this.showForm( active );
 			}
 

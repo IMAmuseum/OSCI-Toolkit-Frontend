@@ -4,6 +4,20 @@ html {
 	overflow-y: hidden;
 }
 
+$header-height: 41px;
+
+$osci-color-primary: #52818b;
+$osci-color-secondary: lighten( $osci-color-primary, 10% );
+$osci-color-text: #3c3c3c;
+
+$popover-height: 160px;
+$popover-color: $osci-color-primary;
+$popover-color-btn: white;
+
+// For the plus icons representing notes
+$paragraph-button-size: 20px;
+$paragraph-button-margin: 10px;
+
 @import "bootstrap/bootstrap";
 @import "typography";
 @import "browsehappy";
@@ -11,15 +25,18 @@ html {
 @import "section";
 @import "navigation";
 @import "progress";
+
 @import "header";
 @import "toolbar";
 @import "navbar";
+
 @import "layered-image";
 @import "figures";
-@import "footnotes";
+
 @import "tooltips";
-@import "overlay";
-@import "notes";
-@import "layout";
-@import "citations";
+
 @import "print";
+
+@import "paragraph-popover";
+@import "paragraph-notes";
+@import "paragraph-citation";

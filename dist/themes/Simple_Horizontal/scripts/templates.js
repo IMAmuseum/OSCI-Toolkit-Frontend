@@ -4,17 +4,7 @@ this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/app.tpl.html"] = func
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n<!--\n<header>\n\t<div id="header"></div>\n</header>\n-->\n\n<!-- Top Navigation -->\n<div id="navbar" class="hidden-print" data-spy="affix">\n\t<div id="toolbar" class="hidden-print hidden-xs" data-spy="affix"></div>\n</div>\n\n<!-- Progress Bar -->\n<div class="progress horizontal hidden-print hidden-xs" data-spy="affix">\n\t<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n\n<div id="loader" class="loader hidden-print">Loading...</div>\n\n<!-- Main Content -->\n<!--\n<div role="content" class="content">\n\t<div class="container">\n\t\t<div id="section"></div>\n\t</div>\n</div>\n-->\n\n<div id="section-container" class="container">\n\t<div id="section"><div id="plate-container"></div></div>\n</div>\n\n<!-- Bottom Navigation -->\n<div id="navigation" class="hidden-print unselectable"></div>';
-
-}
-return __p
-};
-
-this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/font.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<h3>Reading Settings</h3>\n<div class="font-control">\n\t<h3>Font Size</h3>\n\t<a href="#font-larger" class="larger font-button">A</a>\n\t<a href="#font-smaller" class="smaller font-button">A</a>\n</div>\n<div class="theme-control">\n\t<h3>Theme</h3>\n\t<a href="#normal" class="theme-button">Normal</a>\n\t<a href="#sepia" class="theme-button">Sepia</a>\n\t<a href="#night" class="theme-button">Night</a>\n</div>';
+__p += '<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></div>\n\t<div id="figures"></div>\n</div>\n\n<!-- Top Navigation -->\n<div id="navbar" class="hidden-print" data-spy="affix">\n\t<div id="toolbar" class="hidden-print hidden-xs" data-spy="affix"></div>\n</div>\n\n<!-- Progress Bar -->\n<div class="progress horizontal hidden-print hidden-xs" data-spy="affix">\n\t<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>\n</div>\n\n<!--\n<header>\n\t<div id="header"></div>\n</header>\n-->\n\n<div id="loader" class="loader hidden-print">Loading...</div>\n\n<!-- Main Content -->\n<!--\n<div role="content" class="content">\n\t<div class="container">\n\t\t<div id="section"></div>\n\t</div>\n</div>\n-->\n\n<div id="container-container">\n\t<div id="header-container">\n\t\t<div id="header"></div>\n\t</div>\n\t<div id="section-container">\n\t\t<div id="section-padding" class="container">\n\t\t\t<div id="section"></div>\n\t\t</div>\n\t</div>\n</div>\n\n<!-- Bottom Navigation -->\n<div id="navigation" class="hidden-print unselectable"></div>';
 
 }
 return __p
@@ -33,21 +23,20 @@ __p += '\n<div class="container-header" style="background-image: linear-gradient
  } else { ;
 __p += '\n<div class="container-header">\n';
  } ;
-__p += '\n\t<div class="container header-title">\n\t\t<a href="#left" id="skip-header" class="header-scroll-icon"><span class="glyphicon glyphicon-chevron-right"></span></a>\n\t\t<h1>' +
+__p += '\n\n\t<div class="container header-title">\n\t\t<a href="javascript:;" id="skip-header" class="header-scroll-icon"><span class="glyphicon glyphicon-chevron-right"></span></a>\n\t\t<h1>' +
 ((__t = ( title )) == null ? '' : __t) +
-'</h1>\n\t\t<p>\n\t\t\t';
+'</h1>\n\t\t<p>';
  address = 'by ' ;
-__p += '\n\t\t\t';
+
  _.each(creator, function(author) { ;
-__p += '\n\t\t\t\t' +
+__p +=
 ((__t = ( address )) == null ? '' : __t) +
 '' +
-((__t = ( author.value )) == null ? '' : __t) +
-'\n\t\t\t\t';
+((__t = ( author.value )) == null ? '' : __t);
  address = 'and ' ;
-__p += '\n\t\t\t';
+
  }); ;
-__p += '\n\t\t</p>\n\n  \t</div>\n</div>';
+__p += '</p>\n  \t</div>\n\n</div>';
 
 }
 return __p
@@ -182,18 +171,7 @@ __p += '\n\t</ul>\n</div>';
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/page.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p +=
-((__t = ( content.content )) == null ? '' : __t);
-
-}
-return __p
-};
-
-this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/paragraph-citation.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/paragraph-cite.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -234,41 +212,48 @@ __p += '&ldquo;<em>' +
 ((__t = ( formattedDate )) == null ? '' : __t) +
 ', ' +
 ((__t = ( paragraphNumber )) == null ? '' : __t) +
-'.</p>\n\t\t</div>\n\t</div>\n\t<div class="citation-url">\n\t\t<h4>Citation URL</h4>\n\t\t<input disabled="disabled" value="' +
+'.</p>\n\t\t</div>\n\t\t<div id="citation-url" class="citation">\n\t\t\t<h4>Citation URL</h4>\n\t\t\t<p>' +
 ((__t = ( url )) == null ? '' : __t) +
-'" />\n\t</div>\n\t<div class="reference-text">\n\t\t<h4>Reference Text</h4>\n\t\t<textarea disabled="disabled">' +
-((__t = ( referenceText )) == null ? '' : __t) +
-'</textarea>\n\t</div>\n</div>';
+'</p>\n\t\t</div>\n\t</div>\n</div>';
 
 }
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/paragraph-note-form.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/paragraph-notes.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<textarea data-paragraph_number="' +
-((__t = ( id )) == null ? '' : __t) +
+__p += '<textarea class="note-form-wrapper" data-paragraph_number="' +
+((__t = ( paragraph_number )) == null ? '' : __t) +
 '" data-id="' +
 ((__t = ( cid )) == null ? '' : __t) +
 '">' +
-((__t = ( noteText )) == null ? '' : __t) +
-'</textarea>\n<button type="button" class="btn btn-primary btn-block note-submit">Add Note</button>';
+((__t = ( note )) == null ? '' : __t) +
+'</textarea>\n<button id=\'note-submit\' type=\'button\' class=\'btn btn-primary btn-block\'>Save Note</button>';
 
 }
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/paragraph-note-popup.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/paragraph-popover.tpl.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<div class=\'overlay\'>\n    <!-- TODO: Check if this is obsolete-->\n    <div id="dismiss">\n        <button class="btn btn-link">\n        <span class="glyphicon glyphicon-remove"></span>\n        </button>\n    </div>\n    <div class="container">\n        <div class="row" style="margin-top: 30vh;">\n            <div class="col-md-8 col-md-offset-2">\n                <div class="panel panel-default">\n                    <div class="panel-heading">\n                        <h3>Notes</h3>\n                    </div>\n                    <div class="panel-body">\n\n                        <div class="note-popup">\n                            <form class="noteForm">\n                            \t<textarea>' +
-((__t = ( note )) == null ? '' : __t) +
-'</textarea>\n                                <label for="note-tags">Tags:</label>\n                                <input type="text" name="note-tags" id="note-tags" value="' +
-((__t = ( tags.join(', ') )) == null ? '' : __t) +
-'" />\n                            </form>\n                            <div class="status">Saved</div>\n                        </div>\n\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>';
+__p += '<div class="popover-wrapper">\n\n';
+ if( noteForm ) { ;
+__p += '\n\n    <ul class="nav nav-tabs" role="tablist">\n        <li role="presentation" class="active">\n            <a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Notes</a>\n        </li>\n        <li role="presentation">\n            <a href="#cite" aria-controls="cite" role="tab" data-toggle="tab">Cite</a>\n        </li>\n    </ul>\n\n    <div class="tab-content">\n        <div role="tabpanel" class="tab-pane active" id="notes">\n            ' +
+((__t = ( noteForm )) == null ? '' : __t) +
+'\n        </div>\n        <div role="tabpanel" class="tab-pane" id="cite">\n\n';
+ } ;
+__p += '\n            <div id="cite-target">\n                ' +
+((__t = ( citation )) == null ? '' : __t) +
+'\n            </div>\n';
+ if( noteForm ) { ;
+__p += '\n\n        </div>\n    </div>\n';
+ } ;
+__p += '\n\n</div>\n\n\n';
 
 }
 return __p
@@ -290,16 +275,6 @@ __p += '\n<h3>' +
 __p += '\n<hr>\n' +
 ((__t = ( content )) == null ? '' : __t) +
 '\n';
-
-}
-return __p
-};
-
-this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/title.tpl.html"] = function(obj) {
-obj || (obj = {});
-var __t, __p = '', __e = _.escape;
-with (obj) {
-__p += '<h1 id="publication-title"></h1>';
 
 }
 return __p
@@ -378,7 +353,7 @@ __p += '<div class="modal fade" tabindex="-1" role="dialog">\n\t<div class="moda
 ((__t = ( title )) == null ? '' : __t) +
 '</h4>\n\t\t\t</div>\n\t\t\t<div class="modal-body">\n\t\t\t\t' +
 ((__t = ( body )) == null ? '' : __t) +
-'\n\t\t\t</div>\n\t\t\t<div class="modal-footer">\n\t\t\t\t<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n\t\t\t\t<button type="button" class="btn btn-primary">Save changes</button>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>';
+'\n\t\t\t</div>\n\t\t\t<div class="modal-footer">\n\t\t\t\t<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>';
 
 }
 return __p
@@ -399,29 +374,29 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<div class=\'overlay\'>\n\t<div id="dismiss">\n\t\t<button class="btn btn-link">\n\t\t<span class="glyphicon glyphicon-remove"></span>\n\t\t</button>\n\t</div>\n\t<div class="container">\n\t\t<div class="row" style="margin-top: 30vh;">\n\t\t\t<div class="col-md-8 col-md-offset-2">\n\t\t\t\t<div class="panel panel-default">\n\t\t\t\t\t<div class="panel-heading">\n\t\t\t\t\t\t<h3>Table of Contents</h3>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="panel-body">\n\t\t\t\t\t\t<ul class="toc">\n\t\t\t\t\t\t\t';
+__p += '<ul class="toc">\n\t';
  _.each(items, function(item) { ;
-__p += '\n\t\t\t\t\t\t\t\t<li class="toc-item';
+__p += '\n\t\t<li class="toc-item';
  if (item.id === app.views.navigationView.currentNavigationItem.id) { print(" active"); } ;
-__p += '">\n\t\t\t\t\t\t\t\t\t<a data-section-id="' +
+__p += '">\n\t\t\t<a data-section-id="' +
 ((__t = ( item.id )) == null ? '' : __t) +
-'" href="#">\n\t\t\t\t\t\t\t\t\t\t<div class="toc-item-thumbnail">\n\t\t\t\t\t\t\t\t\t\t\t';
+'" href="javascript:;">\n\t\t\t\t<div class="toc-item-thumbnail">\n\t\t\t\t\t';
  if (item.get('thumbnail')) { ;
-__p += '\n\t\t\t\t\t\t\t\t\t\t\t\t<img src="' +
+__p += '\n\t\t\t\t\t\t<img src="' +
 ((__t = ( item.get('thumbnail') )) == null ? '' : __t) +
-'">\n\t\t\t\t\t\t\t\t\t\t\t';
+'">\n\t\t\t\t\t';
  } ;
-__p += '\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\t<div class="toc-item-text">\n\t\t\t\t\t\t\t\t\t\t\t<h4>' +
+__p += '\n\t\t\t\t</div>\n\t\t\t\t<div class="toc-item-text">\n\t\t\t\t\t<h4>' +
 ((__t = ( item.get('title') )) == null ? '' : __t) +
-'</h4>\n\t\t\t\t\t\t\t\t\t\t\t';
+'</h4>\n\t\t\t\t\t';
  if (item.get('subtitle')) { ;
-__p += '\n\t\t\t\t\t\t\t\t\t\t\t\t<h5>' +
+__p += '\n\t\t\t\t\t\t<h5>' +
 ((__t = ( item.get('subtitle') )) == null ? '' : __t) +
-'</h5>\n\t\t\t\t\t\t\t\t\t\t\t';
+'</h5>\n\t\t\t\t\t';
  } ;
-__p += '\n\t\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\t\t<hr>\n\t\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t\t';
+__p += '\n\t\t\t\t</div>\n\t\t\t</a>\n\t\t\t<hr>\n\t\t</li>\n\t';
  }); ;
-__p += '\n\t\t\t\t\t\t</ul>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>';
+__p += '\n</ul>';
 
 }
 return __p

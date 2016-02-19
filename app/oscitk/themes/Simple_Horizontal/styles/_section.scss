@@ -1,12 +1,41 @@
-$header-height: 41px;
-$color-light-red: maroon;
-$color-dark-red: red;
+#container-container {
+	
+	height: calc(100% - 90px);
+    margin-top: 45px;
 
-#section-container.container {
+    white-space: nowrap;
 
-	margin-top: calc( #{$header-height} + 15px);
-    height: calc(100% - 50px - #{$header-height} - 30px );
+    > * {
+    	white-space: initial;
+    	display: inline-block;
+    }
 
+	#header-container {
+
+		height: 100%;
+		width: 100%;
+
+		#header {
+
+		}
+
+	}
+
+	#section-container {
+
+		height: 100%;
+	    padding-top: 15px;
+	    padding-bottom: 15px;
+
+		#section-padding.container {
+
+			//margin-top: calc( #{$header-height} + 15px);
+		    //height: calc(100% - 50px - #{$header-height} - 30px );
+
+			height: 100%;
+
+		}
+	}
 }
 
 #reader {
@@ -17,16 +46,8 @@ $color-dark-red: red;
 	left: 0;
 }
 
-// Scrolling tricks
-#section-container.container,
-body {
-	//overflow: hidden;
-}
-
 // TODO: Move some of this to _figures.scss
 #section {
-	//overflow: auto;
-	//overflow: hidden;
 
 	// Baseline font-size
 	font-size: 16px;
@@ -34,23 +55,11 @@ body {
 
 	// This constrains #section b/w the #header and #navbar
 	width: 100%;
-
-	// hide scrollbar
-	height: calc( 100% );// + 30px); 
-
-	/*
-	margin-top: -15px;
-	margin-bottom: -15px;
-	
-	*/
+	height: 100%;
 
 	padding: 0px 15px;
 
-	// Unsupported CSS3
-	//scroll-snap-points-x: repeat(100%);
-	//scroll-snap-type: mandatory;
-
-	#default-section-view {
+	#section-view {
 
 		overflow: hidden;
 		text-align: left;
@@ -74,17 +83,8 @@ body {
 		// Chapter #
 		h2 {
 
-			font-family: 'Lora', serif;
-
-			//*
 			font-size: 0.875em;
 			line-height: 1.14285714285714em;
-			//*/
-
-			/*
-			font-size: 14px;
-			line-height: 16px;
-			//*/
 
 			text-align: center;
 			text-transform: uppercase;
@@ -94,79 +94,57 @@ body {
 
 		// Chapter Title
 		h3 {
-			font-family: 'Lora', serif;
+
 			font-weight: 700;
 
-			/*
-			font-size: 36px;
-			line-height: 40px;
-			//*/
-
-			//*
 			font-size: 2.25em;
 			line-height: 1.1111111111111em;
-			//*/
 
 			text-align: center;
 			
 			margin-bottom: 16px;
 			color: #3c3c3c;
+			
 		}
 
-		// Body copy
-		p {
-			font-family: 'Lora', serif;
+		p.content-paragraph {
 
-			//clear: both;
+ 			padding-left: 30px;
+		    text-indent: -15px;
 
-			/*
-			font-size: 16px;
-			line-height: 29px;
-			//*/
-
-			//*
 			font-size: 1em;
 			line-height: 1.8125em;
-			//*/
-
+			
 			margin-bottom: 16px;
 			color: #3c3c3c;
 
-			// Offset for p > .paragraph-controls
-			// Changing this to a margin will affect nearest element calculations
-		    padding-left: 20px;
-    		text-indent: -10px;
-
-			position: relative; // anchor for .paragraph-controls
-
-
+			// See ../views/FootnotesView.js
 			.footnote-reference {
 
-				padding-left: 9px;
+				padding-left: 14px;
 
 				margin: 0 5px;
-
 				display: inline-block;
 				position: relative;
 				
-				top: -5px;
-				
+				top: -2px;
 				width: 15px;
 				height: 15px;
-				
 				border-radius: 50%;
-				
+
+				background: $osci-color-secondary;				
 				color: #fff;
+
 				font-size: 12px;
 				line-height: 15px;
 				text-align: center;
-				
-				background: $color-light-red;
-				
+
+				cursor: pointer;				
+
 				&:hover {
-					color:#fff;
+					color: #fff;
 					text-decoration: none;
-					background: $color-dark-red;
+					background: $osci-color-primary;
 				}
 				
 			}
@@ -174,7 +152,21 @@ body {
 			// TODO: Remove me? Hide me?
 			.glossary-term {
 				&:hover {
-					cursor: hand;
+					cursor: pointer;
+				}
+			}
+
+			// See ../views/NavigationView.js
+			&.navigated {
+				-webkit-transition: background-color .7s ease-out;
+				   -moz-transition: background-color .7s ease-out;
+				     -o-transition: background-color .7s ease-out;
+				        transition: background-color .7s ease-out;
+
+				border-radius: 3px;
+
+				&.navigating {
+					background-color: lighten($osci-color-primary, 40%);
 				}
 			}
 
@@ -204,10 +196,10 @@ body {
 	position: relative;
 	text-indent: -9999em;
 
-	border-top: 1.1em solid rgba(184, 41, 39, 0.2);
-	border-right: 1.1em solid rgba(184, 41, 39, 0.2);
-	border-bottom: 1.1em solid rgba(184, 41, 39, 0.2);
-	border-left: 1.1em solid rgb(184, 41, 39);
+	border-top: 1.1em solid rgba( $osci-color-primary, 0.2);
+	border-right: 1.1em solid rgba( $osci-color-primary, 0.2);
+	border-bottom: 1.1em solid rgba( $osci-color-primary, 0.2);
+	border-left: 1.1em solid $osci-color-primary;
 
 	-webkit-transform: translateZ(0);
 	-ms-transform: translateZ(0);
