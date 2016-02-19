@@ -28,7 +28,7 @@ app = {
 
         // setup window resizing, to trigger an event
         window.onresize = function() {
-            
+
             if (window.resizeTimer) {
                 clearTimeout(window.resizeTimer);
             }

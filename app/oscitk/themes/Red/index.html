@@ -4,6 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="" />
 
     <!-- see styles/bootstrap/_variables.scss -->
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
@@ -25,7 +26,7 @@
     <!-- endbuild -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.0.0/imagesloaded.pkgd.min.js"></script>
-    
+
     <!-- build:js scripts/plugins.js -->
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
@@ -95,7 +96,7 @@
 
     <script src="views/ToolbarView.js"></script>
     <script src="views/ToolbarItemView.js"></script>
-    
+
     <script src="views/ToolbarTocView.js"></script>
     <script src="views/ToolbarSearchView.js"></script>
     <script src="views/ToolbarGlossaryView.js"></script>
@@ -103,20 +104,15 @@
     <script src="views/ToolbarFiguresView.js"></script>
     <script src="views/ToolbarNotesView.js"></script>
     <script src="views/ToolbarAccountView.js"></script>
-    
+
     <script src="../../../appBootstrap.js"></script>
     <!-- endbuild -->
 
     <script>jQuery(function() {
-            // $.ajaxSetup({
-            //     async: false
-            // });
-            // var oscitkJson = $.getJSON('oscitk.json');
-            // oscitkJson = JSON.parse(oscitkJson.responseText);
-
-            // app.bootstrap(oscitkJson);
             app.bootstrap({
-                packageUrl: '/api/epub/1/package.opf',
+                basePath: '',
+                baseUrl: '',
+                packageUrl: '/api/epub/13/package.opf',
                 templateUrls: [
                     '/osci-themes/app/oscitk/themes/Red/templates/'
                 ],
