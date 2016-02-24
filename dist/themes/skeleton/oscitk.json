@@ -1,9 +1,27 @@
 {
-	"account": true,
-	"search": false,
-	"notes": false,
-	"citations": false,
-	"glossary": false,
-	"multicolumn": false,
-	"layeredImage": false,
+    "packageUrl": "/api/epub/1/package.opf",
+    "templateUrls": [
+        "/osci-themes/app/oscitk/themes/Skeleton/templates/"
+    ],
+    "endpoints": {
+        "OsciTkNote": "/api/notes/",
+        "OsciTkAccount": "/api/users/"
+    },
+    "toolbarItems": [
+        {"view": "tocView", "text": "toc"},
+        {"view": "figuresView", "text": "figures"},
+        {"view": "fontSizeView", "text": "font-size"},
+        {"view": "accountView", "text": "account"},
+        {"view": "searchView", "text": "search"}
+    ],
+    "theme": "Skeleton",
+    "themeFeatures": {
+        "account": true,
+        "search": false,
+        "notes": false,
+        "citations": false,
+        "glossary": false,
+        "multicolumn": false,
+        "layeredImage": false
+    }
 }
