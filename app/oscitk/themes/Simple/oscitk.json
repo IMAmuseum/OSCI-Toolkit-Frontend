@@ -1,4 +1,6 @@
 {
+    "basePath": "",
+    "baseUrl": "",
     "packageUrl": "/api/epub/1/package.opf",
     "templateUrls": [
         "/osci-themes/app/oscitk/themes/Simple/templates/"
