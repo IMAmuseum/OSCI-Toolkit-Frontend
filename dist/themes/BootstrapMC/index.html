@@ -17,32 +17,14 @@
 	<script src="scripts/main.js"></script>
 
 	<script>jQuery(function() {
-			app.bootstrap({
-				packageUrl: '/api/epub/1/package.opf',
-				templateUrls: [
-					'/osci-themes/app/oscitk/themes/BootstrapMC/templates/'
-				],
-				endpoints: {
-					'OsciTkAccount': '/api/users/'
-				},
-				toolbarItems: [
-					{view: 'tocView', text: 'toc'},
-					{view: 'figuresView', text: 'figures'},
-					{view: 'fontSizeView', text: 'font-size'},
-					{view: 'accountView', text: 'account'}
-				],
-				theme: 'Bootstrap',
-				themeFeatures: {
-					"account": true,
-					"search": false,
-					"notes": false,
-					"citations": false,
-					"glossary": false,
-					"multicolumn": false,
-					"layeredImage": false,
-				}
-			});
-			app.run();
+            $.ajaxSetup({
+                async: false
+            });
+            var oscitkJson = $.getJSON('oscitk.json');
+            oscitkObject = JSON.parse(oscitkJson.responseText);
+
+            app.bootstrap(oscitkObject);
+            app.run();
 		});
 	</script>
 

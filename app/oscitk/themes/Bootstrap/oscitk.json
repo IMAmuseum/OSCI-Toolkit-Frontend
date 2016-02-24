@@ -1,9 +1,33 @@
 {
-	"account": true,
-	"search": false,
-	"notes": true,
-	"citations": true,
-	"glossary": false,
-	"multicolumn": false,
-	"layeredImage": false,
+    "basePath": "",
+    "baseUrl": "",
+    "packageUrl": "/api/epub/1/package.opf",
+    "templateUrls": [
+        "/osci-themes/app/oscitk/themes/Bootstrap/templates/"
+    ],
+    "endpoints": {
+        "OsciTkAccount": "/api/users/",
+        "OsciTkCitation": "/api/citations/",
+        "OsciTkNote": "/api/notes/"
+    },
+    "toolbarItems": [
+        {"view": "tocView", "text": "toc", "style": "default"},
+        {"view": "figuresView", "text": "figures", "style": "default"},
+        {"view": "fontSizeView", "text": "font-size", "style": "inline"},
+        {"view": "accountView", "text": "account", "style": "default"}
+    ],
+    "theme": "Bootstrap",
+    "themeFeatures": {
+        "account": true,
+        "search": false,
+        "notes": true,
+        "citations": true,
+        "glossary": false,
+        "multicolumn": false,
+        "layeredImage": false
+    },
+    "paragraphControls": {
+        "toggleNoteDialog": "note",
+        "toggleCiteDialog": "cite"
+    }
 }
