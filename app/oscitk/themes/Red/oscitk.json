@@ -18,6 +18,7 @@
         {"view": "notesToolbarView", "text": "toolbar-notes", "style": "default"},
         {"view": "accountToolbarView", "text": "toolbar-account", "style": "default"}
     ],
+    "theme": "Red",
     "themeFeatures": {
         "account": true,
         "search": false,
