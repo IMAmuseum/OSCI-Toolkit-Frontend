@@ -1,4 +1,6 @@
 {
+    "basePath": "",
+    "baseUrl": "",
     "packageUrl": "/api/epub/1/package.opf",
     "templateUrls": [
         "/osci-themes/app/oscitk/themes/Simple/templates/"
@@ -14,6 +16,7 @@
         {"view": "printToolbarView", "text": "toolbar-print", "style": "inline"},
         {"view": "fontsizeToolbarView", "text": "toolbar-fontsize", "style": "inline"}
     ],
+    "theme": "Simple",
     "themeFeatures": {
         "account": true,
         "search": false,
