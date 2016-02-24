@@ -99,42 +99,13 @@
     <!-- endbuild -->
 
     <script>jQuery(function() {
-
-            // $.ajaxSetup({
-            //     async: false
-            // });
-            // var oscitkJson = $.getJSON('oscitk.json');
-            // oscitkJson = JSON.parse(oscitkJson.responseText);
-
-            // app.bootstrap(oscitkJson);
-
-            app.bootstrap({
-                packageUrl: '/api/epub/1/package.opf',
-                templateUrls: [
-                    '/osci-themes/app/oscitk/themes/Fuchsia/templates/'
-                ],
-                endpoints: {
-                    'OsciTkAccount': '/api/users/',
-                    'OsciTkCitation': '/api/citations/',
-                    'OsciTkNote': '/api/notes/'
-                },
-                toolbarItems: [
-                    {view: 'tocToolbarView', text: 'toolbar-toc', style: 'default'},
-                    {view: 'notesToolbarView', text: 'toolbar-notes', style: 'default'},
-                    {view: 'accountToolbarView', text: 'toolbar-account', style: 'default'},
-                ],
-                theme: 'Red',
-                themeFeatures: {
-                    "account": true,
-                    "search": false,
-                    "notes": true,
-                    "citations": false,
-                    "glossary": true,
-                    "multicolumn": false,
-                    "layeredImage": true,
-                },
+            $.ajaxSetup({
+                async: false
             });
+            oscitkJson = $.getJSON('oscitk.json');
+            oscitkObject = JSON.parse(oscitkJson.responseText);
 
+            app.bootstrap(oscitkObject);
             app.run();
 
         });

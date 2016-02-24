@@ -1,0 +1,28 @@
+{
+    "basePath": "",
+    "baseUrl": "",
+    "packageUrl": "/api/epub/1/package.opf",
+    "templateUrls": [
+        "/osci-themes/app/oscitk/themes/Fuchsia/templates/"
+    ],
+    "endpoints": {
+        "OsciTkAccount": "/api/users/",
+        "OsciTkCitation": "/api/citations/",
+        "OsciTkNote": "/api/notes/"
+    },
+    "toolbarItems": [
+        {"view": "tocToolbarView", "text": "toolbar-toc", "style": "default"},
+        {"view": "notesToolbarView", "text": "toolbar-notes", "style": "default"},
+        {"view": "accountToolbarView", "text": "toolbar-account", "style": "default"}
+    ],
+    "theme": "Fuchsia",
+    "themeFeatures": {
+        "account": true,
+        "search": false,
+        "notes": true,
+        "citations": false,
+        "glossary": true,
+        "multicolumn": false,
+        "layeredImage": true
+    }
+}
