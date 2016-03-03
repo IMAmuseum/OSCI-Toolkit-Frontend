@@ -60,7 +60,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
         // Currently not used by anything
         Backbone.trigger("sectionRenderStart");
-        
+
         // that refers to the view
         var that = this;
 
@@ -70,8 +70,8 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             var $w = null; // wrapper
 
             var $f = $(e);
-            var $d = $f.find('div.figure_content'); 
-            var $o = $d.find('object'); 
+            var $d = $f.find('div.figure_content');
+            var $o = $d.find('object');
             var $i = $o.find('img');
 
 
@@ -141,7 +141,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
                         var $content = $(data).filter('.layered_image-asset').first();
                         var $container = $f.find('.figure_content');
-                        
+
                         // Note that this permanently deletes $o and $i
                         $container.empty();
                         $content.appendTo( $container );
@@ -153,7 +153,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                             setTimeout( function() {
 
                                 li.map.resize(); // recenter
-                                
+
                                 try {
                                     li.resetZoomRange(); // ensure it can scale down
                                     li.reset(); // reset size and options
@@ -161,7 +161,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                                 } catch(e) {
                                     // slider not init'd error
                                 }
-                                
+
                             }, 100 ); // this is an estimate, tweak it if needed
                         });
 
@@ -171,7 +171,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
             }
 
-        }); 
+        });
 
         // see NavigationView.js
         Backbone.trigger("sectionRenderEnd");
@@ -260,7 +260,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
             };
 
-            // Now we need to constrain the $table to be no taller than that which would allow for the 
+            // Now we need to constrain the $table to be no taller than that which would allow for the
             //   chapter title to be seen; accounting for navigation and toolbar on smaller screens
 
             var resizePlate = function() {
@@ -270,7 +270,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
                 var h = $(window).height();
                     h -= 15; // .section-content vertical padding
                     h -= $('#section-offset').offset().top; // size of section heading
-                
+
                 // Account for navigation
                 if( $('#osci-bp-lg').is(':visible') ) {
                     h -= $('#navigation').outerHeight();
@@ -301,7 +301,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
             //$(window).on('load', imageLoad );
 
             this.listenToOnce( Backbone, "sectionRenderEnd", imageLoad );
-            
+
         }else{
 
             // We still must trigger navigateReady, even if there are no plate images
@@ -324,7 +324,7 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
     // Add data attributes to paragraphs; used for paragraph tooltips
     processParagraphs: function(sectionModel) {
-        
+
         var paragraphs = $(this.content.children).filter('p');
 
         _.each( paragraphs, function(e, i) {
@@ -350,5 +350,5 @@ OsciTk.views.Section = OsciTk.views.BaseView.extend({
 
 
     },
-    
+
 });

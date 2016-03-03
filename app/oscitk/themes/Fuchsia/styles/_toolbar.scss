@@ -5,7 +5,7 @@ $toolbar-margin-bottom: 5px;
 	#toolbar-area {
 
 		position: fixed;
-		bottom: 0;	
+		bottom: 0;
 		right: 0;
 
 		width: $toolbar-width-md;
@@ -23,7 +23,7 @@ $toolbar-margin-bottom: 5px;
 
 		}
 
-		// Accounting for the navigation and the disappearing progress bar 
+		// Accounting for the navigation and the disappearing progress bar
 		/*
 		@media( max-width: $osci-bp-lg ) and (min-height: #{ $osci-bp-vert + 1 } ) {
 			bottom: $navigation-height;
@@ -38,7 +38,7 @@ $toolbar-margin-bottom: 5px;
 			bottom: $navigation-height;
 		}
 
-		// TODO: Move this to top on small screens 
+		// TODO: Move this to top on small screens
 		/*
 		@media( max-width: $osci-bp-md ) {
 			bottom: initial;
@@ -84,9 +84,14 @@ $toolbar-margin-bottom: 5px;
 				&.open {
 					display: inline-block;
 				}
-				
-			}
 
+			}
+			&.searchToolbarView-toolbar-item {
+				background-image: url(../../images/dark/icon-search.png);
+				&.open {
+					background-image: url(../../images/light/icon-search.png);
+				}
+			}
 			&.accountToolbarView-toolbar-item {
 				background-image: url(../../images/dark/icon-user.png);
 				&.open {
@@ -156,7 +161,7 @@ $toolbar-margin-bottom: 5px;
 	}
 
 	#toolbar-overlay-wrapper {
-		
+
 		// Toggled w/ javascript
 		display: none;
 
@@ -179,7 +184,7 @@ $toolbar-margin-bottom: 5px;
 
 		@media( max-width: $osci-bp-lg ) {
 			bottom: $navigation-height;
-		}		
+		}
 
 		// Note that this is lower than the icons
 		z-index: 10001;
@@ -338,5 +343,71 @@ $toolbar-margin-bottom: 5px;
 		background-size: contain;
 		float: left;
 	}
+
+}
+
+#toolbar-search {
+
+
+
+	#search-container {
+
+		#search-box {
+			position: relative;
+			#search-submit {
+				display: block;
+				cursor: pointer;
+				position: absolute;
+				top: 4px;
+				right: 3px;
+				width: 24px;
+				height: 24px;
+				background: url(../../images/dark/icon-search.png) 0 0 no-repeat;
+				background-size: 24px;
+			}
+		}
+
+		#search-box, #search-filters-container {
+			margin: 10px 0px;
+		}
+
+	}
+
+	#search-results-container.toolbar-scroll {
+		height: calc(100% - 39px - #{50px} - 96px ) !important;
+	}
+
+
+	#search-results {
+		#search-results-content {
+			.result-section {
+				.result-title {
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					overflow: hidden;
+					margin-bottom: 10px;
+				}
+				.search-result {
+					.result-content {
+						margin-bottom: 10px;
+						.result-type {
+							float: left;
+							img {
+								height: 15px;
+								width: 15px;
+							}
+						}
+						.result-body {
+							margin-left: 25px;
+						}
+						.result-body:after {
+							content: '...';
+						}
+					}
+				}
+			}
+		}
+	}
+
 
 }

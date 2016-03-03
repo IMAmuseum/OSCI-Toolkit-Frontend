@@ -23,6 +23,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			accountToolbarView: new OsciTk.views.AccountToolbar(),
 			tocToolbarView: new OsciTk.views.TocToolbar(),
 			notesToolbarView: new OsciTk.views.NotesToolbar(),
+			searchToolbarView: new OsciTk.views.SearchToolbar(),
 
 		};
 
@@ -48,5 +49,5 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 	},
 
 
-	
+
 });

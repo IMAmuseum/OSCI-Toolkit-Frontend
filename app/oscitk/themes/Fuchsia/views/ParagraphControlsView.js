@@ -45,7 +45,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         // Whenever something happens to the account, try to reload the notes
         // See ToolbarAccountView.js for more info
         this.listenTo(Backbone, 'accountReady accountStateChanged', function() {
-            
+
             $('[id^="paragraph-"]').popover('destroy');
 
             this.userLogged = app.account.get('id') > 0;
@@ -77,7 +77,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
 
             var section_id = app.models.section.id;
             app.collections.notes.getNotesForSection( section_id );
-        
+
         }
 
         // This is the final check; this will show the controls
@@ -109,7 +109,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         var i = 1; // all osci-content counts start with 1
 
         _.each(this.paragraphs, function(paragraph) {
-            
+
             // Remove previous .paragraph-controls if this is called twice
             $('.paragraph-controls[data-osci_content_id="osci-content-' + i + '"]' ).remove();
 
@@ -180,7 +180,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
         // Unfortunately, FireFox requires tooltip placement to be on top rather than right
         // UPDATE: This is fixed by setting an explicit height on popover elements
         // See .tab-content and #cite-target in _paragraph-popover.scss
-        
+
         /*
         var is_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
         var placement = is_firefox ? 'top' : 'right';
@@ -382,7 +382,7 @@ OsciTk.views.ParagraphControls = OsciTk.views.BaseView.extend({
             content: function() {
                 return $("#popover-content").html();
             }
-            
+
         });
 
         $('#paragraph-'+paragraph_number).popover('destroy');

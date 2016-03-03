@@ -219,6 +219,99 @@ __p += '\n\t</div>\n</div>';
 return __p
 };
 
+this["JST"]["app/oscitk/themes/Fuchsia/templates/toolbar-search-results.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+
+ if (query.keyword) { ;
+__p += '\n<!--\n<div id="search-results-header">\n\t<div id="search-summary">\n\t\tResult(s) for <span id="search-query">"' +
+((__t = ( query.keyword )) == null ? '' : __t) +
+'"</span> (' +
+((__t = ( response.numFound )) == null ? '' : __t) +
+')\n\t\t<a id="reset-search" href="#">RESET</a>\n\t</div>\n\t<div id="results-sort">\n\t\tSort By:\n\t\t<ul>\n\t\t\t<li><a href="#" class="sort-button ' +
+((__t = ( (query.sort === 'score') ? 'active' : '' )) == null ? '' : __t) +
+'" data-sort="score">Relevance</a></li>\n\t\t\t<li><a href="#" class="sort-button ' +
+((__t = ( (query.sort === 'content') ? 'active' : '' )) == null ? '' : __t) +
+'" data-sort="content">Type</a></li>\n\t\t</ul>\n\t</div>\n</div>\n-->\n<div id="search-results-column-wrapper">\n\n\t';
+ if (response.numFound !== 0) { ;
+__p += '\n\t<div id="search-results">\n\t\t<div id="search-results-content">\n\t\t\t';
+ _.each(results, function(group) { var first = true;;
+__p += '\n\n\t\t\t\t<div class="result-section">\n\t\t\t\t\t';
+ _.each(group, function(result) { ;
+__p += '\n\n\t\t\t\t\t\t';
+ if (first && result.get('bundle_name') !== "Note" ) { ;
+__p += '\n\t\t\t\t\t\t<div class="result-title">' +
+((__t = ( result.get('label') )) == null ? '' : __t) +
+'</div>\n\t\t\t\t\t\t';
+ first = false; } ;
+__p += '\n\n\t\t\t\t\t\t';
+ if (!_.isEmpty(result.get('teaser'))) { ;
+__p += '\n\t\t\t\t\t\t<div class="search-result" data-id="' +
+((__t = ( result.get('id') )) == null ? '' : __t) +
+'">\n\t\t\t\t\t\t\t<div class="result-content">\n\n\t\t\t\t\t\t\t\t<!--<div class="result-type ' +
+((__t = ( result.get('bundle') )) == null ? '' : __t) +
+'">' +
+((__t = ( result.get('bundle') )) == null ? '' : __t) +
+'</div>-->\n\t\t\t\t\t\t\t\t<div class="result-type ' +
+((__t = ( result.get('bundle') )) == null ? '' : __t) +
+'"><img src="images/icon-link.png"></div>\n\n\t\t\t\t\t\t\t\t<div class="result-body">\n\t\t\t\t\t\t\t\t';
+ if ( result.get('bundle_name') === "Note" ) { ;
+__p += '\n\t\t\t\t\t\t\t\t\t' +
+((__t = ( result.get('ss_body') )) == null ? '' : __t) +
+'\n\t\t\t\t\t\t\t\t';
+ } else { ;
+__p += '\n\t\t\t\t\t\t\t\t\t';
+ if (_.isEmpty(result.get('teaser'))) { ;
+__p += '\n\t\t\t\t\t\t\t\t\t\t&nbsp;\n\t\t\t\t\t\t\t\t\t';
+ } else { ;
+__p += '\n\t\t\t\t\t\t\t\t\t\t' +
+((__t = ( result.get('teaser') )) == null ? '' : __t) +
+'\n\t\t\t\t\t\t\t\t\t';
+ } ;
+__p += '\n\t\t\t\t\t\t\t\t';
+ } ;
+__p += '\n\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t';
+ } ;
+__p += '\n\n\t\t\t\t\t';
+ }); ;
+__p += '\n\t\t\t\t</div>\n\n\t\t\t';
+ }); ;
+__p += '\n\t\t</div>\n\t</div>\n\t';
+ } else { ;
+__p += '\n\tNo results found.\n\t';
+ } ;
+__p += '\n\n\t<!--\n\t<div id="facet-by-section">\n\t\t<div class="section-title">Filter by section</div>\n\t\t<div id="facet-sections-container">\n\t\t\t<ul id="facet-sections">\n\t\t\t\t';
+ _.each(response.facets, function(facet) { ;
+__p += '\n\t\t\t\t\t<li class="facet-section">\n\t\t\t\t\t\t<a href="#" data-filter="section:' +
+((__t = ( facet.section_id )) == null ? '' : __t) +
+'" class="facet">' +
+((__t = ( facet.section )) == null ? '' : __t) +
+'</a>\n\t\t\t\t\t\t(' +
+((__t = ( facet.count )) == null ? '' : __t) +
+')\n\t\t\t\t\t</li>\n\t\t\t\t';
+ }); ;
+__p += '\n\t\t\t</ul>\n\t\t</div>\n\t</div>\n\t-->\n\n</div>\n';
+ } ;
+
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Fuchsia/templates/toolbar-search.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<h3>Search</h3>\n<div id="search-container">\n\t<form id="search-form" name="search-form" method="POST">\n\t\t<div id="search-box">\n\t\t\t<input type="text" class="form-control input-sm" id="search-keyword" placeholder="Search" value="' +
+((__t = ( query.keyword )) == null ? '' : __t) +
+'"/>\n\t\t\t<div id="search-submit"></div>\n\t\t\t<input type="hidden" name="page" id="search-page" />\n\t\t</div>\n\t\t<div id="search-filters-container">\n\t\t\t<div class="search-filter-select">\n\t\t\t\t<select class="form-control input-sm search-filters">\n\t\t\t\t\t<option>No filter</option>\n\t\t\t\t\t<option value="type:content">Content</option>\n\t\t\t\t\t<option value="type:notes">My Notes</option>\n\t\t\t\t\t<option value="type:footnotes">Footnotes</option>\n\t\t\t\t\t<!--<option value="type:figures">Figures</option>-->\n\t\t\t\t</select>\n\t\t\t</div>\n\t\t</div>\n\t</form>\n</div>\n\n\n<div id="search-results-container" class="toolbar-scroll"></div>';
+
+}
+return __p
+};
+
 this["JST"]["app/oscitk/themes/Fuchsia/templates/toolbar-toc.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
@@ -256,7 +349,7 @@ this["JST"]["app/oscitk/themes/Fuchsia/templates/toolbar.tpl.html"] = function(o
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<div id="toolbar-overlay-wrapper">\n\n\t<div id="toolbar-overlay"></div>\n\n\t<div id="toolbar-sidebar">\n\n\t\t<div id="toolbar-readout">\n\t\t\t<div id="toolbar-account"></div>\n\t\t\t<div id="toolbar-toc"></div>\n\t\t\t<div id="toolbar-notes"></div>\n\t\t</div>\n\n\t</div>\n\n</div>\n\n<div id="toolbar-area">\n\t<li class="toolbar-item-view close-toolbar-item"></li>\n</div>';
+__p += '<div id="toolbar-overlay-wrapper">\n\n\t<div id="toolbar-overlay"></div>\n\n\t<div id="toolbar-sidebar">\n\n\t\t<div id="toolbar-readout">\n\t\t\t<div id="toolbar-search"></div>\n\t\t\t<div id="toolbar-account"></div>\n\t\t\t<div id="toolbar-toc"></div>\n\t\t\t<div id="toolbar-notes"></div>\n\t\t</div>\n\n\t</div>\n\n</div>\n\n<div id="toolbar-area">\n\t<li class="toolbar-item-view close-toolbar-item"></li>\n</div>';
 
 }
 return __p

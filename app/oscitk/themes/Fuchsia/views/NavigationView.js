@@ -48,7 +48,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 					}else{
 						waitForSection = false;
 					}
-					
+
 				}
 
 			}
@@ -67,7 +67,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 					}else{
 
 						Backbone.trigger('navigate', { identifier: data.identifier } );
-					
+
 					}
 				}
 			}
@@ -88,7 +88,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			// Here, gotoPage refers to how far to scroll in percent
 			// 0 = beginning, 1 = end
 
-			var gotoPage = 0; 
+			var gotoPage = 0;
 			var selector = false;
 
 			// Clear any p- etc nonsense
@@ -149,7 +149,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
             var scroll = gotoPage * $(document).height();
             	scroll -= $(window).height() / 2;
             	scroll = Math.max( 0, scroll );
-            	
+
             if( selector ) {
 
             	// todo: for paragraphs, use the button selector, not the paragraph selector
@@ -172,6 +172,9 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
             }
 
             $(window).scrollTop( scroll );
+
+            // Used in ToobarSearchView.js
+            Backbone.trigger( 'navigateScrollEnd' );
 
 		});
 
@@ -217,7 +220,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
    		}
 
     },
-	
+
 	// Book Title | Section Title
 	setDocumentTitle: function() {
 
@@ -260,7 +263,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		var previous = app.views.navigationView.currentNavigationItem.get('previous');
 		var next = app.views.navigationView.currentNavigationItem.get('next');
-		
+
 		if( previous ) {
 			$prev.removeClass('inactive').on('click', function(e) {
 				app.router.navigate("section/" + previous.get('id'), { trigger: true } );

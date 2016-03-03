@@ -8558,27 +8558,35 @@ body {
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.close-toolbar-item.open {
   display: inline-block;
 }
-/* line 90, ../_toolbar.scss */
+/* line 89, ../_toolbar.scss */
+#toolbar > #toolbar-view #toolbar-area .toolbar-item-view.searchToolbarView-toolbar-item {
+  background-image: url(../../images/dark/icon-search.png);
+}
+/* line 91, ../_toolbar.scss */
+#toolbar > #toolbar-view #toolbar-area .toolbar-item-view.searchToolbarView-toolbar-item.open {
+  background-image: url(../../images/light/icon-search.png);
+}
+/* line 95, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.accountToolbarView-toolbar-item {
   background-image: url(../../images/dark/icon-user.png);
 }
-/* line 92, ../_toolbar.scss */
+/* line 97, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.accountToolbarView-toolbar-item.open {
   background-image: url(../../images/light/icon-user.png);
 }
-/* line 97, ../_toolbar.scss */
+/* line 102, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.tocToolbarView-toolbar-item {
   background-image: url(../../images/dark/icon-contents.png);
 }
-/* line 99, ../_toolbar.scss */
+/* line 104, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.tocToolbarView-toolbar-item.open {
   background-image: url(../../images/light/icon-contents.png);
 }
-/* line 104, ../_toolbar.scss */
+/* line 109, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.notesToolbarView-toolbar-item {
   background-image: url(../../images/dark/icon-notes.png);
 }
-/* line 106, ../_toolbar.scss */
+/* line 111, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.notesToolbarView-toolbar-item.open {
   background-image: url(../../images/light/icon-notes.png);
 }
@@ -8588,11 +8596,11 @@ body {
     display: block;
     float: none;
   }
-  /* line 114, ../_toolbar.scss */
+  /* line 119, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.open {
     float: right;
   }
-  /* line 118, ../_toolbar.scss */
+  /* line 123, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.close-toolbar-item {
     float: left;
   }
@@ -8602,12 +8610,12 @@ body {
   #toolbar > #toolbar-view #toolbar-area .toolbar-item-view {
     display: none;
   }
-  /* line 126, ../_toolbar.scss */
+  /* line 131, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-area .toolbar-item-view.open {
     display: inline-block;
   }
 }
-/* line 158, ../_toolbar.scss */
+/* line 163, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-overlay-wrapper {
   display: none;
   position: fixed;
@@ -8627,12 +8635,12 @@ body {
   z-index: 10001;
 }
 @media (max-width: 991px) {
-  /* line 158, ../_toolbar.scss */
+  /* line 163, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-overlay-wrapper {
     bottom: 34px;
   }
 }
-/* line 190, ../_toolbar.scss */
+/* line 195, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-overlay-wrapper #toolbar-overlay {
   width: calc( 100% - 300px );
   background: rgba(0, 0, 0, 0.5);
@@ -8643,99 +8651,99 @@ body {
   float: left;
 }
 @media (max-width: 991px) {
-  /* line 190, ../_toolbar.scss */
+  /* line 195, ../_toolbar.scss */
   #toolbar > #toolbar-view #toolbar-overlay-wrapper #toolbar-overlay {
     box-shadow: none;
   }
 }
-/* line 211, ../_toolbar.scss */
+/* line 216, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-overlay-wrapper #toolbar-sidebar {
   width: 300px;
   background: #fa5d78;
   height: 100%;
   float: left;
 }
-/* line 224, ../_toolbar.scss */
+/* line 229, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout {
   height: 100%;
   color: white;
   padding: 8px 8px 8px 12px;
 }
-/* line 236, ../_toolbar.scss */
+/* line 241, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div {
   height: 100%;
 }
-/* line 240, ../_toolbar.scss */
+/* line 245, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div {
   height: 100%;
 }
-/* line 244, ../_toolbar.scss */
+/* line 249, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div h3 {
   margin: 0;
   border-bottom: 1px white solid;
   padding-bottom: 8px;
 }
-/* line 250, ../_toolbar.scss */
+/* line 255, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll {
   overflow-y: scroll;
   height: calc(100% - 39px - 50px );
   padding: 5px 5px 10px 0px;
   border-bottom: thin solid white;
 }
-/* line 259, ../_toolbar.scss */
+/* line 264, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll a:not(.btn) {
   color: white;
 }
-/* line 262, ../_toolbar.scss */
+/* line 267, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll a:not(.btn):hover {
   text-decoration: none;
 }
-/* line 268, ../_toolbar.scss */
+/* line 273, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll p {
   font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-/* line 272, ../_toolbar.scss */
+/* line 277, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-/* line 278, ../_toolbar.scss */
+/* line 283, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li {
   margin: 10px 0px;
 }
-/* line 282, ../_toolbar.scss */
+/* line 287, ../_toolbar.scss */
 #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li h4, #toolbar > #toolbar-view #toolbar-readout > div > div .toolbar-scroll ul li h5 {
   margin: 0px;
 }
 
-/* line 301, ../_toolbar.scss */
+/* line 306, ../_toolbar.scss */
 #toolbar-notes .notesListItem .note-buttons {
   float: left;
 }
-/* line 305, ../_toolbar.scss */
+/* line 310, ../_toolbar.scss */
 #toolbar-notes .notesListItem .the-note {
   margin-left: 35px;
 }
 
-/* line 314, ../_toolbar.scss */
+/* line 319, ../_toolbar.scss */
 #toolbar-account .account-footer {
   margin-top: 10px;
 }
-/* line 318, ../_toolbar.scss */
+/* line 323, ../_toolbar.scss */
 #toolbar-account .form-error:empty {
   display: none;
 }
-/* line 322, ../_toolbar.scss */
+/* line 327, ../_toolbar.scss */
 #toolbar-account h4 {
   margin-bottom: 5px;
 }
-/* line 326, ../_toolbar.scss */
+/* line 331, ../_toolbar.scss */
 #toolbar-account h5 {
   margin-top: 5px;
   margin-bottom: 22px;
 }
-/* line 331, ../_toolbar.scss */
+/* line 336, ../_toolbar.scss */
 #toolbar-account .user-icon {
   width: 52px;
   height: 52px;
@@ -8745,6 +8753,59 @@ body {
   background-image: url(../../images/light/icon-user.png);
   background-size: contain;
   float: left;
+}
+
+/* line 355, ../_toolbar.scss */
+#toolbar-search #search-container #search-box {
+  position: relative;
+}
+/* line 357, ../_toolbar.scss */
+#toolbar-search #search-container #search-box #search-submit {
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  top: 4px;
+  right: 3px;
+  width: 24px;
+  height: 24px;
+  background: url(../../images/dark/icon-search.png) 0 0 no-repeat;
+  background-size: 24px;
+}
+/* line 370, ../_toolbar.scss */
+#toolbar-search #search-container #search-box, #toolbar-search #search-container #search-filters-container {
+  margin: 10px 0px;
+}
+/* line 376, ../_toolbar.scss */
+#toolbar-search #search-results-container.toolbar-scroll {
+  height: calc(100% - 39px - 50px - 96px ) !important;
+}
+/* line 384, ../_toolbar.scss */
+#toolbar-search #search-results #search-results-content .result-section .result-title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+/* line 391, ../_toolbar.scss */
+#toolbar-search #search-results #search-results-content .result-section .search-result .result-content {
+  margin-bottom: 10px;
+}
+/* line 393, ../_toolbar.scss */
+#toolbar-search #search-results #search-results-content .result-section .search-result .result-content .result-type {
+  float: left;
+}
+/* line 395, ../_toolbar.scss */
+#toolbar-search #search-results #search-results-content .result-section .search-result .result-content .result-type img {
+  height: 15px;
+  width: 15px;
+}
+/* line 400, ../_toolbar.scss */
+#toolbar-search #search-results #search-results-content .result-section .search-result .result-content .result-body {
+  margin-left: 25px;
+}
+/* line 403, ../_toolbar.scss */
+#toolbar-search #search-results #search-results-content .result-section .search-result .result-content .result-body:after {
+  content: '...';
 }
 
 /* line 5, ../_figures.scss */
