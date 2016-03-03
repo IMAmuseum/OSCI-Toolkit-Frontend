@@ -44,7 +44,7 @@
 									<% } %>
 								</div>
 
-								<div class="result-body">
+								<div class="result-body <% if ( result.get('teaser').length > 90 ) { %>ellipsis<% } %>">
 								<% if ( result.get('bundle_name') === "Note" ) { %>
 									<%= result.get('ss_body') %>
 								<% } else { %>

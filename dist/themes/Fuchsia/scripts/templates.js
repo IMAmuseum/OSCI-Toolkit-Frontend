@@ -266,7 +266,11 @@ __p += '\n\t\t\t\t\t\t\t\t\t\t<img src="images/icon-link-note.png">\n\t\t\t\t\t\
  } else { ;
 __p += '\n\t\t\t\t\t\t\t\t\t\t<img src="images/icon-link.png">\n\t\t\t\t\t\t\t\t\t';
  } ;
-__p += '\n\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t<div class="result-body">\n\t\t\t\t\t\t\t\t';
+__p += '\n\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t<div class="result-body ';
+ if ( result.get('teaser').length > 90 ) { ;
+__p += 'ellipsis';
+ } ;
+__p += '">\n\t\t\t\t\t\t\t\t';
  if ( result.get('bundle_name') === "Note" ) { ;
 __p += '\n\t\t\t\t\t\t\t\t\t' +
 ((__t = ( result.get('ss_body') )) == null ? '' : __t) +

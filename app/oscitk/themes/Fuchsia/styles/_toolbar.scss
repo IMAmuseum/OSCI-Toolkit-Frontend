@@ -400,7 +400,7 @@ $toolbar-margin-bottom: 5px;
 						.result-body {
 							margin-left: 25px;
 						}
-						.result-body:after {
+						.result-body.ellipsis:after {
 							content: '...';
 						}
 					}

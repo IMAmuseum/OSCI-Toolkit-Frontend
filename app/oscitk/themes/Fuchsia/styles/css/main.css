@@ -8804,7 +8804,7 @@ body {
   margin-left: 25px;
 }
 /* line 403, ../_toolbar.scss */
-#toolbar-search #search-results #search-results-content .result-section .search-result .result-content .result-body:after {
+#toolbar-search #search-results #search-results-content .result-section .search-result .result-content .result-body.ellipsis:after {
   content: '...';
 }
 
