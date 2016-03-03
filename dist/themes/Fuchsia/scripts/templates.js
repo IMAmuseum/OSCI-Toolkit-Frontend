@@ -241,22 +241,32 @@ __p += '\n\t<div id="search-results">\n\t\t<div id="search-results-content">\n\t
 __p += '\n\n\t\t\t\t<div class="result-section">\n\t\t\t\t\t';
  _.each(group, function(result) { ;
 __p += '\n\n\t\t\t\t\t\t';
- if (first && result.get('bundle_name') !== "Note" ) { ;
-__p += '\n\t\t\t\t\t\t<div class="result-title">' +
+ if ( first ) { ;
+__p += '\n\t\t\t\t\t\t\t';
+ if ( result.get('bundle_name') === "Note" ) { ;
+__p += '\n\t\t\t\t\t\t\t\t<div class="result-title">' +
+((__t = ( result.get('ss_section_title') )) == null ? '' : __t) +
+'</div>\n\t\t\t\t\t\t\t';
+ } else { ;
+__p += '\n\t\t\t\t\t\t\t\t<div class="result-title">' +
 ((__t = ( result.get('label') )) == null ? '' : __t) +
-'</div>\n\t\t\t\t\t\t';
+'</div>\n\t\t\t\t\t\t\t';
+ } ;
+__p += '\n\t\t\t\t\t\t';
  first = false; } ;
 __p += '\n\n\t\t\t\t\t\t';
  if (!_.isEmpty(result.get('teaser'))) { ;
 __p += '\n\t\t\t\t\t\t<div class="search-result" data-id="' +
 ((__t = ( result.get('id') )) == null ? '' : __t) +
-'">\n\t\t\t\t\t\t\t<div class="result-content">\n\n\t\t\t\t\t\t\t\t<!--<div class="result-type ' +
+'">\n\t\t\t\t\t\t\t<div class="result-content">\n\n\t\t\t\t\t\t\t\t<div class="result-type ' +
 ((__t = ( result.get('bundle') )) == null ? '' : __t) +
-'">' +
-((__t = ( result.get('bundle') )) == null ? '' : __t) +
-'</div>-->\n\t\t\t\t\t\t\t\t<div class="result-type ' +
-((__t = ( result.get('bundle') )) == null ? '' : __t) +
-'"><img src="images/icon-link.png"></div>\n\n\t\t\t\t\t\t\t\t<div class="result-body">\n\t\t\t\t\t\t\t\t';
+'">\n\t\t\t\t\t\t\t\t\t';
+ if ( result.get('bundle_name') === "Note" ) { ;
+__p += '\n\t\t\t\t\t\t\t\t\t\t<img src="images/icon-link-note.png">\n\t\t\t\t\t\t\t\t\t';
+ } else { ;
+__p += '\n\t\t\t\t\t\t\t\t\t\t<img src="images/icon-link.png">\n\t\t\t\t\t\t\t\t\t';
+ } ;
+__p += '\n\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t<div class="result-body">\n\t\t\t\t\t\t\t\t';
  if ( result.get('bundle_name') === "Note" ) { ;
 __p += '\n\t\t\t\t\t\t\t\t\t' +
 ((__t = ( result.get('ss_body') )) == null ? '' : __t) +
