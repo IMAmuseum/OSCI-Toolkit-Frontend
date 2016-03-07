@@ -92,8 +92,6 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 	toolbarAction: function(toolbarItem) {
 
-		console.log( 'toolbarAction' );
-
 		this.toolbarToggle();
 
 		// if toolbar item is active show it
@@ -111,8 +109,6 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 	},
 
 	toolbarToggle: function() {
-
-		console.log( 'toolbarToggle' );
 
 		_.each(app.toolbarItems, function(item) {
 
