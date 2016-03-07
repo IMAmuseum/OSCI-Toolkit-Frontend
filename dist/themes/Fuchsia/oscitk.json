@@ -12,10 +12,10 @@
         "OsciTkNote": "/api/notes/"
     },
     "toolbarItems": [
+        {"view": "searchToolbarView", "text": "toolbar-search", "style": "default"},
         {"view": "tocToolbarView", "text": "toolbar-toc", "style": "default"},
         {"view": "notesToolbarView", "text": "toolbar-notes", "style": "default"},
-        {"view": "accountToolbarView", "text": "toolbar-account", "style": "default"},
-        {"view": "searchToolbarView", "text": "toolbar-searcg", "style": "default"}
+        {"view": "accountToolbarView", "text": "toolbar-account", "style": "default"}
     ],
     "theme": "Fuchsia",
     "themeFeatures": {
