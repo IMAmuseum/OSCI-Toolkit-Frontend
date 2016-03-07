@@ -25,15 +25,18 @@
 }
 
 #navbar-title {
+
     color: #333;
-    font-size: 14px;
+    font-size: 18px;
+    float: left;
+    padding: 10px 15px 8px;
+    line-height: 1.2;
+    height: auto;
+
+    display: none;
 
     @media (min-width: $screen-sm) {
-        font-size: 18px;
-        float: left;
-        padding: 10px 15px 8px;
-        line-height: 1.2;
-        height: auto;
+        display: block;
     }
 }
 

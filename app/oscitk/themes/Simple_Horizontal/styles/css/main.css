@@ -8612,21 +8612,22 @@ ul.toc {
 /* line 27, ../_navbar.scss */
 #navbar-title {
   color: #333;
-  font-size: 14px;
+  font-size: 18px;
+  float: left;
+  padding: 10px 15px 8px;
+  line-height: 1.2;
+  height: auto;
+  display: none;
 }
 @media (min-width: 768px) {
   /* line 27, ../_navbar.scss */
   #navbar-title {
-    font-size: 18px;
-    float: left;
-    padding: 10px 15px 8px;
-    line-height: 1.2;
-    height: auto;
+    display: block;
   }
 }
 
 @media (max-width: 480px) {
-  /* line 43, ../_navbar.scss */
+  /* line 48, ../_navbar.scss */
   #navbar .nav li {
     width: 100%;
     text-align: left;
