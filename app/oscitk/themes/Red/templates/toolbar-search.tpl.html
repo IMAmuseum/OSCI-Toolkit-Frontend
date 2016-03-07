@@ -1,5 +1,24 @@
 <h3>Search</h3>
-
-<div class="toolbar-scroll">
-	<!-- TODO: Implement me! -->
+<div id="search-container">
+	<form id="search-form" name="search-form" method="POST">
+		<div id="search-box">
+			<input type="text" class="form-control input-sm" id="search-keyword" placeholder="Search" value="<%= query.keyword %>"/>
+			<div id="search-submit"></div>
+			<input type="hidden" name="page" id="search-page" />
+		</div>
+		<div id="search-filters-container">
+			<div class="search-filter-select">
+				<select class="form-control input-sm search-filters">
+					<option>No filter</option>
+					<option value="type:content">Content</option>
+					<option value="type:notes">My Notes</option>
+					<option value="type:footnotes">Footnotes</option>
+					<!--<option value="type:figures">Figures</option>-->
+				</select>
+			</div>
+		</div>
+	</form>
 </div>
+
+
+<div id="search-results-container" class="toolbar-scroll"></div>

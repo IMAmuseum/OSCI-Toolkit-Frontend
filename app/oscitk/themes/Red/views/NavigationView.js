@@ -5,7 +5,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		// Pages here have nothing to do with the MultiColumn theme's Pages
 		// They are simply a way to keep track of how far to scroll the screen
-		// They are NOT distinct <div> elements and have no associated model or collection 
+		// They are NOT distinct <div> elements and have no associated model or collection
 		// They exist only within the context of the NavigationView.js
 		// They are just numbers!
 
@@ -43,7 +43,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 				// go to first section
 				var sectionId = app.collections.navigationItems.at(0).id;
-				//console.log( sectionId + " asdf"); //asdf
 				app.router.navigate("section/" + sectionId, { trigger: false } );
 				this.setCurrentNavigationItem( sectionId );
 
@@ -51,34 +50,37 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 				// if the first load is via #section/[id]
 				if( this.getCurrentNavigationItem() === null ) {
-					//console.log( data.section_id + " abba" );
 					this.setCurrentNavigationItem( data.section_id );
 				}else{
 
 					// trigger a nav item change *only* if it's a new section
 					// no need to re-render everything if we're staying put...
 					if( data.section_id !== this.getCurrentNavigationItem().get('id') ) {
-						//console.log( data.section_id + " wert" );
 						this.setCurrentNavigationItem( data.section_id );
 					}else{
 						waitForSection = false;
 					}
-					
+
 				}
 
 			}
 
-            
+
 
 			// if there is a secondary route (e.g. to a paragraph),
 			// pass the ball on to the navigate listener
 			if( typeof data.identifier !== undefined ) {
 				if( waitForSection ) {
+
+					// Other themes use "navigateReady", which is triggered at about the same time
 					this.listenToOnce( Backbone, "columnRenderEnd", function() {
 						Backbone.trigger('navigate', { identifier: data.identifier } );
 					});
+
 				}else{
+
 					Backbone.trigger('navigate', { identifier: data.identifier } );
+
 				}
 			}
 
@@ -86,8 +88,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			this.setDocumentTitle();
 
 		});
-
-		
 
 		// TODO: Respond to scroll events?
 
@@ -124,9 +124,9 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		// Figure out the first element on the page and save it
 		this.listenTo(Backbone, 'columnRenderStart', function() {
-	        
+
 	        var offset = $('#default-section-view').offset();
-			
+
 	        var em = $('#default-section-view>*').findNearest({
 	            left: offset.left + $('#section').scrollLeft() + 1,
 	            top: offset.top + 1
@@ -147,7 +147,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		});
 
 		this.listenTo(Backbone, 'navigate', function( data ) {
-
 
 			// Stay on current page by default
             var gotoPage = this.page ? this.page : 1;
@@ -194,29 +193,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
                         }
 
-						/*
-						// Route for footnote references
-                        if (data.identifier.search(/^fn-[0-9]+-[0-9]+/) > -1) {
-                            
-                            matches = data.identifier.match(/^fn-[0-9]+-[0-9]+/);
-                            refs = $('a[href="#' + matches[0] + '"]');
-                            if (refs.length === 1) {
-                                page_for_id = this.getPageNumberForSelector(refs[0]);
-                            }
-                            else {
-                                // find visible occurence
-                                for (j = 0; j < refs.length; j++) {
-                                    if (this.isElementVisible(refs[j])) {
-                                        page_for_id = this.getPageNumberForSelector(refs[j]);
-                                        break;
-                                    }
-                                }
-                            }
-                            break;
-                        
-                        }
-                        */
-
                         // Route to specific element
                         gotoPage = this.getPageForSelector( data.identifier );
 	                    break;
@@ -231,7 +207,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
             // TODO: maybe alert the user that they had an invalid link?
             if( typeof gotoPage === 'undefined') {
             	gotoPage = this.page;
-            	//console.log( this.getCurrentNavigationItem().get('id') + " jkl;");
             	app.router.navigate("section/" + this.getCurrentNavigationItem().get('id'), { trigger: true } );
             }
 
@@ -249,10 +224,10 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			// Check if the page is available...
 			var previous = this.currentNavigationItem.get('previous');
 			var next = this.currentNavigationItem.get('next');
-		
+
 			// If navigating too far, table of contents no longer works
 			var navigateRestoreToolbar = function( route ) {
-				
+
 				var $toolbar = app.views.toolbarView.$el;
 				var $activeItem = $toolbar.find('#toolbar-area > li.active');
 				var restoreItem = $activeItem.length > 0;
@@ -263,10 +238,9 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 				}
 
 				Backbone.trigger("toolbarRemoveViews");
-				app.router.navigate( route, { trigger: true } );
+				app.router.navigate( route, { trigger: true } ); // TODO: verify if trigger has any effect here
 
 				if( restoreItem ) {
-					//console.log( $toolbar.find( '.' + activeToolbarItemClass ) );
 					$toolbar.find( '.' + activeToolbarItemClass ).click();
 				}
 
@@ -292,7 +266,11 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 				this.calculatePages();
 				this.update(this.page);
-				
+
+	            // Used in ToobarSearchView.js (?)
+	            Backbone.trigger( 'navigateScrollEnd' );
+
+
 			}
 
 
@@ -354,7 +332,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 		var previous = this.currentNavigationItem.get('previous');
 		var next = this.currentNavigationItem.get('next');
-		
+
 		// First, just bind each button to move the page
 		$prev.removeClass('inactive').click(function () {
 			Backbone.trigger('navigate', { page: page-1 } );
@@ -396,8 +374,6 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 	},
 
 	setCurrentNavigationItem: function( section_id ) {
-
-		// console.log("setCurrentNavigationItem called: " + section_id);
 
 		var section = app.collections.navigationItems.get(section_id);
 

@@ -5,9 +5,6 @@ OsciTk.views.BaseView = Backbone.View.extend({
 	},
 	addView: function(view, target) {
 
-		//console.log( view, target );
-		//console.log( $('#account').length );
-
 		view.parent = this;
 		if (typeof target === "undefined") {
 			this.$el.append(view.el);

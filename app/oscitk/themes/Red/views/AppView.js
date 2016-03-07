@@ -14,9 +14,9 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 		// initialize all possible views
 		app.views = {
-			
+
 			headerView: new OsciTk.views.Header(),
-			
+
 			//printView: new OsciTk.views.Print(),
 
 			sectionView: new OsciTk.views.Section(),
@@ -25,7 +25,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 			navigationView: new OsciTk.views.Navigation(),
 
-			navbarView: new OsciTk.views.Navbar(),			
+			navbarView: new OsciTk.views.Navbar(),
 
 			toolbarView: new OsciTk.views.Toolbar(),
 			tocToolbarView: new OsciTk.views.TocToolbar(),
@@ -35,7 +35,7 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			figuresToolbarView: new OsciTk.views.FiguresToolbar(),
 			notesToolbarView: new OsciTk.views.NotesToolbar(),
 			accountToolbarView: new OsciTk.views.AccountToolbar(),
-			
+
 
 		};
 
@@ -92,6 +92,8 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 	toolbarAction: function(toolbarItem) {
 
+		console.log( 'toolbarAction' );
+
 		this.toolbarToggle();
 
 		// if toolbar item is active show it
@@ -109,7 +111,9 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 	},
 
 	toolbarToggle: function() {
-		
+
+		console.log( 'toolbarToggle' );
+
 		_.each(app.toolbarItems, function(item) {
 
 			if (item.style == 'default') {
