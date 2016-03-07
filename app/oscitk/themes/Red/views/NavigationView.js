@@ -193,6 +193,16 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
                         }
 
+                        // Route to a footnote
+                        if (data.identifier.search(/^fn-[0-9]+$/) > -1) {
+
+                        	var fid = data.identifier;
+                        	gotoPage = this.getPageForSelector("#" + fid);
+
+                        	break;
+
+                        }
+
                         // Route to specific element
                         gotoPage = this.getPageForSelector( data.identifier );
 	                    break;
@@ -246,7 +256,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 			};
 
-			if( gotoPage < 1 && previous ) {
+
+			if( gotoPage === 0 && previous ) {
 
 				navigateRestoreToolbar( "section/" + previous.id + "/end" );
 
