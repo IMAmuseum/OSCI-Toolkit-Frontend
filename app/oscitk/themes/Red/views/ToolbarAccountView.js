@@ -17,7 +17,6 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 		// see ../../../models/AccountModel.js
 		// re-renders form when the account info is retrieved
 		this.listenTo(Backbone, 'accountReady', function(sectionModel) {
-			this.model = app.account;
 			this.render();
 		});
 
@@ -25,16 +24,16 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 			this.sectionId = sectionModel.get('id');
 		});
 
-
+		console.log("account toolbar inited");
 		this.render();
 
 	},
 
 	render: function() {
-	
+
 
 		// determine if user is logged in.  Show login form or user details
-		if (this.model && this.model.get('id') > 0) {
+		if (app.account && app.account.get('id') > 0) {
 			this.showProfile();
 		}
 		else {
@@ -65,8 +64,8 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 				if (data.success === true) {
 
 					// user was logged in, set the returned user data
-					
-					accountView.model.set( {
+
+					app.account.set( {
 						username: data.user.username,
 						email: data.user.email,
 						id: parseInt(data.user.id)
@@ -87,7 +86,7 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 			}
 
 		});
-		
+
 	},
 
 	logout: function() {
@@ -105,7 +104,7 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 				// The data returned doesn't quite match the js model
 				// { email: null, id: "1", uid: 0, username: "anonymous" }
 
-				accountView.model.set( accountView.model.defaults );
+				app.account.set( app.account.defaults );
 				accountView.showLoginForm();
 
 				Backbone.trigger("accountStateChanged");
@@ -137,7 +136,7 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 				if (data.success === true) {
 
 					// user was logged in, set the returned user data
-					accountView.model.set(data.user);
+					app.account.set(data.user);
 					accountView.showProfile();
 
 					Backbone.trigger("accountStateChanged");
@@ -188,7 +187,7 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 	showProfile: function() {
 
 		this.template = OsciTk.templateManager.get('toolbar-account-profile');
-		this.$el.html(this.template(this.model.toJSON()));
+		this.$el.html(this.template(app.account.toJSON()));
 
 	},
 
