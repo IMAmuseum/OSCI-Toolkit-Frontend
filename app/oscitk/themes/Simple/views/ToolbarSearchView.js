@@ -62,7 +62,7 @@ OsciTk.views.SearchToolbar = OsciTk.views.BaseView.extend({
 		$modal.find('#search-form').on('submit', $.proxy( this.submitSearch, this ) );
 		$modal.find('#search-submit').on('click', $.proxy( this.submitSearch, this ) );
 
-		$modal.find('.search-filters').on('click', $.proxy( this.addFilter, this ) );
+		$modal.find('.search-filters').on('change', $.proxy( this.addFilter, this ) );
 		$modal.find('.filter').on('click', $.proxy( this.addFilter ) );
 
 		// Launch the modal
@@ -173,22 +173,17 @@ OsciTk.views.SearchToolbar = OsciTk.views.BaseView.extend({
 
 
 	addFilter: function(e) {
+
 		e.preventDefault();
 
-		var filter;
-
-		if (e.type === 'change') {
-			filter = $(e.currentTarget).val();
-		} else {
-			filter = $(e.currentTarget).data('filter');
-		}
-
+		var filter = $(e.currentTarget).val();;
 		var exists = _.indexOf(this.query.filters, filter);
 
-		this.$el.find(".filter").removeClass("active");
+		$('#toolbar-search').find(".filter").removeClass("active");
 
 		//remove type filters (only one at a time)
 		this.query.filters = _.reject(this.query.filters, function(filter) {
+			console.log( filter );
 			return filter.indexOf("type:") === 0;
 		});
 
