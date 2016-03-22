@@ -20,16 +20,18 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 
 			// These two should be init'd after section, but before navigation
 			paragraphControlsView: new OsciTk.views.ParagraphControls(),
-			glossaryTooltipView: new OsciTk.views.GlossaryTooltip(),			
+			glossaryTooltipView: new OsciTk.views.GlossaryTooltip(),
 
 			// Not too sure where this belongs
 			notesView: new OsciTk.views.Notes(),
-			
+
 			accountView: new OsciTk.views.Account(),
 			navbarView: new OsciTk.views.Navbar(),
 			fontSizeView: new OsciTk.views.FontSize(),
 			printView: new OsciTk.views.Print(),
-			tocView: new OsciTk.views.Toc(),			
+			tocView: new OsciTk.views.Toc(),
+
+			searchToolbarView: new OsciTk.views.SearchToolbar()
 
 
 		};

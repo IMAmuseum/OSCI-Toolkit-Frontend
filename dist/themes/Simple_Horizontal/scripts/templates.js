@@ -1,6 +1,6 @@
 this["JST"] = this["JST"] || {};
 
-this["JST"]["app/oscitk/themes/Simple_horizontal/templates/app.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/app.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
@@ -10,7 +10,7 @@ __p += '<div class="container">\n\t<div id="account"></div>\n\t<div id="toc"></d
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_horizontal/templates/header.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/header.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -42,7 +42,7 @@ __p += '</p>\n  \t</div>\n\n</div>';
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_horizontal/templates/modal.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/modal.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
@@ -66,7 +66,7 @@ __p += '<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" 
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_horizontal/templates/navbar.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/navbar.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -95,7 +95,7 @@ __p += '\n      </ul>\n\t\t</div>\n\t</div>\n</nav>';
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_horizontal/templates/navigation.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/navigation.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -140,7 +140,7 @@ __p += '\n<div class=\'next-page corner hidden-print\'>\n\t<a href="#section/' +
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_horizontal/templates/notes.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/notes.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -171,7 +171,7 @@ __p += '\n\t</ul>\n</div>';
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_horizontal/templates/paragraph-cite.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/paragraph-cite.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -220,7 +220,7 @@ __p += '&ldquo;<em>' +
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_horizontal/templates/paragraph-notes.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/paragraph-notes.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
@@ -236,7 +236,7 @@ __p += '<textarea class="note-form-wrapper" data-paragraph_number="' +
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_horizontal/templates/paragraph-popover.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/paragraph-popover.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -259,7 +259,7 @@ __p += '\n\n</div>\n\n\n';
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_horizontal/templates/section.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/section.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -280,7 +280,7 @@ __p += '\n<hr>\n' +
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_horizontal/templates/toolbar-account-login.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/toolbar-account-login.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
@@ -290,7 +290,7 @@ __p += '<div class="form-error alert alert-danger"></div>\n<form id="account-for
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_horizontal/templates/toolbar-account-profile.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/toolbar-account-profile.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
@@ -304,7 +304,7 @@ __p += '<div class="form-error alert alert-danger"></div>\n<h4>' +
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_horizontal/templates/toolbar-account-register.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/toolbar-account-register.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
@@ -314,7 +314,7 @@ __p += '<div class="form-error alert alert-danger"></div>\n<form id="account-for
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_horizontal/templates/toolbar-font-size.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/toolbar-font-size.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
@@ -324,7 +324,7 @@ __p += '<a href="#font-larger" class="larger font-button" data-href="font-larger
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_horizontal/templates/toolbar-item.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/toolbar-item.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -345,7 +345,7 @@ __p += '\n';
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_horizontal/templates/toolbar-modal.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/toolbar-modal.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
@@ -359,7 +359,7 @@ __p += '<div class="modal fade" tabindex="-1" role="dialog">\n\t<div class="moda
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_horizontal/templates/toolbar-print.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/toolbar-print.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
@@ -369,7 +369,96 @@ __p += '<a href="#print" id="print"><span class="hide-text">Print</span></a>\n';
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_horizontal/templates/toolbar-toc.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/toolbar-search-results.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+
+ if (query.keyword) { ;
+__p += '\n\n<div id="search-results-column-wrapper">\n\n\t';
+ if (response.numFound !== 0) { ;
+__p += '\n\t<div id="search-results">\n\t\t<div id="search-results-content">\n\t\t\t';
+ _.each(results, function(group) { var first = true;;
+__p += '\n\n\t\t\t\t<div class="result-section">\n\t\t\t\t\t';
+ _.each(group, function(result) { ;
+__p += '\n\n\t\t\t\t\t\t';
+ if ( first ) { ;
+__p += '\n\t\t\t\t\t\t\t';
+ if ( result.get('bundle_name') === "Note" ) { ;
+__p += '\n\t\t\t\t\t\t\t\t<div class="result-title">' +
+((__t = ( result.get('ss_section_title') )) == null ? '' : __t) +
+'</div>\n\t\t\t\t\t\t\t';
+ } else { ;
+__p += '\n\t\t\t\t\t\t\t\t<div class="result-title">' +
+((__t = ( result.get('label') )) == null ? '' : __t) +
+'</div>\n\t\t\t\t\t\t\t';
+ } ;
+__p += '\n\t\t\t\t\t\t';
+ first = false; } ;
+__p += '\n\n\t\t\t\t\t\t';
+ if (!_.isEmpty(result.get('teaser'))) { ;
+__p += '\n\t\t\t\t\t\t<div class="search-result" data-id="' +
+((__t = ( result.get('id') )) == null ? '' : __t) +
+'">\n\t\t\t\t\t\t\t<div class="result-content">\n\n\t\t\t\t\t\t\t\t<div class="result-type ' +
+((__t = ( result.get('bundle') )) == null ? '' : __t) +
+'">\n\t\t\t\t\t\t\t\t\t';
+ if ( result.get('bundle_name') === "Note" ) { ;
+__p += '\n\t\t\t\t\t\t\t\t\t\t<img src="images/icon-link-note.png">\n\t\t\t\t\t\t\t\t\t';
+ } else { ;
+__p += '\n\t\t\t\t\t\t\t\t\t\t<img src="images/icon-link.png">\n\t\t\t\t\t\t\t\t\t';
+ } ;
+__p += '\n\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t<p class="result-body ';
+ if ( result.get('teaser').length > 90 ) { ;
+__p += 'ellipsis';
+ } ;
+__p += '">\n\t\t\t\t\t\t\t\t';
+ if ( result.get('bundle_name') === "Note" ) { ;
+__p += '\n\t\t\t\t\t\t\t\t\t' +
+((__t = ( result.get('ss_body') )) == null ? '' : __t) +
+'\n\t\t\t\t\t\t\t\t';
+ } else { ;
+__p += '\n\t\t\t\t\t\t\t\t\t';
+ if (_.isEmpty(result.get('teaser'))) { ;
+__p += '\n\t\t\t\t\t\t\t\t\t\t&nbsp;\n\t\t\t\t\t\t\t\t\t';
+ } else { ;
+__p += '\n\t\t\t\t\t\t\t\t\t\t' +
+((__t = ( result.get('teaser') )) == null ? '' : __t) +
+'\n\t\t\t\t\t\t\t\t\t';
+ } ;
+__p += '\n\t\t\t\t\t\t\t\t';
+ } ;
+__p += '\n\t\t\t\t\t\t\t\t</p>\n\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t';
+ } ;
+__p += '\n\n\t\t\t\t\t';
+ }); ;
+__p += '\n\t\t\t\t</div>\n\n\t\t\t';
+ }); ;
+__p += '\n\t\t</div>\n\t</div>\n\t';
+ } else { ;
+__p += '\n\tNo results found.\n\t';
+ } ;
+__p += '\n\n</div>\n';
+ } ;
+
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/toolbar-search.tpl.html"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<div id="search-container">\n\t<form id="search-form" name="search-form" method="POST">\n\t\t<div id="search-box">\n\t\t\t<input type="text" class="form-control input-sm" id="search-keyword" placeholder="Search" value="' +
+((__t = ( query.keyword )) == null ? '' : __t) +
+'"/>\n\t\t\t<div id="search-submit"></div>\n\t\t\t<input type="hidden" name="page" id="search-page" />\n\t\t</div>\n\t\t<div id="search-filters-container">\n\t\t\t<div class="search-filter-select">\n\t\t\t\t<select class="form-control input-sm search-filters">\n\t\t\t\t\t<option>No filter</option>\n\t\t\t\t\t<option value="type:content">Content</option>\n\t\t\t\t\t<option value="type:notes">My Notes</option>\n\t\t\t\t\t<option value="type:footnotes">Footnotes</option>\n\t\t\t\t</select>\n\t\t\t</div>\n\t\t</div>\n\t</form>\n</div>\n\n\n<div id="search-results-container" class="toolbar-scroll"></div>';
+
+}
+return __p
+};
+
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/toolbar-toc.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
@@ -402,7 +491,7 @@ __p += '\n</ul>';
 return __p
 };
 
-this["JST"]["app/oscitk/themes/Simple_horizontal/templates/toolbar.tpl.html"] = function(obj) {
+this["JST"]["app/oscitk/themes/Simple_Horizontal/templates/toolbar.tpl.html"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {

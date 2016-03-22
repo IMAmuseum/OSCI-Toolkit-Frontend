@@ -8,18 +8,20 @@
     "endpoints": {
         "OsciTkAccount": "/api/users/",
         "OsciTkCitation": "/api/citations/",
+        "OsciTkSearch": "/api/search/",
         "OsciTkNote": "/api/notes/"
     },
     "toolbarItems": [
         {"view": "accountView", "text": "toolbar-account", "style": "default"},
         {"view": "tocView", "text": "toc", "style": "default"},
+        {"view": "searchToolbarView", "text": "toolbar-search", "style": "default"},
         {"view": "printView", "text": "print", "style": "inline"},
         {"view": "fontSizeView", "text": "font-size", "style": "inline"}
     ],
     "theme": "Simple_Horizontal",
     "themeFeatures": {
         "account": true,
-        "search": false,
+        "search": true,
         "notes": true,
         "citations": true,
         "glossary": true,

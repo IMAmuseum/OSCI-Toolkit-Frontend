@@ -49,6 +49,13 @@ ul.toc {
 	}
 }
 
+.searchToolbarView-toolbar-item {
+	background-image: url(../../images/search-blue.png);
+	&:hover {
+		background-image: url(../../images/search-active.png);
+	}
+}
+
 .printView-toolbar-item {
 	background-image: url(../../images/print.png);
 	&:hover {
@@ -63,6 +70,69 @@ ul.toc {
 		a {
 			display: inline-block;
 			padding: 7px 5px 7px 0;
+		}
+	}
+}
+
+#toolbar-search {
+
+	#search-container {
+
+		#search-box {
+			position: relative;
+			#search-submit {
+				display: block;
+				cursor: pointer;
+				position: absolute;
+				top: 4px;
+				right: 3px;
+				width: 24px;
+				height: 24px;
+				background: url(../../images/icon-search.png) 0 0 no-repeat;
+				background-size: 24px;
+			}
+		}
+
+		#search-box, #search-filters-container {
+			margin: 10px 0px;
+		}
+
+	}
+
+	#search-results-container.toolbar-scroll {
+		height: calc(100% - 39px - #{50px} - 96px ) !important;
+	}
+
+	#search-results {
+		#search-results-content {
+			.result-section {
+				.result-title {
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					overflow: hidden;
+					margin-bottom: 10px;
+				}
+				.search-result {
+					cursor: pointer;
+					.result-content {
+						margin-bottom: 10px;
+						.result-type {
+							float: left;
+							img {
+								height: 15px;
+								width: 15px;
+							}
+						}
+						.result-body {
+							font-size: 14px;
+							margin-left: 25px;
+						}
+						.result-body.ellipsis:after {
+							content: '...';
+						}
+					}
+				}
+			}
 		}
 	}
 }
