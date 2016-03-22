@@ -29,7 +29,8 @@ OsciTk.views.App = OsciTk.views.BaseView.extend({
 			tocToolbarView: new OsciTk.views.TocToolbar(), // NO PROB
 			printToolbarView: new OsciTk.views.PrintToolbar(), // NO PROB
 			fontsizeToolbarView: new OsciTk.views.FontSizeToolbar(), // NO PROB
-			
+			searchToolbarView: new OsciTk.views.SearchToolbar()
+
 		};
 
 		// Add the header view

@@ -8249,22 +8249,30 @@ header .container-header .header-title p {
 #toolbar-area .toolbar-item-view.accountToolbarView-toolbar-item:hover {
   background-image: url(../../images/login-active.png);
 }
-/* line 48, ../_toolbar.scss */
+/* line 47, ../_toolbar.scss */
+#toolbar-area .toolbar-item-view.searchToolbarView-toolbar-item {
+  background-image: url(../../images/search-blue.png);
+}
+/* line 49, ../_toolbar.scss */
+#toolbar-area .toolbar-item-view.searchToolbarView-toolbar-item:hover {
+  background-image: url(../../images/search-active.png);
+}
+/* line 53, ../_toolbar.scss */
 #toolbar-area .toolbar-item-view.printToolbarView-toolbar-item {
   background-image: url(../../images/print.png);
 }
-/* line 50, ../_toolbar.scss */
+/* line 55, ../_toolbar.scss */
 #toolbar-area .toolbar-item-view.printToolbarView-toolbar-item:hover {
   background-image: url(../../images/print-active.png);
 }
-/* line 55, ../_toolbar.scss */
+/* line 60, ../_toolbar.scss */
 #toolbar-area .toolbar-item-view.fontsizeToolbarView-toolbar-item {
   font: inherit;
   width: auto;
   height: auto;
   color: auto;
 }
-/* line 60, ../_toolbar.scss */
+/* line 65, ../_toolbar.scss */
 #toolbar-area .toolbar-item-view.fontsizeToolbarView-toolbar-item .btn-group > .btn {
   padding: 2px;
   border-radius: 5px;
@@ -8276,44 +8284,44 @@ header .container-header .header-title p {
   border-radius: 25px;
   border: 0;
 }
-/* line 73, ../_toolbar.scss */
+/* line 78, ../_toolbar.scss */
 #toolbar-area .toolbar-item-view.fontsizeToolbarView-toolbar-item .btn-group > .btn.larger {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
-/* line 77, ../_toolbar.scss */
+/* line 82, ../_toolbar.scss */
 #toolbar-area .toolbar-item-view.fontsizeToolbarView-toolbar-item .btn-group > .btn.smaller {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 }
 
-/* line 89, ../_toolbar.scss */
+/* line 94, ../_toolbar.scss */
 ul.toc {
   list-style-type: none;
 }
 
 @media (max-width: 925px) {
-  /* line 97, ../_toolbar.scss */
+  /* line 102, ../_toolbar.scss */
   #toolbar {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
   }
-  /* line 104, ../_toolbar.scss */
+  /* line 109, ../_toolbar.scss */
   #toolbar .nav {
     padding-top: 5px;
     background-color: #f8f8f8;
     border-top: thin solid #e7e7e7;
     text-align: center;
   }
-  /* line 112, ../_toolbar.scss */
+  /* line 117, ../_toolbar.scss */
   #toolbar .nav #toolbar-area {
     padding-left: 0px;
     display: inline-block;
     margin: 0px -10px;
   }
-  /* line 122, ../_toolbar.scss */
+  /* line 127, ../_toolbar.scss */
   #toolbar .nav #toolbar-area .toolbar-item-view {
     float: left;
     margin: 0px 10px;
@@ -8321,11 +8329,69 @@ ul.toc {
     width: 30px;
     background-size: 30px 30px;
   }
-  /* line 131, ../_toolbar.scss */
+  /* line 136, ../_toolbar.scss */
   #toolbar .nav #toolbar-area .toolbar-item-view.fontsizeToolbarView-toolbar-item {
     display: none;
   }
 }
+/* line 153, ../_toolbar.scss */
+#toolbar-search #search-container #search-box {
+  position: relative;
+}
+/* line 155, ../_toolbar.scss */
+#toolbar-search #search-container #search-box #search-submit {
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  top: 4px;
+  right: 3px;
+  width: 24px;
+  height: 24px;
+  background: url(../../images/icon-search.png) 0 0 no-repeat;
+  background-size: 24px;
+}
+/* line 168, ../_toolbar.scss */
+#toolbar-search #search-container #search-box, #toolbar-search #search-container #search-filters-container {
+  margin: 10px 0px;
+}
+/* line 174, ../_toolbar.scss */
+#toolbar-search #search-results-container.toolbar-scroll {
+  height: calc(100% - 39px - 50px - 96px ) !important;
+}
+/* line 181, ../_toolbar.scss */
+#toolbar-search #search-results #search-results-content .result-section .result-title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+/* line 187, ../_toolbar.scss */
+#toolbar-search #search-results #search-results-content .result-section .search-result {
+  cursor: pointer;
+}
+/* line 189, ../_toolbar.scss */
+#toolbar-search #search-results #search-results-content .result-section .search-result .result-content {
+  margin-bottom: 10px;
+}
+/* line 191, ../_toolbar.scss */
+#toolbar-search #search-results #search-results-content .result-section .search-result .result-content .result-type {
+  float: left;
+}
+/* line 193, ../_toolbar.scss */
+#toolbar-search #search-results #search-results-content .result-section .search-result .result-content .result-type img {
+  height: 15px;
+  width: 15px;
+}
+/* line 198, ../_toolbar.scss */
+#toolbar-search #search-results #search-results-content .result-section .search-result .result-content .result-body {
+  font-size: 14px;
+  margin-left: 25px;
+}
+/* line 202, ../_toolbar.scss */
+#toolbar-search #search-results #search-results-content .result-section .search-result .result-content .result-body.ellipsis:after {
+  content: '...';
+}
+
 /* line 1, ../_navbar.scss */
 #navbar {
   z-index: 998;
