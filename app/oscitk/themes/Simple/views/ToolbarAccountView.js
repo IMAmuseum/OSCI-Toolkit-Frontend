@@ -1,5 +1,5 @@
 OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
-	
+
 	events: {
 		'click button.login': 'login',
 		'click button.register': 'register',
@@ -14,14 +14,28 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
     templateLogin: OsciTk.templateManager.get('toolbar-account-login'),
     templateProfile: OsciTk.templateManager.get('toolbar-account-profile'),
     templateRegister: OsciTk.templateManager.get('toolbar-account-register'),
-	
+
 	initialize: function() {
 
-		this.$modals = {};
 		var active = 'login';
+
+
+		this.$modals = {
+			login : this.prepareLogin(  ),
+			profile : this.prepareProfile(  ),
+			register : this.prepareRegister(  )
+		};
+
+		if( app.account.get('id') > 0 ) {
+			active = 'profile';
+		} else {
+			active = 'login';
+		}
+
 
 		// For accountReady, see ../../../models/AccountModel.js
 		// We will trigger accountStateChanged below, e.g. on logout
+		// It seems that accountReady is already triggered by the time this rolls around
 		this.listenTo(Backbone, 'accountReady accountStateChanged', function( error ) {
 
 			this.$modals = {
@@ -46,7 +60,7 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 
 		});
 
-		
+
 	},
 
 	modalBindings: function( $modal ) {
@@ -54,6 +68,7 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 	},
 
 	showForm: function( form ) {
+
 		this.$modals[form].clone(true).modal().on('hidden.bs.modal', function() {
 			$(this).data('bs.modal', null).remove();
 		});
@@ -62,7 +77,7 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 
 	prepareLogin: function( error ) {
 
-		var form = this.templateLogin(); 
+		var form = this.templateLogin();
 		var modal = this.templateModal({
 			title: "Login",
 			body: form
@@ -206,7 +221,7 @@ OsciTk.views.AccountToolbar = OsciTk.views.BaseView.extend({
 
 			}
 		});
-		
+
 	},
 
 	logout: function( ) {
