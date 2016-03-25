@@ -5,7 +5,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
         'click .next-page': 'nextPageClicked',
         'click .prev-page': 'prevPageClicked'
     },
-    
+
 	initialize: function() {
 
 		// Stores current section from SectionCollection
@@ -49,7 +49,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 					}else{
 						waitForSection = false;
 					}
-					
+
 				}
 
 			}
@@ -66,7 +66,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			if( typeof data.identifier !== 'undefined' ) {
 				if( data.identifier.length > 0 ) {
 					if( waitForSection ) {
-						
+
 						// Triggered in SectionView.js, usually alongside sectionRenderEnd
 						this.listenToOnce( Backbone, "navigateReady", function() {
 							Backbone.trigger('navigate', { identifier: data.identifier } );
@@ -75,7 +75,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 					} else {
 
 						Backbone.trigger('navigate', { identifier: data.identifier } );
-					
+
 					}
 				}
 			}
@@ -97,7 +97,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			// Here, gotoPage refers to how far to scroll in percent
 			// 0 = beginning, 1 = end
 
-			var gotoPage = 0; 
+			var gotoPage = 0;
 			var selector = false;
 
 			// Clear any p- etc nonsense
@@ -155,10 +155,10 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
             }
 
             // http://stackoverflow.com/questions/12103208/jquery-window-height-is-returning-the-document-height
-            var scroll = gotoPage * $(document).height(); 
+            var scroll = gotoPage * $(document).height();
             	scroll -= $(window).height() / 2;
             	scroll = Math.max( 0, scroll );
-            	
+
             if( selector ) {
 
             	// todo: for paragraphs, use the button selector, not the paragraph selector
@@ -232,6 +232,15 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		// Otherwise the notes won't be loaded after the section loads
 		Backbone.trigger( 'currentNavigationItemChanged', this.currentNavigationItem );
 
-	}
+	},
+
+	prevPageClicked: function(){
+		app.router.navigate("section/" + this.currentNavigationItem.get('previous').id, {trigger: true} );
+
+	},
+
+	nextPageClicked: function(){
+		app.router.navigate("section/" + this.currentNavigationItem.get('next').id, {trigger: true} );
+	},
 
 });

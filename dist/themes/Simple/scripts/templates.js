@@ -91,17 +91,13 @@ function print() { __p += __j.call(arguments, '') }
 with (obj) {
 
  if (previousItem !== null) { ;
-__p += '\n<div class=\'prev-page corner\'>\n\t<a href="#section/' +
-((__t = ( previousItem.id )) == null ? '' : __t) +
-'" title="' +
+__p += '\n<div class=\'prev-page corner\'>\n\t<a href="javascript:;" title="' +
 ((__t = ( previousItem.get('title') )) == null ? '' : __t) +
 '">\n\t\tPrevious\n\t</a>\n</div>\n';
  } ;
 __p += '\n\n';
  if (nextItem !== null) { ;
-__p += '\n<div class=\'next-page corner\'>\n\t<a href="#section/' +
-((__t = ( nextItem.id )) == null ? '' : __t) +
-'" title="' +
+__p += '\n<div class=\'next-page corner\'>\n\t<a href="javascript:;" title="' +
 ((__t = ( nextItem.get('title') )) == null ? '' : __t) +
 '">\n\t\tNext\n\t</a>\n</div>\n';
  } ;
