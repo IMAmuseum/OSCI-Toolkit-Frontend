@@ -4,8 +4,10 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 	events: {
         'click li a': 'itemClick',
+        'click .next-page': 'nextPageClicked',
+        'click .prev-page': 'prevPageClicked'
     },
-    
+
 	initialize: function() {
 
 		// Stores current section from SectionCollection
@@ -42,7 +44,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 				// if the first load is via #section/[id]
 				if( this.getCurrentNavigationItem() === null ) {
-					
+
 					this.setCurrentNavigationItem( data.section_id );
 
 					isFirstLoad = true;
@@ -56,7 +58,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 					}else{
 						waitForSection = false;
 					}
-					
+
 				}
 
 			}
@@ -67,7 +69,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			if( typeof data.identifier !== 'undefined' ) {
 				if( data.identifier.length > 0 ) {
 					if( waitForSection ) {
-						
+
 						// Triggered in SectionView.js, usually alongside sectionRenderEnd
 						this.listenToOnce( Backbone, "navigateReady", function() {
 							Backbone.trigger('navigate', { identifier: data.identifier } );
@@ -76,7 +78,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 					} else {
 
 						Backbone.trigger('navigate', { identifier: data.identifier } );
-					
+
 					}
 				}
 			}else{
@@ -112,7 +114,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 			// Here, gotoPage refers to how far to scroll in percent
 			// 0 = beginning, 1 = end
 
-			var gotoPage = 0; 
+			var gotoPage = 0;
 			var selector = false;
 
 			// Clear any p- etc nonsense
@@ -170,10 +172,10 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
             }
 
             // http://stackoverflow.com/questions/12103208/jquery-window-height-is-returning-the-document-height
-            var scroll = gotoPage * $(document).width(); 
+            var scroll = gotoPage * $(document).width();
             	scroll -= $(window).width() / 2;
             	scroll = Math.max( 0, scroll );
-            	
+
             if( selector ) {
 
             	// todo: for paragraphs, use the button selector, not the paragraph selector
@@ -263,6 +265,15 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 		app.router.navigate( "section/" + sectionId, { trigger: true } );
 		}, 500 );
 
+	},
+
+	prevPageClicked: function(){
+		app.router.navigate("section/" + this.currentNavigationItem.get('previous').id, {trigger: true} );
+
+	},
+
+	nextPageClicked: function(){
+		app.router.navigate("section/" + this.currentNavigationItem.get('next').id, {trigger: true} );
 	},
 
 });
