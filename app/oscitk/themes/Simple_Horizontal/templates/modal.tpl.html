@@ -1,0 +1,25 @@
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="note-<%= id %>" id="note-<%= id %>">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Tools</h4>
+            </div>
+            <div class="modal-body">
+                <div class="tabbable"> <!-- Only required for left/right tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab-<%= id %>1" data-toggle="tab">Notes</a></li>
+                        <li><a href="#tab-<%= id %>2" data-toggle="tab" data-event="toggleCiteDialog" class="toggleCiteDialog">Citations</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab-<%= id %>1">
+                            <%= noteForm %>
+                        </div>
+                        <div class="tab-pane citation" id="tab-<%= id %>2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

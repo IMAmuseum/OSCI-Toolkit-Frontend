@@ -1,0 +1,16 @@
+#navigation {
+	.side {
+		position: fixed;
+		text-align:center;
+		top: 50%;
+		height:28px;
+		width:40px;
+	}
+	.prev-page {
+		left: 0;
+	}
+
+	.next-page {
+		right: 0;
+	}
+}

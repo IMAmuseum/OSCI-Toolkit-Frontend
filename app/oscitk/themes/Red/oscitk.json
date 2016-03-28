@@ -1,0 +1,33 @@
+{
+    "basePath": "",
+    "baseUrl": "",
+    "packageUrl": "/api/epub/1/package.opf",
+    "templateUrls": [
+        "/osci-themes/app/oscitk/themes/Red/templates/"
+    ],
+    "endpoints": {
+        "OsciTkAccount": "/api/users/",
+        "OsciTkCitation": "/api/citations/",
+        "OsciTkSearch": "/api/search/",
+        "OsciTkNote": "/api/notes/"
+    },
+    "toolbarItems": [
+        {"view": "tocToolbarView", "text": "toolbar-toc", "style": "default"},
+        {"view": "searchToolbarView", "text": "toolbar-search", "style": "default"},
+        {"view": "glossaryToolbarView", "text": "toolbar-glossary", "style": "default"},
+        {"view": "footnotesToolbarView", "text": "toolbar-footnotes", "style": "default"},
+        {"view": "figuresToolbarView", "text": "toolbar-figures", "style": "default"},
+        {"view": "notesToolbarView", "text": "toolbar-notes", "style": "default"},
+        {"view": "accountToolbarView", "text": "toolbar-account", "style": "default"}
+    ],
+    "theme": "Red",
+    "themeFeatures": {
+        "account": true,
+        "search": true,
+        "notes": true,
+        "citations": true,
+        "glossary": true,
+        "multicolumn": true,
+        "layeredImage": true
+    }
+}

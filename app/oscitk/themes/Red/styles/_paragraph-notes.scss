@@ -1,0 +1,61 @@
+.note-form-wrapper {
+	height: $popover-height;
+	display: block;
+}
+
+.paragraph-controls {
+
+	//position: relative;
+	//right: 0px;
+	//top: 19px;
+
+	/*
+	float: left;
+	margin-top: 9px;
+	margin-left: -16px;
+	*/
+
+	/*
+	position: absolute;
+	top: 9px;
+	left: 0px;
+	*/
+
+	display: inline-block;
+	margin-right: 10px;
+
+	z-index: 2;
+
+	.btn {
+		text-transform: uppercase;
+	}
+
+	$paragraph-button-size: 10px;
+
+	.paragraph-button {
+
+		background-image: url(../../images/disk-grey.png);
+		background-repeat: no-repeat;
+
+		background-size: $paragraph-button-size $paragraph-button-size;
+		width: $paragraph-button-size;
+		height: $paragraph-button-size;
+
+		border: 0;
+		font: 0/0 a;
+		text-shadow: none;
+		color: transparent;
+
+		&.withNotes {
+			background-image: url(../../images/disk-red.png);
+		}
+
+	}
+
+}
+
+
+
+#note-submit {
+	margin-top: 10px;
+}

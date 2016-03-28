@@ -1,0 +1,37 @@
+#navigation {
+	
+	margin: 0;
+
+	.corner {
+
+		text-align:center;
+		text-transform: uppercase;
+		width: 120px;
+		background-color: $osci-color-primary;
+		padding-top: 8px;
+		padding-bottom: 8px;
+
+		&:hover {
+			background-color: darken($osci-color-primary, 10%);
+		}
+
+	}
+
+	.prev-page {
+		float: left;
+	}
+
+	.next-page {
+		float: right;
+	}
+
+	a {
+		padding: 8px;
+		font-size: 15px;
+		color: #FFF;
+	}
+}
+
+.navbar-default {
+	margin: 0;
+}

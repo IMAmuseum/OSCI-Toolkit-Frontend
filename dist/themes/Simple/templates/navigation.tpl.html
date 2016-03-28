@@ -1,0 +1,15 @@
+<% if (previousItem !== null) { %>
+<div class='prev-page corner'>
+	<a href="javascript:;" title="<%= previousItem.get('title') %>">
+		Previous
+	</a>
+</div>
+<% } %>
+
+<% if (nextItem !== null) { %>
+<div class='next-page corner'>
+	<a href="javascript:;" title="<%= nextItem.get('title') %>">
+		Next
+	</a>
+</div>
+<% } %>

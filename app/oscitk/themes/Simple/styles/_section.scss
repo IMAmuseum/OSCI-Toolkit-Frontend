@@ -1,0 +1,100 @@
+// Some relative font-sizing is required to make the font size selector work
+
+.alert:empty {
+	display: none;
+}
+
+#section {
+
+	font-size: 18px;
+
+	#section-view {
+
+		p.content-paragraph {
+
+			text-indent: -15px;
+	    	padding-left: 30px;
+
+	    	text-align: justify;
+	  	 	
+	  	 	font-family: 'Crimson+Text';
+	  	 	color: $osci-color-text;
+
+		    font-size: 1em;
+	    	line-height: 1.5;
+
+		}
+
+		// See ../views/FootnotesView.js
+		.footnote-reference {
+
+			padding-left: 12px;
+
+			margin: 0 5px;
+			display: inline-block;
+			position: relative;
+
+			top: -5px;
+			width: 15px;
+			height: 15px;
+			border-radius: 50%;
+
+			background: $osci-color-primary;
+			color: #fff;
+
+			font-size: 12px;
+			line-height: 15px;
+			text-align: center;
+			
+				
+			&:hover {
+				text-decoration: none;
+				background: darken($osci-color-primary, 10%);
+				color: #fff;
+			}
+
+		}
+
+
+		// See ../views/GlossaryTooltipView.js
+		.tooltip {
+
+			text-indent: 0px;
+
+			.tooltip-arrow {
+				border-bottom-color: $osci-color-primary;
+			}
+
+			.tooltip-inner  {
+				font-family: 'Verdana';
+				border-radius: 5px;
+				background-color: $osci-color-primary;
+				color: white;
+				font-size: 12px;
+				text-align: center;
+				font-weight: normal;
+			}
+
+		}
+
+		.glossary-term {
+			&:hover {
+				cursor: pointer;
+			}
+		}
+
+		// See ../views/NavigationView.js
+		.navigated {
+			-webkit-transition: background-color .7s ease-out;
+			   -moz-transition: background-color .7s ease-out;
+			     -o-transition: background-color .7s ease-out;
+			        transition: background-color .7s ease-out;
+
+			border-radius: 3px;
+
+			&.navigating {
+				background-color: lighten($osci-color-primary, 40%);
+			}
+		}
+	}
+}

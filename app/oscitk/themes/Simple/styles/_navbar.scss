@@ -1,0 +1,99 @@
+#navbar {
+
+	z-index: 998;
+
+	#navbar-title {
+		color: #333;
+		font-size: 24px;
+
+		opacity: 0;
+		-webkit-transition: opacity 0.25s ease-in-out;
+		-moz-transition: opacity 0.25s ease-in-out;
+		-ms-transition: opacity 0.25s ease-in-out;
+		-o-transition: opacity 0.25s ease-in-out;
+		transition: opacity 0.25s ease-in-out;
+
+	}
+
+	&.affix {
+		position: fixed;
+	    width: 100%;
+	    top: 0;
+
+	    #navbar-title {
+	    	opacity: 1;
+	    }
+	}
+
+
+
+	#navbar-area {
+
+		li {
+			text-align: center;
+			width: 55px;
+
+			&:hover {
+				cursor: pointer;
+			}
+
+			a {
+				font-size: 24px;
+				z-index: 999;
+			}
+
+		}
+
+		li.active {
+
+			a {
+				background-color: #e7e7e7;
+			}
+
+		}
+
+	}
+
+	.tooltip > .tooltip-inner {
+    	background-color: $osci-color-primary;
+    	
+    	position: relative;
+    	right: 50px;
+    	top: -8px;
+
+		height: 40px;
+    	min-width: 150px;
+
+    	text-transform: uppercase;
+    	line-height: 35px;
+    	color: #FFF;
+    }
+    
+    .tooltip.bottom > .tooltip-arrow {
+		top: -16px;
+		left: 50%;
+		margin-left: -15px;
+		border-bottom-color: $osci-color-primary;
+		border-width: 0 15px 15px;
+	}
+
+}
+
+@media (max-width: 767px) {
+	#navbar {
+		#navbar-title {
+			font-size: 14px;
+		}
+		#navbar-area {
+			li {
+				width: 100%;
+				text-align: left;
+
+				a {
+					font-size: 14px;
+				}
+			}
+		}
+	}
+}
+

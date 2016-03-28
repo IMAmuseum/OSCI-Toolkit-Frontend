@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="fragment" content="!">
+    <base href="">
+
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700|Merriweather:400,300italic,400italic,700italic,900italic,900,700,300" rel="stylesheet" type="text/css"><link href="https://fonts.googleapis.com/css?family=Cardo" rel="stylesheet" type="text/css"><link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="styles/css/main.css">
+
+    <script src="scripts/vendor.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.0.0/imagesloaded.pkgd.min.js"></script>
+
+    <script src="scripts/plugins.js"></script>
+
+    <script src="scripts/main.js"></script>
+
+    <script>jQuery(function() {
+            $.ajaxSetup({
+                async: false
+            });
+            var oscitkJson = $.getJSON('oscitk.json');
+            oscitkObject = JSON.parse(oscitkJson.responseText);
+
+            app.bootstrap(oscitkObject);
+            app.run();
+        });
+    </script>
+
+</head>
+<body>
+    <!--[if lt IE 10]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+        e.src='//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+        ga('create','UA-XXXXX-X');ga('send','pageview');
+    </script>
+
+</body>
+</html>

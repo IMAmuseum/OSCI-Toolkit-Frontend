@@ -1,0 +1,90 @@
+<% if (query.keyword) { %>
+<!--
+<div id="search-results-header">
+	<div id="search-summary">
+		Result(s) for <span id="search-query">"<%= query.keyword %>"</span> (<%= response.numFound %>)
+		<a id="reset-search" href="#">RESET</a>
+	</div>
+	<div id="results-sort">
+		Sort By:
+		<ul>
+			<li><a href="#" class="sort-button <%= (query.sort === 'score') ? 'active' : '' %>" data-sort="score">Relevance</a></li>
+			<li><a href="#" class="sort-button <%= (query.sort === 'content') ? 'active' : '' %>" data-sort="content">Type</a></li>
+		</ul>
+	</div>
+</div>
+-->
+<div id="search-results-column-wrapper">
+
+	<% if (response.numFound !== 0) { %>
+	<div id="search-results">
+		<div id="search-results-content">
+			<% _.each(results, function(group) { var first = true;%>
+
+				<div class="result-section">
+					<% _.each(group, function(result) { %>
+
+						<% if ( first ) { %>
+							<% if ( result.get('bundle_name') === "Note" ) { %>
+								<div class="result-title"><%= result.get('ss_section_title') %></div>
+							<% } else { %>
+								<div class="result-title"><%= result.get('label') %></div>
+							<% } %>
+						<% first = false; } %>
+
+						<% if (!_.isEmpty(result.get('teaser'))) { %>
+						<div class="search-result" data-id="<%= result.get('id') %>">
+							<div class="result-content">
+
+								<div class="result-type <%= result.get('bundle') %>">
+									<% if ( result.get('bundle_name') === "Note" ) { %>
+										<img src="images/icon-link-note.png">
+									<% } else { %>
+										<img src="images/icon-link.png">
+									<% } %>
+								</div>
+
+								<div class="result-body <% if ( result.get('teaser').length > 90 ) { %>ellipsis<% } %>">
+								<% if ( result.get('bundle_name') === "Note" ) { %>
+									<%= result.get('ss_body') %>
+								<% } else { %>
+									<% if (_.isEmpty(result.get('teaser'))) { %>
+										&nbsp;
+									<% } else { %>
+										<%= result.get('teaser') %>
+									<% } %>
+								<% } %>
+								</div>
+
+							</div>
+						</div>
+						<% } %>
+
+					<% }); %>
+				</div>
+
+			<% }); %>
+		</div>
+	</div>
+	<% } else { %>
+	No results found.
+	<% } %>
+
+	<!--
+	<div id="facet-by-section">
+		<div class="section-title">Filter by section</div>
+		<div id="facet-sections-container">
+			<ul id="facet-sections">
+				<% _.each(response.facets, function(facet) { %>
+					<li class="facet-section">
+						<a href="#" data-filter="section:<%= facet.section_id %>" class="facet"><%= facet.section %></a>
+						(<%= facet.count %>)
+					</li>
+				<% }); %>
+			</ul>
+		</div>
+	</div>
+	-->
+
+</div>
+<% } %>

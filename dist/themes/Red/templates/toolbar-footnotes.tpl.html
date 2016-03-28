@@ -1,0 +1,18 @@
+<h3>Footnotes</h3>
+
+<div class="toolbar-scroll">
+	<% if( items.length < 1 ) { %>
+		<p>No footnotes in this section.</p>
+	<% } %>
+
+	<ul>
+		<% _.each(items, function(item) { %>
+			<li class="toolbar-footnote-single">
+				<b><%= item.id %></b>
+				<a class="toolbar-link pull-right" data-id="<%= item.id %>">
+					<img src="images/light/link_icon.png"/>
+				</a>
+				<br/><%= item.title %></li>
+		<% }); %>
+	</ul>
+</div>

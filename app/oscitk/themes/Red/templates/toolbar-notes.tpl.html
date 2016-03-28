@@ -1,0 +1,36 @@
+<h3>Notes</h3>
+
+<div class="toolbar-scroll">
+	<div class="notesReel">
+		<% if (notes.length > 0) { %>
+		<ul class="notesList">
+			<% _.each(notes, function(note) { %>
+				<li class="notesListItem">
+					<div class="note-buttons">
+						<a class="note-link toolbar-link pull-left" data-content_id="<%= note.get('content_id') %>">
+							<img src="images/light/link_icon.png"/>
+						</a>
+						<!-- <a href="#" class="noteEdit" data-content_id="<%= note.get('content_id') %>">Edit</a> -->
+					</div>
+					<div class="the-note">
+						<span class="note-content"><%= note.get('note') %></span>
+					</div>
+					<!--
+					<% if (note.get('tags').length > 0) { %>
+						<div class="note-tags">
+		                	<span class="tags-label">tags:</span> <% _.each(note.get('tags'), function(tag) { %><%= tag %> <% }); %>
+		                </div>
+					<% } %>
+					-->
+				</li>
+			<% }); %>
+		</ul>
+		<% } else { %>
+			<% if (app.account.get('id') > 0 ) { %>
+				<p>No notes found for this section.</p>
+			<% } else { %>
+				<p>Login to see your notes for this section.</p>
+			<% } %>
+		<% } %>
+	</div>
+</div>

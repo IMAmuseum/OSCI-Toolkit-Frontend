@@ -1,0 +1,38 @@
+$icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+$image-path : "/images";
+
+
+// For the plus icons representing notes
+$paragraph-button-size: 20px;
+$paragraph-button-margin: 10px;
+
+$color-smalt: #52818B; // smalt blue
+
+$osci-color-primary: $color-smalt;
+$osci-color-text: #1F1F26;
+
+// Intended to be used w/ max-width, i.e. each one is to be read as "[...] at or below this width"
+//$osci-bp-sm: 480px;
+$osci-bp-md: 600px; // Images extend and center over full width of available space
+//$osci-bp-lg: $screen-md-min - 1;
+
+@import "bootstrap/bootstrap";
+@import "typography";
+@import "browsehappy";
+
+@import "section";
+@import "navigation";
+@import "header";
+@import "toolbar";
+@import "navbar";
+
+@import "figures";
+@import "layered-image";
+
+@import "overlay";
+
+@import "paragraph-popover";
+@import "paragraph-notes";
+@import "paragraph-citation";
+
+@import "print";

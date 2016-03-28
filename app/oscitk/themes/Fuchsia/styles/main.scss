@@ -1,0 +1,82 @@
+$icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+$image-path : "/images";
+
+// Theme colors
+$color-dk-grey: #676767;
+$color-lt-grey: #dddddd;
+$color-fuchsia: #fa5d78;
+$color-text: #3c3c3c;
+
+// These were originally defined in bootstrap/variables; moved here for convenience
+$font-family-sans-serif:  'Raleway', "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-serif:       'Bitter', Georgia, "Times New Roman", Times, serif !default;
+
+// For the little speech-bubble icons representing notes
+$paragraph-button-size: 20px;
+$paragraph-button-margin: 10px;
+
+// Shrinks to vertical layout on smaller screens
+$toolbar-width-md: 300px;
+$toolbar-width-sm: 50px;
+
+// We don't have to hard-code the navigation height.
+// This is just for constraining the #toolbar-overlay-wrapper
+//   and setting body's margin-bottom.
+$navigation-height: 34px;
+//$navigation-height-sans-progress: 34px;
+
+// http://stackoverflow.com/questions/17045132/scrollbar-overlay-in-ie10-how-do-you-stop-that
+@-ms-viewport{ width: auto !important; } 
+
+// Import bootstrap variables for the below to work
+@import "bootstrap/bootstrap";
+
+// Intended to be used w/ max-width, i.e. each one is to be read as "[...] at or below this width"
+$osci-bp-sm: 480px; // Does nothing at the moment
+$osci-bp-md: 600px; // Toolbar collapses to top, superimposed; text extends all the way to the right
+$osci-bp-lg: $screen-md-min - 1; // Navigation collapses to bottom of screen; toolbar buttons collapse into a vertical column on right
+
+$osci-bp-vert: 640px; // Progress bar is hidden
+
+#osci-bp-sm, #osci-bp-md, #osci-bp-lg, #osci-bp-xl  {
+	display: none;
+}
+
+@media( max-width: $osci-bp-sm ) {
+	#osci-bp-sm { display: block; }
+}
+
+@media( min-width: $osci-bp-sm + 1 ) and ( max-width: $osci-bp-md ) {
+	#osci-bp-md { display: block; }
+}
+
+@media( min-width: $osci-bp-md + 1 ) and ( max-width: $osci-bp-lg ) {
+	#osci-bp-lg  { display: block; }
+}
+
+@media( min-width: $osci-bp-lg + 1 ) {
+	#osci-bp-xl  { display: block; }
+}
+
+
+@import "typography";
+@import "browsehappy";
+
+@import "section";
+@import "navigation";
+//@import "header";
+@import "toolbar";
+//@import "navbar";
+//@import "navbar-slider";
+
+@import "figures";
+@import "layered-image";
+
+//@import "overlay";
+
+@import "paragraph-popover";
+@import "note-form";
+@import "citation";
+
+//@import "print";
+

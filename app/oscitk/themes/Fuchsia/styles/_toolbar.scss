@@ -1,0 +1,414 @@
+$toolbar-margin-bottom: 5px;
+
+#toolbar > #toolbar-view {
+
+	#toolbar-area {
+
+		position: fixed;
+		bottom: 0;
+		right: 0;
+
+		width: $toolbar-width-md;
+
+
+		// Bump this up to avoid the navigation
+		@media( max-width: $osci-bp-lg ) {
+			width: auto; // bumps unopened back to vertical
+			bottom: $navigation-height;
+
+			&.open {
+				max-width: 100%;
+				width: $toolbar-width-md;
+			}
+
+		}
+
+		// Accounting for the navigation and the disappearing progress bar
+		/*
+		@media( max-width: $osci-bp-lg ) and (min-height: #{ $osci-bp-vert + 1 } ) {
+			bottom: $navigation-height;
+		}
+
+		@media( max-width: $osci-bp-lg ) and (max-height: #{ $osci-bp-vert } ) {
+			bottom: $navigation-height-sans-progress;
+		}
+		*/
+
+		@media( max-width: $osci-bp-lg ) {
+			bottom: $navigation-height;
+		}
+
+		// TODO: Move this to top on small screens
+		/*
+		@media( max-width: $osci-bp-md ) {
+			bottom: initial;
+			top: 0;
+			width: 100%;
+			background-color: $color-dk-grey;
+		}
+		*/
+
+		// On small screens
+
+		// We want this to be higher than the overlay
+		z-index: 10002;
+
+		.toolbar-item-view {
+
+			list-style-type: none;
+			padding: 0;
+
+			// This disables all text inside the button
+			border: 0;
+			font: 0/0 a;
+			text-shadow: none;
+			color: transparent;
+
+			width: 50px;
+			height: 50px;
+
+			background-size: 50px 50px;
+
+			cursor: pointer;
+
+			float: right;
+
+			display: inline-block;
+
+			&.close-toolbar-item {
+
+				background-image: url(../../images/light/icon-x.png);
+				display: none;
+				float: left;
+
+				&.open {
+					display: inline-block;
+				}
+
+			}
+			&.searchToolbarView-toolbar-item {
+				background-image: url(../../images/dark/icon-search.png);
+				&.open {
+					background-image: url(../../images/light/icon-search.png);
+				}
+			}
+			&.accountToolbarView-toolbar-item {
+				background-image: url(../../images/dark/icon-user.png);
+				&.open {
+					background-image: url(../../images/light/icon-user.png);
+				}
+			}
+
+			&.tocToolbarView-toolbar-item {
+				background-image: url(../../images/dark/icon-contents.png);
+				&.open {
+					background-image: url(../../images/light/icon-contents.png);
+				}
+			}
+
+			&.notesToolbarView-toolbar-item {
+				background-image: url(../../images/dark/icon-notes.png);
+				&.open {
+					background-image: url(../../images/light/icon-notes.png);
+				}
+			}
+
+			@media( max-width: #{$osci-bp-lg} ) {
+				display: block;
+				float: none;
+				&.open {
+					float: right;
+				}
+
+				&.close-toolbar-item {
+					float: left;
+				}
+
+			}
+
+			@media( max-width: $osci-bp-md ) {
+				display: none;
+				&.open {
+					display: inline-block;
+				}
+			}
+
+			/*
+			@media( max-width: $osci-bp-md ) {
+				display: inline-block;
+
+				&.accountToolbarView-toolbar-item {
+					background-image: url(../../images/light/icon-user.png);
+				}
+
+				&.tocToolbarView-toolbar-item {
+					background-image: url(../../images/light/icon-contents.png);
+				}
+
+				&.notesToolbarView-toolbar-item {
+					background-image: url(../../images/light/icon-notes.png);
+				}
+
+				&.open {
+					background-color: $color-fuchsia;
+				}
+
+			}
+			*/
+
+		}
+
+	}
+
+	#toolbar-overlay-wrapper {
+
+		// Toggled w/ javascript
+		display: none;
+
+		position: fixed;
+
+		top: 0; // MENU BAR HEIGHT?
+		right: 0;
+		bottom: 0;
+		left: 0;
+
+		/*
+		@media( max-width: $osci-bp-lg ) and (min-height: #{ $osci-bp-vert + 1 } ) {
+			bottom: $navigation-height;
+		}
+
+		@media( max-width: $osci-bp-lg ) and (max-height: #{ $osci-bp-vert } ) {
+			bottom: $navigation-height-sans-progress;
+		}
+		*/
+
+		@media( max-width: $osci-bp-lg ) {
+			bottom: $navigation-height;
+		}
+
+		// Note that this is lower than the icons
+		z-index: 10001;
+
+		// TESTING
+		//background: rgba(255,0,0, 0.25);
+
+		#toolbar-overlay {
+			width: calc( 100% - #{$toolbar-width-md} );
+			background: rgba(0,0,0, 0.5);
+
+			box-shadow: 0px 0px 5px black;
+
+			@media( max-width: $osci-bp-lg ) {
+				box-shadow: none;
+			}
+
+			position: relative;
+			z-index: 2;
+
+			//position: fixed;
+			//top: 0; bottom: 0;
+			//left: 0
+
+			height: 100%;
+			float: left;
+		}
+
+		#toolbar-sidebar {
+			width: $toolbar-width-md;
+			background: $color-fuchsia;
+			//background: white;
+
+			height: 100%;
+			float: left;
+
+		}
+
+	}
+
+	// #toolbar-overlay-wrapper > #toolbar-sidebar
+	#toolbar-readout {
+
+		//float: left;
+
+		height: 100%;
+		color: white;
+
+		//display: none;
+
+		//background: $color-dark-red;
+		padding: 8px 8px 8px 12px;
+
+		> div {
+
+			height: 100%;
+
+			> div {
+
+				height: 100%;
+
+				h3 {
+					margin: 0;
+					border-bottom: 1px white solid;
+					padding-bottom: 8px;
+				}
+
+				.toolbar-scroll {
+
+					overflow-y: scroll;
+					height: calc(100% - 39px - #{50px} );
+
+					padding: 5px 5px 10px 0px;
+
+				    border-bottom: thin solid white;
+
+					a:not(.btn) {
+						color: white;
+
+						&:hover {
+							//color: $color-light-red;
+							text-decoration: none;
+						}
+					}
+
+					p {
+						font-family: $font-family-sans-serif;
+					}
+
+					ul {
+
+						list-style: none;
+						padding: 0;
+						margin: 0;
+
+						li {
+
+							margin: 10px 0px;
+
+							h4, h5 {
+								margin: 0px;
+							}
+
+						}
+
+					}
+
+				}
+			}
+		}
+	}
+
+}
+
+
+#toolbar-notes {
+	.notesListItem {
+
+		.note-buttons {
+			float: left;
+		}
+
+		.the-note {
+			margin-left: 35px;
+		}
+
+	}
+}
+
+#toolbar-account {
+
+	.account-footer {
+		margin-top: 10px;
+	}
+
+	.form-error:empty {
+		display: none;
+	}
+
+	h4 {
+		margin-bottom: 5px
+	}
+
+	h5{
+		margin-top: 5px;
+		margin-bottom: 22px;
+	}
+
+	.user-icon {
+		width: 52px;
+		height: 52px;
+		margin-right: 10px;
+		border-radius: 50%;
+		background-color: $color-lt-grey;
+		background-image: url(../../images/light/icon-user.png);
+		background-size: contain;
+		float: left;
+	}
+
+}
+
+#toolbar-search {
+
+
+
+	#search-container {
+
+		#search-box {
+			position: relative;
+			#search-submit {
+				display: block;
+				cursor: pointer;
+				position: absolute;
+				top: 4px;
+				right: 3px;
+				width: 24px;
+				height: 24px;
+				background: url(../../images/dark/icon-search.png) 0 0 no-repeat;
+				background-size: 24px;
+			}
+		}
+
+		#search-box, #search-filters-container {
+			margin: 10px 0px;
+		}
+
+	}
+
+	#search-results-container.toolbar-scroll {
+		height: calc(100% - 39px - #{50px} - 96px ) !important;
+	}
+
+
+	#search-results {
+		#search-results-content {
+			.result-section {
+				.result-title {
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					overflow: hidden;
+					margin-bottom: 10px;
+				}
+				.search-result {
+					cursor: pointer;
+					.result-content {
+						margin-bottom: 10px;
+						.result-type {
+							float: left;
+							img {
+								height: 15px;
+								width: 15px;
+							}
+						}
+						.result-body {
+							margin-left: 25px;
+						}
+						.result-body.ellipsis:after {
+							content: '...';
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+}

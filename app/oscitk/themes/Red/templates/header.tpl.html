@@ -1,0 +1,19 @@
+<div class="header-title">
+	<div class="container-fluid">
+		<div class="pull-left" id="publication-title-container">
+			<h1 class="publication-title"><%= pubTitle %></h1>
+		</div>
+		<div class="pull-left hidden-xs hidden-sm">
+			<p class="section-title"><a class="prev-page" href="javascript:;">&lt;</a><%= sectionTitle %>: <%= sectionSubtitle %><a class="next-page" href="javascript:;">&gt;</a></p>
+		</div>
+		<div class="pull-right">
+			<p class="btn-menu"><a href ="javascript:;" id="header-menu-button">Menu</a></p>
+		</div>
+		<div class="pull-right hidden-xs hidden-sm">
+			<p>
+				<a href ="javascript:;" id="header-login-button">
+					<% if( username !== null ) { %>	<%= username %> <% } else { %> Login <% } %>
+				</a></p>
+		</div>
+	</div>
+</div>

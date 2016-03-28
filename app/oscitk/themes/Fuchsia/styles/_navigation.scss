@@ -1,0 +1,243 @@
+#navigation {
+
+	font-family: sans-serif;
+	font-size: 0.8em;
+
+	line-height: 20px;
+
+	position: fixed;
+	right: 0px;
+
+	// IE work-around; initial doesn't work
+	@media( min-width: #{$osci-bp-lg+1} ) {
+		top: 20px;
+	}
+
+	width: $toolbar-width-md;
+	padding: 8px;
+
+	// For the .progress-bar in navbar
+	.progress {
+
+		height: 6px;
+		margin-bottom: 6px;
+
+		.progress-bar {
+			&.progress-bar-fuchsia {
+				background-color: $color-fuchsia;
+			}
+		}
+
+	}
+
+	.chapter-info {
+
+		display: inline-block;
+		width: calc( 100% - 50px );
+
+		.chapter-number {
+			font-family: $font-family-serif;
+			font-size: 14px;
+		}
+
+		.chapter-title {
+			font-family: $font-family-sans-serif;
+			font-size: 14px;
+		}
+
+		.mobile-menu {
+			width: 24px; // 25
+			height: 22px; // 23
+			cursor: pointer;
+			background-image: url(../../images/light/icon-menu.png);
+
+			display: none; // see media queries
+
+			position: absolute;
+		    //left: 50%;
+		    right: 6px;
+		    bottom: 5px;
+
+		    margin-left: -12px;
+		}
+
+	}
+
+	.btn-container {
+
+		float: right;
+
+		.btn-page {
+
+			display: inline-block;
+
+			height: 20px;
+			width: 20px;
+
+			cursor: pointer;
+
+
+			background-image: url(../../images/dark/icon-arrow.png);
+
+			&.inactive {
+				background-image: url(../../images/light/icon-arrow.png);
+			}
+
+			&.prev-page { }
+
+			&.next-page {
+
+				// Horizontal filp
+			    -moz-transform: scaleX(-1);
+			    -o-transform: scaleX(-1);
+			    -webkit-transform: scaleX(-1);
+			    transform: scaleX(-1);
+			    filter: FlipH;
+			    -ms-filter: "FlipH";
+
+			}
+
+		}
+
+	}
+
+	// Navigation collapses to a grey bar fixed to bottom
+	@media( max-width: $osci-bp-lg ) {
+
+		background-color: $color-dk-grey;
+
+		height: $navigation-height;
+		width: 100%;
+		
+		top: initial;
+		bottom: 0;
+
+		z-index: 10001;
+
+		padding-bottom: 0px;
+		padding-top: 0px;
+		
+		.progress {
+
+			margin-left: -8px;
+			margin-right: -8px;
+
+			height: 4px;
+
+			border-radius: 0px;
+			background-color: $color-lt-grey;
+
+
+		}
+
+
+		.chapter-info {
+
+			width: calc( 100% - 98px );
+			margin-left: 70px;
+    		
+
+			color: #fff;
+
+			.chapter-number,
+			.chapter-title {
+				display: inline-block;
+				height: 20px;
+			}
+
+			.chapter-title {
+				margin-left: 30px;
+			}
+
+		}
+
+		.btn-container {
+
+			float: none;
+			position: fixed;
+			bottom: 0;
+			left: 0;
+
+			// width: calc( 100% - 24px - 12px - 24px );
+			width: 60px;
+
+			margin-left: 6px;
+			//margin-bottom: 2px;
+
+			.btn-page {
+				background-image: url(../../images/light/icon-arrow.png);
+				&.inactive {
+					background-image: url(../../images/dark/icon-arrow.png);
+				}
+				&.next-page {
+					float: right;
+				}
+			}
+		}
+
+	}
+
+	// When the toolbar buttons disappear, show hamburger menu
+	// Make the chapter title disappear on smaller screens
+	// @media( max-width: #{$screen-xs-min - 1} ) {
+	@media( max-width: $osci-bp-md ) {
+		.chapter-info {
+			.chapter-number {
+			    width: calc(100% - 20px);
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			.chapter-title {
+				display: none;
+			}
+			.mobile-menu {
+				display: block;
+			}
+		}
+	}
+
+	/*
+	.btn-container {
+		width: calc( 100% - 24px - 12px - 24px );
+	}
+	*/
+
+}
+
+
+
+// Double-clicking on the navigation tends to select it...
+*.unselectable {
+
+   -moz-user-select: none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+  
+   // IE 10: http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+   -ms-user-select: none;
+   user-select: none;
+
+}
+
+// Offset body for the fixed navbar
+/*
+@media( max-width: $osci-bp-lg ) and (min-height: #{ $osci-bp-vert + 1 } ) {
+	body {
+		margin-bottom: $navigation-height;
+	}
+}
+
+@media( max-width: $osci-bp-lg ) and (max-height: #{ $osci-bp-vert } ) {
+	body {
+		margin-bottom: $navigation-height-sans-progress;
+	}
+}
+*/
+
+
+@media( max-width: $osci-bp-lg ) {
+	body {
+		margin-bottom: $navigation-height;
+	}
+}

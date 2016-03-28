@@ -1,0 +1,60 @@
+<% if (query.keyword) { %>
+
+<div id="search-results-column-wrapper">
+
+	<% if (response.numFound !== 0) { %>
+	<div id="search-results">
+		<div id="search-results-content">
+			<% _.each(results, function(group) { var first = true;%>
+
+				<div class="result-section">
+					<% _.each(group, function(result) { %>
+
+						<% if ( first ) { %>
+							<% if ( result.get('bundle_name') === "Note" ) { %>
+								<div class="result-title"><%= result.get('ss_section_title') %></div>
+							<% } else { %>
+								<div class="result-title"><%= result.get('label') %></div>
+							<% } %>
+						<% first = false; } %>
+
+						<% if (!_.isEmpty(result.get('teaser'))) { %>
+						<div class="search-result" data-id="<%= result.get('id') %>">
+							<div class="result-content">
+
+								<div class="result-type <%= result.get('bundle') %>">
+									<% if ( result.get('bundle_name') === "Note" ) { %>
+										<img src="images/icon-link-note.png">
+									<% } else { %>
+										<img src="images/icon-link.png">
+									<% } %>
+								</div>
+
+								<p class="result-body <% if ( result.get('teaser').length > 90 ) { %>ellipsis<% } %>">
+								<% if ( result.get('bundle_name') === "Note" ) { %>
+									<%= result.get('ss_body') %>
+								<% } else { %>
+									<% if (_.isEmpty(result.get('teaser'))) { %>
+										&nbsp;
+									<% } else { %>
+										<%= result.get('teaser') %>
+									<% } %>
+								<% } %>
+								</p>
+
+							</div>
+						</div>
+						<% } %>
+
+					<% }); %>
+				</div>
+
+			<% }); %>
+		</div>
+	</div>
+	<% } else { %>
+	No results found.
+	<% } %>
+
+</div>
+<% } %>

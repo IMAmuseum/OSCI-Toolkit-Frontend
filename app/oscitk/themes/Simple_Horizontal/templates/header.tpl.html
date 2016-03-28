@@ -1,0 +1,13 @@
+<% if (typeof(headerImage) !== "undefined") { %>
+<div class="container-header" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('<%= headerImage %>');">
+<% } else { %>
+<div class="container-header">
+<% } %>
+
+	<div class="container header-title">
+		<a href="javascript:;" id="skip-header" class="header-scroll-icon"><span class="glyphicon glyphicon-chevron-right"></span></a>
+		<h1><%= title %></h1>
+		<p><% address = 'by ' %><% _.each(creator, function(author) { %><%= address %><%= author.value %><% address = 'and ' %><% }); %></p>
+  	</div>
+
+</div>

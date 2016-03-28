@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<link rel="apple-touch-icon" href="images/icon-app-57.png">
+	<base href="">
+
+	<link rel="stylesheet" href="styles/vendor/vendor.css">
+
+	<link rel="stylesheet" href="styles/main.css">
+
+	<script src="scripts/vendor.js"></script>
+
+	<script src="scripts/main.js"></script>
+
+	<script>jQuery(function() {
+            $.ajaxSetup({
+                async: false
+            });
+            oscitkJson = $.getJSON('oscitk.json');
+            oscitkObject = JSON.parse(oscitkJson.responseText);
+
+            app.bootstrap(oscitkObject);
+            // app.zotero.init();
+            app.run();
+		});
+	</script>
+</head>
+<body>
+
+</body>
+</html>
