@@ -21,8 +21,23 @@ body {
 
 // TODO: Move some of this to _figures.scss
 #section {
+
 	//overflow: auto;
 	overflow: hidden;
+
+	// See ../views/NavigationView.js
+	.navigated {
+		-webkit-transition: background-color .7s ease-out;
+		   -moz-transition: background-color .7s ease-out;
+		     -o-transition: background-color .7s ease-out;
+		        transition: background-color .7s ease-out;
+
+		border-radius: 3px;
+
+		&.navigating {
+			background-color: lighten($color-light-red, 40%);
+		}
+	}
 
 	// Baseline font-size
 	font-size: 16px;
@@ -32,12 +47,12 @@ body {
 	width: 100%;
 
 	// hide scrollbar
-	height: calc( 100% );// + 30px); 
+	height: calc( 100% );// + 30px);
 
 	/*
 	margin-top: -15px;
 	margin-bottom: -15px;
-	
+
 	*/
 
 	padding: 0px 15px;
@@ -104,7 +119,7 @@ body {
 			//*/
 
 			text-align: center;
-			
+
 			margin-bottom: 16px;
 			color: #3c3c3c;
 		}
@@ -144,27 +159,27 @@ body {
 
 				display: inline-block;
 				position: relative;
-				
+
 				top: -5px;
-				
+
 				width: 15px;
 				height: 15px;
-				
+
 				border-radius: 50%;
-				
+
 				color: #fff;
 				font-size: 12px;
 				line-height: 15px;
 				text-align: center;
-				
+
 				background: $color-light-red;
-				
+
 				&:hover {
 					color:#fff;
 					text-decoration: none;
 					background: $color-dark-red;
 				}
-				
+
 			}
 
 			// TODO: Remove me? Hide me?

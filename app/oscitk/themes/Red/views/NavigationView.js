@@ -150,6 +150,7 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 
 			// Stay on current page by default
             var gotoPage = this.page ? this.page : 1;
+            var selector = false;
 
             if (typeof data.page !== "undefined") {
                 gotoPage = data.page;
@@ -174,7 +175,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
                         if(data.identifier.search(/^p-[0-9]+/) > -1) {
 
                         	var pid = data.identifier.slice(data.identifier.lastIndexOf('-') + 1, data.identifier.length);
-                            gotoPage = this.getPageForSelector('p[data-paragraph_number='+pid+']');
+                        	selector = 'p[data-paragraph_number='+pid+']';
+                            gotoPage = this.getPageForSelector( selector );
 
                         	break;
 
@@ -187,7 +189,8 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
                         if (data.identifier.search(/^fig-[0-9]+-[0-9]+$/) > -1) {
 
                         	var fid = data.identifier;
-                        	gotoPage = this.getPageForSelector("#" + fid);
+                        	selector = "#" + fid;
+                        	gotoPage = this.getPageForSelector( selector );
 
                         	break;
 
@@ -197,14 +200,16 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
                         if (data.identifier.search(/^fn-[0-9]+$/) > -1) {
 
                         	var fid = data.identifier;
-                        	gotoPage = this.getPageForSelector("#" + fid);
+                        	selector = "#" + fid;
+                        	gotoPage = this.getPageForSelector( selector );
 
                         	break;
 
                         }
 
                         // Route to specific element
-                        gotoPage = this.getPageForSelector( data.identifier );
+                        selector = data.identifier;
+                        gotoPage = this.getPageForSelector( selector );
 	                    break;
 
 
@@ -271,6 +276,17 @@ OsciTk.views.Navigation = OsciTk.views.BaseView.extend({
 				// We will need to account for column offset
 				var cc = $('#section').attr('data-columns-rendered');
 					cc = cc ? cc : $('#section').attr('data-columns-setting');
+
+				// Animate background etc...
+				if( selector ) {
+	            	$('.navigating').removeClass('navigated');
+	            	$(selector).addClass('navigated');
+	            	$(selector).addClass('navigating');
+
+	            	setTimeout( function() {
+	            		$(selector).removeClass('navigating');
+	            	}, 1000);
+				}
 
 				// This is the only time when scrolling is allowed
 				$target.scrollLeft( page_width * ( gotoPage - 1 ) );

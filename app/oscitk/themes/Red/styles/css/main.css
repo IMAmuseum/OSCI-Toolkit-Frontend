@@ -8840,14 +8840,26 @@ body {
   line-height: 24px;
   width: 100%;
   height: calc( 100% );
-  /*
-  margin-top: -15px;
-  margin-bottom: -15px;
+  	/*
+  	margin-top: -15px;
+  	margin-bottom: -15px;
   
-  */
+  	*/
   padding: 0px 15px;
 }
-/* line 49, ../_section.scss */
+/* line 29, ../_section.scss */
+#section .navigated {
+  -webkit-transition: background-color .7s ease-out;
+  -moz-transition: background-color .7s ease-out;
+  -o-transition: background-color .7s ease-out;
+  transition: background-color .7s ease-out;
+  border-radius: 3px;
+}
+/* line 37, ../_section.scss */
+#section .navigated.navigating {
+  background-color: #f0bbbb;
+}
+/* line 64, ../_section.scss */
 #section #default-section-view {
   overflow: hidden;
   text-align: left;
@@ -8864,7 +8876,7 @@ body {
   line-height: 100%;
   padding-right: 15px;
 }
-/* line 71, ../_section.scss */
+/* line 86, ../_section.scss */
 #section #default-section-view h2 {
   font-family: 'Lora', serif;
   font-size: 0.875em;
@@ -8877,7 +8889,7 @@ body {
   text-transform: uppercase;
   color: #3c3c3c;
 }
-/* line 92, ../_section.scss */
+/* line 107, ../_section.scss */
 #section #default-section-view h3 {
   font-family: 'Lora', serif;
   font-weight: 700;
@@ -8891,7 +8903,7 @@ body {
   margin-bottom: 16px;
   color: #3c3c3c;
 }
-/* line 113, ../_section.scss */
+/* line 128, ../_section.scss */
 #section #default-section-view p {
   font-family: 'Lora', serif;
   /*
@@ -8906,7 +8918,7 @@ body {
   text-indent: -10px;
   position: relative;
 }
-/* line 139, ../_section.scss */
+/* line 154, ../_section.scss */
 #section #default-section-view p .footnote-reference {
   padding-left: 9px;
   margin: 0 5px;
@@ -8922,27 +8934,27 @@ body {
   text-align: center;
   background: #b82927;
 }
-/* line 162, ../_section.scss */
+/* line 177, ../_section.scss */
 #section #default-section-view p .footnote-reference:hover {
   color: #fff;
   text-decoration: none;
   background: #810c0b;
 }
-/* line 172, ../_section.scss */
+/* line 187, ../_section.scss */
 #section #default-section-view p .glossary-term:hover {
   cursor: hand;
 }
-/* line 180, ../_section.scss */
+/* line 195, ../_section.scss */
 #section #default-section-view .tooltip-inner {
   text-indent: 0;
 }
-/* line 185, ../_section.scss */
+/* line 200, ../_section.scss */
 #section #default-section-view .plate {
   max-width: 100%;
   max-height: 100%;
 }
 
-/* line 196, ../_section.scss */
+/* line 211, ../_section.scss */
 .loader {
   margin: 80px auto;
   font-size: 10px;
@@ -8958,7 +8970,7 @@ body {
   -webkit-animation: load8 1.1s infinite linear;
   animation: load8 1.1s infinite linear;
 }
-/* line 215, ../_section.scss */
+/* line 230, ../_section.scss */
 .loader, .loader:after {
   border-radius: 50%;
   width: 10em;
@@ -8984,7 +8996,7 @@ body {
     transform: rotate(360deg);
   }
 }
-/* line 246, ../_section.scss */
+/* line 261, ../_section.scss */
 #loader {
   position: absolute;
   top: 50%;
